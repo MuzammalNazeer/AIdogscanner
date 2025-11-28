@@ -1,0 +1,761 @@
+Affenpinscher
+Afghan Hound
+African Hunting Dog
+Airedale Terrier
+American Bulldog
+American Cocker Spaniel
+American Pit Bull Terrier
+American Staffordshire Terrier
+Appenzeller Sennenhund
+Australian Shepherd
+Australian Terrier
+Basenji
+Basset Hound
+Beagle
+Bearded Collie
+Bedlington Terrier
+Bernese Mountain Dog
+Black And Tan Coonhound
+Blenheim Spaniel
+Bloodhound
+Bluetick Coonhound
+Border Collie
+Border Terrier
+Borzoi
+Boston Terrier
+Bouvier Des Flandres
+Boxer
+Brabancon Griffon
+Briard
+Brittany Spaniel
+Bullmastiff
+Cairn Terrier
+Cardigan Welsh Corgi
+Chesapeake Bay Retriever
+Chihuahua
+Chow Chow
+Clumber Spaniel
+Cocker Spaniel
+Collie
+Curly Coated Retriever
+Dandie Dinmont Terrier
+Dhole
+Dingo
+Doberman Pinscher
+English Cocker Spaniel
+English Foxhound
+English Pointer
+English Setter
+English Springer Spaniel
+Entlebucher Mountain Dog
+Eskimo Dog
+Flat Coated Retriever
+French Bulldog
+German Shepherd
+German Shorthaired Pointer
+Giant Schnauzer
+Golden Retriever
+Gordon Setter
+Great Dane
+Great Pyrenees
+Greater Swiss Mountain Dog
+Groenendael
+Mexican Hairless Dog
+Havanese
+Ibizan Hound
+Irish Red And White Setter
+Irish Setter
+Irish Terrier
+Irish Water Spaniel
+Irish Wolfhound
+Italian Greyhound
+Japanese Chin
+Keeshond
+Kelpie
+Kerry Blue Terrier
+Komondor
+Kuvasz
+Labrador Retriever
+Lakeland Terrier
+Leonberger
+Lhasa Apso
+Alaskan Malamute
+Belgian Malinois
+Maltese
+Miniature Pinscher
+Miniature Poodle
+Miniature Schnauzer
+Newfoundland
+Norfolk Terrier
+Norwegian Elkhound
+Norwich Terrier
+Old English Sheepdog
+Otterhound
+Papillon
+Pekingese
+Pembroke Welsh Corgi
+Pomeranian
+Pug
+Redbone Coonhound
+Rhodesian Ridgeback
+Rottweiler
+Saint Bernard
+Saluki
+Samoyed
+Schipperke
+Scottish Terrier
+Scottish Deerhound
+Sealyham Terrier
+Shetland Sheepdog
+Shiba Inu
+Shih Tzu
+Siberian Husky
+Silky Terrier
+Soft Coated Wheaten Terrier
+Staffordshire Bull Terrier
+Standard Poodle
+Standard Schnauzer
+Sussex Spaniel
+Tibetan Mastiff
+Tibetan Spaniel
+Tibetan Terrier
+Toy Poodle
+Vizsla
+Walker Hound
+Weimaraner
+Welsh Springer Spaniel
+West Highland White Terrier
+Whippet
+Wire Fox Terrier
+Yorkshire Terrier
+Aidi
+Akbash Dog
+Akita
+Alano Español
+Alapaha Blue Blood Bulldog
+Alaskan Husky
+Alaskan Klee Kai
+American Akita
+American Eskimo Dog
+American Foxhound
+American Hairless Terrier
+American Leopard Hound
+American Mastiff
+American Water Spaniel
+Anatolian Shepherd Dog
+Ariegeois
+Armant
+Australian Cattle Dog
+Australian Kelpie
+Australian Stumpy Tail Cattle Dog
+Azawakh
+Banjara Hound
+Barbet
+Basset Artésien Normand
+Basset Bleu De Gascogne
+Basset Fauve De Bretagne
+Bavarian Mountain Hound
+Beauceron
+Belgian Laekenois
+Belgian Sheepdog
+Belgian Tervuren
+Bergamasco Shepherd
+Berger Blanc Suisse
+Berger Picard
+Bichon Frise
+Black Mouth Cur
+Black Norwegian Elkhound
+Black Russian Terrier
+Blue Lacy
+Blue Picardy Spaniel
+Boerboel
+Bohemian Shepherd
+Bolognese
+Bouvier Des Ardennes
+Boykin Spaniel
+Bracco Italiano
+Braque D'auvergne
+Braque Du Bourbonnais
+Braque Français
+Braque Saint Germain
+Brittany
+Broholmer
+Brussels Griffon
+Bucovina Shepherd Dog
+Bull Terrier
+Bulldog
+Canaan Dog
+Cane Corso
+Cão Da Serra De Aires
+Cão De Castro Laboreiro
+Cão De Gado Transmontano
+Carolina Dog
+Catahoula Leopard Dog
+Caucasian Shepherd Dog
+Cavalier King Charles Spaniel
+Central Asian Shepherd Dog
+Cesky Fousek
+Cesky Terrier
+Chart Polski
+Chien D'artois
+Chien Français Blanc Et Noir
+Chien Français Blanc Et Orange
+Chien Français Tricolore
+Chinese Crested
+Chinese Shar Pei
+Chinook
+Chippiparai
+Cimarrón Uruguayo
+Cirneco Dell'etna
+Coton De Tulear
+Croatian Sheepdog
+Czechoslovakian Wolfdog
+Dachshund
+Dalmatian
+Danish Swedish Farmdog
+Deutsche Bracke
+Dogo Argentino
+Dogo Canario
+Dogue De Bordeaux
+Drentse Patrijshond
+Drever
+Dunker
+Dutch Shepherd
+Dutch Smoushond
+East Siberian Laika
+English Coonhound
+English Toy Terrier
+Estonian Hound
+Eurasier
+Field Spaniel
+Fila Brasileiro
+Finnish Hound
+Finnish Lapphund
+Finnish Spitz
+French Spaniel
+Galgo Español
+Gascon Saintongeois
+German Hound
+German Longhaired Pointer
+German Pinscher
+German Shepherd Dog
+German Spaniel
+German Spitz
+German Wirehaired Pointer
+Glen Of Imaal Terrier
+Grand Basset Griffon Vendéen
+Grand Bleu De Gascogne
+Grand Griffon Vendéen
+Greek Harehound
+Greenland Dog
+Greyhound
+Griffon Bruxellois
+Griffon Fauve De Bretagne
+Griffon Nivernais
+Halden Hound
+Hamiltonstövare
+Hanoverian Scenthound
+Harrier
+Hellenic Hound
+Hokkaido
+Hovawart
+Huntaway
+Hygen Hound
+Icelandic Sheepdog
+Istrian Coarse Haired Hound
+Istrian Shorthaired Hound
+Jack Russell Terrier
+Jagdterrier
+Japanese Akita Inu
+Japanese Spitz
+Japanese Terrier
+Jindo
+Kai Ken
+Kangal Shepherd Dog
+Kanni
+Karelian Bear Dog
+Karst Shepherd
+King Charles Spaniel
+Kishu Ken
+Kooikerhondje
+Kromfohrlander
+Kunming Wolfdog
+Lagotto Romagnolo
+Lancashire Heeler
+Landseer
+Lapponian Herder
+Large Münsterländer
+Lithuanian Hound
+Löwchen
+Mackenzie River Husky
+Magyar Agár
+Manchester Terrier
+Maremma Sheepdog
+Mastiff
+Mcnab Shepherd
+Miniature American Shepherd
+Miniature Bull Terrier
+Montenegrin Mountain Hound
+Mountain Cur
+Mudi
+Neapolitan Mastiff
+New Guinea Singing Dog
+New Zealand Huntaway
+Norrbottenspets
+Norwegian Buhund
+Norwegian Lundehund
+Nova Scotia Duck Tolling Retriever
+Old Danish Pointer
+Pachon Navarro
+Parson Russell Terrier
+Patterdale Terrier
+Perro De Presa Canario
+Perro De Presa Mallorquin
+Peruvian Hairless Dog
+Petit Basset Griffon Vendéen
+Petit Brabançon
+Phalène
+Pharaoh Hound
+Picardy Spaniel
+Plott Hound
+Podengo Português
+Pointer
+Poitevin
+Polish Greyhound
+Polish Hound
+Polish Lowland Sheepdog
+Polish Tatra Sheepdog
+Poodle
+Porcelaine
+Portuguese Podengo
+Portuguese Pointer
+Portuguese Water Dog
+Posavac Hound
+Prazsky Krysarik
+Pudelpointer
+Puli
+Pumi
+Pyrenean Mastiff
+Pyrenean Mountain Dog
+Pyrenean Shepherd
+Rafeiro Do Alentejo
+Rajapalayam
+Ratonero Bodeguero Andaluz
+Romanian Mioritic Shepherd Dog
+Russian Black Terrier
+Russian Toy
+Russian European Laika
+Saarloos Wolfdog
+Sabueso Español
+Schapendoes
+Schnauzer
+Segugio Italiano
+Serbian Hound
+Serbian Tricolour Hound
+Shar Pei
+Shikoku
+Skye Terrier
+Sloughi
+Slovakian Wirehaired Pointer
+Slovenský Cuvac
+Slovenský Kopov
+Small Münsterländer
+Smooth Fox Terrier
+South Russian Shepherd Dog
+Spanish Mastiff
+Spanish Water Dog
+Stabyhoun
+Styrian Coarse Haired Hound
+Swedish Lapphund
+Swedish Vallhund
+Taiwan Dog
+Tamaskan Dog
+Teddy Roosevelt Terrier
+Thai Bangkaew Dog
+Thai Ridgeback
+Tornjak
+Tosa
+Toy Fox Terrier
+Toy Manchester Terrier
+Transylvanian Hound
+Treeing Tennessee Brindle
+Treeing Walker Coonhound
+Tyrolean Hound
+Volpino Italiano
+Welsh Corgi
+Welsh Terrier
+West Siberian Laika
+Wetterhoun
+White Shepherd
+Wirehaired Pointing Griffon
+Wirehaired Vizsla
+Xoloitzcuintli
+Yakutian Laika
+Yugoslavian Shepherd Dog
+Alpine Dachsbracke
+Anglo Français De Petite Vénérie
+Australian Silky Terrier
+Balkan Hound
+Bavarian Mountain Scent Hound
+Beagle Harrier
+Berger De Picardie
+Berger Des Pyrénées
+Billy
+Brazilian Terrier
+Bruno Jura Hound
+Canadian Eskimo Dog
+Cane Di Oropa
+Cane Paratore
+Chien Français
+Dobermann
+Great Japanese Dog
+Kai
+Kishu
+Kromfohrländer
+Pyrenean Sheepdog
+American English Coonhound
+Bergamasco Sheepdog
+English Toy Spaniel
+Native American Indian Dog
+Peruvian Inca Orchid
+Rat Terrier
+Small Munsterlander Pointer
+Spinone Italiano
+St. Bernard
+Belgian Shepherd Groenendael
+Belgian Shepherd Laekenois
+Belgian Shepherd Malinois
+Belgian Shepherd Tervueren
+Bergamasco
+Long Coat Chihuahua
+Smooth Coat Chihuahua
+Rough Collie
+Smooth Collie
+Long Haired Dachshund
+Miniature Long Haired Dachshund
+Miniature Smooth Haired Dachshund
+Miniature Wire Haired Dachshund
+Smooth Haired Dachshund
+Wire Haired Dachshund
+Deerhound
+Estrela Mountain Dog
+German Spitz Klein
+German Spitz Mittel
+Hungarian Kuvasz
+Hungarian Puli
+Hungarian Vizsla
+Hungarian Wire Haired Vizsla
+Korean Jindo
+Petit Basset Griffon Vendeen
+Grand Basset Griffon Vendeen
+Artois Hound
+Auvergne Pointer
+Brittany Basset
+Golden Boxer
+Pomeranian Spitz
+Siberian Husky Mix
+Toy Affenpinscher
+Afador
+Affenhuahua
+Akita Chow
+Akita Pit
+Akita Shepherd
+American Pugabull
+Auggie
+Aussiedoodle
+Australian Retriever
+Australian Shepherd Husky
+Australian Shepherd Lab Mix
+Australian Shepherd Pit Bull Mix
+Bassador
+Basset Retriever
+Beabull
+Beaglier
+Bernedoodle
+Biewer Terrier
+Bocker
+Boglen Terrier
+Borador
+Border Sheepdog
+Bordoodle
+Boshih
+Bossie
+Boston Boxer
+Boston Terrier Pekingese Mix
+Boxador
+Boxerdoodle
+Boxmatian
+Boxweiler
+Bugg
+Bullador
+Bullboxer Pit
+Bullmatian
+Bull Pei
+Catahoula Bulldog
+Cavachon
+Cavador
+Cav A Jack
+Cavapoo
+Chabrador
+Cheagle
+Chi Chi
+Chigi
+Chilier
+Chion
+Chipin
+Chi Poo
+Chiweenie
+Chorkie
+Chow Shepherd
+Chug
+Chusky
+Cockalier
+Cockapoo
+Corman Shepherd
+Dachsador
+Daniff
+Deutscher Wachtelhund
+Doberdor
+Docker
+Dorgi
+Dorkie
+Doxiepoo
+Doxle
+Frenchton
+Frengle
+German Shepherd Pit Bull
+German Shepherd Rottweiler Mix
+German Sheprador
+Goberian
+Goldador
+Golden Cocker Retriever
+Goldendoodle
+Golden Mountain Dog
+Golden Retriever Corgi
+Golden Shepherd
+Gollie
+Greyador
+Horgi
+Huskita
+Huskydoodle
+Jack A Poo
+Jack Chi
+Jackshund
+King Shepherd
+Kyi Leo
+Labernese
+Labmaraner
+Lab Pointer
+Labradane
+Labradoodle
+Labrastaff
+Labsky
+Lhasapoo
+Maltese Shih Tzu
+Maltipoo
+Mastador
+Miniature Dachshund
+Morkie
+Northern Inuit
+Papipoo
+Peekapoo
+Pitsky
+Pocket Beagle
+Pomapoo
+Pomchi
+Pomeagle
+Pomsky
+Poochon
+Portuguese Podengo Pequeno
+Portuguese Sheepdog
+Pugalier
+Puggle
+Puginese
+Pyredoodle
+Rottador
+Rottle
+Saint Berdoodle
+Samusky
+Schnoodle
+Sheepadoodle
+Shepsky
+Shichon
+Shih Poo
+Shiloh Shepherd
+Shiranian
+Shollie
+Shorkie
+Silken Windhound
+Springador
+Terripoo
+Texas Heeler
+Valley Bulldog
+Westiepoo
+Whoodle
+Yorkipoo
+Abyssinian Cat
+Bengal Cat
+Birman Cat
+Bombay Cat
+British Shorthair Cat
+Egyptian Mau Cat
+Maine Coon Cat
+Persian Cat
+Ragdoll Cat
+Russian Blue Cat
+Siamese Cat
+Sphynx Cat
+American Bandogge
+American Bully
+American Alsatian
+Hairless Mexican Dog
+Miniature Poodle Mix
+Toy Spaniel
+White Swiss Shepherd
+Wire Haired Fox Terrier
+Yorkshire Terrier Affenpinscher
+Akbash
+American Eskimo
+Anatolian Shepherd
+Chinese Crested Dog
+Corgi Inu
+Drentsche Patrijshond
+Fox Terrier
+Golden Setter
+Mutt
+Australian Cattle
+Australian Stumpy Tail Cattle
+Bernese Mountain
+Canaan
+Carolina
+Catahoula Leopard
+Caucasian Shepherd
+Central Asian Shepherd
+Chinses Crested
+Chinses Shar Pei
+Corgi Lnu
+Drentsche Patrijishond
+Entlebucher Mountain
+Estrela Mountain
+Field Spsniel
+Glen Of Lmaal Terrier
+Golden Mountain
+Greater Swiss Mountain
+Jack Russel Terrier
+Karelian Bear
+Labradull
+Northern Lnuit
+Petil Basset Griffon Vendeen
+Portuguese Water
+Sheepaddoodle
+Shollio
+Taiwan
+Airedale
+Akita American
+Appenzeller
+Artésien Normand
+Basset
+Belgian Shepherd Dog
+Bichon Frisé
+Bluetick
+Boston Bull
+Bull Mastiff
+Cairn
+Cardigan
+Chow
+Clumber
+Coton De Tuléar
+Dandie Dinmont
+Doberman
+English Springer
+Entlebucher
+German Short Haired Pointer
+Japanese Spaniel
+Leonberg
+Lhasa
+Lowchen
+Malamute
+Malinois
+Maltese Dog
+Mexican Hairless
+Pekinese
+Pembroke
+Plott
+Redbone
+Scotch Terrier
+Staffordshire Bullterrier
+Toy Terrier
+Welsh Corgi Cardigan
+Braque D Auvergne
+Belgian Shepherd Dog Laekenois
+Dachshund Wire Haired
+Collie Smooth
+Welsh Corgi Pembroke
+Collie Rough
+Belgian Shepherd Dog Groenendael
+Bull Terrier Miniature
+Chihuahua Long Coat
+Chihuahua Smooth Coat
+Ariégeois
+Dachshund Miniature Smooth Haired
+Yorkshire Terrieraffenpinscher
+Cirneco Dell Etna
+English Toy Terrier Black Tan
+German Shepherd Dog Alsatian
+Fox Terrier Wire
+Belgian Shepherd Dog Tervueren
+Poodle Miniature
+Japanese Shiba Inu
+Dachshund Smooth Haired
+Poodle Standard
+Poodle Toy
+Dachshund Miniature Wire Haired
+Chien D Artois
+Fox Terrier Smooth
+Dachshund Long Haired
+Auvergne
+St Bernard
+Dachshund Miniature Long Haired
+Belgian Shepherd Dog Malinois
+Cocker Spaniel (american)
+Cocker Spaniel (english)
+Collie (rough)
+Collie (smooth)
+Czechoslovakian Vlcak
+Dachshund (longhaired)
+Dachshund (smooth)
+Dachshund (wirehaired)
+Deerhound (scottish)
+Hungarian Wirehaired Vizsla
+Italian Spinone
+Japanese Ainu
+Jindo (korean Jindo)
+Munsterlander (large)
+Munsterlander (small)
+Mastiff (english)
+Mastiff (french)
+Mastiff (neapolitan)
+Mastiff (spanish)
+Mastiff (tibetan)
+Nederlandse Kooikerhondje
+Olde English Bulldogge
+Owczarek Podhalanski
+Picardy Shepherd
+Pointer (english)
+Pont Audemer Spaniel
+Poodle (miniature)
+Poodle (standard)
+Poodle (toy)
+Queensland Heeler
+Russian Tsvetnaya Bolonka
+Sarplaninac
+Schnauzer (giant)
+Schnauzer (miniature)
+Schnauzer (standard)
+Small Munsterlander
+Tosa Inu
+Working Kelpie
+Artois
+Braque D
+Chien D
+Cirneco Dell
