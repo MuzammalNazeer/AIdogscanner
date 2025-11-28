@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.6</version>
+        <relativePath/>
+    </parent>
+    <groupId>spring-dog-backend</groupId>
+    <artifactId>spring-dog-backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-dog-backend</name>
+    <description>Dog Breed Identification API</description>
+
+    <properties>
+        <java.version>21</java.version>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.3.0</version>
+        </dependency>
+            <!-- Spring Data JPA -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+            </dependency>
+        <!-- Validation (CRITICAL - This was missing) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Spring Security OAuth2 Resource Server (for JWT support) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+            <!-- MySQL Connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.11.5</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                    <compilerArgs>--enable-preview</compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">-->
+<!--    <modelVersion>4.0.0</modelVersion>-->
+<!--    <parent>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
+<!--        <version>3.5.6</version>-->
+<!--        <relativePath/>-->
+<!--    </parent>-->
+<!--    <groupId>spring-dog-backend</groupId>-->
+<!--    <artifactId>spring-dog-backend</artifactId>-->
+<!--    <version>0.0.1-SNAPSHOT</version>-->
+<!--    <name>spring-dog-backend</name>-->
+<!--    <description>Dog Breed Identification API</description>-->
+
+<!--    <properties>-->
+<!--        <java.version>21</java.version>-->
+<!--    </properties>-->
+
+<!--    <dependencies>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-web</artifactId>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; TensorFlow Lite with GPU support &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.tensorflow</groupId>-->
+<!--            <artifactId>tensorflow-lite</artifactId>-->
+<!--            <version>2.14.0</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; TensorFlow Core Platform (includes TensorFlow Lite) &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.tensorflow</groupId>-->
+<!--            <artifactId>tensorflow-core-platform</artifactId>-->
+<!--            <version>0.5.0</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; Optional: TensorFlow Lite GPU delegate &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.tensorflow</groupId>-->
+<!--            <artifactId>tensorflow-lite-gpu</artifactId>-->
+<!--            <version>2.14.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.openpnp</groupId>-->
+<!--            <artifactId>opencv</artifactId>-->
+<!--            <version>4.10.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-test</artifactId>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <excludes>-->
+<!--                        <exclude>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok</artifactId>-->
+<!--                        </exclude>-->
+<!--                    </excludes>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
+<!--</project>-->
+
+<!--&lt;!&ndash;<?xml version="1.0" encoding="UTF-8"?>&ndash;&gt;-->
+<!--&lt;!&ndash;<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&ndash;&gt;-->
+<!--&lt;!&ndash;	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">&ndash;&gt;-->
+<!--&lt;!&ndash;	<modelVersion>4.0.0</modelVersion>&ndash;&gt;-->
+<!--&lt;!&ndash;	<parent>&ndash;&gt;-->
+<!--&lt;!&ndash;		<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;		<artifactId>spring-boot-starter-parent</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;		<version>3.5.6</version>&ndash;&gt;-->
+<!--&lt;!&ndash;		<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;	</parent>&ndash;&gt;-->
+<!--&lt;!&ndash;	<groupId>spring-dog-backend</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;	<artifactId>spring-dog-backend</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;	<version>0.0.1-SNAPSHOT</version>&ndash;&gt;-->
+<!--&lt;!&ndash;	<name>spring-dog-backend</name>&ndash;&gt;-->
+<!--&lt;!&ndash;	<description>Demo project for Spring Boot</description>&ndash;&gt;-->
+<!--&lt;!&ndash;	<url/>&ndash;&gt;-->
+<!--&lt;!&ndash;	<licenses>&ndash;&gt;-->
+<!--&lt;!&ndash;		<license/>&ndash;&gt;-->
+<!--&lt;!&ndash;	</licenses>&ndash;&gt;-->
+<!--&lt;!&ndash;	<developers>&ndash;&gt;-->
+<!--&lt;!&ndash;		<developer/>&ndash;&gt;-->
+<!--&lt;!&ndash;	</developers>&ndash;&gt;-->
+<!--&lt;!&ndash;	<scm>&ndash;&gt;-->
+<!--&lt;!&ndash;		<connection/>&ndash;&gt;-->
+<!--&lt;!&ndash;		<developerConnection/>&ndash;&gt;-->
+<!--&lt;!&ndash;		<tag/>&ndash;&gt;-->
+<!--&lt;!&ndash;		<url/>&ndash;&gt;-->
+<!--&lt;!&ndash;	</scm>&ndash;&gt;-->
+<!--&lt;!&ndash;    <properties>&ndash;&gt;-->
+<!--&lt;!&ndash;        <java.version>21</java.version>&ndash;&gt;-->
+<!--&lt;!&ndash;        <maven.compiler.source>25</maven.compiler.source>&ndash;&gt;-->
+<!--&lt;!&ndash;        <maven.compiler.target>25</maven.compiler.target>&ndash;&gt;-->
+<!--&lt;!&ndash;    </properties>&ndash;&gt;-->
+<!--&lt;!&ndash;	<dependencies>&ndash;&gt;-->
+<!--&lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<artifactId>spring-boot-starter-web</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;		</dependency>&ndash;&gt;-->
+
+<!--&lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<artifactId>spring-boot-devtools</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<scope>runtime</scope>&ndash;&gt;-->
+<!--&lt;!&ndash;			<optional>true</optional>&ndash;&gt;-->
+<!--&lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;			<groupId>org.projectlombok</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<artifactId>lombok</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<optional>true</optional>&ndash;&gt;-->
+<!--&lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;		<dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;			<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<artifactId>spring-boot-starter-test</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;			<scope>test</scope>&ndash;&gt;-->
+<!--&lt;!&ndash;		</dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;	</dependencies>&ndash;&gt;-->
+
+<!--&lt;!&ndash;	<build>&ndash;&gt;-->
+<!--&lt;!&ndash;		<plugins>&ndash;&gt;-->
+<!--&lt;!&ndash;			<plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;				<groupId>org.apache.maven.plugins</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;				<artifactId>maven-compiler-plugin</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;				<configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;					<annotationProcessorPaths>&ndash;&gt;-->
+<!--&lt;!&ndash;						<path>&ndash;&gt;-->
+<!--&lt;!&ndash;							<groupId>org.projectlombok</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;							<artifactId>lombok</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;						</path>&ndash;&gt;-->
+<!--&lt;!&ndash;					</annotationProcessorPaths>&ndash;&gt;-->
+<!--&lt;!&ndash;				</configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;			</plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;			<plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;				<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;				<artifactId>spring-boot-maven-plugin</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;				<configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;					<excludes>&ndash;&gt;-->
+<!--&lt;!&ndash;						<exclude>&ndash;&gt;-->
+<!--&lt;!&ndash;							<groupId>org.projectlombok</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;							<artifactId>lombok</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;						</exclude>&ndash;&gt;-->
+<!--&lt;!&ndash;					</excludes>&ndash;&gt;-->
+<!--&lt;!&ndash;				</configuration>&ndash;&gt;-->
+<!--&lt;!&ndash;			</plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;		</plugins>&ndash;&gt;-->
+<!--&lt;!&ndash;	</build>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</project>&ndash;&gt;-->
