@@ -1,10 +1,10 @@
-
-import 'package:dog_breed/Valid/AppColors.dart';
-import 'package:dog_breed/config/components/roundButton.dart';
-import 'package:dog_breed/utils/routes/routes_name.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+
+import '../../Valid/AppColors.dart';
+import '../../config/components/roundButton.dart';
+import '../../utils/routes/routes_name.dart';
 
 class Proview extends StatefulWidget {
   const Proview({super.key});
@@ -14,359 +14,233 @@ class Proview extends StatefulWidget {
 }
 
 class _ProviewState extends State<Proview> {
-  final List<Map<String, dynamic>> features = [
-    {'name': 'Video Screen Recorder', },
-    {'name': 'Audio Capture', },
-    {'name': 'FHD & UHD Support', },
-    {'name': 'VIP Customer Support',},
-    {'name': 'Remove Ads', },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 15,top: 10),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, RoutesName.splash),
-                      child: const Icon(Icons.close, size: 24, color: Colors.black),
-                    ),
-                  ),
-                ),
-                 SizedBox(height:14.h),
-                Padding(
-                  padding: const EdgeInsets.only(left: 85,right: 85),
-                  child: Row(
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              ClipPath(
+                clipper: SoftEllipseBottomClipper(),
+                child: Container(
+                  height: 183.h,
+                  width: double.infinity,
+                  color: const Color(0xFF7A1FFF),
+                  child: Column(
                     children: [
-                      SvgPicture.asset(
-                        "assets/images/Group2.svg",
-                        width: 72.w,
-                        height: 37.h,
-                        fit: BoxFit.contain,
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        'Manager',
-                        style: TextStyle(
-                          fontFamily: 'Sora',
-                          fontWeight: FontWeight.w200,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 30.sp,
-                          height: 1.0,
-                          letterSpacing: 0.0,
-                          color: AppColors.jet,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                 SizedBox(height: 38.h),
-                Padding(
-                  padding: const EdgeInsets.only(left: 70,right: 70),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        "assets/images/Vector1.svg",
-                        width: 97,
-                        height: 50,
-                        fit: BoxFit.contain,
-                      ),
-                      const SizedBox(width: 5),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      Row(
                         children: [
-                          Text(
-                            'Dog Manager',
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12.56,
-                              height: 1.0,
-                              letterSpacing: -0.14,
-                              color: AppColors.jet,
-                            ),
-                          ),
-                          SizedBox(height: 5.h,),
-                          Text(
-                            'Premium Version',
-                            style: TextStyle(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w700,
-                              fontSize: 17.94,
-                              height: 1.0,
-                              letterSpacing: -0.14,
-                              color: AppColors.jet,
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.w),
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 28.sp,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(width: 5),
-                      SvgPicture.asset(
-                        "assets/images/Vector.svg",
-                        width: 97,
-                        height: 50,
-                        fit: BoxFit.contain,
+                      SizedBox(width: 25.w),
+                      const Icon(
+                        Icons.diamond,
+                        color: Colors.white,
+                        size: 55, // Exact size from your design
                       ),
                     ],
                   ),
                 ),
-                 SizedBox(height: 16.h),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'START LIKE A ',
-                        style: TextStyle(
-                          fontFamily: 'Sora',
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 26.sp,
-                          height: 1.0,
-                          letterSpacing: 0.0,
-                          color: AppColors.jet,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'PRO',
-                        style: TextStyle(
-                          fontFamily: 'Sora',
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 26.sp,
-                          height: 1.0,
-                          letterSpacing: 0.0,
-                          color: AppColors.vibrantPurple,
-                        ),
-                      ),
-                    ],
-                  ),
+              ),
+              SizedBox(height: 10.h),
+              Text(
+                "Start Like A Pro",
+                style: TextStyle(
+                  fontSize: 28.sp,
+                  height: 45.2 / 28,
+                  letterSpacing: 0,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF000000),
+                  fontFamily: "Inter",
                 ),
-                 SizedBox(height: 85.h),
-                Stack(
-                  clipBehavior: Clip.none,
+              ),
+              SizedBox(height: 4.h),
+              Text(
+                "unlock All Features",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  height: 45.2 / 16,
+                  letterSpacing: 0,
+                  color: const Color(0xFF6F7D86),
+                  fontFamily: "Inter",
+                ),
+              ),
+              SizedBox(height: 18.h),
+              Padding(
+                padding: EdgeInsets.only(right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Column(
-                      children: [
-                        _buildFeatureRow('Video Screen Recorder'),
-                        SizedBox(height: 7.h,),
-                        _buildFeatureRow('Audio Capture'),
-                        SizedBox(height: 7.h,),
-                        _buildFeatureRow('FHD & UHD Support'),
-                        SizedBox(height: 7.h,),
-                        _buildFeatureRow('VIP Customer Support'),
-                        SizedBox(height: 7.h,),
-                        _buildFeatureRow('Remove Ads'),
-                      ],
-                    ),
-
-                    Positioned(
-                      top: -30,
-                      left: 195,
-                      child: Container(
-                        width: 76.w,
-                        height: 361.h,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFEBD8FF),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Text(
-                                'BASIC',
-                                style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 14.sp,
-                                  height: 1.2,
-                                  letterSpacing: -0.16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: features.asMap().entries.map((entry) {
-                                  final item = entry.value;
-                                  final bool basic = item['basic'] ?? false;
-
-                                  return Container(
-                                    height: 361.h / (features.length + 1),
-                                    alignment: Alignment.center,
-                                    child: basic
-                                        ? Icon(Icons.check, color: Color(0xFF6A5AE0), size: 22.sp)
-                                        : Text(
-                                      '—',
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ],
-                        ),
+                    Text(
+                      "Premium",
+                      style: TextStyle(
+                        color: Color(0xFF6F7D86),
+                        fontSize: 15.sp,
                       ),
                     ),
-                    SizedBox(width: 3.w,),
-                    Positioned(
-                      top: -30,
-                      left: 260,
-                      child: Container(
-                        width: 76.w,
-                        height: 361.h,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF3E7CD),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Text(
-                                'PREMIUM',
-                                style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 14.h,
-                                  height: 1.2,
-                                  letterSpacing: -0.16,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: features.map((item) {
-                                  final bool premium = item['premium'] ?? true;
-                                  return Container(
-                                    height: 361.h / (features.length + 1),
-                                    alignment: Alignment.center,
-                                    child: premium
-                                        ? Icon(Icons.check, color: Color(0xFF6A5AE0), size: 22.sp)
-                                        : Text(
-                                      '—',
-                                      style: TextStyle(
-                                          color: Colors.grey[600],
-                                          fontSize: 20.sp,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ],
-                        ),
+                    SizedBox(width: 20.w),
+                    Text(
+                      "Free",
+                      style: TextStyle(
+                        color: Color(0xFF6F7D86),
+                        fontSize: 15.sp,
                       ),
                     ),
                   ],
                 ),
-                 SizedBox(height: 77.h),
-                Text(
-                  'Rs. 2,500/week after FREE 3-day trial',
-                  style: TextStyle(fontSize: 14.sp, color: AppColors.appColorBlack),
+              ),
+              SizedBox(height: 5.h),
+              const _FeatureRow(
+                title: "Camera Detector (Flash Mode)",
+                premium: true,
+                free: true,
+              ),
+              const _FeatureRow(
+                title: "Device Scanner (WiFi)",
+                premium: true,
+                free: true,
+              ),
+              const _FeatureRow(
+                title: "Camera Detector (Magnetic)",
+                premium: true,
+                free: true,
+              ),
+              const _FeatureRow(
+                title: "Remove Ads",
+                premium: true,
+                free: false,
+              ),
+              const _FeatureRow(
+                title: "VIP Customer Support",
+                premium: true,
+                free: false,
+              ),
+              SizedBox(height: 160.h),
+              Text(
+                "3-Days FREE Trial, Rs 2550/Week After",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  height: 24 / 14,
+                  letterSpacing: 0,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF000000),
+                  fontFamily: "Inter",
                 ),
-                 SizedBox(height: 10.h),
-                Text(
-                  'By continuing you agree to our Terms and Privacy policies.\n'
-                      'Subscription is billed after the trial ends and will auto-renew. Cancel\n'
-                      'subscription anytime before trial ends to avoid charges.',
-                  textAlign: TextAlign.center,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 8.h),
+              RoundButton(
+                title: "START FREE TRIAL",
+                height: 56.h,
+                width: 379.w,
+                backgroundColors: AppColors.vibrantPurple,
+                isSelected: true,
+                onPress: () {
+                  Navigator.pushNamed(context, RoutesName.wizard);
+                },
+              ),
+              SizedBox(height: 5.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 36.w),
+                child: Text(
+                  "By continuing you agree to our Terms and Privacy policy, subscription is billed after the trial ends and will auto-renew. Cancel subscription anytime before trial ends to avoid charges.",
                   style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12.sp,
-                    height: 1.23,
-                    letterSpacing: -0.16,
-                    color: AppColors.battleshipGray,
+                    fontSize: 10.sp,
+                    height: 18 / 10,
+                    letterSpacing: 0,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF000000),
+                    fontFamily: "Inter",
                   ),
+                  textAlign: TextAlign.center,
                 ),
-                 SizedBox(height: 25.h),
-                RoundButton(
-                  title: "START FREE TRIAL",
-                  height: 56,
-                  width: 379,
-                  backgroundColors: AppColors.vibrantPurple,
-                  isSelected: true,
-                  onPress: () {
-                    Navigator.pushNamed(context, RoutesName.wizard);
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-  Widget _buildFeatureRow(String name) {
-    return Container(
-      width: double.infinity,
-      height: 49.h,
-      padding: EdgeInsets.only(left: 10,right: 20),
-      decoration: BoxDecoration(
-        color: AppColors.whiteSmoke,
-        borderRadius: BorderRadius.circular(6.r),
-        border: Border.all(color: const Color(0xFFE0E0E0)),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            _getFeatureIcon(name),
-            color: const Color(0xFF6A5AE0),
-            size: 18.sp,
-          ),
-           SizedBox(width: 12.w),
-          Text(
-            name,
-            style:  TextStyle(
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w400,
-              fontStyle: FontStyle.normal,
-              fontSize: 16.sp,
-              height: 1.2,
-              letterSpacing: -0.16,
-              color: Colors.black87,
-            ),
+              ),
+              SizedBox(height: 20),
+            ],
           ),
         ],
       ),
     );
   }
-  // Get Feature Icon
-  IconData _getFeatureIcon(String feature) {
-    switch (feature) {
-      case 'Video Screen Recorder':
-        return Icons.videocam;
-      case 'Audio Capture':
-        return Icons.mic;
-      case 'FHD & UHD Support':
-        return Icons.hd;
-      case 'VIP Customer Support':
-        return Icons.headset_mic;
-      case 'Remove Ads':
-        return Icons.block;
-      default:
-        return Icons.check;
-    }
+}
+
+class SoftEllipseBottomClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    const double inset = 55.0; // Left & right inset
+    const double lift = 115.0; // How much the curve is pulled upward
+
+    final path = Path();
+
+    // Top-left corner
+    path.moveTo(0, 0);
+    path.lineTo(0, size.height - lift);
+
+    // Perfect centered soft ellipse
+    path.quadraticBezierTo(
+      size.width * 0.5,
+      size.height + 75,
+      size.width - inset,
+      size.height - lift,
+    );
+
+    // Close the shape cleanly
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+}
+
+class _FeatureRow extends StatelessWidget {
+  final String title;
+  final bool premium;
+  final bool free;
+
+  const _FeatureRow({
+    required this.title,
+    required this.premium,
+    required this.free,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: Color(0xFF000000),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          const Icon(Icons.check, color: Color(0xFF7A1FFF), size: 20),
+          const SizedBox(width: 40),
+          Icon(
+            free ? Icons.check : Icons.lock_outline,
+            color: Color(0xFF7A1FFF),
+            size: 20,
+          ),
+        ],
+      ),
+    );
   }
 }

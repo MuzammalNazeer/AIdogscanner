@@ -36,7 +36,7 @@ class Routes {
             builder: (BuildContext context) => const Splashview());
         case RoutesName.pro:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Proview());
+            builder: (BuildContext context) =>  const Proview());
         case RoutesName.login:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  LoginView());
@@ -102,7 +102,7 @@ class Routes {
             ? args
             : File(''); // fallback (never used if you pass properly)
 
-        
+
         return MaterialPageRoute(
           builder: (_) => DogResultScreen(imageFile: imageFile),
         );
