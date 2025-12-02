@@ -498,7 +498,7 @@ class _HomeviewState extends State<Homeview> {
                 SizedBox(height: 19.h),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, RoutesName.dogIdentifier);
+                    Navigator.pushNamed(context, RoutesName.camera);
                   },
                   child: Text(
                     'Scan Now',

@@ -1,5 +1,6 @@
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/utils.dart';
 
 class CommonInputField extends StatefulWidget {
@@ -50,64 +51,68 @@ class _CommonInputFieldState extends State<CommonInputField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          controller: widget.controller,
-          focusNode: widget.currentFocusNode,
-          obscureText: _isObscure,
-          enabled: widget.isEnabled,
-          decoration: InputDecoration(
-              fillColor: const Color(0xFFF5F5F5),
-              filled: true,
-              prefixIcon: widget.prefixIcon,
-            suffixIcon: widget.obscureText
-                ? IconButton(
-              icon: Icon(
-                _isObscure ? Icons.visibility : Icons.visibility_off,
-              ),
-              onPressed: () {
-                setState(() {
-                  _isObscure = !_isObscure;
-                });
-              },
-            )
-                : (widget.suffixIcon != null ? Icon(widget.suffixIcon) : null),
-            hintText: widget.hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(
-                color: _hasError ? Colors.red : AppColors.whiteSmoke,
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(
-                color: AppColors.whiteSmoke
+        SizedBox(
+          height: 45,
+          width: double.infinity,
+          child: TextFormField(
+            controller: widget.controller,
+            focusNode: widget.currentFocusNode,
+            obscureText: _isObscure,
+            enabled: widget.isEnabled,
+            decoration: InputDecoration(
+                fillColor: const Color(0xFFF5F5F5),
+                filled: true,
+                prefixIcon: widget.prefixIcon,
+              suffixIcon: widget.obscureText
+                  ? IconButton(
+                icon: Icon(
+                  _isObscure ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isObscure = !_isObscure;
+                  });
+                },
               )
-            )
+                  : (widget.suffixIcon != null ? Icon(widget.suffixIcon) : null),
+              hintText: widget.hintText,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(
+                  color: _hasError ? Colors.red : AppColors.whiteSmoke,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(9),
+                borderSide: const BorderSide(
+                  color: AppColors.whiteSmoke
+                )
+              )
+            ),
+            onFieldSubmitted: (_) {
+              Utils.fieldFocusChange(
+                context,
+                widget.currentFocusNode,
+                widget.nextFocusNode!,
+              );
+            },
+            validator: (value) {
+              final error = widget.validator(value);
+              setState(() {
+                _hasError = error != null;
+              });
+              return error;
+            },
           ),
-          onFieldSubmitted: (_) {
-            Utils.fieldFocusChange(
-              context,
-              widget.currentFocusNode,
-              widget.nextFocusNode!,
-            );
-          },
-          validator: (value) {
-            final error = widget.validator(value);
-            setState(() {
-              _hasError = error != null;
-            });
-            return error;
-          },
         ),
         if (_hasError && widget.validationMessage != null)
           Row(
             children: [
               Icon(widget.errorIcon ?? Icons.error_outline, color: Colors.red),
-              const SizedBox(width: 5),
+               SizedBox(width: 5.w),
               Expanded(
                 child: Text(
                   widget.validationMessage!,
@@ -116,7 +121,7 @@ class _CommonInputFieldState extends State<CommonInputField> {
               ),
             ],
           ),
-        const SizedBox(height: 10),
+
       ],
     );
   }

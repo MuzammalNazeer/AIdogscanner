@@ -17,12 +17,14 @@ class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
 
   // Controllers
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final  TextEditingController _passwordController = TextEditingController();
+
 
   // Focus Nodes
-  final _emailFocus = FocusNode();
-  final _passwordFocus = FocusNode();
+  final FocusNode _emailFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+
 
   @override
   void dispose() {
@@ -153,6 +155,7 @@ class _LoginViewState extends State<LoginView> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
+                        Navigator.pushNamed(context, RoutesName.forgetEmail);
                       },
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero,
@@ -275,7 +278,7 @@ class _LoginViewState extends State<LoginView> {
                     backgroundColors: AppColors.black,
                     isSelected: true,
                     onPress: () {
-                      // Navigator.pushNamed(context, RoutesName.dashboard);
+                      Navigator.pushNamed(context, RoutesName.signup);
                     },
                   ),
                   const SizedBox(height: 10),

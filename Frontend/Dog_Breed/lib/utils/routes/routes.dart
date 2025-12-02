@@ -21,7 +21,12 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 
 import '../../View/Splash/splashView.dart';
+import '../../View/forget/confirmpasswordview.dart';
+import '../../View/forget/forgotPasswordEmailView.dart';
+import '../../View/forget/forgotcodeView.dart';
+import '../../View/forget/newpasswordview.dart';
 import '../../View/pro/proView.dart';
+import '../../View/signup/signupview.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -35,6 +40,21 @@ class Routes {
         case RoutesName.login:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  LoginView());
+        case RoutesName.signup:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Signupview());
+        case RoutesName.forgetEmail:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Forgotpasswordemailview());
+        case RoutesName.forgetCode:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Forgotcodeview());
+        case RoutesName.confirm:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Confirmpasswordview());
+        case RoutesName.newPassword:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Newpasswordview());
         case RoutesName.wizard:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  Wizardview());
@@ -86,8 +106,19 @@ class Routes {
           builder: (_) => DogResultScreen(imageFile: imageFile),
         );
       case RoutesName.dogIdentifier:
+      // Get the File that was passed as argument
+        final args = ModalRoute.of(context as BuildContext)?.settings.arguments;
+        final File imageFile = args is File
+            ? args
+            : File(''); // fallback (never used if you pass properly)
+
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  const DogIdentifierApp());
+          builder: (_) => const DogIdentifierApp(),
+        );
+
+      // case RoutesName.dogIdentifier:
+      //   return MaterialPageRoute(
+      //       builder: (BuildContext context) =>  const DogIdentifierApp());
       default:
         return MaterialPageRoute(builder: (_) {
           return const Scaffold(
