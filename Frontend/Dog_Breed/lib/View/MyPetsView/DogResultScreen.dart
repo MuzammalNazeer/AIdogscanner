@@ -260,7 +260,7 @@ class _DogResultScreenState extends State<DogResultScreen> {
               color: Colors.orange,
             ),
           ),
-          SizedBox(height: 12.h),
+          SizedBox(height: 12.h) ,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

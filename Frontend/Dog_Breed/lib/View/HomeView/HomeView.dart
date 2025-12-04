@@ -733,36 +733,137 @@ class _HomeviewState extends State<Homeview> {
   }
 
   Widget _buildSupportedBreedsVerticalFormatted() {
+
     final List<Map<String, String>> topBreeds = [
       {
-        'name': 'Labrador Retriever',
-        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
-        'accuracy': '98%',
-        'image': 'assets/images/Ellipse 83.png',
+        'name': 'Bulldog',
+        'description': 'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.',
+        'image': 'assets/images/Ellipse 139.png',
       },
       {
-        'name': 'German Shepherd',
-        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
-        'accuracy': '96%',
-        'image': 'assets/images/Ellipse 82.png',
+        'name': 'Beagle',
+        'description': 'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.',
+        'image': 'assets/images/Ellipse 139 (1).png',
+      },
+      {
+        'name': 'Yorkshire Terrier',
+        'description': 'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.',
+        'image': 'assets/images/Ellipse 139 (2).png',
+      },
+      {
+        'name': 'Cavalier King Charles Spaniel',
+        'description': 'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.',
+        'image': 'assets/images/Ellipse 139 (3).png',
+      },
+      {
+        'name': 'English Springer Spaniel',
+        'description': 'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.',
+        'image': 'assets/images/Ellipse 139 (4).png',
+      },
+      {
+        'name': 'Bullmastiff',
+        'description': 'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.',
+        'image': 'assets/images/Ellipse 139 (5).png',
+      },
+      {
+        'name': 'English Cocker Spaniel',
+        'description': 'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.',
+        'image': 'assets/images/Ellipse 139 (6).png',
+      },
+      {
+        'name': 'Airedale Terrier',
+        'description': 'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.',
+        'image': 'assets/images/Ellipse 139 (7).png',
+      },
+      {
+        'name': 'Terrier',
+        'description': 'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.',
+        'image': 'assets/images/Ellipse 139 (8).png',
+      },
+      {
+        'name': 'Whippet',
+        'description': 'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.',
+        'image': 'assets/images/Ellipse 1399.png',
+      },
+      {
+        'name': 'Bull Terrier',
+        'description': 'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.',
+        'image': 'assets/images/Ellipse 139 (9).png',
       },
       {
         'name': 'Golden Retriever',
-        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
-        'accuracy': '95%',
-        'image': 'assets/images/Ellipse 81 (1).png',
+        'description': 'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.',
+        'image': 'assets/images/Ellipse 139 (10).png',
       },
       {
-        'name': 'French Bulldog',
-        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
-        'accuracy': '94%',
-        'image': 'assets/images/Ellipse 81 (2).png',
+        'name': 'Old English Sheepdog',
+        'description': 'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.',
+        'image': 'assets/images/Ellipse 1391.png',
       },
       {
-        'name': 'Poodle',
-        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
-        'accuracy': '93%',
-        'image': 'assets/images/Ellipse 77 (1).png',
+        'name': 'Border Collie',
+        'description': 'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.',
+        'image': 'assets/images/Ellipse 1392.png',
+      },
+      {
+        'name': 'Greyhound',
+        'description': 'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.',
+        'image': 'assets/images/Ellipse 139 (12).png',
+      },
+      {
+        'name': 'Jack Russell Terrier',
+        'description': 'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.',
+        'image': 'assets/images/Ellipse 139 (13).png',
+      },
+      {
+        'name': 'Bloodhound',
+        'description': 'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.',
+        'image': 'assets/images/Ellipse 139 (14).png',
+      },
+      {
+        'name': 'English Pointer',
+        'description': 'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.',
+        'image': 'assets/images/Ellipse 139 (15).png',
+      },
+      {
+        'name': 'Staffordshire Bull Terrier',
+        'description': 'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.',
+        'image': 'assets/images/Ellipse 139 (16).png',
+      },
+      {
+        'name': 'English Foxhound',
+        'description': 'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.',
+        'image': 'assets/images/Ellipse 139 (17).png',
+      },
+      {
+        'name': 'Wire Fox Terrier',
+        'description': 'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.',
+        'image': 'assets/images/Ellipse 139 (18).png',
+      },
+      {
+        'name': 'Manchester Terrier',
+        'description': 'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.',
+        'image': 'assets/images/Ellipse 1393.png',
+      },
+      {
+        'name': 'Bedlington Terrier',
+        'description': 'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.',
+        'image': 'assets/images/Ellipse 139 (20).png',
+      },
+      {
+        'name': 'Boston Terrier',
+        'description': 'Life expectancy: 11-13 years.\nFriendly "American Gentleman"\nwith tuxedo-like markings.',
+        'image': 'assets/images/Ellipse 1394.png',
+      },
+      {
+        'name': 'English Setter',
+        'description': 'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.',
+        'image': 'assets/images/Ellipse 139 (21).png',
+      },
+      {
+        'name': 'Border Terrier',
+        'description': 'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.',
+        'image': 'assets/images/Ellipse 139 (22).png',
       },
     ];
     return Column(
@@ -812,7 +913,7 @@ class _HomeviewState extends State<Homeview> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 16.w),
+                  SizedBox(width: 12.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -829,7 +930,7 @@ class _HomeviewState extends State<Homeview> {
                             ),
                             const Spacer(),
                             Padding(
-                              padding: EdgeInsets.only(top: 16.h, right: 16.w),
+                              padding: EdgeInsets.only(top: 16.h, right: 6.w),
                               child: GestureDetector(
                                 onTap: () {
                                   setState(() {
@@ -854,7 +955,7 @@ class _HomeviewState extends State<Homeview> {
                           child: Text(
                             breed['description']!,
                             style: TextStyle(
-                              fontSize: 12.sp,
+                              fontSize: 14.sp,
                               fontWeight: FontWeight.bold,
                               color: const Color(0xFF371B34),
                               height: 1.5,
