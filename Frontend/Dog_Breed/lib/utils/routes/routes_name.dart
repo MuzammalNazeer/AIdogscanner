@@ -6,6 +6,9 @@ class RoutesName {
   static const String signup = 'Signupview';
   static const String wizard = 'Wizardview';
   static const String profile = 'Profileview';
+  static const String history = 'Historyview';
+  static const String favourites = 'Favouritesview';
+  static const String setting = 'Settingview';
   static const String activites = 'Activitesview';
   static const String myPets = 'Mypetsview';
   static const String home = 'Homeview';

@@ -20,12 +20,15 @@ import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 
+import '../../View/Favourites/favouritesView.dart';
+import '../../View/History/historyView.dart';
 import '../../View/Splash/splashView.dart';
 import '../../View/forget/confirmpasswordview.dart';
 import '../../View/forget/forgotPasswordEmailView.dart';
 import '../../View/forget/forgotcodeView.dart';
 import '../../View/forget/newpasswordview.dart';
 import '../../View/pro/proView.dart';
+import '../../View/setting/settingView.dart';
 import '../../View/signup/signupview.dart';
 
 class Routes {
@@ -61,9 +64,18 @@ class Routes {
         case RoutesName.home:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  Homeview());
-        case RoutesName.dashboard:
+      case RoutesName.dashboard:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  DashboardHomeView());
+        case RoutesName.setting:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Settingview());
+      case RoutesName.favourites:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Favouritesview());
+      case RoutesName.history:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Historyview());
         case RoutesName.activites:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  Activitesview());
@@ -86,23 +98,18 @@ class Routes {
         return MaterialPageRoute(
             builder: (BuildContext context) =>  Cameraview());
       case RoutesName.dogIdentification:
-      // Get the File that was passed as argument
         final args = ModalRoute.of(context as BuildContext)?.settings.arguments;
         final File imageFile = args is File
             ? args
-            : File(''); // fallback (never used if you pass properly)
-
+            : File('');
         return MaterialPageRoute(
           builder: (_) => DogIdentificationScreen(imageFile: imageFile),
         );
         case RoutesName.dogResult:
-      // Get the File that was passed as argument
         final args = ModalRoute.of(context as BuildContext)?.settings.arguments;
         final File imageFile = args is File
             ? args
-            : File(''); // fallback (never used if you pass properly)
-
-
+            : File('');
         return MaterialPageRoute(
           builder: (_) => DogResultScreen(imageFile: imageFile),
         );

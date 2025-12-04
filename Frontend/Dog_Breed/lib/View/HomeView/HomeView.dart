@@ -1,8 +1,14 @@
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+import 'dart:io';
+
+import '../../View_model/ScanProvider.dart';
+import '../MyPetsView/DogResultScreen.dart';
 
 class Homeview extends StatefulWidget {
   const Homeview({super.key});
@@ -12,31 +18,78 @@ class Homeview extends StatefulWidget {
 }
 
 class _HomeviewState extends State<Homeview> {
-  final String userName = "Sarina";
+  final Set<String> _favoriteBreeds = {};
 
   @override
   Widget build(BuildContext context) {
+    final scanProvider = Provider.of<ScanProvider>(context);
+    final recentScans = scanProvider.recentScans;
+
+    if (kDebugMode) {
+      print('🏠 HomeView build() called. Recent scans: ${recentScans.length}');
+    }
+    if (recentScans.isNotEmpty) {
+      if (kDebugMode) {
+        print('   First scan: ${recentScans.first['breedName']}');
+      }
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 24, right: 23, top: 18),
+          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
-              SizedBox(height: 17.h),
-              _buildSearchBar(),
-              SizedBox(height: 15.h),
-              _buildPremiumBanner(),
-              SizedBox(height: 17.h),
-              _buildQuickActions(),
-              SizedBox(height: 6.h),
+              SizedBox(height: 4.h),
               _buildIdentifyDogCard(),
-              SizedBox(height: 6.h),
-              _buildFoodManagementCard(),
-              SizedBox(height: 6.h),
-              _buildVisitsDogCard(),
+              SizedBox(height: 22.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Recent Scans',
+                    style: TextStyle(
+                      fontFamily: 'Sora',
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 16.sp,
+                      height: 1.0,
+                      letterSpacing: 0.0,
+                      color: const Color(0xFF371B34),
+                    ),
+                  ),
+                  Text(
+                    '${recentScans.length} scans',
+                    style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.h),
+
+              // Display recent scans
+              if (recentScans.isNotEmpty)
+                _buildRecentScansList(recentScans)
+              else
+                _buildEmptyState(),
+
+              SizedBox(height: 22.h),
+              Text(
+                'Supported Breeds',
+                style: TextStyle(
+                  fontFamily: 'Sora',
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 16.sp,
+                  height: 1.0,
+                  letterSpacing: 0.0,
+                  color: const Color(0xFF371B34),
+                ),
+              ),
+              _buildSupportedBreedsVerticalFormatted(),
+
             ],
           ),
         ),
@@ -44,421 +97,427 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
-  Widget _buildSearchBar() {
+  Widget _buildEmptyState() {
     return Container(
-      height: 52.h,
+      width: 413.w,
+      height: 169.h,
       decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(12.r),
+        color: const Color(0xFFF4F7F6),
+        borderRadius: BorderRadius.circular(20.r),
       ),
-      child: Row(
-        children: [
-          SizedBox(width: 16.w),
-          const SizedBox(
-            width: 22,
-            height: 22,
-            child: Icon(Icons.search, color: Color(0x99000000)),
+      child: Center(
+        child: Text(
+          'No recent scans',
+          style: TextStyle(
+            fontSize: 28.sp,
+            fontWeight: FontWeight.w600,
+            color: Colors.grey[600],
           ),
-          SizedBox(width: 8.w),
-          Expanded(
-            child: Text(
-              'Search for Dog',
-              style: TextStyle(
-                color: const Color(0x99000000),
-                fontFamily: 'Sora',
-                fontWeight: FontWeight.w200,
-                fontSize: 14.sp,
-                height: 1.0,
-                letterSpacing: 0.0,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
+  Widget _buildRecentScansList(List<Map<String, dynamic>> recentScans) {
+    final lastSixScans = recentScans.length > 6
+        ? recentScans.sublist(recentScans.length - 6)
+        : recentScans;
 
-  Widget quickActionButton({
-    required Widget image, // Now accepts Widget instead of String
-    required String label,
-    required Color color,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Container(
-            width: 86.w,
-            height: 90.h,
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Container(
-              width: 57.w,
-              height: 57.h,
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(
-                color: color,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: image, // ✅ Use the widget directly, no Image.asset()
-            ),
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            label,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-          ),
-        ],
-      ),
+    return Column(
+      children: lastSixScans.asMap().entries.map((entry) {
+        final index = entry.key;
+        final scan = entry.value;
+        return _buildRecentScanCard(scan, index);
+      }).toList(),
     );
   }
 
-  Widget _buildHeader() {
-    return Stack(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
+  Widget _buildRecentScanCard(Map<String, dynamic> scan, int index) {
+    final image = scan['image'];
+    final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
+    final formattedBreedName =
+        scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName);
+    final confidence = scan['confidence'] is double
+        ? scan['confidence'] as double
+        : 0.0;
+    final _ = scan['timestamp'] is DateTime
+        ? scan['timestamp'] as DateTime
+        : DateTime.now();
+
+    return Container(
+      margin: EdgeInsets.only(bottom: 12.h),
+      width: 413.w,
+      height: 169.h,
+      decoration: BoxDecoration(
+        color: const Color(0xFFF4F7F6),
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(6.r),
+        child: Column(
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                Stack(
                   children: [
-                    SvgPicture.asset(
-                      "assets/images/Group2.svg",
-                      width: 72.w,
-                      height: 37.h,
-                      fit: BoxFit.contain,
+                    Container(
+                      width: 80.w,
+                      height: 80.h,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
+                        ),
+                      ),
                     ),
-                    const SizedBox(width: 5),
-                    Text(
-                      'Manager',
-                      style: TextStyle(
-                        fontFamily: 'Sora',
-                        fontWeight: FontWeight.w200,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 30.sp,
-                        height: 1.0,
-                        letterSpacing: 0.0,
-                        color: AppColors.jet,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 60.w,
+                        height: 60.h,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFF7B2CBF),
+                        ),
+                        child: image is File && image.existsSync()
+                            ? ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            30.w,
+                          ), // For circle
+                          child: Image.file(
+                            image,
+                            width: 68.w,
+                            height: 68.h,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                            : Center(
+                          child: Icon(
+                            Icons.pets,
+                            color: Colors.white.withOpacity(0.8),
+                            size: 24.r,
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 22.h),
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontSize: 22.sp,
-                      height: 1.0,
-                      letterSpacing: 0.0,
-                      color: Colors.black,
+                SizedBox(width: 6.w),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      formattedBreedName,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                        color: Colors.black,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    children: [
-                      const TextSpan(
-                        text: 'Welcome back, ',
-                        style: TextStyle(fontWeight: FontWeight.w400),
+                    SizedBox(height: 14.h),
+                    Text(
+                      "Your dog you scanned looks like this.",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.sp,
+                        color: Colors.black,
                       ),
-                      TextSpan(
-                        text: '$userName!',
-                        style: const TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                    ],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Container(
+                  width: 73.w,
+                  height: 73.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: const Color(0xFF7DFAC4).withOpacity(0.24),
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${(confidence * 100).toStringAsFixed(1)}%',
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF05E51F),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
-            SizedBox(width: 38.w),
-            SizedBox(
-              height: 92.h,
-              width: 92.w,
-              child: Center(
-                child: Transform.rotate(
-                  angle: -80.11,
-                  child: Image.asset(
-                    'assets/images/Group88.png',
-                    width: 92.w,
-                    height: 92.h,
-                    color: const Color(0xFFF3F6F3),
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
+            SizedBox(height: 12.h),
+            Divider(
+              color: Colors.grey[300],
+              thickness: 1.0,
+              height: 1.h,
             ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPremiumBanner() {
-    return Container(
-      width: 393.w,
-      height: 91.h,
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: const Color(0xFF6D09E8),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: Stack(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Stack(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 5,
-                        left: 5,
-                        right: 15,
+                    GestureDetector(
+                      child: const Text(
+                        'Rerun',
+                        style: TextStyle(
+                          color: Color(0xFF371B34),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Try Premium Features 🌵',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            maxLines: 1,
-                          ),
-                          Text(
-                            'Claim your offer now and get unlimited recognition, health check and more',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14.sp,
-                              height: 1.4,
-                              letterSpacing: 0.2,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                    ),
+                    SizedBox(width: 102.w),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pushNamed(context, RoutesName.dogResult);
+                      },
+                      child: const Text(
+                        'Show',
+                        style: TextStyle(
+                          color: Color(0xFF371B34),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(width: 8.w),
-              Padding(
-                padding: const EdgeInsets.only(right: 5),
-                child: SizedBox(
-                  width: 84.w,
-                  height: 36.h,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.amber,
-                      padding: EdgeInsets.symmetric(vertical: 8.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                    ),
-                    child: FittedBox(
-                      child: Text(
-                        'GET IT',
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                    ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      scan['isFavorite'] = !(scan['isFavorite'] == true);
+                    });
+                  },
+                  icon: Icon(
+                    scan['isFavorite'] == true ? Icons.favorite : Icons.favorite_border,
+                    color: scan['isFavorite'] == true ? Colors.red : Colors.grey[600],
+                    size: 26,
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  // Widget _buildPremiumBanner() {
+
+  //
+  // Widget _buildRecentScansList(List<Map<String, dynamic>> recentScans) {
+  //   return Column(
+  //     children: recentScans.asMap().entries.map((entry) {
+  //       final index = entry.key;
+  //       final scan = entry.value;
+  //       return _buildRecentScanCard(scan, index);
+  //     }).toList(),
+  //   );
+  // }
+
+
+
+  // Widget _buildRecentScanCard(Map<String, dynamic> scan, int index) {
+  //   final image = scan['image'];
+  //   final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
+  //   final formattedBreedName =
+  //       scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName);
+  //   final confidence = scan['confidence'] is double
+  //       ? scan['confidence'] as double
+  //       : 0.0;
+  //   final timestamp = scan['timestamp'] is DateTime
+  //       ? scan['timestamp'] as DateTime
+  //       : DateTime.now();
+  //
   //   return Container(
-  //     height: 91,
-  //     width: 393,
-  //     padding: EdgeInsets.all(5.w),
+  //     margin: EdgeInsets.only(bottom: 12.h),
+  //     width: 413.w,
+  //     height: 169.h,
   //     decoration: BoxDecoration(
-  //       gradient: const LinearGradient(
-  //         colors: [Color(0xFF9C27B0), Color(0xFFE1BEE7)],
-  //       ),
+  //       color: const Color(0xFFF4F7F6),
   //       borderRadius: BorderRadius.circular(12.r),
   //     ),
-  //     child: Row(
-  //       children: [
-  //         Expanded(
-  //           child: Column(
+  //     child: Padding(
+  //       padding: EdgeInsets.all(6.r),
+  //       child: Column(
+  //         children: [
+  //           Row(
   //             crossAxisAlignment: CrossAxisAlignment.start,
   //             children: [
-  //               Text(
-  //                 'Try Premium Features  🌵 ',
-  //                 style: TextStyle(
-  //                   color: Colors.white,
-  //                   fontSize: 15.sp,
-  //                   fontWeight: FontWeight.bold,
-  //                 ),
-  //                 maxLines: 1,
-  //               ),
-  //               SizedBox(height: 2.h),
-  //               SizedBox(
-  //                 height: 36.h,
-  //                 child: Text(
-  //                   'Claim your offer now and get unlimited recognition, health check and more',
-  //                   style: TextStyle(
-  //                     color: Colors.white70,
-  //                     fontSize: 10.sp,
-  //                     height: 1.4,
-  //                     letterSpacing: 0.2,
+  //               Stack(
+  //                 children: [
+  //                   Container(
+  //                     width: 80.w,
+  //                     height: 80.h,
+  //                     decoration: const BoxDecoration(
+  //                       shape: BoxShape.circle,
+  //                       gradient: LinearGradient(
+  //                         begin: Alignment.topLeft,
+  //                         end: Alignment.bottomRight,
+  //                         colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
+  //                       ),
+  //                     ),
   //                   ),
-  //                   maxLines: 2,
-  //                   softWrap: true,
+  //                   Padding(
+  //                     padding: const EdgeInsets.all(8.0),
+  //                     child: Container(
+  //                       width: 60.w,
+  //                       height: 60.h,
+  //                       decoration: const BoxDecoration(
+  //                         shape: BoxShape.circle,
+  //                         color: Color(0xFF7B2CBF),
+  //                       ),
+  //                       child: image is File && image.existsSync()
+  //                           ? ClipRRect(
+  //                               borderRadius: BorderRadius.circular(
+  //                                 30.w,
+  //                               ), // For circle
+  //                               child: Image.file(
+  //                                 image,
+  //                                 width: 68.w,
+  //                                 height: 68.h,
+  //                                 fit: BoxFit.cover,
+  //                               ),
+  //                             )
+  //                           : Center(
+  //                               child: Icon(
+  //                                 Icons.pets,
+  //                                 color: Colors.white.withOpacity(0.8),
+  //                                 size: 24.r,
+  //                               ),
+  //                             ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               SizedBox(width: 6.w),
+  //               Column(
+  //                 mainAxisAlignment: MainAxisAlignment.start,
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Text(
+  //                     formattedBreedName,
+  //                     style: TextStyle(
+  //                       fontWeight: FontWeight.bold,
+  //                       fontSize: 16.sp,
+  //                       color: Colors.black,
+  //                     ),
+  //                     maxLines: 1,
+  //                     overflow: TextOverflow.ellipsis,
+  //                   ),
+  //                   SizedBox(height: 14.h),
+  //                   Text(
+  //                     "Your dog you scanned looks like this.",
+  //                     style: TextStyle(
+  //                       fontWeight: FontWeight.bold,
+  //                       fontSize: 12.sp,
+  //                       color: Colors.black,
+  //                     ),
+  //                     maxLines: 1,
+  //                     overflow: TextOverflow.ellipsis,
+  //                   ),
+  //                 ],
+  //               ),
+  //               const Spacer(),
+  //               Container(
+  //                 width: 73.w,
+  //                 height: 73.h,
+  //                 decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   color: const Color(0xFF7DFAC4).withOpacity(0.24),
+  //                 ),
+  //                 child: Center(
+  //                   child: Column(
+  //                     mainAxisAlignment: MainAxisAlignment.center,
+  //                     children: [
+  //                       Text(
+  //                         '${(confidence * 100).toStringAsFixed(1)}%',
+  //                         style: TextStyle(
+  //                           fontSize: 20.sp,
+  //                           fontWeight: FontWeight.bold,
+  //                           color: const Color(0xFF05E51F),
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
   //                 ),
   //               ),
   //             ],
   //           ),
-  //         ),
-  //         SizedBox(width: 8.w),
-  //         Image.asset(
-  //           'assets/images/Group88.png',
-  //           width: 52.w,
-  //           height: 52.h,
-  //           fit: BoxFit.contain,
-  //         ),
-  //         SizedBox(
-  //           width: 80.w,
-  //           child: ElevatedButton(
-  //             onPressed: () {},
-  //             style: ElevatedButton.styleFrom(
-  //               backgroundColor: Colors.amber,
-  //               padding: EdgeInsets.symmetric(vertical: 8.h),
-  //               shape: RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.circular(8.r),
+  //           SizedBox(height: 12.h),
+  //           Divider(
+  //             color: Colors.grey[300],
+  //             thickness: 1.0,
+  //             height: 1.h,
+  //           ),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Row(
+  //                 children: [
+  //                   const Text(
+  //                     'Rerun',
+  //                     style: TextStyle(
+  //                       color: Color(0xFF371B34),
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                   SizedBox(width: 102.w),
+  //                   const Text(
+  //                     'Show',
+  //                     style: TextStyle(
+  //                       color: Color(0xFF371B34),
+  //                       fontWeight: FontWeight.bold,
+  //                     ),
+  //                   ),
+  //                 ],
   //               ),
-  //             ),
-  //             child: FittedBox(
-  //               child: Text(
-  //                 'GET IT',
-  //                 style: TextStyle(
-  //                   color: Colors.black87,
-  //                   fontWeight: FontWeight.bold,
-  //                   fontSize: 12.sp,
+  //               IconButton(
+  //                 onPressed: () {
+  //                   setState(() {
+  //                     if (scan['isFavorite'] == true) {
+  //                       scan['isFavorite'] = false;
+  //                     } else {
+  //                       scan['isFavorite'] = true;
+  //                     }
+  //                   });
+  //                 },
+  //                 icon: Icon(
+  //                   scan['isFavorite'] == true ? Icons.favorite : Icons.favorite_border,
+  //                   color: scan['isFavorite'] == true ? Colors.red : Colors.grey[600],
+  //                   size: 26,
   //                 ),
   //               ),
-  //             ),
+  //             ],
   //           ),
-  //         ),
-  //         Image.asset(
-  //           'assets/images/Group88.png',
-  //           width: 52.w,
-  //           height: 52.h,
-  //           fit: BoxFit.contain,
-  //         ),
-  //       ],
+  //         ],
+  //       ),
   //     ),
   //   );
   // }
-  final List<Map<String, dynamic>> actions = [
-    {
-      'image': 'assets/images/H.png',
-      'label': 'Hygiene',
-      'color': const Color(0xFFF8BBD0),
-    },
-    {
-      'image': 'assets/images/C.png',
-      'label': 'Cleaning',
-      'color': const Color(0xFFBBDEFB),
-    },
-    {
-      'image': 'assets/images/M.png',
-      'label': 'Medical',
-      'color': const Color(0xFFECEF8B),
-    },
-    {
-      'image': 'assets/images/B.png',
-      'label': 'Booking',
-      'color': const Color(0xFFC8E6C9),
-    },
-  ];
 
-  Widget _buildQuickActions() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        quickActionButton(
-          image: SvgPicture.asset(
-            'assets/images/Group77.svg',
-            width: 52.w,
-            height: 66.h,
-            fit: BoxFit.contain,
-          ),
-          label: 'Hygiene',
-          color: const Color(0xFFEF5DA8),
-          onTap: () {
-            Navigator.pushNamed(context, RoutesName.hygiene);
-          },
-        ),
-        const SizedBox(width: 9),
-        quickActionButton(
-          image:  SvgPicture.asset(
-            'assets/images/Group88.svg',
-            width: 52.w,
-            height: 66.h,
-            fit: BoxFit.contain,
-          ),
-          label: 'Cleaning',
-          color: const Color(0xFFAEAFF7),
-          onTap: () {
-            Navigator.pushNamed(context, RoutesName.cleaning);
-          },
-        ),
-        const SizedBox(width: 9),
-        quickActionButton(
-          image:  SvgPicture.asset(
-            'assets/images/Group99.svg',
-            width: 52.w,
-            height: 66.h,
-            fit: BoxFit.contain,
-          ),
-          label: 'Medical',
-          color: const Color(0xFFECEF8B),
-          onTap: () {},
-        ),
-        const SizedBox(width: 9),
-        quickActionButton(
-          image:  SvgPicture.asset(
-            'assets/images/Group991.svg',
-            width: 52.w,
-            height: 66.h,
-            fit: BoxFit.contain,
-          ),
-          label: 'Booking',
-          color: const Color(0xFFA0E3E2),
-          onTap: () {},
-        ),
-      ],
-    );
+  String _formatBreedName(String name) {
+    return name
+        .replaceAll('-', ' ')
+        .split(' ')
+        .map((word) => word[0].toUpperCase() + word.substring(1))
+        .join(' ');
   }
 
   Widget _buildIdentifyDogCard() {
     return Container(
-      height: 157.h,
-      width: 384.w,
+      height: 177.h,
+      width: 409.w,
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
         color: const Color(0xFFD4ACFF),
@@ -470,7 +529,7 @@ class _HomeviewState extends State<Homeview> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10.h),
+                SizedBox(height: 20.h),
                 Text(
                   'Identify Dog',
                   style: TextStyle(
@@ -482,7 +541,7 @@ class _HomeviewState extends State<Homeview> {
                     color: const Color(0xFF371B34),
                   ),
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: 18.h),
                 Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                   style: TextStyle(
@@ -495,10 +554,104 @@ class _HomeviewState extends State<Homeview> {
                   ),
                   maxLines: 2,
                 ),
-                SizedBox(height: 19.h),
+                SizedBox(height: 29.h),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, RoutesName.camera);
+                  onTap: () async {
+                    if (kDebugMode) {
+                      print('📸 Starting scan process...');
+                    }
+
+                    try {
+                      final cameraResult = await Navigator.pushNamed(
+                        context,
+                        RoutesName.camera,
+                      );
+                      if (cameraResult != null && cameraResult is File) {
+                        if (kDebugMode) {
+                          print('📷 Image captured: ${cameraResult.path}');
+                        }
+                        final dogResult = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                DogResultScreen(imageFile: cameraResult),
+                          ),
+                        );
+                        if (dogResult != null &&
+                            dogResult is Map<String, dynamic>) {
+                          if (kDebugMode) {
+                            print('✅ Received valid scan data!');
+                          }
+
+                          // Get the provider
+                          final scanProvider = Provider.of<ScanProvider>(
+                            context,
+                            listen: false,
+                          );
+
+                          // Create scan data
+                          final scanData = {
+                            'image': dogResult['image'] ?? cameraResult,
+                            'breedName':
+                            dogResult['breedName']?.toString() ??
+                                'Unknown Breed',
+                            'confidence':
+                            (dogResult['confidence'] ?? 0.0) is double
+                                ? dogResult['confidence'] as double
+                                : 0.0,
+                            'formattedBreedName':
+                            dogResult['formattedBreedName']?.toString() ??
+                                _formatBreedName(
+                                  dogResult['breedName']?.toString() ??
+                                      'Unknown Breed',
+                                ),
+                            'timestamp': DateTime.now(),
+                          };
+
+                          if (kDebugMode) {
+                            print(
+                            '📋 Adding scan to provider: ${scanData['breedName']}',
+                          );
+                          }
+
+                          // Add to provider (this will trigger UI update)
+                          scanProvider.addScan(scanData);
+
+                          // Show success message
+                          final confidencePercent =
+                          (scanData['confidence']! * 100).toStringAsFixed(
+                            1,
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                '✅ Saved: ${scanData['formattedBreedName']} ($confidencePercent% confidence)',
+                              ),
+                              duration: const Duration(seconds: 3),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+
+                          if (kDebugMode) {
+                            print('💾 Scan saved via provider!');
+                          }
+                        } else if (dogResult == null) {
+                          if (kDebugMode) {
+                            print(
+                            '⚠️ User cancelled or went back without saving',
+                          );
+                          }
+                        }
+                      } else {
+                        if (kDebugMode) {
+                          print('❌ No image returned from camera');
+                        }
+                      }
+                    } catch (e) {
+                      if (kDebugMode) {
+                        print('❌ Error in scan flow: $e');
+                      }
+                    }
                   },
                   child: Text(
                     'Scan Now',
@@ -527,143 +680,199 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
-  Widget _buildVisitsDogCard() {
-    return Container(
-      height: 157.h,
-      width: 384.w,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: const Color(0xFFA4C4FF),
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildHeader() {
+    return Stack(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
               children: [
-                SizedBox(height: 10.h),
+                SvgPicture.asset(
+                  "assets/images/Group2.svg",
+                  width: 72.w,
+                  height: 37.h,
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(width: 5),
                 Text(
-                  'Vet Visits',
+                  'Manager',
                   style: TextStyle(
                     fontFamily: 'Sora',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 22.sp,
+                    fontWeight: FontWeight.w200,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 30.sp,
                     height: 1.0,
-                    letterSpacing: 0,
-                    color: const Color(0xFF371B34),
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w300,
-                    fontSize: 14.sp,
-                    height: 1.0,
-                    letterSpacing: 0,
-                    color: const Color(0xFF371B34),
-                  ),
-                  maxLines: 2,
-                ),
-                SizedBox(height: 19.h),
-                GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    'Create Visit',
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20.sp,
-                      height: 0.9,
-                      letterSpacing: 0,
-                      color: const Color(0xFF0059FF),
-                    ),
+                    letterSpacing: 0.0,
+                    color: AppColors.jet,
                   ),
                 ),
               ],
             ),
-          ),
-          SizedBox(width: 12.w),
-          Image.asset(
-            'assets/images/image 46.png',
-            width: 123.w,
-            height: 154.h,
-            fit: BoxFit.contain,
-          ),
-        ],
-      ),
+            SizedBox(width: 78.w),
+            SizedBox(
+              height: 92.h,
+              width: 92.w,
+              child: Center(
+                child: Transform.rotate(
+                  angle: -80.11,
+                  child: Image.asset(
+                    'assets/images/Group88.png',
+                    width: 92.w,
+                    height: 92.h,
+                    color: const Color(0xFFF3F6F3),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
-  Widget _buildFoodManagementCard() {
-    return Container(
-      height: 157.h,
-      width: 384.w,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF0E0),
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10.h),
-                Text(
-                  'Food Management',
-                  style: TextStyle(
-                    fontFamily: 'Sora',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 22.sp,
-                    height: 1.0,
-                    letterSpacing: 0,
-                    color: const Color(0xFF371B34),
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w300,
-                    fontSize: 14.sp,
-                    height: 1.0,
-                    letterSpacing: 0,
-                    color: const Color(0xFF371B34),
-                  ),
-                  maxLines: 2,
-                ),
-                SizedBox(height: 19.h),
-                GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    'Check Schedule',
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20.sp,
-                      height: 0.9,
-                      letterSpacing: 0,
-                      color: const Color(0xFF6E4B25),
+  Widget _buildSupportedBreedsVerticalFormatted() {
+    final List<Map<String, String>> topBreeds = [
+      {
+        'name': 'Labrador Retriever',
+        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
+        'accuracy': '98%',
+        'image': 'assets/images/Ellipse 83.png',
+      },
+      {
+        'name': 'German Shepherd',
+        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
+        'accuracy': '96%',
+        'image': 'assets/images/Ellipse 82.png',
+      },
+      {
+        'name': 'Golden Retriever',
+        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
+        'accuracy': '95%',
+        'image': 'assets/images/Ellipse 81 (1).png',
+      },
+      {
+        'name': 'French Bulldog',
+        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
+        'accuracy': '94%',
+        'image': 'assets/images/Ellipse 81 (2).png',
+      },
+      {
+        'name': 'Poodle',
+        'description': 'Life expectancy can be up to 15 years.\nSaint Bernards can become obese if overled and under-exercised.',
+        'accuracy': '93%',
+        'image': 'assets/images/Ellipse 77 (1).png',
+      },
+    ];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 6.h),
+        Column(
+          children: topBreeds.asMap().entries.map((entry) {
+            final _ = entry.key;
+            final breed = entry.value;
+            final isFavorite = _favoriteBreeds.contains(breed['name']);
+
+            return Container(
+              margin: EdgeInsets.only(bottom: 16.h),
+              width: 413.w,
+              height: 169.h,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF2F5F4),
+                borderRadius: BorderRadius.circular(20.r),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 103.w,
+                    height: 103.h,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFF8F5FF),
+
+                    ),
+                    child: breed['image'] != null
+                        ? ClipRRect(
+                      borderRadius: BorderRadius.circular(51.5.w),
+                      child: Image.asset(
+                        breed['image']!,
+                        fit: BoxFit.cover,
+                        width: 103.w,
+                        height: 103.h,
+                      ),
+                    )
+                        : Center(
+                      child: Icon(
+                        Icons.pets,
+                        size: 40.sp,
+                        color: AppColors.vibrantPurple,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 12.w),
-          Image.asset(
-            'assets/images/image 47.png',
-            width: 123.w,
-            height: 154.h,
-            fit: BoxFit.contain,
-          ),
-        ],
-      ),
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              breed['name']!,
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xFF371B34),
+                              ),
+                            ),
+                            const Spacer(),
+                            Padding(
+                              padding: EdgeInsets.only(top: 16.h, right: 16.w),
+                              child: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    if (isFavorite) {
+                                      _favoriteBreeds.remove(breed['name']);
+                                    } else {
+                                      _favoriteBreeds.add(breed['name']!);
+                                    }
+                                  });
+                                },
+                                child: Icon(
+                                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                                  color: isFavorite ? Colors.red : Colors.grey[600],
+                                  size: 28.sp,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 12.h),
+                        Expanded(
+                          child: Text(
+                            breed['description']!,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF371B34),
+                              height: 1.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
+
+
 }
+

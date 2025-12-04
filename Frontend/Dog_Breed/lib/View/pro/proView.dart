@@ -23,30 +23,32 @@ class _ProviewState extends State<Proview> {
           Column(
             children: [
               ClipPath(
-                clipper: SoftEllipseBottomClipper(),
+                clipper: _CustomShapeClipper(),
                 child: Container(
-                  height: 183.h,
+                  height: 165.h,
                   width: double.infinity,
-                  color: const Color(0xFF7A1FFF),
-                  child: Column(
+                  color: const Color(0xFF7B2CBF),
+                  child: Stack(
                     children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 20.w),
-                            child: Icon(
-                              Icons.close,
-                              color: Colors.white,
-                              size: 28.sp,
-                            ),
-                          ),
-                        ],
+                      Positioned(
+                        left: 20.w,
+                        top: 50.h,
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.white,
+                          size: 36.sp,
+                        ),
                       ),
-                      SizedBox(width: 25.w),
-                      const Icon(
-                        Icons.diamond,
-                        color: Colors.white,
-                        size: 55, // Exact size from your design
+                      Positioned(
+                        top: 85.h,
+                        left: 164.w,
+                        child: Center(
+                          child: Image.asset(
+                            'assets/images/Group888.png',
+                            height: 80.h,
+                            width: 80.w,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -174,36 +176,29 @@ class _ProviewState extends State<Proview> {
   }
 }
 
-class SoftEllipseBottomClipper extends CustomClipper<Path> {
+// CustomClipper for the curved background shape
+class _CustomShapeClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    const double inset = 55.0; // Left & right inset
-    const double lift = 115.0; // How much the curve is pulled upward
-
     final path = Path();
-
-    // Top-left corner
-    path.moveTo(0, 0);
-    path.lineTo(0, size.height - lift);
-
-    // Perfect centered soft ellipse
+    path.lineTo(0, size.height - 40);
     path.quadraticBezierTo(
-      size.width * 0.5,
-      size.height + 75,
-      size.width - inset,
-      size.height - lift,
+      size.width / 2,
+      size.height + 40,
+      size.width,
+      size.height - 40,
     );
-
-    // Close the shape cleanly
     path.lineTo(size.width, 0);
     path.close();
-
     return path;
   }
 
   @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
 }
+
 
 class _FeatureRow extends StatelessWidget {
   final String title;

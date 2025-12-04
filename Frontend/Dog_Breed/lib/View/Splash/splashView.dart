@@ -28,7 +28,7 @@ class _SplashviewState extends State<Splashview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.vibrantPurple,
+      backgroundColor: const Color(0xFF7B2CBF),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -45,7 +45,7 @@ class _SplashviewState extends State<Splashview> {
                     boxShadow: [
                       BoxShadow(
                         color: const Color(0xFF00D9FF).withOpacity(1),
-                        blurRadius: 134,
+                        blurRadius: 54,
                         spreadRadius: 0,
                         offset: Offset.zero,
                       ),
@@ -62,7 +62,6 @@ class _SplashviewState extends State<Splashview> {
                 ),
               ),
               const SizedBox(height: 10),
-
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Row(
@@ -76,9 +75,9 @@ class _SplashviewState extends State<Splashview> {
                       fit: BoxFit.contain,
                     ),
                     const SizedBox(width: 5),
-                    Text(
+                    const Text(
                       'Manager',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Sora',
                         fontWeight: FontWeight.w200, // ExtraLight
                         fontSize: 40,

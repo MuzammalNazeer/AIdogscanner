@@ -2,8 +2,14 @@
   <dictionary name="project">
     <words>
       <w>activites</w>
+      <w>cameraview</w>
+      <w>favouritesview</w>
       <w>forgotpasswordemail</w>
       <w>forgotpasswordemailview</w>
+      <w>historyview</w>
+      <w>homeview</w>
+      <w>proview</w>
+      <w>settingview</w>
       <w>signupview</w>
     </words>
   </dictionary>
