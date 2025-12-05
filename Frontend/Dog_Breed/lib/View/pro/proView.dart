@@ -17,148 +17,131 @@ class _ProviewState extends State<Proview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              ClipPath(
-                clipper: _CustomShapeClipper(),
-                child: Container(
-                  height: 165.h,
-                  width: double.infinity,
-                  color: const Color(0xFF7B2CBF),
-                  child: Stack(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Column(
+              children: [
+                ClipPath(
+                  clipper: _CustomShapeClipper(),
+                  child: Container(
+                    height: 165.h,
+                    width: double.infinity,
+                    color: const Color(0xFF7B2CBF),
+                    child: Stack(
+                      children: [
+                        Padding(
+                          padding:  EdgeInsets.only(left: 20.w,top: 50.h),
+                          child: GestureDetector(
+                            onTap:(){
+                              Navigator.pushNamed(context, RoutesName.pro);
+                            },
+                            child: Positioned(
+                              left: 20.w,
+                              top: 50.h,
+                              child: Icon(
+                                Icons.close,
+                                color: Theme.of(context).colorScheme.surface,
+                                size: 36.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 85.h,
+                          left: 164.w,
+                          child: Center(
+                            child: Image.asset(
+                              'assets/images/Group888.png',
+                              height: 80.h,
+                              width: 80.w,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                Text(
+                  "Start Like A Pro",
+                  style: TextStyle(
+                    fontSize: 28.sp,
+                    height: 45.2 / 28,
+                    letterSpacing: 0,
+                    fontWeight: FontWeight.bold,
+                    color:  Theme.of(context).colorScheme.onSurface,
+                    fontFamily: "Inter",
+                  ),
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  "unlock All Features",
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    height: 45.2 / 16,
+                    letterSpacing: 0,
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontFamily: "Inter",
+                  ),
+                ),
+                SizedBox(height: 18.h),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Positioned(
-                        left: 20.w,
-                        top: 50.h,
-                        child: Icon(
-                          Icons.close,
-                          color: Colors.white,
-                          size: 36.sp,
+                      Text(
+                        "Premium",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 15.sp,
                         ),
                       ),
-                      Positioned(
-                        top: 85.h,
-                        left: 164.w,
-                        child: Center(
-                          child: Image.asset(
-                            'assets/images/Group888.png',
-                            height: 80.h,
-                            width: 80.w,
-                          ),
+                      SizedBox(width: 20.w),
+                      Text(
+                        "Free",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 15.sp,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              SizedBox(height: 10.h),
-              Text(
-                "Start Like A Pro",
-                style: TextStyle(
-                  fontSize: 28.sp,
-                  height: 45.2 / 28,
-                  letterSpacing: 0,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF000000),
-                  fontFamily: "Inter",
+                SizedBox(height: 5.h),
+                const _FeatureRow(
+                  title: "Camera Detector (Flash Mode)",
+                  premium: true,
+                  free: true,
                 ),
-              ),
-              SizedBox(height: 4.h),
-              Text(
-                "unlock All Features",
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  height: 45.2 / 16,
-                  letterSpacing: 0,
-                  color: const Color(0xFF6F7D86),
-                  fontFamily: "Inter",
+                const _FeatureRow(
+                  title: "Device Scanner (WiFi)",
+                  premium: true,
+                  free: true,
                 ),
-              ),
-              SizedBox(height: 18.h),
-              Padding(
-                padding: EdgeInsets.only(right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      "Premium",
-                      style: TextStyle(
-                        color: Color(0xFF6F7D86),
-                        fontSize: 15.sp,
-                      ),
-                    ),
-                    SizedBox(width: 20.w),
-                    Text(
-                      "Free",
-                      style: TextStyle(
-                        color: Color(0xFF6F7D86),
-                        fontSize: 15.sp,
-                      ),
-                    ),
-                  ],
+                const _FeatureRow(
+                  title: "Camera Detector (Magnetic)",
+                  premium: true,
+                  free: true,
                 ),
-              ),
-              SizedBox(height: 5.h),
-              const _FeatureRow(
-                title: "Camera Detector (Flash Mode)",
-                premium: true,
-                free: true,
-              ),
-              const _FeatureRow(
-                title: "Device Scanner (WiFi)",
-                premium: true,
-                free: true,
-              ),
-              const _FeatureRow(
-                title: "Camera Detector (Magnetic)",
-                premium: true,
-                free: true,
-              ),
-              const _FeatureRow(
-                title: "Remove Ads",
-                premium: true,
-                free: false,
-              ),
-              const _FeatureRow(
-                title: "VIP Customer Support",
-                premium: true,
-                free: false,
-              ),
-              SizedBox(height: 160.h),
-              Text(
-                "3-Days FREE Trial, Rs 2550/Week After",
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  height: 24 / 14,
-                  letterSpacing: 0,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF000000),
-                  fontFamily: "Inter",
+                const _FeatureRow(
+                  title: "Remove Ads",
+                  premium: true,
+                  free: false,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 8.h),
-              RoundButton(
-                title: "START FREE TRIAL",
-                height: 56.h,
-                width: 379.w,
-                backgroundColors: AppColors.vibrantPurple,
-                isSelected: true,
-                onPress: () {
-                  Navigator.pushNamed(context, RoutesName.wizard);
-                },
-              ),
-              SizedBox(height: 5.h),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 36.w),
-                child: Text(
-                  "By continuing you agree to our Terms and Privacy policy, subscription is billed after the trial ends and will auto-renew. Cancel subscription anytime before trial ends to avoid charges.",
+                const _FeatureRow(
+                  title: "VIP Customer Support",
+                  premium: true,
+                  free: false,
+                ),
+                SizedBox(height: 160.h),
+                Text(
+                  "3-Days FREE Trial, Rs 2550/Week After",
                   style: TextStyle(
-                    fontSize: 10.sp,
-                    height: 18 / 10,
+                    fontSize: 14.sp,
+                    height: 24 / 14,
                     letterSpacing: 0,
                     fontWeight: FontWeight.bold,
                     color: const Color(0xFF000000),
@@ -166,11 +149,38 @@ class _ProviewState extends State<Proview> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-              ),
-              SizedBox(height: 20),
-            ],
-          ),
-        ],
+                SizedBox(height: 8.h),
+                RoundButton(
+                  title: "START FREE TRIAL",
+                  height: 56.h,
+                  width: 379.w,
+                  backgroundColors: AppColors.vibrantPurple,
+                  isSelected: true,
+                  onPress: () {
+                    Navigator.pushNamed(context, RoutesName.wizard);
+                  },
+                ),
+                SizedBox(height: 5.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 36.w),
+                  child: Text(
+                    "By continuing you agree to our Terms and Privacy policy, subscription is billed after the trial ends and will auto-renew. Cancel subscription anytime before trial ends to avoid charges.",
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      height: 18 / 10,
+                      letterSpacing: 0,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF000000),
+                      fontFamily: "Inter",
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -222,7 +232,7 @@ class _FeatureRow extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: 16.sp,
-                color: Color(0xFF000000),
+                color: Theme.of(context).colorScheme.onSurface,
                 fontWeight: FontWeight.bold,
               ),
             ),

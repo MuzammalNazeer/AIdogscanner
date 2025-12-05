@@ -69,7 +69,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -97,7 +97,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
                 style: TextStyle(
                   fontSize: 28.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -108,7 +108,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
                 'This usually takes up 1 minute...',
                 style: TextStyle(
                   fontSize: 16.sp,
-                  color: Colors.grey[600],
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -143,7 +143,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
                       width: 40.w,
                       height: 40.h,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.onSurface,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(

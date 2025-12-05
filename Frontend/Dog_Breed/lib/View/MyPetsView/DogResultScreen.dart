@@ -88,7 +88,7 @@ class _DogResultScreenState extends State<DogResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 30.h),
@@ -108,13 +108,13 @@ class _DogResultScreenState extends State<DogResultScreen> {
                       height: 40.305.h,
                       padding: const EdgeInsets.all(8.96),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3F6F3),
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(8.96),
                       ),
                       child: Icon(
                         CupertinoIcons.chevron_left,
                         size: 20.sp,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ),
@@ -376,7 +376,7 @@ class _DogResultScreenState extends State<DogResultScreen> {
           style: TextStyle(
             fontSize: 12.sp,
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF000000),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ],
@@ -17728,7 +17728,7 @@ class _DogResultScreenState extends State<DogResultScreen> {
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF101010),
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -17752,14 +17752,6 @@ class _DogResultScreenState extends State<DogResultScreen> {
                         fontSize: 30.sp,
                         fontWeight: FontWeight.bold,
                         color: const Color(0xFF05E51F),
-                      ),
-                    ),
-                    SizedBox(height: 4.h),
-                    Text(
-                      "Confidence",
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: Colors.grey[600],
                       ),
                     ),
                   ],

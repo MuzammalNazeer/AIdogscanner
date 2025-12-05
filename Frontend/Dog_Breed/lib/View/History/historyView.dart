@@ -21,7 +21,7 @@ class _HistoryviewState extends State<Historyview> {
     final recentScans = scanProvider.recentScans;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
@@ -53,7 +53,7 @@ class _HistoryviewState extends State<Historyview> {
                 fontSize: 30.sp,
                 height: 1.0,
                 letterSpacing: 0.0,
-                color: const Color(0xFF371B34),
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             SizedBox(width: 188.w),
@@ -88,7 +88,7 @@ class _HistoryviewState extends State<Historyview> {
             'No recent scans found',
             style: TextStyle(
               fontSize: 16.sp,
-              color: Colors.grey,
+              color:Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),
@@ -122,7 +122,7 @@ class _HistoryviewState extends State<Historyview> {
       width: 413.w,
       height: 169.h,
       decoration: BoxDecoration(
-        color: const Color(0xFFF4F7F6),
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Padding(
@@ -188,7 +188,7 @@ class _HistoryviewState extends State<Historyview> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.sp,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -199,7 +199,7 @@ class _HistoryviewState extends State<Historyview> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12.sp,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -234,7 +234,7 @@ class _HistoryviewState extends State<Historyview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: Colors.grey[300],
+              color: Theme.of(context).colorScheme.onSurface,
               thickness: 1.0,
               height: 1.h,
             ),
@@ -246,10 +246,10 @@ class _HistoryviewState extends State<Historyview> {
                     GestureDetector(
                       onTap: () {
                       },
-                      child: const Text(
+                      child:  Text(
                         'Rerun',
                         style: TextStyle(
-                          color: Color(0xFF371B34),
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -263,10 +263,10 @@ class _HistoryviewState extends State<Historyview> {
                           arguments: scan,
                         );
                       },
-                      child: const Text(
+                      child:  Text(
                         'Show',
                         style: TextStyle(
-                          color: Color(0xFF371B34),
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -292,7 +292,7 @@ class _HistoryviewState extends State<Historyview> {
                         : Icons.favorite_border,
                     color: scan['isFavorite'] == true
                         ? Colors.red
-                        : Colors.grey[600],
+                        : Theme.of(context).colorScheme.onSurface,
                     size: 26,
                   ),
                 ),

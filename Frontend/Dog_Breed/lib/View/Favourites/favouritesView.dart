@@ -23,9 +23,8 @@ class _FavouritesviewState extends State<Favouritesview> {
   Widget build(BuildContext context) {
     final scanProvider = Provider.of<ScanProvider>(context, listen: true);
     final recentScans = scanProvider.recentScans;
-
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
@@ -70,7 +69,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                     fontSize: 30.sp,
                     height: 1.0,
                     letterSpacing: 0.0,
-                    color: const Color(0xFF371B34),
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -118,7 +117,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                       color: _selectedSection == 0
-                          ? const Color(0xFF371B34)
+                          ? Theme.of(context).colorScheme.onSurface
                           : const Color(0xFF7E808F),
                     ),
                   ),
@@ -140,7 +139,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                       color: _selectedSection == 1
-                          ? const Color(0xFF371B34)
+                          ? Theme.of(context).colorScheme.onSurface
                           : const Color(0xFF7E808F),
                     ),
                   ),
@@ -353,7 +352,7 @@ class _FavouritesviewState extends State<Favouritesview> {
               width: 413.w,
               height: 169.h,
               decoration: BoxDecoration(
-                color: const Color(0xFFF2F5F4),
+                color:Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: Row(
@@ -397,7 +396,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xFF371B34),
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                             ),
                             const Spacer(),
@@ -415,7 +414,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                                 },
                                 child: Icon(
                                   isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  color: isFavorite ? Colors.red : Colors.grey[600],
+                                  color: isFavorite ? Colors.red : Theme.of(context).colorScheme.onSurface,
                                   size: 28.sp,
                                 ),
                               ),
@@ -429,7 +428,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
-                              color: const Color(0xFF371B34),
+                              color: Theme.of(context).colorScheme.onSurface,
                               height: 1.5,
                             ),
                           ),
@@ -463,7 +462,7 @@ class _FavouritesviewState extends State<Favouritesview> {
       width: 413.w,
       height: 169.h,
       decoration: BoxDecoration(
-        color: const Color(0xFFF4F7F6),
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Padding(
@@ -529,7 +528,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.sp,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -540,7 +539,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12.sp,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -575,7 +574,7 @@ class _FavouritesviewState extends State<Favouritesview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: Colors.grey[300],
+              color: Theme.of(context).colorScheme.onSurface,
               thickness: 1.0,
               height: 1.h,
             ),
@@ -585,10 +584,10 @@ class _FavouritesviewState extends State<Favouritesview> {
                 Row(
                   children: [
                     GestureDetector(
-                      child: const Text(
+                      child:  Text(
                         'Rerun',
                         style: TextStyle(
-                          color: Color(0xFF371B34),
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -598,10 +597,10 @@ class _FavouritesviewState extends State<Favouritesview> {
                       onTap: (){
                         Navigator.pushNamed(context, RoutesName.dogResult);
                       },
-                      child: const Text(
+                      child:  Text(
                         'Show',
                         style: TextStyle(
-                          color: Color(0xFF371B34),
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -616,7 +615,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                   },
                   icon: Icon(
                     scan['isFavorite'] == true ? Icons.favorite : Icons.favorite_border,
-                    color: scan['isFavorite'] == true ? Colors.red : Colors.grey[600],
+                    color: scan['isFavorite'] == true ? Colors.red : Theme.of(context).colorScheme.onSurface,
                     size: 26,
                   ),
                 ),
@@ -632,16 +631,16 @@ class _FavouritesviewState extends State<Favouritesview> {
     return Container(
       padding: EdgeInsets.all(40.w),
       decoration: BoxDecoration(
-        color: Colors.grey[50],
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: Colors.grey[200]!),
+        border: Border.all(color: Theme.of(context).colorScheme.surface!),
       ),
       child: Column(
         children: [
           Icon(
             _selectedSection == 0 ? Icons.camera_alt : Icons.pets,
             size: 60.sp,
-            color: Colors.grey[400],
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           SizedBox(height: 16.h),
           Text(
@@ -649,7 +648,7 @@ class _FavouritesviewState extends State<Favouritesview> {
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.w600,
-              color: Colors.grey[600],
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
           SizedBox(height: 8.h),
@@ -657,7 +656,7 @@ class _FavouritesviewState extends State<Favouritesview> {
             message,
             style: TextStyle(
               fontSize: 14.sp,
-              color: Colors.grey[500],
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             textAlign: TextAlign.center,
           ),

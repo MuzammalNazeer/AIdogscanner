@@ -1,9 +1,10 @@
+
 // scan_provider.dart
 import 'package:flutter/material.dart';
 import 'dart:io';
 
 class ScanProvider extends ChangeNotifier {
-  List<Map<String, dynamic>> _recentScans = [];
+  final List<Map<String, dynamic>> _recentScans = [];
 
   List<Map<String, dynamic>> get recentScans => _recentScans;
 

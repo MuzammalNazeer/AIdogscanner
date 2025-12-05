@@ -1,3 +1,5 @@
+
+
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/foundation.dart';
@@ -35,7 +37,7 @@ class _HomeviewState extends State<Homeview> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
@@ -58,18 +60,16 @@ class _HomeviewState extends State<Homeview> {
                       fontSize: 16.sp,
                       height: 1.0,
                       letterSpacing: 0.0,
-                      color: const Color(0xFF371B34),
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   Text(
                     '${recentScans.length} scans',
-                    style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
+                    style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ],
               ),
               SizedBox(height: 16.h),
-
-              // Display recent scans
               if (recentScans.isNotEmpty)
                 _buildRecentScansList(recentScans)
               else
@@ -85,7 +85,7 @@ class _HomeviewState extends State<Homeview> {
                   fontSize: 16.sp,
                   height: 1.0,
                   letterSpacing: 0.0,
-                  color: const Color(0xFF371B34),
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               _buildSupportedBreedsVerticalFormatted(),
@@ -102,7 +102,7 @@ class _HomeviewState extends State<Homeview> {
       width: 413.w,
       height: 169.h,
       decoration: BoxDecoration(
-        color: const Color(0xFFF4F7F6),
+        color:  Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Center(
@@ -148,8 +148,15 @@ class _HomeviewState extends State<Homeview> {
       width: 413.w,
       height: 169.h,
       decoration: BoxDecoration(
-        color: const Color(0xFFF4F7F6),
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.1),
+            blurRadius: 50,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Padding(
         padding: EdgeInsets.all(6.r),
@@ -214,7 +221,7 @@ class _HomeviewState extends State<Homeview> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.sp,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -225,7 +232,7 @@ class _HomeviewState extends State<Homeview> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 12.sp,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -260,7 +267,7 @@ class _HomeviewState extends State<Homeview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: Colors.grey[300],
+              color: Theme.of(context).colorScheme.onSurface,
               thickness: 1.0,
               height: 1.h,
             ),
@@ -270,10 +277,10 @@ class _HomeviewState extends State<Homeview> {
                 Row(
                   children: [
                     GestureDetector(
-                      child: const Text(
+                      child:  Text(
                         'Rerun',
                         style: TextStyle(
-                          color: Color(0xFF371B34),
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -283,10 +290,10 @@ class _HomeviewState extends State<Homeview> {
                       onTap: (){
                         Navigator.pushNamed(context, RoutesName.dogResult);
                       },
-                      child: const Text(
+                      child:  Text(
                         'Show',
                         style: TextStyle(
-                          color: Color(0xFF371B34),
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -301,7 +308,7 @@ class _HomeviewState extends State<Homeview> {
                   },
                   icon: Icon(
                     scan['isFavorite'] == true ? Icons.favorite : Icons.favorite_border,
-                    color: scan['isFavorite'] == true ? Colors.red : Colors.grey[600],
+                    color: scan['isFavorite'] == true ? Colors.red : Theme.of(context).colorScheme.onSurface,
                     size: 26,
                   ),
                 ),
@@ -313,198 +320,6 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
-
-  //
-  // Widget _buildRecentScansList(List<Map<String, dynamic>> recentScans) {
-  //   return Column(
-  //     children: recentScans.asMap().entries.map((entry) {
-  //       final index = entry.key;
-  //       final scan = entry.value;
-  //       return _buildRecentScanCard(scan, index);
-  //     }).toList(),
-  //   );
-  // }
-
-
-
-  // Widget _buildRecentScanCard(Map<String, dynamic> scan, int index) {
-  //   final image = scan['image'];
-  //   final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
-  //   final formattedBreedName =
-  //       scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName);
-  //   final confidence = scan['confidence'] is double
-  //       ? scan['confidence'] as double
-  //       : 0.0;
-  //   final timestamp = scan['timestamp'] is DateTime
-  //       ? scan['timestamp'] as DateTime
-  //       : DateTime.now();
-  //
-  //   return Container(
-  //     margin: EdgeInsets.only(bottom: 12.h),
-  //     width: 413.w,
-  //     height: 169.h,
-  //     decoration: BoxDecoration(
-  //       color: const Color(0xFFF4F7F6),
-  //       borderRadius: BorderRadius.circular(12.r),
-  //     ),
-  //     child: Padding(
-  //       padding: EdgeInsets.all(6.r),
-  //       child: Column(
-  //         children: [
-  //           Row(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               Stack(
-  //                 children: [
-  //                   Container(
-  //                     width: 80.w,
-  //                     height: 80.h,
-  //                     decoration: const BoxDecoration(
-  //                       shape: BoxShape.circle,
-  //                       gradient: LinearGradient(
-  //                         begin: Alignment.topLeft,
-  //                         end: Alignment.bottomRight,
-  //                         colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   Padding(
-  //                     padding: const EdgeInsets.all(8.0),
-  //                     child: Container(
-  //                       width: 60.w,
-  //                       height: 60.h,
-  //                       decoration: const BoxDecoration(
-  //                         shape: BoxShape.circle,
-  //                         color: Color(0xFF7B2CBF),
-  //                       ),
-  //                       child: image is File && image.existsSync()
-  //                           ? ClipRRect(
-  //                               borderRadius: BorderRadius.circular(
-  //                                 30.w,
-  //                               ), // For circle
-  //                               child: Image.file(
-  //                                 image,
-  //                                 width: 68.w,
-  //                                 height: 68.h,
-  //                                 fit: BoxFit.cover,
-  //                               ),
-  //                             )
-  //                           : Center(
-  //                               child: Icon(
-  //                                 Icons.pets,
-  //                                 color: Colors.white.withOpacity(0.8),
-  //                                 size: 24.r,
-  //                               ),
-  //                             ),
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //               SizedBox(width: 6.w),
-  //               Column(
-  //                 mainAxisAlignment: MainAxisAlignment.start,
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text(
-  //                     formattedBreedName,
-  //                     style: TextStyle(
-  //                       fontWeight: FontWeight.bold,
-  //                       fontSize: 16.sp,
-  //                       color: Colors.black,
-  //                     ),
-  //                     maxLines: 1,
-  //                     overflow: TextOverflow.ellipsis,
-  //                   ),
-  //                   SizedBox(height: 14.h),
-  //                   Text(
-  //                     "Your dog you scanned looks like this.",
-  //                     style: TextStyle(
-  //                       fontWeight: FontWeight.bold,
-  //                       fontSize: 12.sp,
-  //                       color: Colors.black,
-  //                     ),
-  //                     maxLines: 1,
-  //                     overflow: TextOverflow.ellipsis,
-  //                   ),
-  //                 ],
-  //               ),
-  //               const Spacer(),
-  //               Container(
-  //                 width: 73.w,
-  //                 height: 73.h,
-  //                 decoration: BoxDecoration(
-  //                   shape: BoxShape.circle,
-  //                   color: const Color(0xFF7DFAC4).withOpacity(0.24),
-  //                 ),
-  //                 child: Center(
-  //                   child: Column(
-  //                     mainAxisAlignment: MainAxisAlignment.center,
-  //                     children: [
-  //                       Text(
-  //                         '${(confidence * 100).toStringAsFixed(1)}%',
-  //                         style: TextStyle(
-  //                           fontSize: 20.sp,
-  //                           fontWeight: FontWeight.bold,
-  //                           color: const Color(0xFF05E51F),
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //           SizedBox(height: 12.h),
-  //           Divider(
-  //             color: Colors.grey[300],
-  //             thickness: 1.0,
-  //             height: 1.h,
-  //           ),
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Row(
-  //                 children: [
-  //                   const Text(
-  //                     'Rerun',
-  //                     style: TextStyle(
-  //                       color: Color(0xFF371B34),
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                   SizedBox(width: 102.w),
-  //                   const Text(
-  //                     'Show',
-  //                     style: TextStyle(
-  //                       color: Color(0xFF371B34),
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //               IconButton(
-  //                 onPressed: () {
-  //                   setState(() {
-  //                     if (scan['isFavorite'] == true) {
-  //                       scan['isFavorite'] = false;
-  //                     } else {
-  //                       scan['isFavorite'] = true;
-  //                     }
-  //                   });
-  //                 },
-  //                 icon: Icon(
-  //                   scan['isFavorite'] == true ? Icons.favorite : Icons.favorite_border,
-  //                   color: scan['isFavorite'] == true ? Colors.red : Colors.grey[600],
-  //                   size: 26,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   String _formatBreedName(String name) {
     return name
@@ -704,7 +519,7 @@ class _HomeviewState extends State<Homeview> {
                     fontSize: 30.sp,
                     height: 1.0,
                     letterSpacing: 0.0,
-                    color: AppColors.jet,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ],
@@ -881,7 +696,7 @@ class _HomeviewState extends State<Homeview> {
               width: 413.w,
               height: 169.h,
               decoration: BoxDecoration(
-                color: const Color(0xFFF2F5F4),
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: Row(
@@ -925,7 +740,7 @@ class _HomeviewState extends State<Homeview> {
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
-                                color: const Color(0xFF371B34),
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                             ),
                             const Spacer(),
@@ -943,7 +758,7 @@ class _HomeviewState extends State<Homeview> {
                                 },
                                 child: Icon(
                                   isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  color: isFavorite ? Colors.red : Colors.grey[600],
+                                  color: isFavorite ? Colors.red : Theme.of(context).colorScheme.onSurface,
                                   size: 28.sp,
                                 ),
                               ),
@@ -957,7 +772,7 @@ class _HomeviewState extends State<Homeview> {
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.bold,
-                              color: const Color(0xFF371B34),
+                              color: Theme.of(context).colorScheme.onSurface,
                               height: 1.5,
                             ),
                           ),
@@ -973,7 +788,5 @@ class _HomeviewState extends State<Homeview> {
       ],
     );
   }
-
-
 }
 

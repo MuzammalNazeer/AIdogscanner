@@ -28,7 +28,7 @@ class _SplashviewState extends State<Splashview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF7B2CBF),
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -75,7 +75,7 @@ class _SplashviewState extends State<Splashview> {
                       fit: BoxFit.contain,
                     ),
                     const SizedBox(width: 5),
-                    const Text(
+                     Text(
                       'Manager',
                       style: TextStyle(
                         fontFamily: 'Sora',
