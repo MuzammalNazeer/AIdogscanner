@@ -24,7 +24,7 @@ class _SettingviewState extends State<Settingview> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
-              SizedBox(height: 20.h),
+              SizedBox(height: 10.h),
               _buildSettingsSection(),
             ],
           ),
@@ -67,7 +67,8 @@ class _SettingviewState extends State<Settingview> {
                   ),
                 ),
               ),
-            ),          ],
+            ),
+          ],
         ),
       ],
     );
@@ -80,52 +81,47 @@ class _SettingviewState extends State<Settingview> {
           iconPath: 'assets/images/ff.svg',
           title: 'My Favorites',
           onTap: () => Navigator.pushNamed(context, RoutesName.favourites),
-          iconBackgroundColor: const Color(0xFFFEF2F2), // Light red
-          iconColor: const Color(0xFFDD2E44), // Red icon
+          iconBackgroundColor: const Color(0xFFFEF2F2),
+          iconColor: const Color(0xFFDD2E44),
         ),
 
         _buildSettingOptionTile(
           iconPath: 'assets/images/fd.svg',
           title: 'Feedback',
-          onTap: () {
-            // Navigate to feedback
-          },
-          iconBackgroundColor: const Color(0xFFF0F9FF), // Light blue
-          iconColor: const Color(0xFF00D9FF), // Blue icon
+          onTap: () {},
+          iconBackgroundColor: const Color(0xFFF0F9FF),
+          iconColor: const Color(0xFF00D9FF),
         ),
 
         _buildSettingOptionTile(
           iconPath: 'assets/images/rs.svg',
           title: 'Rate us',
-          onTap: () {
-            // Navigate to rate
-          },
-          iconBackgroundColor: const Color(0xFFFFF7ED), // Light orange
-          iconColor: const Color(0xFFF6B03F), // Orange icon
+          onTap: () {},
+          iconBackgroundColor: const Color(0xFFFFF7ED),
+          iconColor: const Color(0xFFF6B03F),
         ),
 
         _buildSettingOptionTile(
           iconPath: 'assets/images/sh.svg',
           title: 'Share',
-          onTap: () {
-            // Share functionality
-          },
-          iconBackgroundColor: const Color(0xFFF0FDF4), // Light green
-          iconColor: const Color(0xFF0B75FF), // Green icon
+          onTap: () {},
+          iconBackgroundColor: const Color(0xFFF0FDF4),
+          iconColor: const Color(0xFF0B75FF),
         ),
 
         _buildSettingOptionTile(
           iconPath: 'assets/images/mp.svg',
           title: 'My Premium Service',
           onTap: () => Navigator.pushNamed(context, RoutesName.pro),
-          iconBackgroundColor: const Color(0xFFFAF5FF), // Light purple
-          iconColor: const Color(0xFFF69104), // Purple icon
+          iconBackgroundColor: const Color(0xFFFAF5FF),
+          iconColor: const Color(0xFFF69104),
         ),
 
         _buildThemeSwitchTile(),
       ],
     );
   }
+
   Widget _buildThemeSwitchTile() {
     return Consumer<ThemeNotifier>(
       builder: (context, themeProvider, child) {
@@ -134,7 +130,7 @@ class _SettingviewState extends State<Settingview> {
           margin: EdgeInsets.only(bottom: 10.h),
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
+            color: Color(0xFFF4F7F6).withOpacity(0.1),
             borderRadius: BorderRadius.circular(12.r),
             boxShadow: [
               BoxShadow(
@@ -153,10 +149,10 @@ class _SettingviewState extends State<Settingview> {
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: SvgPicture.asset(
-                  'assets/images/th.svg',
-                  color:  const Color(0xFF000000),
-                  width: 20.w,
-                  height: 20.h,
+                  'assets/images/tm.svg',
+                  color: const Color(0xFFF8C600),
+                  width: 24.w,
+                  height: 24.h,
                 ),
               ),
               SizedBox(width: 12.w),
@@ -178,14 +174,16 @@ class _SettingviewState extends State<Settingview> {
                   themeProvider.toggleTheme(val);
                 },
                 activeColor: const Color(0xFFCBD8CB),
-                activeTrackColor:  const Color(0xFFFFFFFF),
-                inactiveTrackColor:  const Color(0xFFFFFFFF),
+                activeTrackColor: const Color(0xFFFFFFFF),
+                inactiveTrackColor: const Color(0xFFFFFFFF),
               ),
               SizedBox(width: 4.w),
               Text(
                 themeProvider.isDarkMode ? 'Dark' : 'Light',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withOpacity(0.7),
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w500,
                 ),
@@ -202,7 +200,8 @@ class _SettingviewState extends State<Settingview> {
     required String title,
     required VoidCallback onTap,
     Color borderColor = Colors.transparent,
-    Color? iconColor, required Color iconBackgroundColor,
+    Color? iconColor,
+    required Color iconBackgroundColor,
   }) {
     return InkWell(
       onTap: onTap,
@@ -212,7 +211,7 @@ class _SettingviewState extends State<Settingview> {
         margin: EdgeInsets.only(bottom: 10.h),
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
+          color: Color(0xFFF4F7F6).withOpacity(0.1),
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
@@ -225,20 +224,19 @@ class _SettingviewState extends State<Settingview> {
         child: Row(
           children: [
             Container(
+              height: 40.h,
+              width: 40.w,
               padding: EdgeInsets.all(8.r),
               decoration: BoxDecoration(
                 color: const Color(0xFFFFFFFF),
                 borderRadius: BorderRadius.circular(12.r),
-                border: Border.all(
-                  color: borderColor,
-                  width: 2.w,
-                ),
+                border: Border.all(color: borderColor, width: 2.w),
               ),
               child: SvgPicture.asset(
                 iconPath,
                 color: iconColor ?? Theme.of(context).colorScheme.primary,
-                width: 20.w,
-                height: 20.h,
+                width: 24.w,
+                height: 24.h,
               ),
             ),
             SizedBox(width: 12.w),
@@ -264,4 +262,3 @@ class _SettingviewState extends State<Settingview> {
     );
   }
 }
-
