@@ -15,8 +15,9 @@ class _WizardviewState extends State<Wizardview> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor:const Color(0xFF7B2CBF),
+      backgroundColor:colors.onBackground,
       body: SafeArea(
         child: Column(
           children: [
@@ -36,7 +37,7 @@ class _WizardviewState extends State<Wizardview> {
             // Bottom Navigation Bar
             Container(
               height: 100.h,
-              color: const Color(0xFF7B2CBF),
+              color: colors.onBackground,
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,6 +129,9 @@ class OnboardingPage1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final colors1 = Theme.of(context).colorScheme;
+
     return Padding(
       padding:  EdgeInsets.all(10.r),
       child: Column(
@@ -154,21 +158,21 @@ class OnboardingPage1 extends StatelessWidget {
               Container(
                 width: 340.w,
                 height: 340.h,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
+                    colors: [colors.onBackground, colors.onBackground],
                   ),
                 ),
               ),
               Container(
                 width: 260.w,
                 height: 260.h,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFF7B2CBF),
+                  color: colors.onBackground,
                 ),
               ),
               ClipOval(
@@ -208,6 +212,8 @@ class OnboardingPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Padding(
       padding:  EdgeInsets.all(16.r),
       child: Column(
@@ -238,12 +244,12 @@ class OnboardingPage2 extends StatelessWidget {
                 Container(
                   width: 320.w,
                   height: 320.h,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
+                      colors: [colors.onBackground, colors.onBackground],
                     ),
                   ),
                 ),
@@ -312,14 +318,14 @@ class OnboardingPage3 extends StatelessWidget {
       padding:  EdgeInsets.all(32.r),
       child: Column(
         children: [
-          SizedBox(height: 140.h,),
+          SizedBox(height: 120.h,),
           Expanded(
             child: GridView.builder(
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
+                mainAxisSpacing: 10,
               ),
               itemCount: 6,
               itemBuilder: (context, index) {
@@ -345,8 +351,8 @@ class OnboardingPage3 extends StatelessWidget {
                     ),
                     if (showCloseIcon)
                       Positioned(
-                        top: 8,
-                        right: 8,
+                        top: 6,
+                        right: 6,
                         child: CircleAvatar(
                           radius: 15.r,
                           backgroundColor: Colors.red,
@@ -359,8 +365,8 @@ class OnboardingPage3 extends StatelessWidget {
                       )
                     else if (showCheckIcon)
                       Positioned(
-                        top: 8,
-                        right: 8,
+                        top: 6,
+                        right: 6,
                         child: CircleAvatar(
                           radius: 15.r,
                           backgroundColor: Colors.green,

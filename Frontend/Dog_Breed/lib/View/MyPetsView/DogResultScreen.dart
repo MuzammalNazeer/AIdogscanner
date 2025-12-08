@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
 import 'package:image/image.dart' as img;
 import 'package:provider/provider.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -60,6 +61,7 @@ class DogResultScreen extends StatefulWidget {
 }
 
 class _DogResultScreenState extends State<DogResultScreen> {
+  final box = Hive.box('dataBox');
   PredictionResult? _predictionResult;
   File? _image;
   bool _loading = false;
@@ -72,7 +74,6 @@ class _DogResultScreenState extends State<DogResultScreen> {
   String _error = '';
   bool _isModelInitialized = false;
 
-  // Dog detection labels (binary classification)
   static const List<String> _dogDetectionLabels = ['Not Dog', 'Dog'];
 
   @override
@@ -17697,7 +17698,6 @@ class _DogResultScreenState extends State<DogResultScreen> {
         .map((word) => word[0].toUpperCase() + word.substring(1))
         .join(' ');
   }
-
   Widget _buildResultsSection() {
     if (_predictionResult == null) return const SizedBox();
 
@@ -17871,6 +17871,56 @@ class _DogResultScreenState extends State<DogResultScreen> {
               ),
             ),
             SizedBox(width: 12.w),
+
+            Expanded(
+              child: RoundButton(
+                title: "Save ",
+                height: 45.h,
+                width: 163.w,
+                borderRadius: 47.r,
+                textColors: const Color(0xFFFFFFFF),
+                backgroundColors: const Color(0xFF2A2A2A),
+                isSelected: true,
+                onPress: () {
+                  if (_predictionResult != null) {
+                    // Prepare the data
+                    final resultData = {
+                      'image': widget.imageFile,
+                      'breedName': _predictionResult!.breed,
+                      'confidence': _predictionResult!.confidence,
+                      'formattedBreedName': _formatBreedName(
+                        _predictionResult!.breed,
+                      ),
+                      'timestamp': DateTime.now(),
+                    };
+
+                    if (kDebugMode) {
+                      print('💾 SAVING RESULT:');
+                    }
+                    if (kDebugMode) {
+                      print('   Breed: ${resultData['breedName']}');
+                    }
+                    if (kDebugMode) {
+                      print('   Confidence: ${resultData['confidence']}');
+                    }
+                    if (kDebugMode) {
+                      print('   Image: ${widget.imageFile.path}');
+                    }
+
+                    // Get the provider and add scan
+                    final scanProvider = Provider.of<ScanProvider>(
+                      context,
+                      listen: false,
+                    );
+                    scanProvider.addScan(resultData);
+
+                    // Navigate back to HomeView
+                    Navigator.pushNamed(context, RoutesName.dashboard);
+                  }
+                },
+              ),
+            ),
+            SizedBox(width: 12.w),
             Expanded(
               child: RoundButton(
                 title: "Save Results",
@@ -17930,7 +17980,7 @@ class _DogResultScreenState extends State<DogResultScreen> {
 
 
 
- 
+
 
 
 

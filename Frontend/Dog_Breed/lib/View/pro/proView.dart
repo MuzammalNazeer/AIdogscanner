@@ -16,8 +16,10 @@ class Proview extends StatefulWidget {
 class _ProviewState extends State<Proview> {
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: Stack(
           children: [
@@ -28,7 +30,7 @@ class _ProviewState extends State<Proview> {
                   child: Container(
                     height: 165.h,
                     width: double.infinity,
-                    color: const Color(0xFF7B2CBF),
+                    color: colors.onBackground,
                     child: Stack(
                       children: [
                         Padding(
@@ -42,7 +44,7 @@ class _ProviewState extends State<Proview> {
                               top: 50.h,
                               child: Icon(
                                 Icons.close,
-                                color: Theme.of(context).colorScheme.surface,
+                                color: Colors.white,
                                 size: 36.sp,
                               ),
                             ),
@@ -154,7 +156,7 @@ class _ProviewState extends State<Proview> {
                   title: "START FREE TRIAL",
                   height: 56.h,
                   width: 379.w,
-                  backgroundColors: AppColors.vibrantPurple,
+                  backgroundColors: colors.onBackground,
                   isSelected: true,
                   onPress: () {
                     Navigator.pushNamed(context, RoutesName.wizard);
@@ -232,7 +234,7 @@ class _FeatureRow extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: 16.sp,
-                color: Theme.of(context).colorScheme.onSurface,
+                color: const Color(0xFF0A0A0A),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -241,7 +243,7 @@ class _FeatureRow extends StatelessWidget {
           const SizedBox(width: 40),
           Icon(
             free ? Icons.check : Icons.lock_outline,
-            color: Color(0xFF7A1FFF),
+            color: const Color(0xFF7A1FFF),
             size: 20,
           ),
         ],

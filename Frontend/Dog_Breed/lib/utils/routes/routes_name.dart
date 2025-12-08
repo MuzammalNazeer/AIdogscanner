@@ -24,6 +24,7 @@ class RoutesName {
   static const String forgetCode= 'Forgotcodeview';
   static const String confirm= 'Confirmpasswordview';
   static const String newPassword= 'Newpasswordview';
+  static const String feedback= 'FeedbackView';
 
 
 }

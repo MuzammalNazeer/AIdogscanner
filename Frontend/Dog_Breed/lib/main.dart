@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'Valid/AppTheme.dart';
 import 'View_model/ThemeNotifier.dart';
 
 List<CameraDescription> cameras = [];
@@ -51,23 +52,14 @@ class MyApp extends StatelessWidget {
               return MaterialApp(
                 title: 'Dog Breed',
                 debugShowCheckedModeBanner: false,
-                theme: ThemeData(
-                  useMaterial3: true,
-                  colorScheme: ColorScheme.fromSeed(
-                    seedColor: Colors.white,
-                    brightness: Brightness.light,
-                  ),
-                  fontFamily: 'Sora',
-                ),
-                darkTheme: ThemeData(
-                  useMaterial3: true,
-                  colorScheme: ColorScheme.fromSeed(
-                    seedColor: Colors.deepPurple,
-                    brightness: Brightness.dark,
-                  ),
-                  fontFamily: 'Sora',
-                ),
+
+                // 🔥 USE YOUR CUSTOM THEMES HERE
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+
+                // 🔥 Theme provider controls light/dark mode
                 themeMode: themeProvider.themeMode,
+
                 initialRoute: RoutesName.splash,
                 onGenerateRoute: Routes.generateRoute,
               );

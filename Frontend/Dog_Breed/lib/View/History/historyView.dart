@@ -21,7 +21,7 @@ class _HistoryviewState extends State<Historyview> {
     final recentScans = scanProvider.recentScans;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
@@ -122,7 +122,7 @@ class _HistoryviewState extends State<Historyview> {
       width: 413.w,
       height: 169.h,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: const Color(0xFF323332).withOpacity(0.1),
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Padding(
@@ -212,7 +212,7 @@ class _HistoryviewState extends State<Historyview> {
                   height: 73.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: const Color(0xFF7DFAC4).withOpacity(0.24),
+                    color: const Color(0xFFE58F05).withOpacity(0.24),
                   ),
                   child: Center(
                     child: Column(
@@ -223,7 +223,7 @@ class _HistoryviewState extends State<Historyview> {
                           style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
-                            color: const Color(0xFF05E51F),
+                            color: const Color(0xFFE58F05),
                           ),
                         ),
                       ],
@@ -234,7 +234,7 @@ class _HistoryviewState extends State<Historyview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: Theme.of(context).colorScheme.onSurface,
+              color: const Color(0xFF323332).withOpacity(0.1),
               thickness: 1.0,
               height: 1.h,
             ),

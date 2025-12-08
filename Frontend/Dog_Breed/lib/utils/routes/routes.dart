@@ -28,6 +28,7 @@ import '../../View/forget/forgotPasswordEmailView.dart';
 import '../../View/forget/forgotcodeView.dart';
 import '../../View/forget/newpasswordview.dart';
 import '../../View/pro/proView.dart';
+import '../../View/setting/FeedbackView.dart';
 import '../../View/setting/settingView.dart';
 import '../../View/signup/signupview.dart';
 
@@ -94,6 +95,9 @@ class Routes {
         case RoutesName.addPet:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  AddPetView());
+        case RoutesName.feedback:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  FeedbackView());
         case RoutesName.camera:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  Cameraview());
@@ -113,16 +117,16 @@ class Routes {
         return MaterialPageRoute(
           builder: (_) => DogResultScreen(imageFile: imageFile),
         );
-      case RoutesName.dogIdentifier:
-      // Get the File that was passed as argument
-        final args = ModalRoute.of(context as BuildContext)?.settings.arguments;
-        final File imageFile = args is File
-            ? args
-            : File(''); // fallback (never used if you pass properly)
-
-        return MaterialPageRoute(
-          builder: (_) => const DogIdentifierApp(),
-        );
+      // case RoutesName.dogIdentifier:
+      // // Get the File that was passed as argument
+      //   final args = ModalRoute.of(context as BuildContext)?.settings.arguments;
+      //   final File imageFile = args is File
+      //       ? args
+      //       : File(''); // fallback (never used if you pass properly)
+      //
+      //   return MaterialPageRoute(
+      //     builder: (_) => const DogIdentifierApp(),
+      //   );
 
       // case RoutesName.dogIdentifier:
       //   return MaterialPageRoute(
