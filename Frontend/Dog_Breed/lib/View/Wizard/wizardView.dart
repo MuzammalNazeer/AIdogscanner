@@ -69,8 +69,8 @@ class _WizardviewState extends State<Wizardview> {
                     children: List.generate(
                       4,
                       (i) => AnimatedContainer(
-                        duration:  Duration(milliseconds: 300),
-                        margin:  EdgeInsets.only(right: 8),
+                        duration:  const Duration(milliseconds: 300),
+                        margin:  const EdgeInsets.only(right: 8),
                         width: currentPage == i ? 28 : 10,
                         height: 10.h,
                         decoration: BoxDecoration(
@@ -140,8 +140,7 @@ class OnboardingPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final colors1 = Theme.of(context).colorScheme;
-
+    final bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding:  EdgeInsets.all(10.r),
       child: Column(
@@ -155,9 +154,12 @@ class OnboardingPage1 extends StatelessWidget {
                 height: 360.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
+
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF00D9FF).withOpacity(1),
+                      color: isDarkTheme
+                          ? colors.onBackground.withOpacity(0.3)  // Dark theme
+                          : const Color(0xFF00D9FF).withOpacity(0.4),  // Light theme
                       blurRadius: 54,
                       spreadRadius: 0,
                       offset: Offset.zero,
@@ -178,11 +180,11 @@ class OnboardingPage1 extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 260.w,
-                height: 260.h,
+                width: 280.w,
+                height: 245.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: colors.onBackground,
+                    color: colors.onBackground
                 ),
               ),
               ClipOval(
@@ -223,7 +225,7 @@ class OnboardingPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-
+    final bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding:  EdgeInsets.all(16.r),
       child: Column(
@@ -241,9 +243,12 @@ class OnboardingPage2 extends StatelessWidget {
                   height: 380.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
+
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF00D9FF).withOpacity(1),
+                        color: isDarkTheme
+                            ? colors.onBackground.withOpacity(0.3)  // Dark theme
+                            : const Color(0xFF00D9FF).withOpacity(0.6),
                         blurRadius: 54,
                         spreadRadius: 0,
                         offset: Offset.zero,

@@ -199,9 +199,11 @@ class _HistoryviewState extends State<Historyview> {
                           borderRadius: BorderRadius.circular(30.w),
                           child: Image.memory(
                             imageBytes,
+                            key: ValueKey('image_$scanId'),
                             width: 68.w,
                             height: 68.h,
                             fit: BoxFit.cover,
+                            gaplessPlayback: true,
                           ),
                         )
                             : Center(
@@ -309,7 +311,13 @@ class _HistoryviewState extends State<Historyview> {
                       SizedBox(width: 102.w),
                       GestureDetector(
                         onTap: () {
-                          // _handleShowDetails(scan, context);
+                          if (kDebugMode) {
+                            print("📌 Navigating with scanId: $scanId");
+                          }
+                          Navigator.pushNamed(context,
+                              RoutesName.dogSave,
+                              arguments: {"scanId": scanId}
+                          );
                         },
                         child: Text(
                           'Show',

@@ -624,8 +624,144 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
     }
   }
 
+  // Future<void> _saveResults(DogValuesViewModel viewModel) async {
+  //   if (viewModel.predictionResult == null) return;
+  //
+  //   setState(() {
+  //     _isSaving = true;
+  //   });
+  //
+  //   try {
+  //     final result = viewModel.predictionResult!;
+  //     final imageBytes = viewModel.imageBytes ?? _imageBytes;
+  //
+  //     if (imageBytes == null) {
+  //       _showSnackbar('No image data', Colors.red);
+  //       return;
+  //     }
+  //
+  //     // Get additional breed information from your database
+  //     final breedInfo = viewModel.dogBreeds[result.breed] as Map<String, dynamic>?;
+  //
+  //     // Prepare characteristics from PredictionResult
+  //     final Map<String, dynamic> characteristics = {
+  //       'size': result.size,
+  //       'weight': result.weight,
+  //       'height': result.height,
+  //       'coat': result.coat,
+  //       'color': result.color,
+  //       'headFace': result.headFace,
+  //       'body': result.body,
+  //       'purpose': result.purpose,
+  //       'shape': result.shape,
+  //       'age': result.age,
+  //       'gender': result.gender,
+  //     };
+  //
+  //     // Add temperament from PredictionResult
+  //     if (result.temperament.isNotEmpty) {
+  //       characteristics['temperament'] = result.temperament;
+  //     }
+  //
+  //     // If we have breedInfo from the database, merge it (breedInfo takes priority)
+  //     if (breedInfo != null) {
+  //       // Merge breedInfo into characteristics
+  //       characteristics.addAll({
+  //         'size': breedInfo['size'] as String? ?? result.size,
+  //         'weight': breedInfo['weight'] as String? ?? result.weight,
+  //         'height': breedInfo['height'] as String? ?? result.height,
+  //         'age': breedInfo['age'] as String? ?? result.age,
+  //         'coat': breedInfo['coat'] as String? ?? result.coat,
+  //         'color': breedInfo['color'] as String? ?? result.color,
+  //         'headFace': breedInfo['headFace'] as String? ?? result.headFace,
+  //         'body': breedInfo['body'] as String? ?? result.body,
+  //         'purpose': breedInfo['purpose'] as String? ?? result.purpose,
+  //       });
+  //
+  //       // Add temperament from breedInfo if available
+  //       if (breedInfo['temperament'] is Map) {
+  //         final temperament = Map<String, String>.from(breedInfo['temperament']);
+  //         characteristics['temperament'] = {
+  //           ...result.temperament,
+  //           ...temperament, // BreedInfo temperament takes priority
+  //         };
+  //       }
+  //     }
+  //
+  //     final resultData = {
+  //       'id': DateTime.now().millisecondsSinceEpoch.toString(),
+  //       'imageBytes': imageBytes,
+  //       'breedName': result.breed,
+  //       'formattedBreedName': _formatBreedName(result.breed),
+  //       'confidence': result.confidence,
+  //       'timestamp': DateTime.now().toIso8601String(),
+  //       'isFavorite': false,
+  //       'characteristics': characteristics,
+  //
+  //       // Also store individual fields for easy access
+  //       'size': characteristics['size'],
+  //       'weight': characteristics['weight'],
+  //       'height': characteristics['height'],
+  //       'age': characteristics['age'],
+  //       'coat': characteristics['coat'],
+  //       'color': characteristics['color'],
+  //       'headFace': characteristics['headFace'],
+  //       'body': characteristics['body'],
+  //       'purpose': characteristics['purpose'],
+  //       'temperament': characteristics['temperament'],
+  //     };
+  //
+  //     final scanProvider = Provider.of<ScanProvider>(context, listen: false);
+  //
+  //     // Save the scan with all data
+  //     await scanProvider.addScan(resultData);
+  //
+  //     // Show success message
+  //     String message;
+  //     Color color;
+  //
+  //     if (breedInfo != null) {
+  //       message = '${_formatBreedName(result.breed)} saved with complete breed information! ✅';
+  //       color = Colors.green;
+  //     } else {
+  //       message = '${_formatBreedName(result.breed)} saved with basic information';
+  //       color = Colors.orange;
+  //     }
+  //
+  //     _showSnackbar(message, color);
+  //
+  //     await Future.delayed(const Duration(milliseconds: 800));
+  //
+  //     if (mounted) {
+  //       Navigator.pushNamedAndRemoveUntil(
+  //         context,
+  //         RoutesName.dashboard,
+  //             (route) => false,
+  //       );
+  //     }
+  //   } catch (e, stackTrace) {
+  //     if (kDebugMode) {
+  //       print('Save error: $e');
+  //       print('Stack trace: $stackTrace');
+  //     }
+  //     _showSnackbar('Failed to save results', Colors.red);
+  //   } finally {
+  //     if (mounted) {
+  //       setState(() {
+  //         _isSaving = false;
+  //       });
+  //     }
+  //   }
+  // }
+
   Future<void> _saveResults(DogValuesViewModel viewModel) async {
-    if (viewModel.predictionResult == null) return;
+    // Get the current prediction result
+    final viewModel = Provider.of<DogValuesViewModel>(context, listen: false);
+
+    if (viewModel.predictionResult == null) {
+      _showSnackbar('No prediction result available', Colors.red);
+      return;
+    }
 
     setState(() {
       _isSaving = true;
@@ -636,37 +772,174 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
       final imageBytes = viewModel.imageBytes ?? _imageBytes;
 
       if (imageBytes == null) {
-        _showSnackbar('No image data', Colors.red);
+        _showSnackbar('No image data to save', Colors.red);
+        setState(() => _isSaving = false);
         return;
       }
 
-      final resultData = {
-        'imageBytes': imageBytes,
-        'breedName': result.breed,
-        'confidence': result.confidence,
-        'formattedBreedName': _formatBreedName(result.breed),
-        'timestamp': DateTime.now().toIso8601String(),
+      // if (kDebugMode) {
+      //   print('💾 Starting save process for ${result.breed}');
+      //   print('   Confidence: ${result.confidence}');
+      //   print('   Has image: ${imageBytes.isNotEmpty}');
+      // }
+
+      // Get breed data from DogValuesViewModel database
+      final breedInfo = viewModel.dogBreeds[result.breed] as Map<String, dynamic>?;
+
+      // if (kDebugMode) {
+      //   print('   Looking for breed "${result.breed}" in database');
+      //   print('   Found breed data: ${breedInfo != null}');
+      //   if (breedInfo != null) {
+      //     print('   Breed data keys: ${breedInfo.keys.toList()}');
+      //   }
+      // }
+
+      // Start with characteristics from prediction result
+      final Map<String, dynamic> characteristics = {
+        'size': result.size,
+        'weight': result.weight,
+        'height': result.height,
+        'coat': result.coat,
+        'color': result.color,
+        'headFace': result.headFace,
+        'body': result.body,
+        'purpose': result.purpose,
+        'shape': result.shape,
+        'age': result.age,
+        'gender': result.gender,
       };
 
+      // Add temperament if available
+      if (result.temperament.isNotEmpty) {
+        characteristics['temperament'] = result.temperament;
+      }
+
+      // If breedInfo exists in database, enrich the characteristics
+      if (breedInfo != null) {
+        // if (kDebugMode) {
+        //   print('   Enriching with breed data from database');
+        // }
+
+        // Override with database values (they're more complete)
+        characteristics.addAll({
+          'size': breedInfo['size'] as String? ?? result.size,
+          'weight': breedInfo['weight'] as String? ?? result.weight,
+          'height': breedInfo['height'] as String? ?? result.height,
+          'age': breedInfo['age'] as String? ?? result.age,
+          'coat': breedInfo['coat'] as String? ?? result.coat,
+          'color': breedInfo['color'] as String? ?? result.color,
+          'headFace': breedInfo['headFace'] as String? ?? result.headFace,
+          'body': breedInfo['body'] as String? ?? result.body,
+          'purpose': breedInfo['purpose'] as String? ?? result.purpose,
+        });
+
+        // Add temperament from breedInfo if available
+        if (breedInfo['temperament'] is Map) {
+          try {
+            final temperament = Map<String, String>.from(breedInfo['temperament'] as Map);
+            characteristics['temperament'] = {
+              // Start with prediction temperament
+              ...result.temperament,
+              // Override with database temperament (more complete)
+              ...temperament,
+            };
+          } catch (e) {
+            // if (kDebugMode) {
+            //   print('   Error parsing breedInfo temperament: $e');
+            // }
+            // Keep existing temperament if parsing fails
+          }
+        }
+      } else {
+        // if (kDebugMode) {
+        //   print('   ⚠️ No breed data found in database for "${result.breed}"');
+        //   print('   Will save basic prediction data only');
+        // }
+      }
+
+      // Create the complete scan data
+      final resultData = {
+        'id': DateTime.now().millisecondsSinceEpoch.toString(),
+        'imageBytes': imageBytes,
+        'breedName': result.breed,
+        'formattedBreedName': _formatBreedName(result.breed),
+        'confidence': result.confidence,
+        'timestamp': DateTime.now().toIso8601String(),
+        'isFavorite': false,
+        'characteristics': characteristics,
+
+        // Also store key fields individually for easier access
+        'size': characteristics['size'],
+        'weight': characteristics['weight'],
+        'height': characteristics['height'],
+        'age': characteristics['age'],
+        'coat': characteristics['coat'],
+        'color': characteristics['color'],
+        'headFace': characteristics['headFace'],
+        'body': characteristics['body'],
+        'purpose': characteristics['purpose'],
+        'temperament': characteristics['temperament'],
+      };
+
+      if (kDebugMode) {
+        // print('📦 Prepared scan data:');
+        // print('   Breed: ${resultData['breedName']}');
+        // print('   Confidence: ${resultData['confidence']}');
+        // print('   Has characteristics: ${resultData.containsKey('characteristics')}');
+        // if (resultData.containsKey('characteristics')) {
+        //   final chars = resultData['characteristics'] as Map;
+        //   print('   Characteristics keys: ${chars.keys.toList()}');
+        //   if (chars.containsKey('temperament')) {
+        //     final temp = chars['temperament'];
+        //     print('   Temperament type: ${temp.runtimeType}');
+        //     if (temp is Map) {
+        //       print('   Temperament keys: ${temp.keys.toList()}');
+        //     }
+        //   }
+        // }
+      }
+
+      // Save to ScanProvider
       final scanProvider = Provider.of<ScanProvider>(context, listen: false);
-       scanProvider.addScan(resultData);
+      await scanProvider.addScan(resultData);
 
-      // _showSnackbar('Results saved!', Colors.green);
+      // if (kDebugMode) {
+      //   print('✅ Scan saved successfully!');
+      //   print('   Total scans now: ${scanProvider.recentScans.length}');
+      // }
 
-      await Future.delayed(const Duration(milliseconds: 1000));
+      // Show success message
+      String message;
+      Color color;
+
+      if (breedInfo != null) {
+        // message = '${_formatBreedName(result.breed)} saved with complete breed information! ✅';
+        // color = Colors.green;
+      } else {
+        // message = '${_formatBreedName(result.breed)} saved with basic information';
+        // color = Colors.orange;
+      }
+
+      // _showSnackbar(message, color);
+
+      // Short delay before navigation
+      await Future.delayed(const Duration(milliseconds: 800));
 
       if (mounted) {
+        // Navigate to dashboard or saved scans screen
         Navigator.pushNamedAndRemoveUntil(
           context,
           RoutesName.dashboard,
-          (route) => false,
+              (route) => false,
         );
       }
-    } catch (e) {
-      if (kDebugMode) {
-        print('Save error: $e');
-      }
-      _showSnackbar('Failed to save: $e', Colors.red);
+
+    } catch (e, stackTrace) {
+      // if (kDebugMode) {
+      //   print('❌ Save error: $e');
+      //   print('Stack trace: $stackTrace');
+      // }
+      // _showSnackbar('Failed to save results: ${e.toString()}', Colors.red);
     } finally {
       if (mounted) {
         setState(() {
@@ -675,6 +948,57 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
       }
     }
   }
+  // Future<void> _saveResults(DogValuesViewModel viewModel) async {
+  //   if (viewModel.predictionResult == null) return;
+  //
+  //   setState(() {
+  //     _isSaving = true;
+  //   });
+  //
+  //   try {
+  //     final result = viewModel.predictionResult!;
+  //     final imageBytes = viewModel.imageBytes ?? _imageBytes;
+  //
+  //     if (imageBytes == null) {
+  //       _showSnackbar('No image data', Colors.red);
+  //       return;
+  //     }
+  //
+  //     final resultData = {
+  //       'imageBytes': imageBytes,
+  //       'breedName': result.breed,
+  //       'confidence': result.confidence,
+  //       'formattedBreedName': _formatBreedName(result.breed),
+  //       'timestamp': DateTime.now().toIso8601String(),
+  //     };
+  //
+  //     final scanProvider = Provider.of<ScanProvider>(context, listen: false);
+  //      scanProvider.addScan(resultData);
+  //
+  //     // _showSnackbar('Results saved!', Colors.green);
+  //
+  //     await Future.delayed(const Duration(milliseconds: 1000));
+  //
+  //     if (mounted) {
+  //       Navigator.pushNamedAndRemoveUntil(
+  //         context,
+  //         RoutesName.dashboard,
+  //         (route) => false,
+  //       );
+  //     }
+  //   } catch (e) {
+  //     if (kDebugMode) {
+  //       print('Save error: $e');
+  //     }
+  //     _showSnackbar('Failed to save: $e', Colors.red);
+  //   } finally {
+  //     if (mounted) {
+  //       setState(() {
+  //         _isSaving = false;
+  //       });
+  //     }
+  //   }
+  // }
 
   void _showSnackbar(String message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(

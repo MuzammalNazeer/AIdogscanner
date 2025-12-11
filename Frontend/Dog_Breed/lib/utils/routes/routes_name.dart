@@ -25,6 +25,7 @@ class RoutesName {
   static const String confirm= 'Confirmpasswordview';
   static const String newPassword= 'Newpasswordview';
   static const String feedback= 'FeedbackView';
+  static const String dogSave= 'Dogtreslutsave';
 
 
 }

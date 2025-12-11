@@ -102,15 +102,15 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
       ),
     );
   }
-
   Widget _buildBottomNavigationBar(HomeViewModel homeProvider) {
+    final colors = Theme.of(context).colorScheme;
     return Container(
       height: 70.h,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.background,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.background,
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -120,25 +120,25 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         padding: EdgeInsets.only(bottom: 8.h),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           currentIndex: homeProvider.selectedIndex,
           selectedFontSize: 11.sp,
           unselectedFontSize: 11.sp,
-          selectedItemColor: const Color(0xFF820DFF),
+          selectedItemColor: colors.tertiary,
           unselectedItemColor: const Color(0xFF666666),
           selectedLabelStyle: TextStyle(
             fontFamily: 'Sora',
             fontWeight: FontWeight.w600,
-            fontSize: 11.sp,
+            fontSize: 14.sp,
             height: 1.0,
           ),
           unselectedLabelStyle: TextStyle(
             fontFamily: 'Sora',
             fontWeight: FontWeight.w500,
-            fontSize: 11.sp,
+            fontSize: 14.sp,
             height: 1.0,
           ),
-          iconSize: 22.w,
+          iconSize: 24.w,
           elevation: 0,
           onTap: (index) {
             if (index == 2) return;
@@ -153,7 +153,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 child: Image.asset(
                   'assets/images/home.png',
                   color: homeProvider.selectedIndex == 0
-                      ? const Color(0xFF820DFF)
+                      ? colors.tertiary
                       : const Color(0xFF666666),
                 ),
               ),
@@ -162,34 +162,20 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 height: 25,
                 child: Image.asset(
                   'assets/images/home.png',
-                  color: const Color(0xFF820DFF),
+                  color: colors.tertiary,
                 ),
               ),
               label: 'Home',
             ),
-
-            // BottomNavigationBarItem(
-            //   icon: Icon(
-            //     size: 25,
-            //     Icons.home_filled,
-            //     color: homeProvider.selectedIndex == 0
-            //         ? const Color(0xFF820DFF)
-            //         : const Color(0xFF666666),
-            //   ),
-            //   activeIcon: const Icon(Icons.home_filled, color: Color(0xFF820DFF)),
-            //   label: 'Home',
-            // ),
-
-            // Favourites
             BottomNavigationBarItem(
               icon: Icon(
                 size: 25,
                 Icons.favorite,
                 color: homeProvider.selectedIndex == 1
-                    ? const Color(0xFF820DFF)
+                    ? colors.tertiary
                     : const Color(0xFF666666),
               ),
-              activeIcon: const Icon(Icons.favorite,size: 25, color: Color(0xFF820DFF)),
+              activeIcon: Icon(Icons.favorite,size: 25, color: colors.tertiary),
               label: 'Favourites',
             ),
 
@@ -205,10 +191,10 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 size: 25,
                 Icons.history,
                 color: homeProvider.selectedIndex == 3
-                    ? const Color(0xFF820DFF)
+                    ? colors.tertiary
                     : const Color(0xFF666666),
               ),
-              activeIcon: const Icon(Icons.history,size: 25, color: Color(0xFF820DFF)),
+              activeIcon:  Icon(Icons.history,size: 25, color: colors.tertiary),
               label: 'History',
             ),
 
@@ -218,10 +204,10 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 size: 25,
                 Icons.settings,
                 color: homeProvider.selectedIndex == 4
-                    ? const Color(0xFF820DFF)
+                    ? colors.tertiary
                     : const Color(0xFF666666),
               ),
-              activeIcon: const Icon(Icons.settings,size: 25, color: Color(0xFF820DFF)),
+              activeIcon:  Icon(Icons.settings,size: 25, color: colors.tertiary),
               label: 'Setting',
             ),
           ],

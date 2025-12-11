@@ -5,6 +5,7 @@ import 'package:dog_breed/View_model/home/home_view_model.dart';
 import 'package:dog_breed/View_model/pet.dart';
 import 'package:dog_breed/utils/routes/routes.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
+import 'package:edge_to_edge/edge_to_edge.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +19,8 @@ import 'View_model/dogvaluesviewmodel.dart';
 List<CameraDescription> cameras = [];
 
 Future<void> main() async {
-  await Hive.initFlutter();
+
+
   WidgetsFlutterBinding.ensureInitialized();
   try {
     cameras = await availableCameras();
@@ -31,7 +33,14 @@ Future<void> main() async {
   await SharedPreferences.getInstance();
   final scanProvider = ScanProvider();
   await scanProvider.initialize();
-
+  EdgeToEdge.configure(
+    statusBarColor: Colors.transparent,
+    navigationBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.dark,
+    navigationBarIconBrightness: Brightness.dark,
+    enableTop: true,
+    enableBottom: true,
+  );
   runApp(
     ChangeNotifierProvider.value(
       value: scanProvider,

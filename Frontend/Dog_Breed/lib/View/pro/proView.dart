@@ -212,6 +212,47 @@ class _CustomShapeClipper extends CustomClipper<Path> {
 }
 
 
+// class _FeatureRow extends StatelessWidget {
+//   final String title;
+//   final bool premium;
+//   final bool free;
+//
+//   const _FeatureRow({
+//     required this.title,
+//     required this.premium,
+//     required this.free,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final colors = Theme.of(context).colorScheme;
+//
+//     return Padding(
+//       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+//       child: Row(
+//         children: [
+//           Expanded(
+//             child: Text(
+//               title,
+//               style: TextStyle(
+//                 fontSize: 16.sp,
+//                 color: const Color(0xFF0A0A0A),
+//                 fontWeight: FontWeight.bold,
+//               ),
+//             ),
+//           ),
+//            Icon(Icons.check, color: free ? colors.surface : AppColors.vibrantPurple, size: 20),
+//           const SizedBox(width: 40),
+//           Icon(
+//             free ? Icons.check : Icons.lock_outline,
+//             color: free ? colors.surface : AppColors.vibrantPurple,
+//             size: 20,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 class _FeatureRow extends StatelessWidget {
   final String title;
   final bool premium;
@@ -225,6 +266,9 @@ class _FeatureRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
       child: Row(
@@ -239,11 +283,21 @@ class _FeatureRow extends StatelessWidget {
               ),
             ),
           ),
-          const Icon(Icons.check, color: Color(0xFF7A1FFF), size: 20),
+          // First column (Premium)
+          Icon(
+            premium ? Icons.check : Icons.lock_outline,
+            color: premium
+                ? (isDarkTheme ? colors.surface : AppColors.vibrantPurple)
+                : (isDarkTheme ? colors.surface.withOpacity(0.9) : AppColors.vibrantPurple.withOpacity(0.9)),
+            size: 20,
+          ),
           const SizedBox(width: 40),
+          // Second column (Free)
           Icon(
             free ? Icons.check : Icons.lock_outline,
-            color: const Color(0xFF7A1FFF),
+            color: free
+                ? (isDarkTheme ? colors.surface : AppColors.vibrantPurple)
+                : (isDarkTheme ? colors.surface.withOpacity(0.9) : AppColors.vibrantPurple.withOpacity(0.9)),
             size: 20,
           ),
         ],

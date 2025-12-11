@@ -22,6 +22,7 @@ import 'package:path/path.dart';
 
 import '../../View/Favourites/favouritesView.dart';
 import '../../View/History/historyView.dart';
+import '../../View/MyPetsView/dogtreslutsave.dart';
 import '../../View/Splash/splashView.dart';
 import '../../View/forget/confirmpasswordview.dart';
 import '../../View/forget/forgotPasswordEmailView.dart';
@@ -98,10 +99,12 @@ class Routes {
         case RoutesName.feedback:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  FeedbackView());
-
+        case RoutesName.dogSave:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  const Dogtreslutsave(), settings: settings, );
         case RoutesName.camera:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Cameraview());
+            builder: (BuildContext context) =>  const Cameraview());
       case RoutesName.dogIdentification:
         final args = ModalRoute.of(context as BuildContext)?.settings.arguments;
         final File imageFile = args is File

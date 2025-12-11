@@ -28,7 +28,6 @@ class _SplashviewState extends State<Splashview> {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-
     return Scaffold(
       backgroundColor: colors.onBackground,
       body: SafeArea(

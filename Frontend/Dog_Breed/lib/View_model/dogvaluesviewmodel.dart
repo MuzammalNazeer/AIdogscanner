@@ -1,17 +1,23 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:image/image.dart' as img;
 import 'package:flutter/services.dart';
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
+
+import 'ScanProvider.dart';
 
 class PredictionResult {
   final String breed;
   final double confidence;
   final String size;
   final String shape;
+  final String height;
   final String color;
   final String coat;
   final String headFace;
@@ -22,11 +28,12 @@ class PredictionResult {
   final String age;
   final String weight;
 
-  PredictionResult({
+  PredictionResult( {
     required this.breed,
     required this.confidence,
     required this.size,
     required this.shape,
+    required this.height,
     required this.color,
     required this.coat,
     required this.headFace,
@@ -44,6 +51,7 @@ class PredictionResult {
       'confidence': confidence,
       'size': size,
       'shape': shape,
+      'height':height,
       'color': color,
       'coat': coat,
       'headFace': headFace,
@@ -70,9 +78,10 @@ class PredictionResult {
       purpose: map['purpose'] as String,
       gender: map['gender'] as String,
       age: map['age'] as String,
-      weight: map['weight'] as String,
+      weight: map['weight'] as String, height: map['height'] as String,
     );
   }
+
 }
 
 class DogValuesViewModel extends ChangeNotifier {
@@ -17412,7 +17421,7 @@ class DogValuesViewModel extends ChangeNotifier {
         purpose: breedInfo['purpose'] ?? "Companion",
         gender: "Unknown",
         age: "Adult",
-        weight: breedInfo['weight'] ?? "Varies by Breed",
+        weight: breedInfo['weight'] ?? "Varies by Breed", height:breedInfo['height'] ?? "Varies by Breed",
       );
 
       setState(() {
@@ -17536,12 +17545,47 @@ class DogValuesViewModel extends ChangeNotifier {
     fn();
     notifyListeners();
   }
+// After getting prediction results from DogValuesViewModel
+  void saveScanResult() {
+    final scanProvider = Provider.of<ScanProvider>(context as BuildContext, listen: false);
+    final viewModel = Provider.of<DogValuesViewModel>(context as BuildContext, listen: false);
 
+    // Get the characteristics from your viewModel
+    final characteristics = {
+      'size': viewModel.predictionResult?.size ?? 'N/A',
+      'weight': viewModel.predictionResult?.weight ?? 'N/A',
+      'height': viewModel.predictionResult?.height ?? 'N/A',
+      'coat': viewModel.predictionResult?.coat ?? 'N/A',
+      'color': viewModel.predictionResult?.color ?? 'N/A',
+      'headFace': viewModel.predictionResult?.headFace ?? 'N/A',
+      'body': viewModel.predictionResult?.body ?? 'N/A',
+      'purpose': viewModel.predictionResult?.purpose ?? 'N/A',
+    };
+
+    scanProvider.addScan({
+      'imageBytes': imageBytes, // Your image Uint8List
+      'breedName': viewModel.predictionResult?.breed ?? 'Unknown',
+      'confidence': viewModel.predictionResult?.confidence ?? 0.0,
+      'characteristics': characteristics,
+    });
+  }
   void dispose() {
     _dogDetectorInterpreter?.close();
     _breedInterpreter?.close();
     super.dispose();
   }
+  void loadSavedPrediction({
+    required PredictionResult result,
+    required Uint8List imageBytes,
+  }) {
+    _predictionResult = result;
+    _imageBytes = imageBytes;
+    _isDogDetected = true;
+    _isLoading = false;
+    _error = '';
+    notifyListeners();
+  }
+
 
 }
 

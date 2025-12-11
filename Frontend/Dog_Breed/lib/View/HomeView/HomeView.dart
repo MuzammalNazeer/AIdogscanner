@@ -368,9 +368,11 @@ class _HomeviewState extends State<Homeview> {
                                   borderRadius: BorderRadius.circular(30.w),
                                   child: Image.memory(
                                     imageBytes,
+                                    key: ValueKey('image_$scanId'),
                                     width: 68.w,
                                     height: 68.h,
                                     fit: BoxFit.cover,
+                                    gaplessPlayback: true,
                                   ),
                                 )
                               : Center(
@@ -452,8 +454,8 @@ class _HomeviewState extends State<Homeview> {
             SizedBox(height: 12.h),
             Divider(
               color: const Color(0xFFCBE4DC),
-              thickness: 2.0,
-              height: 2.h,
+              thickness: 1.0,
+              height: 1.h,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -476,25 +478,15 @@ class _HomeviewState extends State<Homeview> {
                         ),
                       ),
                       SizedBox(width: 102.w),
-                      // GestureDetector(
-                      //   onTap: viewModel.predictionResult != null
-                      //       ? () => showPredictionDetails(viewModel.predictionResult!, context)
-                      //       : null,
-                      //   child: Text(
-                      //     'Show',
-                      //     style: TextStyle(
-                      //       color: viewModel.predictionResult != null
-                      //           ? Theme.of(context).colorScheme.onSurface
-                      //           : Colors.grey,
-                      //       fontWeight: FontWeight.bold,
-                      //       fontSize: 16.sp,
-                      //     ),
-                      //   ),
-                      // )
-
                       GestureDetector(
                         onTap: () {
-                          _handleShowDetails(scan, context);
+                          if (kDebugMode) {
+                            print("📌 Navigating with scanId: $scanId");
+                          }
+                          Navigator.pushNamed(context,
+                            RoutesName.dogSave,
+                              arguments: {"scanId": scanId}
+                          );
                         },
                         child: Text(
                           'Show',
@@ -638,178 +630,6 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
-  void _handleShowDetails(Map<String, dynamic> scan, BuildContext context) {
-    final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
-    final confidence = scan['confidence'] is double
-        ? scan['confidence'] as double
-        : 0.0;
-    final size = scan['size']?.toString() ?? 'Unknown';
-    final shape = scan['shape']?.toString() ?? 'Unknown';
-    final color = scan['color']?.toString() ?? 'Unknown';
-    final coat = scan['coat']?.toString() ?? 'Unknown';
-    final headFace = scan['headFace']?.toString() ?? 'Unknown';
-    final body = scan['body']?.toString() ?? 'Unknown';
-    final purpose = scan['purpose']?.toString() ?? 'Unknown';
-    final weight = scan['weight']?.toString() ?? 'Unknown';
-    final temperament = scan['temperament'] is Map
-        ? scan['temperament'] as Map<String, dynamic>
-        : {
-      "Energy Level": "Moderate",
-      "Trainability": "Moderate",
-      "Social Behavior": "Friendly",
-      "Family Compatibility": "Good",
-      "Child Friendliness": "Good",
-    };
-
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Center(
-          child: Text(
-            _formatBreedName(breedName),
-            style: TextStyle(
-              fontSize: 22.sp,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF820DFF),
-            ),
-          ),
-        ),
-        content: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Confidence Circle
-              Center(
-                child: Container(
-                  width: 80.w,
-                  height: 80.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color(0xFF7B2CBF),
-                        const Color(0xFF5B0BAE),
-                      ],
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      '${(confidence * 100).toStringAsFixed(1)}%',
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Text(
-                "Characteristics",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF820DFF),
-                ),
-              ),
-              SizedBox(height: 6.h),
-              // Characteristics Grid
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 8.w,
-                mainAxisSpacing: 10.h,
-                childAspectRatio: 3,
-                children: [
-                  _buildCharacteristicItem("Size", size),
-                  _buildCharacteristicItem("Shape", shape),
-                  _buildCharacteristicItem("Color", color),
-                  _buildCharacteristicItem("Coat", coat),
-                  _buildCharacteristicItem("Head & Face", headFace),
-                  _buildCharacteristicItem("Purpose", purpose),
-                  _buildCharacteristicItem("Body", body),
-                  _buildCharacteristicItem("Weight", weight),
-                ],
-              ),
-
-              SizedBox(height: 10.h),
-              Text(
-                "Temperament & Characteristics",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF820DFF),
-                ),
-              ),
-              SizedBox(height: 12.h),
-              Column(
-                children: [
-                  _buildTemperamentItem("Energy Level", temperament["Energy Level"]?.toString() ?? "Moderate"),
-                  SizedBox(height: 8.h),
-                  _buildTemperamentItem("Trainability", temperament["Trainability"]?.toString() ?? "Moderate"),
-                  SizedBox(height: 8.h),
-                  _buildTemperamentItem("Social Behavior", temperament["Social Behavior"]?.toString() ?? "Friendly"),
-                  SizedBox(height: 8.h),
-                  _buildTemperamentItem("Family Compatibility", temperament["Family Compatibility"]?.toString() ?? "Good"),
-                  SizedBox(height: 8.h),
-                  _buildTemperamentItem("Child Friendliness", temperament["Child Friendliness"]?.toString() ?? "Good"),
-                ],
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'Close',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xFF820DFF),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-// Helper widget for info items
-  Widget _buildInfoItem({
-    required IconData icon,
-    required String label,
-    required String value,
-  }) {
-    return Column(
-      children: [
-        Icon(
-          icon,
-          size: 24.sp,
-          color: const Color(0xFF7B2CBF),
-        ),
-        SizedBox(height: 4.h),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 12.sp,
-            color: Colors.grey[600],
-          ),
-        ),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    );
-  }
 
 // Helper widget for characteristic items
   Widget _buildCharacteristicItem(String title, String value) {
