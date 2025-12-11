@@ -5,7 +5,6 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: const Color(0xFFF7F9FB),
-
     colorScheme:  ColorScheme.light(
       primary: Color(0xFF820DFF),
       secondary: Color(0xFF00D9FF).withOpacity(0.1),
@@ -13,9 +12,9 @@ class AppTheme {
       onBackground: Color(0xFF7B2CBF),
       surface: Color(0xFF323332),
       onPrimary: Color(0xFF371B34),
-      onSurface: Color(0xFF0A0A0A),
+      onSurface: const Color(0xFF0A0A0A),
       onSecondary: Colors.black,
-
+        tertiary:const Color(0xFF7B2CBF)
     ),
 
     appBarTheme: const AppBarTheme(
@@ -40,7 +39,8 @@ class AppTheme {
       surface: Color(0xFF323332),
       onPrimary: Color(0xFF371B34),
       onSecondary: Colors.black,
-      onSurface: Color(0xFFFFFFFF),
+      onSurface: const Color(0xFFFFFFFF),
+        tertiary:const Color(0xFFFFFFFF)
     ),
 
     appBarTheme: const AppBarTheme(

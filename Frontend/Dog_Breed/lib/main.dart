@@ -10,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Valid/AppTheme.dart';
 import 'View_model/ThemeNotifier.dart';
+import 'View_model/dogvaluesviewmodel.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -26,8 +28,16 @@ Future<void> main() async {
     }
     cameras = [];
   }
+  await SharedPreferences.getInstance();
+  final scanProvider = ScanProvider();
+  await scanProvider.initialize();
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider.value(
+      value: scanProvider,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -41,6 +51,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => PetProvid()),
         ChangeNotifierProvider(create: (_) => ScanProvider()),
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),
+        ChangeNotifierProvider(create: (_) => DogValuesViewModel()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(440, 956),
@@ -52,14 +63,9 @@ class MyApp extends StatelessWidget {
               return MaterialApp(
                 title: 'Dog Breed',
                 debugShowCheckedModeBanner: false,
-
-                // 🔥 USE YOUR CUSTOM THEMES HERE
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
-
-                // 🔥 Theme provider controls light/dark mode
                 themeMode: themeProvider.themeMode,
-
                 initialRoute: RoutesName.splash,
                 onGenerateRoute: Routes.generateRoute,
               );

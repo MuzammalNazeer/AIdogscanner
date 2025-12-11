@@ -98,6 +98,7 @@ class Routes {
         case RoutesName.feedback:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  FeedbackView());
+
         case RoutesName.camera:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  Cameraview());

@@ -55,7 +55,7 @@ class _SettingviewState extends State<Settingview> {
                 fontSize: 30.sp,
                 height: 1.0,
                 letterSpacing: 0.0,
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             SizedBox(width: 188.w),
@@ -96,7 +96,7 @@ class _SettingviewState extends State<Settingview> {
           iconPath: 'assets/images/fd.svg',
           title: 'Feedback',
           onTap: () {
-            // Navigator.pushNamed(context, RoutesName.feedback);
+            Navigator.pushNamed(context, RoutesName.feedback);
           },
           iconBackgroundColor: const Color(0xFFF0F9FF),
           iconColor: const Color(0xFF00D9FF),
@@ -288,14 +288,20 @@ class _SettingviewState extends State<Settingview> {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Title
-                  const Text(
-                    'Enjoying the app?',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Enjoying the app?',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(width: 50,),
+                      Icon(Icons.close)
+                    ],
                   ),
                   const SizedBox(height: 8),
 

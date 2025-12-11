@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import '../../View_model/ScanProvider.dart';
 import '../../utils/routes/routes_name.dart';
+import '../MyPetsView/DogResultScreen.dart';
 
 class Historyview extends StatefulWidget {
   const Historyview({super.key});
@@ -30,7 +33,7 @@ class _HistoryviewState extends State<Historyview> {
             children: [
               _buildHeader(),
               SizedBox(height: 5.h),
-              _buildRecentScansList(recentScans),
+              _buildRecentScansList(recentScans,scanProvider,context),
             ],
           ),
         ),
@@ -79,44 +82,73 @@ class _HistoryviewState extends State<Historyview> {
     );
   }
 
-  Widget _buildRecentScansList(List<Map<String, dynamic>> recentScans) {
-    if (recentScans.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: EdgeInsets.only(top: 100.h),
-          child: Text(
-            'No recent scans found',
-            style: TextStyle(
-              fontSize: 16.sp,
-              color:Theme.of(context).colorScheme.onSurface,
-            ),
-          ),
-        ),
-      );
-    }
+  Widget _buildRecentScansList(
+      List<Map<String, dynamic>> recentScans,
+      ScanProvider scanProvider,
+      BuildContext context,
+      ) {
+    final lastSixScans = recentScans.length > 6
+        ? recentScans.sublist(recentScans.length - 6)
+        : recentScans;
 
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: recentScans.length,
-      itemBuilder: (context, index) {
-        return _buildRecentScanCard(recentScans[index], index);
-      },
+    return Column(
+      children: lastSixScans.asMap().entries.map((entry) {
+        final index = entry.key;
+        final scan = entry.value;
+        return _buildRecentScanCard(scan, index, scanProvider,context);
+      }).toList(),
     );
   }
+  Uint8List? _parseImageData(dynamic imageData) {
+    if (imageData == null) return null;
 
-  Widget _buildRecentScanCard(Map<String, dynamic> scan, int index) {
-    final image = scan['image'];
+    if (imageData is Uint8List) {
+      return imageData;
+    } else if (imageData is String) {
+      try {
+        String base64String = imageData;
+
+        // Handle data:image/...;base64,... format
+        if (imageData.contains('base64,')) {
+          final parts = imageData.split('base64,');
+          if (parts.length > 1) {
+            base64String = parts[1];
+          }
+        }
+
+        // Decode base64 string
+        return base64.decode(base64String);
+      } catch (e) {
+        print('Failed to decode base64 image: $e');
+        return null;
+      }
+    } else if (imageData is List<int>) {
+      return Uint8List.fromList(imageData);
+    }
+
+    print('Unsupported image data type: ${imageData.runtimeType}');
+    return null;
+  }
+
+  Widget _buildRecentScanCard(
+      Map<String, dynamic> scan,
+      int index,
+      ScanProvider scanProvider,
+      BuildContext context,
+      ) {
+    final imageBytes = _parseImageData(scan['imageBytes']);
+
+    final scanId = scan['id']?.toString() ?? index.toString();
     final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
     final formattedBreedName =
         scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName);
     final confidence = scan['confidence'] is double
         ? scan['confidence'] as double
         : 0.0;
-    final _ = scan['timestamp'] is DateTime
-        ? scan['timestamp'] as DateTime
-        : DateTime.now();
-
+    final isFavorite = scan['isFavorite'] == true;
+    final timestamp = scan['timestamp'] != null
+        ? DateTime.tryParse(scan['timestamp'].toString())
+        : null;
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       width: 413.w,
@@ -124,9 +156,16 @@ class _HistoryviewState extends State<Historyview> {
       decoration: BoxDecoration(
         color: const Color(0xFF323332).withOpacity(0.1),
         borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.1),
+            blurRadius: 50,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Padding(
-        padding: EdgeInsets.all(6.r),
+        padding: EdgeInsets.all(8.r),
         child: Column(
           children: [
             Row(
@@ -155,13 +194,11 @@ class _HistoryviewState extends State<Historyview> {
                           shape: BoxShape.circle,
                           color: Color(0xFF7B2CBF),
                         ),
-                        child: image is File && image.existsSync()
+                        child: imageBytes != null
                             ? ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                            30.w,
-                          ), // For circle
-                          child: Image.file(
-                            image,
+                          borderRadius: BorderRadius.circular(30.w),
+                          child: Image.memory(
+                            imageBytes,
                             width: 68.w,
                             height: 68.h,
                             fit: BoxFit.cover,
@@ -179,34 +216,50 @@ class _HistoryviewState extends State<Historyview> {
                   ],
                 ),
                 SizedBox(width: 6.w),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      formattedBreedName,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
-                        color: Theme.of(context).colorScheme.onSurface,
+
+                // Breed Info
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      Text(
+                        breedName,
+                        style: TextStyle(
+                            fontSize: 16.sp,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: 14.h),
-                    Text(
-                      "Your dog you scanned looks like this.",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12.sp,
-                        color: Theme.of(context).colorScheme.onSurface,
+                      SizedBox(height: 4.h),
+                      if (timestamp != null)
+                        Text(
+                          _formatDateTime(timestamp),
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            color: Colors.grey[500],
+                          ),
+                        ),
+                      SizedBox(height: 6.h),
+                      Text(
+                        "Your dog you scanned looks like this.",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12.sp,
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withOpacity(0.8),
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                const Spacer(),
+                SizedBox(width: 12.w),
                 Container(
                   width: 73.w,
                   height: 73.h,
@@ -215,18 +268,13 @@ class _HistoryviewState extends State<Historyview> {
                     color: const Color(0xFFE58F05).withOpacity(0.24),
                   ),
                   child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '${(confidence * 100).toStringAsFixed(1)}%',
-                          style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFFE58F05),
-                          ),
-                        ),
-                      ],
+                    child: Text(
+                      '${(confidence * 100).toStringAsFixed(1)}%',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFFE58F05),
+                      ),
                     ),
                   ),
                 ),
@@ -234,75 +282,65 @@ class _HistoryviewState extends State<Historyview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: const Color(0xFF323332).withOpacity(0.1),
+              color: const Color(0xFFCBE4DC),
               thickness: 1.0,
               height: 1.h,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                      },
-                      child:  Text(
-                        'Rerun',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          await _handleRescanTap(scan, context);
+                        },
+                        child: Text(
+                          'Return',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.sp,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(width: 102.w),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          RoutesName.dogResult,
-                          arguments: scan,
-                        );
-                      },
-                      child:  Text(
-                        'Show',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontWeight: FontWeight.bold,
+                      SizedBox(width: 102.w),
+                      GestureDetector(
+                        onTap: () {
+                          // _handleShowDetails(scan, context);
+                        },
+                        child: Text(
+                          'Show',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.sp,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      scan['isFavorite'] = !(scan['isFavorite'] == true);
-                      // Update the favorite breeds set
-                      if (scan['isFavorite'] == true) {
-                        _favoriteBreeds.add(breedName);
-                      } else {
-                        _favoriteBreeds.remove(breedName);
-                      }
-                    });
-
-                  },
-                  icon: Icon(
-                    scan['isFavorite'] == true
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: scan['isFavorite'] == true
-                        ? Colors.red
-                        : Theme.of(context).colorScheme.onSurface,
-                    size: 26,
+                    ],
                   ),
-                ),
-              ],
+                  GestureDetector(
+                    onTap: () {
+                      scanProvider.toggleScanFavorite(scanId);
+                    },
+                    child: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: isFavorite ? Colors.red : Colors.grey[600],
+                      size: 26,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
+
 
   String _formatBreedName(String name) {
     if (name.isEmpty) return 'Unknown Breed';
@@ -315,4 +353,107 @@ class _HistoryviewState extends State<Historyview> {
         .join(' ');
   }
 
+}
+String _formatDateTime(DateTime dateTime) {
+  final now = DateTime.now();
+  final difference = now.difference(dateTime);
+
+  if (difference.inDays > 7) {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  } else if (difference.inDays > 0) {
+    return '${difference.inDays} days ago';
+  } else if (difference.inHours > 0) {
+    return '${difference.inHours} hours ago';
+  } else if (difference.inMinutes > 0) {
+    return '${difference.inMinutes} minutes ago';
+  } else {
+    return 'Just now';
+  }
+}
+Future<void> _handleRescanTap(
+    Map<String, dynamic> scan,
+    BuildContext context,
+    ) async {
+  if (kDebugMode) {
+    print('🔄 Re-scanning: ${scan['breedName']}');
+  }
+
+  try {
+    final cameraResult = await Navigator.pushNamed(
+      context,
+      RoutesName.camera,
+    );
+
+    if (cameraResult != null && cameraResult is File) {
+      if (kDebugMode) {
+        print('📷 New image captured: ${cameraResult.path}');
+      }
+      final dogResult = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DogResultScreen(imageFile: cameraResult),
+        ),
+      );
+
+      if (dogResult != null && dogResult is Map<String, dynamic>) {
+        if (kDebugMode) {
+          print('✅ Received new scan data!');
+        }
+
+        final scanProvider = Provider.of<ScanProvider>(
+          context,
+          listen: false,
+        );
+        final scanData = {
+          'id': DateTime.now().millisecondsSinceEpoch.toString(),
+          'image': dogResult['image'] ?? cameraResult,
+          'breedName': dogResult['breedName']?.toString() ?? 'Unknown Breed',
+          'confidence': (dogResult['confidence'] ?? 0.0) is double
+              ? dogResult['confidence'] as double
+              : 0.0,
+          // 'formattedBreedName':
+          // dogResult['formattedBreedName']?.toString() ??
+          //     _formatBreedName(
+          //       dogResult['breedName']?.toString() ?? 'Unknown Breed',
+          //     ),
+          'timestamp': DateTime.now(),
+          'isFavorite': false,
+        };
+
+        if (kDebugMode) {
+          print('📋 Adding new scan to provider: ${scanData['breedName']}');
+        }
+
+        // Add to provider (this will trigger UI update)
+        scanProvider.addScan(scanData);
+
+        final confidencePercent = (scanData['confidence']! * 100)
+            .toStringAsFixed(1);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '✅ Re-scanned: ${scanData['formattedBreedName']} ($confidencePercent% confidence)',
+            ),
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.green,
+          ),
+        );
+
+        if (kDebugMode) {
+          print('💾 New scan saved via provider!');
+        }
+      }
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      print('❌ Error in re-scan flow: $e');
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Error re-scanning: $e'),
+        duration: const Duration(seconds: 3),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
 }

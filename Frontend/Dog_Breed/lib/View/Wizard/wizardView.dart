@@ -44,8 +44,14 @@ class _WizardviewState extends State<Wizardview> {
                 children: [
                   if (currentPage < 3)
                     TextButton(
-                      onPressed: () =>
-                          Navigator.pushNamed(context, RoutesName.dashboard),
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RoutesName.dashboard,
+                              (route) => false,
+                        );
+                      },
+
                       child:  Text(
                         "Skip",
                         style: TextStyle(
@@ -81,7 +87,11 @@ class _WizardviewState extends State<Wizardview> {
                   GestureDetector(
                     onTap: () {
                       if (currentPage == 3) {
-                        Navigator.pushNamed(context, RoutesName.dashboard);
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RoutesName.dashboard,
+                              (route) => false,
+                        );
                       } else {
                         _pageController.nextPage(
                           duration: const Duration(milliseconds: 400),
@@ -275,7 +285,7 @@ class OnboardingPage2 extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 165.h),
+          SizedBox(height: 140.h),
            Text(
             "We need your\n permission",
             textAlign: TextAlign.center,
@@ -444,7 +454,7 @@ class OnboardingPage4 extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          SizedBox(height: 12.h),
+                          SizedBox(height: 5.h),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(15.r),
                             child: Image.asset(
@@ -469,7 +479,7 @@ class OnboardingPage4 extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            SizedBox(height: 12.h),
+                            SizedBox(height: 5.h),
                             ClipRRect(
                               borderRadius: BorderRadius.circular(15.r),
                               child: Image.asset(
@@ -486,7 +496,7 @@ class OnboardingPage4 extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 30.h),
                 SizedBox(
                   width: 370.w,
                   child: ClipRRect(
@@ -504,7 +514,7 @@ class OnboardingPage4 extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 210.h),
+          SizedBox(height: 170.h),
           Text(
             "Ensure your dog stays \n healthy and active.",
             textAlign: TextAlign.center,

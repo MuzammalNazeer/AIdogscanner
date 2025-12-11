@@ -138,7 +138,7 @@ class _ProviewState extends State<Proview> {
                   premium: true,
                   free: false,
                 ),
-                SizedBox(height: 160.h),
+                SizedBox(height: 130.h),
                 Text(
                   "3-Days FREE Trial, Rs 2550/Week After",
                   style: TextStyle(
@@ -178,7 +178,7 @@ class _ProviewState extends State<Proview> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 20.h),
               ],
             ),
           ],

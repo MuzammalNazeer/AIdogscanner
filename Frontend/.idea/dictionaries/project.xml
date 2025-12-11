@@ -3,6 +3,8 @@
     <words>
       <w>activites</w>
       <w>cameraview</w>
+      <w>dogresultsaveview</w>
+      <w>dogvaluesviewmodel</w>
       <w>favouritesview</w>
       <w>forgotpasswordemail</w>
       <w>forgotpasswordemailview</w>
@@ -11,6 +13,8 @@
       <w>proview</w>
       <w>settingview</w>
       <w>signupview</w>
+      <w>snackbar</w>
+      <w>wizardview</w>
     </words>
   </dictionary>
 </component>
