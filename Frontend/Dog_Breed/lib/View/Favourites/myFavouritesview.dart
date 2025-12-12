@@ -176,119 +176,124 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
         padding: EdgeInsets.all(8.r),
         child: Column(
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: 80.w,
-                      height: 80.h,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: 60.w,
-                        height: 60.h,
+            GestureDetector(
+              onTap: () async {
+                await _handleRescanTap(scan, context);
+              },
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      Container(
+                        width: 80.w,
+                        height: 80.h,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xFF7B2CBF),
-                        ),
-                        child: imageBytes != null
-                            ? ClipRRect(
-                          borderRadius: BorderRadius.circular(30.w),
-                          child: Image.memory(
-                            imageBytes,
-                            key: ValueKey('image_$scanId'),
-                            width: 68.w,
-                            height: 68.h,
-                            fit: BoxFit.cover,
-                            gaplessPlayback: true,
-                          ),
-                        )
-                            : Center(
-                          child: Icon(
-                            Icons.pets,
-                            color: Colors.white.withOpacity(0.8),
-                            size: 24.r,
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(width: 6.w),
-
-                // Breed Info
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      Text(
-                        breedName,
-                        style: TextStyle(
-                            fontSize: 16.sp,
-                            color: Theme.of(context).colorScheme.onSurface,
-                            fontWeight: FontWeight.bold
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 4.h),
-                      if (timestamp != null)
-                        Text(
-                          _formatDateTime(timestamp),
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            color: Colors.grey[500],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: 60.w,
+                          height: 60.h,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xFF7B2CBF),
+                          ),
+                          child: imageBytes != null
+                              ? ClipRRect(
+                            borderRadius: BorderRadius.circular(30.w),
+                            child: Image.memory(
+                              imageBytes,
+                              key: ValueKey('image_$scanId'),
+                              width: 68.w,
+                              height: 68.h,
+                              fit: BoxFit.cover,
+                              gaplessPlayback: true,
+                            ),
+                          )
+                              : Center(
+                            child: Icon(
+                              Icons.pets,
+                              color: Colors.white.withOpacity(0.8),
+                              size: 24.r,
+                            ),
                           ),
                         ),
-                      SizedBox(height: 6.h),
-                      Text(
-                        "Your dog you scanned looks like this.",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.sp,
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.onSurface.withOpacity(0.8),
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
-                ),
-                SizedBox(width: 12.w),
-                Container(
-                  width: 73.w,
-                  height: 73.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: const Color(0xFFE58F05).withOpacity(0.24),
+                  SizedBox(width: 6.w),
+
+                  // Breed Info
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+
+                        Text(
+                          breedName,
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Theme.of(context).colorScheme.onSurface,
+                              fontWeight: FontWeight.bold
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 4.h),
+                        if (timestamp != null)
+                          Text(
+                            _formatDateTime(timestamp),
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              color: Colors.grey[500],
+                            ),
+                          ),
+                        SizedBox(height: 6.h),
+                        Text(
+                          "Your dog you scanned looks like this.",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.sp,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withOpacity(0.8),
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Center(
-                    child: Text(
-                      '${(confidence * 100).toStringAsFixed(1)}%',
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xFFE58F05),
+                  SizedBox(width: 12.w),
+                  Container(
+                    width: 73.w,
+                    height: 73.h,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color(0xFFE58F05).withOpacity(0.24),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${(confidence * 100).toStringAsFixed(1)}%',
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFFE58F05),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             SizedBox(height: 12.h),
             Divider(
