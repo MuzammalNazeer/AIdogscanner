@@ -14,8 +14,11 @@ class AppTheme {
       onPrimary: Color(0xFF371B34),
       onSurface: const Color(0xFF0A0A0A),
       onSecondary: Colors.black,
-        tertiary:const Color(0xFF7B2CBF)
-    ),
+        tertiary:const Color(0xFF7B2CBF),
+        onTertiary: Color(0xFF820DFF),
+        tertiaryContainer: const Color(0xFFF4F7F6)
+
+  ),
 
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
@@ -36,11 +39,13 @@ class AppTheme {
       secondary: const Color(0xFF21241F).withOpacity(0.1),
       background: const Color(0xFF21241F),
       onBackground: const Color(0xFF21241F),
-      surface: Color(0xFF323332),
-      onPrimary: Color(0xFF371B34),
+      surface: const Color(0xFF323332),
+      onPrimary: const Color(0xFF371B34),
       onSecondary: Colors.black,
       onSurface: const Color(0xFFFFFFFF),
-        tertiary:const Color(0xFFFFFFFF)
+      tertiary:const Color(0xFFFFFFFF),
+      onTertiary: const Color(0xFF323332),
+      tertiaryContainer: const Color(0xFF323332)
     ),
 
     appBarTheme: const AppBarTheme(

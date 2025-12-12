@@ -11,10 +11,13 @@
       <w>forgotpasswordemailview</w>
       <w>historyview</w>
       <w>homeview</w>
+      <w>myfavouritesview</w>
       <w>proview</w>
       <w>settingview</w>
       <w>signupview</w>
       <w>snackbar</w>
+      <w>splashview</w>
+      <w>tflite</w>
       <w>wizardview</w>
     </words>
   </dictionary>

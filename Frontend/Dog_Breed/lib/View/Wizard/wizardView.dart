@@ -51,7 +51,6 @@ class _WizardviewState extends State<Wizardview> {
                               (route) => false,
                         );
                       },
-
                       child:  Text(
                         "Skip",
                         style: TextStyle(
@@ -117,8 +116,8 @@ class _WizardviewState extends State<Wizardview> {
                       ),
                       child: Text(
                         currentPage == 3 ? "Get Started" : "Next",
-                        style: const TextStyle(
-                          color: Color(0xFF6D09E8),
+                        style: TextStyle(
+                          color: colors.onBackground,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -157,9 +156,7 @@ class OnboardingPage1 extends StatelessWidget {
 
                   boxShadow: [
                     BoxShadow(
-                      color: isDarkTheme
-                          ? colors.onBackground.withOpacity(0.3)  // Dark theme
-                          : const Color(0xFF00D9FF).withOpacity(0.4),  // Light theme
+                      color:  const Color(0xFF00D9FF).withOpacity(0.6),  // Light theme
                       blurRadius: 54,
                       spreadRadius: 0,
                       offset: Offset.zero,
@@ -172,11 +169,12 @@ class OnboardingPage1 extends StatelessWidget {
                 height: 340.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [colors.onBackground, colors.onBackground],
-                  ),
+                  color: colors.onTertiary,
+                  // gradient: LinearGradient(
+                  //   begin: Alignment.topLeft,
+                  //   end: Alignment.bottomRight,
+                  //   colors: [colors.onBackground, colors.onBackground],
+                  // ),
                 ),
               ),
               Container(
@@ -220,7 +218,7 @@ class OnboardingPage1 extends StatelessWidget {
 }
 
 class OnboardingPage2 extends StatelessWidget {
-  const OnboardingPage2({super.key});
+  const  OnboardingPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -243,12 +241,9 @@ class OnboardingPage2 extends StatelessWidget {
                   height: 380.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-
                     boxShadow: [
                       BoxShadow(
-                        color: isDarkTheme
-                            ? colors.onBackground.withOpacity(0.3)  // Dark theme
-                            : const Color(0xFF00D9FF).withOpacity(0.6),
+                        color:  const Color(0xFF00D9FF).withOpacity(0.6),
                         blurRadius: 54,
                         spreadRadius: 0,
                         offset: Offset.zero,
@@ -261,11 +256,7 @@ class OnboardingPage2 extends StatelessWidget {
                   height: 320.h,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [colors.onBackground, colors.onBackground],
-                    ),
+                    color: colors.onTertiary
                   ),
                 ),
                 Container(
@@ -284,9 +275,9 @@ class OnboardingPage2 extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Positioned(top: 50.h,  left: 45.w,   child: _buildSmallDogCircle('assets/images/Ellipse 78.png')),
-                Positioned(top: 160.h,  right: 10.w,  child: _buildSmallDogCircle('assets/images/Ellipse 78.png')),
-                Positioned(bottom: 38.h, left: 68.w, child: _buildSmallDogCircle('assets/images/Ellipse 78.png')),
+                Positioned(top: 50.h,  left: 45.w,   child: _buildSmallDogCircle('assets/images/Ellipse 789.png', context)),
+                Positioned(top: 160.h,  right: 10.w,  child: _buildSmallDogCircle('assets/images/Ellipse 788.png',context)),
+                Positioned(bottom: 38.h, left: 68.w, child: _buildSmallDogCircle('assets/images/Ellipse 808.png',context)),
               ],
             ),
           ),
@@ -313,14 +304,36 @@ class OnboardingPage2 extends StatelessWidget {
 }
 
 
-Widget _buildSmallDogCircle(String assetPath) {
-  return ClipOval(
-    child: Image.asset(
-      assetPath,
-      width: 100.w,
-      height: 100.h,
-      fit: BoxFit.cover,
+Widget _buildSmallDogCircle(String assetPath, BuildContext context) {
+  final colors = Theme.of(context).colorScheme;
+  return Stack(
+    alignment: Alignment.center,
+    children: [
+      Container(
+        width: 115.w,
+        height: 115.h,
+        decoration:  BoxDecoration(
+          shape: BoxShape.circle,
+          color:colors.onTertiary,
+        ),
+      ),
+    Container(
+    width: 100.w,
+    height: 100.h,
+    decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: colors.onTertiary
     ),
+    child: ClipOval(
+      child: Image.asset(
+        assetPath,
+        width: 100.w,
+        height: 100.h,
+        fit: BoxFit.cover,
+      ),
+    ),
+  )
+    ],
   );
 }
 // PAGE 3 - Image Quality Grid
@@ -434,7 +447,7 @@ class OnboardingPage4 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 212.h,
+                  height: 210.h,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -454,8 +467,8 @@ class OnboardingPage4 extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15.r),
                             child: Image.asset(
                               'assets/images/Rectangle 3197.png',
-                              width: 95.w,
-                              height: 95.w,
+                              width: 100.w,
+                              height: 100.w,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -464,40 +477,37 @@ class OnboardingPage4 extends StatelessWidget {
                             borderRadius: BorderRadius.circular(15.r),
                             child: Image.asset(
                               'assets/images/Rectangle 3194.png',
-                              width: 95.w,
-                              height: 95.w,
+                              width: 100.w,
+                              height: 100.w,
                               fit: BoxFit.cover,
                             ),
                           ),
                         ],
                       ),
                       SizedBox(width: 10.w),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.r),
-                              child: Image.asset(
-                                'assets/images/Rectangle 3195.png',
-                                width: 95.w,
-                                height: 95.w,
-                                fit: BoxFit.cover,
-                              ),
+                      Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15.r),
+                            child: Image.asset(
+                              'assets/images/Rectangle 3195.png',
+                              width: 100.w,
+                              height: 100.w,
+                              fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5.h),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(15.r),
-                              child: Image.asset(
-                                'assets/images/Rectangle 3196.png',
-                                width: 95.w,
-                                height: 95.w,
-                                fit: BoxFit.cover,
-                              ),
+                          ),
+                          SizedBox(height: 5.h),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(15.r),
+                            child: Image.asset(
+                              'assets/images/Rectangle 3196.png',
+                              width: 100.w,
+                              height: 100.w,
+                              fit: BoxFit.cover,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-
                     ],
                   ),
                 ),

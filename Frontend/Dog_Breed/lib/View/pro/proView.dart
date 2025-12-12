@@ -37,7 +37,7 @@ class _ProviewState extends State<Proview> {
                           padding:  EdgeInsets.only(left: 20.w,top: 50.h),
                           child: GestureDetector(
                             onTap:(){
-                              Navigator.pushNamed(context, RoutesName.pro);
+                              Navigator.pushNamed(context, RoutesName.splash);
                             },
                             child: Positioned(
                               left: 20.w,
@@ -52,7 +52,7 @@ class _ProviewState extends State<Proview> {
                         ),
                         Positioned(
                           top: 85.h,
-                          left: 164.w,
+                          left: 184.w,
                           child: Center(
                             child: Image.asset(
                               'assets/images/Group888.png',
@@ -188,7 +188,6 @@ class _ProviewState extends State<Proview> {
   }
 }
 
-// CustomClipper for the curved background shape
 class _CustomShapeClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -212,47 +211,6 @@ class _CustomShapeClipper extends CustomClipper<Path> {
 }
 
 
-// class _FeatureRow extends StatelessWidget {
-//   final String title;
-//   final bool premium;
-//   final bool free;
-//
-//   const _FeatureRow({
-//     required this.title,
-//     required this.premium,
-//     required this.free,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final colors = Theme.of(context).colorScheme;
-//
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-//       child: Row(
-//         children: [
-//           Expanded(
-//             child: Text(
-//               title,
-//               style: TextStyle(
-//                 fontSize: 16.sp,
-//                 color: const Color(0xFF0A0A0A),
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//           ),
-//            Icon(Icons.check, color: free ? colors.surface : AppColors.vibrantPurple, size: 20),
-//           const SizedBox(width: 40),
-//           Icon(
-//             free ? Icons.check : Icons.lock_outline,
-//             color: free ? colors.surface : AppColors.vibrantPurple,
-//             size: 20,
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
 class _FeatureRow extends StatelessWidget {
   final String title;
   final bool premium;

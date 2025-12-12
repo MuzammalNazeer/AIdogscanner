@@ -330,22 +330,12 @@ class _FavouritesviewState extends State<Favouritesview> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Text(
-                      //   formattedBreedName,
-                      //   style: TextStyle(
-                      //     fontWeight: FontWeight.bold,
-                      //     fontSize: 16.sp,
-                      //     color: Theme.of(context).colorScheme.onSurface,
-                      //   ),
-                      //   maxLines: 1,
-                      //   overflow: TextOverflow.ellipsis,
-                      // ),
-                      // SizedBox(height: 4.h),
+
                       Text(
                         breedName,
                         style: TextStyle(
                             fontSize: 16.sp,
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold
                         ),
                         maxLines: 1,

@@ -21,6 +21,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 
 import '../../View/Favourites/favouritesView.dart';
+import '../../View/Favourites/myFavouritesview.dart';
 import '../../View/History/historyView.dart';
 import '../../View/MyPetsView/dogtreslutsave.dart';
 import '../../View/Splash/splashView.dart';
@@ -44,61 +45,64 @@ class Routes {
             builder: (BuildContext context) =>  const Proview());
         case RoutesName.login:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  LoginView());
+            builder: (BuildContext context) =>  const LoginView());
         case RoutesName.signup:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Signupview());
+            builder: (BuildContext context) =>  const Signupview());
         case RoutesName.forgetEmail:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Forgotpasswordemailview());
+            builder: (BuildContext context) =>  const Forgotpasswordemailview());
         case RoutesName.forgetCode:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Forgotcodeview());
+            builder: (BuildContext context) =>  const Forgotcodeview());
         case RoutesName.confirm:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Confirmpasswordview());
+            builder: (BuildContext context) =>  const Confirmpasswordview());
         case RoutesName.newPassword:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Newpasswordview());
+            builder: (BuildContext context) =>  const Newpasswordview());
         case RoutesName.wizard:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Wizardview());
+            builder: (BuildContext context) =>  const Wizardview());
         case RoutesName.home:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Homeview());
+            builder: (BuildContext context) =>  const Homeview());
+        case RoutesName.myFavourites:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  const Myfavouritesview());
       case RoutesName.dashboard:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  DashboardHomeView());
+            builder: (BuildContext context) =>   DashboardHomeView());
         case RoutesName.setting:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Settingview());
+            builder: (BuildContext context) =>  const Settingview());
       case RoutesName.favourites:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Favouritesview());
+            builder: (BuildContext context) =>  const Favouritesview());
       case RoutesName.history:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Historyview());
+            builder: (BuildContext context) =>  const Historyview());
         case RoutesName.activites:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Activitesview());
+            builder: (BuildContext context) =>  const Activitesview());
         case RoutesName.myPets:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Mypetsview());
+            builder: (BuildContext context) =>  const Mypetsview());
         case RoutesName.profile:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Profileview());
+            builder: (BuildContext context) =>  const Profileview());
         case RoutesName.hygiene:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  HygieneView());
+            builder: (BuildContext context) =>  const HygieneView());
         case RoutesName.cleaning:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Cleaningview());
+            builder: (BuildContext context) =>  const Cleaningview());
         case RoutesName.addPet:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  AddPetView());
+            builder: (BuildContext context) =>  const AddPetView());
         case RoutesName.feedback:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  FeedbackView());
+            builder: (BuildContext context) =>  const FeedbackView());
         case RoutesName.dogSave:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Dogtreslutsave(), settings: settings, );

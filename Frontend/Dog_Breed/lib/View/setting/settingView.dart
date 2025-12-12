@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // For Clipboard
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:permission_handler/permission_handler.dart'; // For permissions
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
+
 import '../../View_model/ThemeNotifier.dart';
 import '../../utils/routes/routes_name.dart';
 
@@ -19,6 +23,14 @@ class Settingview extends StatefulWidget {
 class _SettingviewState extends State<Settingview> {
   int _selectedStars = 0;
   bool _hasRated = false;
+
+  // Update these with your actual app details
+  static const String _androidPackageName = 'com.example.hiddencamerafinder';
+  static const String _iosAppId = '123456789'; // Your actual iOS App ID
+  static const String _appName = 'Hidden Camera Finder';
+  static const String _shareMessage = 'Check out Hidden Camera Finder - an amazing app for detecting hidden cameras!';
+  static const String _playStoreUrl = 'https://play.google.com/store/apps/details?id=$_androidPackageName';
+  static const String _appStoreUrl = 'https://apps.apple.com/app/id$_iosAppId';
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +99,7 @@ class _SettingviewState extends State<Settingview> {
         _buildSettingOptionTile(
           iconPath: 'assets/images/ff.svg',
           title: 'My Favorites',
-          onTap: () => Navigator.pushNamed(context, RoutesName.favourites),
+          onTap: () => Navigator.pushNamed(context, RoutesName.myFavourites),
           iconBackgroundColor: const Color(0xFFFEF2F2),
           iconColor: const Color(0xFFDD2E44),
         ),
@@ -115,7 +127,9 @@ class _SettingviewState extends State<Settingview> {
         _buildSettingOptionTile(
           iconPath: 'assets/images/sh.svg',
           title: 'Share',
-          onTap: () {},
+          onTap: () async {
+            await _shareApp();
+          },
           iconBackgroundColor: const Color(0xFFF0FDF4),
           iconColor: const Color(0xFF0B75FF),
         ),
@@ -156,7 +170,7 @@ class _SettingviewState extends State<Settingview> {
               Container(
                 padding: EdgeInsets.all(8.r),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFFFFF),
+                  color: Theme.of(context).colorScheme.background,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: SvgPicture.asset(
@@ -239,7 +253,7 @@ class _SettingviewState extends State<Settingview> {
               width: 40.w,
               padding: EdgeInsets.all(8.r),
               decoration: BoxDecoration(
-                color: const Color(0xFFFFFFFF),
+                color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(12.r),
                 border: Border.all(color: borderColor, width: 2.w),
               ),
@@ -280,7 +294,7 @@ class _SettingviewState extends State<Settingview> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).colorScheme.background,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -288,37 +302,43 @@ class _SettingviewState extends State<Settingview> {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Enjoying the app?',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                       Expanded(
+                        child: Text(
+                          'Enjoying the app?',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                         ),
                       ),
-                      SizedBox(width: 50,),
-                      Icon(Icons.close)
+                      SizedBox(width: 10.w),
+                      IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () => Navigator.pop(context),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ],
                   ),
                   const SizedBox(height: 8),
-
-                  // Subtitle
                   RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text:  TextSpan(
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       children: [
-                        TextSpan(text: 'Do you enjoy using the\n'),
+                        const TextSpan(text: 'Do you enjoy using the\n'),
                         TextSpan(
                           text: 'Hidden Camera Finder?',
-                          style: TextStyle(fontSize: 16,
-                            color: Colors.grey,),
+                          style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onSurface),
                         ),
                       ],
                     ),
@@ -326,12 +346,12 @@ class _SettingviewState extends State<Settingview> {
                   const SizedBox(height: 16),
 
                   // Message
-                  const Text(
+                   Text(
                     "We'd greatly appreciate it if\nyou could rate us.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.grey,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -381,8 +401,8 @@ class _SettingviewState extends State<Settingview> {
                           setState(() {
                             _hasRated = true;
                           });
-                          // You can launch store immediately or show another dialog
-                          Future.delayed(const Duration(milliseconds: 500), () {
+                          // Launch store after a short delay
+                          Future.delayed(const Duration(milliseconds: 300), () {
                             Navigator.pop(context);
                             _launchStoreRating();
                           });
@@ -405,9 +425,7 @@ class _SettingviewState extends State<Settingview> {
                         elevation: 0,
                       ),
                       child: Text(
-                        _selectedStars > 0
-                            ? 'Rate Us '
-                            : '',
+                        _selectedStars > 0 ? 'Rate Us' : 'Select Stars',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -415,7 +433,6 @@ class _SettingviewState extends State<Settingview> {
                       ),
                     ),
                   ] else ...[
-                    // Thank you message after rating
                     Icon(
                       Icons.check_circle,
                       size: 60,
@@ -453,7 +470,7 @@ class _SettingviewState extends State<Settingview> {
                         elevation: 0,
                       ),
                       child: const Text(
-                        'Rate ',
+                        'Rate on Store',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -461,7 +478,6 @@ class _SettingviewState extends State<Settingview> {
                       ),
                     ),
                   ],
-
                 ],
               ),
             );
@@ -470,46 +486,40 @@ class _SettingviewState extends State<Settingview> {
       },
     );
   }
-// Add this method to your State class
+
   Future<void> _launchStoreRating() async {
     try {
-      // For Android - replace 'com.your.package.name' with your actual package name
-      const String androidPackageName = 'com.example.hiddencamerafinder';
-
-      // For iOS - replace '123456789' with your actual App Store ID
-      const String iosAppId = '123456789';
-
       String url;
 
       // Check platform and create appropriate store URL
       if (Platform.isAndroid) {
-        url = 'market://details?id=$androidPackageName';
+        url = 'market://details?id=$_androidPackageName';
       } else if (Platform.isIOS) {
-        url = 'https://apps.apple.com/app/id$iosAppId';
+        url = 'itms-apps://itunes.apple.com/app/id$_iosAppId';
       } else {
         // Fallback for other platforms
-        url = 'https://play.google.com/store/apps/details?id=$androidPackageName';
+        url = _playStoreUrl;
       }
 
-      // Launch the URL
+      // Try to launch the deep link
       if (await canLaunchUrl(Uri.parse(url))) {
-        await launchUrl(Uri.parse(url));
+        await launchUrl(
+          Uri.parse(url),
+          mode: LaunchMode.externalApplication,
+        );
       } else {
-        // Fallback to web URL if the store app can't be launched
-        final webUrl = Platform.isIOS
-            ? 'https://apps.apple.com/app/id$iosAppId'
-            : 'https://play.google.com/store/apps/details?id=$androidPackageName';
+        // If deep link fails, try the web URL
+        final webUrl = Platform.isIOS ? _appStoreUrl : _playStoreUrl;
 
         if (await canLaunchUrl(Uri.parse(webUrl))) {
-          await launchUrl(Uri.parse(webUrl));
+          await launchUrl(
+            Uri.parse(webUrl),
+            mode: LaunchMode.externalApplication,
+          );
         } else {
           // Show error message if nothing works
           if (context.mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Could not open app store. Please try again later.'),
-              ),
-            );
+            _showErrorSnackBar('Could not open app store. Please try again later.');
           }
         }
       }
@@ -518,33 +528,335 @@ class _SettingviewState extends State<Settingview> {
         print('Error launching store: $e');
       }
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error opening app store.'),
-          ),
-        );
+        _showErrorSnackBar('Error opening app store.');
       }
     }
   }
-// Method to save rating locally
-  void _saveRating(int stars) {
-    // Save rating to SharedPreferences or local storage
-    // This prevents showing the dialog again if already rated
-    // Example using shared_preferences:
 
-    // final prefs = await SharedPreferences.getInstance();
-    // await prefs.setInt('app_rating', stars);
-    // await prefs.setBool('has_rated', true);
+  Future<void> _shareApp() async {
+    try {
+      if (!mounted) return;
 
-    print('User rated: $stars stars');
+      // Create optimized share content
+      String shareUrl;
+      String shareText;
+
+      if (Platform.isIOS) {
+        shareUrl = _appStoreUrl;
+        shareText = '📱 Discover $_appName on the App Store!';
+      } else if (Platform.isAndroid) {
+        shareUrl = _playStoreUrl;
+        shareText = '📱 Get $_appName on Google Play!';
+      } else {
+        shareUrl = _playStoreUrl;
+        shareText = '📱 Check out $_appName!';
+      }
+
+      // Create the full share content
+      final shareContent = '''
+$shareText
+
+🔍 $_shareMessage
+
+🔗 Download now: $shareUrl
+
+#HiddenCameraFinder #SecurityApp #Privacy''';
+
+      // Get position for share dialog (optional, but helps positioning)
+      final RenderBox? box = context.findRenderObject() as RenderBox?;
+      final Rect? sharePosition = box != null
+          ? box.localToGlobal(Offset.zero) & box.size
+          : null;
+
+      // Call Share.share() - This will show ALL sharing options
+      final result = await Share.share(
+        shareContent,
+        subject: '$_appName - Hidden Camera Detection App',
+        sharePositionOrigin: sharePosition,
+      );
+
+      // // Log the result (optional)
+      // if (kDebugMode) {
+      //   print('Share completed: $result');
+      // }
+
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        print('Share PlatformException: ${e.message}');
+      }
+      if (mounted) {
+        _showErrorSnackBar('Unable to open share options. Error: ${e.message}');
+
+        // Fallback: Show manual share options dialog
+        _showManualShareOptions();
+      }
+    } catch (e, stackTrace) {
+      if (kDebugMode) {
+        print('Error in _shareApp: $e\n$stackTrace');
+      }
+      if (mounted) {
+        // Fallback: Show custom share dialog with options
+        _showCustomShareDialog();
+      }
+    }
   }
 
-// Method to show feedback dialog for low ratings
+  // Fallback method to show manual share options
+  void _showManualShareOptions() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Share App',
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              SizedBox(height: 20.h),
+
+              // Copy Link Option
+              ListTile(
+                leading: Icon(Icons.link, color: Theme.of(context).primaryColor),
+                title: Text('Copy Link', style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                )),
+                onTap: () async {
+                  Navigator.pop(context);
+                  await _copyToClipboard();
+                },
+              ),
+
+              // Share via WhatsApp
+              ListTile(
+                leading: Icon(Icons.chat, color: Colors.green),
+                title: Text('Share via WhatsApp', style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                )),
+                onTap: () {
+                  Navigator.pop(context);
+                  _shareViaWhatsApp();
+                },
+              ),
+
+              // Share via Email
+              ListTile(
+                leading: Icon(Icons.email, color: Colors.red),
+                title: Text('Share via Email', style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                )),
+                onTap: () {
+                  Navigator.pop(context);
+                  _shareViaEmail();
+                },
+              ),
+
+              // Share via SMS
+              ListTile(
+                leading: Icon(Icons.sms, color: Colors.blue),
+                title: Text('Share via SMS', style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface,
+                )),
+                onTap: () {
+                  Navigator.pop(context);
+                  _shareViaSMS();
+                },
+              ),
+
+              SizedBox(height: 10.h),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Cancel', style: TextStyle(
+                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                )),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // Custom share dialog with multiple options
+  void _showCustomShareDialog() {
+    final shareUrl = Platform.isIOS ? _appStoreUrl : _playStoreUrl;
+    final shareContent = '$_shareMessage\n\n$shareUrl';
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Share $_appName'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Choose how you want to share:'),
+              SizedBox(height: 20),
+
+              // Quick actions
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  // Copy
+                  ActionChip(
+                    avatar: Icon(Icons.copy, size: 18),
+                    label: Text('Copy'),
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      await _copyToClipboard();
+                    },
+                  ),
+
+                  // WhatsApp
+                  ActionChip(
+                    avatar: Icon(Icons.chat, size: 18, color: Colors.green),
+                    label: Text('WhatsApp'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      _shareViaWhatsApp();
+                    },
+                  ),
+
+                  // More Options
+                  ActionChip(
+                    avatar: Icon(Icons.more_horiz, size: 18),
+                    label: Text('More'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      // Try system share again
+                      _retrySystemShare();
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  // Copy to clipboard fallback
+  Future<void> _copyToClipboard() async {
+    try {
+      final shareUrl = Platform.isIOS ? _appStoreUrl : _playStoreUrl;
+      final shareContent = '$_shareMessage\n\n$shareUrl';
+
+      await Clipboard.setData(ClipboardData(text: shareContent));
+
+      if (mounted) {
+        _showSuccessSnackBar('Link copied to clipboard! You can now paste and share it.');
+      }
+    } catch (e) {
+      if (mounted) {
+        _showErrorSnackBar('Failed to copy to clipboard.');
+      }
+    }
+  }
+
+  // Share via WhatsApp
+  Future<void> _shareViaWhatsApp() async {
+    try {
+      final shareUrl = Platform.isIOS ? _appStoreUrl : _playStoreUrl;
+      final whatsappUrl = Platform.isIOS
+          ? 'whatsapp://send?text=${Uri.encodeComponent('$_shareMessage\n\n$shareUrl')}'
+          : 'https://wa.me/?text=${Uri.encodeComponent('$_shareMessage\n\n$shareUrl')}';
+
+      if (await canLaunchUrl(Uri.parse(whatsappUrl))) {
+        await launchUrl(Uri.parse(whatsappUrl));
+      } else {
+        await _copyToClipboard();
+      }
+    } catch (e) {
+      await _copyToClipboard();
+    }
+  }
+
+  // Share via Email
+  Future<void> _shareViaEmail() async {
+    try {
+      final shareUrl = Platform.isIOS ? _appStoreUrl : _playStoreUrl;
+      final emailUrl = 'mailto:?subject=$_appName&body=${Uri.encodeComponent('$_shareMessage\n\n$shareUrl')}';
+
+      if (await canLaunchUrl(Uri.parse(emailUrl))) {
+        await launchUrl(Uri.parse(emailUrl));
+      } else {
+        await _copyToClipboard();
+      }
+    } catch (e) {
+      await _copyToClipboard();
+    }
+  }
+
+  // Share via SMS
+  Future<void> _shareViaSMS() async {
+    try {
+      final shareUrl = Platform.isIOS ? _appStoreUrl : _playStoreUrl;
+      final smsUrl = 'sms:?body=${Uri.encodeComponent('$_shareMessage\n\n$shareUrl')}';
+
+      if (await canLaunchUrl(Uri.parse(smsUrl))) {
+        await launchUrl(Uri.parse(smsUrl));
+      } else {
+        await _copyToClipboard();
+      }
+    } catch (e) {
+      await _copyToClipboard();
+    }
+  }
+
+  // Retry system share
+  Future<void> _retrySystemShare() async {
+    try {
+      final shareUrl = Platform.isIOS ? _appStoreUrl : _playStoreUrl;
+      final shareContent = '$_shareMessage\n\n$shareUrl';
+
+      await Share.share(
+        shareContent,
+        subject: '$_appName - Hidden Camera Detection App',
+      );
+    } catch (e) {
+      await _copyToClipboard();
+    }
+  }
+
+  // Method to save rating locally
+  void _saveRating(int stars) {
+    if (kDebugMode) {
+      print('User rated: $stars stars');
+    }
+  }
+
+  // Method to show feedback dialog for low ratings
   void _showFeedbackDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
           title: const Text('We\'re sorry to hear that'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -571,16 +883,13 @@ class _SettingviewState extends State<Settingview> {
             ),
             ElevatedButton(
               onPressed: () {
-                // Submit feedback
                 Navigator.pop(context);
-                // Show thank you message
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Thank you for your feedback!'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
+                _showSuccessSnackBar('Thank you for your feedback!');
               },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFF6B03F),
+                foregroundColor: Colors.white,
+              ),
               child: const Text('Submit Feedback'),
             ),
           ],
@@ -588,4 +897,33 @@ class _SettingviewState extends State<Settingview> {
       },
     );
   }
+
+  void _showErrorSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
+
+  void _showSuccessSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
 }
+

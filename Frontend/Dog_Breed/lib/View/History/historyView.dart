@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +33,7 @@ class _HistoryviewState extends State<Historyview> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
-              SizedBox(height: 5.h),
+              SizedBox(height: 25.h),
               _buildRecentScansList(recentScans,scanProvider,context),
             ],
           ),
@@ -47,19 +48,21 @@ class _HistoryviewState extends State<Historyview> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'History',
-              style: TextStyle(
-                fontFamily: 'Sora',
-                fontWeight: FontWeight.w200,
-                fontStyle: FontStyle.normal,
-                fontSize: 30.sp,
-                height: 1.0,
-                letterSpacing: 0.0,
-                color: Theme.of(context).colorScheme.onSurface,
+            Center(
+              child: Text(
+                'History',
+                style: TextStyle(
+                  fontFamily: 'Sora',
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 35.sp,
+                  height: 1.0,
+                  letterSpacing: 0.0,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
             ),
-            SizedBox(width: 188.w),
+            SizedBox(width: 168.w),
             SizedBox(
               height: 92.h,
               width: 92.w,

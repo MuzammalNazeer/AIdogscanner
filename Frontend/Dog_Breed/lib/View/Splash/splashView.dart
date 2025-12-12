@@ -1,6 +1,7 @@
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Splashview extends StatefulWidget {
@@ -34,14 +35,15 @@ class _SplashviewState extends State<Splashview> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 30, right: 30),
                 child: Container(
-                  width: 330,
-                  height: 330,
+                  width: 350.w,
+                  height: 350.h,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF6D09E8),
+                    color: colors.onTertiary,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
@@ -54,9 +56,9 @@ class _SplashviewState extends State<Splashview> {
                   ),
                   child: Center(
                     child: SvgPicture.asset(
-                      "assets/images/Dog.svg",
-                      width: 360,
-                      height: 360,
+                      "assets/images/Vector555.svg",
+                      width: 230.w,
+                      height: 230.h,
                       fit: BoxFit.contain,
                     ),
                   ),

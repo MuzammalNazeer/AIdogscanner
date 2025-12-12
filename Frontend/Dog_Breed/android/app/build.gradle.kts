@@ -6,6 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.dog_breed"
+//    namespace ="org.tensorflow.lite.flutter"
     compileSdk = 36
     ndkVersion = "27.0.12077973"
 
