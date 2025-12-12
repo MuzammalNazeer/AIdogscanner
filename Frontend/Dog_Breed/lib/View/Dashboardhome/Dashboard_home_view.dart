@@ -1,7 +1,4 @@
-import 'package:dog_breed/View/ActivitesView/ActivitesView.dart';
 import 'package:dog_breed/View/HomeView/HomeView.dart';
-import 'package:dog_breed/View/MyPetsView/MyPetsView.dart';
-import 'package:dog_breed/View/ProfileView/ProfileView.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

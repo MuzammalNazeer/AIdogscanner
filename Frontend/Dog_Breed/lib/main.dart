@@ -1,5 +1,4 @@
 import 'package:camera/camera.dart';
-import 'package:dog_breed/View/MyPetsView/cameraView.dart';
 import 'package:dog_breed/View_model/ScanProvider.dart';
 import 'package:dog_breed/View_model/home/home_view_model.dart';
 import 'package:dog_breed/View_model/pet.dart';
@@ -9,7 +8,6 @@ import 'package:edge_to_edge/edge_to_edge.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Valid/AppTheme.dart';

@@ -17,7 +17,6 @@ class Myfavouritesview extends StatefulWidget {
 }
 
 class _MyfavouritesviewState extends State<Myfavouritesview> {
-  final Set<String> _favoriteBreeds = {};
 
   @override
   Widget build(BuildContext context) {
@@ -127,14 +126,18 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
         // Decode base64 string
         return base64.decode(base64String);
       } catch (e) {
-        print('Failed to decode base64 image: $e');
+        if (kDebugMode) {
+          print('Failed to decode base64 image: $e');
+        }
         return null;
       }
     } else if (imageData is List<int>) {
       return Uint8List.fromList(imageData);
     }
 
-    print('Unsupported image data type: ${imageData.runtimeType}');
+    if (kDebugMode) {
+      print('Unsupported image data type: ${imageData.runtimeType}');
+    }
     return null;
   }
 

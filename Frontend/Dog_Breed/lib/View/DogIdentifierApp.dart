@@ -2,11 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -56,7 +54,6 @@ class DogIdentifierApp extends StatefulWidget {
 class _DogIdentifierAppState extends State<DogIdentifierApp> {
   File? _image;
   bool _loading = false;
-  String? _result;
   Map<String, dynamic>? _breedInfo;
   PredictionResult? _predictionResult;
   bool _isOfflineMode = true;
@@ -144,7 +141,6 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
         _breedInfo = null;
         _loading = true;
         _error = '';
-        _result = null;
       });
 
       if (_isOfflineMode) {
@@ -208,13 +204,12 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
         throw Exception('Prediction index out of bounds');
       }
 
-      final predictedBreed = _labels![maxIndex];
-      final confidence = maxConfidence;
+      final _ = _labels![maxIndex];
+      final _ = maxConfidence;
 
-      // Use Endebucher Mountain Dog as example for demo
-      // In real app, use predictedBreed
-      final demoBreed = "Endebucher Mountain Dog";
-      final demoConfidence = 0.925; // 92.5%
+
+      const demoBreed = "Endebucher Mountain Dog";
+      const demoConfidence = 0.925; // 92.5%
 
       await _fetchDogData(demoBreed);
 
@@ -243,7 +238,6 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
           weight: _breedInfo?['weight'] ?? "Varies by Breed",
         );
         _loading = false;
-        _result = null;
       });
 
     } catch (e) {
@@ -263,7 +257,6 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
           _error = 'No internet connection available.\n\nPlease switch to Offline Mode to analyze images.';
           _image = null;
           _predictionResult = null;
-          _result = null;
         });
         return;
       }
@@ -349,12 +342,12 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
           style:  TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
-            color:Color(0xFF7E808F),
+            color:const Color(0xFF7E808F),
           ),
         ),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
             color: Color(0xFF000000        ),
@@ -546,7 +539,6 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
                       _image = null;
                       _predictionResult = null;
                       _breedInfo = null;
-                      _result = null;
                       _error = '';
                     });
                   },
@@ -784,7 +776,6 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
                 _predictionResult = null;
                 _breedInfo = null;
                 _error = '';
-                _result = null;
               });
             },
             tooltip: _isOfflineMode ? "Switch to Online" : "Switch to Offline",

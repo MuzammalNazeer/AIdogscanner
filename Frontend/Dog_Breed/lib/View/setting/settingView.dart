@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // For Clipboard
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:permission_handler/permission_handler.dart'; // For permissions
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
@@ -569,7 +568,7 @@ $shareText
           : null;
 
       // Call Share.share() - This will show ALL sharing options
-      final result = await Share.share(
+      final _ = await Share.share(
         shareContent,
         subject: '$_appName - Hidden Camera Detection App',
         sharePositionOrigin: sharePosition,
@@ -643,7 +642,7 @@ $shareText
 
               // Share via WhatsApp
               ListTile(
-                leading: Icon(Icons.chat, color: Colors.green),
+                leading: const Icon(Icons.chat, color: Colors.green),
                 title: Text('Share via WhatsApp', style: TextStyle(
                   color: Theme.of(context).colorScheme.onSurface,
                 )),
@@ -655,7 +654,7 @@ $shareText
 
               // Share via Email
               ListTile(
-                leading: Icon(Icons.email, color: Colors.red),
+                leading: const Icon(Icons.email, color: Colors.red),
                 title: Text('Share via Email', style: TextStyle(
                   color: Theme.of(context).colorScheme.onSurface,
                 )),
@@ -667,7 +666,7 @@ $shareText
 
               // Share via SMS
               ListTile(
-                leading: Icon(Icons.sms, color: Colors.blue),
+                leading: const Icon(Icons.sms, color: Colors.blue),
                 title: Text('Share via SMS', style: TextStyle(
                   color: Theme.of(context).colorScheme.onSurface,
                 )),
@@ -700,12 +699,12 @@ $shareText
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Share $_appName'),
+          title: const Text('Share $_appName'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Choose how you want to share:'),
-              SizedBox(height: 20),
+              const Text('Choose how you want to share:'),
+              const SizedBox(height: 20),
 
               // Quick actions
               Wrap(
@@ -714,8 +713,8 @@ $shareText
                 children: [
                   // Copy
                   ActionChip(
-                    avatar: Icon(Icons.copy, size: 18),
-                    label: Text('Copy'),
+                    avatar: const Icon(Icons.copy, size: 18),
+                    label: const Text('Copy'),
                     onPressed: () async {
                       Navigator.pop(context);
                       await _copyToClipboard();
@@ -724,8 +723,8 @@ $shareText
 
                   // WhatsApp
                   ActionChip(
-                    avatar: Icon(Icons.chat, size: 18, color: Colors.green),
-                    label: Text('WhatsApp'),
+                    avatar: const Icon(Icons.chat, size: 18, color: Colors.green),
+                    label: const Text('WhatsApp'),
                     onPressed: () {
                       Navigator.pop(context);
                       _shareViaWhatsApp();
@@ -734,8 +733,8 @@ $shareText
 
                   // More Options
                   ActionChip(
-                    avatar: Icon(Icons.more_horiz, size: 18),
-                    label: Text('More'),
+                    avatar: const Icon(Icons.more_horiz, size: 18),
+                    label: const Text('More'),
                     onPressed: () {
                       Navigator.pop(context);
                       // Try system share again
@@ -749,7 +748,7 @@ $shareText
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
           ],
         );

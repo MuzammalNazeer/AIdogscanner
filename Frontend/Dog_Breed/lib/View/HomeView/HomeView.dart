@@ -285,14 +285,18 @@ class _HomeviewState extends State<Homeview> {
         // Decode base64 string
         return base64.decode(base64String);
       } catch (e) {
-        print('Failed to decode base64 image: $e');
+        if (kDebugMode) {
+          print('Failed to decode base64 image: $e');
+        }
         return null;
       }
     } else if (imageData is List<int>) {
       return Uint8List.fromList(imageData);
     }
 
-    print('Unsupported image data type: ${imageData.runtimeType}');
+    if (kDebugMode) {
+      print('Unsupported image data type: ${imageData.runtimeType}');
+    }
     return null;
   }
   Widget _buildRecentScanCard(
@@ -305,7 +309,7 @@ class _HomeviewState extends State<Homeview> {
 
     final scanId = scan['id']?.toString() ?? index.toString();
     final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
-    final formattedBreedName =
+    final _ =
         scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName);
     final confidence = scan['confidence'] is double
         ? scan['confidence'] as double
@@ -540,10 +544,10 @@ class _HomeviewState extends State<Homeview> {
                 child: Container(
                   width: 80.w,
                   height: 80.h,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(
-                      colors: [const Color(0xFF7B2CBF), const Color(0xFF5B0BAE)],
+                      colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
                     ),
                   ),
                   child: Center(

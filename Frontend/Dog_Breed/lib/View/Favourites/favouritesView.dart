@@ -25,7 +25,7 @@ class _FavouritesviewState extends State<Favouritesview> {
   Widget build(BuildContext context) {
     final scanProvider = Provider.of<ScanProvider>(context, listen: true);
     final favoriteScans = scanProvider.favoriteScans;
-    final favoriteBreeds = scanProvider.favoriteBreeds;
+    final _ = scanProvider.favoriteBreeds;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
@@ -223,14 +223,18 @@ class _FavouritesviewState extends State<Favouritesview> {
         // Decode base64 string
         return base64.decode(base64String);
       } catch (e) {
-        print('Failed to decode base64 image: $e');
+        if (kDebugMode) {
+          print('Failed to decode base64 image: $e');
+        }
         return null;
       }
     } else if (imageData is List<int>) {
       return Uint8List.fromList(imageData);
     }
 
-    print('Unsupported image data type: ${imageData.runtimeType}');
+    if (kDebugMode) {
+      print('Unsupported image data type: ${imageData.runtimeType}');
+    }
     return null;
   }
 
@@ -712,43 +716,6 @@ class _FavouritesviewState extends State<Favouritesview> {
     );
   }
 
-  Widget _buildEmptyState(String title, String message, IconData icon) {
-    return Container(
-      padding: EdgeInsets.all(40.w),
-      decoration: BoxDecoration(
-        color: const Color(0xFF323332).withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: const Color(0xFF323332).withOpacity(0.1)),
-      ),
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 60.sp,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
-          SizedBox(height: 16.h),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-          ),
-          SizedBox(height: 8.h),
-          Text(
-            message,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    );
-  }
 
   String _formatBreedName(String name) {
     return name

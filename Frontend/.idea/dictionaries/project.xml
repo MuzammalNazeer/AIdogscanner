@@ -3,19 +3,23 @@
     <words>
       <w>activites</w>
       <w>cameraview</w>
+      <w>cocker</w>
       <w>dogresultsaveview</w>
       <w>dogtreslutsave</w>
       <w>dogvaluesviewmodel</w>
       <w>favouritesview</w>
       <w>forgotpasswordemail</w>
       <w>forgotpasswordemailview</w>
+      <w>hiddencamerafinder</w>
       <w>historyview</w>
       <w>homeview</w>
       <w>myfavouritesview</w>
       <w>proview</w>
+      <w>screenutil</w>
       <w>settingview</w>
       <w>signupview</w>
       <w>snackbar</w>
+      <w>soro</w>
       <w>splashview</w>
       <w>tflite</w>
       <w>wizardview</w>

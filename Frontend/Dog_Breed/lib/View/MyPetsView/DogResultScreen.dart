@@ -870,8 +870,8 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
 
 
       // Show success message
-      String message;
-      Color color;
+      String _;
+      Color _;
 
       if (breedInfo != null) {
 

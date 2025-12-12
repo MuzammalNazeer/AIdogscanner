@@ -139,7 +139,7 @@ class OnboardingPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+    final bool _ = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding:  EdgeInsets.all(10.r),
       child: Column(
@@ -170,11 +170,7 @@ class OnboardingPage1 extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: colors.onTertiary,
-                  // gradient: LinearGradient(
-                  //   begin: Alignment.topLeft,
-                  //   end: Alignment.bottomRight,
-                  //   colors: [colors.onBackground, colors.onBackground],
-                  // ),
+
                 ),
               ),
               Container(
