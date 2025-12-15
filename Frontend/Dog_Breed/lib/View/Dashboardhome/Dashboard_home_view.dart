@@ -43,6 +43,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         children: _widgetOptions,
       ),
       floatingActionButton: _buildAddPetFAB(),
+
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _buildBottomNavigationBar(homeProvider),
     );

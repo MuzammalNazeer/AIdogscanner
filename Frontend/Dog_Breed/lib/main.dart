@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dog_breed/View_model/ScanProvider.dart';
 import 'package:dog_breed/View_model/home/home_view_model.dart';
 import 'package:dog_breed/View_model/pet.dart';
@@ -13,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Valid/AppTheme.dart';
 import 'View_model/ThemeNotifier.dart';
 import 'View_model/dogvaluesviewmodel.dart';
+import 'config/components/FeedbackService.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -20,6 +22,12 @@ Future<void> main() async {
 
 
   WidgetsFlutterBinding.ensureInitialized();
+  // Filter out verbose UrlLauncher logs
+  debugPrint = (String? message, {int? wrapWidth}) {
+    if (message != null && !message.contains('component name')) {
+      print(message);
+    }
+  };
   try {
     cameras = await availableCameras();
   } catch (e) {

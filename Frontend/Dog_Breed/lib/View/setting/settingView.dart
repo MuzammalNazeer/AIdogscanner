@@ -23,9 +23,8 @@ class _SettingviewState extends State<Settingview> {
   int _selectedStars = 0;
   bool _hasRated = false;
 
-  // Update these with your actual app details
   static const String _androidPackageName = 'com.example.hiddencamerafinder';
-  static const String _iosAppId = '123456789'; // Your actual iOS App ID
+  static const String _iosAppId = '123456789';
   static const String _appName = 'Hidden Camera Finder';
   static const String _shareMessage = 'Check out Hidden Camera Finder - an amazing app for detecting hidden cameras!';
   static const String _playStoreUrl = 'https://play.google.com/store/apps/details?id=$_androidPackageName';
@@ -61,7 +60,7 @@ class _SettingviewState extends State<Settingview> {
               'Settings',
               style: TextStyle(
                 fontFamily: 'Sora',
-                fontWeight: FontWeight.w200,
+                fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.normal,
                 fontSize: 30.sp,
                 height: 1.0,
@@ -75,18 +74,17 @@ class _SettingviewState extends State<Settingview> {
               width: 92.w,
               child: Center(
                 child: Transform.rotate(
-                  angle: -80.11,
-                  child: Image.asset(
-                    'assets/images/Group88.png',
-                    width: 92.w,
-                    height: 92.h,
-                    color: const Color(0xFFF3F6F3),
+                  angle: -81.51,
+                  child: SvgPicture.asset(
+                    "assets/images/Group099.svg",
+                    width: 102.w,
+                    height: 102.h,
+                    color: const Color(0xFF353635),
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
-            ),
-          ],
+            ),          ],
         ),
       ],
     );
@@ -149,16 +147,18 @@ class _SettingviewState extends State<Settingview> {
   Widget _buildThemeSwitchTile() {
     return Consumer<ThemeNotifier>(
       builder: (context, themeProvider, child) {
+        final colors = Theme.of(context).colorScheme;
+
         return Container(
           height: 55.h,
           margin: EdgeInsets.only(bottom: 10.h),
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6).withOpacity(0.1),
+            color:  colors.surfaceBright.withOpacity(0.3),
             borderRadius: BorderRadius.circular(12.r),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: colors.surface.withOpacity(0.05),
                 blurRadius: 8.r,
                 offset: Offset(0, 2.h),
               ),
@@ -227,6 +227,7 @@ class _SettingviewState extends State<Settingview> {
     Color? iconColor,
     required Color iconBackgroundColor,
   }) {
+    final colors = Theme.of(context).colorScheme;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12.r),
@@ -235,15 +236,15 @@ class _SettingviewState extends State<Settingview> {
         margin: EdgeInsets.only(bottom: 10.h),
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         decoration: BoxDecoration(
-          color: const Color(0xFFF4F7F6).withOpacity(0.1),
+          color:  colors.surfaceBright.withOpacity(0.2),
           borderRadius: BorderRadius.circular(12.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 8.r,
-              offset: Offset(0, 2.h),
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: colors.surface,
+          //     blurRadius: 8.r,
+          //     offset: Offset(0, 2.h),
+          //   ),
+          // ],
         ),
         child: Row(
           children: [
@@ -286,6 +287,7 @@ class _SettingviewState extends State<Settingview> {
     );
   }
 
+// ⭐⭐⭐⭐⭐ RATE US DIALOG (4 stars → feedback, 5 stars → store)
   void _showRateUsDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -301,182 +303,85 @@ class _SettingviewState extends State<Settingview> {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                       Expanded(
-                        child: Text(
-                          'Enjoying the app?',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () => Navigator.pop(context),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text:  TextSpan(
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                      children: [
-                        const TextSpan(text: 'Do you enjoy using the\n'),
-                        TextSpan(
-                          text: 'Hidden Camera Finder?',
-                          style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onSurface),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // Message
-                   Text(
-                    "We'd greatly appreciate it if\nyou could rate us.",
-                    textAlign: TextAlign.center,
+                  Text(
+                    'Enjoying the app?',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
-                  const SizedBox(height: 24),
-                  if (!_hasRated) ...[
-                    const Text(
-                      'Tap to rate:',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(5, (index) {
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              _selectedStars = index + 1;
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 2),
-                            child: Icon(
-                              index < _selectedStars
-                                  ? Icons.star
-                                  : Icons.star_border,
-                              size: 40,
-                              color: index < _selectedStars
-                                  ? const Color(0xFFF6B03F)
-                                  : Colors.grey[300],
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: _selectedStars > 0
-                          ? () {
-                        // Save rating locally
-                        _saveRating(_selectedStars);
-
-                        // Show different UI based on rating
-                        if (_selectedStars >= 4) {
-                          // High rating - ask to rate in store
+                  const SizedBox(height: 16),
+                  const Text('Tap to rate:'),
+                  const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(5, (index) {
+                      return GestureDetector(
+                        onTap: () {
                           setState(() {
-                            _hasRated = true;
+                            _selectedStars = index + 1;
                           });
-                          // Launch store after a short delay
-                          Future.delayed(const Duration(milliseconds: 300), () {
-                            Navigator.pop(context);
-                            _launchStoreRating();
-                          });
-                        } else {
-                          // Low rating - ask for feedback
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2),
+                          child: Icon(
+                            index < _selectedStars
+                                ? Icons.star
+                                : Icons.star_border,
+                            size: 40,
+                            color: index < _selectedStars
+                                ? const Color(0xFFF6B03F)
+                                : Colors.grey[300],
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: _selectedStars > 0
+                        ? () {
+                      _saveRating(_selectedStars);
+
+                      // ✅ NEW LOGIC
+                      if (_selectedStars == 5) {
+                        setState(() {
+                          _hasRated = true;
+                        });
+                        Future.delayed(
+                            const Duration(milliseconds: 300), () {
                           Navigator.pop(context);
-                          _showFeedbackDialog(context);
-                        }
+                          _launchStoreRating();
+                        });
+                      } else if (_selectedStars == 4) {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, RoutesName.feedback);
+                      } else {
+                        Navigator.pop(context);
+                        _showFeedbackDialog(context);
                       }
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _selectedStars > 0
-                            ? const Color(0xFFF6B03F)
-                            : Colors.grey[300],
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        elevation: 0,
+                    }
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _selectedStars > 0
+                          ? const Color(0xFFF6B03F)
+                          : Colors.grey[300],
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text(
-                        _selectedStars > 0 ? 'Rate Us' : 'Select Stars',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      elevation: 0,
                     ),
-                  ] else ...[
-                    Icon(
-                      Icons.check_circle,
-                      size: 60,
-                      color: Colors.green[400],
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Thank you for your rating!',
-                      style: TextStyle(
-                        fontSize: 18,
+                    child: Text(
+                      _selectedStars > 0 ? 'Rate Us' : 'Select Stars',
+                      style: const TextStyle(
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      'Your feedback helps us improve.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        _launchStoreRating();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF6B03F),
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: const Text(
-                        'Rate on Store',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ],
               ),
             );
@@ -485,7 +390,6 @@ class _SettingviewState extends State<Settingview> {
       },
     );
   }
-
   Future<void> _launchStoreRating() async {
     try {
       String url;
@@ -536,57 +440,59 @@ class _SettingviewState extends State<Settingview> {
     try {
       if (!mounted) return;
 
-      // Create optimized share content
+      // App info for Dog_Breed
+      const appName = 'Dog_Breed';
+      const androidPackageId = 'com.example.dog_breed';
+      const iosAppId = '123456789'; // Replace with actual App Store ID
+      const shareMessage = 'Check out Dog_Breed - an amazing app for dog lovers!';
+      const playStoreUrl =
+          'https://play.google.com/store/apps/details?id=$androidPackageId';
+      final appStoreUrl = 'https://apps.apple.com/app/id$iosAppId';
+
+      // Determine platform
       String shareUrl;
       String shareText;
 
       if (Platform.isIOS) {
-        shareUrl = _appStoreUrl;
-        shareText = '📱 Discover $_appName on the App Store!';
+        shareUrl = appStoreUrl;
+        shareText = '📱 Discover $appName on the App Store!';
       } else if (Platform.isAndroid) {
-        shareUrl = _playStoreUrl;
-        shareText = '📱 Get $_appName on Google Play!';
+        shareUrl = playStoreUrl;
+        shareText = '📱 Get $appName on Google Play!';
       } else {
-        shareUrl = _playStoreUrl;
-        shareText = '📱 Check out $_appName!';
+        shareUrl = playStoreUrl;
+        shareText = '📱 Check out $appName!';
       }
 
-      // Create the full share content
+      // Full share content
       final shareContent = '''
 $shareText
 
-🔍 $_shareMessage
+🔍 $shareMessage
 
 🔗 Download now: $shareUrl
 
-#HiddenCameraFinder #SecurityApp #Privacy''';
+#DogBreed #Dogs #Pets
+''';
 
-      // Get position for share dialog (optional, but helps positioning)
+      // Position for share sheet (optional)
       final RenderBox? box = context.findRenderObject() as RenderBox?;
-      final Rect? sharePosition = box != null
-          ? box.localToGlobal(Offset.zero) & box.size
-          : null;
+      final Rect? sharePosition =
+      box != null ? box.localToGlobal(Offset.zero) & box.size : null;
 
-      // Call Share.share() - This will show ALL sharing options
-      final _ = await Share.share(
+      // Show system share dialog
+      await Share.share(
         shareContent,
-        subject: '$_appName - Hidden Camera Detection App',
+        subject: '$appName - Dog Breed App',
         sharePositionOrigin: sharePosition,
       );
-
-      // // Log the result (optional)
-      // if (kDebugMode) {
-      //   print('Share completed: $result');
-      // }
-
     } on PlatformException catch (e) {
       if (kDebugMode) {
         print('Share PlatformException: ${e.message}');
       }
       if (mounted) {
-        _showErrorSnackBar('Unable to open share options. Error: ${e.message}');
-
-        // Fallback: Show manual share options dialog
+        _showErrorSnackBar(
+            'Unable to open share options. Error: ${e.message}');
         _showManualShareOptions();
       }
     } catch (e, stackTrace) {
@@ -594,13 +500,11 @@ $shareText
         print('Error in _shareApp: $e\n$stackTrace');
       }
       if (mounted) {
-        // Fallback: Show custom share dialog with options
         _showCustomShareDialog();
       }
     }
   }
 
-  // Fallback method to show manual share options
   void _showManualShareOptions() {
     showModalBottomSheet(
       context: context,
@@ -693,7 +597,7 @@ $shareText
   // Custom share dialog with multiple options
   void _showCustomShareDialog() {
     final shareUrl = Platform.isIOS ? _appStoreUrl : _playStoreUrl;
-    final shareContent = '$_shareMessage\n\n$shareUrl';
+    final _ = '$_shareMessage\n\n$shareUrl';
 
     showDialog(
       context: context,

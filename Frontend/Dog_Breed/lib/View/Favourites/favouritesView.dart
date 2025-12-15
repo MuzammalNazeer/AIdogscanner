@@ -68,7 +68,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                   'Favorites',
                   style: TextStyle(
                     fontFamily: 'Sora',
-                    fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
                     fontSize: 30.sp,
                     height: 1.0,
@@ -84,12 +84,12 @@ class _FavouritesviewState extends State<Favouritesview> {
               width: 92.w,
               child: Center(
                 child: Transform.rotate(
-                  angle: -80.11,
-                  child: Image.asset(
-                    'assets/images/Group88.png',
-                    width: 92.w,
-                    height: 92.h,
-                    color: const Color(0xFFF3F6F3),
+                  angle: -81.51,
+                  child: SvgPicture.asset(
+                    "assets/images/Group099.svg",
+                    width: 102.w,
+                    height: 102.h,
+                    color: const Color(0xFF353635),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -244,6 +244,7 @@ class _FavouritesviewState extends State<Favouritesview> {
       ScanProvider scanProvider,
       BuildContext context,
       ) {
+    final colors = Theme.of(context).colorScheme;
     final imageBytes = _parseImageData(scan['imageBytes']);
 
     final scanId = scan['id']?.toString() ?? index.toString();
@@ -260,15 +261,17 @@ class _FavouritesviewState extends State<Favouritesview> {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       width: 413.w,
-      height: 169.h,
+      height: 179.h,
       decoration: BoxDecoration(
-        color: const Color(0xFF323332).withOpacity(0.1),
+        color:  colors.surfaceBright.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: colors.background.withOpacity(0.2)),
         boxShadow: [
           BoxShadow(
-            color: Colors.white.withOpacity(0.1),
-            blurRadius: 50,
-            offset: const Offset(0, 4),
+            color: colors.onSurface.withOpacity(0.1),
+            blurRadius: 42.w,
+            spreadRadius: 2.w,
+            offset: Offset(0, 8.h),
           ),
         ],
       ),
@@ -277,14 +280,22 @@ class _FavouritesviewState extends State<Favouritesview> {
         child: Column(
           children: [
             GestureDetector(
-              onTap: () async {
-                await _handleRescanTap(scan, context);
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                if (kDebugMode) {
+                  print("📌 Navigating with scanId: $scanId");
+                }
+                Navigator.pushNamed(context,
+                    RoutesName.dogSave,
+                    arguments: {"scanId": scanId}
+                );
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Image Container
                   Stack(
+                    alignment: Alignment.center,
                     children: [
                       Container(
                         width: 80.w,
@@ -301,8 +312,8 @@ class _FavouritesviewState extends State<Favouritesview> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: 60.w,
-                          height: 60.h,
+                          width: 64.w,
+                          height: 64.h,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xFF7B2CBF),
@@ -400,7 +411,7 @@ class _FavouritesviewState extends State<Favouritesview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: const Color(0xFFCBE4DC),
+              color: colors.onSurface.withOpacity(0.2),
               thickness: 1.0,
               height: 1.h,
             ),
@@ -482,6 +493,7 @@ class _FavouritesviewState extends State<Favouritesview> {
     }
   }
   Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
+    final colors = Theme.of(context).colorScheme;
     final List<Map<String, String>> topBreeds = [
       {
         'name': 'Bulldog',
@@ -614,24 +626,42 @@ class _FavouritesviewState extends State<Favouritesview> {
         'image': 'assets/images/Ellipse 139 (22).png',
       },
     ];
+    final favouriteBreeds = topBreeds
+        .where((breed) => scanProvider.isBreedFavorite(breed['name']!))
+        .toList();
+
+    if (favouriteBreeds.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: EdgeInsets.only(top: 40.h),
+          child: Text(
+            'No favourite breeds yet',
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w600,
+              color: colors.onSurface.withOpacity(0.6),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: 6.h),
         Column(
-          children: topBreeds.asMap().entries.map((entry) {
-            final _ = entry.key;
-            final breed = entry.value;
-            final isFavorite = scanProvider.isBreedFavorite(breed['name']!);
+          children: favouriteBreeds.map((breed) {
+            final isFavorite = true; // always true here
 
             return Container(
               margin: EdgeInsets.only(bottom: 16.h),
               width: 413.w,
-              height: 169.h,
+              height: 154.h,
               decoration: BoxDecoration(
-                color: const Color(0xFF323332).withOpacity(0.1),
+                color: colors.surfaceBright.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(20.r),
+                border: Border.all(color: colors.background.withOpacity(0.2)),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -643,21 +673,11 @@ class _FavouritesviewState extends State<Favouritesview> {
                       shape: BoxShape.circle,
                       color: Color(0xFFF8F5FF),
                     ),
-                    child: breed['image'] != null
-                        ? ClipRRect(
+                    child: ClipRRect(
                       borderRadius: BorderRadius.circular(51.5.w),
                       child: Image.asset(
                         breed['image']!,
                         fit: BoxFit.cover,
-                        width: 103.w,
-                        height: 103.h,
-                      ),
-                    )
-                        : Center(
-                      child: Icon(
-                        Icons.pets,
-                        size: 40.sp,
-                        color: AppColors.vibrantPurple,
                       ),
                     ),
                   ),
@@ -666,14 +686,15 @@ class _FavouritesviewState extends State<Favouritesview> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 6.h),
                         Row(
                           children: [
                             Text(
                               breed['name']!,
                               style: TextStyle(
-                                fontSize: 18.sp,
+                                fontSize: 17.sp,
                                 fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onSurface,
+                                color: colors.onSurface,
                               ),
                             ),
                             const Spacer(),
@@ -684,22 +705,22 @@ class _FavouritesviewState extends State<Favouritesview> {
                                   scanProvider.toggleBreedFavorite(breed['name']!);
                                 },
                                 child: Icon(
-                                  isFavorite ? Icons.favorite : Icons.favorite_border,
-                                  color: isFavorite ? Colors.red : Theme.of(context).colorScheme.onSurface,
+                                  Icons.favorite,
+                                  color: Colors.red,
                                   size: 28.sp,
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 12.h),
+                        SizedBox(height: 6.h),
                         Expanded(
                           child: Text(
                             breed['description']!,
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).colorScheme.onSurface,
+                              color: colors.onSurface,
                               height: 1.5,
                             ),
                           ),

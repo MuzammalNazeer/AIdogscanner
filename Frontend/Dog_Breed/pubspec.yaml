@@ -55,6 +55,8 @@ dependencies:
   edge_to_edge: ^0.0.2
   share_plus: ^7.2.0
   device_info_plus: ^9.0.3
+  mailer: ^6.6.0
+  emailjs: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

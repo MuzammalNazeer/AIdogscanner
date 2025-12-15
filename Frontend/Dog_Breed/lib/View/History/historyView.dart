@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import '../../View_model/ScanProvider.dart';
 import '../../utils/routes/routes_name.dart';
@@ -67,12 +68,12 @@ class _HistoryviewState extends State<Historyview> {
               width: 92.w,
               child: Center(
                 child: Transform.rotate(
-                  angle: -80.11,
-                  child: Image.asset(
-                    'assets/images/Group88.png',
-                    width: 92.w,
-                    height: 92.h,
-                    color: const Color(0xFFF3F6F3),
+                  angle: -81.51,
+                  child: SvgPicture.asset(
+                    "assets/images/Group099.svg",
+                    width: 102.w,
+                    height: 102.h,
+                    color: const Color(0xFF353635),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -142,6 +143,7 @@ class _HistoryviewState extends State<Historyview> {
       ScanProvider scanProvider,
       BuildContext context,
       ) {
+    final colors = Theme.of(context).colorScheme;
     final imageBytes = _parseImageData(scan['imageBytes']);
 
     final scanId = scan['id']?.toString() ?? index.toString();
@@ -158,15 +160,17 @@ class _HistoryviewState extends State<Historyview> {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       width: 413.w,
-      height: 169.h,
+      height: 179.h,
       decoration: BoxDecoration(
-        color: const Color(0xFF323332).withOpacity(0.1),
+        color:  colors.surfaceBright.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: colors.background.withOpacity(0.2)),
         boxShadow: [
           BoxShadow(
-            color: Colors.white.withOpacity(0.1),
-            blurRadius: 50,
-            offset: const Offset(0, 4),
+            color: colors.onSurface.withOpacity(0.1),
+            blurRadius: 42.w,
+            spreadRadius: 2.w,
+            offset: Offset(0, 8.h),
           ),
         ],
       ),
@@ -175,13 +179,21 @@ class _HistoryviewState extends State<Historyview> {
         child: Column(
           children: [
             GestureDetector(
-              onTap: () async {
-                await _handleRescanTap(scan, context);
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                if (kDebugMode) {
+                  print("📌 Navigating with scanId: $scanId");
+                }
+                Navigator.pushNamed(context,
+                    RoutesName.dogSave,
+                    arguments: {"scanId": scanId}
+                );
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
+                    alignment: Alignment.center,
                     children: [
                       Container(
                         width: 80.w,
@@ -198,8 +210,8 @@ class _HistoryviewState extends State<Historyview> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: 60.w,
-                          height: 60.h,
+                          width: 64.w,
+                          height: 64.h,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xFF7B2CBF),
@@ -240,7 +252,7 @@ class _HistoryviewState extends State<Historyview> {
                           breedName,
                           style: TextStyle(
                               fontSize: 16.sp,
-                              color: Colors.black,
+                              color: colors.onSurface,
                               fontWeight: FontWeight.bold
                           ),
                           maxLines: 1,
@@ -295,7 +307,7 @@ class _HistoryviewState extends State<Historyview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: const Color(0xFFCBE4DC),
+              color: colors.onSurface.withOpacity(0.2),
               thickness: 1.0,
               height: 1.h,
             ),

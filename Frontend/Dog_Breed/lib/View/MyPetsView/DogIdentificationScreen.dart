@@ -69,7 +69,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),

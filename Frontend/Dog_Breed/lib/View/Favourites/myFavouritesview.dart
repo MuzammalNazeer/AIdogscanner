@@ -57,13 +57,13 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
                 height: 40.305.h,
                 padding: const EdgeInsets.all(8.96),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF3F6F3),
+                  color: Theme.of(context).colorScheme.background,
                   borderRadius: BorderRadius.circular(8.96),
                 ),
                 child: Icon(
                   CupertinoIcons.chevron_left,
                   size: 20.sp,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ),
@@ -147,6 +147,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
       ScanProvider scanProvider,
       BuildContext context,
       ) {
+    final colors = Theme.of(context).colorScheme;
     final imageBytes = _parseImageData(scan['imageBytes']);
 
     final scanId = scan['id']?.toString() ?? index.toString();
@@ -163,9 +164,9 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       width: 413.w,
-      height: 169.h,
+      height: 179.h,
       decoration: BoxDecoration(
-        color: const Color(0xFF323332).withOpacity(0.1),
+        color:  colors.surfaceBright.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
@@ -180,13 +181,21 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
         child: Column(
           children: [
             GestureDetector(
-              onTap: () async {
-                await _handleRescanTap(scan, context);
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                if (kDebugMode) {
+                  print("📌 Navigating with scanId: $scanId");
+                }
+                Navigator.pushNamed(context,
+                    RoutesName.dogSave,
+                    arguments: {"scanId": scanId}
+                );
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
+                    alignment: Alignment.center,
                     children: [
                       Container(
                         width: 80.w,
@@ -203,8 +212,8 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: 60.w,
-                          height: 60.h,
+                          width: 64.w,
+                          height: 64.h,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xFF7B2CBF),
@@ -300,7 +309,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: const Color(0xFFCBE4DC),
+              color: colors.onSurface.withOpacity(0.2),
               thickness: 1.0,
               height: 1.h,
             ),

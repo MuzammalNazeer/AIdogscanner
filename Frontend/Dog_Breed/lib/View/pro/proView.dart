@@ -24,46 +24,85 @@ class _ProviewState extends State<Proview> {
           children: [
             Column(
               children: [
-                ClipPath(
-                  clipper: _CustomShapeClipper(),
-                  child: Container(
-                    height: 165.h,
-                    width: double.infinity,
-                    color: colors.onBackground,
-                    child: Stack(
-                      children: [
-                        Padding(
-                          padding:  EdgeInsets.only(left: 20.w,top: 50.h),
-                          child: GestureDetector(
-                            onTap:(){
-                              Navigator.pushNamed(context, RoutesName.splash);
-                            },
-                            child: Positioned(
-                              left: 20.w,
-                              top: 50.h,
-                              child: Icon(
-                                Icons.close,
-                                color: Colors.white,
-                                size: 36.sp,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 85.h,
-                          left: 184.w,
-                          child: Center(
-                            child: Image.asset(
-                              'assets/images/Group888.png',
-                              height: 80.h,
-                              width: 80.w,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+        ClipPath(
+        clipper: _CustomShapeClipper(),
+        child: Container(
+          width: double.infinity,
+          height: 165.h,
+          color: colors.onBackground, // APPLY COLOR HERE
+          child: Stack(
+            children: [
+
+              Positioned(
+                left: 20.w,
+                top: 50.h,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesName.splash);
+                  },
+                  child: Icon(
+                    Icons.close,
+                    color: Colors.white,
+                    size: 36.sp,
                   ),
                 ),
+              ),
+
+              Positioned(
+                top: 85.h,
+                left: 184.w,
+                child: Image.asset(
+                  'assets/images/Group888.png',
+                  height: 80.h,
+                  width: 80.w,
+                  color: Colors.white, // OPTIONAL: apply white tint
+                ),
+              ),
+
+            ],
+          ),
+        ),
+      ),
+        // ClipPath(
+                //   clipper: _CustomShapeClipper(),
+                //   child: Container(
+                //     height: 165.h,
+                //     width: double.infinity,
+                //     color: colors.onBackground,
+                //     child: Stack(
+                //       children: [
+                //         Padding(
+                //           padding:  EdgeInsets.only(left: 20.w,top: 50.h),
+                //           child: GestureDetector(
+                //             onTap:(){
+                //               Navigator.pushNamed(context, RoutesName.splash);
+                //             },
+                //             child: Positioned(
+                //               left: 20.w,
+                //               top: 50.h,
+                //               child: Icon(
+                //                 Icons.close,
+                //                 color: Colors.white,
+                //                 size: 36.sp,
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //         Positioned(
+                //           top: 85.h,
+                //           left: 184.w,
+                //           child: Center(
+                //             child: Image.asset(
+                //               'assets/images/Group888.png',
+                //               height: 80.h,
+                //               width: 80.w,
+                //             ),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 10.h),
                 Text(
                   "Start Like A Pro",

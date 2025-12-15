@@ -63,7 +63,7 @@ Map<String,dynamic>? scan;
     return Consumer<ScanProvider>(
       builder: (context, scanProvider, child) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           body: SafeArea(
             child: scan == null
                 ? _buildEmptyState()
@@ -144,13 +144,13 @@ Map<String,dynamic>? scan;
               height: 40.305.h,
               padding: const EdgeInsets.all(8.96),
               decoration: BoxDecoration(
-                color: const Color(0xFFF3F6F3),
+                color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(8.96),
               ),
               child: Icon(
                 CupertinoIcons.chevron_left,
                 size: 20.sp,
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
@@ -164,7 +164,7 @@ Map<String,dynamic>? scan;
                   fontSize: 29.75.w,
                   height: 1.0,
                   letterSpacing: 0.0,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ),
@@ -333,7 +333,7 @@ Map<String,dynamic>? scan;
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xFF820DFF),
+                    color: Theme.of(context).colorScheme.tertiary,
                   ),
                 ),
                 SizedBox(height: 16.h),
@@ -373,7 +373,7 @@ Map<String,dynamic>? scan;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
       decoration: BoxDecoration(
-        color: const Color(0xFFCFBAE9),
+        color: Theme.of(context).colorScheme.tertiary.withOpacity(0.4),
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Colors.grey[300]!),
       ),
@@ -384,7 +384,7 @@ Map<String,dynamic>? scan;
               iconPath,
               width: 32.w,
               height: 32.h,
-              color: const Color(0xFF820DFF),
+              color: Theme.of(context).colorScheme.tertiary,
             ),
           SizedBox(width: 10.w),
           Expanded(
@@ -394,11 +394,11 @@ Map<String,dynamic>? scan;
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: const Color(0xFF101010)),
+                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.onSurface),
                 ),
                 Text(
                   value,
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold, color: const Color(0xFF820DFF)),
+                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.tertiary),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -423,7 +423,7 @@ Map<String,dynamic>? scan;
           SizedBox(height: 8.h),
           Text(
             value,
-            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold,color: Theme.of(context).colorScheme.onSurface),
           ),
         ],
       ),

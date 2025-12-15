@@ -1,6 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dog_breed">
-
+    <!-- Add this <queries> block -->
+    <queries>
+        <!-- Query for email apps -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="mailto" />
+        </intent>
+        <!-- The query for https is also recommended for general use -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
     <!-- Application definition -->
     <application
         android:label="dog_breed"

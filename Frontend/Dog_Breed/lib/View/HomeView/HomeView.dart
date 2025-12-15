@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/foundation.dart';
@@ -305,6 +304,7 @@ class _HomeviewState extends State<Homeview> {
     ScanProvider scanProvider,
       BuildContext context,
   ) {
+    final colors = Theme.of(context).colorScheme;
     final imageBytes = _parseImageData(scan['imageBytes']);
 
     final scanId = scan['id']?.toString() ?? index.toString();
@@ -321,30 +321,40 @@ class _HomeviewState extends State<Homeview> {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       width: 413.w,
-      height: 169.h,
+      height: 179.h,
       decoration: BoxDecoration(
-        color: const Color(0xFF323332).withOpacity(0.1),
+        color: colors.surfaceBright.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.white.withOpacity(0.1),
-            blurRadius: 50,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        border: Border.all(color: colors.background.withOpacity(0.2)),
+        // boxShadow: [
+        //   BoxShadow(
+        //     color:  const Color(0xFFCBE4DC).withOpacity(0.5),
+        //     blurRadius: 52.w,
+        //     spreadRadius: 2.w,
+        //     offset: Offset(0, 8.h),
+        //   ),
+        // ],
       ),
       child: Padding(
         padding: EdgeInsets.all(8.r),
         child: Column(
           children: [
             GestureDetector(
-              onTap: () async {
-                await _handleRescanTap(scan, context);
+              behavior: HitTestBehavior.opaque,
+              onTap: () {
+                if (kDebugMode) {
+                  print("📌 Navigating with scanId: $scanId");
+                }
+                Navigator.pushNamed(context,
+                    RoutesName.dogSave,
+                    arguments: {"scanId": scanId}
+                );
               },
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
+                    alignment: Alignment.center,
                     children: [
                       Container(
                         width: 80.w,
@@ -361,8 +371,8 @@ class _HomeviewState extends State<Homeview> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: 60.w,
-                          height: 60.h,
+                          width: 64.w,
+                          height: 64.h,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color(0xFF7B2CBF),
@@ -457,7 +467,7 @@ class _HomeviewState extends State<Homeview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: const Color(0xFFCBE4DC),
+              color: colors.onSurface.withOpacity(0.2),
               thickness: 1.0,
               height: 1.h,
             ),
@@ -483,6 +493,7 @@ class _HomeviewState extends State<Homeview> {
                       ),
                       SizedBox(width: 102.w),
                       GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                         onTap: () {
                           if (kDebugMode) {
                             print("📌 Navigating with scanId: $scanId");
@@ -521,225 +532,7 @@ class _HomeviewState extends State<Homeview> {
       ),
     );
   }
-  void showPredictionDetails(PredictionResult result, BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Center(
-          child: Text(
-            _formatBreedName(result.breed),
-            style: TextStyle(
-              fontSize: 22.sp,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF820DFF),
-            ),
-          ),
-        ),
-        content: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Confidence
-              Center(
-                child: Container(
-                  width: 80.w,
-                  height: 80.h,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [Color(0xFF7B2CBF), Color(0xFF5B0BAE)],
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      '${(result.confidence * 100).toStringAsFixed(1)}%',
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 12.h),
 
-              // Physical Characteristics
-              Text(
-                "Physical Characteristics",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF820DFF),
-                ),
-              ),
-              SizedBox(height: 6.h),
-              GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                crossAxisSpacing: 8.w,
-                mainAxisSpacing: 10.h,
-                childAspectRatio: 3,
-                children: [
-                  _buildCharacteristicItem("Size", result.size),
-                  _buildCharacteristicItem("Shape", result.shape),
-                  _buildCharacteristicItem("Color", result.color),
-                  _buildCharacteristicItem("Coat", result.coat),
-                  _buildCharacteristicItem("Head & Face", result.headFace),
-                  _buildCharacteristicItem("Body", result.body),
-                  _buildCharacteristicItem("Purpose", result.purpose),
-                  _buildCharacteristicItem("Weight", result.weight),
-                  _buildCharacteristicItem("Age", result.age),
-                  _buildCharacteristicItem("Gender", result.gender),
-                ],
-              ),
-              SizedBox(height: 12.h),
-
-              // Temperament
-              Text(
-                "Temperament & Behavior",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF820DFF),
-                ),
-              ),
-              SizedBox(height: 10.h),
-              Column(
-                children: result.temperament.entries.map((entry) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 8.h),
-                    child: _buildTemperamentItem(entry.key, entry.value),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'Close',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: const Color(0xFF820DFF),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-
-// Helper widget for characteristic items
-  Widget _buildCharacteristicItem(String title, String value) {
-    return Container(
-      padding: EdgeInsets.all(8.r),
-      decoration: BoxDecoration(
-        color: const Color(0xFF323332).withOpacity(0.05),
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(
-          color: const Color(0xFF323332).withOpacity(0.1),
-          width: 1,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 10.sp,
-              color: Colors.grey[600],
-            ),
-          ),
-          SizedBox(height: 2.h),
-          Expanded(
-            child: Text(
-              value,
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.black,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-// Helper widget for temperament items
-  Widget _buildTemperamentItem(String title, String value) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(
-          color: Colors.grey[200]!,
-          width: 1,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
-            decoration: BoxDecoration(
-              color: _getTemperamentColor(value).withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Text(
-              value,
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500,
-                color: _getTemperamentColor(value),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-// Helper function to get color based on temperament value
-  Color _getTemperamentColor(String value) {
-    final lowerValue = value.toLowerCase();
-    if (lowerValue.contains('high') || lowerValue.contains('excellent')) {
-      return Colors.green;
-    } else if (lowerValue.contains('very high') || lowerValue.contains('outstanding')) {
-      return Colors.lightGreen;
-    } else if (lowerValue.contains('moderate') || lowerValue.contains('good')) {
-      return Colors.orange;
-    } else if (lowerValue.contains('low') || lowerValue.contains('poor')) {
-      return Colors.red;
-    } else if (lowerValue.contains('minimal') || lowerValue.contains('very low')) {
-      return Colors.redAccent;
-    } else if (lowerValue.contains('friendly')) {
-      return Colors.blue;
-    } else if (lowerValue.contains('protective')) {
-      return Colors.deepPurple;
-    }
-    return const Color(0xFF7B2CBF);
-  }
 
   String _formatBreedName(String name) {
     return name
@@ -774,8 +567,17 @@ class _HomeviewState extends State<Homeview> {
       width: 409.w,
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
-        color: colors.onBackground.withOpacity(0.4),
+        color: colors.onTertiary.withOpacity(0.3),
         borderRadius: BorderRadius.circular(16.r),
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: colors.onSurface.withOpacity(0.1),
+        //     blurRadius: 52.w,
+        //     spreadRadius: 0.w,
+        //     offset: Offset(0, 4.h),
+        //   ),
+        // ],
+
       ),
       child: Row(
         children: [
@@ -783,7 +585,7 @@ class _HomeviewState extends State<Homeview> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20.h),
+                SizedBox(height: 10.h),
                 Text(
                   'Identify Dog',
                   style: TextStyle(
@@ -797,18 +599,18 @@ class _HomeviewState extends State<Homeview> {
                 ),
                 SizedBox(height: 18.h),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                  'Take a picture of your dog\nand identify its breed instantly.',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w300,
-                    fontSize: 14.sp,
+                    fontSize: 16.sp,
                     height: 1.0,
                     letterSpacing: 0,
                     color: colors.onSurface,
                   ),
                   maxLines: 2,
                 ),
-                SizedBox(height: 29.h),
+                SizedBox(height: 22.h),
                 GestureDetector(
                   onTap: () async {
                     if (kDebugMode) {
@@ -865,7 +667,7 @@ class _HomeviewState extends State<Homeview> {
 
                           if (kDebugMode) {
                             print(
-                              '📋 Adding scan to provider: ${scanData['breedName']}',
+                              ' Adding scan to provider: ${scanData['breedName']}',
                             );
                           }
 
@@ -911,7 +713,7 @@ class _HomeviewState extends State<Homeview> {
                     style: TextStyle(
                       fontFamily: 'Sora',
                       fontWeight: FontWeight.bold,
-                      fontSize: 20.sp,
+                      fontSize: 22.sp,
                       height: 0.9,
                       letterSpacing: 0,
                       color: colors.tertiary,
@@ -952,7 +754,7 @@ class _HomeviewState extends State<Homeview> {
                   'Manager',
                   style: TextStyle(
                     fontFamily: 'Sora',
-                    fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.w400,
                     fontStyle: FontStyle.normal,
                     fontSize: 30.sp,
                     height: 1.0,
@@ -968,12 +770,12 @@ class _HomeviewState extends State<Homeview> {
               width: 92.w,
               child: Center(
                 child: Transform.rotate(
-                  angle: -80.11,
-                  child: Image.asset(
-                    'assets/images/Group88.png',
-                    width: 92.w,
-                    height: 92.h,
-                    color: const Color(0xFFF3F6F3),
+                  angle: -81.51,
+                  child: SvgPicture.asset(
+                    "assets/images/Group099.svg",
+                    width: 102.w,
+                    height: 102.h,
+                    color: const Color(0xFF353635),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -986,6 +788,7 @@ class _HomeviewState extends State<Homeview> {
   }
 
   Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
+    final colors = Theme.of(context).colorScheme;
     final List<Map<String, String>> topBreeds = [
       {
         'name': 'Bulldog',
@@ -1158,10 +961,19 @@ class _HomeviewState extends State<Homeview> {
             return Container(
               margin: EdgeInsets.only(bottom: 16.h),
               width: 413.w,
-              height: 169.h,
+              height: 154.h,
               decoration: BoxDecoration(
-                color: const Color(0xFF323332).withOpacity(0.1),
+                color:  colors.tertiaryContainer,
                 borderRadius: BorderRadius.circular(20.r),
+                border: Border.all(color: colors.background.withOpacity(0.2)),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: colors.surface.withOpacity(0.1),
+                //     blurRadius: 42.w,
+                //     spreadRadius: 2.w,
+                //     offset: Offset(0, 4.h),
+                //   ),
+                // ],
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1194,17 +1006,19 @@ class _HomeviewState extends State<Homeview> {
                             ),
                     ),
                   ),
-                  SizedBox(width: 12.w),
+                  SizedBox(width: 4.w),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 6.h),
                         Row(
                           children: [
+
                             Text(
                               breed['name']!,
                               style: TextStyle(
-                                fontSize: 18.sp,
+                                fontSize: 17.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.onSurface,
                               ),
@@ -1231,7 +1045,7 @@ class _HomeviewState extends State<Homeview> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 12.h),
+                        SizedBox(height: 6.h),
                         Expanded(
                           child: Text(
                             breed['description']!,
