@@ -36,7 +36,7 @@ class _SettingviewState extends State<Settingview> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
+          padding: EdgeInsets.symmetric(vertical: 29.h, horizontal: 19.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

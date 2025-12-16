@@ -92,18 +92,30 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
                 ),
               ),
               SizedBox(height: 20.h),
-              Text(
-                'AI identifying Your DOG',
-                style: TextStyle(
-                  fontSize: 28.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.onSurface,
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'AI identifying Your ',
+                      style: TextStyle(
+                        fontSize: 28.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'DOG',
+                      style: TextStyle(
+                        fontSize: 28.sp,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF820DFF),
+                      ),
+                    ),
+                  ],
                 ),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 12.h),
-
-              // Subtitle
               Text(
                 'This usually takes up 1 minute...',
                 style: TextStyle(

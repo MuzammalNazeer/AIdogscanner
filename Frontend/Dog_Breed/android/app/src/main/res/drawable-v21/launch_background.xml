@@ -2,10 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/vibrantPurple" />
 
-    <!-- Optional: Add your dog image in the center -->
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/group" />
+            android:src="@mipmap/frame_412" />
     </item>
 </layer-list>

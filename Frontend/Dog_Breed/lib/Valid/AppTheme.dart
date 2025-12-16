@@ -19,11 +19,13 @@ class AppTheme {
         tertiaryContainer: const Color(0xFFF2F5F4),
         surfaceBright:const Color(0xFFCBE4DC),
         secondaryContainer: const Color(0xFFF4F7F6),
-        surfaceContainerLow:const Color(0xFFF3F6F3),
+        surfaceContainerLow:const Color(0xFFE9ECE9),
         surfaceContainerHigh:const Color(0xFFD4ACFF),
         surfaceContainerHighest: const Color(0xFF7B2CBF),
        surfaceContainerLowest: const Color(0xFF512717),
         surfaceContainer: const Color(0xFF7B2CBF),
+        outlineVariant: const Color(0xFFCBE4DC),
+      onPrimaryContainer: const Color(0xFF7DFAC4).withOpacity(0.24)
 
 
     ),
@@ -56,7 +58,9 @@ class AppTheme {
       surfaceContainerHigh:const Color(0xFF353635),
       surfaceContainerHighest: const Color(0xFF21241F),
       surfaceContainerLowest: const Color(0xFFFFFFFF),
-      surfaceContainer: const Color(0xFFFFFFFF)
+      surfaceContainer: const Color(0xFFFFFFFF),
+      outlineVariant: const Color(0xFF21241F),
+        onPrimaryContainer: const Color(0xFF323332)
 
 
     ),

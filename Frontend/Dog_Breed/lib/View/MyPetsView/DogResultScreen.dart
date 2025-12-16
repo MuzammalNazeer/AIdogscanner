@@ -532,33 +532,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                     height: 100.h,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          confidence >= 70.0
-                              ? const Color(0xFF7DFAC4).withOpacity(0.3)
-                              : confidence >= 40.0
-                              ? const Color(0xFFFFD700).withOpacity(0.3)
-                              : const Color(0xFFFF6B6B).withOpacity(0.3),
-                          confidence >= 70.0
-                              ? const Color(0xFF05E51F).withOpacity(0.1)
-                              : confidence >= 40.0
-                              ? const Color(0xFFFFA500).withOpacity(0.1)
-                              : const Color(0xFFFF5252).withOpacity(0.1),
-                        ],
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: confidence >= 70.0
-                              ? Colors.green.withOpacity(0.2)
-                              : confidence >= 40.0
-                              ? Colors.orange.withOpacity(0.2)
-                              : Colors.red.withOpacity(0.2),
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                        ),
-                      ],
+                      color: Theme.of(context).colorScheme.onPrimaryContainer
                     ),
                     child: Center(
                       child: Text(
@@ -566,11 +540,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                         style: TextStyle(
                           fontSize: 32.sp,
                           fontWeight: FontWeight.bold,
-                          color: confidence >= 70.0
-                              ? const Color(0xFF05E51F)
-                              : confidence >= 40.0
-                              ? const Color(0xFFFFA500)
-                              : const Color(0xFFFF5252),
+                          color:const Color(0xFF05E51F)
                         ),
                       ),
                     ),

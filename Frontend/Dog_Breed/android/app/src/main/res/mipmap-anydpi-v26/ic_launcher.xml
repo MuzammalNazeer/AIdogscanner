@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Background layer (your purple color) -->
-    <background android:drawable="@color/vibrantPurple" />
-    <!-- Foreground layer (your dog icon) -->
-    <foreground android:drawable="@mipmap/group" />
+    <background android:drawable="@color/vibrantPurple"/>
+    <foreground android:drawable="@mipmap/frame_412"/>
 </adaptive-icon>

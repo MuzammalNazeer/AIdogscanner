@@ -70,16 +70,16 @@ dependency_overrides:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/logo.png"
+  image_path: "assets/images/frame_412.png"
 
   flutter_native_splash:
     # Light mode
     color: "#820DFF"  # White background
-    image: assets/splash/logo.png  # Your logo (dark colored)
+    image: assets/splash/frame_412.png  # Your logo (dark colored)
 
     # Dark mode
-    color_dark: "#21241F"  # Dark background
-    image_dark: assets/splash/logo_white.png  # White logo
+    color_dark: "#820DFF"  # Dark background
+    image_dark: assets/splash/frame_412.png  # White logo
 
     # Common settings
     android: true

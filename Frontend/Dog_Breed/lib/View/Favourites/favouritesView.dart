@@ -31,7 +31,7 @@ class _FavouritesviewState extends State<Favouritesview> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+          padding: EdgeInsets.symmetric(vertical: 29.h, horizontal: 19.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -41,7 +41,6 @@ class _FavouritesviewState extends State<Favouritesview> {
                 offset: Offset(0, -30.h),
                 child: _buildNavigationButtons(),
               ),
-              SizedBox(height: 24.h),
               _selectedSection == 0
                   ? _buildRecentScansList(favoriteScans, scanProvider, context)
                   : _buildSupportedBreedsVerticalFormatted(scanProvider),
@@ -102,57 +101,6 @@ class _FavouritesviewState extends State<Favouritesview> {
     );
   }
 
-  // Widget _buildHeader() {
-  //   return Stack(
-  //     children: [
-  //       Row(
-  //         crossAxisAlignment: CrossAxisAlignment.center,
-  //         children: [
-  //           Row(
-  //             children: [
-  //               SvgPicture.asset(
-  //                 "assets/images/Group2.svg",
-  //                 width: 72.w,
-  //                 height: 37.h,
-  //                 fit: BoxFit.contain,
-  //               ),
-  //               SizedBox(width: 5.w),
-  //               Text(
-  //                 'Favorites',
-  //                 style: TextStyle(
-  //                   fontFamily: 'Sora',
-  //                   fontWeight: FontWeight.w400,
-  //                   fontStyle: FontStyle.normal,
-  //                   fontSize: 30.sp,
-  //                   height: 1.0,
-  //                   letterSpacing: 0.0,
-  //                   color: Theme.of(context).colorScheme.onSurface,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //           SizedBox(width: 78.w),
-  //           SizedBox(
-  //             height: 92.h,
-  //             width: 92.w,
-  //             child: Center(
-  //               child: Transform.rotate(
-  //                 angle: -81.51,
-  //                 child: SvgPicture.asset(
-  //                   "assets/images/Group099.svg",
-  //                   width: 102.w,
-  //                   height: 102.h,
-  //                   color: const Color(0xFF353635),
-  //                   fit: BoxFit.contain,
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget _buildNavigationButtons() {
     return Column(
@@ -470,7 +418,7 @@ class _FavouritesviewState extends State<Favouritesview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: colors.onSurface.withOpacity(0.2),
+              color: colors.outlineVariant,
               thickness: 1.0,
               height: 1.h,
             ),
@@ -739,14 +687,14 @@ class _FavouritesviewState extends State<Favouritesview> {
         SizedBox(height: 6.h),
         Column(
           children: favouriteBreeds.map((breed) {
-            final isFavorite = true; // always true here
+            final _ = true; // always true here
 
             return Container(
               margin: EdgeInsets.only(bottom: 16.h),
               width: 413.w,
               height: 140.h,
               decoration: BoxDecoration(
-                color: colors.surfaceBright.withOpacity(0.2),
+                color: colors.tertiaryContainer,
                 borderRadius: BorderRadius.circular(20.r),
                 border: Border.all(color: colors.background.withOpacity(0.2)),
               ),

@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="vibrantPurple">#6D09E8</color>
+
+    <!-- Optional: Add variations or complementary colors -->
+    <color name="icon_background">@color/vibrantPurple</color> <!-- Alias -->
+    <color name="primary_color">#6D09E8</color>
+    <color name="primary_dark">#4D00B3</color> <!-- Darker variant -->
+    <color name="primary_light">#9D4CFF</color> <!-- Lighter variant -->
+
+    <!-- Common app colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>

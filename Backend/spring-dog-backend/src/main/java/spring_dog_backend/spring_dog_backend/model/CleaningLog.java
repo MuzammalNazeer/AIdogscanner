@@ -21,7 +21,7 @@ public class CleaningLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer  id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pet_id")
@@ -54,11 +54,15 @@ public class CleaningLog {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    // Keep ONLY these 5 values
     public enum ItemType {
-        FOOD_PLATE, BED, TOYS, WATER_FOUNTAIN, LEASH_COLLAR
+        FOOD_PLATE,
+        BED,
+        TOYS,
+        WATER_FOUNTAIN,
+        LEASH_COLLAR
     }
 }
-
 
 //package spring_dog_backend.spring_dog_backend.model;
 //
@@ -83,18 +87,18 @@ public class CleaningLog {
 //
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long id;
+//    private Integer  id;
 //
 //    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "pet_id", nullable = false)
+//    @JoinColumn(name = "pet_id")
 //    private Pet pet;
+//
+//    @Column(name = "cleaned_at")
+//    private LocalDateTime cleanedAt;
 //
 //    @Enumerated(EnumType.STRING)
 //    @Column(name = "item_type", nullable = false)
 //    private ItemType itemType;
-//
-//    @Column(name = "cleaned_at", nullable = false)
-//    private LocalDate cleanedAt;
 //
 //    @Column(name = "cleaning_method")
 //    private String cleaningMethod;
@@ -120,3 +124,5 @@ public class CleaningLog {
 //        FOOD_PLATE, BED, TOYS, WATER_FOUNTAIN, LEASH_COLLAR
 //    }
 //}
+//
+//

@@ -27,7 +27,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 16.w),
+          padding: EdgeInsets.symmetric(vertical: 29.h, horizontal: 19.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -309,7 +309,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: colors.onSurface.withOpacity(0.2),
+              color: colors.outlineVariant,
               thickness: 1.0,
               height: 1.h,
             ),

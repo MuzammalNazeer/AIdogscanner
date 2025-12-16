@@ -66,7 +66,7 @@ class _HomeviewState extends State<Homeview> {
                     child: _buildIdentifyDogCard(),
                   ),
                   // _buildIdentifyDogCard(),
-                  SizedBox(height: 22.h),
+                  SizedBox(height: 16.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -237,8 +237,8 @@ class _HomeviewState extends State<Homeview> {
           ),
           SvgPicture.asset(
             "assets/images/Group5354.svg",
-            width: 172.w,
-            height: 117.h,
+            width: 160.w,
+            height: 82.h,
             fit: BoxFit.contain,
           ),
           SizedBox(height: 12.h),
@@ -480,7 +480,7 @@ class _HomeviewState extends State<Homeview> {
             ),
             SizedBox(height: 12.h),
             Divider(
-              color: colors.onSurface.withOpacity(0.2),
+              color: colors.outlineVariant,
               thickness: 1.0,
               height: 1.h,
             ),
@@ -581,7 +581,7 @@ class _HomeviewState extends State<Homeview> {
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
         color: colors.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
         // boxShadow: [
         //   BoxShadow(
         //     color: colors.onSurface.withOpacity(0.1),
@@ -755,11 +755,13 @@ class _HomeviewState extends State<Homeview> {
                   ),
                 ),
               ),
-              Image.asset(
-                'assets/images/image 45.png',
+              SizedBox(
                 width: 123.w,
-                height: 196.h,
-                fit: BoxFit.contain,
+                height: 164.h,
+                child: Image.asset(
+                  'assets/images/image 45.png',
+
+                ),
               ),
             ],
           ),
@@ -841,6 +843,7 @@ class _HomeviewState extends State<Homeview> {
                     "assets/images/Group099.svg",
                     width: 92.w,
                     height: 92.h,
+                    // color: const Color(0xFFE9ECE9),
                     color: colors.surfaceContainerLow,
                     fit: BoxFit.contain,
                   ),
@@ -852,61 +855,6 @@ class _HomeviewState extends State<Homeview> {
       ),
     );
   }
-  // Widget _buildHeader() {
-  //   final colors = Theme.of(context).colorScheme;
-  //   return Stack(
-  //     children: [
-  //       Row(
-  //         crossAxisAlignment: CrossAxisAlignment.center,
-  //         children: [
-  //           Row(
-  //             children: [
-  //               SvgPicture.asset(
-  //                 "assets/images/Group2.svg",
-  //                 width: 72.w,
-  //                 height: 37.h,
-  //                 fit: BoxFit.contain,
-  //               ),
-  //               const SizedBox(width: 5),
-  //               Text(
-  //                 'Manager',
-  //                 style: TextStyle(
-  //                   fontFamily: 'Sora',
-  //                   fontWeight: FontWeight.w400,
-  //                   fontStyle: FontStyle.normal,
-  //                   fontSize: 30.sp,
-  //                   height: 1.0,
-  //                   letterSpacing: 0.0,
-  //                   color: Theme.of(context).colorScheme.onSurface,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //           SizedBox(width: 78.w),
-  //           Positioned(
-  //             top: 20.h,
-  //             child: SizedBox(
-  //               height: 92.h,
-  //               width: 92.w,
-  //               child: Center(
-  //                 child: Transform.rotate(
-  //                   angle: -81.51,
-  //                   child: SvgPicture.asset(
-  //                     "assets/images/Group099.svg",
-  //                     width: 102.w,
-  //                     height: 102.h,
-  //                     color: colors.surfaceContainerLow,
-  //                     fit: BoxFit.contain,
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
     final colors = Theme.of(context).colorScheme;
