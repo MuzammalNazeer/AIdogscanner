@@ -38,7 +38,7 @@ class _ProviewState extends State<Proview> {
                 top: 50.h,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, RoutesName.splash);
+                    Navigator.pushNamed(context, RoutesName.setting);
                   },
                   child: Icon(
                     Icons.close,
@@ -135,15 +135,17 @@ class _ProviewState extends State<Proview> {
                       Text(
                         "Premium",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: Theme.of(context).colorScheme.surface,
                           fontSize: 15.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       SizedBox(width: 20.w),
                       Text(
                         "Free",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
+                          color: Theme.of(context).colorScheme.surface,
+                          fontWeight: FontWeight.bold,
                           fontSize: 15.sp,
                         ),
                       ),

@@ -13,12 +13,19 @@ class AppTheme {
       surface: const Color(0xFF323332),
       onPrimary: const Color(0xFF371B34),
       onSurface: const Color(0xFF0A0A0A),
-      onSecondary: Colors.black,
+      onSecondary: const Color(0xFF000000),
         tertiary:const Color(0xFF7B2CBF),
         onTertiary: const Color(0xFF820DFF),
         tertiaryContainer: const Color(0xFFF2F5F4),
         surfaceBright:const Color(0xFFCBE4DC),
         secondaryContainer: const Color(0xFFF4F7F6),
+        surfaceContainerLow:const Color(0xFFF3F6F3),
+        surfaceContainerHigh:const Color(0xFFD4ACFF),
+        surfaceContainerHighest: const Color(0xFF7B2CBF),
+       surfaceContainerLowest: const Color(0xFF512717),
+        surfaceContainer: const Color(0xFF7B2CBF),
+
+
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
@@ -38,13 +45,20 @@ class AppTheme {
       onBackground: const Color(0xFF21241F),
       surface: const Color(0xFF323332),
       onPrimary: const Color(0xFF371B34),
-      onSecondary: Colors.black,
+        onSecondary: const Color(0xFFFFFFFF),
       onSurface: const Color(0xFFFFFFFF),
       tertiary:const Color(0xFFFFFFFF),
       onTertiary: const Color(0xFF323332),
       tertiaryContainer: const Color(0xFF323332),
       surfaceBright:const Color(0xFF323332),
       secondaryContainer: const Color(0xFF323332),
+      surfaceContainerLow:const Color(0xFF353635),
+      surfaceContainerHigh:const Color(0xFF353635),
+      surfaceContainerHighest: const Color(0xFF21241F),
+      surfaceContainerLowest: const Color(0xFFFFFFFF),
+      surfaceContainer: const Color(0xFFFFFFFF)
+
+
     ),
 
     appBarTheme: const AppBarTheme(

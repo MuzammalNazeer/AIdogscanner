@@ -228,29 +228,38 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 17.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
-                SizedBox(height: 2.h),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
+                Flexible(
                   child: Text(
                     value,
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 14.sp,
                       color: Theme.of(context).colorScheme.tertiary,
+                      height: 1.5.h
                     ),
-                    maxLines: 1,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
+                // FittedBox(
+                //   fit: BoxFit.scaleDown,
+                //   child: Text(
+                //     value,
+                //     style: TextStyle(
+                //       fontSize: 18.sp,
+                //       color: Theme.of(context).colorScheme.tertiary,
+                //     ),
+                //     maxLines: 2,
+                //
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -674,8 +683,8 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                     Expanded(
                       child: RoundButton(
                         title: "Cancel",
-                        height: 52.h,
-                        borderRadius: 12.r,
+                        height: 58.h,
+                        borderRadius: 47.r,
                         textColors: const Color(0xFFFF0505),
                         backgroundColors: const Color(0xFFFFE5E5),
                         isSelected: true,
@@ -696,8 +705,8 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                             title: !canSave ? "Cannot Save" :
                             _isSaving ? "Saving..." :
                             (_isAutoSaved ? "Saved  Recents" : "Save Results"),
-                            height: 52.h,
-                            borderRadius: 12.r,
+                            height: 58.h,
+                            borderRadius: 47.r,
                             textColors: Colors.white,
                             backgroundColors: !canSave ? Colors.black :
                             _isAutoSaved ? Colors.black : Colors.black,

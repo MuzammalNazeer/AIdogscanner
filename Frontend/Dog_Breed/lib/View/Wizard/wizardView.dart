@@ -507,9 +507,10 @@ class OnboardingPage4 extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 30.h),
+                SizedBox(height: 20.h),
                 SizedBox(
                   width: 370.w,
+                  height: 120.h,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.r),
                     child: AspectRatio(
@@ -525,7 +526,7 @@ class OnboardingPage4 extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 170.h),
+          SizedBox(height: 150.h),
           Text(
             "Ensure your dog stays \n healthy and active.",
             textAlign: TextAlign.center,

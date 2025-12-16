@@ -390,17 +390,19 @@ Map<String,dynamic>? scan;
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
                   title,
                   style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.onSurface),
                 ),
-                Text(
-                  value,
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.tertiary),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Flexible(
+                  child: Text(
+                    value,
+                    style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold,height: 1.5.h, color: Theme.of(context).colorScheme.tertiary),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

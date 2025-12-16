@@ -41,54 +41,104 @@ class _SettingviewState extends State<Settingview> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
-              SizedBox(height: 10.h),
-              _buildSettingsSection(),
+              SizedBox(height: 20.h),
+              Transform.translate(offset: Offset(0, -30.h),
+              child: _buildSettingsSection()),
             ],
           ),
         ),
       ),
     );
   }
-
   Widget _buildHeader() {
-    return Stack(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'Settings',
-              style: TextStyle(
-                fontFamily: 'Sora',
-                fontWeight: FontWeight.w400,
-                fontStyle: FontStyle.normal,
-                fontSize: 30.sp,
-                height: 1.0,
-                letterSpacing: 0.0,
-                color: Theme.of(context).colorScheme.onSurface,
+    final colors = Theme.of(context).colorScheme;
+    return SizedBox(
+      height: 90.h,
+      child: Stack(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Settings',
+                style: TextStyle(
+                  fontFamily: 'Sora',
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 30.sp,
+                  height: 1.0,
+                  letterSpacing: 0.0,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
-            ),
-            SizedBox(width: 188.w),
-            SizedBox(
-              height: 92.h,
-              width: 92.w,
+              const Spacer(),
+            ],
+          ),
+
+          Positioned(
+            bottom: 5,
+            right: 10,
+            child: SizedBox(
+              height: 78.h,
+              width: 80.w,
               child: Center(
                 child: Transform.rotate(
                   angle: -81.51,
                   child: SvgPicture.asset(
                     "assets/images/Group099.svg",
-                    width: 102.w,
-                    height: 102.h,
-                    color: const Color(0xFF353635),
+                    width: 92.w,
+                    height: 92.h,
+                    color: colors.surfaceContainerLow,
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
-            ),          ],
-        ),
-      ],
+            ),
+          ),
+        ],
+      ),
     );
   }
+
+  // Widget _buildHeader() {
+  //   return Stack(
+  //     children: [
+  //       Row(
+  //         crossAxisAlignment: CrossAxisAlignment.center,
+  //         children: [
+  //           Text(
+  //             'Settings',
+  //             style: TextStyle(
+  //               fontFamily: 'Sora',
+  //               fontWeight: FontWeight.w400,
+  //               fontStyle: FontStyle.normal,
+  //               fontSize: 30.sp,
+  //               height: 1.0,
+  //               letterSpacing: 0.0,
+  //               color: Theme.of(context).colorScheme.onSurface,
+  //             ),
+  //           ),
+  //           SizedBox(width: 188.w),
+  //           SizedBox(
+  //             height: 92.h,
+  //             width: 92.w,
+  //             child: Center(
+  //               child: Transform.rotate(
+  //                 angle: -81.51,
+  //                 child: SvgPicture.asset(
+  //                   "assets/images/Group099.svg",
+  //                   width: 102.w,
+  //                   height: 102.h,
+  //                   color: const Color(0xFF353635),
+  //                   fit: BoxFit.contain,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),          ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildSettingsSection() {
     return Column(
@@ -154,7 +204,7 @@ class _SettingviewState extends State<Settingview> {
           margin: EdgeInsets.only(bottom: 10.h),
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           decoration: BoxDecoration(
-            color:  colors.surfaceBright.withOpacity(0.3),
+            color:  colors.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
             boxShadow: [
               BoxShadow(
@@ -236,7 +286,7 @@ class _SettingviewState extends State<Settingview> {
         margin: EdgeInsets.only(bottom: 10.h),
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         decoration: BoxDecoration(
-          color:  colors.surfaceBright.withOpacity(0.2),
+          color:  colors.secondaryContainer,
           borderRadius: BorderRadius.circular(12.r),
           // boxShadow: [
           //   BoxShadow(

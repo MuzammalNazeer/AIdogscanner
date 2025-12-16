@@ -122,11 +122,12 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
           currentIndex: homeProvider.selectedIndex,
           selectedFontSize: 11.sp,
           unselectedFontSize: 11.sp,
-          selectedItemColor: colors.tertiary,
-          unselectedItemColor: const Color(0xFF666666),
+          selectedItemColor: colors.onSecondary,
+          unselectedItemColor: const Color(0xFF7E808F),
           selectedLabelStyle: TextStyle(
             fontFamily: 'Sora',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFF000000),
             fontSize: 14.sp,
             height: 1.0,
           ),
@@ -152,7 +153,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                   'assets/images/home.png',
                   color: homeProvider.selectedIndex == 0
                       ? colors.tertiary
-                      : const Color(0xFF666666),
+                      : const Color(0xFF7E808F),
                 ),
               ),
               activeIcon: SizedBox(
@@ -209,7 +210,9 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
               label: 'Setting',
             ),
           ],
+
         ),
+
       ),
     );
   }

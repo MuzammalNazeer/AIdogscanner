@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/foundation.dart';
@@ -52,75 +53,83 @@ class _HomeviewState extends State<Homeview> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          padding: EdgeInsets.symmetric(vertical: 29.h, horizontal: 19.w),
+          child: Stack(
             children: [
-              _buildHeader(),
-              SizedBox(height: 4.h),
-              _buildIdentifyDogCard(),
-              SizedBox(height: 22.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Recent Scans',
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 16.sp,
-                      height: 1.0,
-                      letterSpacing: 0.0,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                  _buildHeader(),
+                  SizedBox(height: 5.h),
+                  Transform.translate(
+                    offset: Offset(0, -30.h),
+                    child: _buildIdentifyDogCard(),
                   ),
-                  Text(
-                    '${recentScans.length} scans',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16.h),
-              if (recentScans.isNotEmpty)
-                _buildRecentScansList(recentScans, scanProvider,context)
-              else
-                _buildEmptyState(),
-
-              SizedBox(height: 22.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Supported Breeds',
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 16.sp,
-                      height: 1.0,
-                      letterSpacing: 0.0,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                  if (favoriteBreeds.isNotEmpty)
-                    Text(
-                      '${favoriteBreeds.length} favorites',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: Theme.of(context).colorScheme.onSurface,
-                        fontWeight: FontWeight.bold,
+                  // _buildIdentifyDogCard(),
+                  SizedBox(height: 22.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Recent Scans',
+                        style: TextStyle(
+                          fontFamily: 'Sora',
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 16.sp,
+                          height: 1.0,
+                          letterSpacing: 0.0,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                       ),
-                    ),
+                      Text(
+                        '${recentScans.length} scans',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16.h),
+                  if (recentScans.isNotEmpty)
+                    _buildRecentScansList(recentScans, scanProvider,context)
+                  else
+                    _buildEmptyState(),
+
+                  SizedBox(height: 22.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Supported Breeds',
+                        style: TextStyle(
+                          fontFamily: 'Sora',
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 16.sp,
+                          height: 1.0,
+                          letterSpacing: 0.0,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                      if (favoriteBreeds.isNotEmpty)
+                        Text(
+                          '${favoriteBreeds.length} favorites',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                    ],
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildSupportedBreedsVerticalFormatted(scanProvider),
                 ],
               ),
-              SizedBox(height: 12.h),
-              _buildSupportedBreedsVerticalFormatted(scanProvider),
             ],
-          ),
+          )
         ),
       ),
     );
@@ -215,34 +224,38 @@ class _HomeviewState extends State<Homeview> {
   }
 
   Widget _buildEmptyState() {
-    return Container(
-      width: 413.w,
-      height: 169.h,
-      decoration: BoxDecoration(
-        color: const Color(0xFF323332).withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20.r),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.camera_alt, size: 48.sp, color: Colors.grey[600]),
-            SizedBox(height: 12.h),
-            Text(
-              'No recent scans',
-              style: TextStyle(
-                fontSize: 28.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.grey[600],
-              ),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            "assets/images/Group5353.svg",
+            width: 32.w,
+            height: 37.h,
+            fit: BoxFit.contain,
+            color: Theme.of(context).colorScheme.surfaceContainerLowest,
+          ),
+          SvgPicture.asset(
+            "assets/images/Group5354.svg",
+            width: 172.w,
+            height: 117.h,
+            fit: BoxFit.contain,
+          ),
+          SizedBox(height: 12.h),
+          Text(
+            '0 Results',
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
-            SizedBox(height: 8.h),
-            Text(
-              'Scan a dog to see results here',
-              style: TextStyle(fontSize: 14.sp, color: Colors.grey[500]),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(height: 8.h),
+          Text(
+            'As soon as you’ve made your first scan,\nyour results will be logged here.',
+            style: TextStyle(fontSize: 12.sp, color: Theme.of(context).colorScheme.onSurface),
+          ),
+        ],
       ),
     );
   }
@@ -323,7 +336,7 @@ class _HomeviewState extends State<Homeview> {
       width: 413.w,
       height: 179.h,
       decoration: BoxDecoration(
-        color: colors.surfaceBright.withOpacity(0.2),
+        color: colors.secondaryContainer,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: colors.background.withOpacity(0.2)),
         // boxShadow: [
@@ -567,7 +580,7 @@ class _HomeviewState extends State<Homeview> {
       width: 409.w,
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
-        color: colors.onTertiary.withOpacity(0.3),
+        color: colors.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(16.r),
         // boxShadow: [
         //   BoxShadow(
@@ -724,68 +737,176 @@ class _HomeviewState extends State<Homeview> {
             ),
           ),
           SizedBox(width: 12.w),
-          Image.asset(
-            'assets/images/image 45.png',
-            width: 123.w,
-            height: 196.h,
-            fit: BoxFit.contain,
+          Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center, 
+            children: [
+              Positioned(
+                top: -10.h,   
+                left: -30.w,  
+                child: Transform.rotate(
+                  angle: -83.51 * (pi / 180),
+                  child: SvgPicture.asset(
+                    "assets/images/Group099.svg",
+                    width: 92.w,
+                    height: 92.h,
+                    color: colors.surfaceContainerHighest,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              Image.asset(
+                'assets/images/image 45.png',
+                width: 123.w,
+                height: 196.h,
+                fit: BoxFit.contain,
+              ),
+            ],
           ),
+          // Stack(
+          //   children: [
+          //     Positioned(
+          //       child: SizedBox(
+          //         height: 78.h,
+          //         width: 80.w,
+          //         child: Center(
+          //           child: Transform.rotate(
+          //             angle: -83.51,
+          //             child: SvgPicture.asset(
+          //               "assets/images/Group099.svg",
+          //               width: 92.w,
+          //               height: 92.h,
+          //               color: colors.surfaceContainerLow,
+          //               fit: BoxFit.contain,
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     Image.asset(
+          //       'assets/images/image 45.png',
+          //       width: 123.w,
+          //       height: 196.h,
+          //       fit: BoxFit.contain,
+          //     ),
+          //   ],
+          // )
+
         ],
       ),
     );
   }
-
   Widget _buildHeader() {
-    return Stack(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                SvgPicture.asset(
-                  "assets/images/Group2.svg",
-                  width: 72.w,
-                  height: 37.h,
-                  fit: BoxFit.contain,
+    final colors = Theme.of(context).colorScheme;
+    return SizedBox(
+      height: 80.h,
+      child: Stack(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                "assets/images/Group2.svg",
+                width: 72.w,
+                height: 37.h,
+                fit: BoxFit.contain,
+              ),
+              const SizedBox(width: 5),
+              Text(
+                'Manager',
+                style: TextStyle(
+                  fontFamily: 'Sora',
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 30.sp,
+                  height: 1.0,
+                  letterSpacing: 0.0,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
-                const SizedBox(width: 5),
-                Text(
-                  'Manager',
-                  style: TextStyle(
-                    fontFamily: 'Sora',
-                    fontWeight: FontWeight.w400,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 30.sp,
-                    height: 1.0,
-                    letterSpacing: 0.0,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(width: 78.w),
-            SizedBox(
-              height: 92.h,
-              width: 92.w,
+              ),
+              const Spacer(),
+            ],
+          ),
+
+          Positioned(
+            bottom: 5,
+            right: 10,
+            child: SizedBox(
+              height: 78.h,
+              width: 80.w,
               child: Center(
                 child: Transform.rotate(
                   angle: -81.51,
                   child: SvgPicture.asset(
                     "assets/images/Group099.svg",
-                    width: 102.w,
-                    height: 102.h,
-                    color: const Color(0xFF353635),
+                    width: 92.w,
+                    height: 92.h,
+                    color: colors.surfaceContainerLow,
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
+  // Widget _buildHeader() {
+  //   final colors = Theme.of(context).colorScheme;
+  //   return Stack(
+  //     children: [
+  //       Row(
+  //         crossAxisAlignment: CrossAxisAlignment.center,
+  //         children: [
+  //           Row(
+  //             children: [
+  //               SvgPicture.asset(
+  //                 "assets/images/Group2.svg",
+  //                 width: 72.w,
+  //                 height: 37.h,
+  //                 fit: BoxFit.contain,
+  //               ),
+  //               const SizedBox(width: 5),
+  //               Text(
+  //                 'Manager',
+  //                 style: TextStyle(
+  //                   fontFamily: 'Sora',
+  //                   fontWeight: FontWeight.w400,
+  //                   fontStyle: FontStyle.normal,
+  //                   fontSize: 30.sp,
+  //                   height: 1.0,
+  //                   letterSpacing: 0.0,
+  //                   color: Theme.of(context).colorScheme.onSurface,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           SizedBox(width: 78.w),
+  //           Positioned(
+  //             top: 20.h,
+  //             child: SizedBox(
+  //               height: 92.h,
+  //               width: 92.w,
+  //               child: Center(
+  //                 child: Transform.rotate(
+  //                   angle: -81.51,
+  //                   child: SvgPicture.asset(
+  //                     "assets/images/Group099.svg",
+  //                     width: 102.w,
+  //                     height: 102.h,
+  //                     color: colors.surfaceContainerLow,
+  //                     fit: BoxFit.contain,
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
     final colors = Theme.of(context).colorScheme;
@@ -961,7 +1082,7 @@ class _HomeviewState extends State<Homeview> {
             return Container(
               margin: EdgeInsets.only(bottom: 16.h),
               width: 413.w,
-              height: 154.h,
+              height: 140.h,
               decoration: BoxDecoration(
                 color:  colors.tertiaryContainer,
                 borderRadius: BorderRadius.circular(20.r),
@@ -979,7 +1100,7 @@ class _HomeviewState extends State<Homeview> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(3.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
                       width: 103.w,
                       height: 103.h,
@@ -1018,7 +1139,7 @@ class _HomeviewState extends State<Homeview> {
                             Text(
                               breed['name']!,
                               style: TextStyle(
-                                fontSize: 17.sp,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).colorScheme.onSurface,
                               ),

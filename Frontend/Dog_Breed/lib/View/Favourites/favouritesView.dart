@@ -37,11 +37,14 @@ class _FavouritesviewState extends State<Favouritesview> {
             children: [
               _buildHeader(),
               SizedBox(height: 24.h),
-              _buildNavigationButtons(),
+              Transform.translate(
+                offset: Offset(0, -30.h),
+                child: _buildNavigationButtons(),
+              ),
               SizedBox(height: 24.h),
               _selectedSection == 0
-                  ? _buildRecentScansList(favoriteScans, scanProvider, context,)
-                  : _buildSupportedBreedsVerticalFormatted( scanProvider),
+                  ? _buildRecentScansList(favoriteScans, scanProvider, context)
+                  : _buildSupportedBreedsVerticalFormatted(scanProvider),
             ],
           ),
         ),
@@ -50,56 +53,106 @@ class _FavouritesviewState extends State<Favouritesview> {
   }
 
   Widget _buildHeader() {
-    return Stack(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                SvgPicture.asset(
-                  "assets/images/Group2.svg",
-                  width: 72.w,
-                  height: 37.h,
-                  fit: BoxFit.contain,
+    final colors = Theme.of(context).colorScheme;
+    return SizedBox(
+      height: 80.h,
+      child: Stack(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Favorites',
+                style: TextStyle(
+                  fontFamily: 'Sora',
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal,
+                  fontSize: 30.sp,
+                  height: 1.0,
+                  letterSpacing: 0.0,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
-                SizedBox(width: 5.w),
-                Text(
-                  'Favorites',
-                  style: TextStyle(
-                    fontFamily: 'Sora',
-                    fontWeight: FontWeight.w400,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 30.sp,
-                    height: 1.0,
-                    letterSpacing: 0.0,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(width: 78.w),
-            SizedBox(
-              height: 92.h,
-              width: 92.w,
+              ),
+              const Spacer(),
+            ],
+          ),
+
+          Positioned(
+            bottom: 5,
+            right: 10,
+            child: SizedBox(
+              height: 78.h,
+              width: 80.w,
               child: Center(
                 child: Transform.rotate(
                   angle: -81.51,
                   child: SvgPicture.asset(
                     "assets/images/Group099.svg",
-                    width: 102.w,
-                    height: 102.h,
-                    color: const Color(0xFF353635),
+                    width: 92.w,
+                    height: 92.h,
+                    color: colors.surfaceContainerLow,
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
+
+  // Widget _buildHeader() {
+  //   return Stack(
+  //     children: [
+  //       Row(
+  //         crossAxisAlignment: CrossAxisAlignment.center,
+  //         children: [
+  //           Row(
+  //             children: [
+  //               SvgPicture.asset(
+  //                 "assets/images/Group2.svg",
+  //                 width: 72.w,
+  //                 height: 37.h,
+  //                 fit: BoxFit.contain,
+  //               ),
+  //               SizedBox(width: 5.w),
+  //               Text(
+  //                 'Favorites',
+  //                 style: TextStyle(
+  //                   fontFamily: 'Sora',
+  //                   fontWeight: FontWeight.w400,
+  //                   fontStyle: FontStyle.normal,
+  //                   fontSize: 30.sp,
+  //                   height: 1.0,
+  //                   letterSpacing: 0.0,
+  //                   color: Theme.of(context).colorScheme.onSurface,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           SizedBox(width: 78.w),
+  //           SizedBox(
+  //             height: 92.h,
+  //             width: 92.w,
+  //             child: Center(
+  //               child: Transform.rotate(
+  //                 angle: -81.51,
+  //                 child: SvgPicture.asset(
+  //                   "assets/images/Group099.svg",
+  //                   width: 102.w,
+  //                   height: 102.h,
+  //                   color: const Color(0xFF353635),
+  //                   fit: BoxFit.contain,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildNavigationButtons() {
     return Column(
@@ -162,7 +215,9 @@ class _FavouritesviewState extends State<Favouritesview> {
                 height: 3.h,
                 decoration: BoxDecoration(
                   color: _selectedSection == 0
-                      ? const Color(0xFF820DFF) // Purple color
+                      ? Theme.of(context)
+                            .colorScheme
+                            .surfaceContainer // Purple color
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(2.r),
                 ),
@@ -175,7 +230,9 @@ class _FavouritesviewState extends State<Favouritesview> {
                 height: 3.h,
                 decoration: BoxDecoration(
                   color: _selectedSection == 1
-                      ? const Color(0xFF820DFF) // Purple color
+                      ? Theme.of(context)
+                            .colorScheme
+                            .surfaceContainer // Purple color
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(2.r),
                 ),
@@ -186,11 +243,12 @@ class _FavouritesviewState extends State<Favouritesview> {
       ],
     );
   }
+
   Widget _buildRecentScansList(
-      List<Map<String, dynamic>> recentScans,
-      ScanProvider scanProvider,
-      BuildContext context,
-      ) {
+    List<Map<String, dynamic>> recentScans,
+    ScanProvider scanProvider,
+    BuildContext context,
+  ) {
     final lastSixScans = recentScans.length > 6
         ? recentScans.sublist(recentScans.length - 6)
         : recentScans;
@@ -199,10 +257,11 @@ class _FavouritesviewState extends State<Favouritesview> {
       children: lastSixScans.asMap().entries.map((entry) {
         final index = entry.key;
         final scan = entry.value;
-        return _buildRecentScanCard(scan, index, scanProvider,context);
+        return _buildRecentScanCard(scan, index, scanProvider, context);
       }).toList(),
     );
   }
+
   Uint8List? _parseImageData(dynamic imageData) {
     if (imageData == null) return null;
 
@@ -239,11 +298,11 @@ class _FavouritesviewState extends State<Favouritesview> {
   }
 
   Widget _buildRecentScanCard(
-      Map<String, dynamic> scan,
-      int index,
-      ScanProvider scanProvider,
-      BuildContext context,
-      ) {
+    Map<String, dynamic> scan,
+    int index,
+    ScanProvider scanProvider,
+    BuildContext context,
+  ) {
     final colors = Theme.of(context).colorScheme;
     final imageBytes = _parseImageData(scan['imageBytes']);
 
@@ -263,17 +322,17 @@ class _FavouritesviewState extends State<Favouritesview> {
       width: 413.w,
       height: 179.h,
       decoration: BoxDecoration(
-        color:  colors.surfaceBright.withOpacity(0.2),
+        color: colors.secondaryContainer,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: colors.background.withOpacity(0.2)),
-        boxShadow: [
-          BoxShadow(
-            color: colors.onSurface.withOpacity(0.1),
-            blurRadius: 42.w,
-            spreadRadius: 2.w,
-            offset: Offset(0, 8.h),
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: colors.onSurface.withOpacity(0.1),
+        //     blurRadius: 42.w,
+        //     spreadRadius: 2.w,
+        //     offset: Offset(0, 8.h),
+        //   ),
+        // ],
       ),
       child: Padding(
         padding: EdgeInsets.all(8.r),
@@ -285,9 +344,10 @@ class _FavouritesviewState extends State<Favouritesview> {
                 if (kDebugMode) {
                   print("📌 Navigating with scanId: $scanId");
                 }
-                Navigator.pushNamed(context,
-                    RoutesName.dogSave,
-                    arguments: {"scanId": scanId}
+                Navigator.pushNamed(
+                  context,
+                  RoutesName.dogSave,
+                  arguments: {"scanId": scanId},
                 );
               },
               child: Row(
@@ -320,23 +380,23 @@ class _FavouritesviewState extends State<Favouritesview> {
                           ),
                           child: imageBytes != null
                               ? ClipRRect(
-                            borderRadius: BorderRadius.circular(30.w),
-                            child: Image.memory(
-                              imageBytes,
-                              key: ValueKey('image_$scanId'),
-                              width: 68.w,
-                              height: 68.h,
-                              fit: BoxFit.cover,
-                              gaplessPlayback: true,
-                            ),
-                          )
+                                  borderRadius: BorderRadius.circular(30.w),
+                                  child: Image.memory(
+                                    imageBytes,
+                                    key: ValueKey('image_$scanId'),
+                                    width: 68.w,
+                                    height: 68.h,
+                                    fit: BoxFit.cover,
+                                    gaplessPlayback: true,
+                                  ),
+                                )
                               : Center(
-                            child: Icon(
-                              Icons.pets,
-                              color: Colors.white.withOpacity(0.8),
-                              size: 24.r,
-                            ),
-                          ),
+                                  child: Icon(
+                                    Icons.pets,
+                                    color: Colors.white.withOpacity(0.8),
+                                    size: 24.r,
+                                  ),
+                                ),
                         ),
                       ),
                     ],
@@ -349,13 +409,12 @@ class _FavouritesviewState extends State<Favouritesview> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Text(
                           breedName,
                           style: TextStyle(
-                              fontSize: 16.sp,
-                              color: Theme.of(context).colorScheme.onSurface,
-                              fontWeight: FontWeight.bold
+                            fontSize: 16.sp,
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontWeight: FontWeight.bold,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -441,9 +500,10 @@ class _FavouritesviewState extends State<Favouritesview> {
                           if (kDebugMode) {
                             print("📌 Navigating with scanId: $scanId");
                           }
-                          Navigator.pushNamed(context,
-                              RoutesName.dogSave,
-                              arguments: {"scanId": scanId}
+                          Navigator.pushNamed(
+                            context,
+                            RoutesName.dogSave,
+                            arguments: {"scanId": scanId},
                           );
                         },
                         child: Text(
@@ -492,137 +552,164 @@ class _FavouritesviewState extends State<Favouritesview> {
       return 'Just now';
     }
   }
+
   Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
     final colors = Theme.of(context).colorScheme;
     final List<Map<String, String>> topBreeds = [
       {
         'name': 'Bulldog',
-        'description': 'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.',
+        'description':
+            'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.',
         'image': 'assets/images/Ellipse 139.png',
       },
       {
         'name': 'Beagle',
-        'description': 'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.',
+        'description':
+            'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.',
         'image': 'assets/images/Ellipse 139 (1).png',
       },
       {
         'name': 'Yorkshire Terrier',
-        'description': 'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.',
+        'description':
+            'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.',
         'image': 'assets/images/Ellipse 139 (2).png',
       },
       {
         'name': 'Cavalier King Charles Spaniel',
-        'description': 'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.',
+        'description':
+            'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.',
         'image': 'assets/images/Ellipse 139 (3).png',
       },
       {
         'name': 'English Springer Spaniel',
-        'description': 'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.',
+        'description':
+            'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.',
         'image': 'assets/images/Ellipse 139 (4).png',
       },
       {
         'name': 'Bullmastiff',
-        'description': 'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.',
+        'description':
+            'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.',
         'image': 'assets/images/Ellipse 139 (5).png',
       },
       {
         'name': 'English Cocker Spaniel',
-        'description': 'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.',
+        'description':
+            'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.',
         'image': 'assets/images/Ellipse 139 (6).png',
       },
       {
         'name': 'Airedale Terrier',
-        'description': 'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.',
+        'description':
+            'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.',
         'image': 'assets/images/Ellipse 139 (7).png',
       },
       {
         'name': 'Terrier',
-        'description': 'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.',
+        'description':
+            'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.',
         'image': 'assets/images/Ellipse 139 (8).png',
       },
       {
         'name': 'Whippet',
-        'description': 'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.',
+        'description':
+            'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.',
         'image': 'assets/images/Ellipse 1399.png',
       },
       {
         'name': 'Bull Terrier',
-        'description': 'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.',
+        'description':
+            'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.',
         'image': 'assets/images/Ellipse 139 (9).png',
       },
       {
         'name': 'Golden Retriever',
-        'description': 'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.',
+        'description':
+            'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.',
         'image': 'assets/images/Ellipse 139 (10).png',
       },
       {
         'name': 'Old English Sheepdog',
-        'description': 'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.',
+        'description':
+            'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.',
         'image': 'assets/images/Ellipse 1391.png',
       },
       {
         'name': 'Border Collie',
-        'description': 'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.',
+        'description':
+            'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.',
         'image': 'assets/images/Ellipse 1392.png',
       },
       {
         'name': 'Greyhound',
-        'description': 'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.',
+        'description':
+            'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.',
         'image': 'assets/images/Ellipse 139 (12).png',
       },
       {
         'name': 'Jack Russell Terrier',
-        'description': 'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.',
+        'description':
+            'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.',
         'image': 'assets/images/Ellipse 139 (13).png',
       },
       {
         'name': 'Bloodhound',
-        'description': 'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.',
+        'description':
+            'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.',
         'image': 'assets/images/Ellipse 139 (14).png',
       },
       {
         'name': 'English Pointer',
-        'description': 'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.',
+        'description':
+            'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.',
         'image': 'assets/images/Ellipse 139 (15).png',
       },
       {
         'name': 'Staffordshire Bull Terrier',
-        'description': 'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.',
+        'description':
+            'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.',
         'image': 'assets/images/Ellipse 139 (16).png',
       },
       {
         'name': 'English Foxhound',
-        'description': 'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.',
+        'description':
+            'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.',
         'image': 'assets/images/Ellipse 139 (17).png',
       },
       {
         'name': 'Wire Fox Terrier',
-        'description': 'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.',
+        'description':
+            'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.',
         'image': 'assets/images/Ellipse 139 (18).png',
       },
       {
         'name': 'Manchester Terrier',
-        'description': 'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.',
+        'description':
+            'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.',
         'image': 'assets/images/Ellipse 1393.png',
       },
       {
         'name': 'Bedlington Terrier',
-        'description': 'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.',
+        'description':
+            'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.',
         'image': 'assets/images/Ellipse 139 (20).png',
       },
       {
         'name': 'Boston Terrier',
-        'description': 'Life expectancy: 11-13 years.\nFriendly "American Gentleman"\nwith tuxedo-like markings.',
+        'description':
+            'Life expectancy: 11-13 years.\nFriendly "American Gentleman"\nwith tuxedo-like markings.',
         'image': 'assets/images/Ellipse 1394.png',
       },
       {
         'name': 'English Setter',
-        'description': 'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.',
+        'description':
+            'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.',
         'image': 'assets/images/Ellipse 139 (21).png',
       },
       {
         'name': 'Border Terrier',
-        'description': 'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.',
+        'description':
+            'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.',
         'image': 'assets/images/Ellipse 139 (22).png',
       },
     ];
@@ -657,7 +744,7 @@ class _FavouritesviewState extends State<Favouritesview> {
             return Container(
               margin: EdgeInsets.only(bottom: 16.h),
               width: 413.w,
-              height: 154.h,
+              height: 140.h,
               decoration: BoxDecoration(
                 color: colors.surfaceBright.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(20.r),
@@ -666,18 +753,18 @@ class _FavouritesviewState extends State<Favouritesview> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 103.w,
-                    height: 103.h,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFF8F5FF),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(51.5.w),
-                      child: Image.asset(
-                        breed['image']!,
-                        fit: BoxFit.cover,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 103.w,
+                      height: 103.h,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xFFF8F5FF),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(51.5.w),
+                        child: Image.asset(breed['image']!, fit: BoxFit.cover),
                       ),
                     ),
                   ),
@@ -692,7 +779,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                             Text(
                               breed['name']!,
                               style: TextStyle(
-                                fontSize: 17.sp,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                                 color: colors.onSurface,
                               ),
@@ -702,7 +789,9 @@ class _FavouritesviewState extends State<Favouritesview> {
                               padding: EdgeInsets.only(top: 16.h, right: 6.w),
                               child: GestureDetector(
                                 onTap: () {
-                                  scanProvider.toggleBreedFavorite(breed['name']!);
+                                  scanProvider.toggleBreedFavorite(
+                                    breed['name']!,
+                                  );
                                 },
                                 child: Icon(
                                   Icons.favorite,
@@ -737,7 +826,6 @@ class _FavouritesviewState extends State<Favouritesview> {
     );
   }
 
-
   String _formatBreedName(String name) {
     return name
         .replaceAll('-', ' ')
@@ -746,19 +834,17 @@ class _FavouritesviewState extends State<Favouritesview> {
         .join(' ');
   }
 }
+
 Future<void> _handleRescanTap(
-    Map<String, dynamic> scan,
-    BuildContext context,
-    ) async {
+  Map<String, dynamic> scan,
+  BuildContext context,
+) async {
   if (kDebugMode) {
     print('🔄 Re-scanning: ${scan['breedName']}');
   }
 
   try {
-    final cameraResult = await Navigator.pushNamed(
-      context,
-      RoutesName.camera,
-    );
+    final cameraResult = await Navigator.pushNamed(context, RoutesName.camera);
 
     if (cameraResult != null && cameraResult is File) {
       if (kDebugMode) {
@@ -776,10 +862,7 @@ Future<void> _handleRescanTap(
           print('✅ Received new scan data!');
         }
 
-        final scanProvider = Provider.of<ScanProvider>(
-          context,
-          listen: false,
-        );
+        final scanProvider = Provider.of<ScanProvider>(context, listen: false);
         final scanData = {
           'id': DateTime.now().millisecondsSinceEpoch.toString(),
           'image': dogResult['image'] ?? cameraResult,
@@ -833,5 +916,3 @@ Future<void> _handleRescanTap(
     );
   }
 }
-
-

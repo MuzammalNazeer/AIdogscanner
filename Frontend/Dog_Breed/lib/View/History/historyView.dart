@@ -18,7 +18,6 @@ class Historyview extends StatefulWidget {
 }
 
 class _HistoryviewState extends State<Historyview> {
-
   @override
   Widget build(BuildContext context) {
     final scanProvider = Provider.of<ScanProvider>(context, listen: true);
@@ -33,8 +32,14 @@ class _HistoryviewState extends State<Historyview> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
-              SizedBox(height: 25.h),
-              _buildRecentScansList(recentScans,scanProvider,context),
+              Transform.translate(
+                offset: Offset(0, -30.h),
+                child: _buildRecentScansList(
+                  recentScans,
+                  scanProvider,
+                  context,
+                ),
+              ),
             ],
           ),
         ),
@@ -43,13 +48,15 @@ class _HistoryviewState extends State<Historyview> {
   }
 
   Widget _buildHeader() {
-    return Stack(
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
+    final colors = Theme.of(context).colorScheme;
+    return SizedBox(
+      height: 90.h,
+      child: Stack(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
                 'History',
                 style: TextStyle(
                   fontFamily: 'Sora',
@@ -61,35 +68,83 @@ class _HistoryviewState extends State<Historyview> {
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
-            ),
-            SizedBox(width: 168.w),
-            SizedBox(
-              height: 92.h,
-              width: 92.w,
+              const Spacer(),
+            ],
+          ),
+
+          Positioned(
+            bottom: 5,
+            right: 10,
+            child: SizedBox(
+              height: 78.h,
+              width: 80.w,
               child: Center(
                 child: Transform.rotate(
                   angle: -81.51,
                   child: SvgPicture.asset(
                     "assets/images/Group099.svg",
-                    width: 102.w,
-                    height: 102.h,
-                    color: const Color(0xFF353635),
+                    width: 92.w,
+                    height: 92.h,
+                    color: colors.surfaceContainerLow,
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-      ],
+          ),
+        ],
+      ),
     );
   }
 
+  // Widget _buildHeader() {
+  //   return Stack(
+  //     children: [
+  //       Row(
+  //         crossAxisAlignment: CrossAxisAlignment.center,
+  //         children: [
+  //           Center(
+  //             child: Text(
+  //               'History',
+  //               style: TextStyle(
+  //                 fontFamily: 'Sora',
+  //                 fontWeight: FontWeight.w400,
+  //                 fontStyle: FontStyle.normal,
+  //                 fontSize: 35.sp,
+  //                 height: 1.0,
+  //                 letterSpacing: 0.0,
+  //                 color: Theme.of(context).colorScheme.onSurface,
+  //               ),
+  //             ),
+  //           ),
+  //           SizedBox(width: 168.w),
+  //           SizedBox(
+  //             height: 92.h,
+  //             width: 92.w,
+  //             child: Center(
+  //               child: Transform.rotate(
+  //                 angle: -81.51,
+  //                 child: SvgPicture.asset(
+  //                   "assets/images/Group099.svg",
+  //                   width: 102.w,
+  //                   height: 102.h,
+  //                   color: const Color(0xFF353635),
+  //                   fit: BoxFit.contain,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
+
   Widget _buildRecentScansList(
-      List<Map<String, dynamic>> recentScans,
-      ScanProvider scanProvider,
-      BuildContext context,
-      ) {
+    List<Map<String, dynamic>> recentScans,
+    ScanProvider scanProvider,
+    BuildContext context,
+  ) {
     final lastSixScans = recentScans.length > 6
         ? recentScans.sublist(recentScans.length - 6)
         : recentScans;
@@ -98,10 +153,11 @@ class _HistoryviewState extends State<Historyview> {
       children: lastSixScans.asMap().entries.map((entry) {
         final index = entry.key;
         final scan = entry.value;
-        return _buildRecentScanCard(scan, index, scanProvider,context);
+        return _buildRecentScanCard(scan, index, scanProvider, context);
       }).toList(),
     );
   }
+
   Uint8List? _parseImageData(dynamic imageData) {
     if (imageData == null) return null;
 
@@ -138,11 +194,11 @@ class _HistoryviewState extends State<Historyview> {
   }
 
   Widget _buildRecentScanCard(
-      Map<String, dynamic> scan,
-      int index,
-      ScanProvider scanProvider,
-      BuildContext context,
-      ) {
+    Map<String, dynamic> scan,
+    int index,
+    ScanProvider scanProvider,
+    BuildContext context,
+  ) {
     final colors = Theme.of(context).colorScheme;
     final imageBytes = _parseImageData(scan['imageBytes']);
 
@@ -162,17 +218,17 @@ class _HistoryviewState extends State<Historyview> {
       width: 413.w,
       height: 179.h,
       decoration: BoxDecoration(
-        color:  colors.surfaceBright.withOpacity(0.2),
+        color: colors.secondaryContainer,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: colors.background.withOpacity(0.2)),
-        boxShadow: [
-          BoxShadow(
-            color: colors.onSurface.withOpacity(0.1),
-            blurRadius: 42.w,
-            spreadRadius: 2.w,
-            offset: Offset(0, 8.h),
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: colors.onSurface.withOpacity(0.1),
+        //     blurRadius: 42.w,
+        //     spreadRadius: 2.w,
+        //     offset: Offset(0, 8.h),
+        //   ),
+        // ],
       ),
       child: Padding(
         padding: EdgeInsets.all(8.r),
@@ -184,9 +240,10 @@ class _HistoryviewState extends State<Historyview> {
                 if (kDebugMode) {
                   print("📌 Navigating with scanId: $scanId");
                 }
-                Navigator.pushNamed(context,
-                    RoutesName.dogSave,
-                    arguments: {"scanId": scanId}
+                Navigator.pushNamed(
+                  context,
+                  RoutesName.dogSave,
+                  arguments: {"scanId": scanId},
                 );
               },
               child: Row(
@@ -218,23 +275,23 @@ class _HistoryviewState extends State<Historyview> {
                           ),
                           child: imageBytes != null
                               ? ClipRRect(
-                            borderRadius: BorderRadius.circular(30.w),
-                            child: Image.memory(
-                              imageBytes,
-                              key: ValueKey('image_$scanId'),
-                              width: 68.w,
-                              height: 68.h,
-                              fit: BoxFit.cover,
-                              gaplessPlayback: true,
-                            ),
-                          )
+                                  borderRadius: BorderRadius.circular(30.w),
+                                  child: Image.memory(
+                                    imageBytes,
+                                    key: ValueKey('image_$scanId'),
+                                    width: 68.w,
+                                    height: 68.h,
+                                    fit: BoxFit.cover,
+                                    gaplessPlayback: true,
+                                  ),
+                                )
                               : Center(
-                            child: Icon(
-                              Icons.pets,
-                              color: Colors.white.withOpacity(0.8),
-                              size: 24.r,
-                            ),
-                          ),
+                                  child: Icon(
+                                    Icons.pets,
+                                    color: Colors.white.withOpacity(0.8),
+                                    size: 24.r,
+                                  ),
+                                ),
                         ),
                       ),
                     ],
@@ -247,13 +304,12 @@ class _HistoryviewState extends State<Historyview> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Text(
                           breedName,
                           style: TextStyle(
-                              fontSize: 16.sp,
-                              color: colors.onSurface,
-                              fontWeight: FontWeight.bold
+                            fontSize: 16.sp,
+                            color: colors.onSurface,
+                            fontWeight: FontWeight.bold,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -337,9 +393,10 @@ class _HistoryviewState extends State<Historyview> {
                           if (kDebugMode) {
                             print("📌 Navigating with scanId: $scanId");
                           }
-                          Navigator.pushNamed(context,
-                              RoutesName.dogSave,
-                              arguments: {"scanId": scanId}
+                          Navigator.pushNamed(
+                            context,
+                            RoutesName.dogSave,
+                            arguments: {"scanId": scanId},
                           );
                         },
                         child: Text(
@@ -372,19 +429,20 @@ class _HistoryviewState extends State<Historyview> {
     );
   }
 
-
   String _formatBreedName(String name) {
     if (name.isEmpty) return 'Unknown Breed';
     return name
         .replaceAll('-', ' ')
         .split(' ')
-        .map((word) => word.isNotEmpty
-        ? word[0].toUpperCase() + word.substring(1).toLowerCase()
-        : '')
+        .map(
+          (word) => word.isNotEmpty
+              ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+              : '',
+        )
         .join(' ');
   }
-
 }
+
 String _formatDateTime(DateTime dateTime) {
   final now = DateTime.now();
   final difference = now.difference(dateTime);
@@ -401,19 +459,17 @@ String _formatDateTime(DateTime dateTime) {
     return 'Just now';
   }
 }
+
 Future<void> _handleRescanTap(
-    Map<String, dynamic> scan,
-    BuildContext context,
-    ) async {
+  Map<String, dynamic> scan,
+  BuildContext context,
+) async {
   if (kDebugMode) {
     print('🔄 Re-scanning: ${scan['breedName']}');
   }
 
   try {
-    final cameraResult = await Navigator.pushNamed(
-      context,
-      RoutesName.camera,
-    );
+    final cameraResult = await Navigator.pushNamed(context, RoutesName.camera);
 
     if (cameraResult != null && cameraResult is File) {
       if (kDebugMode) {
@@ -431,10 +487,7 @@ Future<void> _handleRescanTap(
           print('✅ Received new scan data!');
         }
 
-        final scanProvider = Provider.of<ScanProvider>(
-          context,
-          listen: false,
-        );
+        final scanProvider = Provider.of<ScanProvider>(context, listen: false);
         final scanData = {
           'id': DateTime.now().millisecondsSinceEpoch.toString(),
           'image': dogResult['image'] ?? cameraResult,
