@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color (auto-switches for light/dark theme) -->
+<!--    <item android:drawable="@color/splash_background"/>-->
+    <item android:drawable="@color/vibrantPurple" />     <!-- Your app icon centered -->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/frame_412"/>
+    </item>
+</layer-list>

@@ -17,7 +17,6 @@ import spring_dog_backend.spring_dog_backend.exception.PetNotFoundException;
 import spring_dog_backend.spring_dog_backend.model.CleaningLog;
 import spring_dog_backend.spring_dog_backend.model.Pet;
 import spring_dog_backend.spring_dog_backend.repository.CleaningLogRepository;
-import spring_dog_backend.spring_dog_backend.repository.CleaningLogService;
 import spring_dog_backend.spring_dog_backend.repository.PetRepository;
 
 import java.time.LocalDate;
@@ -27,12 +26,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static spring_dog_backend.spring_dog_backend.model.Pet.Species.OTHER;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CleaningLogServiceImpl implements CleaningLogService {
+public class CleaningLogServiceImpl implements spring_dog_backend.spring_dog_backend.service.CleaningLogService {
 
     private final CleaningLogRepository cleaningLogRepository;
     private final PetRepository petRepository;
@@ -56,7 +53,7 @@ public class CleaningLogServiceImpl implements CleaningLogService {
 
         CleaningLog cleaningLog = CleaningLog.builder()
                 .pet(pet)
-                .itemType(CleaningLog.ItemType.valueOf(String.valueOf(request.getItemType())))
+                .itemType(request.getItemType())
                 .cleanedAt(request.getCleanedAt().atStartOfDay())
                 .cleaningMethod(request.getCleaningMethod())
                 .cleaningProducts(cleaningProductsJson)
@@ -94,17 +91,31 @@ public class CleaningLogServiceImpl implements CleaningLogService {
         return responses;
     }
 
+
+
+    @Override
+    public CleaningLogResponse getCleaningLogByIdAndItemType(Long id, CleaningLog.ItemType itemType)
+            throws CleaningLogNotFoundException {
+
+        log.info("Fetching cleaning log with ID: {} and item type: {}", id, itemType);
+
+        CleaningLog cleaningLog = cleaningLogRepository.findByIdAndItemType(id, itemType)
+                .orElseThrow(() ->  new CleaningLogNotFoundException(id));
+
+        return convertToResponse(cleaningLog);
+    }
+
+
     @Override
     @Transactional(readOnly = true)
     public CleaningLogResponse getCleaningLogById(Long id) {
         log.info("Fetching cleaning log with ID: {}", id);
 
-        CleaningLog cleaningLog = cleaningLogRepository.findById(id)
+        CleaningLog cleaningLog = cleaningLogRepository.findById(id.intValue())
                 .orElseThrow(() -> new CleaningLogNotFoundException(id));
 
         return convertToResponse(cleaningLog);
     }
-
     @Override
     @Transactional(readOnly = true)
     public List<CleaningLogResponse> getCleaningLogsByPetId(Long petId) {
@@ -169,32 +180,19 @@ public class CleaningLogServiceImpl implements CleaningLogService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Map<String, Long> getCleaningStatsByPetId(Long petId) {
-        log.info("Fetching cleaning statistics for pet ID: {}", petId);
 
-        validatePetExists(petId);
-
-        List<Object[]> stats = cleaningLogRepository.findCleaningCountByItemType(petId);
-        return stats.stream()
-                .collect(Collectors.toMap(
-                        obj -> ((CleaningLog.ItemType) obj[0]).name(),
-                        obj -> (Long) obj[1]
-                ));
-    }
 
     @Override
     @Transactional
     public CleaningLogResponse updateCleaningLog(Long id, UpdateCleaningLogRequest request) {
         log.info("Updating cleaning log with ID: {}", id);
 
-        CleaningLog cleaningLog = cleaningLogRepository.findById(id)
+        CleaningLog cleaningLog = cleaningLogRepository.findById(Math.toIntExact(id))
                 .orElseThrow(() -> new CleaningLogNotFoundException(id));
 
         // Update fields if provided
         if (request.getItemType() != null) {
-            cleaningLog.setItemType(CleaningLog.ItemType.valueOf(String.valueOf(request.getItemType())));
+            cleaningLog.setItemType(request.getItemType());
         }
 
         if (request.getCleanedAt() != null) {
@@ -219,30 +217,45 @@ public class CleaningLogServiceImpl implements CleaningLogService {
             cleaningLog.setCleaningProducts(cleaningProductsJson);
         }
 
-//        // Recalculate next due date if cleaned date or item type changed
-//        if (request.getCleanedAt() != null || request.getItemType() != null) {
-//            LocalDate cleanedAt = (request.getCleanedAt() != null ? request.getCleanedAt() : cleaningLog.getCleanedAt()).atStartOfDay();
-//            CleaningLog.ItemType itemType = request.getItemType() != null ? request.getItemType() : cleaningLog.getItemType();
-//            LocalDate nextDueDate = calculateNextDueDate(cleanedAt, itemType);
-//            cleaningLog.setNextDueDate(nextDueDate);
-//        }
-
         CleaningLog updatedLog = cleaningLogRepository.save(cleaningLog);
         log.info("Cleaning log updated successfully with ID: {}", updatedLog.getId());
 
         return convertToResponse(updatedLog);
     }
+    @Override
+    @Transactional(readOnly = true)
+    public Map<String, Long> getCleaningStatsByPetId(Long petId) {
+        log.info("Fetching cleaning statistics for pet ID: {}", petId);
 
+        validatePetExists(petId);
+
+        List<Object[]> stats = cleaningLogRepository.findCleaningCountByItemType(petId);
+
+        log.debug("Raw stats from repository: {}", stats);
+        for (int i = 0; i < stats.size(); i++) {
+            Object[] stat = stats.get(i);
+            log.debug("Stat {}: itemType={} (type: {}), count={} (type: {})",
+                    i, stat[0], stat[0] != null ? stat[0].getClass().getName() : "null",
+                    stat[1], stat[1] != null ? stat[1].getClass().getName() : "null");
+        }
+
+        return stats.stream()
+                .filter(obj -> obj[0] != null)
+                .collect(Collectors.toMap(
+                        obj -> ((CleaningLog.ItemType) obj[0]).name(),
+                        obj -> ((Number) obj[1]).longValue()
+                ));
+    }
     @Override
     @Transactional
     public void deleteCleaningLog(Long id) {
         log.info("Deleting cleaning log with ID: {}", id);
 
-        if (!cleaningLogRepository.existsById(id)) {
+        if (!cleaningLogRepository.existsById(Math.toIntExact(id))) {
             throw new CleaningLogNotFoundException(id);
         }
 
-        cleaningLogRepository.deleteById(id);
+        cleaningLogRepository.deleteById(Math.toIntExact(id));
         log.info("Cleaning log deleted successfully with ID: {}", id);
     }
 
@@ -288,20 +301,18 @@ public class CleaningLogServiceImpl implements CleaningLogService {
                 return cleanedAt.plusWeeks(1);    // Clean toys weekly
             case LEASH_COLLAR:
                 return cleanedAt.plusWeeks(3);    // Clean leash/collar every 3 weeks
-//            case OTHER:
-//                return cleanedAt.plusWeeks(1);    // Default weekly for other items
             default:
-                return cleanedAt.plusWeeks(1);
+                return cleanedAt.plusWeeks(1);    // Default weekly for other items
         }
     }
 
     private CleaningLogResponse convertToResponse(CleaningLog cleaningLog) {
         CleaningLogResponse response = new CleaningLogResponse();
-        response.setId(Long.valueOf(cleaningLog.getId()));
+        response.setId(cleaningLog.getId().longValue());  // Convert Integer to Long
         response.setPetId(cleaningLog.getPet().getId());
         response.setPetName(cleaningLog.getPet().getName());
-        response.setItemType(CleaningLog.ItemType.valueOf(String.valueOf(cleaningLog.getItemType())));
-        response.setCleanedAt(LocalDate.from(cleaningLog.getCleanedAt()));
+        response.setItemType(cleaningLog.getItemType());
+        response.setCleanedAt(cleaningLog.getCleanedAt().toLocalDate());
         response.setCleaningMethod(cleaningLog.getCleaningMethod());
         response.setNotes(cleaningLog.getNotes());
         response.setNextDueDate(cleaningLog.getNextDueDate());
@@ -326,4 +337,6 @@ public class CleaningLogServiceImpl implements CleaningLogService {
         return response;
     }
 }
+
+
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- This should be purple in light theme, dark in dark theme -->
+    <background android:drawable="@color/icon_background"/>
+
+    <!-- This is your frame_412 image -->
+    <foreground android:drawable="@mipmap/frame_412"/>
+</adaptive-icon>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    &lt;!&ndash; Background will auto-switch between light/dark theme &ndash;&gt;-->
+<!--    <background android:drawable="@color/icon_background"/>-->
+<!--    &lt;!&ndash; Your foreground icon &ndash;&gt;-->
+<!--    <foreground android:drawable="@mipmap/frame_412"/>-->
+<!--</adaptive-icon>-->

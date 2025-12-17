@@ -1,6 +1,7 @@
 package spring_dog_backend.spring_dog_backend.service;
 
 import org.springframework.stereotype.Service;
+
 import spring_dog_backend.spring_dog_backend.model.Metadata;
 import spring_dog_backend.spring_dog_backend.model.PredictionResponse;
 import spring_dog_backend.spring_dog_backend.model.Temperament;
@@ -72,7 +73,7 @@ public class PredictionService {
 
     public List<String> getAllBreeds() {
         List<String> breeds = breedDataLoader.getAllBreedNames();
-        System.out.println(STR."\uD83D\uDCCB PredictionService returning \{breeds.size()} breeds from JSON");
+        System.out.println(STR." PredictionService returning \{breeds.size()} breeds from JSON");
         return breeds;
     }
 

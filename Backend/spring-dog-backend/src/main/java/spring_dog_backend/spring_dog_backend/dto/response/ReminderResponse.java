@@ -66,31 +66,3 @@ public class ReminderResponse {
         return response;
     }}
 
-//package spring_dog_backend.spring_dog_backend.dto.response;
-//
-//import lombok.Data;
-//import spring_dog_backend.spring_dog_backend.model.Reminder;
-//
-//import java.time.LocalDateTime;
-//
-//@Data
-//public class ReminderResponse {
-//    private Long id;
-//    private Long petId;
-//    private String petName;
-//    private Long categoryId;
-//    private String categoryName;
-//    private String subcategory;
-//    private String title;
-//    private String description;
-//    private LocalDateTime dueDateTime;
-//    private Reminder.RepeatPattern repeatPattern;
-//    private Integer repeatInterval;
-//    private Reminder.Priority priority;
-//    private Boolean isCompleted;
-//    private LocalDateTime completedAt;
-//    private String notes;
-//    private String customData;
-//    private LocalDateTime createdAt;
-//    private LocalDateTime updatedAt;
-//}

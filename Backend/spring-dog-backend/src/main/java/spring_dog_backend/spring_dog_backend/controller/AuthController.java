@@ -33,8 +33,7 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@Valid @RequestBody SignupRequest signupRequest,
-                                      BindingResult bindingResult) {
+    public ResponseEntity<?> register(@Valid @RequestBody SignupRequest signupRequest, BindingResult bindingResult) {
         try {
             System.out.println("=== 👤 REGISTRATION ATTEMPT ===");
 
@@ -44,7 +43,7 @@ public class AuthController {
                 bindingResult.getFieldErrors().forEach(error ->
                         errors.put(error.getField(), error.getDefaultMessage()));
 
-                System.out.println("❌ SPRING VALIDATION FAILED: " + errors);
+                System.out.println(STR."❌ SPRING VALIDATION FAILED: \{errors}");
                 return ResponseEntity.badRequest()
                         .body(Map.of(
                                 "success", false,
@@ -194,194 +193,6 @@ public class AuthController {
 
 
 
-//    @PostMapping("/signup")
-//    public ResponseEntity<?> register(@RequestBody SignupRequest signupRequest) {
-//        try {
-//            System.out.println("=== 👤 REGISTRATION ATTEMPT ===");
-//            System.out.println("Username: " + signupRequest.getUsername());
-//            System.out.println("Email: " + signupRequest.getEmail());
-//            System.out.println("Full Name: " + signupRequest.getFullName());
-//            System.out.println(STR."Password length: \{signupRequest.getPassword() != null ? signupRequest.getPassword().length() : 0}");
-//
-//            // ... [KEEP ALL YOUR EXISTING VALIDATION CODE] ...
-//
-//            // Create new user
-//            User user = new User();
-//            user.setUsername(signupRequest.getUsername());
-//            user.setEmail(signupRequest.getEmail());
-//
-//            // Encode password before saving
-//            String encodedPassword = passwordEncoder.encode(signupRequest.getPassword());
-//            user.setPassword(encodedPassword);
-//            user.setFullName(signupRequest.getFullName());
-//
-//            // ✅ ADD DEBUG CODE RIGHT HERE - AFTER CREATING USER, BEFORE SAVING
-//            System.out.println("🔍 DEBUG: About to save user to database...");
-//            System.out.println(STR."   - Username: \{user.getUsername()}");
-//            System.out.println(STR."   - Email: \{user.getEmail()}");
-//            System.out.println(STR."   - Full Name: \{user.getFullName()}");
-//            System.out.println(STR."   - Password encoded: \{user.getPassword() != null}");
-//
-//            User savedUser = userRepository.save(user);
-//
-//            // ✅ ADD THIS DEBUG CODE RIGHT AFTER SAVING
-//            System.out.println("✅ USER SAVED TO DATABASE:");
-//            System.out.println("   - ID: " + savedUser.getId());
-//            System.out.println("   - Username: " + savedUser.getUsername());
-//            System.out.println("   - Email: " + savedUser.getEmail());
-//            System.out.println("   - Full Name: " + savedUser.getFullName());
-//            System.out.println("   - Created At: " + savedUser.getCreatedAt());
-//
-//            // Verify the user was actually saved
-//            Optional<User> verifiedUser = userRepository.findById(savedUser.getId());
-//            if (verifiedUser.isPresent()) {
-//                System.out.println("✅ USER VERIFIED IN DATABASE");
-//                User foundUser = verifiedUser.get();
-//                System.out.println("   - Verified Username: " + foundUser.getUsername());
-//                System.out.println("   - Verified Email: " + foundUser.getEmail());
-//            } else {
-//                System.out.println("❌ USER NOT FOUND AFTER SAVE!");
-//            }
-//
-//            System.out.println("✅ USER REGISTERED: " + savedUser.getUsername());
-//            System.out.println("🔑 Encoded password length: " + savedUser.getPassword().length());
-//
-//            // Generate token
-//            String token = jwtUtil.generateJwtToken(savedUser.getUsername());
-//
-//            // Response
-//            Map<String, Object> userInfo = new HashMap<>();
-//            userInfo.put("id", savedUser.getId());
-//            userInfo.put("username", savedUser.getUsername());
-//            userInfo.put("email", savedUser.getEmail());
-//            userInfo.put("fullName", savedUser.getFullName());
-//
-//            Map<String, Object> response = new HashMap<>();
-//            response.put("token", token);
-//            response.put("user", userInfo);
-//            response.put("message", "Registration successful");
-//
-//            return ResponseEntity.ok(response);
-//
-//        } catch (Exception e) {
-//            System.out.println("💥 REGISTRATION ERROR: " + e.getMessage());
-//            e.printStackTrace();
-//            return ResponseEntity.badRequest().body(
-//                    Map.of("error", "Registration failed", "message", e.getMessage())
-//            );
-//        }
-//    }
-
-
-
-
-
-
-//    @PostMapping("/signup")
-//    public ResponseEntity<?> register(@RequestBody SignupRequest signupRequest) {
-//        try {
-//            System.out.println("=== 👤 REGISTRATION ATTEMPT ===");
-//            System.out.println("Username: " + signupRequest.getUsername());
-//            System.out.println("Email: " + signupRequest.getEmail());
-//            System.out.println("Full Name: " + signupRequest.getFullName());
-//            System.out.println(STR."Password length: \{signupRequest.getPassword() != null ? signupRequest.getPassword().length() : 0}");
-//
-//            // ✅ MANUAL VALIDATION: Check if fields are provided
-//            if (signupRequest.getUsername() == null || signupRequest.getUsername().trim().isEmpty()) {
-//                return ResponseEntity.badRequest().body(
-//                        Map.of("error", "Registration failed", "message", "Username is required")
-//                );
-//            }
-//
-//            if (signupRequest.getEmail() == null || signupRequest.getEmail().trim().isEmpty()) {
-//                return ResponseEntity.badRequest().body(
-//                        Map.of("error", "Registration failed", "message", "Email is required")
-//                );
-//            }
-//
-//            if (signupRequest.getPassword() == null || signupRequest.getPassword().trim().isEmpty()) {
-//                return ResponseEntity.badRequest().body(
-//                        Map.of("error", "Registration failed", "message", "Password is required")
-//                );
-//            }
-//
-//            // ✅ MANUAL VALIDATION: Password length (3-20 characters)
-//            String password = signupRequest.getPassword();
-//            if (password.length() < 3) {
-//                return ResponseEntity.badRequest().body(
-//                        Map.of("error", "Registration failed",
-//                                "message", "Password must be at least 3 characters long")
-//                );
-//            }
-//
-//            if (password.length() > 20) {
-//                return ResponseEntity.badRequest().body(
-//                        Map.of("error", "Registration failed",
-//                                "message", "Password must be no more than 20 characters long")
-//                );
-//            }
-//
-//            // ✅ MANUAL VALIDATION: Username length
-//            if (signupRequest.getUsername().length() < 3 || signupRequest.getUsername().length() > 50) {
-//                return ResponseEntity.badRequest().body(
-//                        Map.of("error", "Registration failed",
-//                                "message", "Username must be between 3 and 50 characters")
-//                );
-//            }
-//
-//            // Check if username exists
-//            if (userRepository.findByUsername(signupRequest.getUsername()).isPresent()) {
-//                return ResponseEntity.badRequest().body(
-//                        Map.of("error", "Registration failed", "message", "Username already exists")
-//                );
-//            }
-//
-//            // Check if email exists
-//            if (userRepository.findByEmail(signupRequest.getEmail()).isPresent()) {
-//                return ResponseEntity.badRequest().body(
-//                        Map.of("error", "Registration failed", "message", "Email already exists")
-//                );
-//            }
-//
-//            // Create new user
-//            User user = new User();
-//            user.setUsername(signupRequest.getUsername());
-//            user.setEmail(signupRequest.getEmail());
-//
-//            // Encode password before saving
-//            String encodedPassword = passwordEncoder.encode(signupRequest.getPassword());
-//            user.setPassword(encodedPassword);
-//            user.setFullName(signupRequest.getFullName());
-//
-//            User savedUser = userRepository.save(user);
-//            System.out.println("✅ USER REGISTERED: " + savedUser.getUsername());
-//            System.out.println("🔑 Encoded password length: " + savedUser.getPassword().length());
-//
-//            // Generate token
-//            String token = jwtUtil.generateJwtToken(savedUser.getUsername());
-//
-//            // Response
-//            Map<String, Object> userInfo = new HashMap<>();
-//            userInfo.put("id", savedUser.getId());
-//            userInfo.put("username", savedUser.getUsername());
-//            userInfo.put("email", savedUser.getEmail());
-//            userInfo.put("fullName", savedUser.getFullName());
-//
-//            Map<String, Object> response = new HashMap<>();
-//            response.put("token", token);
-//            response.put("user", userInfo);
-//            response.put("message", "Registration successful");
-//
-//            return ResponseEntity.ok(response);
-//
-//        } catch (Exception e) {
-//            System.out.println("💥 REGISTRATION ERROR: " + e.getMessage());
-//            e.printStackTrace();
-//            return ResponseEntity.badRequest().body(
-//                    Map.of("error", "Registration failed", "message", e.getMessage())
-//            );
-//        }
-//    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {

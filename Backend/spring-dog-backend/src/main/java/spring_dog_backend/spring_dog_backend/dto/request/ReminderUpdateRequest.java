@@ -19,17 +19,3 @@ public class ReminderUpdateRequest {
     private String customData;
 }
 
-//package spring_dog_backend.spring_dog_backend.dto.request;
-//
-//import lombok.Data;
-//import java.time.LocalDateTime;
-//
-//@Data
-//public class ReminderUpdateRequest {
-//    private String title;
-//    private String description;
-//    private LocalDateTime dueDateTime;
-//    private String notes;
-//    private Boolean isCompleted;
-//    private String customData;
-//}

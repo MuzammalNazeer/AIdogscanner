@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Override vibrantPurple for dark theme -->
+    <color name="vibrantPurple">#21241F</color>
+
+    <!-- Override other colors for dark theme if needed -->
+    <color name="icon_background">@color/vibrantPurple</color>
+    <color name="primary_color">#21241F</color>
+    <color name="primary_dark">#1A1D18</color> <!-- Even darker -->
+    <color name="primary_light">#2B2E29</color> <!-- Slightly lighter -->
+
+    <!-- Adjust other colors for dark theme -->
+    <color name="white">#E0E0E0</color> <!-- Softer white for dark theme -->
+    <color name="black">#121212</color> <!-- Softer black for dark theme -->
+</resources>
