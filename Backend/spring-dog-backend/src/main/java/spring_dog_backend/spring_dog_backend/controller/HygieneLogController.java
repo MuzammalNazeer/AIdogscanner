@@ -35,8 +35,8 @@ public class HygieneLogController {
     public ResponseEntity<?> createHygieneLogs(
             @Valid @RequestBody List<CreateHygieneLogRequest> requests) {
 
-        log.info("=== 🆕 CREATE MULTIPLE HYGIENE LOGS ENDPOINT ===");
-        log.info("📥 Received {} hygiene log requests", requests.size());
+        log.info("===  CREATE MULTIPLE HYGIENE LOGS ENDPOINT ===");
+        log.info(" Received {} hygiene log requests", requests.size());
 
         try {
             List<HygieneLogResponse> responses = hygieneLogService.createHygieneLogs(requests);
@@ -79,7 +79,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
 
     @GetMapping("/{id}")
     public ResponseEntity<HygieneLogResponse> getHygieneLog(@PathVariable Long id) {
-        log.info("📋 Getting hygiene log with ID: {}", id);
+        log.info(" Getting hygiene log with ID: {}", id);
         try {
             HygieneLogResponse response = hygieneLogService.getHygieneLogById(id);
             log.info("✅ Found hygiene log with ID: {}", id);
@@ -92,7 +92,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
 
     @GetMapping("/pet/{petId}")
     public ResponseEntity<List<HygieneLogResponse>> getHygieneLogsByPet(@PathVariable Long petId) {
-        log.info("📋 Getting all hygiene logs for pet ID: {}", petId);
+        log.info(" Getting all hygiene logs for pet ID: {}", petId);
         try {
             List<HygieneLogResponse> responses = hygieneLogService.getHygieneLogsByPetId(petId);
             if (log.isInfoEnabled()) {
@@ -110,7 +110,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
             @PathVariable Long petId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        log.info("📄 Getting paginated hygiene logs for pet ID: {}, page: {}, size: {}", petId, page, size);
+        log.info(" Getting paginated hygiene logs for pet ID: {}, page: {}, size: {}", petId, page, size);
         try {
             Pageable pageable = PageRequest.of(page, size);
             Page<HygieneLogResponse> responses = ((HygieneLogServiceImpl) hygieneLogService)
@@ -129,7 +129,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
             @PathVariable Long petId,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
-        log.info("📅 Getting hygiene logs for pet ID: {} between {} and {}", petId, startDate, endDate);
+        log.info(" Getting hygiene logs for pet ID: {} between {} and {}", petId, startDate, endDate);
         try {
             List<HygieneLogResponse> responses = ((HygieneLogServiceImpl) hygieneLogService)
                     .getHygieneLogsByDateRange(petId, startDate, endDate);
@@ -143,7 +143,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
 
     @GetMapping("/pet/{petId}/total-cost")
     public ResponseEntity<Double> getTotalHygieneCost(@PathVariable Long petId) {
-        log.info("💰 Calculating total hygiene cost for pet ID: {}", petId);
+        log.info(" Calculating total hygiene cost for pet ID: {}", petId);
         try {
             Double totalCost = ((HygieneLogServiceImpl) hygieneLogService).getTotalHygieneCostByPetId(petId);
             log.info("✅ Total hygiene cost for pet ID {}: ${}", petId, totalCost);
@@ -158,7 +158,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
     public ResponseEntity<List<HygieneLogResponse>> getRecentHygieneLogs(
             @PathVariable Long petId,
             @RequestParam(defaultValue = "30") int days) {
-        log.info("🕒 Getting recent hygiene logs for pet ID: {} from last {} days", petId, days);
+        log.info(" Getting recent hygiene logs for pet ID: {} from last {} days", petId, days);
         try {
             List<HygieneLogResponse> responses = hygieneLogService.getRecentHygieneLogs(petId, days);
             log.info("✅ Found {} recent hygiene logs for pet ID: {}", responses.size(), petId);
@@ -172,8 +172,8 @@ public ResponseEntity<Map<String, String>> healthCheck() {
     public ResponseEntity<?> getDueHygieneActivitiesByType(
             @PathVariable HygieneLog.ActivityType activityType) {
 
-        log.info("=== ⏰ GET DUE HYGIENE ACTIVITIES BY TYPE ===");
-        log.info("📥 Request for due activities of type: {}", activityType);
+        log.info("===  GET DUE HYGIENE ACTIVITIES BY TYPE ===");
+        log.info(" Request for due activities of type: {}", activityType);
 
         try {
             List<HygieneLogResponse> dueActivities = hygieneLogService.getDueHygieneActivitiesByType(activityType);
@@ -186,7 +186,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
     }
     @GetMapping("/due")
     public ResponseEntity<List<HygieneLogResponse>> getDueHygieneActivities() {
-        log.info("⏰ Getting due hygiene activities");
+        log.info(" Getting due hygiene activities");
         try {
             List<HygieneLogResponse> responses = hygieneLogService.getDueHygieneActivities();
             log.info("✅ Found {} due hygiene activities", responses.size());
@@ -201,7 +201,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
     public ResponseEntity<List<HygieneLogResponse>> getHygieneLogsByActivityType(
             @PathVariable Long petId,
             @PathVariable HygieneLog.ActivityType activityType) {
-        log.info("🔧 Getting hygiene logs for pet ID: {} with activity type: {}", petId, activityType);
+        log.info(" Getting hygiene logs for pet ID: {} with activity type: {}", petId, activityType);
         try {
             List<HygieneLogResponse> responses = hygieneLogService.getHygieneLogsByActivityType(petId, activityType);
             log.info("✅ Found {} hygiene logs with activity type {} for pet ID: {}",
@@ -218,17 +218,17 @@ public ResponseEntity<Map<String, String>> healthCheck() {
             @PathVariable Long id,
             @Valid @RequestBody CreateHygieneLogRequest request) {
 
-        log.info("✏️ Updating hygiene log with ID: {}", id);
+        log.info(" Updating hygiene log with ID: {}", id);
 
         // Check authentication
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
-            log.info("🔐 Current user: {}, Authorities: {}", auth.getName(), auth.getAuthorities());
+            log.info(" Current user: {}, Authorities: {}", auth.getName(), auth.getAuthorities());
         } else {
-            log.warn("🔐 No authentication found!");
+            log.warn(" No authentication found!");
         }
 
-        log.info("📥 Update request - petId: {}, activityType: {}",
+        log.info(" Update request - petId: {}, activityType: {}",
                 request.getPetId(), request.getActivityType());
 
         try {
@@ -243,7 +243,7 @@ public ResponseEntity<Map<String, String>> healthCheck() {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> deleteHygieneLog(@PathVariable Long id) {
-        log.info("🗑️ Deleting hygiene log with ID: {}", id);
+        log.info(" Deleting hygiene log with ID: {}", id);
 
         try {
             hygieneLogService.deleteHygieneLog(id);

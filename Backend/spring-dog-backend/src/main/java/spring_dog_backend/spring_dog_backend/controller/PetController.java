@@ -107,7 +107,7 @@ public class PetController {
 
     @PostMapping("/public")
     public ResponseEntity<ApiResponse<PetResponse>> createPetPublic(@Valid @RequestBody PetRequest request) {
-        System.out.println("🔓 PUBLIC CREATE PET - userId: " + request.getUserId() + ", name: " + request.getName());
+        System.out.println(" PUBLIC CREATE PET - userId: " + request.getUserId() + ", name: " + request.getName());
         PetResponse pet = petService.createPet(request);
         return ResponseEntity.ok(ApiResponse.success("Pet created successfully (public)", pet));
     }
@@ -138,7 +138,7 @@ public class PetController {
     public ResponseEntity<?> debugAuthentication() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        System.out.println("🔍 AUTHENTICATION DEBUG:");
+        System.out.println(" AUTHENTICATION DEBUG:");
         System.out.println("   Name: " + auth.getName());
         System.out.println("   Principal: " + auth.getPrincipal());
         System.out.println("   Authorities: " + auth.getAuthorities());
@@ -154,7 +154,7 @@ public class PetController {
 
     @PostMapping("/debug-raw")
     public ResponseEntity<?> debugRawJson(@RequestBody String rawJson) {
-        System.out.println("🔍 RAW JSON DEBUG:");
+        System.out.println(" RAW JSON DEBUG:");
         System.out.println("   Received: " + rawJson);
 
         Map<String, Object> response = Map.of(
@@ -186,7 +186,7 @@ public class PetController {
 
     @PostMapping("/debug-map")
     public ResponseEntity<?> debugWithMap(@RequestBody Map<String, Object> requestMap) {
-        System.out.println("🔍 REQUEST MAP DEBUG:");
+        System.out.println(" REQUEST MAP DEBUG:");
         requestMap.forEach((key, value) -> {
             System.out.println("   " + key + " = " + value + " (type: " +
                     (value != null ? value.getClass().getSimpleName() : "null") + ")");
@@ -215,10 +215,10 @@ public class PetController {
             System.out.println("   ❌ userId field not found in request");
             // Check for alternative field names
             if (requestMap.containsKey("userid")) {
-                System.out.println("   💡 Found 'userid' field instead of 'userId'");
+                System.out.println("    Found 'userid' field instead of 'userId'");
             }
             if (requestMap.containsKey("user_id")) {
-                System.out.println("   💡 Found 'user_id' field instead of 'userId'");
+                System.out.println("    Found 'user_id' field instead of 'userId'");
             }
         }
 
@@ -232,7 +232,7 @@ public class PetController {
 
     @PostMapping("/debug-create")
     public ResponseEntity<?> debugCreatePet(@RequestBody Map<String, Object> requestMap) {
-        System.out.println("🔍 DEBUG CREATE PET:");
+        System.out.println(" DEBUG CREATE PET:");
 
         try {
             PetRequest request = new PetRequest();

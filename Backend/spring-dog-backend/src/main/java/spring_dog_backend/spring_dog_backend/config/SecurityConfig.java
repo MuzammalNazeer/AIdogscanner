@@ -46,7 +46,8 @@ public class SecurityConfig {
                                 "/api/reminder-categories/**",
                                 "/api/favorites/breeds/**",
                                 "/api/hygiene-logs/**",
-                                "/api/cleaning-logs/**"
+                                "/api/cleaning-logs/**",
+                                "/api/medical-records**"
 
                         ).permitAll()
                         .anyRequest().authenticated()

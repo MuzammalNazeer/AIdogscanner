@@ -191,8 +191,5 @@ public class CleaningLogController {
         Page<CleaningLogResponse> responses = cleaningLogService.getCleaningLogsByPetIdWithPagination(petId, pageable);
         return ResponseEntity.ok(responses);
     }
-
-
-
 }
 

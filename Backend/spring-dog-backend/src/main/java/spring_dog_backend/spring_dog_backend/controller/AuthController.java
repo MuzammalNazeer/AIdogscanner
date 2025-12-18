@@ -126,7 +126,7 @@ public class AuthController {
             user.setPassword(encodedPassword);
 
             // ✅ DEBUG: Before saving
-            System.out.println("🔍 ABOUT TO SAVE USER:");
+            System.out.println(" ABOUT TO SAVE USER:");
             System.out.println("   - Username: " + user.getUsername());
             System.out.println("   - Email: " + user.getEmail());
             System.out.println("   - Full Name: " + user.getFullName());
@@ -177,11 +177,11 @@ public class AuthController {
             response.put("user", userInfo);
             response.put("message", "Registration successful");
 
-            System.out.println("🎉 REGISTRATION COMPLETED SUCCESSFULLY FOR: " + savedUser.getUsername());
+            System.out.println(" REGISTRATION COMPLETED SUCCESSFULLY FOR: " + savedUser.getUsername());
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
-            System.out.println("💥 REGISTRATION ERROR: " + e.getMessage());
+            System.out.println(" REGISTRATION ERROR: " + e.getMessage());
             e.printStackTrace();
             return ResponseEntity.internalServerError().body(
                     Map.of("success", false, "error", "Registration failed",
