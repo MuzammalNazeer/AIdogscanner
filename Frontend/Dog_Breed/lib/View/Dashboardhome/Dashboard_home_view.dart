@@ -1,4 +1,5 @@
 import 'package:dog_breed/View/HomeView/HomeView.dart';
+import 'package:dog_breed/View/MyPetsView/MyPetsView.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,9 +7,13 @@ import 'package:provider/provider.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/View_model/home/home_view_model.dart';
 
+import '../ActivitesView/ActivitesView.dart';
+import '../Calendar/calendarView.dart';
 import '../Favourites/favouritesView.dart';
 import '../History/historyView.dart';
+import '../ProfileView/ProfileView.dart';
 import '../setting/settingView.dart';
+import '../shop/shopview.dart';
 
 class DashboardHomeView extends StatefulWidget {
   const DashboardHomeView({super.key});
@@ -25,10 +30,11 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
     super.initState();
     _widgetOptions = <Widget>[
       const Homeview(),
-      const Favouritesview(),
-       const SizedBox(),
-      const Historyview(),
-      const Settingview(),
+      const Calendarview(),
+      const Mypetsview(),
+      const Shopview(),
+      const Activitesview(),
+      const Profileview(),
     ];
   }
 
@@ -43,7 +49,6 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         children: _widgetOptions,
       ),
       floatingActionButton: _buildAddPetFAB(),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _buildBottomNavigationBar(homeProvider),
     );
@@ -82,7 +87,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.camera_alt_outlined,color: Colors.white,),
+              const Icon(Icons.camera_alt_outlined, color: Colors.white),
               Text(
                 'Camera',
                 textAlign: TextAlign.center,
@@ -100,6 +105,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
       ),
     );
   }
+
   Widget _buildBottomNavigationBar(HomeViewModel homeProvider) {
     final colors = Theme.of(context).colorScheme;
     return Container(
@@ -119,7 +125,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-          currentIndex: homeProvider.selectedIndex,
+          currentIndex: _getCurrentIndexForNavigationBar(homeProvider.selectedIndex),
           selectedFontSize: 11.sp,
           unselectedFontSize: 11.sp,
           selectedItemColor: colors.onSecondary,
@@ -128,7 +134,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
             fontFamily: 'Sora',
             fontWeight: FontWeight.bold,
             color: const Color(0xFF000000),
-            fontSize: 14.sp,
+            fontSize: 12.sp,
             height: 1.0,
           ),
           unselectedLabelStyle: TextStyle(
@@ -139,12 +145,15 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
           ),
           iconSize: 24.w,
           elevation: 0,
-          onTap: (index) {
-            if (index == 2) return;
-            homeProvider.selectedIndex = index;
+          onTap: (navBarIndex) {
+            // Convert navigation bar index to widget index
+            int widgetIndex = _convertNavBarIndexToWidgetIndex(navBarIndex);
+            if (widgetIndex != -1) {
+              homeProvider.selectedIndex = widgetIndex;
+            }
           },
           items: [
-            // Home
+            // Home (nav index 0 -> widget index 0)
             BottomNavigationBarItem(
               icon: SizedBox(
                 width: 25,
@@ -166,71 +175,118 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
               ),
               label: 'Home',
             ),
+
+            // Calendar (nav index 1 -> widget index 1)
             BottomNavigationBarItem(
               icon: Icon(
                 size: 25,
-                Icons.favorite,
+                Icons.calendar_month,
                 color: homeProvider.selectedIndex == 1
                     ? colors.tertiary
                     : const Color(0xFF666666),
               ),
-              activeIcon: Icon(Icons.favorite,size: 25, color: colors.tertiary),
-              label: 'Favourites',
+              activeIcon: Icon(Icons.calendar_month, size: 25, color: colors.tertiary),
+              label: 'Calendar',
             ),
 
-            // FAB gap
+            // My Pets (nav index 2 -> widget index 2)
+            BottomNavigationBarItem(
+              icon: Icon(
+                size: 25,
+                Icons.pets,
+                color: homeProvider.selectedIndex == 2
+                    ? colors.tertiary
+                    : const Color(0xFF666666),
+              ),
+              activeIcon: Icon(Icons.pets, size: 25, color: colors.tertiary),
+              label: 'My Pets',
+            ),
+
+            // FAB gap (nav index 3 -> no widget)
             const BottomNavigationBarItem(
               icon: SizedBox.shrink(),
               label: '',
             ),
 
-            // History
+            // Shop (nav index 4 -> widget index 3)
             BottomNavigationBarItem(
               icon: Icon(
                 size: 25,
-                Icons.history,
+                Icons.shopping_bag,
                 color: homeProvider.selectedIndex == 3
                     ? colors.tertiary
                     : const Color(0xFF666666),
               ),
-              activeIcon:  Icon(Icons.history,size: 25, color: colors.tertiary),
-              label: 'History',
+              activeIcon: Icon(Icons.shopping_bag, size: 25, color: colors.tertiary),
+              label: 'Shop',
             ),
 
-            // Setting
+            // Activities (nav index 5 -> widget index 4)
             BottomNavigationBarItem(
               icon: Icon(
                 size: 25,
-                Icons.settings,
+                Icons.directions_run,
                 color: homeProvider.selectedIndex == 4
                     ? colors.tertiary
                     : const Color(0xFF666666),
               ),
-              activeIcon:  Icon(Icons.settings,size: 25, color: colors.tertiary),
-              label: 'Setting',
+              activeIcon: Icon(Icons.directions_run, size: 25, color: colors.tertiary),
+              label: 'Activities',
+            ),
+
+            // Profile (nav index 6 -> widget index 5)
+            BottomNavigationBarItem(
+              icon: Icon(
+                size: 25,
+                Icons.person,
+                color: homeProvider.selectedIndex == 5
+                    ? colors.tertiary
+                    : const Color(0xFF666666),
+              ),
+              activeIcon: Icon(Icons.person, size: 25, color: colors.tertiary),
+              label: 'Profile',
             ),
           ],
-
         ),
-
       ),
     );
   }
+
+  // Convert navigation bar index to widget index
+  int _convertNavBarIndexToWidgetIndex(int navBarIndex) {
+    // Navigation bar indices: 0,1,2,3(FAB),4,5,6
+    // Widget indices: 0,1,2,3,4,5
+    if (navBarIndex == 3) return -1; // FAB position, no widget
+    if (navBarIndex > 3) return navBarIndex - 1; // After FAB: 4->3, 5->4, 6->5
+    return navBarIndex; // Before FAB: 0->0, 1->1, 2->2
+  }
+
+  // Convert widget index to navigation bar index
+  int _getCurrentIndexForNavigationBar(int widgetIndex) {
+    // Widget indices: 0,1,2,3,4,5
+    // Navigation bar indices: 0,1,2,3(FAB),4,5,6
+    if (widgetIndex >= 3) return widgetIndex + 1; // 3->4, 4->5, 5->6
+    return widgetIndex; // 0->0, 1->1, 2->2
+  }
 }
 
-
-
+// import 'package:dog_breed/View/HomeView/HomeView.dart';
+// import 'package:dog_breed/View/MyPetsView/MyPetsView.dart';
+// import 'package:dog_breed/utils/routes/routes_name.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:provider/provider.dart';
-// import 'package:dog_breed/View_model/home/home_view_model.dart';
-// import 'package:dog_breed/utils/routes/routes_name.dart';
 // import 'package:dog_breed/Valid/AppColors.dart';
+// import 'package:dog_breed/View_model/home/home_view_model.dart';
 //
+// // Import all referenced widgets
+// import '../ActivitesView/ActivitesView.dart';
+// import '../Calendar/calendarView.dart';
 // import '../Favourites/favouritesView.dart';
 // import '../History/historyView.dart';
-// import '../HomeView/HomeView.dart';
+// import '../ProfileView/ProfileView.dart';
 // import '../setting/settingView.dart';
+// import '../shop/shopview.dart';
 //
 // class DashboardHomeView extends StatefulWidget {
 //   const DashboardHomeView({super.key});
@@ -240,65 +296,81 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // }
 //
 // class _DashboardHomeViewState extends State<DashboardHomeView> {
-//   late final List<Widget> _pages;
+//   late final List<Widget> _widgetOptions;
 //
 //   @override
 //   void initState() {
 //     super.initState();
-//     _pages = <Widget>[
+//     _widgetOptions = <Widget>[
 //       const Homeview(),
-//       const Favouritesview(),
-//       const SizedBox(),
-//       const Historyview(),
-//       const Settingview(),
+//       const Calendarview(),
+//       const Mypetsview(),
+//       const Shopview(),
+//       const Activitesview(),
+//       const Profileview(),
 //     ];
 //   }
 //
 //   @override
 //   Widget build(BuildContext context) {
 //     final homeProvider = context.watch<HomeViewModel>();
-//     final colors = Theme.of(context).colorScheme;
 //
 //     return Scaffold(
 //       backgroundColor: AppColors.appColorWhite,
 //       body: IndexedStack(
 //         index: homeProvider.selectedIndex,
-//         children: _pages,
+//         children: _widgetOptions,
 //       ),
 //       floatingActionButton: _buildAddPetFAB(),
 //       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-//       bottomNavigationBar: BottomAppBar(
-//         shape:  const CircularNotchedRectangle(),
-//         notchMargin: 10.0,
-//         child: SizedBox(
-//           height: 30.h,
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceAround,
+//       bottomNavigationBar: _buildBottomNavigationBar(homeProvider),
+//     );
+//   }
+//
+//   Widget _buildAddPetFAB() {
+//     return SizedBox(
+//       width: 80.w,
+//       height: 80.h,
+//       child: FloatingActionButton(
+//         onPressed: () {
+//           Navigator.pushNamed(context, RoutesName.camera);
+//         },
+//         backgroundColor: Colors.transparent,
+//         elevation: 0,
+//         shape: const CircleBorder(),
+//         child: Container(
+//           width: 65.w,
+//           height: 65.h,
+//           decoration: BoxDecoration(
+//             shape: BoxShape.circle,
+//             color: Theme.of(context).colorScheme.onTertiary,
+//             boxShadow: [
+//               BoxShadow(
+//                 color: const Color(0x1919190D).withOpacity(0.15),
+//                 offset: const Offset(0, 8),
+//                 blurRadius: 20,
+//               ),
+//               BoxShadow(
+//                 color: const Color(0x16223308).withOpacity(0.1),
+//                 offset: const Offset(0, 4),
+//                 blurRadius: 10,
+//               ),
+//             ],
+//           ),
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
 //             children: [
-//               _buildBottomNavItem(
-//                 icon: Icons.home,
-//                 index: 0,
-//                 label: 'Home',
-//                 homeProvider: homeProvider,
-//               ),
-//               _buildBottomNavItem(
-//                 icon: Icons.favorite,
-//                 index: 1,
-//                 label: 'Favourites',
-//                 homeProvider: homeProvider,
-//               ),
-//               const SizedBox(width: 40),
-//               _buildBottomNavItem(
-//                 icon: Icons.history,
-//                 index: 3,
-//                 label: 'History',
-//                 homeProvider: homeProvider,
-//               ),
-//               _buildBottomNavItem(
-//                 icon: Icons.settings,
-//                 index: 4,
-//                 label: 'Setting',
-//                 homeProvider: homeProvider,
+//               const Icon(Icons.camera_alt_outlined, color: Colors.white),
+//               Text(
+//                 'Camera',
+//                 textAlign: TextAlign.center,
+//                 style: TextStyle(
+//                   fontFamily: 'Sora',
+//                   fontSize: 10.sp,
+//                   fontWeight: FontWeight.w600,
+//                   color: Colors.white,
+//                   height: 1.1,
+//                 ),
 //               ),
 //             ],
 //           ),
@@ -307,63 +379,153 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 //     );
 //   }
 //
-//   Widget _buildAddPetFAB() {
-//     return SizedBox(
-//       width: 80.w, // Bigger circle
-//       height: 80.h,
-//       child: FloatingActionButton(
-//         onPressed: () => Navigator.pushNamed(context, RoutesName.camera),
-//         backgroundColor: Theme.of(context).colorScheme.primary,
-//         shape: const CircleBorder(),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             const Icon(Icons.camera_alt_outlined, color: Colors.white, size: 30),
-//             SizedBox(height: 2.h),
-//             Text(
-//               'Camera',
-//               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w600),
+//   Widget _buildBottomNavigationBar(HomeViewModel homeProvider) {
+//     final colors = Theme.of(context).colorScheme;
+//     return Container(
+//       height: 70.h,
+//       decoration: BoxDecoration(
+//         color: Theme.of(context).colorScheme.background,
+//         boxShadow: [
+//           BoxShadow(
+//             color: Theme.of(context).colorScheme.background,
+//             blurRadius: 10,
+//             offset: const Offset(0, -2),
+//           ),
+//         ],
+//       ),
+//       child: Padding(
+//         padding: EdgeInsets.only(bottom: 0.h),
+//         child: BottomNavigationBar(
+//           type: BottomNavigationBarType.fixed,
+//           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+//           currentIndex: homeProvider.selectedIndex < _widgetOptions.length ? homeProvider.selectedIndex : 0,
+//           selectedFontSize: 11.sp,
+//           unselectedFontSize: 11.sp,
+//           selectedItemColor: colors.onSecondary,
+//           unselectedItemColor: const Color(0xFF7E808F),
+//           selectedLabelStyle: TextStyle(
+//             fontFamily: 'Sora',
+//             fontWeight: FontWeight.bold,
+//             color: const Color(0xFF000000),
+//             fontSize: 12.sp,
+//             height: 1.0,
+//           ),
+//           unselectedLabelStyle: TextStyle(
+//             fontFamily: 'Sora',
+//             fontWeight: FontWeight.w500,
+//             fontSize: 14.sp,
+//             height: 1.0,
+//           ),
+//           iconSize: 24.w,
+//           elevation: 0,
+//           onTap: (index) {
+//             int adjustedIndex = index;
+//             if (index > 2) {
+//               adjustedIndex = index - 1;
+//             }
+//
+//             // Ensure index is within bounds
+//             if (adjustedIndex < _widgetOptions.length) {
+//               homeProvider.selectedIndex = adjustedIndex;
+//             }
+//           },
+//           items: [
+//             // Home
+//             BottomNavigationBarItem(
+//               icon: SizedBox(
+//                 width: 25,
+//                 height: 25,
+//                 child: Image.asset(
+//                   'assets/images/home.png',
+//                   color: homeProvider.selectedIndex == 0
+//                       ? colors.tertiary
+//                       : const Color(0xFF7E808F),
+//                 ),
+//               ),
+//               activeIcon: SizedBox(
+//                 width: 25,
+//                 height: 25,
+//                 child: Image.asset(
+//                   'assets/images/home.png',
+//                   color: colors.tertiary,
+//                 ),
+//               ),
+//               label: 'Home',
+//             ),
+//             // Calendar
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 size: 25,
+//                 Icons.calendar_month,
+//                 color: homeProvider.selectedIndex == 1
+//                     ? colors.tertiary
+//                     : const Color(0xFF666666),
+//               ),
+//               activeIcon: Icon(Icons.calendar_month, size: 25, color: colors.tertiary),
+//               label: 'Calendar',
+//             ),
+//             // My Pets
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 size: 25,
+//                 Icons.pets,
+//                 color: homeProvider.selectedIndex == 2
+//                     ? colors.tertiary
+//                     : const Color(0xFF666666),
+//               ),
+//               activeIcon: Icon(Icons.pets, size: 25, color: colors.tertiary),
+//               label: 'My Pets',
+//             ),
+//             // FAB gap
+//             const BottomNavigationBarItem(
+//               icon: SizedBox.shrink(),
+//               label: '',
+//             ),
+//             // Shop
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 size: 25,
+//                 Icons.shopping_bag,
+//                 color: homeProvider.selectedIndex == 3
+//                     ? colors.tertiary
+//                     : const Color(0xFF666666),
+//               ),
+//               activeIcon: Icon(Icons.shopping_bag, size: 25, color: colors.tertiary),
+//               label: 'Shop',
+//             ),
+//             // Activities
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 size: 25,
+//                 Icons.directions_run,
+//                 color: homeProvider.selectedIndex == 4
+//                     ? colors.tertiary
+//                     : const Color(0xFF666666),
+//               ),
+//               activeIcon: Icon(Icons.directions_run, size: 25, color: colors.tertiary),
+//               label: 'Activities',
+//             ),
+//             // Profile
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 size: 25,
+//                 Icons.person,
+//                 color: homeProvider.selectedIndex == 5
+//                     ? colors.tertiary
+//                     : const Color(0xFF666666),
+//               ),
+//               activeIcon: Icon(Icons.person, size: 25, color: colors.tertiary),
+//               label: 'Profile',
 //             ),
 //           ],
 //         ),
 //       ),
 //     );
 //   }
-//
-//   Widget _buildBottomNavItem({
-//     required IconData icon,
-//     required int index,
-//     required String label,
-//     required HomeViewModel homeProvider,
-//   }) {
-//     final colors = Theme.of(context).colorScheme;
-//     final isSelected = homeProvider.selectedIndex == index;
-//
-//     return InkWell(
-//       onTap: () => homeProvider.selectedIndex = index,
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Icon(icon, color: isSelected ? colors.tertiary : const Color(0xFF666666),size: 26,),
-//           Text(
-//             label,
-//             style: TextStyle(
-//               color: isSelected ?  colors.tertiary
-//                      : const Color(0xFF666666),
-//               fontSize: 16.sp,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
 // }
 //
-//
-// // import 'package:dog_breed/View/ActivitesView/ActivitesView.dart';
 // // import 'package:dog_breed/View/HomeView/HomeView.dart';
 // // import 'package:dog_breed/View/MyPetsView/MyPetsView.dart';
-// // import 'package:dog_breed/View/ProfileView/ProfileView.dart';
 // // import 'package:dog_breed/utils/routes/routes_name.dart';
 // // import 'package:flutter/material.dart';
 // // import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -371,9 +533,13 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // // import 'package:dog_breed/Valid/AppColors.dart';
 // // import 'package:dog_breed/View_model/home/home_view_model.dart';
 // //
+// // import '../ActivitesView/ActivitesView.dart';
+// // import '../Calendar/calendarView.dart';
 // // import '../Favourites/favouritesView.dart';
 // // import '../History/historyView.dart';
+// // import '../ProfileView/ProfileView.dart';
 // // import '../setting/settingView.dart';
+// // import '../shop/shopview.dart';
 // //
 // // class DashboardHomeView extends StatefulWidget {
 // //   const DashboardHomeView({super.key});
@@ -390,10 +556,12 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // //     super.initState();
 // //     _widgetOptions = <Widget>[
 // //       const Homeview(),
-// //       const Favouritesview(),
+// //       const Calendarview(),
+// //       const Mypetsview(),
 // //        const SizedBox(),
-// //       const Historyview(),
-// //       const Settingview(),
+// //       const Shopview(),
+// //       const Activitesview(),
+// //       const Profileview(),
 // //     ];
 // //   }
 // //
@@ -408,6 +576,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // //         children: _widgetOptions,
 // //       ),
 // //       floatingActionButton: _buildAddPetFAB(),
+// //
 // //       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 // //       bottomNavigationBar: _buildBottomNavigationBar(homeProvider),
 // //     );
@@ -429,7 +598,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // //           height: 65.h,
 // //           decoration: BoxDecoration(
 // //             shape: BoxShape.circle,
-// //             color: Theme.of(context).colorScheme.onBackground,
+// //             color: Theme.of(context).colorScheme.onTertiary,
 // //             boxShadow: [
 // //               BoxShadow(
 // //                 color: const Color(0x1919190D).withOpacity(0.15),
@@ -482,16 +651,17 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // //         padding: EdgeInsets.only(bottom: 0.h),
 // //         child: BottomNavigationBar(
 // //           type: BottomNavigationBarType.fixed,
-// //           backgroundColor: Theme.of(context).colorScheme.background,
+// //           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
 // //           currentIndex: homeProvider.selectedIndex,
 // //           selectedFontSize: 11.sp,
 // //           unselectedFontSize: 11.sp,
-// //           selectedItemColor: colors.tertiary,
-// //           unselectedItemColor: const Color(0xFF666666),
+// //           selectedItemColor: colors.onSecondary,
+// //           unselectedItemColor: const Color(0xFF7E808F),
 // //           selectedLabelStyle: TextStyle(
 // //             fontFamily: 'Sora',
-// //             fontWeight: FontWeight.w600,
-// //             fontSize: 14.sp,
+// //             fontWeight: FontWeight.bold,
+// //             color: const Color(0xFF000000),
+// //             fontSize: 12.sp,
 // //             height: 1.0,
 // //           ),
 // //           unselectedLabelStyle: TextStyle(
@@ -516,7 +686,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // //                   'assets/images/home.png',
 // //                   color: homeProvider.selectedIndex == 0
 // //                       ? colors.tertiary
-// //                       : const Color(0xFF666666),
+// //                       : const Color(0xFF7E808F),
 // //                 ),
 // //               ),
 // //               activeIcon: SizedBox(
@@ -529,16 +699,28 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // //               ),
 // //               label: 'Home',
 // //             ),
+// //
 // //             BottomNavigationBarItem(
 // //               icon: Icon(
 // //                 size: 25,
-// //                 Icons.favorite,
+// //                 Icons.calendar_month,
 // //                 color: homeProvider.selectedIndex == 1
 // //                     ? colors.tertiary
 // //                     : const Color(0xFF666666),
 // //               ),
-// //               activeIcon: Icon(Icons.favorite,size: 25, color: colors.tertiary),
-// //               label: 'Favourites',
+// //               activeIcon: Icon(Icons.calendar_month,size: 25, color: colors.tertiary),
+// //               label: 'Calendar',
+// //             ),
+// //             BottomNavigationBarItem(
+// //               icon: Icon(
+// //                 size: 25,
+// //                 Icons.pets,
+// //                 color: homeProvider.selectedIndex == 2
+// //                     ? colors.tertiary
+// //                     : const Color(0xFF666666),
+// //               ),
+// //               activeIcon: Icon(Icons.pets,size: 25, color: colors.tertiary),
+// //               label: 'MY Pets',
 // //             ),
 // //
 // //             // FAB gap
@@ -552,12 +734,12 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // //               icon: Icon(
 // //                 size: 25,
 // //                 Icons.history,
-// //                 color: homeProvider.selectedIndex == 3
+// //                 color: homeProvider.selectedIndex == 4
 // //                     ? colors.tertiary
 // //                     : const Color(0xFF666666),
 // //               ),
 // //               activeIcon:  Icon(Icons.history,size: 25, color: colors.tertiary),
-// //               label: 'History',
+// //               label: 'shop',
 // //             ),
 // //
 // //             // Setting
@@ -565,17 +747,33 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 // //               icon: Icon(
 // //                 size: 25,
 // //                 Icons.settings,
-// //                 color: homeProvider.selectedIndex == 4
+// //                 color: homeProvider.selectedIndex == 5
 // //                     ? colors.tertiary
 // //                     : const Color(0xFF666666),
 // //               ),
 // //               activeIcon:  Icon(Icons.settings,size: 25, color: colors.tertiary),
-// //               label: 'Setting',
+// //               label: 'Activities',
+// //             ),
+// //             // Setting
+// //             BottomNavigationBarItem(
+// //               icon: Icon(
+// //                 size: 25,
+// //                 Icons.settings,
+// //                 color: homeProvider.selectedIndex == 5
+// //                     ? colors.tertiary
+// //                     : const Color(0xFF666666),
+// //               ),
+// //               activeIcon:  Icon(Icons.settings,size: 25, color: colors.tertiary),
+// //               label: 'Profile',
 // //             ),
 // //           ],
+// //
 // //         ),
+// //
 // //       ),
 // //     );
 // //   }
 // // }
+// //
+// //
 // //

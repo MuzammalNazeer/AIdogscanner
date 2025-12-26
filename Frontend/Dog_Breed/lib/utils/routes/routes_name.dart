@@ -27,6 +27,8 @@ class RoutesName {
   static const String feedback= 'FeedbackView';
   static const String dogSave= 'Dogtreslutsave';
   static const String myFavourites= 'Myfavouritesview';
+  static const String calendar= 'Calendarview';
+  static const String shop= 'Shopview';
 
 
 }

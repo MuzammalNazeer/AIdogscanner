@@ -57,6 +57,7 @@ dependencies:
   device_info_plus: ^9.0.3
   mailer: ^6.6.0
   emailjs: ^1.1.0
+  table_calendar: ^3.0.9
 dev_dependencies:
   flutter_test:
     sdk: flutter

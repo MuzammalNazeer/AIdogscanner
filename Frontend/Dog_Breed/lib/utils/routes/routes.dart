@@ -20,6 +20,7 @@ import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 
+import '../../View/Calendar/calendarView.dart';
 import '../../View/Favourites/favouritesView.dart';
 import '../../View/Favourites/myFavouritesview.dart';
 import '../../View/History/historyView.dart';
@@ -32,6 +33,7 @@ import '../../View/forget/newpasswordview.dart';
 import '../../View/pro/proView.dart';
 import '../../View/setting/FeedbackView.dart';
 import '../../View/setting/settingView.dart';
+import '../../View/shop/shopview.dart';
 import '../../View/signup/signupview.dart';
 
 class Routes {
@@ -88,6 +90,12 @@ class Routes {
         case RoutesName.myPets:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Mypetsview());
+        case RoutesName.calendar:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  Calendarview());
+        case RoutesName.shop:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  const Shopview());
         case RoutesName.profile:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Profileview());
