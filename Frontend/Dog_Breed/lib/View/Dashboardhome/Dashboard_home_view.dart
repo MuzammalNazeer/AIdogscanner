@@ -60,7 +60,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
       height: 80.h,
       child: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, RoutesName.camera);
+          Navigator.pushNamed(context, RoutesName.addPet);
         },
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -89,7 +89,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
             children: [
               const Icon(Icons.camera_alt_outlined, color: Colors.white),
               Text(
-                'Camera',
+                'Add Pet',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Sora',
@@ -135,13 +135,13 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
             fontWeight: FontWeight.bold,
             color: const Color(0xFF000000),
             fontSize: 12.sp,
-            height: 1.0,
+            height: 2,
           ),
           unselectedLabelStyle: TextStyle(
             fontFamily: 'Sora',
             fontWeight: FontWeight.w500,
             fontSize: 14.sp,
-            height: 1.0,
+            height: 2,
           ),
           iconSize: 24.w,
           elevation: 0,
@@ -153,13 +153,69 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
             }
           },
           items: [
-            // Home (nav index 0 -> widget index 0)
             BottomNavigationBarItem(
               icon: SizedBox(
-                width: 25,
-                height: 25,
+                width: 25.w,
+                height: 25.h,
                 child: Image.asset(
                   'assets/images/home.png',
+                  color: homeProvider.selectedIndex == 0
+                      ? colors.tertiary
+                      : const Color(0xFF7E808F),
+                ),
+              ),
+              activeIcon: SizedBox(
+                width: 25.w,
+                height: 25.h,
+                child: Image.asset(
+                  'assets/images/home.png',
+                  color: colors.tertiary,
+                ),
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                size: 25,
+                Icons.calendar_month,
+                color: homeProvider.selectedIndex == 1
+                    ? colors.tertiary
+                    : const Color(0xFF666666),
+              ),
+              activeIcon: Icon(Icons.calendar_month, size: 25.sp, color: colors.tertiary),
+              label: 'Calendar',
+            ),
+            BottomNavigationBarItem(
+              icon:SizedBox(
+                width: 25.w,
+                height: 25.h,
+                child: Image.asset(
+                  'assets/images/s12.png',
+                  color: homeProvider.selectedIndex == 0
+                      ? colors.tertiary
+                      : const Color(0xFF7E808F),
+                ),
+              ),
+              activeIcon: SizedBox(
+                width: 25.w,
+                height: 25.h,
+                child: Image.asset(
+                  'assets/images/s12.png',
+                  color: colors.tertiary,
+                ),
+              ),
+              label: 'My Pets',
+            ),
+            const BottomNavigationBarItem(
+              icon: SizedBox.shrink(),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: SizedBox(
+                width: 25.w,
+                height: 25.h,
+                child: Image.asset(
+                  'assets/images/s13.png',
                   color: homeProvider.selectedIndex == 0
                       ? colors.tertiary
                       : const Color(0xFF7E808F),
@@ -169,81 +225,52 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 width: 25,
                 height: 25,
                 child: Image.asset(
-                  'assets/images/home.png',
+                  'assets/images/s13.png',
                   color: colors.tertiary,
                 ),
               ),
-              label: 'Home',
-            ),
-
-            // Calendar (nav index 1 -> widget index 1)
-            BottomNavigationBarItem(
-              icon: Icon(
-                size: 25,
-                Icons.calendar_month,
-                color: homeProvider.selectedIndex == 1
-                    ? colors.tertiary
-                    : const Color(0xFF666666),
-              ),
-              activeIcon: Icon(Icons.calendar_month, size: 25, color: colors.tertiary),
-              label: 'Calendar',
-            ),
-
-            // My Pets (nav index 2 -> widget index 2)
-            BottomNavigationBarItem(
-              icon: Icon(
-                size: 25,
-                Icons.pets,
-                color: homeProvider.selectedIndex == 2
-                    ? colors.tertiary
-                    : const Color(0xFF666666),
-              ),
-              activeIcon: Icon(Icons.pets, size: 25, color: colors.tertiary),
-              label: 'My Pets',
-            ),
-
-            // FAB gap (nav index 3 -> no widget)
-            const BottomNavigationBarItem(
-              icon: SizedBox.shrink(),
-              label: '',
-            ),
-
-            // Shop (nav index 4 -> widget index 3)
-            BottomNavigationBarItem(
-              icon: Icon(
-                size: 25,
-                Icons.shopping_bag,
-                color: homeProvider.selectedIndex == 3
-                    ? colors.tertiary
-                    : const Color(0xFF666666),
-              ),
-              activeIcon: Icon(Icons.shopping_bag, size: 25, color: colors.tertiary),
               label: 'Shop',
             ),
-
-            // Activities (nav index 5 -> widget index 4)
             BottomNavigationBarItem(
-              icon: Icon(
-                size: 25,
-                Icons.directions_run,
-                color: homeProvider.selectedIndex == 4
-                    ? colors.tertiary
-                    : const Color(0xFF666666),
+              icon: SizedBox(
+                width: 25.w,
+                height: 25.h,
+                child: Image.asset(
+                  'assets/images/s14.png',
+                  color: homeProvider.selectedIndex == 0
+                      ? colors.tertiary
+                      : const Color(0xFF7E808F),
+                ),
               ),
-              activeIcon: Icon(Icons.directions_run, size: 25, color: colors.tertiary),
+              activeIcon: SizedBox(
+                width: 25.w,
+                height: 25.h,
+                child: Image.asset(
+                  'assets/images/s14.png',
+                  color: colors.tertiary,
+                ),
+              ),
               label: 'Activities',
             ),
-
-            // Profile (nav index 6 -> widget index 5)
             BottomNavigationBarItem(
-              icon: Icon(
-                size: 25,
-                Icons.person,
-                color: homeProvider.selectedIndex == 5
-                    ? colors.tertiary
-                    : const Color(0xFF666666),
+              icon: SizedBox(
+                width: 25.w,
+                height: 25.h,
+                child: Image.asset(
+                  'assets/images/s15.png',
+                  color: homeProvider.selectedIndex == 0
+                      ? colors.tertiary
+                      : const Color(0xFF7E808F),
+                ),
               ),
-              activeIcon: Icon(Icons.person, size: 25, color: colors.tertiary),
+              activeIcon: SizedBox(
+                width: 25.w,
+                height: 25.h,
+                child: Image.asset(
+                  'assets/images/s15.png',
+                  color: colors.tertiary,
+                ),
+              ),
               label: 'Profile',
             ),
           ],
@@ -252,21 +279,16 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
     );
   }
 
-  // Convert navigation bar index to widget index
   int _convertNavBarIndexToWidgetIndex(int navBarIndex) {
-    // Navigation bar indices: 0,1,2,3(FAB),4,5,6
-    // Widget indices: 0,1,2,3,4,5
-    if (navBarIndex == 3) return -1; // FAB position, no widget
-    if (navBarIndex > 3) return navBarIndex - 1; // After FAB: 4->3, 5->4, 6->5
-    return navBarIndex; // Before FAB: 0->0, 1->1, 2->2
+
+    if (navBarIndex == 3) return -1;
+    if (navBarIndex > 3) return navBarIndex - 1;
+    return navBarIndex;
   }
 
-  // Convert widget index to navigation bar index
   int _getCurrentIndexForNavigationBar(int widgetIndex) {
-    // Widget indices: 0,1,2,3,4,5
-    // Navigation bar indices: 0,1,2,3(FAB),4,5,6
-    if (widgetIndex >= 3) return widgetIndex + 1; // 3->4, 4->5, 5->6
-    return widgetIndex; // 0->0, 1->1, 2->2
+    if (widgetIndex >= 3) return widgetIndex + 1;
+    return widgetIndex;
   }
 }
 

@@ -2,11 +2,13 @@
   <dictionary name="project">
     <words>
       <w>activites</w>
+      <w>calendarview</w>
       <w>cameraview</w>
       <w>cocker</w>
       <w>dogresultsaveview</w>
       <w>dogtreslutsave</w>
       <w>dogvaluesviewmodel</w>
+      <w>emailjs</w>
       <w>favouritesview</w>
       <w>forgotpasswordemail</w>
       <w>forgotpasswordemailview</w>

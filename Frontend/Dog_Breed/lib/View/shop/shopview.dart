@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class Shopview extends StatefulWidget {
   const Shopview({super.key});
@@ -10,6 +11,8 @@ class Shopview extends StatefulWidget {
 class _ShopviewState extends State<Shopview> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      backgroundColor: Colors.white,
+    );
   }
 }

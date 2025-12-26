@@ -28,12 +28,12 @@ class _MypetsviewState extends State<Mypetsview> {
                 'My Pets',
                 style: TextStyle(
                   fontFamily: 'Sora',
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w400,
                   fontStyle: FontStyle.normal,
                   fontSize: 29.75.sp,
                   height: 1.0,
                   letterSpacing: 0.0,
-                  color: Color(0xFF272727),
+                  color: const Color(0xFF272727),
                 ),
               ),
             ),
@@ -49,22 +49,12 @@ class _MypetsviewState extends State<Mypetsview> {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 children: [
                   if (petProvider.pets.isNotEmpty) ...[
-                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: Text(
-                        'Your Added Pets',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF272727),
-                        ),
-                      ),
-                    ),
                     ...petProvider.pets.map((pet) => Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: PetCard(
                         key: Key('saved_pet_${pet.name}_${petProvider.pets.indexOf(pet)}'),
                         imageUrl: _getPetImage(petProvider.pets.indexOf(pet)),
+                        imageBytes: pet.imageBytes,
                         name: pet.name,
                         photoCount: 2,
                         vaccineCount: 3,

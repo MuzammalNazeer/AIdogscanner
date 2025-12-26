@@ -791,15 +791,26 @@ class _AddPetViewState extends State<AddPetView> {
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null) setState(() => _selectedDate = picked);
+      final DateTime? picked = await showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(2000),
+          lastDate: DateTime.now(),
+          builder: (BuildContext context, Widget? child) {
+              return Theme(
+                  data: ThemeData.light().copyWith(
+                      colorScheme: const ColorScheme.light(
+                          primary: Color(0xFF820DFF), // Your app's primary color
+                          onPrimary: Colors.white,
+                      ),
+                      dialogBackgroundColor: Colors.white, // White background for dialog
+                  ),
+                  child: child!,
+              );
+          },
+      );
+      if (picked != null) setState(() => _selectedDate = picked);
   }
-
   // Image selection method
   Future<void> _pickImage() async {
     try {
@@ -880,13 +891,12 @@ class _AddPetViewState extends State<AddPetView> {
                   child: Container(
                     width: 159.w,
                     height: 159.h,
-                    padding: const EdgeInsets.all(13.44),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF3F6F3),
                       borderRadius: BorderRadius.circular(27.83),
-                      border: _selectedImage != null
-                          ? Border.all(color: const Color(0xFF820DFF), width: 2)
-                          : null,
+                    //   border: _selectedImage != null
+                    //       ? Border.all(color: const Color(0xFF820DFF), width: 2)
+                    //       : null,
                     ),
                     child: _selectedImage != null
                         ? ClipRRect(
@@ -928,54 +938,61 @@ class _AddPetViewState extends State<AddPetView> {
                  SizedBox(height: 17.h),
                  Text('Breed', style: TextStyle(fontFamily: 'Inter', fontSize: 12.sp, color: const Color(0xFF6F7D86))),
                   SizedBox(height: 4.h),
-                SizedBox(
-                  width: double.infinity,
-                  height: 58.h,
-                  child: DropdownButtonFormField<String>(
-                    value: _selectedBreed,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: const Color(0xFFF5F5F5),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none
+                Center(
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 58.h,
+                    child: DropdownButtonFormField<String>(
+                      value: _selectedBreed,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color(0xFFF5F5F5),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 12),
                       ),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                      items: _breeds.map((b) => DropdownMenuItem(
+                        value: b,
+                        child: Text(
+                          b,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      )).toList(),
+                      onChanged: (v) => setState(() => _selectedBreed = v),
+                      icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                        dropdownColor: Colors.white,
+                      isExpanded: true,
+
                     ),
-                    items: _breeds.map((b) => DropdownMenuItem(
-                      value: b,
-                      child: Text(
-                        b,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                    )).toList(),
-                    onChanged: (v) => setState(() => _selectedBreed = v),
-                    icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-                    isExpanded: true,
                   ),
                 ),
                   SizedBox(height: 17.h),
                  Text('Gender', style: TextStyle(fontFamily: 'Inter', fontSize: 12.sp, color: const Color(0xFF6F7D86))),
                   SizedBox(height: 4.h),
-                  SizedBox(
-                      height: 58.h,
-                      child: DropdownButtonFormField<String>(
-                          value: _selectedGender,
-                          decoration: InputDecoration(
-                              filled: true,
-                              fillColor: const Color(0xFFF5F5F5),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12.r),
-                                  borderSide: BorderSide.none
-                              ),
-                              contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 0),
-                          ),
-                          items: _genders.map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
-                          onChanged: (v) => setState(() => _selectedGender = v),
-                          icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-                          isExpanded: true,
-                      ),
+                  Center(
+                    child: SizedBox(
+                        height: 58.h,
+                        child: DropdownButtonFormField<String>(
+                            value: _selectedGender,
+                            decoration: InputDecoration(
+                                filled: true,
+                                fillColor: const Color(0xFFF5F5F5),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    borderSide: BorderSide.none
+                                ),
+                                contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 0),
+                            ),
+                            items: _genders.map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
+                            onChanged: (v) => setState(() => _selectedGender = v),
+                            icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                            dropdownColor: Colors.white,
+                            isExpanded: true,
+                        ),
+                    ),
                   ),
                   SizedBox(height: 17.h),
                 const Text('Birthday', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
@@ -985,9 +1002,9 @@ class _AddPetViewState extends State<AddPetView> {
                       child: Container(
                           height: 58.h,
                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                          alignment: Alignment.center, // Centers content vertically
+                          alignment: Alignment.center,
                           decoration: BoxDecoration(
-                              color: const Color(0xFFF5F5F5),
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(12.r),
                           ),
                           child: Row(
@@ -1002,6 +1019,7 @@ class _AddPetViewState extends State<AddPetView> {
                                           fontSize: 16),
                                   ),
                                   const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
+
                               ],
                           ),
                       ),
@@ -1033,7 +1051,7 @@ class _AddPetViewState extends State<AddPetView> {
                     );
           
                     Provider.of<PetProvid>(context, listen: false).addPet(newPet);
-                    Navigator.pushNamed(context, RoutesName.myPets);
+                    // Navigator.pushNamed(context, RoutesName.myPets);
                   },
                 ),
               ],
@@ -1045,827 +1063,4 @@ class _AddPetViewState extends State<AddPetView> {
   }
 }
 
-// import 'package:dog_breed/View_model/pet.dart';
-// import 'package:dog_breed/config/components/roundButton.dart';
-// import 'package:dog_breed/utils/routes/routes_name.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-//
-// class AddPetView extends StatefulWidget {
-//   const AddPetView({super.key});
-//
-//   @override
-//   State<AddPetView> createState() => _AddPetViewState();
-// }
-//
-// class _AddPetViewState extends State<AddPetView> {
-//   final TextEditingController _nameController = TextEditingController();
-//   String? _selectedBreed;
-//   String? _selectedGender;
-//   DateTime? _selectedDate;
-//
-//   final List<String> _breeds = [
-//     'Affenpinscher','Akita','Beagle','Boxer','Bulldog','Chihuahua','Dachshund',
-//     'Dalmatian','Doberman','Golden Retriever','Labrador','Poodle','Rottweiler',
-//     'Shih Tzu','Siberian Husky','Yorkshire Terrier',
-//   ];
-//
-//   final List<String> _genders = ['Male', 'Female', 'Other'];
-//
-//   Future<void> _selectDate(BuildContext context) async {
-//     final DateTime? picked = await showDatePicker(
-//       context: context,
-//       initialDate: DateTime.now(),
-//       firstDate: DateTime(2000),
-//       lastDate: DateTime.now(),
-//     );
-//     if (picked != null) setState(() => _selectedDate = picked);
-//   }
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _nameController.text = 'Super Dog';
-//     _selectedBreed = 'Affenpinscher';
-//     _selectedGender = 'Male';
-//     _selectedDate = DateTime(2020, 2, 2);
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: SafeArea(
-//         child: Padding(
-//           padding: const EdgeInsets.all(12.0),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               // Header
-//               Row(
-//                 children: [
-//                   GestureDetector(
-//                     onTap: () => Navigator.pop(context),
-//                     child: Container(
-//                       width: 40.305,
-//                       height: 40.305,
-//                       padding: const EdgeInsets.all(8.96),
-//                       decoration: BoxDecoration(
-//                         color: const Color(0xFFF3F6F3),
-//                         borderRadius: BorderRadius.circular(8.96),
-//                       ),
-//                       child: const Icon(CupertinoIcons.chevron_left,
-//                           size: 20, color: Colors.black),
-//                     ),
-//                   ),
-//                   const Expanded(
-//                     child: Center(
-//                       child: Text(
-//                         'Add Pet',
-//                         style: TextStyle(
-//                           fontFamily: 'Sora',
-//                           fontWeight: FontWeight.w300,
-//                           fontSize: 29.75,
-//                           color: Colors.black,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               const SizedBox(height: 22),
-//
-//               // Photo
-//               GestureDetector(
-//                 onTap: () {},
-//                 child: Container(
-//                   width: 159,
-//                   height: 159,
-//                   padding: const EdgeInsets.all(13.44),
-//                   decoration: BoxDecoration(
-//                     color: const Color(0xFFF3F6F3),
-//                     borderRadius: BorderRadius.circular(27.83),
-//                   ),
-//                   child: const Column(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       Icon(Icons.camera_alt, color: Colors.grey, size: 32),
-//                       SizedBox(height: 3),
-//                       Text('Photo', style: TextStyle(color: Colors.grey, fontSize: 14)),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(height: 32),
-//
-//               // Pet Name
-//               const Text('Pet Name', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
-//               const SizedBox(height: 8),
-//               TextField(
-//                 controller: _nameController,
-//                 decoration: InputDecoration(
-//                   filled: true,
-//                   fillColor: const Color(0xFFF5F5F5),
-//                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-//                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-//                 ),
-//               ),
-//               const SizedBox(height: 14),
-//
-//               // Breed
-//               const Text('Breed', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
-//               const SizedBox(height: 8),
-//               DropdownButtonFormField<String>(
-//                 value: _selectedBreed,
-//                 decoration: InputDecoration(
-//                   filled: true,
-//                   fillColor: const Color(0xFFF5F5F5),
-//                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-//                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-//                 ),
-//                 items: _breeds.map((b) => DropdownMenuItem(value: b, child: Text(b))).toList(),
-//                 onChanged: (v) => setState(() => _selectedBreed = v),
-//                 icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-//               ),
-//               const SizedBox(height: 14),
-//
-//               // Gender
-//               const Text('Gender', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
-//               const SizedBox(height: 8),
-//               DropdownButtonFormField<String>(
-//                 value: _selectedGender,
-//                 decoration: InputDecoration(
-//                   filled: true,
-//                   fillColor: const Color(0xFFF5F5F5),
-//                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-//                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-//                 ),
-//                 items: _genders.map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
-//                 onChanged: (v) => setState(() => _selectedGender = v),
-//                 icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-//               ),
-//               const SizedBox(height: 14),
-//
-//               // Birthday
-//               const Text('Birthday', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
-//               const SizedBox(height: 8),
-//               GestureDetector(
-//                 onTap: () => _selectDate(context),
-//                 child: Container(
-//                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-//                   decoration: BoxDecoration(
-//                     color: const Color(0xFFF5F5F5),
-//                     borderRadius: BorderRadius.circular(12),
-//                   ),
-//                   child: Row(
-//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                     children: [
-//                       Text(
-//                         _selectedDate != null
-//                             ? '${_selectedDate!.day.toString().padLeft(2, '0')}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.year}'
-//                             : 'DD-MM-YYYY',
-//                         style: TextStyle(
-//                             color: _selectedDate != null ? Colors.black87 : Colors.grey,
-//                             fontSize: 16),
-//                       ),
-//                       const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(height: 30),
-//
-//               // RoundButton(
-//               //   title: "Save",
-//               //   height: 50,
-//               //   width: 379,
-//               //   backgroundColors: const Color(0xFF820DFF), // Use your AppColors.vibrantPurple
-//               //   isSelected: true,
-//               //   onPress: () {
-//               //     if (_nameController.text.isEmpty ||
-//               //         _selectedBreed == null ||
-//               //         _selectedGender == null ||
-//               //         _selectedDate == null) {
-//               //       ScaffoldMessenger.of(context).showSnackBar(
-//               //         const SnackBar(content: Text('Please fill all fields')),
-//               //       );
-//               //       return;
-//               //     }
-//               //
-//               //     final newPet = Pet(
-//               //       name: _nameController.text.trim(),
-//               //       breed: _selectedBreed!,
-//               //       gender: _selectedGender!,
-//               //       birthday: _selectedDate!,
-//               //     );
-//               //     Provider.of<Pet>(context, listen: false).addPet(newPet);
-//               //
-//               //     Navigator.pushNamed(context, RoutesName.myPets);
-//               //   },
-//               // ),
-//
-//
-//               // In your AddPetView's save button:
-//               RoundButton(
-//                 title: "Save",
-//                 height: 50,
-//                   width: 379,
-//                   backgroundColors: const Color(0xFF820DFF), // Use your AppColors.vibrantPurple
-//                   isSelected: true,
-//                 onPress: () {
-//                   if (_nameController.text.isEmpty ||
-//                       _selectedBreed == null ||
-//                       _selectedGender == null ||
-//                       _selectedDate == null) {
-//                     ScaffoldMessenger.of(context).showSnackBar(
-//                       const SnackBar(content: Text('Please fill all fields')),
-//                     );
-//                     return;
-//                   }
-//
-//                   final newPet = Pet(
-//                     name: _nameController.text.trim(),
-//                     breed: _selectedBreed!,
-//                     gender: _selectedGender!,
-//                     birthday: _selectedDate!,
-//                   );
-//
-//                   // FIX: Use PetProvider instead of Pet
-//                   Provider.of<PetProvid>(context, listen: false).addPet(newPet);
-//                   Navigator.pushNamed(context, RoutesName.myPets);
-//                 },
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-//
-// // // lib/View/MyPetsView/addPetView.dart
-// // import 'package:dog_breed/Valid/AppColors.dart';
-// // import 'package:dog_breed/View_model/pet.dart';
-// // import 'package:dog_breed/config/components/roundButton.dart';
-// // import 'package:dog_breed/utils/routes/routes_name.dart';
-// // import 'package:flutter/cupertino.dart';
-// // import 'package:flutter/material.dart';
-// // import 'package:provider/provider.dart';
-// //
-// // class AddPetView extends StatefulWidget {
-// //   const AddPetView({super.key});
-// //
-// //   @override
-// //   State<AddPetView> createState() => _AddPetViewState();
-// // }
-// //
-// // class _AddPetViewState extends State<AddPetView> {
-// //   final TextEditingController _nameController = TextEditingController();
-// //   String? _selectedBreed;
-// //   String? _selectedGender;
-// //   DateTime? _selectedDate;
-// //
-// //   final List<String> _breeds = [
-// //     'Affenpinscher','Akita','Beagle','Boxer','Bulldog','Chihuahua','Dachshund',
-// //     'Dalmatian','Doberman','Golden Retriever','Labrador','Poodle','Rottweiler',
-// //     'Shih Tzu','Siberian Husky','Yorkshire Terrier',
-// //   ];
-// //
-// //   final List<String> _genders = ['Male', 'Female', 'Other'];
-// //
-// //   Future<void> _selectDate(BuildContext context) async {
-// //     final DateTime? picked = await showDatePicker(
-// //       context: context,
-// //       initialDate: DateTime.now(),
-// //       firstDate: DateTime(2000),
-// //       lastDate: DateTime.now(),
-// //     );
-// //     if (picked != null) setState(() => _selectedDate = picked);
-// //   }
-// //
-// //   @override
-// //   void initState() {
-// //     super.initState();
-// //     _nameController.text = 'Super Dog';
-// //     _selectedBreed = 'Affenpinscher';
-// //     _selectedGender = 'Male';
-// //     _selectedDate = DateTime(2020, 2, 2);
-// //   }
-// //
-// //   void _savePet() {
-// //     if (_nameController.text.isEmpty ||
-// //         _selectedBreed == null ||
-// //         _selectedGender == null ||
-// //         _selectedDate == null) {
-// //       ScaffoldMessenger.of(context).showSnackBar(
-// //         const SnackBar(content: Text('Please fill all fields')),
-// //       );
-// //       return;
-// //     }
-// //
-// //     final pet = Pet(
-// //       name: _nameController.text.trim(),
-// //       breed: _selectedBreed!,
-// //       gender: _selectedGender!,
-// //       birthday: _selectedDate!,
-// //     );
-// //
-// //     // Correct: Pet is the provider
-// //     Provider.of<Pet>(context, listen: false).addPet(pet);
-// //
-// //     Navigator.pop(context);
-// //   }
-// //
-// //   @override
-// //   Widget build(BuildContext context) {
-// //     return Scaffold(
-// //       backgroundColor: Colors.white,
-// //       body: SafeArea(
-// //         child: Padding(
-// //           padding: const EdgeInsets.all(12.0),
-// //           child: Column(
-// //             crossAxisAlignment: CrossAxisAlignment.start,
-// //             children: [
-// //               // Header
-// //               Row(
-// //                 children: [
-// //                   GestureDetector(
-// //                     onTap: () => Navigator.pop(context),
-// //                     child: Container(
-// //                       width: 40.305,
-// //                       height: 40.305,
-// //                       padding: const EdgeInsets.all(8.96),
-// //                       decoration: BoxDecoration(
-// //                         color: const Color(0xFFF3F6F3),
-// //                         borderRadius: BorderRadius.circular(8.96),
-// //                       ),
-// //                       child: const Icon(CupertinoIcons.chevron_left,
-// //                           size: 20, color: Colors.black),
-// //                     ),
-// //                   ),
-// //                   const Expanded(
-// //                     child: Center(
-// //                       child: Text(
-// //                         'Add Pet',
-// //                         style: TextStyle(
-// //                           fontFamily: 'Sora',
-// //                           fontWeight: FontWeight.w300,
-// //                           fontSize: 29.75,
-// //                           color: Colors.black,
-// //                         ),
-// //                       ),
-// //                     ),
-// //                   ),
-// //                 ],
-// //               ),
-// //               const SizedBox(height: 22),
-// //
-// //               // Photo
-// //               GestureDetector(
-// //                 onTap: () {},
-// //                 child: Container(
-// //                   width: 159,
-// //                   height: 159,
-// //                   padding: const EdgeInsets.all(13.44),
-// //                   decoration: BoxDecoration(
-// //                     color: const Color(0xFFF3F6F3),
-// //                     borderRadius: BorderRadius.circular(27.83),
-// //                   ),
-// //                   child: const Column(
-// //                     mainAxisAlignment: MainAxisAlignment.center,
-// //                     children: [
-// //                       Icon(Icons.camera_alt, color: Colors.grey, size: 32),
-// //                       SizedBox(height: 3),
-// //                       Text('Photo', style: TextStyle(color: Colors.grey, fontSize: 14)),
-// //                     ],
-// //                   ),
-// //                 ),
-// //               ),
-// //               const SizedBox(height: 32),
-// //
-// //               // Pet Name
-// //               const Text('Pet Name', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
-// //               const SizedBox(height: 8),
-// //               TextField(
-// //                 controller: _nameController,
-// //                 decoration: InputDecoration(
-// //                   filled: true,
-// //                   fillColor: const Color(0xFFF5F5F5),
-// //                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-// //                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-// //                 ),
-// //               ),
-// //               const SizedBox(height: 14),
-// //
-// //               // Breed
-// //               const Text('Breed', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
-// //               const SizedBox(height: 8),
-// //               DropdownButtonFormField<String>(
-// //                 value: _selectedBreed,
-// //                 decoration: InputDecoration(
-// //                   filled: true,
-// //                   fillColor: const Color(0xFFF5F5F5),
-// //                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-// //                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-// //                 ),
-// //                 items: _breeds.map((b) => DropdownMenuItem(value: b, child: Text(b))).toList(),
-// //                 onChanged: (v) => setState(() => _selectedBreed = v),
-// //                 icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-// //               ),
-// //               const SizedBox(height: 14),
-// //
-// //               // Gender
-// //               const Text('Gender', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
-// //               const SizedBox(height: 8),
-// //               DropdownButtonFormField<String>(
-// //                 value: _selectedGender,
-// //                 decoration: InputDecoration(
-// //                   filled: true,
-// //                   fillColor: const Color(0xFFF5F5F5),
-// //                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
-// //                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-// //                 ),
-// //                 items: _genders.map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
-// //                 onChanged: (v) => setState(() => _selectedGender = v),
-// //                 icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-// //               ),
-// //               const SizedBox(height: 14),
-// //
-// //               // Birthday
-// //               const Text('Birthday', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
-// //               const SizedBox(height: 8),
-// //               GestureDetector(
-// //                 onTap: () => _selectDate(context),
-// //                 child: Container(
-// //                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-// //                   decoration: BoxDecoration(
-// //                     color: const Color(0xFFF5F5F5),
-// //                     borderRadius: BorderRadius.circular(12),
-// //                   ),
-// //                   child: Row(
-// //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// //                     children: [
-// //                       Text(
-// //                         _selectedDate != null
-// //                             ? '${_selectedDate!.day.toString().padLeft(2, '0')}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.year}'
-// //                             : 'DD-MM-YYYY',
-// //                         style: TextStyle(
-// //                             color: _selectedDate != null ? Colors.black87 : Colors.grey,
-// //                             fontSize: 16),
-// //                       ),
-// //                       const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
-// //                     ],
-// //                   ),
-// //                 ),
-// //               ),
-// //               const SizedBox(height: 30),
-// //
-// // // In your AddPetView, update the save method:
-// //               RoundButton(
-// //                 title: "Save",
-// //                 height: 50,
-// //                 width: 379,
-// //                 backgroundColors: AppColors.vibrantPurple,
-// //                 isSelected: true,
-// //                 onPress: () {
-// //                   if (_nameController.text.isEmpty ||
-// //                       _selectedBreed == null ||
-// //                       _selectedGender == null ||
-// //                       _selectedDate == null) {
-// //                     ScaffoldMessenger.of(context).showSnackBar(
-// //                       const SnackBar(content: Text('Please fill all fields')),
-// //                     );
-// //                     return;
-// //                   }
-// //
-// //                   final newPet = Pet(
-// //                     name: _nameController.text.trim(),
-// //                     breed: _selectedBreed!,
-// //                     gender: _selectedGender!,
-// //                     birthday: _selectedDate!,
-// //                   );
-// //
-// //                   Provider.of<Pet>(context, listen: false).addPet(newPet);
-// //
-// //                   // Navigate to My Pets view
-// //                   Navigator.pushNamedAndRemoveUntil(
-// //                     context,
-// //                     RoutesName.dashboard, // or whatever your dashboard route is
-// //                         (route) => false,
-// //                   );
-// //                 },
-// //               ),
-// //             ],
-// //           ),
-// //         ),
-// //       ),
-// //     );
-// //   }
-// // }
-// //
-// //
-// // // import 'package:dog_breed/Valid/AppColors.dart';
-// // // import 'package:dog_breed/config/components/roundButton.dart';
-// // // import 'package:dog_breed/utils/routes/routes_name.dart';
-// // // import 'package:flutter/cupertino.dart';
-// // // import 'package:flutter/material.dart';
-// // //
-// // // class AddPetView extends StatefulWidget {
-// // //   const AddPetView({super.key});
-// // //
-// // //   @override
-// // //   State<AddPetView> createState() => _AddPetViewState();
-// // // }
-// // //
-// // // class _AddPetViewState extends State<AddPetView> {
-// // //   final TextEditingController _nameController = TextEditingController();
-// // //   String? _selectedBreed;
-// // //   String? _selectedGender;
-// // //   DateTime? _selectedDate;
-// // //
-// // //   final List<String> _breeds = [
-// // //     'Affenpinscher',
-// // //     'Akita',
-// // //     'Beagle',
-// // //     'Boxer',
-// // //     'Bulldog',
-// // //     'Chihuahua',
-// // //     'Dachshund',
-// // //     'Dalmatian',
-// // //     'Doberman',
-// // //     'Golden Retriever',
-// // //     'Labrador',
-// // //     'Poodle',
-// // //     'Rottweiler',
-// // //     'Shih Tzu',
-// // //     'Siberian Husky',
-// // //     'Yorkshire Terrier',
-// // //   ];
-// // //
-// // //   final List<String> _genders = ['Male', 'Female', 'Other'];
-// // //
-// // //   Future<void> _selectDate(BuildContext context) async {
-// // //     final DateTime? picked = await showDatePicker(
-// // //       context: context,
-// // //       initialDate: DateTime.now(),
-// // //       firstDate: DateTime(2000),
-// // //       lastDate: DateTime.now(),
-// // //     );
-// // //     if (picked != null && picked != _selectedDate) {
-// // //       setState(() {
-// // //         _selectedDate = picked;
-// // //       });
-// // //     }
-// // //   }
-// // //
-// // //   @override
-// // //   void initState() {
-// // //     super.initState();
-// // //     _nameController.text = 'Super Dog';
-// // //     _selectedBreed = 'Affenpinscher';
-// // //     _selectedGender = 'Male';
-// // //     _selectedDate = DateTime(2020, 2, 2);
-// // //   }
-// // //
-// // //   @override
-// // //   Widget build(BuildContext context) {
-// // //     return Scaffold(
-// // //       backgroundColor: Colors.white,
-// // //       body: SafeArea(
-// // //         child: Padding(
-// // //           padding: const EdgeInsets.all(12.0),
-// // //           child: Column(
-// // //             crossAxisAlignment: CrossAxisAlignment.start,
-// // //             children: [
-// // //               Row(
-// // //                 mainAxisAlignment: MainAxisAlignment.start,
-// // //                 crossAxisAlignment: CrossAxisAlignment.center,
-// // //                 children: [
-// // //                   GestureDetector(
-// // //                     onTap: () {
-// // //                       Navigator.pop(context);
-// // //                     },
-// // //                     child: Container(
-// // //                       width: 40.305,
-// // //                       height: 40.305,
-// // //                       padding: const EdgeInsets.all(8.96),
-// // //                       decoration: BoxDecoration(
-// // //                         color: const Color(0xFFF3F6F3), // #F3F6F3
-// // //                         borderRadius: BorderRadius.circular(8.96),
-// // //                       ),
-// // //                       child: const Icon(
-// // //                         CupertinoIcons.chevron_left,
-// // //                         size: 20,
-// // //                         color: Colors.black,
-// // //                       ),
-// // //                     ),
-// // //                   ),
-// // //                   Expanded(
-// // //                     child: Center(
-// // //                       child: Text(
-// // //                         'Add Pet',
-// // //                         style: TextStyle(
-// // //                           fontFamily: 'Sora',
-// // //                           fontWeight: FontWeight.w300,
-// // //                           fontSize: 29.75,
-// // //                           height: 1.0,
-// // //                           letterSpacing: 0.0,
-// // //                           color: Colors.black,
-// // //                         ),
-// // //                       ),
-// // //                     ),
-// // //                   ),
-// // //                 ],
-// // //               ),
-// // //               const SizedBox(height: 22),
-// // //               GestureDetector(
-// // //                 onTap: () {},
-// // //                 child: Container(
-// // //                   width: 159,
-// // //                   height: 159,
-// // //                   padding: const EdgeInsets.all(13.44),
-// // //                   decoration: BoxDecoration(
-// // //                     color: const Color(0xFFF3F6F3),
-// // //                     borderRadius: BorderRadius.circular(27.83),
-// // //                   ),
-// // //                   child: Column(
-// // //                     mainAxisAlignment: MainAxisAlignment.center,
-// // //                     children: const [
-// // //                       Icon(Icons.camera_alt, color: Colors.grey, size: 32),
-// // //                       SizedBox(height: 3), // gap between icon & text
-// // //                       Text(
-// // //                         'Photo',
-// // //                         style: TextStyle(color: Colors.grey, fontSize: 14),
-// // //                       ),
-// // //                     ],
-// // //                   ),
-// // //                 ),
-// // //               ),
-// // //               const SizedBox(height: 32),
-// // //               const Text(
-// // //                 'Pet Name',
-// // //                 style: TextStyle(
-// // //                   fontFamily: 'Inter',
-// // //                   fontSize: 12,
-// // //                   color: Color(0xFF6F7D86),
-// // //                   fontWeight: FontWeight.w400,
-// // //                   height: 13 / 12,
-// // //                   letterSpacing: 0.07 / 100 * 12,
-// // //                 ),
-// // //               ),
-// // //               const SizedBox(height: 8),
-// // //               TextField(
-// // //                 controller: _nameController,
-// // //                 decoration: InputDecoration(
-// // //                   filled: true,
-// // //                   fillColor: const Color(0xFFF5F5F5),
-// // //                   border: OutlineInputBorder(
-// // //                     borderRadius: BorderRadius.circular(12),
-// // //                     borderSide: BorderSide.none,
-// // //                   ),
-// // //                   contentPadding: const EdgeInsets.symmetric(
-// // //                     horizontal: 16,
-// // //                     vertical: 16,
-// // //                   ),
-// // //                 ),
-// // //               ),
-// // //               const SizedBox(height: 14),
-// // //               const Text(
-// // //                 'Breed',
-// // //                 style: TextStyle(
-// // //                   fontFamily: 'Inter',
-// // //                   fontSize: 12,
-// // //                   color: Color(0xFF6F7D86),
-// // //                   fontWeight: FontWeight.w400,
-// // //                   height: 13 / 12,
-// // //                   letterSpacing: 0.07 / 100 * 12,
-// // //                 ),
-// // //               ),
-// // //               const SizedBox(height: 8),
-// // //               DropdownButtonFormField<String>(
-// // //                 value: _selectedBreed,
-// // //                 decoration: InputDecoration(
-// // //                   filled: true,
-// // //                   fillColor: const Color(0xFFF5F5F5),
-// // //                   border: OutlineInputBorder(
-// // //                     borderRadius: BorderRadius.circular(12),
-// // //                     borderSide: BorderSide.none,
-// // //                   ),
-// // //                   contentPadding: const EdgeInsets.symmetric(
-// // //                     horizontal: 16,
-// // //                     vertical: 16,
-// // //                   ),
-// // //                 ),
-// // //                 items: _breeds.map((breed) {
-// // //                   return DropdownMenuItem(value: breed, child: Text(breed));
-// // //                 }).toList(),
-// // //                 onChanged: (value) {
-// // //                   setState(() {
-// // //                     _selectedBreed = value;
-// // //                   });
-// // //                 },
-// // //                 icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-// // //               ),
-// // //               const SizedBox(height: 14),
-// // //               const Text(
-// // //                 'Gender',
-// // //                 style: TextStyle(
-// // //                   fontFamily: 'Inter',
-// // //                   fontSize: 12,
-// // //                   color: Color(0xFF6F7D86),
-// // //                   fontWeight: FontWeight.w400,
-// // //                   height: 13 / 12,
-// // //                   letterSpacing: 0.07 / 100 * 12,
-// // //                 ),
-// // //               ),
-// // //               const SizedBox(height: 8),
-// // //               DropdownButtonFormField<String>(
-// // //                 value: _selectedGender,
-// // //                 decoration: InputDecoration(
-// // //                   filled: true,
-// // //                   fillColor: const Color(0xFFF5F5F5),
-// // //                   border: OutlineInputBorder(
-// // //                     borderRadius: BorderRadius.circular(12),
-// // //                     borderSide: BorderSide.none,
-// // //                   ),
-// // //                   contentPadding: const EdgeInsets.symmetric(
-// // //                     horizontal: 16,
-// // //                     vertical: 16,
-// // //                   ),
-// // //                 ),
-// // //                 items: _genders.map((gender) {
-// // //                   return DropdownMenuItem(value: gender, child: Text(gender));
-// // //                 }).toList(),
-// // //                 onChanged: (value) {
-// // //                   setState(() {
-// // //                     _selectedGender = value;
-// // //                   });
-// // //                 },
-// // //                 icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-// // //               ),
-// // //               const SizedBox(height: 14),
-// // //               const Text(
-// // //                 'Birthday',
-// // //                 style: TextStyle(
-// // //                   fontFamily: 'Inter',
-// // //                   fontSize: 12,
-// // //                   color: Color(0xFF6F7D86),
-// // //                   fontWeight: FontWeight.w400,
-// // //                   height: 13 / 12,
-// // //                   letterSpacing: 0.07 / 100 * 12,
-// // //                 ),
-// // //               ),
-// // //               const SizedBox(height: 8),
-// // //               GestureDetector(
-// // //                 onTap: () => _selectDate(context),
-// // //                 child: Container(
-// // //                   padding: const EdgeInsets.symmetric(
-// // //                     horizontal: 16,
-// // //                     vertical: 16,
-// // //                   ),
-// // //                   decoration: BoxDecoration(
-// // //                     color: const Color(0xFFF5F5F5),
-// // //                     borderRadius: BorderRadius.circular(12),
-// // //                   ),
-// // //                   child: Row(
-// // //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// // //                     children: [
-// // //                       Text(
-// // //                         _selectedDate != null
-// // //                             ? '${_selectedDate!.day.toString().padLeft(2, '0')}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.year}'
-// // //                             : 'DD-MM-YYYY',
-// // //                         style: TextStyle(
-// // //                           color: _selectedDate != null
-// // //                               ? Colors.black87
-// // //                               : Colors.grey,
-// // //                           fontSize: 16,
-// // //                         ),
-// // //                       ),
-// // //                       const Icon(
-// // //                         Icons.calendar_today,
-// // //                         color: Colors.grey,
-// // //                         size: 20,
-// // //                       ),
-// // //                     ],
-// // //                   ),
-// // //                 ),
-// // //               ),
-// // //               const SizedBox(height: 30),
-// // //               RoundButton(
-// // //                 title: "Save",
-// // //                 height: 50,
-// // //                 width: 379,
-// // //                 backgroundColors: AppColors.vibrantPurple,
-// // //                 isSelected: true,
-// // //                 onPress: () {
-// // //
-// // //                 },
-// // //               ),
-// // //             ],
-// // //           ),
-// // //         ),
-// // //       ),
-// // //     );
-// // //   }
-// // // }
+
