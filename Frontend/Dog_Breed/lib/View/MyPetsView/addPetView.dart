@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dog_breed/View_model/pet.dart';
+import 'package:dog_breed/View_model/home/Pet.dart';
+import 'package:dog_breed/View_model/pet.dart' hide Pet;
 import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+
+import '../../View_model/PetProvider.dart';
 
 class AddPetView extends StatefulWidget {
   const AddPetView({super.key});
@@ -1025,35 +1028,77 @@ class _AddPetViewState extends State<AddPetView> {
                       ),
                   ),
                    SizedBox(height: 190.h),
-                RoundButton(
-                  title: "Save",
-                  height: 50,
-                  width: 379,
-                  backgroundColors: const Color(0xFF820DFF),
-                  isSelected: true,
-                  onPress: () {
-                    if (_nameController.text.isEmpty ||
-                        _selectedBreed == null ||
-                        _selectedGender == null ||
-                        _selectedDate == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Please fill all fields')),
-                      );
-                      return;
-                    }
-          
-                    final newPet = Pet(
-                      name: _nameController.text.trim(),
-                      breed: _selectedBreed!,
-                      gender: _selectedGender!,
-                      birthday: _selectedDate!,
-                      imageBytes: _selectedImage, // Save the selected image
-                    );
-          
-                    Provider.of<PetProvid>(context, listen: false).addPet(newPet);
-                    // Navigator.pushNamed(context, RoutesName.myPets);
-                  },
-                ),
+
+                  // AddPetView - Update the onPress method in the RoundButton:
+                  RoundButton(
+                      title: "Save",
+                      height: 50,
+                      width: 379,
+                      backgroundColors: const Color(0xFF820DFF),
+                      isSelected: true,
+                      onPress: () async {
+                          if (_nameController.text.isEmpty ||
+                              _selectedBreed == null ||
+                              _selectedGender == null ||
+                              _selectedDate == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Please fill all fields')),
+                              );
+                              return;
+                          }
+
+                          final newPet = Pet(
+                              name: _nameController.text.trim(),
+                              breed: _selectedBreed!,
+                              gender: _selectedGender!,
+                              birthday: _selectedDate!,
+                              imageBytes: _selectedImage,
+                          );
+
+                          final petProvider = Provider.of<PetProvider>(context, listen: false);
+                          final success = await petProvider.addPet(newPet as Pet);
+
+                          if (success) {
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //     const SnackBar(content: Text('Pet saved successfully!')),
+                              // );
+                              Navigator.pop(context);
+                          } else {
+                              // ScaffoldMessenger.of(context).showSnackBar(
+                              //     const SnackBar(content: Text('Failed to save pet. Please try again.')),
+                              // );
+                          }
+                      },
+                  ),
+                // RoundButton(
+                //   title: "Save",
+                //   height: 50,
+                //   width: 379,
+                //   backgroundColors: const Color(0xFF820DFF),
+                //   isSelected: true,
+                //   onPress: () {
+                //     if (_nameController.text.isEmpty ||
+                //         _selectedBreed == null ||
+                //         _selectedGender == null ||
+                //         _selectedDate == null) {
+                //       ScaffoldMessenger.of(context).showSnackBar(
+                //         const SnackBar(content: Text('Please fill all fields')),
+                //       );
+                //       return;
+                //     }
+                //
+                //     final newPet = Pet(
+                //       name: _nameController.text.trim(),
+                //       breed: _selectedBreed!,
+                //       gender: _selectedGender!,
+                //       birthday: _selectedDate!,
+                //       imageBytes: _selectedImage, // Save the selected image
+                //     );
+                //
+                //     Provider.of<PetProvid>(context, listen: false).addPet(newPet);
+                //     // Navigator.pushNamed(context, RoutesName.myPets);
+                //   },
+                // ),
               ],
             ),
           ),

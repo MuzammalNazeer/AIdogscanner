@@ -20,6 +20,8 @@ import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 
+import '../../View/Calendar/add_activities_View.dart';
+import '../../View/Calendar/allActivityView.dart';
 import '../../View/Calendar/calendarView.dart';
 import '../../View/Favourites/favouritesView.dart';
 import '../../View/Favourites/myFavouritesview.dart';
@@ -93,9 +95,17 @@ class Routes {
         case RoutesName.calendar:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  Calendarview());
+
         case RoutesName.shop:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Shopview());
+
+        case RoutesName.allActivity:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>   const Allactivityview());
+        case RoutesName.addActivities:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>   const AddActivitiesView());
         case RoutesName.profile:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Profileview());

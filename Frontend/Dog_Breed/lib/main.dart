@@ -11,7 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Valid/AppTheme.dart';
+import 'View_model/PetProvider.dart';
 import 'View_model/ThemeNotifier.dart';
+import 'View_model/activity_provider.dart';
 import 'View_model/dogvaluesviewmodel.dart';
 
 List<CameraDescription> cameras = [];
@@ -64,6 +66,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ScanProvider()),
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),
         ChangeNotifierProvider(create: (_) => DogValuesViewModel()),
+        ChangeNotifierProvider(create: (_) => ActivityNotifier()),
+        ChangeNotifierProvider<PetProvider>(
+          create: (_) => PetProvider(),
+          lazy: false, // Important: instantiate immediately
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(440, 956),

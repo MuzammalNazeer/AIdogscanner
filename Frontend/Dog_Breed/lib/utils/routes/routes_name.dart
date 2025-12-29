@@ -29,6 +29,8 @@ class RoutesName {
   static const String myFavourites= 'Myfavouritesview';
   static const String calendar= 'Calendarview';
   static const String shop= 'Shopview';
+  static const String addActivities= 'AddActivitiesView';
+  static const String allActivity= 'Allactivityview';
 
 
 }

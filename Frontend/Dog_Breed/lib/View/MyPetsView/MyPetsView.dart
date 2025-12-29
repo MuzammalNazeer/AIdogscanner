@@ -1,9 +1,14 @@
+// Mypetsview.dart - Updated version
+import 'dart:typed_data';
 import 'package:dog_breed/config/components/pet_card.dart';
-import 'package:dog_breed/View_model/pet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import '../../View_model/PetProvider.dart';
+import '../../View_model/home/Pet.dart';
+import '../../utils/routes/routes_name.dart';
 
 class Mypetsview extends StatefulWidget {
   const Mypetsview({super.key});
@@ -13,47 +18,75 @@ class Mypetsview extends StatefulWidget {
 }
 
 class _MypetsviewState extends State<Mypetsview> {
+  String _searchQuery = '';
+
   @override
   Widget build(BuildContext context) {
-    final petProvider = Provider.of<PetProvid>(context);
+    final petProvider = Provider.of<PetProvider>(context);
+    final pets = petProvider.pets;
+
+    // Filter pets based on search query
+    final filteredPets = _searchQuery.isEmpty
+        ? pets
+        : pets.where((pet) =>
+    pet.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+        pet.breed.toLowerCase().contains(_searchQuery.toLowerCase())).toList();
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-             SizedBox(height: 20.h),
-             Center(
+            SizedBox(height: 20.h),
+            Center(
               child: Text(
                 'My Pets',
                 style: TextStyle(
                   fontFamily: 'Sora',
                   fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
                   fontSize: 29.75.sp,
-                  height: 1.0,
-                  letterSpacing: 0.0,
                   color: const Color(0xFF272727),
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: CupertinoSearchTextField(
                 placeholder: 'Search for Dog',
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                onChanged: (value) {
+                  setState(() {
+                    _searchQuery = value;
+                  });
+                },
               ),
             ),
             Expanded(
-              child: ListView(
+              child: pets.isEmpty
+                  ? const Center(
+                child: Text(
+                  'No pets added yet',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+              )
+                  : filteredPets.isEmpty
+                  ? const Center(
+                child: Text(
+                  'No pets match your search',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+              )
+                  : ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  if (petProvider.pets.isNotEmpty) ...[
-                    ...petProvider.pets.map((pet) => Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
+                itemCount: filteredPets.length,
+                itemBuilder: (context, index) {
+                  final pet = filteredPets[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: GestureDetector(
                       child: PetCard(
-                        key: Key('saved_pet_${pet.name}_${petProvider.pets.indexOf(pet)}'),
-                        imageUrl: _getPetImage(petProvider.pets.indexOf(pet)),
+                        key: Key('pet_${pet.id}_$index'),
+                        imageUrl: _getPetImage(index),
                         imageBytes: pet.imageBytes,
                         name: pet.name,
                         photoCount: 2,
@@ -61,7 +94,7 @@ class _MypetsviewState extends State<Mypetsview> {
                         clothesCount: 4,
                         calendarCount: 1,
                         medicalCount: 0,
-                        profileCount: 4,
+                        profileCount: 0,
                         photoProgress: 0.4,
                         vaccineProgress: 0.6,
                         clothesProgress: 0.8,
@@ -69,26 +102,18 @@ class _MypetsviewState extends State<Mypetsview> {
                         medicalProgress: 0.0,
                         profileProgress: 0.8,
                       ),
-                    )),
-                  ] else ...[
-                    const Padding(
-                      padding: EdgeInsets.only(top: 20, bottom: 20),
-                      child: Center(
-                        child: Text(
-                          'No additional pets added yet',
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
-                        ),
-                      ),
                     ),
-                  ],
-                ],
+                  );
+                },
               ),
             ),
           ],
         ),
       ),
+
     );
   }
+
 
   String _getPetImage(int index) {
     final images = [
@@ -99,3 +124,106 @@ class _MypetsviewState extends State<Mypetsview> {
     return images[index % images.length];
   }
 }
+
+
+// import 'package:dog_breed/config/components/pet_card.dart';
+// import 'package:dog_breed/View_model/pet.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:provider/provider.dart';
+//
+// class Mypetsview extends StatefulWidget {
+//   const Mypetsview({super.key});
+//
+//   @override
+//   State<Mypetsview> createState() => _MypetsviewState();
+// }
+//
+// class _MypetsviewState extends State<Mypetsview> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final petProvider = Provider.of<PetProvid>(context);
+//
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       body: SafeArea(
+//         child: Column(
+//           children: [
+//              SizedBox(height: 20.h),
+//              Center(
+//               child: Text(
+//                 'My Pets',
+//                 style: TextStyle(
+//                   fontFamily: 'Sora',
+//                   fontWeight: FontWeight.w400,
+//                   fontStyle: FontStyle.normal,
+//                   fontSize: 29.75.sp,
+//                   height: 1.0,
+//                   letterSpacing: 0.0,
+//                   color: const Color(0xFF272727),
+//                 ),
+//               ),
+//             ),
+//             const Padding(
+//               padding: EdgeInsets.all(16.0),
+//               child: CupertinoSearchTextField(
+//                 placeholder: 'Search for Dog',
+//                 padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+//               ),
+//             ),
+//             Expanded(
+//               child: ListView(
+//                 padding: const EdgeInsets.symmetric(horizontal: 16),
+//                 children: [
+//                   if (petProvider.pets.isNotEmpty) ...[
+//                     ...petProvider.pets.map((pet) => Padding(
+//                       padding: const EdgeInsets.only(bottom: 16),
+//                       child: PetCard(
+//                         key: Key('saved_pet_${pet.name}_${petProvider.pets.indexOf(pet)}'),
+//                         imageUrl: _getPetImage(petProvider.pets.indexOf(pet)),
+//                         imageBytes: pet.imageBytes,
+//                         name: pet.name,
+//                         photoCount: 2,
+//                         vaccineCount: 3,
+//                         clothesCount: 4,
+//                         calendarCount: 1,
+//                         medicalCount: 0,
+//                         profileCount: 0,
+//                         photoProgress: 0.4,
+//                         vaccineProgress: 0.6,
+//                         clothesProgress: 0.8,
+//                         calendarProgress: 0.2,
+//                         medicalProgress: 0.0,
+//                         profileProgress: 0.8,
+//                       ),
+//                     )),
+//                   ] else ...[
+//                     const Padding(
+//                       padding: EdgeInsets.only(top: 20, bottom: 20),
+//                       child: Center(
+//                         child: Text(
+//                           'No additional pets added yet',
+//                           style: TextStyle(fontSize: 16, color: Colors.grey),
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+//
+//   String _getPetImage(int index) {
+//     final images = [
+//       'assets/images/Ellipse 77 (2).png',
+//       'assets/images/Ellipse 77 (1).png',
+//       'assets/images/Ellipse 77.png',
+//     ];
+//     return images[index % images.length];
+//   }
+// }
