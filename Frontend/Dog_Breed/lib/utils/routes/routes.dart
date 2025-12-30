@@ -23,6 +23,7 @@ import 'package:path/path.dart';
 import '../../View/Calendar/add_activities_View.dart';
 import '../../View/Calendar/allActivityView.dart';
 import '../../View/Calendar/calendarView.dart';
+import '../../View/Calendar/walkView.dart';
 import '../../View/Favourites/favouritesView.dart';
 import '../../View/Favourites/myFavouritesview.dart';
 import '../../View/History/historyView.dart';
@@ -99,6 +100,9 @@ class Routes {
         case RoutesName.shop:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Shopview());
+        case RoutesName.walk:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  const Walkview());
 
         case RoutesName.allActivity:
         return MaterialPageRoute(

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,50 @@ class _CalendarviewState extends State<Calendarview> {
   DateTime _currentMonth = DateTime.now();
 
   final List<String> tabs = ['Activities', 'Reminders', 'Progress', 'Documents', 'Settings'];
+  ScrollController? _scrollController;
+  int _selectedIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToSelectedDate();
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController?.dispose();
+    super.dispose();
+  }
+
+// Update the scrollToSelectedDate function to handle null controller
+  void _scrollToSelectedDate() {
+    if (_scrollController == null) return;
+
+    final days = _getDaysInMonth(_currentMonth);
+    final selectedIndex = days.indexWhere((date) =>
+    date.year == _selectedDate.year &&
+        date.month == _selectedDate.month &&
+        date.day == _selectedDate.day
+    );
+
+    if (selectedIndex != -1) {
+      _selectedIndex = selectedIndex;
+
+      // Calculate the position to scroll to (center of the list)
+      final itemWidth = 70.w + 12.w; // 70.w + horizontal margin (6.w * 2)
+      final screenWidth = MediaQuery.of(context).size.width;
+      final offset = (selectedIndex * itemWidth) - (screenWidth / 2) + (itemWidth / 2);
+
+      _scrollController!.animateTo(
+        offset.clamp(0.0, _scrollController!.position.maxScrollExtent),
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     // Listen to activities from provider
@@ -142,11 +186,10 @@ class _CalendarviewState extends State<Calendarview> {
             ),
 
             SizedBox(height: 12.h),
-
-            // Horizontal Days List
             SizedBox(
               height: 100.h,
               child: ListView.builder(
+                controller: _scrollController, // This can be null initially
                 scrollDirection: Axis.horizontal,
                 itemCount: _getDaysInMonth(_currentMonth).length,
                 itemBuilder: (context, index) {
@@ -156,7 +199,17 @@ class _CalendarviewState extends State<Calendarview> {
                       date.day == _selectedDate.day;
 
                   return GestureDetector(
-                    onTap: () => setState(() => _selectedDate = date),
+                    onTap: () {
+                      setState(() {
+                        _selectedDate = date;
+                      });
+                      // Scroll to the selected date after a small delay
+                      Future.delayed(const Duration(milliseconds: 50), () {
+                        if (_scrollController != null) {
+                          _scrollToSelectedDate();
+                        }
+                      });
+                    },
                     child: Container(
                       width: 70.w,
                       margin: EdgeInsets.symmetric(horizontal: 6.w),
@@ -170,7 +223,10 @@ class _CalendarviewState extends State<Calendarview> {
                         children: [
                           Text(
                             DateFormat('MMM').format(date),
-                            style: TextStyle(fontSize: 12.sp, color: isSelected ? Colors.white : Colors.black54),
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: isSelected ? Colors.white : Colors.black54
+                            ),
                           ),
                           SizedBox(height: 4.h),
                           Text(
@@ -184,7 +240,10 @@ class _CalendarviewState extends State<Calendarview> {
                           SizedBox(height: 4.h),
                           Text(
                             DateFormat('EEE').format(date),
-                            style: TextStyle(fontSize: 12.sp, color: isSelected ? Colors.white : Colors.black54),
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: isSelected ? Colors.white : Colors.black54
+                            ),
                           ),
                         ],
                       ),
@@ -193,6 +252,57 @@ class _CalendarviewState extends State<Calendarview> {
                 },
               ),
             ),
+
+            // // Horizontal Days List
+            // SizedBox(
+            //   height: 100.h,
+            //   child: ListView.builder(
+            //     scrollDirection: Axis.horizontal,
+            //     itemCount: _getDaysInMonth(_currentMonth).length,
+            //     itemBuilder: (context, index) {
+            //       final date = _getDaysInMonth(_currentMonth)[index];
+            //       final isSelected = date.year == _selectedDate.year &&
+            //           date.month == _selectedDate.month &&
+            //           date.day == _selectedDate.day;
+            //
+            //       return GestureDetector(
+            //         onTap: () => setState(() => _selectedDate = date),
+            //         child: Container(
+            //           width: 70.w,
+            //           margin: EdgeInsets.symmetric(horizontal: 6.w),
+            //           padding: EdgeInsets.symmetric(vertical: 8.h),
+            //           decoration: BoxDecoration(
+            //             color: isSelected ? const Color(0xFF820DFF) : const Color(0xFFF4F7F6),
+            //             borderRadius: BorderRadius.circular(16.r),
+            //           ),
+            //           child: Column(
+            //             mainAxisAlignment: MainAxisAlignment.center,
+            //             children: [
+            //               Text(
+            //                 DateFormat('MMM').format(date),
+            //                 style: TextStyle(fontSize: 12.sp, color: isSelected ? Colors.white : Colors.black54),
+            //               ),
+            //               SizedBox(height: 4.h),
+            //               Text(
+            //                 date.day.toString(),
+            //                 style: TextStyle(
+            //                   fontSize: 22.sp,
+            //                   fontWeight: FontWeight.bold,
+            //                   color: isSelected ? Colors.white : Colors.black,
+            //                 ),
+            //               ),
+            //               SizedBox(height: 4.h),
+            //               Text(
+            //                 DateFormat('EEE').format(date),
+            //                 style: TextStyle(fontSize: 12.sp, color: isSelected ? Colors.white : Colors.black54),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
 
             SizedBox(height: 20.h),
 
@@ -249,14 +359,23 @@ class _CalendarviewState extends State<Calendarview> {
                   'Add Activity',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                IconButton(
-                  icon: SvgPicture.asset(
-                    'assets/images/add.svg',
-                    width: 28.w,
-                    height: 28.h,
+                Container(
+                  width: 50.w,
+                  height: 50.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
-                  onPressed: () => _showAddActivitySheet(context),
-                ),
+                  child: IconButton(
+                    icon: SvgPicture.asset(
+                      'assets/images/add.svg',
+                      width: 28.w,
+                      height: 28.h,
+                    ),
+                    onPressed: () => _showAddActivitySheet(context),
+                  ),
+                )
+
               ],
             ),
           ),
@@ -306,46 +425,52 @@ class _CalendarviewState extends State<Calendarview> {
 
 
   Widget _buildActivityCard(Activity activity) {
+    final String activityName = activity.name.toLowerCase();
+    final bool isDrink = activityName == 'drink';
+    final bool isWalk = activityName == 'walk';
+    final String? amount = activity.food;
+
     return Card(
       margin: EdgeInsets.symmetric(vertical: 4.h),
       elevation: 0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       color: const Color(0xFFF4F7F6),
       child: Container(
-        width: 415.w,
-        height: 145.h,
-        // constraints: BoxConstraints(minHeight: 110.h),
-        padding: EdgeInsets.all(12.w),
+        padding: EdgeInsets.all(10.w),
+
         child: Column(
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 70.w,
-                  height: 70.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: ClipOval(
-                      child: Image.asset(
-                        activity.imagePath ?? 'assets/images/dog_default.png', // fallback if no imagePath
-                        fit: BoxFit.cover,
-                        width: 54.w,
-                        height: 54.h,
-                        errorBuilder: (_, __, ___) => Icon(
-                          Icons.pets,
-                          color: activity.color ?? Colors.brown,
-                          size: 28.w,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Container(
+                    width: 70.w,
+                    height: 70.h,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: ClipOval(
+                        child: Image.asset(
+                          activity.imagePath ?? 'assets/images/dog_default.png',
+                          fit: BoxFit.cover,
+                          width: 54.w,
+                          height: 54.h,
+                          errorBuilder: (_, __, ___) => Icon(
+                            Icons.pets,
+                            color: activity.color ?? Colors.brown,
+                            size: 28.w,
+                          ),
                         ),
                       ),
                     ),
@@ -357,72 +482,91 @@ class _CalendarviewState extends State<Calendarview> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: Center(
-                              child: Text(
-                                activity.name,
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          // Left: Name + Amount (Drink or Walk)
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    activity.name,
+                                    style: TextStyle(
+                                      fontSize: 18.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  // Show amount for Drink or Walk
+                                  if ((isDrink || isWalk) && amount != null && amount.isNotEmpty)
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 6.h),
+                                      child: Text(
+                                        amount,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color(0xFF7D7D7D), // Purple accent like Drink
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
                             ),
                           ),
-
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(height: 15.h,),
-                              Text(
-                                activity.formattedDate.toLowerCase(),
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  color: Colors.grey[700],
-                                ),
-                              ),
-                              SizedBox(height: 5.h,),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.access_time,
-                                    size: 16.w,
-                                    color: Colors.grey[600],
+                          // Right: Date & Time
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  activity.formattedDate.toLowerCase(),
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: Colors.grey[700],
                                   ),
-                                  SizedBox(width: 4.w),
-                                  Text(
-                                    activity.formattedTime,
-                                    style: TextStyle(
-                                      fontSize: 17.sp,
+                                ),
+                                SizedBox(height: 5.h),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.access_time,
+                                      size: 16.w,
                                       color: Colors.grey[600],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    SizedBox(width: 4.w),
+                                    Text(
+                                      activity.formattedTime,
+                                      style: TextStyle(
+                                        fontSize: 17.sp,
+                                        color: Colors.grey[600],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-
                     ],
                   ),
                 ),
-
               ],
             ),
-            SizedBox(height: 10.h,),
             const Divider(
-              thickness: 2,
+              thickness: 1,
               height: 1,
               color: Color(0xFFCBE4DC),
             ),
-            SizedBox(height: 12.h,),
-            // Notes section
-            if (activity.note != null && activity.note!.isNotEmpty) ...[
+            SizedBox(height: 12.h),
+            if (activity.note != null && activity.note!.isNotEmpty)
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Notes:',
@@ -432,23 +576,21 @@ class _CalendarviewState extends State<Calendarview> {
                       color: Colors.grey[800],
                     ),
                   ),
-                  SizedBox(width: 4.w),
-                  Text(
-                    activity.note!,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: Colors.black87,
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: Text(
+                      activity.note!,
+                      style: TextStyle(fontSize: 16.sp, color: Colors.black87),
                     ),
                   ),
                 ],
-              )
-
-            ],
+              ),
           ],
         ),
       ),
     );
   }
+
 
 
 

@@ -31,6 +31,7 @@ class RoutesName {
   static const String shop= 'Shopview';
   static const String addActivities= 'AddActivitiesView';
   static const String allActivity= 'Allactivityview';
+  static const String walk= 'Walkview';
 
 
 }

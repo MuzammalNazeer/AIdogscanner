@@ -43,7 +43,10 @@ class ActivityNotifier extends ChangeNotifier {
       debugPrint('Error saving activities: $e');
     }
   }
-
+  void removeActivity(Activity activity) {
+    _activities.remove(activity);
+    notifyListeners();
+  }
   void addActivity(Activity activity) {
     _activities.add(activity);
     _saveActivities(); // Persist immediately

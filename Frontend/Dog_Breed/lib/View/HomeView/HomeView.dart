@@ -407,7 +407,7 @@ class _HomeviewState extends State<Homeview> {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                  'Instantly scan and identify your dog using AI',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w300,
@@ -610,7 +610,7 @@ class _HomeviewState extends State<Homeview> {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                  'Schedule checkups and  keep \n track of vet visits',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w300,
@@ -703,7 +703,7 @@ class _HomeviewState extends State<Homeview> {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                  'Track meals and manage your \n pet’s daily nutrition',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w300,
