@@ -1,0 +1,26 @@
+{
+  "@@locale": "sv",
+  "appTitle": "Hundras",
+  "settingsTitle": "Inställningar",
+  "appLanguageTitle": "Appspråk",
+  "notificationLanguageTitle": "Aviseringsspråk",
+  "editProfile": "Redigera profil",
+  "changePassword": "Ändra lösenord",
+  "notifications": "Aviseringar",
+  "premiumSubscription": "Premiumprenumeration",
+  "aboutUs": "Om oss",
+  "faq": "Vanliga frågor",
+  "termsOfUse": "Användarvillkor",
+  "customerCare": "Kundtjänst",
+  "measurementUnits": "Måttenheter",
+  "supportAnimalIdProject": "Stöd Animal ID-projektet",
+  "deleteOwnerProfile": "Ta bort ägarprofil",
+  "logout": "Logga ut",
+  "dialogCancel": "Avbryt",
+  "dialogDelete": "Ta bort",
+  "dialogDeleteProfileTitle": "Ta bort profil",
+  "dialogDeleteProfileMessage": "Är du säker på att du vill ta bort din profil permanent? Detta kan inte ångras.",
+  "dialogLogoutTitle": "Logga ut",
+  "dialogLogoutMessage": "Är du säker på att du vill logga ut?"
+}
+

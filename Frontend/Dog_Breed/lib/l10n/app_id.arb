@@ -1,0 +1,26 @@
+{
+  "@@locale": "id",
+  "appTitle": "Ras Anjing",
+  "settingsTitle": "Pengaturan",
+  "appLanguageTitle": "Bahasa aplikasi",
+  "notificationLanguageTitle": "Bahasa notifikasi",
+  "editProfile": "Edit profil",
+  "changePassword": "Ganti kata sandi",
+  "notifications": "Notifikasi",
+  "premiumSubscription": "Langganan Premium",
+  "aboutUs": "Tentang kami",
+  "faq": "FAQ",
+  "termsOfUse": "Syarat penggunaan",
+  "customerCare": "Layanan pelanggan",
+  "measurementUnits": "Satuan ukuran",
+  "supportAnimalIdProject": "Dukung proyek Animal ID",
+  "deleteOwnerProfile": "Hapus profil pemilik",
+  "logout": "Keluar",
+  "dialogCancel": "Batal",
+  "dialogDelete": "Hapus",
+  "dialogDeleteProfileTitle": "Hapus profil",
+  "dialogDeleteProfileMessage": "Apakah Anda yakin ingin menghapus profil secara permanen? Tindakan ini tidak dapat dibatalkan.",
+  "dialogLogoutTitle": "Keluar",
+  "dialogLogoutMessage": "Apakah Anda yakin ingin keluar?"
+}
+

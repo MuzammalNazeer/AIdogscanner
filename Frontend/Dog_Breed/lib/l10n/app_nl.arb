@@ -1,0 +1,26 @@
+{
+  "@@locale": "nl",
+  "appTitle": "Hondenras",
+  "settingsTitle": "Instellingen",
+  "appLanguageTitle": "App-taal",
+  "notificationLanguageTitle": "Meldingstaal",
+  "editProfile": "Profiel bewerken",
+  "changePassword": "Wachtwoord wijzigen",
+  "notifications": "Meldingen",
+  "premiumSubscription": "Premium-abonnement",
+  "aboutUs": "Over ons",
+  "faq": "FAQ",
+  "termsOfUse": "Gebruiksvoorwaarden",
+  "customerCare": "Klantendienst",
+  "measurementUnits": "Meeteenheden",
+  "supportAnimalIdProject": "Steun het Animal ID-project",
+  "deleteOwnerProfile": "Profiel van eigenaar verwijderen",
+  "logout": "Afmelden",
+  "dialogCancel": "Annuleren",
+  "dialogDelete": "Verwijderen",
+  "dialogDeleteProfileTitle": "Profiel verwijderen",
+  "dialogDeleteProfileMessage": "Weet u zeker dat u uw profiel permanent wilt verwijderen? Dit kan niet ongedaan worden gemaakt.",
+  "dialogLogoutTitle": "Afmelden",
+  "dialogLogoutMessage": "Weet u zeker dat u wilt afmelden?"
+}
+

@@ -1,0 +1,26 @@
+{
+  "@@locale": "es",
+  "appTitle": "Raza de Perro",
+  "settingsTitle": "Ajustes",
+  "appLanguageTitle": "Idioma de la aplicación",
+  "notificationLanguageTitle": "Idioma de notificaciones",
+  "editProfile": "Editar perfil",
+  "changePassword": "Cambiar contraseña",
+  "notifications": "Notificaciones",
+  "premiumSubscription": "Suscripción Premium",
+  "aboutUs": "Sobre nosotros",
+  "faq": "Preguntas frecuentes",
+  "termsOfUse": "Términos de uso",
+  "customerCare": "Atención al cliente",
+  "measurementUnits": "Unidades de medida",
+  "supportAnimalIdProject": "Apoyar el proyecto Animal ID",
+  "deleteOwnerProfile": "Eliminar perfil del propietario",
+  "logout": "Cerrar sesión",
+  "dialogCancel": "Cancelar",
+  "dialogDelete": "Eliminar",
+  "dialogDeleteProfileTitle": "Eliminar perfil",
+  "dialogDeleteProfileMessage": "¿Seguro que quieres eliminar tu perfil de forma permanente? Esta acción no se puede deshacer.",
+  "dialogLogoutTitle": "Cerrar sesión",
+  "dialogLogoutMessage": "¿Seguro que quieres cerrar sesión?"
+}
+

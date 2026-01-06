@@ -1,0 +1,26 @@
+{
+  "@@locale": "en",
+  "appTitle": "Dog Breed",
+  "settingsTitle": "Settings",
+  "appLanguageTitle": "App Language",
+  "notificationLanguageTitle": "Notification language",
+  "editProfile": "Edit Profile",
+  "changePassword": "Change Password",
+  "notifications": "Notifications",
+  "premiumSubscription": "Premium Subscription",
+  "aboutUs": "About us",
+  "faq": "FAQ",
+  "termsOfUse": "Terms of Use",
+  "customerCare": "Customer Care",
+  "measurementUnits": "Measurement units",
+  "supportAnimalIdProject": "Support the Animal ID project",
+  "deleteOwnerProfile": "Delete owner's profile",
+  "logout": "Logout",
+  "dialogCancel": "Cancel",
+  "dialogDelete": "Delete",
+  "dialogDeleteProfileTitle": "Delete Profile",
+  "dialogDeleteProfileMessage": "Are you sure you want to permanently delete your profile? This cannot be undone.",
+  "dialogLogoutTitle": "Logout",
+  "dialogLogoutMessage": "Are you sure you want to log out?"
+}
+

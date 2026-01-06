@@ -1,0 +1,26 @@
+{
+  "@@locale": "it",
+  "appTitle": "Razza di cane",
+  "settingsTitle": "Impostazioni",
+  "appLanguageTitle": "Lingua dell’app",
+  "notificationLanguageTitle": "Lingua delle notifiche",
+  "editProfile": "Modifica profilo",
+  "changePassword": "Cambia password",
+  "notifications": "Notifiche",
+  "premiumSubscription": "Abbonamento Premium",
+  "aboutUs": "Chi siamo",
+  "faq": "FAQ",
+  "termsOfUse": "Termini di utilizzo",
+  "customerCare": "Assistenza clienti",
+  "measurementUnits": "Unità di misura",
+  "supportAnimalIdProject": "Supporta il progetto Animal ID",
+  "deleteOwnerProfile": "Elimina profilo del proprietario",
+  "logout": "Disconnetti",
+  "dialogCancel": "Annulla",
+  "dialogDelete": "Elimina",
+  "dialogDeleteProfileTitle": "Elimina profilo",
+  "dialogDeleteProfileMessage": "Sei sicuro di voler eliminare definitivamente il profilo? Questa azione non può essere annullata.",
+  "dialogLogoutTitle": "Disconnetti",
+  "dialogLogoutMessage": "Sei sicuro di voler uscire?"
+}
+

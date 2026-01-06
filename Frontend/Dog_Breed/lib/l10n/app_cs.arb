@@ -1,0 +1,26 @@
+{
+  "@@locale": "cs",
+  "appTitle": "Psí plemeno",
+  "settingsTitle": "Nastavení",
+  "appLanguageTitle": "Jazyk aplikace",
+  "notificationLanguageTitle": "Jazyk oznámení",
+  "editProfile": "Upravit profil",
+  "changePassword": "Změnit heslo",
+  "notifications": "Oznámení",
+  "premiumSubscription": "Premium předplatné",
+  "aboutUs": "O nás",
+  "faq": "Časté dotazy",
+  "termsOfUse": "Podmínky použití",
+  "customerCare": "Zákaznická podpora",
+  "measurementUnits": "Měrné jednotky",
+  "supportAnimalIdProject": "Podpořte projekt Animal ID",
+  "deleteOwnerProfile": "Smazat profil majitele",
+  "logout": "Odhlásit se",
+  "dialogCancel": "Zrušit",
+  "dialogDelete": "Smazat",
+  "dialogDeleteProfileTitle": "Smazat profil",
+  "dialogDeleteProfileMessage": "Opravdu chcete trvale smazat svůj profil? Tuto akci nelze vrátit.",
+  "dialogLogoutTitle": "Odhlášení",
+  "dialogLogoutMessage": "Opravdu se chcete odhlásit?"
+}
+

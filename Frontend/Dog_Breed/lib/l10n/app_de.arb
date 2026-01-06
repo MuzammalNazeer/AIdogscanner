@@ -1,0 +1,26 @@
+{
+  "@@locale": "de",
+  "appTitle": "Hunderasse",
+  "settingsTitle": "Einstellungen",
+  "appLanguageTitle": "App-Sprache",
+  "notificationLanguageTitle": "Benachrichtigungssprache",
+  "editProfile": "Profil bearbeiten",
+  "changePassword": "Passwort ändern",
+  "notifications": "Benachrichtigungen",
+  "premiumSubscription": "Premium-Abonnement",
+  "aboutUs": "Über uns",
+  "faq": "FAQ",
+  "termsOfUse": "Nutzungsbedingungen",
+  "customerCare": "Kundendienst",
+  "measurementUnits": "Maßeinheiten",
+  "supportAnimalIdProject": "Animal-ID-Projekt unterstützen",
+  "deleteOwnerProfile": "Profil des Besitzers löschen",
+  "logout": "Abmelden",
+  "dialogCancel": "Abbrechen",
+  "dialogDelete": "Löschen",
+  "dialogDeleteProfileTitle": "Profil löschen",
+  "dialogDeleteProfileMessage": "Möchten Sie Ihr Profil wirklich dauerhaft löschen? Dies kann nicht rückgängig gemacht werden.",
+  "dialogLogoutTitle": "Abmelden",
+  "dialogLogoutMessage": "Möchten Sie sich wirklich abmelden?"
+}
+

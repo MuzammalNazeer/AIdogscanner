@@ -1,0 +1,26 @@
+{
+  "@@locale": "fi",
+  "appTitle": "Koirarotu",
+  "settingsTitle": "Asetukset",
+  "appLanguageTitle": "Sovelluksen kieli",
+  "notificationLanguageTitle": "Ilmoitusten kieli",
+  "editProfile": "Muokkaa profiilia",
+  "changePassword": "Vaihda salasana",
+  "notifications": "Ilmoitukset",
+  "premiumSubscription": "Premium-tilaus",
+  "aboutUs": "Tietoa meistä",
+  "faq": "UKK",
+  "termsOfUse": "Käyttöehdot",
+  "customerCare": "Asiakaspalvelu",
+  "measurementUnits": "Mittayksiköt",
+  "supportAnimalIdProject": "Tue Animal ID -projektia",
+  "deleteOwnerProfile": "Poista omistajan profiili",
+  "logout": "Kirjaudu ulos",
+  "dialogCancel": "Peruuta",
+  "dialogDelete": "Poista",
+  "dialogDeleteProfileTitle": "Poista profiili",
+  "dialogDeleteProfileMessage": "Haluatko varmasti poistaa profiilisi pysyvästi? Tätä toimintoa ei voi perua.",
+  "dialogLogoutTitle": "Kirjaudu ulos",
+  "dialogLogoutMessage": "Haluatko varmasti kirjautua ulos?"
+}
+

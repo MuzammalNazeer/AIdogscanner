@@ -1,0 +1,26 @@
+{
+  "@@locale": "pl",
+  "appTitle": "Rasa psa",
+  "settingsTitle": "Ustawienia",
+  "appLanguageTitle": "Język aplikacji",
+  "notificationLanguageTitle": "Język powiadomień",
+  "editProfile": "Edytuj profil",
+  "changePassword": "Zmień hasło",
+  "notifications": "Powiadomienia",
+  "premiumSubscription": "Subskrypcja Premium",
+  "aboutUs": "O nas",
+  "faq": "FAQ",
+  "termsOfUse": "Warunki korzystania",
+  "customerCare": "Obsługa klienta",
+  "measurementUnits": "Jednostki miary",
+  "supportAnimalIdProject": "Wspieraj projekt Animal ID",
+  "deleteOwnerProfile": "Usuń profil właściciela",
+  "logout": "Wyloguj się",
+  "dialogCancel": "Anuluj",
+  "dialogDelete": "Usuń",
+  "dialogDeleteProfileTitle": "Usuń profil",
+  "dialogDeleteProfileMessage": "Czy na pewno chcesz trwale usunąć swój profil? Tego nie można cofnąć.",
+  "dialogLogoutTitle": "Wyloguj się",
+  "dialogLogoutMessage": "Czy na pewno chcesz się wylogować?"
+}
+

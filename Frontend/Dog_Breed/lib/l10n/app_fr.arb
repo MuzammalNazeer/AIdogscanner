@@ -1,0 +1,26 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Race de chien",
+  "settingsTitle": "Paramètres",
+  "appLanguageTitle": "Langue de l’application",
+  "notificationLanguageTitle": "Langue des notifications",
+  "editProfile": "Modifier le profil",
+  "changePassword": "Changer le mot de passe",
+  "notifications": "Notifications",
+  "premiumSubscription": "Abonnement Premium",
+  "aboutUs": "À propos de nous",
+  "faq": "FAQ",
+  "termsOfUse": "Conditions d’utilisation",
+  "customerCare": "Service client",
+  "measurementUnits": "Unités de mesure",
+  "supportAnimalIdProject": "Soutenir le projet Animal ID",
+  "deleteOwnerProfile": "Supprimer le profil du propriétaire",
+  "logout": "Se déconnecter",
+  "dialogCancel": "Annuler",
+  "dialogDelete": "Supprimer",
+  "dialogDeleteProfileTitle": "Supprimer le profil",
+  "dialogDeleteProfileMessage": "Êtes-vous sûr de vouloir supprimer définitivement votre profil ? Cette action est irréversible.",
+  "dialogLogoutTitle": "Déconnexion",
+  "dialogLogoutMessage": "Êtes-vous sûr de vouloir vous déconnecter ?"
+}
+

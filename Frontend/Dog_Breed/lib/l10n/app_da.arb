@@ -1,0 +1,26 @@
+{
+  "@@locale": "da",
+  "appTitle": "Hunderace",
+  "settingsTitle": "Indstillinger",
+  "appLanguageTitle": "App-sprog",
+  "notificationLanguageTitle": "Notifikationssprog",
+  "editProfile": "Rediger profil",
+  "changePassword": "Skift adgangskode",
+  "notifications": "Notifikationer",
+  "premiumSubscription": "Premium-abonnement",
+  "aboutUs": "Om os",
+  "faq": "Ofte stillede spørgsmål",
+  "termsOfUse": "Brugsvilkår",
+  "customerCare": "Kundeservice",
+  "measurementUnits": "Måleenheder",
+  "supportAnimalIdProject": "Støt Animal ID-projektet",
+  "deleteOwnerProfile": "Slet ejerprofil",
+  "logout": "Log ud",
+  "dialogCancel": "Annuller",
+  "dialogDelete": "Slet",
+  "dialogDeleteProfileTitle": "Slet profil",
+  "dialogDeleteProfileMessage": "Er du sikker på, at du vil slette din profil permanent? Dette kan ikke fortrydes.",
+  "dialogLogoutTitle": "Log ud",
+  "dialogLogoutMessage": "Er du sikker på, at du vil logge ud?"
+}
+

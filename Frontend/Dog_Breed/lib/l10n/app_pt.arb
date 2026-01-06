@@ -1,0 +1,26 @@
+{
+  "@@locale": "pt",
+  "appTitle": "Raça de Cão",
+  "settingsTitle": "Configurações",
+  "appLanguageTitle": "Idioma do app",
+  "notificationLanguageTitle": "Idioma das notificações",
+  "editProfile": "Editar perfil",
+  "changePassword": "Alterar senha",
+  "notifications": "Notificações",
+  "premiumSubscription": "Assinatura Premium",
+  "aboutUs": "Sobre nós",
+  "faq": "Perguntas frequentes",
+  "termsOfUse": "Termos de uso",
+  "customerCare": "Atendimento ao cliente",
+  "measurementUnits": "Unidades de medida",
+  "supportAnimalIdProject": "Apoiar o projeto Animal ID",
+  "deleteOwnerProfile": "Excluir perfil do proprietário",
+  "logout": "Sair",
+  "dialogCancel": "Cancelar",
+  "dialogDelete": "Excluir",
+  "dialogDeleteProfileTitle": "Excluir perfil",
+  "dialogDeleteProfileMessage": "Tem certeza de que deseja excluir permanentemente seu perfil? Esta ação não pode ser desfeita.",
+  "dialogLogoutTitle": "Sair",
+  "dialogLogoutMessage": "Tem certeza de que deseja sair?"
+}
+

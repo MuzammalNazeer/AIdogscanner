@@ -1,0 +1,26 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Köpek Irkı",
+  "settingsTitle": "Ayarlar",
+  "appLanguageTitle": "Uygulama dili",
+  "notificationLanguageTitle": "Bildirim dili",
+  "editProfile": "Profili düzenle",
+  "changePassword": "Parolayı değiştir",
+  "notifications": "Bildirimler",
+  "premiumSubscription": "Premium abonelik",
+  "aboutUs": "Hakkımızda",
+  "faq": "SSS",
+  "termsOfUse": "Kullanım şartları",
+  "customerCare": "Müşteri hizmetleri",
+  "measurementUnits": "Ölçü birimleri",
+  "supportAnimalIdProject": "Animal ID projesini destekle",
+  "deleteOwnerProfile": "Sahip profilini sil",
+  "logout": "Çıkış yap",
+  "dialogCancel": "İptal",
+  "dialogDelete": "Sil",
+  "dialogDeleteProfileTitle": "Profili sil",
+  "dialogDeleteProfileMessage": "Profilinizi kalıcı olarak silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+  "dialogLogoutTitle": "Çıkış yap",
+  "dialogLogoutMessage": "Çıkış yapmak istediğinizden emin misiniz?"
+}
+

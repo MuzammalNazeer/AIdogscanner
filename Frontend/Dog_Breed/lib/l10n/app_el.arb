@@ -1,0 +1,26 @@
+{
+  "@@locale": "el",
+  "appTitle": "Ράτσα σκύλου",
+  "settingsTitle": "Ρυθμίσεις",
+  "appLanguageTitle": "Γλώσσα εφαρμογής",
+  "notificationLanguageTitle": "Γλώσσα ειδοποιήσεων",
+  "editProfile": "Επεξεργασία προφίλ",
+  "changePassword": "Αλλαγή κωδικού",
+  "notifications": "Ειδοποιήσεις",
+  "premiumSubscription": "Συνδρομή Premium",
+  "aboutUs": "Σχετικά με εμάς",
+  "faq": "Συχνές ερωτήσεις",
+  "termsOfUse": "Όροι χρήσης",
+  "customerCare": "Εξυπηρέτηση πελατών",
+  "measurementUnits": "Μονάδες μέτρησης",
+  "supportAnimalIdProject": "Υποστηρίξτε το έργο Animal ID",
+  "deleteOwnerProfile": "Διαγραφή προφίλ ιδιοκτήτη",
+  "logout": "Αποσύνδεση",
+  "dialogCancel": "Άκυρο",
+  "dialogDelete": "Διαγραφή",
+  "dialogDeleteProfileTitle": "Διαγραφή προφίλ",
+  "dialogDeleteProfileMessage": "Είστε βέβαιοι ότι θέλετε να διαγράψετε οριστικά το προφίλ σας; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+  "dialogLogoutTitle": "Αποσύνδεση",
+  "dialogLogoutMessage": "Είστε βέβαιοι ότι θέλετε να αποσυνδεθείτε;"
+}
+
