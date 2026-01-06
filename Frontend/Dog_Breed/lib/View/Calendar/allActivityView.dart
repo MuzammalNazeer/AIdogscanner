@@ -1,4 +1,5 @@
 import 'package:dog_breed/Valid/AppColors.dart';
+import 'package:dog_breed/View/Calendar/walkView.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,10 @@ import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/activity_provider.dart';
 import '../../activity_model.dart';
+import '../../config/components/CustomDatePicker.dart';
 import '../../utils/routes/routes_name.dart';
 
 class Allactivityview extends StatefulWidget {
@@ -24,6 +27,8 @@ class Allactivityview extends StatefulWidget {
 class _AllactivityviewState extends State<Allactivityview> {
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay.now();
+  DateTime? _reminderDate;
+  TimeOfDay? _reminderTime;
   final TextEditingController _foodController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
@@ -37,19 +42,27 @@ class _AllactivityviewState extends State<Allactivityview> {
   DateTime _walkEndDate = DateTime.now();
   TimeOfDay _walkEndTime = TimeOfDay.now();
 
-  // // Drink state
-  // double _drinkQuantityOz = 0.0;
-  // bool _isOzUnit = true;
-  double _drinkQuantityOz = 0.0;  // initial value in oz
+  double _drinkQuantityOz = 0.0;
   bool _isOzUnit = true;
-  // Walk state
+
   double _walkDistanceKm = 0.0;
-  bool _isKmUnit = true; // true = km, false = mi
+  bool _isKmUnit = true;
+
+  bool _hasReminder = false;
 
   @override
   void initState() {
     super.initState();
     _currentActivity = widget.selectedActivity;
+
+    // If editing existing activity with reminder, populate values
+    if (_currentActivity?.hasReminder == true) {
+      _hasReminder = true;
+      _reminderDate = _currentActivity?.reminderDateTime;
+      _reminderTime = _currentActivity?.reminderDateTime != null
+          ? TimeOfDay.fromDateTime(_currentActivity!.reminderDateTime!)
+          : null;
+    }
 
     final int totalMinutes =
         _selectedTime.hour * 60 + _selectedTime.minute + 60;
@@ -58,7 +71,99 @@ class _AllactivityviewState extends State<Allactivityview> {
     _walkEndTime = TimeOfDay(hour: endHour, minute: endMinute);
   }
 
-  // Picker methods - MOVED TO CLASS LEVEL
+  // Reminder date selection
+  Future<void> _selectReminderDate() async {
+    final DateTime? picked = await showDialog<DateTime>(
+      context: context,
+      builder: (context) => CustomDatePicker(
+        initialDate: _reminderDate ?? DateTime.now(),
+      ),
+    );
+
+    if (picked != null) {
+      setState(() {
+        _reminderDate = picked;
+        _hasReminder = true;
+      });
+    }
+  }
+
+  // Reminder time selection
+  Future<void> _selectReminderTime() async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _reminderTime ?? TimeOfDay.now(),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xFF820DFF),
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
+            ),
+            dialogBackgroundColor: Colors.white,
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFF820DFF),
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null) {
+      setState(() {
+        _reminderTime = picked;
+        _hasReminder = true;
+      });
+    }
+  }
+
+  // Activity date selection
+  void _selectDate() async {
+    final DateTime? picked = await showDialog<DateTime>(
+      context: context,
+      builder: (context) => CustomDatePicker(
+        initialDate: _selectedDate,
+      ),
+    );
+
+    if (picked != null) {
+      setState(() => _selectedDate = picked);
+    }
+  }
+
+  // Activity time selection
+  Future<void> _selectTime() async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime,
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xFF820DFF),
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
+            ),
+            dialogBackgroundColor: Colors.white,
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xFF820DFF),
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null && picked != _selectedTime) {
+      setState(() => _selectedTime = picked);
+    }
+  }
+
+  // Walk specific date/time methods
   Future<void> _selectWalkStartDate() async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -117,64 +222,6 @@ class _AllactivityviewState extends State<Allactivityview> {
       ),
     );
     if (picked != null) setState(() => _walkEndTime = picked);
-  }
-
-  Future<void> _selectDate() async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate,
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2030),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF),
-              onPrimary: Colors.white,
-              onSurface: Colors.black,
-            ),
-            dialogBackgroundColor: Colors.white,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor: const Color(0xFF820DFF),
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (picked != null && picked != _selectedDate) {
-      setState(() => _selectedDate = picked);
-    }
-  }
-
-  Future<void> _selectTime() async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: _selectedTime,
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF),
-              onPrimary: Colors.white,
-              onSurface: Colors.black,
-            ),
-            dialogBackgroundColor: Colors.white,
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor: const Color(0xFF820DFF),
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (picked != null && picked != _selectedTime) {
-      setState(() => _selectedTime = picked);
-    }
   }
 
   Future<void> _pickImage(ImageSource source) async {
@@ -267,10 +314,27 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
   }
 
-  void _saveActivity() {
+  void _saveActivity() async {
     if (_currentActivity == null) {
       _showErrorSnackBar('Please select an activity first');
       return;
+    }
+
+    // Validate reminder time if set
+    DateTime? reminderDateTime;
+    if (_hasReminder && _reminderDate != null && _reminderTime != null) {
+      reminderDateTime = DateTime(
+        _reminderDate!.year,
+        _reminderDate!.month,
+        _reminderDate!.day,
+        _reminderTime!.hour,
+        _reminderTime!.minute,
+      );
+
+      if (reminderDateTime.isBefore(DateTime.now())) {
+        _showErrorSnackBar('Reminder time must be in the future');
+        return;
+      }
     }
 
     String? foodValue;
@@ -281,9 +345,9 @@ class _AllactivityviewState extends State<Allactivityview> {
       double amount = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
       foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? 'oz' : 'ml'}';
     } else if (activityName == 'walk') {
-      const double kmToMi = 0.500;
+      const double kmToMi = 0.621371;
       double amount = _isKmUnit ? _walkDistanceKm : _walkDistanceKm * kmToMi;
-      foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'ml'}';
+      foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}';
     } else {
       if (_foodController.text.trim().isEmpty) {
         _showErrorSnackBar('Please enter food name or type');
@@ -301,35 +365,75 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
 
     try {
-      final newActivity = Activity(
-        name: _currentActivity!.name,
-        imagePath: _currentActivity!.imagePath,
-        color: _currentActivity!.color,
-        food: foodValue,
-        dateTime: DateTime(
+      DateTime activityDateTime;
+
+      if (activityName == 'walk') {
+        activityDateTime = DateTime(
+          _walkStartDate.year,
+          _walkStartDate.month,
+          _walkStartDate.day,
+          _walkStartTime.hour,
+          _walkStartTime.minute,
+        );
+      } else {
+        activityDateTime = DateTime(
           _selectedDate.year,
           _selectedDate.month,
           _selectedDate.day,
           _selectedTime.hour,
           _selectedTime.minute,
-        ),
+        );
+      }
+
+      final newActivity = Activity(
+        name: _currentActivity!.name,
+        imagePath: _currentActivity!.imagePath,
+        color: _currentActivity!.color,
+        food: foodValue,
+        dateTime: activityDateTime,
         note: _noteController.text.trim().isEmpty
             ? null
             : _noteController.text.trim(),
         imagePathLocal: _selectedImage?.path,
         videoPathLocal: _selectedVideo?.path,
+        hasReminder: _hasReminder,
+        reminderDateTime: reminderDateTime,
+        reminderId: _currentActivity?.reminderId,
       );
 
       final activityNotifier = Provider.of<ActivityNotifier>(
         context,
         listen: false,
       );
+
+      final reminderNotifier = Provider.of<ReminderNotifier>(
+        context,
+        listen: false,
+      );
+
+      // Save activity
       activityNotifier.addActivity(newActivity);
 
+      // Schedule reminder if set
+      if (_hasReminder && reminderDateTime != null) {
+        final reminderId = await reminderNotifier.scheduleReminder(
+          activity: newActivity,
+          reminderDateTime: reminderDateTime,
+        );
+
+        // Update activity with reminder ID
+        final updatedActivity = newActivity.copyWith(reminderId: reminderId);
+        activityNotifier.updateActivity(updatedActivity);
+      } else if (!_hasReminder && _currentActivity?.reminderId != null) {
+        // Cancel existing reminder if removed
+        await reminderNotifier.cancelReminder(_currentActivity!.reminderId!);
+      }
+
       Navigator.pop(context); // close loading
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Activity saved successfully!'),
+          content: Text('Activity ${_hasReminder ? 'with reminder ' : ''}saved successfully!'),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -506,21 +610,180 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
   }
 
+  Widget _buildReminderSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Reminder Header
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Set Reminder',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            // Switch(
+            //   value: _hasReminder,
+            //   activeThumbColor: Colors.black,
+            //   activeColor: const Color(0xFF820DFF),
+            //   inactiveThumbColor: Colors.white,
+            //   inactiveTrackColor: Colors.red,
+            //
+            //   onChanged: (value) {
+            //     setState(() {
+            //       _hasReminder = value;
+            //       if (!value) {
+            //         _reminderDate = null;
+            //         _reminderTime = null;
+            //       }
+            //     });
+            //   },
+            // ),
 
+            Switch(
+              value: _hasReminder,
+              activeColor: const Color(0xFF820DFF), // Purple track when ON
+              activeTrackColor: const Color(0xFF820DFF), // Purple track
+              inactiveThumbColor: Colors.white,
+              inactiveTrackColor: Colors.red, // Red track when OFF
+              thumbColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return Colors.white; // White thumb when ON
+                }
+                return Colors.white; // White thumb when OFF
+              }),
+              trackOutlineColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+                if (states.contains(MaterialState.selected)) {
+                  return const Color(0xFF820DFF);
+                }
+                return Colors.red;
+              }),
+              onChanged: (value) {
+                setState(() {
+                  _hasReminder = value;
+                  if (!value) {
+                    _reminderDate = null;
+                    _reminderTime = null;
+                  }
+                });
+              },
+            ),
+          ],
+        ),
+        SizedBox(height: 8.h),
+
+        if (_hasReminder) ...[
+          // Reminder Date
+          GestureDetector(
+            onTap: _selectReminderDate,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+              decoration: BoxDecoration(
+                color: Colors.grey[50],
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    _reminderDate != null
+                        ? DateFormat('MMM dd, yyyy').format(_reminderDate!)
+                        : 'Select reminder date',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: _reminderDate != null ? Colors.black : Colors.grey,
+                    ),
+                  ),
+                  const Icon(Icons.calendar_today, color: Colors.grey),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 12.h),
+
+          // Reminder Time
+          GestureDetector(
+            onTap: _selectReminderTime,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+              decoration: BoxDecoration(
+                color: Colors.grey[50],
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    _reminderTime != null
+                        ? _reminderTime!.format(context)
+                        : 'Select reminder time',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: _reminderTime != null ? Colors.black : Colors.grey,
+                    ),
+                  ),
+                  const Icon(Icons.access_time, color: Colors.grey),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 8.h),
+
+          // Reminder Preview
+          if (_reminderDate != null && _reminderTime != null)
+            Container(
+              padding: EdgeInsets.all(12.w),
+              decoration: BoxDecoration(
+                color: const Color(0xFF820DFF).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8.r),
+                border: Border.all(
+                  color: const Color(0xFF820DFF).withOpacity(0.2),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.notifications,
+                    color: const Color(0xFF820DFF),
+                    size: 18.w,
+                  ),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: Text(
+                      'Reminder set for ${DateFormat('MMM d, yyyy').format(_reminderDate!)} at ${_reminderTime!.format(context)}',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: const Color(0xFF820DFF),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          SizedBox(height: 16.h),
+        ],
+      ],
+    );
+  }
 
   Widget _buildDrinkQuantitySelector() {
+    // ... (keep existing drink selector code)
     const double ozToMl = 29.5735;
     const double ozStep = 0.1;
     const double mlStep = 1;
-
 
     double snapOzToWholeMl(double oz) {
       double ml = oz * ozToMl;
       return ml.roundToDouble() / ozToMl;
     }
 
-    double displayValue =
-    _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
+    double displayValue = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
 
     void increment() {
       setState(() {
@@ -552,7 +815,6 @@ class _AllactivityviewState extends State<Allactivityview> {
 
     return Column(
       children: [
-        // ───────── Quantity Display ─────────
         Container(
           padding: EdgeInsets.all(16.w),
           decoration: BoxDecoration(
@@ -566,17 +828,15 @@ class _AllactivityviewState extends State<Allactivityview> {
                 icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
                 onPressed: decrement,
               ),
-
               Text(
                 _isOzUnit
-                    ? displayValue.toStringAsFixed(1) // oz
-                    : displayValue.toStringAsFixed(0), // mL
+                    ? displayValue.toStringAsFixed(1)
+                    : displayValue.toStringAsFixed(0),
                 style: TextStyle(
                   fontSize: 36.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
               IconButton(
                 icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
                 onPressed: increment,
@@ -584,10 +844,7 @@ class _AllactivityviewState extends State<Allactivityview> {
             ],
           ),
         ),
-
         SizedBox(height: 12.h),
-
-        // ───────── Unit Toggle ─────────
         Container(
           decoration: BoxDecoration(
             color: const Color(0xFFF4F7F6),
@@ -653,18 +910,11 @@ class _AllactivityviewState extends State<Allactivityview> {
   }
 
   Widget _buildWalkDistanceSelector() {
+    // ... (keep existing walk selector code)
     const double kmToMi = 0.621371;
-
-    // Base value stored in km
     double baseKm = _walkDistanceKm;
-
-    // Display value
     double rawDisplayValue = _isKmUnit ? baseKm : baseKm * kmToMi;
-
-    // Step size: 1 in current unit
     double step = 1.0;
-
-    // Format: 1 decimal for km, whole number for mi
     String displayText = _isKmUnit
         ? '${rawDisplayValue.toStringAsFixed(1)}'
         : '${rawDisplayValue.round()} ';
@@ -672,21 +922,46 @@ class _AllactivityviewState extends State<Allactivityview> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // "Or start a timer" button
         RoundButton(
           title: "Or start a timer",
           isSelected: true,
-          textColors: Colors.white,
+          textColors: AppColors.vibrantPurple,
           hasIcons: true,
-          icon: const Icon(Icons.update, color: Colors.white),
-          backgroundColors: AppColors.vibrantPurple,
-          onPress: () {
-            Navigator.pushNamed(context, RoutesName.walk);
+          icon: const Icon(Icons.update, color: AppColors.vibrantPurple),
+          backgroundColors: const Color(0xFFF4F7F6),
+          onPress: () async {
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Walkview(selectedActivity: _currentActivity),
+              ),
+            );
+
+            if (result != null && result is Map) {
+              final duration = result['duration'] as Duration;
+              final formattedDuration = result['formattedDuration'] as String;
+              final note = result['note'] as String;
+
+              final walkActivity = Activity(
+                name: 'Walk',
+                imagePath: _currentActivity!.imagePath,
+                color: _currentActivity!.color,
+                food: '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
+                dateTime: DateTime.now(),
+                note: note.isNotEmpty ? note : null,
+                duration: duration,
+                formattedDuration: formattedDuration,
+                walkDistance: '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
+              );
+
+              final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
+              activityNotifier.addActivity(walkActivity);
+
+              Navigator.pop(context);
+            }
           },
         ),
         SizedBox(height: 16.h),
-
-        // Distance Selector
         Container(
           padding: EdgeInsets.all(6.w),
           decoration: BoxDecoration(
@@ -696,14 +971,12 @@ class _AllactivityviewState extends State<Allactivityview> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Minus Button
               Container(
                 width: 85.w,
                 height: 45.h,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8.r),
-
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.remove, color: Colors.black, size: 28),
@@ -723,33 +996,28 @@ class _AllactivityviewState extends State<Allactivityview> {
                   },
                 ),
               ),
-
-              // Display Value
               Text(
                 displayText,
                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
               ),
-
-              // Plus Button
               Container(
                 width: 85.w,
                 height: 45.h,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8.r),
-
                 ),
                 child: IconButton(
                   icon: const Icon(Icons.add, color: Colors.black, size: 28),
                   onPressed: () {
                     setState(() {
                       if (_isKmUnit) {
-                        if (_walkDistanceKm <= 99) { // reasonable max
+                        if (_walkDistanceKm <= 99) {
                           _walkDistanceKm += step;
                         }
                       } else {
                         double currentMi = _walkDistanceKm * kmToMi;
-                        if (currentMi <= 62) { // ~100 km max
+                        if (currentMi <= 62) {
                           _walkDistanceKm = (currentMi + step) / kmToMi;
                         }
                       }
@@ -761,8 +1029,6 @@ class _AllactivityviewState extends State<Allactivityview> {
           ),
         ),
         SizedBox(height: 12.h),
-
-        // km / mi Toggle
         Container(
           decoration: BoxDecoration(
             color: const Color(0xFFF4F7F6),
@@ -815,10 +1081,7 @@ class _AllactivityviewState extends State<Allactivityview> {
             ],
           ),
         ),
-
         SizedBox(height: 24.h),
-
-        // Started At
         Text('Started At', style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600)),
         SizedBox(height: 8.h),
         Row(
@@ -858,10 +1121,7 @@ class _AllactivityviewState extends State<Allactivityview> {
             ),
           ],
         ),
-
         SizedBox(height: 16.h),
-
-        // Ended At
         Text('Ended At', style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600)),
         SizedBox(height: 8.h),
         Row(
@@ -915,961 +1175,261 @@ class _AllactivityviewState extends State<Allactivityview> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Header with back and save buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Icon(CupertinoIcons.chevron_left),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: _saveActivity,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Icon(CupertinoIcons.check_mark),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16.h),
-
-            // Activity preview
-            Container(
-              padding: EdgeInsets.all(16.w),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF4F7F6),
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Row(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildActivityImage(),
-                  SizedBox(width: 20.w),
-                  Expanded(
-                    child: Text(
-                      _currentActivity?.name ?? 'No Activity Selected',
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
+                        borderRadius: BorderRadius.circular(10),
                       ),
+                      child: const Icon(CupertinoIcons.chevron_left),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: _saveActivity,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Icon(CupertinoIcons.check_mark),
                     ),
                   ),
                 ],
               ),
-            ),
-            SizedBox(height: 16.h),
+              SizedBox(height: 16.h),
 
-            // Conditional Input Section
-            if (activityName == 'drink')
-              _buildDrinkQuantitySelector()
-            else if (activityName == 'walk')
-              _buildWalkDistanceSelector()
-            else
-              TextField(
-                controller: _foodController,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  hintText: '+ Add food name or type',
-                  hintStyle: TextStyle(
-                    color: const Color(0xFF820DFF),
-                    fontSize: 16.sp,
+              Container(
+                padding: EdgeInsets.all(16.w),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF4F7F6),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Row(
+                  children: [
+                    _buildActivityImage(),
+                    SizedBox(width: 20.w),
+                    Expanded(
+                      child: Text(
+                        _currentActivity?.name ?? 'No Activity Selected',
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 16.h),
+
+              // Reminder Section (for all activities)
+              _buildReminderSection(),
+              SizedBox(height: 16.h),
+
+              // Conditional Input Section
+              if (activityName == 'drink')
+                _buildDrinkQuantitySelector()
+              else if (activityName == 'walk')
+                _buildWalkDistanceSelector()
+              else
+                TextField(
+                  controller: _foodController,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration(
+                    hintText: '+ Add food name or type',
+                    hintStyle: TextStyle(
+                      color: const Color(0xFF820DFF),
+                      fontSize: 16.sp,
+                    ),
+                    filled: true,
+                    fillColor: const Color(0xFFF4F7F6),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
+                ),
+
+              SizedBox(height: 16.h),
+
+              // Activity Date & Time (for non-walk activities)
+              if (activityName != 'walk') ...[
+                Text(
+                  'Date',
+                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 8.h),
+                GestureDetector(
+                  onTap: _selectDate,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 14.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[50],
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          dateFormat.format(_selectedDate),
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Icon(Icons.calendar_month),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16.h),
+
+                Text(
+                  'Time',
+                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 8.h),
+                GestureDetector(
+                  onTap: _selectTime,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 14.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[50],
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          timeFormat.format(
+                            DateTime(
+                              2000,
+                              1,
+                              1,
+                              _selectedTime.hour,
+                              _selectedTime.minute,
+                            ),
+                          ),
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Icon(Icons.access_time),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16.h),
+              ],
+
+              // Note
+              Text(
+                'Note',
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(height: 8.h),
+              TextField(
+                controller: _noteController,
+                maxLines: 4,
+                decoration: InputDecoration(
+                  hintText: 'Add a note about this activity...',
                   filled: true,
-                  fillColor: const Color(0xFFF4F7F6),
+                  fillColor: const Color(0xFFF3F6F3),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide.none,
                   ),
+                  contentPadding: EdgeInsets.all(16.w),
                 ),
               ),
+              SizedBox(height: 24.h),
 
-            SizedBox(height: 16.h),
-
-            // === ONLY SHOW SINGLE DATE & TIME FOR NON-WALK ACTIVITIES ===
-            if (activityName != 'walk') ...[
-              // Date
-              Text(
-                'Date',
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(height: 8.h),
+              // Add Image
               GestureDetector(
-                onTap: _selectDate,
+                onTap: _showImageSourceDialog,
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 14.h,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: const Color(0xFFF3F6F3),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        dateFormat.format(_selectedDate),
+                      const Icon(Icons.camera_alt, color: Color(0xFF820DFF)),
+                      SizedBox(width: 12.w),
+                      const Text(
+                        '+ Add Image',
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF820DFF),
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const Icon(Icons.calendar_month),
                     ],
                   ),
                 ),
               ),
+              _buildSelectedImage(),
               SizedBox(height: 16.h),
 
-              // Time
-              Text(
-                'Time',
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(height: 8.h),
+              // Add Video
               GestureDetector(
-                onTap: _selectTime,
+                onTap: _showVideoSourceDialog,
                 child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 14.h,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: const Color(0xFFF3F6F3),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        timeFormat.format(
-                          DateTime(
-                            2000,
-                            1,
-                            1,
-                            _selectedTime.hour,
-                            _selectedTime.minute,
-                          ),
-                        ),
+                      const Icon(Icons.videocam, color: Color(0xFF820DFF)),
+                      SizedBox(width: 12.w),
+                      const Text(
+                        '+ Add Video',
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF820DFF),
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const Icon(Icons.access_time),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 16.h),
+              _buildSelectedVideo(),
+              SizedBox(height: 32.h),
+
+              // Save Button
+              RoundButton(
+                title: 'Save',
+                isSelected: true,
+                textColors: Colors.white,
+                backgroundColors: AppColors.vibrantPurple,
+                onPress: _saveActivity,
+              ),
             ],
-
-            // Note
-            Text(
-              'Note',
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(height: 8.h),
-            TextField(
-              controller: _noteController,
-              maxLines: 4,
-              decoration: InputDecoration(
-                hintText: 'Add a note about this activity...',
-                filled: true,
-                fillColor: const Color(0xFFF3F6F3),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: EdgeInsets.all(16.w),
-              ),
-            ),
-            SizedBox(height: 24.h),
-
-            // Add Image
-            GestureDetector(
-              onTap: _showImageSourceDialog,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF3F6F3),
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.camera_alt, color: Color(0xFF820DFF)),
-                    SizedBox(width: 12.w),
-                    const Text(
-                      '+ Add Image',
-                      style: TextStyle(
-                        color: Color(0xFF820DFF),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            _buildSelectedImage(),
-            SizedBox(height: 16.h),
-
-            // Add Video
-            GestureDetector(
-              onTap: _showVideoSourceDialog,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF3F6F3),
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.videocam, color: Color(0xFF820DFF)),
-                    SizedBox(width: 12.w),
-                    const Text(
-                      '+ Add Video',
-                      style: TextStyle(
-                        color: Color(0xFF820DFF),
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            _buildSelectedVideo(),
-            SizedBox(height: 32.h),
-
-            // Save Button
-            RoundButton(
-              title: 'Save',
-              isSelected: true,
-              textColors: Colors.white,
-              backgroundColors: AppColors.vibrantPurple,
-              onPress: _saveActivity,
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
-
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import 'package:dog_breed/Valid/AppColors.dart';
-// import 'package:dog_breed/config/components/roundButton.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:image_picker/image_picker.dart';
-// import 'dart:io';
-// import 'package:intl/intl.dart';
-// import 'package:provider/provider.dart';
-//
-// import '../../View_model/activity_provider.dart';
-// import '../../activity_model.dart';
-//
-// class Allactivityview extends StatefulWidget {
-//   final Activity? selectedActivity;
-//
-//   const Allactivityview({super.key, this.selectedActivity});
-//
-//   @override
-//   State<Allactivityview> createState() => _AllactivityviewState();
-// }
-//
-// class _AllactivityviewState extends State<Allactivityview> {
-//   DateTime _selectedDate = DateTime.now();
-//   TimeOfDay _selectedTime = TimeOfDay.now();
-//   final TextEditingController _foodController = TextEditingController();
-//   final TextEditingController _noteController = TextEditingController();
-//
-//   File? _selectedImage;
-//   File? _selectedVideo;
-//   final ImagePicker _picker = ImagePicker();
-//
-//   Activity? _currentActivity;
-//
-//   // Drink quantity state (only used when activity is "Drink")
-//   double _drinkQuantityOz = 1.0; // default 1.0 oz
-//   bool _isOzUnit = true; // true = oz, false = mL
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _currentActivity = widget.selectedActivity;
-//   }
-//
-//   Future<void> _selectDate() async {
-//     final DateTime? picked = await showDatePicker(
-//       context: context,
-//       initialDate: _selectedDate,
-//       firstDate: DateTime(2020),
-//       lastDate: DateTime(2030),
-//       builder: (context, child) {
-//         return Theme(
-//           data: Theme.of(context).copyWith(
-//             colorScheme: const ColorScheme.light(
-//               primary: Color(0xFF820DFF),
-//               onPrimary: Colors.white,
-//               onSurface: Colors.black,
-//             ),
-//             dialogBackgroundColor: Colors.white,
-//             textButtonTheme: TextButtonThemeData(
-//               style: TextButton.styleFrom(
-//                 foregroundColor: const Color(0xFF820DFF),
-//               ),
-//             ),
-//           ),
-//           child: child!,
-//         );
-//       },
-//     );
-//     if (picked != null && picked != _selectedDate) {
-//       setState(() => _selectedDate = picked);
-//     }
-//   }
-//
-//   Future<void> _selectTime() async {
-//     final TimeOfDay? picked = await showTimePicker(
-//       context: context,
-//       initialTime: _selectedTime,
-//       builder: (context, child) {
-//         return Theme(
-//           data: Theme.of(context).copyWith(
-//             colorScheme: const ColorScheme.light(
-//               primary: Color(0xFF820DFF),
-//               onPrimary: Colors.white,
-//               onSurface: Colors.black,
-//             ),
-//             dialogBackgroundColor: Colors.white,
-//             textButtonTheme: TextButtonThemeData(
-//               style: TextButton.styleFrom(
-//                 foregroundColor: const Color(0xFF820DFF),
-//               ),
-//             ),
-//           ),
-//           child: child!,
-//         );
-//       },
-//     );
-//     if (picked != null && picked != _selectedTime) {
-//       setState(() => _selectedTime = picked);
-//     }
-//   }
-//
-//   Future<void> _pickImage(ImageSource source) async {
-//     try {
-//       final XFile? image = await _picker.pickImage(source: source);
-//       if (image != null) {
-//         setState(() => _selectedImage = File(image.path));
-//       }
-//     } catch (e) {
-//       debugPrint('Error picking image: $e');
-//     }
-//   }
-//
-//   Future<void> _pickVideo(ImageSource source) async {
-//     try {
-//       final XFile? video = await _picker.pickVideo(source: source);
-//       if (video != null) {
-//         setState(() => _selectedVideo = File(video.path));
-//       }
-//     } catch (e) {
-//       debugPrint('Error picking video: $e');
-//     }
-//   }
-//
-//   void _showImageSourceDialog() {
-//     showModalBottomSheet(
-//       context: context,
-//       builder: (context) {
-//         return SafeArea(
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               ListTile(
-//                 leading: const Icon(Icons.camera_alt, color: Color(0xFF820DFF)),
-//                 title: const Text('Take Photo'),
-//                 onTap: () {
-//                   Navigator.pop(context);
-//                   _pickImage(ImageSource.camera);
-//                 },
-//               ),
-//               ListTile(
-//                 leading: const Icon(Icons.photo_library, color: Color(0xFF820DFF)),
-//                 title: const Text('Choose from Gallery'),
-//                 onTap: () {
-//                   Navigator.pop(context);
-//                   _pickImage(ImageSource.gallery);
-//                 },
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     );
-//   }
-//
-//   void _showVideoSourceDialog() {
-//     showModalBottomSheet(
-//       context: context,
-//       builder: (context) {
-//         return SafeArea(
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               ListTile(
-//                 leading: const Icon(Icons.videocam, color: Color(0xFF820DFF)),
-//                 title: const Text('Record Video'),
-//                 onTap: () {
-//                   Navigator.pop(context);
-//                   _pickVideo(ImageSource.camera);
-//                 },
-//               ),
-//               ListTile(
-//                 leading: const Icon(Icons.video_library, color: Color(0xFF820DFF)),
-//                 title: const Text('Choose from Gallery'),
-//                 onTap: () {
-//                   Navigator.pop(context);
-//                   _pickVideo(ImageSource.gallery);
-//                 },
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     );
-//   }
-//
-//   void _saveActivity() {
-//     if (_currentActivity == null) {
-//       _showErrorSnackBar('Please select an activity first');
-//       return;
-//     }
-//
-//     // For Drink activity, we don't require food name
-//     if (_currentActivity!.name.toLowerCase() != 'drink' && _foodController.text.trim().isEmpty) {
-//       _showErrorSnackBar('Please enter food name or type');
-//       return;
-//     }
-//
-//     showDialog(
-//       context: context,
-//       barrierDismissible: false,
-//       builder: (context) => const Center(
-//         child: CircularProgressIndicator(color: AppColors.vibrantPurple),
-//       ),
-//     );
-//
-//     try {
-//       // Determine food / drink value
-//       String? foodValue;
-//       if (_currentActivity!.name.toLowerCase() == 'drink') {
-//         double amount = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * 29.5735;
-//         foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? 'oz' : 'mL'}';
-//       } else {
-//         foodValue = _foodController.text.trim();
-//       }
-//
-//       final newActivity = Activity(
-//         name: _currentActivity!.name,
-//         imagePath: _currentActivity!.imagePath,
-//         color: _currentActivity!.color,
-//         food: foodValue,
-//         dateTime: DateTime(
-//           _selectedDate.year,
-//           _selectedDate.month,
-//           _selectedDate.day,
-//           _selectedTime.hour,
-//           _selectedTime.minute,
-//         ),
-//         note: _noteController.text.trim().isEmpty ? null : _noteController.text.trim(),
-//         imagePathLocal: _selectedImage?.path,
-//         videoPathLocal: _selectedVideo?.path,
-//       );
-//
-//       final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
-//       activityNotifier.addActivity(newActivity);
-//
-//       Navigator.pop(context); // close loading
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(
-//           content: const Text('Activity saved successfully!'),
-//           backgroundColor: Colors.green,
-//           behavior: SnackBarBehavior.floating,
-//           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-//         ),
-//       );
-//
-//       Future.delayed(const Duration(milliseconds: 800), () {
-//         if (context.mounted) {
-//           Navigator.pop(context, true);
-//         }
-//       });
-//     } catch (e) {
-//       Navigator.pop(context);
-//       _showErrorSnackBar('Failed to save: $e');
-//     }
-//   }
-//
-//   void _showErrorSnackBar(String message) {
-//     ScaffoldMessenger.of(context).showSnackBar(
-//       SnackBar(
-//         content: Text(message),
-//         backgroundColor: Colors.red,
-//         behavior: SnackBarBehavior.floating,
-//       ),
-//     );
-//   }
-//
-//   Widget _buildActivityImage() {
-//     if (_currentActivity != null) {
-//       return Container(
-//         width: 90.w,
-//         height: 90.h,
-//         decoration: BoxDecoration(
-//           shape: BoxShape.circle,
-//           color: Colors.white,
-//           boxShadow: [
-//             BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8, offset: const Offset(0, 2)),
-//           ],
-//         ),
-//         child: Center(
-//           child: ClipOval(
-//             child: Image.asset(
-//               _currentActivity!.imagePath,
-//               width: 70.w,
-//               height: 70.h,
-//               fit: BoxFit.contain,
-//               errorBuilder: (context, error, stackTrace) => Icon(
-//                 Icons.pets,
-//                 color: _currentActivity!.color,
-//               ),
-//             ),
-//           ),
-//         ),
-//       );
-//     }
-//     return Container(
-//       width: 70.w,
-//       height: 70.h,
-//       decoration: const BoxDecoration(shape: BoxShape.circle, color: CupertinoColors.systemGrey4),
-//       child: const Icon(CupertinoIcons.photo, size: 32, color: CupertinoColors.systemGrey),
-//     );
-//   }
-//
-//   Widget _buildSelectedImage() {
-//     if (_selectedImage == null) return const SizedBox.shrink();
-//     return Padding(
-//       padding: EdgeInsets.only(top: 8.h),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text('Selected Image:', style: TextStyle(fontSize: 14.sp, color: Colors.grey[700])),
-//           SizedBox(height: 8.h),
-//           Stack(
-//             children: [
-//               ClipRRect(
-//                 borderRadius: BorderRadius.circular(12.r),
-//                 child: Image.file(_selectedImage!, width: 100.w, height: 100.h, fit: BoxFit.cover),
-//               ),
-//               Positioned(
-//                 top: 4,
-//                 right: 4,
-//                 child: GestureDetector(
-//                   onTap: () => setState(() => _selectedImage = null),
-//                   child: Container(
-//                     padding: const EdgeInsets.all(4),
-//                     decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black54),
-//                     child: const Icon(Icons.close, size: 16, color: Colors.white),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//
-//   Widget _buildSelectedVideo() {
-//     if (_selectedVideo == null) return const SizedBox.shrink();
-//     return Padding(
-//       padding: EdgeInsets.only(top: 8.h),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text('Selected Video:', style: TextStyle(fontSize: 14.sp, color: Colors.grey[700])),
-//           SizedBox(height: 8.h),
-//           Stack(
-//             children: [
-//               Container(
-//                 width: 100.w,
-//                 height: 100.h,
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(12.r),
-//                   color: const Color(0xFF820DFF).withOpacity(0.1),
-//                 ),
-//                 child: const Center(child: Icon(Icons.videocam, size: 40, color: Color(0xFF820DFF))),
-//               ),
-//               Positioned(
-//                 top: 4,
-//                 right: 4,
-//                 child: GestureDetector(
-//                   onTap: () => setState(() => _selectedVideo = null),
-//                   child: Container(
-//                     padding: const EdgeInsets.all(4),
-//                     decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.black54),
-//                     child: const Icon(Icons.close, size: 16, color: Colors.white),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//
-//   Widget _buildDrinkQuantitySelector() {
-//     const double ozToMl = 1.0;
-//     double displayValue = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
-//
-//     return Column(
-//       children: [
-//         Container(
-//           padding: EdgeInsets.all(6.w),
-//           decoration: BoxDecoration(
-//             color: const Color(0xFFF4F7F6),
-//             borderRadius: BorderRadius.circular(12.r),
-//           ),
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Container(
-//                 width: 90.w,
-//                 height: 45.h,
-//                 decoration:const BoxDecoration(
-//                     color: Color(0xFFFFFFFF)
-//                 ) ,
-//                 child: IconButton(
-//                   icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
-//                   onPressed: () {
-//                     setState(() {
-//                       if (_drinkQuantityOz >= 0.5) _drinkQuantityOz -= 0.5;
-//                     });
-//                   },
-//                 ),
-//               ),
-//               Text(
-//                 displayValue.toStringAsFixed(1),
-//                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
-//               ),
-//               Container(
-//                 width: 90.w,
-//                 height: 45.h,
-//                 decoration:const BoxDecoration(
-//                   color: Color(0xFFFFFFFF)
-//                 ) ,
-//                 child:IconButton(
-//                   icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
-//                   onPressed: () {
-//                     setState(() {
-//                       if (_drinkQuantityOz <= 49.5) _drinkQuantityOz += 0.5;
-//                     });
-//                   },
-//                 ),
-//               )
-//
-//             ],
-//           ),
-//         ),
-//         SizedBox(height: 12.h),
-//         Container(
-//           padding: EdgeInsets.all(6.w),
-//           decoration: BoxDecoration(
-//             color: const Color(0xFFF4F7F6),
-//             borderRadius: BorderRadius.circular(12.r),
-//           ),
-//           child: Row(
-//             children: [
-//               // Left side - oz button
-//               Expanded(
-//                 child: GestureDetector(
-//                   onTap: () => setState(() => _isOzUnit = true),
-//                   child: Container(
-//                     padding: EdgeInsets.symmetric(vertical: 10.h),
-//                     decoration: BoxDecoration(
-//                       color: _isOzUnit ? const Color(0xFF820DFF) : Colors.transparent,
-//                       borderRadius: BorderRadius.only(
-//                         topLeft: Radius.circular(10.r),
-//                         bottomLeft: Radius.circular(10.r),
-//                       ),
-//                     ),
-//                     child: Center(
-//                       child: Text(
-//                         'oz',
-//                         style: TextStyle(
-//                           color: _isOzUnit ? Colors.white : Colors.black,
-//                           fontWeight: FontWeight.w600,
-//                           fontSize: 16.sp,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//
-//               // Right side - mL button
-//               Expanded(
-//                 child: GestureDetector(
-//                   onTap: () => setState(() => _isOzUnit = false),
-//                   child: Container(
-//                     padding: EdgeInsets.symmetric(vertical: 10.h),
-//                     decoration: BoxDecoration(
-//                       color: !_isOzUnit ? const Color(0xFF820DFF) : Colors.transparent,
-//                       borderRadius: BorderRadius.only(
-//                         topRight: Radius.circular(20.r),
-//                         bottomRight: Radius.circular(20.r),
-//                       ),
-//                     ),
-//                     child: Center(
-//                       child: Text(
-//                         'mL',
-//                         style: TextStyle(
-//                           color: !_isOzUnit ? Colors.white : Colors.black,
-//                           fontWeight: FontWeight.w600,
-//                           fontSize: 16.sp,
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final dateFormat = DateFormat('MM-dd-yyyy');
-//     final timeFormat = DateFormat('HH:mm');
-//
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       body: SingleChildScrollView(
-//         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             // Header
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               children: [
-//                 GestureDetector(
-//                   onTap: () => Navigator.pop(context),
-//                   child: Container(
-//                     padding: const EdgeInsets.all(8),
-//                     decoration: BoxDecoration(
-//                       color: Theme.of(context).colorScheme.background,
-//                       borderRadius: BorderRadius.circular(10),
-//                     ),
-//                     child: const Icon(CupertinoIcons.chevron_left),
-//                   ),
-//                 ),
-//                 GestureDetector(
-//                   onTap: _saveActivity,
-//                   child: Container(
-//                     padding: const EdgeInsets.all(8),
-//                     decoration: BoxDecoration(
-//                       color: Theme.of(context).colorScheme.background,
-//                       borderRadius: BorderRadius.circular(10),
-//                     ),
-//                     child: const Icon(CupertinoIcons.check_mark),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             SizedBox(height: 16.h),
-//
-//             // Activity preview
-//             Container(
-//               padding: EdgeInsets.all(16.w),
-//               decoration: BoxDecoration(
-//                 color: const Color(0xFFF4F7F6),
-//                 borderRadius: BorderRadius.circular(12.r),
-//               ),
-//               child: Row(
-//                 children: [
-//                   _buildActivityImage(),
-//                   SizedBox(width: 20.w),
-//                   Expanded(
-//                     child: Text(
-//                       _currentActivity?.name ?? 'No Activity Selected',
-//                       style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             SizedBox(height: 12.h),
-//
-//             // Conditional: Food input OR Drink quantity selector
-//             if (_currentActivity?.name.toLowerCase() == 'drink')
-//               _buildDrinkQuantitySelector()
-//             else
-//               TextField(
-//                 controller: _foodController,
-//                 textAlign: TextAlign.center,
-//                 decoration: InputDecoration(
-//                   hintText: '+ Add food name or type',
-//                   hintStyle: TextStyle(color: const Color(0xFF820DFF), fontSize: 16.sp),
-//                   filled: true,
-//                   fillColor: const Color(0xFFF4F7F6),
-//                   border: OutlineInputBorder(
-//                     borderRadius: BorderRadius.circular(12.r),
-//                     borderSide: BorderSide.none,
-//                   ),
-//                 ),
-//               ),
-//             SizedBox(height: 10.h),
-//             // Date
-//             Text('Date', style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600)),
-//             SizedBox(height: 4.h),
-//             GestureDetector(
-//               onTap: _selectDate,
-//               child: Container(
-//                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-//                 decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(12.r)),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Text(dateFormat.format(_selectedDate), style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
-//                     const Icon(Icons.calendar_month),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             SizedBox(height: 10.h),
-//             // Time
-//             Text('Time', style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600)),
-//             SizedBox(height: 4.h),
-//             GestureDetector(
-//               onTap: _selectTime,
-//               child: Container(
-//                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-//                 decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(12.r)),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                   children: [
-//                     Text(
-//                       timeFormat.format(DateTime(2000, 1, 1, _selectedTime.hour, _selectedTime.minute)),
-//                       style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-//                     ),
-//                     const Icon(Icons.access_time),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             SizedBox(height: 10.h),
-//
-//             // Note
-//             Text('Note', style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600)),
-//             SizedBox(height: 4.h),
-//             TextField(
-//               controller: _noteController,
-//               maxLines: 4,
-//               decoration: InputDecoration(
-//                 hintText: 'Add a note about this activity...',
-//                 filled: true,
-//                 fillColor: const Color(0xFFF3F6F3),
-//                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: BorderSide.none),
-//                 contentPadding: EdgeInsets.all(16.w),
-//               ),
-//             ),
-//             SizedBox(height: 16.h),
-//
-//             // Add Image
-//             GestureDetector(
-//               onTap: _showImageSourceDialog,
-//               child: Container(
-//                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-//                 decoration: BoxDecoration(color: const Color(0xFFF3F6F3), borderRadius: BorderRadius.circular(12.r)),
-//                 child: Row(
-//                   children: [
-//                     const Icon(Icons.camera_alt, color: Color(0xFF820DFF)),
-//                     SizedBox(width: 12.w),
-//                     const Text('+ Add Image', style: TextStyle(color: Color(0xFF820DFF), fontWeight: FontWeight.w500)),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             _buildSelectedImage(),
-//             SizedBox(height: 10.h),
-//
-//             // Add Video
-//             GestureDetector(
-//               onTap: _showVideoSourceDialog,
-//               child: Container(
-//                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-//                 decoration: BoxDecoration(color: const Color(0xFFF3F6F3), borderRadius: BorderRadius.circular(12.r)),
-//                 child: Row(
-//                   children: [
-//                     const Icon(Icons.videocam, color: Color(0xFF820DFF)),
-//                     SizedBox(width: 12.w),
-//                     const Text('+ Add Video', style: TextStyle(color: Color(0xFF820DFF), fontWeight: FontWeight.w500)),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//             _buildSelectedVideo(),
-//             SizedBox(height: 20.h),
-//
-//             // Save Button
-//             RoundButton(
-//               title: 'Save',
-//               isSelected: true,
-//               textColors: Colors.white,
-//               backgroundColors: AppColors.vibrantPurple,
-//               onPress: _saveActivity,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-//

@@ -6,6 +6,12 @@
       <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/android/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/android/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/android/build" />
+      <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/petcare_flutter/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/petcare_flutter/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/Dog_Breed/petcare_flutter/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

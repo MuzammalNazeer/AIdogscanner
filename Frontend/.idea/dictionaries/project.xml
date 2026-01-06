@@ -2,6 +2,7 @@
   <dictionary name="project">
     <words>
       <w>activites</w>
+      <w>allactivityview</w>
       <w>calendarview</w>
       <w>cameraview</w>
       <w>cocker</w>
@@ -16,6 +17,8 @@
       <w>historyview</w>
       <w>homeview</w>
       <w>iplice</w>
+      <w>lastnameview</w>
+      <w>muzammal</w>
       <w>myfavouritesview</w>
       <w>proview</w>
       <w>screenutil</w>
