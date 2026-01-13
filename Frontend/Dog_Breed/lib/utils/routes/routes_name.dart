@@ -30,11 +30,15 @@ class RoutesName {
   static const String myFavourites= 'Myfavouritesview';
   static const String calendar = 'Calendarview';
   static const String shop = 'Shopview';
+  static const String productDetail = 'ProductDetailView';
   static const String addActivities= 'AddActivitiesView';
   static const String allActivity= 'Allactivityview';
   static const String walk= 'Walkview';
   static const String appLanguage = 'AppLanguageView';
   static const String editProfile = 'Ownerprofileview';
+  static const String changePassword = 'Changepassword';
+  static const String notification = 'NotificationView';
+  static const String termsOfUse = 'TermsOfUseView';
 
 
 }

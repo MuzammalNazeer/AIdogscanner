@@ -75,14 +75,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     final viewModel = Provider.of<DocumentViewModel>(context, listen: false);
-      //     viewModel.pickAndUploadFile(context);
-      //   },
-      //   backgroundColor: Color(0xFF820DFF),
-      //   child: Icon(Icons.add, color: Colors.white),
-      // ),
+
     );
   }
 
@@ -93,7 +86,6 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Category Selector
         Container(
           height: 48.h,
           padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -136,8 +128,6 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
           ),
         ),
         SizedBox(height: 16.h),
-
-        // Category Info
         if (viewModel.selectedCategory != 'All')
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -160,8 +150,6 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
             ),
           ),
         SizedBox(height: 12.h),
-
-        // Documents List
         Expanded(
           child: Container(
             padding: EdgeInsets.all(12.w),
@@ -197,7 +185,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                   Icon(
                     Icons.folder_open,
                     size: 64.sp,
-                    color: Colors.grey.shade400,
+                    color: Colors.grey.shade200,
                   ),
                   SizedBox(height: 16.h),
                   Text(
@@ -216,7 +204,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                         : 'Try a different search term',
                     style: TextStyle(
                       fontSize: 14.sp,
-                      color: Colors.grey.shade500,
+                      color: Colors.grey.shade200,
                     ),
                   ),
                 ],
@@ -266,7 +254,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
           child: Container(
             padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
-              color: const Color(0xFFE4E4E4),
+              color: Colors.grey.shade200,
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Row(

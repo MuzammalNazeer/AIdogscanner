@@ -159,14 +159,9 @@ class _WalkviewState extends State<Walkview> {
   }
 
   void _saveNote() {
-    setState(() {}); // refresh UI to show note
+    setState(() {});
     Navigator.pop(context);
   }
-
-  // void _saveNote() {
-  //   Navigator.pop(context);
-  //   // Note is already saved in _noteController
-  // }
 
   @override
   void dispose() {
@@ -212,143 +207,197 @@ class _WalkviewState extends State<Walkview> {
                   ),
                 ],
               ),
-              SizedBox(height: 20.h),
-
-              // Activity Image and Name
-              Column(
-                children: [
-                  Container(
-                    width: 120.w,
-                    height: 120.h,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade200,
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.black.withOpacity(0.08),
-                      //     blurRadius: 20,
-                      //     offset: const Offset(0, 4),
-                      //   ),
-                      // ],
-                    ),
-                    child: Center(
-                      child: Image.asset(
-                        widget.selectedActivity?.imagePath ?? 'assets/images/67.png',
-                        width: 80.w,
-                        height: 80.h,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 24.h),
-                  Text(
-                    widget.selectedActivity?.name ?? 'Walk',
-                    style: TextStyle(
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 30.h),
-
-              // Timer Circle
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Background ticks
-                  SizedBox(
-                    width: 260.w,
-                    height: 260.h,
-                    child: CustomPaint(
-                      painter: MinimalTickPainter(),
-                    ),
-                  ),
-
-                  // Gray background ring
-                  SizedBox(
-                    width: 240.w,
-                    height: 240.h,
-                    child: const CircularProgressIndicator(
-                      value: 1.0,
-                      strokeWidth: 12,
-                      backgroundColor: Color(0xFFF4F7F6),
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFF4F7F6)),
-                    ),
-                  ),
-
-                  // Purple progress ring
-                  SizedBox(
-                    width: 240.w,
-                    height: 240.h,
-                    child: CircularProgressIndicator(
-                      value: (_duration.inSeconds / 3600.0).clamp(0.0, 1.0),
-                      strokeWidth: 12,
-                      backgroundColor: Colors.transparent,
-                      valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF820DFF)),
-                      strokeCap: StrokeCap.round,
-                    ),
-                  ),
-
-                  // Timer and duration text
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      // Timer in MM:SS format
-                      Text(
-                        _formattedTime,
-                        style: TextStyle(
-                          fontSize: 64.sp,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.black,
-                          letterSpacing: 2,
-                        ),
+                      SizedBox(height: 20.h),
+
+                      // Activity Image and Name
+                      Column(
+                        children: [
+                          Container(
+                            width: 120.w,
+                            height: 120.h,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey.shade200,
+                              // boxShadow: [
+                              //   BoxShadow(
+                              //     color: Colors.black.withOpacity(0.08),
+                              //     blurRadius: 20,
+                              //     offset: const Offset(0, 4),
+                              //   ),
+                              // ],
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                widget.selectedActivity?.imagePath ??
+                                    'assets/images/67.png',
+                                width: 80.w,
+                                height: 80.h,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 24.h),
+                          Text(
+                            widget.selectedActivity?.name ?? 'Walk',
+                            style: TextStyle(
+                              fontSize: 28.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 8.h),
-                      // Duration in hr/min format
-                      Text(
-                        _formattedDuration,
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xFF820DFF),
-                        ),
+                      SizedBox(height: 30.h),
+
+                      // Timer Circle
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // Background ticks
+                          SizedBox(
+                            width: 260.w,
+                            height: 260.h,
+                            child: CustomPaint(
+                              painter: MinimalTickPainter(),
+                            ),
+                          ),
+
+                          // Gray background ring
+                          SizedBox(
+                            width: 240.w,
+                            height: 240.h,
+                            child: const CircularProgressIndicator(
+                              value: 1.0,
+                              strokeWidth: 12,
+                              backgroundColor: Color(0xFFF4F7F6),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Color(0xFFF4F7F6)),
+                            ),
+                          ),
+
+                          // Purple progress ring
+                          SizedBox(
+                            width: 240.w,
+                            height: 240.h,
+                            child: CircularProgressIndicator(
+                              value:
+                                  (_duration.inSeconds / 3600.0).clamp(0.0, 1.0),
+                              strokeWidth: 12,
+                              backgroundColor: Colors.transparent,
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                  Color(0xFF820DFF)),
+                              strokeCap: StrokeCap.round,
+                            ),
+                          ),
+
+                          // Timer and duration text
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Timer in MM:SS format
+                              Text(
+                                _formattedTime,
+                                style: TextStyle(
+                                  fontSize: 64.sp,
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.black,
+                                  letterSpacing: 2,
+                                ),
+                              ),
+                              SizedBox(height: 8.h),
+                              // Duration in hr/min format
+                              Text(
+                                _formattedDuration,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFF820DFF),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
+                      SizedBox(height: 40.h),
+
+                      // Control buttons
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _controlButton(Icons.delete_outline,
+                              color: const Color(0xFF820DFF),
+                              onTap: _deleteWalk),
+                          SizedBox(width: 32.w),
+                          _controlButton(
+                            _isRunning ? Icons.pause : Icons.play_arrow,
+                            size: 40,
+                            onTap: _toggleTimer,
+                            color: const Color(0xFF820DFF),
+                          ),
+                          SizedBox(width: 32.w),
+                          _controlButton(Icons.refresh,
+                              color: const Color(0xFF820DFF), onTap: _resetTimer),
+                          SizedBox(width: 32.w),
+                          _controlButton(Icons.check,
+                              color: const Color(0xFF820DFF), onTap: _saveWalk),
+                        ],
+                      ),
+                      SizedBox(height: 20.h),
                     ],
                   ),
-                ],
+                ),
               ),
-              SizedBox(height: 40.h),
-
-              // Control buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _controlButton(Icons.delete_outline, color: const Color(0xFF820DFF), onTap: _deleteWalk),
-                  SizedBox(width: 32.w),
-                  _controlButton(
-                    _isRunning ? Icons.pause : Icons.play_arrow,
-                    size: 40,
-                    onTap: _toggleTimer,
-                    color: const Color(0xFF820DFF),
+              if (_noteController.text.isNotEmpty)
+                Padding(
+                  padding: EdgeInsets.only(bottom: 16.h),
+                  child: Container(
+                    width: double.infinity,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF4F7F6),
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            _noteController.text,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        SizedBox(width: 12.w),
+                        GestureDetector(
+                          onTap: _showNoteBottomSheet,
+                          child: Icon(
+                            Icons.edit_note,
+                            color: Colors.black54,
+                            size: 24.sp,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(width: 32.w),
-                  _controlButton(Icons.refresh, color: const Color(0xFF820DFF), onTap: _resetTimer),
-                  SizedBox(width: 32.w),
-                  _controlButton(Icons.check, color: const Color(0xFF820DFF), onTap: _saveWalk),
-                ],
-              ),
-
-              const Spacer(),
-
-              // Add Note button
+                ),
               RoundButton(
-                title: _noteController.text.isEmpty ? 'Add a note' : 'Note added',
+                title: _noteController.text.isEmpty ? 'Add a note' : 'Save',
                 isSelected: true,
                 textColors: Colors.white,
-                backgroundColors: _noteController.text.isEmpty ? AppColors.vibrantPurple :AppColors.vibrantPurple,
-                onPress: _showNoteBottomSheet,
+                backgroundColors: AppColors.vibrantPurple,
+                onPress: _noteController.text.isEmpty
+                    ? _showNoteBottomSheet
+                    : _saveWalk,
               ),
             ],
           ),
@@ -381,14 +430,14 @@ class _WalkviewState extends State<Walkview> {
     );
   }
 
-  // Show note bottom sheet
   void _showNoteBottomSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom),
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -403,7 +452,8 @@ class _WalkviewState extends State<Walkview> {
               Center(
                 child: Text(
                   'Note',
-                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(height: 16.h),

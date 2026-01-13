@@ -84,7 +84,12 @@ class _AddReminderViewState extends State<AddReminderView> {
     for (final activity in expiredActivities) {
       if (!mounted) return;
       // Pass silent: true to avoid spamming SnackBars
-      await _removeReminder(activity, reminderNotifier, activityNotifier, silent: true);
+      await _removeReminder(
+        activity,
+        reminderNotifier,
+        activityNotifier,
+        silent: true,
+      );
     }
   }
 
@@ -93,8 +98,8 @@ class _AddReminderViewState extends State<AddReminderView> {
 
     final days = _getDaysInMonth(_currentMonth);
     final selectedIndex = days.indexWhere(
-          (date) =>
-      date.year == _selectedDate.year &&
+      (date) =>
+          date.year == _selectedDate.year &&
           date.month == _selectedDate.month &&
           date.day == _selectedDate.day,
     );
@@ -115,13 +120,28 @@ class _AddReminderViewState extends State<AddReminderView> {
     }
   }
 
+  Future<void> _selectDate() async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final activityNotifier = Provider.of<ActivityNotifier>(context);
     final activities = activityNotifier.activities;
 
     final filteredActivities = activities.where((activity) {
-      return activity.dateTime.year == _selectedDate.year &&
+      // final isVisible = activityNotifier.isActivityVisible(activity.name);
+      return /*isVisible &&*/ activity.dateTime.year == _selectedDate.year &&
           activity.dateTime.month == _selectedDate.month &&
           activity.dateTime.day == _selectedDate.day;
     }).toList();
@@ -131,10 +151,7 @@ class _AddReminderViewState extends State<AddReminderView> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8.w),
         child: Column(
-          children: [
-
-            Expanded(child: _buildTabContent(filteredActivities)),
-          ],
+          children: [Expanded(child: _buildTabContent(filteredActivities))],
         ),
       ),
     );
@@ -152,10 +169,12 @@ class _AddReminderViewState extends State<AddReminderView> {
   Widget _buildActivitiesList(List<Activity> activities) {
     final hasActivities = activities.isNotEmpty;
     final formattedDate = DateFormat('EEEE, MMMM d').format(_selectedDate);
+    final dateFormat = DateFormat('MMM dd, yyyy');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: 16.h),
         // Add Activity Header
         Container(
           height: 70.h,
@@ -178,9 +197,12 @@ class _AddReminderViewState extends State<AddReminderView> {
                     _buildHeaderIcon('assets/images/63.png'),
                   ],
                 ),
-                const Text(
-                  'Add Activity',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                GestureDetector(
+                  onTap: () => _showAddActivitySheet(context),
+                  child: const Text(
+                    'Add Activity',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Container(
                   width: 50.w,
@@ -247,14 +269,22 @@ class _AddReminderViewState extends State<AddReminderView> {
   Widget _buildActivityCard(Activity activity) {
     final String activityName = activity.name.toLowerCase();
     final bool isDrink = activityName == 'drink';
+    final bool isEat = activityName == 'eat';
+    final bool isTreat = activityName == 'treat';
+    final bool isGrooming = activityName == 'grooming';
+    final bool isMedication = activityName == 'medication';
     final bool isWalk = activityName == 'walk';
+    final bool isPlay = activityName == 'play';
+    final bool isCrate = activityName == 'crate';
+    final bool isTimerActivity = isWalk || isPlay || isCrate;
     final bool hasNote = activity.note != null && activity.note!.isNotEmpty;
 
     String distanceText = '';
     String durationText = '';
+    String displayName = activity.name;
 
-    if (isWalk) {
-      if (activity.food != null && activity.food!.isNotEmpty) {
+    if (isTimerActivity) {
+      if (isWalk && activity.food != null && activity.food!.isNotEmpty) {
         distanceText = activity.food!;
       }
 
@@ -264,14 +294,24 @@ class _AddReminderViewState extends State<AddReminderView> {
       } else if (activity.duration != null) {
         final hours = activity.duration!.inHours;
         final minutes = activity.duration!.inMinutes.remainder(60);
-        if (hours > 0) {
-          durationText = '$hours hr ${minutes > 0 ? '$minutes min' : ''}'.trim();
-        } else {
-          durationText = '$minutes min';
-        }
+        durationText = hours > 0
+            ? '$hours hr ${minutes > 0 ? '$minutes min' : ''}'.trim()
+            : '$minutes min';
       }
     } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
-      distanceText = activity.food!;
+      String food = activity.food!;
+      final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
+      final match = quantityRegex.firstMatch(food);
+
+      if (match != null) {
+        distanceText = match.group(1)?.trim() ?? '';
+        String namePart = match.group(2)?.trim() ?? '';
+        if (namePart.isNotEmpty) {
+          displayName = namePart;
+        }
+      } else {
+        displayName = food;
+      }
     }
 
     return Dismissible(
@@ -283,22 +323,21 @@ class _AddReminderViewState extends State<AddReminderView> {
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.endToStart) {
           return await _showDeleteConfirmation(activity);
-        } else {
-          _editActivity(activity);
-          return false;
         }
+        _editActivity(activity);
+        return false;
       },
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 4.h),
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(10.r), // Slightly smaller border radius
         ),
         color: const Color(0xFFF4F7F6),
         child: InkWell(
           onTap: () => _showReminderOptions(activity),
           child: Container(
-            padding: EdgeInsets.all(10.w),
+            padding: EdgeInsets.all(12.w), // Reduced padding
             child: Column(
               children: [
                 Row(
@@ -307,34 +346,31 @@ class _AddReminderViewState extends State<AddReminderView> {
                     // Activity Image with reminder badge
                     Stack(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Container(
-                            width: 70.w,
-                            height: 70.h,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Center(
-                              child: ClipOval(
-                                child: Image.asset(
-                                  activity.imagePath,
-                                  fit: BoxFit.cover,
-                                  width: 54.w,
-                                  height: 54.h,
-                                  errorBuilder: (_, __, ___) => Icon(
-                                    Icons.pets,
-                                    color: activity.color,
-                                    size: 28.w,
-                                  ),
+                        Container(
+                          width: 56.w, // Smaller image container
+                          height: 56.h,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.05), // Lighter shadow
+                                blurRadius: 3,
+                                offset: const Offset(0, 1),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: ClipOval(
+                              child: Image.asset(
+                                activity.imagePath,
+                                fit: BoxFit.cover,
+                                width: 44.w, // Smaller image
+                                height: 44.h,
+                                errorBuilder: (_, __, ___) => Icon(
+                                  Icons.pets,
+                                  color: activity.color,
+                                  size: 24.w, // Smaller icon
                                 ),
                               ),
                             ),
@@ -343,20 +379,23 @@ class _AddReminderViewState extends State<AddReminderView> {
                         // Reminder indicator badge
                         if (activity.hasReminder && activity.reminderDateTime != null)
                           Positioned(
-                            top: 8,
+                            top: 4,
                             right: 0,
                             child: Container(
-                              width: 20.w,
-                              height: 20.h,
+                              width: 16.w,
+                              height: 16.h,
                               decoration: BoxDecoration(
                                 color: Colors.orange,
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 2),
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 1.5,
+                                ),
                               ),
                               child: Center(
                                 child: Icon(
                                   Icons.notifications,
-                                  size: 10.w,
+                                  size: 8.w, // Smaller icon
                                   color: Colors.white,
                                 ),
                               ),
@@ -364,9 +403,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                           ),
                       ],
                     ),
-                    SizedBox(width: 12.w),
-
-                    // Activity Details
+                    SizedBox(width: 10.w), // Reduced spacing
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -375,66 +412,109 @@ class _AddReminderViewState extends State<AddReminderView> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Left: Name + Distance/Duration
                               Expanded(
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 20,
-                                  ),
+                                  padding: const EdgeInsets.symmetric(vertical: 8), // Reduced vertical padding
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            activity.name,
-                                            style: TextStyle(
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(width: 8.w),
-                                          // Reminder time if set
-                                          if (activity.hasReminder && activity.reminderDateTime != null)
-                                            Container(
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 6.w,
-                                                vertical: 2.h,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.orange.withOpacity(0.1),
-                                                borderRadius: BorderRadius.circular(4.r),
-                                                border: Border.all(
-                                                  color: Colors.orange.withOpacity(0.3),
-                                                  width: 1,
-                                                ),
-                                              ),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Icon(
-                                                    Icons.notifications,
-                                                    size: 12.w,
-                                                    color: Colors.orange,
+                                      if (isDrink && distanceText.isNotEmpty)
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  activity.name,
+                                                  style: TextStyle(
+                                                    fontSize: 16.sp, // Smaller font
+                                                    fontWeight: FontWeight.bold,
                                                   ),
-                                                  SizedBox(width: 4.w),
-                                                  Text(
-                                                    DateFormat('hh:mm a').format(activity.reminderDateTime!),
-                                                    style: TextStyle(
-                                                      fontSize: 10.sp,
-                                                      color: Colors.orange,
-                                                      fontWeight: FontWeight.bold,
+                                                ),
+                                                SizedBox(width: 6.w),
+                                                // Reminder time if set
+                                                if (activity.hasReminder && activity.reminderDateTime != null)
+                                                  Container(
+                                                    padding: EdgeInsets.symmetric(
+                                                      horizontal: 5.w,
+                                                      vertical: 1.h,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.orange.withOpacity(0.1),
+                                                      borderRadius: BorderRadius.circular(3.r),
+                                                      border: Border.all(
+                                                        color: Colors.orange.withOpacity(0.3),
+                                                        width: 0.5,
+                                                      ),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize: MainAxisSize.min,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.notifications,
+                                                          size: 10.w,
+                                                          color: Colors.orange,
+                                                        ),
+                                                        SizedBox(width: 3.w),
+                                                        Text(
+                                                          DateFormat('h:mm a').format(activity.reminderDateTime!),
+                                                          style: TextStyle(
+                                                            fontSize: 9.sp,
+                                                            color: Colors.orange,
+                                                            fontWeight: FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                ],
+                                              ],
+                                            ),
+                                            SizedBox(height: 3.h),
+                                            Text(
+                                              distanceText,
+                                              style: TextStyle(
+                                                fontSize: 13.sp, // Smaller font
+                                                fontWeight: FontWeight.bold,
+                                                color: const Color(0xFF7D7D7D),
                                               ),
                                             ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 6.h),
+                                            SizedBox(height: 3.h),
+                                            Text(
+                                              displayName,
+                                              style: TextStyle(
+                                                fontSize: 13.sp, // Smaller font
+                                                fontWeight: FontWeight.bold,
+                                                color: const Color(0xFF7D7D7D),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      else ...[
+                                        Text(
+                                          displayName,
+                                          style: TextStyle(
+                                            fontSize: 16.sp, // Smaller font
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        if ((isEat ||
+                                                isTreat ||
+                                                isGrooming ||
+                                                isMedication) &&
+                                            activity.food != null &&
+                                            activity.food!.isNotEmpty)
+                                          Text(
+                                            activity.food!,
+                                            style: TextStyle(
+                                              fontSize: 13.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xFF7D7D7D),
+                                            ),
+                                          ),
+                                      ],
+                                      SizedBox(height: 4.h), // Reduced spacing
 
-                                      // Display distance and duration for walk
-                                      if (isWalk)
+                                      if (isTimerActivity)
                                         Row(
                                           children: [
                                             if (distanceText.isNotEmpty)
@@ -442,49 +522,38 @@ class _AddReminderViewState extends State<AddReminderView> {
                                                 children: [
                                                   Icon(
                                                     Icons.directions_walk,
-                                                    size: 16.sp,
+                                                    size: 14.sp, // Smaller icon
                                                     color: const Color(0xFF7D7D7D),
                                                   ),
-                                                  SizedBox(width: 4.w),
+                                                  SizedBox(width: 3.w),
                                                   Text(
                                                     distanceText,
                                                     style: TextStyle(
-                                                      fontSize: 14.sp,
+                                                      fontSize: 13.sp, // Smaller font
                                                       fontWeight: FontWeight.bold,
                                                       color: const Color(0xFF7D7D7D),
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            SizedBox(width: 5.w),
+                                            if (distanceText.isNotEmpty && durationText.isNotEmpty)
+                                              SizedBox(width: 4.w),
                                             if (durationText.isNotEmpty)
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.timer,
-                                                    size: 16.sp,
-                                                    color: const Color(0xFF7D7D7D),
-                                                  ),
-                                                  SizedBox(width: 4.w),
-                                                  Text(
-                                                    durationText,
-                                                    style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xFF7D7D7D),
-                                                    ),
-                                                  ),
-                                                ],
+                                              Text(
+                                                durationText,
+                                                style: TextStyle(
+                                                  fontSize: 13.sp, // Smaller font
+                                                  fontWeight: FontWeight.bold,
+                                                  color: const Color(0xFF7D7D7D),
+                                                ),
                                               ),
                                           ],
-                                        ),
-
-                                      // Display just quantity for drink
-                                      if (isDrink && distanceText.isNotEmpty)
+                                        )
+                                      else if (isEat && activity.food != null && activity.food!.isNotEmpty)
                                         Text(
-                                          distanceText,
+                                          activity.food!,
                                           style: TextStyle(
-                                            fontSize: 14.sp,
+                                            fontSize: 13.sp, // Smaller font
                                             fontWeight: FontWeight.bold,
                                             color: const Color(0xFF7D7D7D),
                                           ),
@@ -494,7 +563,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 0),
+                                padding: const EdgeInsets.only(top: 4),
                                 child: IconButton(
                                   onPressed: () => _showReminderOptions(activity),
                                   icon: Icon(
@@ -504,7 +573,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                                     color: activity.hasReminder
                                         ? Colors.orange
                                         : Colors.grey[600],
-                                    size: 24.w,
+                                    size: 20.w, // Smaller icon
                                   ),
                                 ),
                               ),
@@ -515,34 +584,33 @@ class _AddReminderViewState extends State<AddReminderView> {
                     ),
                   ],
                 ),
-
-                // Date & Time Row
+                SizedBox(height: 8.h), // Reduced spacing
                 Padding(
-                  padding: EdgeInsets.only(left: 222.w, bottom: 8.h),
-                  child: Row(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 2),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
                         DateFormat('MMM dd, yyyy').format(activity.dateTime).toLowerCase(),
                         style: TextStyle(
-                          fontSize: 12.sp,
+                          fontSize: 11.sp, // Smaller font
                           color: Colors.grey[700],
                         ),
                       ),
-                      SizedBox(width: 16.w),
+                      SizedBox(height: 2.h),
                       Row(
-                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Icon(
                             Icons.access_time,
-                            size: 16.w,
+                            size: 14.w, // Smaller icon
                             color: Colors.grey[600],
                           ),
-                          SizedBox(width: 4.w),
+                          SizedBox(width: 3.w),
                           Text(
                             DateFormat('hh:mm a').format(activity.dateTime),
                             style: TextStyle(
-                              fontSize: 12.sp,
+                              fontSize: 11.sp, // Smaller font
                               color: Colors.grey[600],
                             ),
                           ),
@@ -551,35 +619,49 @@ class _AddReminderViewState extends State<AddReminderView> {
                     ],
                   ),
                 ),
+                const Divider(
+                  thickness: 0.5, // Thinner divider
+                  height: 1,
+                  color: Color(0xFFCBE4DC),
+                ),
+                SizedBox(height: 2.h),
 
-                // Divider
-                const Divider(thickness: 1, height: 1, color: Color(0xFFCBE4DC)),
-                SizedBox(height: 12.h),
-
-                // Note Section
                 if (hasNote)
                   Padding(
                     padding: EdgeInsets.only(top: 8.h),
+
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
+
                       children: [
-                        SizedBox(width: 82.w),
-                        Text(
-                          'Note:',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.grey[800],
-                          ),
-                        ),
                         SizedBox(width: 8.w),
+
                         Expanded(
-                          child: Text(
-                            activity.note!,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Colors.black87,
-                            ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+
+                            children: [
+                              Text(
+                                'Note:',
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.grey[800],
+                                ),
+                              ),
+
+                              SizedBox(width: 5.w),
+
+                              Expanded(
+                                child: Text(
+                                  activity.note!,
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -593,244 +675,18 @@ class _AddReminderViewState extends State<AddReminderView> {
     );
   }
 
-  // void _showReminderOptions(Activity activity) {
-  //   final reminderNotifier = Provider.of<ReminderNotifier>(context, listen: false);
-  //   final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
-  //
-  //   DateTime selectedDate = activity.dateTime;
-  //   TimeOfDay selectedTime = activity.reminderDateTime != null
-  //       ? TimeOfDay.fromDateTime(activity.reminderDateTime!)
-  //       : TimeOfDay.now();
-  //
-  //   showModalBottomSheet(
-  //     context: context,
-  //     isScrollControlled: true,
-  //     backgroundColor: Colors.white,
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-  //     ),
-  //     builder: (context) {
-  //       return StatefulBuilder(
-  //         builder: (context, setState) {
-  //           return Container(
-  //             padding: EdgeInsets.all(20.w),
-  //             child: Column(
-  //               mainAxisSize: MainAxisSize.min,
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: [
-  //                 Center(
-  //                   child: Container(
-  //                     width: 40.w,
-  //                     height: 4.h,
-  //                     decoration: BoxDecoration(
-  //                       color: Colors.grey[300],
-  //                       borderRadius: BorderRadius.circular(2.r),
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 SizedBox(height: 20.h),
-  //
-  //                 Text(
-  //                   'Set Reminder for ${activity.name}',
-  //                   style: TextStyle(
-  //                     fontSize: 20.sp,
-  //                     fontWeight: FontWeight.bold,
-  //                   ),
-  //                 ),
-  //                 SizedBox(height: 16.h),
-  //
-  //                 // Activity summary
-  //                 Container(
-  //                   padding: EdgeInsets.all(16.w),
-  //                   decoration: BoxDecoration(
-  //                     color: Colors.grey[50],
-  //                     borderRadius: BorderRadius.circular(12.r),
-  //                   ),
-  //                   child: Row(
-  //                     children: [
-  //                       Container(
-  //                         width: 50.w,
-  //                         height: 50.h,
-  //                         decoration: BoxDecoration(
-  //                           shape: BoxShape.circle,
-  //                           color: Colors.white,
-  //                         ),
-  //                         child: Center(
-  //                           child: Image.asset(
-  //                             activity.imagePath,
-  //                             width: 30.w,
-  //                             height: 30.h,
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       SizedBox(width: 12.w),
-  //                       Expanded(
-  //                         child: Column(
-  //                           crossAxisAlignment: CrossAxisAlignment.start,
-  //                           children: [
-  //                             Text(
-  //                               activity.name,
-  //                               style: TextStyle(
-  //                                 fontSize: 16.sp,
-  //                                 fontWeight: FontWeight.bold,
-  //                               ),
-  //                             ),
-  //                             Text(
-  //                               DateFormat('MMM dd, yyyy • hh:mm a').format(activity.dateTime),
-  //                               style: TextStyle(
-  //                                 fontSize: 12.sp,
-  //                                 color: Colors.grey[600],
-  //                               ),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //                 SizedBox(height: 24.h),
-  //
-  //                 // Date selector
-  //                 ListTile(
-  //                   leading: const Icon(Icons.calendar_today, color: Colors.blue),
-  //                   title: Text(
-  //                     'Date',
-  //                     style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
-  //                   ),
-  //                   subtitle: Text(
-  //                     DateFormat('EEE, MMM d, yyyy').format(selectedDate),
-  //                     style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-  //                   ),
-  //                   onTap: () async {
-  //                     final picked = await showDatePicker(
-  //                       context: context,
-  //                       initialDate: selectedDate,
-  //                       firstDate: DateTime.now(),
-  //                       lastDate: DateTime(2027, 12, 31),
-  //                     );
-  //                     if (picked != null) {
-  //                       setState(() {
-  //                         selectedDate = picked;
-  //                       });
-  //                     }
-  //                   },
-  //                 ),
-  //
-  //                 // Time selector
-  //                 ListTile(
-  //                   leading: Icon(Icons.access_time, color: Colors.blue),
-  //                   title: Text(
-  //                     'Time',
-  //                     style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
-  //                   ),
-  //                   subtitle: Text(
-  //                     selectedTime.format(context),
-  //                     style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
-  //                   ),
-  //                   onTap: () async {
-  //                     final picked = await showTimePicker(
-  //                       context: context,
-  //                       initialTime: selectedTime,
-  //                     );
-  //                     if (picked != null) {
-  //                       setState(() {
-  //                         selectedTime = picked;
-  //                       });
-  //                     }
-  //                   },
-  //                 ),
-  //                 SizedBox(height: 32.h),
-  //
-  //                 // Action buttons
-  //                 Row(
-  //                   children: [
-  //                     // Remove reminder button (only if already has reminder)
-  //                     if (activity.hasReminder)
-  //                       Expanded(
-  //                         child: OutlinedButton(
-  //                           onPressed: () async {
-  //                             await _removeReminder(activity, reminderNotifier, activityNotifier);
-  //                             Navigator.pop(context);
-  //                           },
-  //                           style: OutlinedButton.styleFrom(
-  //                             padding: EdgeInsets.symmetric(vertical: 16.h),
-  //                             shape: RoundedRectangleBorder(
-  //                               borderRadius: BorderRadius.circular(12.r),
-  //                             ),
-  //                           ),
-  //                           child: const Text(
-  //                             'Remove Reminder',
-  //                             style: TextStyle(color: Colors.red),
-  //                           ),
-  //                         ),
-  //                       ),
-  //
-  //                     if (activity.hasReminder) SizedBox(width: 12.w),
-  //
-  //                     // Save/Cancel buttons
-  //                     Expanded(
-  //                       child: ElevatedButton(
-  //                         onPressed: () async {
-  //                           final reminderDateTime = DateTime(
-  //                             selectedDate.year,
-  //                             selectedDate.month,
-  //                             selectedDate.day,
-  //                             selectedTime.hour,
-  //                             selectedTime.minute,
-  //                           );
-  //
-  //                           // Validation: Check if time is in the past
-  //                           if (reminderDateTime.isBefore(DateTime.now())) {
-  //                             // ScaffoldMessenger.of(context).showSnackBar(
-  //                             //   const SnackBar(
-  //                             //     content: Text('Reminder time must be in the future'),
-  //                             //     backgroundColor: Colors.red,
-  //                             //   ),
-  //                             // );
-  //                             return;
-  //                           }
-  //
-  //                           await _setReminder(
-  //                             activity,
-  //                             reminderDateTime,
-  //                             reminderNotifier,
-  //                             activityNotifier,
-  //                           );
-  //                           Navigator.pop(context);
-  //                         },
-  //                         style: ElevatedButton.styleFrom(
-  //                           backgroundColor: Colors.blue,
-  //                           padding: EdgeInsets.symmetric(vertical: 16.h),
-  //                           shape: RoundedRectangleBorder(
-  //                             borderRadius: BorderRadius.circular(12.r),
-  //                           ),
-  //                         ),
-  //                         child: Text(
-  //                           activity.hasReminder ? 'Update Reminder' : 'Set Reminder',
-  //                           style: TextStyle(color: Colors.white),
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 SizedBox(height: 10.h),
-  //
-  //                 TextButton(
-  //                   onPressed: () => Navigator.pop(context),
-  //                   child: Text('Cancel'),
-  //                 ),
-  //               ],
-  //             ),
-  //           );
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
+
+
 
   void _showReminderOptions(Activity activity) {
-    final reminderNotifier = Provider.of<ReminderNotifier>(context, listen: false);
-    final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
+    final reminderNotifier = Provider.of<ReminderNotifier>(
+      context,
+      listen: false,
+    );
+    final activityNotifier = Provider.of<ActivityNotifier>(
+      context,
+      listen: false,
+    );
 
     DateTime selectedDate = activity.dateTime;
     TimeOfDay selectedTime = activity.reminderDateTime != null
@@ -913,7 +769,9 @@ class _AddReminderViewState extends State<AddReminderView> {
                                 ),
                               ),
                               Text(
-                                DateFormat('MMM dd, yyyy • hh:mm a').format(activity.dateTime),
+                                DateFormat(
+                                  'MMM dd, yyyy • hh:mm a',
+                                ).format(activity.dateTime),
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   color: Colors.grey[600],
@@ -994,7 +852,8 @@ class _AddReminderViewState extends State<AddReminderView> {
                                 SizedBox(width: 12.w),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Date',
@@ -1005,7 +864,9 @@ class _AddReminderViewState extends State<AddReminderView> {
                                       ),
                                       SizedBox(height: 4.h),
                                       Text(
-                                        DateFormat('EEE, MMM d, yyyy').format(selectedDate),
+                                        DateFormat(
+                                          'EEE, MMM d, yyyy',
+                                        ).format(selectedDate),
                                         style: TextStyle(
                                           fontSize: 16.sp,
                                           fontWeight: FontWeight.bold,
@@ -1045,7 +906,9 @@ class _AddReminderViewState extends State<AddReminderView> {
                                     ),
                                     timePickerTheme: TimePickerThemeData(
                                       backgroundColor: Colors.white,
-                                      dayPeriodBorderSide: BorderSide(color: Colors.grey[300]!),
+                                      dayPeriodBorderSide: BorderSide(
+                                        color: Colors.grey[300]!,
+                                      ),
                                     ),
                                   ),
                                   child: child!,
@@ -1092,7 +955,8 @@ class _AddReminderViewState extends State<AddReminderView> {
                                 SizedBox(width: 12.w),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Time',
@@ -1165,7 +1029,11 @@ class _AddReminderViewState extends State<AddReminderView> {
                         Expanded(
                           child: OutlinedButton(
                             onPressed: () async {
-                              await _removeReminder(activity, reminderNotifier, activityNotifier);
+                              await _removeReminder(
+                                activity,
+                                reminderNotifier,
+                                activityNotifier,
+                              );
                               Navigator.pop(context);
                             },
                             style: OutlinedButton.styleFrom(
@@ -1212,7 +1080,6 @@ class _AddReminderViewState extends State<AddReminderView> {
 
                             // Validation: Check if time is in the past
                             if (reminderDateTime.isBefore(DateTime.now())) {
-
                               return;
                             }
 
@@ -1244,7 +1111,9 @@ class _AddReminderViewState extends State<AddReminderView> {
                               ),
                               SizedBox(width: 8.w),
                               Text(
-                                activity.hasReminder ? 'Update Reminder' : 'Set Reminder',
+                                activity.hasReminder
+                                    ? 'Update Reminder'
+                                    : 'Set Reminder',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -1282,11 +1151,11 @@ class _AddReminderViewState extends State<AddReminderView> {
   }
 
   Future<void> _setReminder(
-      Activity activity,
-      DateTime reminderDateTime,
-      ReminderNotifier reminderNotifier,
-      ActivityNotifier activityNotifier,
-      ) async {
+    Activity activity,
+    DateTime reminderDateTime,
+    ReminderNotifier reminderNotifier,
+    ActivityNotifier activityNotifier,
+  ) async {
     try {
       // Create or update reminder
       final reminderId = await reminderNotifier.scheduleReminder(
@@ -1304,14 +1173,10 @@ class _AddReminderViewState extends State<AddReminderView> {
       // Update in activity provider
       activityNotifier.updateActivity(updatedActivity);
 
-
-      if (mounted) {
-
-      }
+      if (mounted) {}
 
       // Refresh UI
       if (mounted) setState(() {});
-
     } catch (e) {
       debugPrint('Failed to set reminder: $e');
       if (mounted) {
@@ -1321,11 +1186,11 @@ class _AddReminderViewState extends State<AddReminderView> {
   }
 
   Future<void> _removeReminder(
-      Activity activity,
-      ReminderNotifier reminderNotifier,
-      ActivityNotifier activityNotifier, {
-        bool silent = false,
-      }) async {
+    Activity activity,
+    ReminderNotifier reminderNotifier,
+    ActivityNotifier activityNotifier, {
+    bool silent = false,
+  }) async {
     try {
       // Cancel the notification
       if (activity.reminderId != null) {
@@ -1354,7 +1219,6 @@ class _AddReminderViewState extends State<AddReminderView> {
 
       // Refresh UI
       if (mounted) setState(() {});
-
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -1464,7 +1328,9 @@ class _AddReminderViewState extends State<AddReminderView> {
       backgroundColor: Colors.transparent,
       builder: (context) => SizedBox(
         height: MediaQuery.of(context).size.height * 0.92,
-        child: const AddActivitiesView(),
+        child: AddActivitiesView(
+          initialDate: _selectedDate,
+        ),
       ),
     );
   }
@@ -1489,7 +1355,6 @@ class _AddReminderViewState extends State<AddReminderView> {
     return days;
   }
 }
-
 
 //
 // import 'dart:io';

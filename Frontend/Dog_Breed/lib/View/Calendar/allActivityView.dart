@@ -17,8 +17,9 @@ import '../../utils/routes/routes_name.dart';
 
 class Allactivityview extends StatefulWidget {
   final Activity? selectedActivity;
+  final DateTime? initialDate;
 
-  const Allactivityview({super.key, this.selectedActivity});
+  const Allactivityview({super.key, this.selectedActivity, this.initialDate});
 
   @override
   State<Allactivityview> createState() => _AllactivityviewState();
@@ -55,6 +56,13 @@ class _AllactivityviewState extends State<Allactivityview> {
     super.initState();
     _currentActivity = widget.selectedActivity;
 
+    if (widget.initialDate != null) {
+      _selectedDate = widget.initialDate!;
+    } else if (_currentActivity != null) {
+      _selectedDate = _currentActivity!.dateTime;
+      _selectedTime = TimeOfDay.fromDateTime(_currentActivity!.dateTime);
+    }
+
     // If editing existing activity with reminder, populate values
     if (_currentActivity?.hasReminder == true) {
       _hasReminder = true;
@@ -75,9 +83,8 @@ class _AllactivityviewState extends State<Allactivityview> {
   Future<void> _selectReminderDate() async {
     final DateTime? picked = await showDialog<DateTime>(
       context: context,
-      builder: (context) => CustomDatePicker(
-        initialDate: _reminderDate ?? DateTime.now(),
-      ),
+      builder: (context) =>
+          CustomDatePicker(initialDate: _reminderDate ?? DateTime.now()),
     );
 
     if (picked != null) {
@@ -124,9 +131,7 @@ class _AllactivityviewState extends State<Allactivityview> {
   void _selectDate() async {
     final DateTime? picked = await showDialog<DateTime>(
       context: context,
-      builder: (context) => CustomDatePicker(
-        initialDate: _selectedDate,
-      ),
+      builder: (context) => CustomDatePicker(initialDate: _selectedDate),
     );
 
     if (picked != null) {
@@ -344,16 +349,23 @@ class _AllactivityviewState extends State<Allactivityview> {
       const double ozToMl = 29.5735;
       double amount = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
       foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? 'oz' : 'ml'}';
-    } else if (activityName == 'walk') {
+      if (_foodController.text.trim().isNotEmpty) {
+        foodValue = '$foodValue ${_foodController.text.trim()}';
+      }
+    } else if (['walk', 'play', 'crate'].contains(activityName)) {
       const double kmToMi = 0.621371;
       double amount = _isKmUnit ? _walkDistanceKm : _walkDistanceKm * kmToMi;
       foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}';
     } else {
-      if (_foodController.text.trim().isEmpty) {
-        _showErrorSnackBar('Please enter food name or type');
-        return;
+      if (activityName == 'eat') {
+        if (_foodController.text.trim().isEmpty) {
+          _showErrorSnackBar('Please enter food name or type');
+          return;
+        }
       }
-      foodValue = _foodController.text.trim();
+      if (_foodController.text.trim().isNotEmpty) {
+        foodValue = _foodController.text.trim();
+      }
     }
 
     showDialog(
@@ -367,7 +379,7 @@ class _AllactivityviewState extends State<Allactivityview> {
     try {
       DateTime activityDateTime;
 
-      if (activityName == 'walk') {
+      if (['walk', 'play', 'crate'].contains(activityName)) {
         activityDateTime = DateTime(
           _walkStartDate.year,
           _walkStartDate.month,
@@ -433,7 +445,9 @@ class _AllactivityviewState extends State<Allactivityview> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Activity ${_hasReminder ? 'with reminder ' : ''}saved successfully!'),
+          content: Text(
+            'Activity ${_hasReminder ? 'with reminder ' : ''}saved successfully!',
+          ),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -614,66 +628,66 @@ class _AllactivityviewState extends State<Allactivityview> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Reminder Header
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                'Set Reminder',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            // Switch(
-            //   value: _hasReminder,
-            //   activeThumbColor: Colors.black,
-            //   activeColor: const Color(0xFF820DFF),
-            //   inactiveThumbColor: Colors.white,
-            //   inactiveTrackColor: Colors.red,
-            //
-            //   onChanged: (value) {
-            //     setState(() {
-            //       _hasReminder = value;
-            //       if (!value) {
-            //         _reminderDate = null;
-            //         _reminderTime = null;
-            //       }
-            //     });
-            //   },
-            // ),
-
-            Switch(
-              value: _hasReminder,
-              activeColor: const Color(0xFF820DFF), // Purple track when ON
-              activeTrackColor: const Color(0xFF820DFF), // Purple track
-              inactiveThumbColor: Colors.white,
-              inactiveTrackColor: Colors.red, // Red track when OFF
-              thumbColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
-                  return Colors.white; // White thumb when ON
-                }
-                return Colors.white; // White thumb when OFF
-              }),
-              trackOutlineColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                if (states.contains(MaterialState.selected)) {
-                  return const Color(0xFF820DFF);
-                }
-                return Colors.red;
-              }),
-              onChanged: (value) {
-                setState(() {
-                  _hasReminder = value;
-                  if (!value) {
-                    _reminderDate = null;
-                    _reminderTime = null;
-                  }
-                });
-              },
-            ),
-          ],
-        ),
+        // // Reminder Header
+        // Row(
+        //   children: [
+        //     Expanded(
+        //       child: Text(
+        //         'Set Reminder',
+        //         style: TextStyle(
+        //           fontSize: 16.sp,
+        //           fontWeight: FontWeight.w600,
+        //         ),
+        //       ),
+        //     ),
+        //     // Switch(
+        //     //   value: _hasReminder,
+        //     //   activeThumbColor: Colors.black,
+        //     //   activeColor: const Color(0xFF820DFF),
+        //     //   inactiveThumbColor: Colors.white,
+        //     //   inactiveTrackColor: Colors.red,
+        //     //
+        //     //   onChanged: (value) {
+        //     //     setState(() {
+        //     //       _hasReminder = value;
+        //     //       if (!value) {
+        //     //         _reminderDate = null;
+        //     //         _reminderTime = null;
+        //     //       }
+        //     //     });
+        //     //   },
+        //     // ),
+        //
+        //     Switch(
+        //       value: _hasReminder,
+        //       activeColor: const Color(0xFF820DFF), // Purple track when ON
+        //       activeTrackColor: const Color(0xFF820DFF), // Purple track
+        //       inactiveThumbColor: Colors.white,
+        //       inactiveTrackColor: Colors.red, // Red track when OFF
+        //       thumbColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+        //         if (states.contains(MaterialState.selected)) {
+        //           return Colors.white; // White thumb when ON
+        //         }
+        //         return Colors.white; // White thumb when OFF
+        //       }),
+        //       trackOutlineColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+        //         if (states.contains(MaterialState.selected)) {
+        //           return const Color(0xFF820DFF);
+        //         }
+        //         return Colors.red;
+        //       }),
+        //       onChanged: (value) {
+        //         setState(() {
+        //           _hasReminder = value;
+        //           if (!value) {
+        //             _reminderDate = null;
+        //             _reminderTime = null;
+        //           }
+        //         });
+        //       },
+        //     ),
+        //   ],
+        // ),
         SizedBox(height: 8.h),
 
         if (_hasReminder) ...[
@@ -772,6 +786,430 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
   }
 
+  void _showFoodName1BottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        decoration: const BoxDecoration(
+          color:  Color(0xFFF4F7F6),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 32.w,
+                  height: 4.h,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2.r),
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              Text(
+                'Name',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 8.h),
+
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: TextField(
+                  controller: _foodController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter name',
+                    hintStyle: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: 14.sp,
+                    ),
+                    border: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: RoundButton(
+                      title: 'save',
+                      height: 53.h,
+                      isSelected: true,
+                      textColors: Colors.white,
+                      backgroundColors: const Color(0xFF820DFF),
+                      onPress: () {
+                        setState(() {});
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    child: RoundButton(
+                      title: 'Delete',
+                      height: 53.h,
+                      isSelected: true,
+                      isOutline: true,
+                      borderColors: Colors.red,
+                      textColors: Colors.red,
+                      onPress: () {
+                        setState(() {
+                          _foodController.clear();
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 16.h),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showFoodNameBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom),
+        decoration: const BoxDecoration(
+          color:  Color(0xFFF4F7F6),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Handle Bar
+              Center(
+                child: Container(
+                  width: 32.w,
+                  height: 4.h,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2.r),
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              Text(
+                'Name',
+                style: TextStyle(
+                  fontSize: 16.sp, 
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 8.h),
+              
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: TextField(
+                  controller: _foodController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter name',
+                    hintStyle: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: 14.sp,
+                    ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(
+                        horizontal: 16.w, vertical: 14.h),
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+              
+              RoundButton(
+                title: 'save',
+                height: 53.h,
+                isSelected: true,
+                textColors: Colors.white,
+                backgroundColors: const Color(0xFF820DFF),
+                onPress: () {
+                  setState(() {});
+                  Navigator.pop(context);
+                },
+              ),
+
+              SizedBox(height: 16.h),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  void _showDrinkName1BottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        decoration: const BoxDecoration(
+          color:  Color(0xFFF4F7F6),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 32.w,
+                  height: 4.h,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2.r),
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              Text(
+                'Name',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 8.h),
+
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: TextField(
+                  controller: _foodController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter name',
+                    hintStyle: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: 14.sp,
+                    ),
+                    border: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: RoundButton(
+                      title: 'save',
+                      height: 53.h,
+                      isSelected: true,
+                      textColors: Colors.white,
+                      backgroundColors: const Color(0xFF820DFF),
+                      onPress: () {
+                        setState(() {});
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    child: RoundButton(
+                      title: 'Delete',
+                      height: 53.h,
+                      isSelected: true,
+                      isOutline: true,
+                      borderColors: Colors.red,
+                      textColors: Colors.red,
+                      onPress: () {
+                        setState(() {
+                          _foodController.clear();
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 16.h),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showDrinkNameBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom),
+        decoration: const BoxDecoration(
+          color: Color(0xFFF4F7F6),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(24.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Handle Bar
+              Center(
+                child: Container(
+                  width: 32.w,
+                  height: 4.h,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(2.r),
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              Text(
+                'Name',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 8.h),
+
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(color: Colors.grey.shade200),
+                ),
+                child: TextField(
+                  controller: _foodController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter name',
+                    hintStyle: TextStyle(
+                      color: Colors.grey[400],
+                      fontSize: 14.sp,
+                    ),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(
+                        horizontal: 16.w, vertical: 14.h),
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+
+              RoundButton(
+                title: 'save',
+                height: 53.h,
+                isSelected: true,
+                textColors: Colors.white,
+                backgroundColors: const Color(0xFF820DFF),
+                onPress: () {
+                  setState(() {});
+                  Navigator.pop(context);
+                },
+              ),
+
+              SizedBox(height: 16.h),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+
+
+
+  void _deleteDrinkName() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding: EdgeInsets.all(24.w),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Delete Drink Name?',
+              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16.h),
+            RoundButton(
+              title: 'Delete',
+              isSelected: true,
+              backgroundColors: Colors.red,
+              textColors: Colors.white,
+              onPress: () {
+                setState(() {
+                  _foodController.clear();
+                });
+                Navigator.pop(context); // Close delete sheet
+              },
+            ),
+            SizedBox(height: 12.h),
+            RoundButton(
+              title: 'Cancel',
+              isSelected: true,
+              backgroundColors: Colors.grey.shade200,
+              textColors: Colors.black,
+              onPress: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildDrinkQuantitySelector() {
     // ... (keep existing drink selector code)
     const double ozToMl = 29.5735;
@@ -783,7 +1221,9 @@ class _AllactivityviewState extends State<Allactivityview> {
       return ml.roundToDouble() / ozToMl;
     }
 
-    double displayValue = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
+    double displayValue = _isOzUnit
+        ? _drinkQuantityOz
+        : _drinkQuantityOz * ozToMl;
 
     void increment() {
       setState(() {
@@ -815,8 +1255,29 @@ class _AllactivityviewState extends State<Allactivityview> {
 
     return Column(
       children: [
+        if (_foodController.text.isNotEmpty)
+          RoundButton(
+            title: _foodController.text,
+            isSelected: true,
+            backgroundColors: const Color(0xFFF4F7F6),
+            textColors: Colors.black,
+            hasIcons: true,
+            isTrailingIcon: true,
+            icon: const Icon(Icons.edit, size: 20, color: Colors.black),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            onPress: _showDrinkName1BottomSheet,
+          )
+        else
+          RoundButton(
+            title: "+ Add Drink name or type",
+            isSelected: true,
+            backgroundColors: const Color(0xFFF4F7F6),
+            textColors: const Color(0xFF820DFF),
+            onPress: _showDrinkNameBottomSheet,
+          ),
+        SizedBox(height: 6.h),
         Container(
-          padding: EdgeInsets.all(16.w),
+          padding: EdgeInsets.all(6.w),
           decoration: BoxDecoration(
             color: const Color(0xFFF4F7F6),
             borderRadius: BorderRadius.circular(12.r),
@@ -832,10 +1293,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 _isOzUnit
                     ? displayValue.toStringAsFixed(1)
                     : displayValue.toStringAsFixed(0),
-                style: TextStyle(
-                  fontSize: 36.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
               ),
               IconButton(
                 icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
@@ -909,8 +1367,11 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
   }
 
+
   Widget _buildWalkDistanceSelector() {
-    // ... (keep existing walk selector code)
+    final String activityName = _currentActivity?.name.toLowerCase() ?? '';
+    final bool isWalkActivity = activityName == 'walk';
+
     const double kmToMi = 0.621371;
     double baseKm = _walkDistanceKm;
     double rawDisplayValue = _isKmUnit ? baseKm : baseKm * kmToMi;
@@ -933,7 +1394,8 @@ class _AllactivityviewState extends State<Allactivityview> {
             final result = await Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Walkview(selectedActivity: _currentActivity),
+                builder: (context) =>
+                    Walkview(selectedActivity: _currentActivity),
               ),
             );
 
@@ -943,146 +1405,167 @@ class _AllactivityviewState extends State<Allactivityview> {
               final note = result['note'] as String;
 
               final walkActivity = Activity(
-                name: 'Walk',
+                name: _currentActivity?.name ?? 'Walk',
                 imagePath: _currentActivity!.imagePath,
                 color: _currentActivity!.color,
-                food: '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
+                food:
+                '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
                 dateTime: DateTime.now(),
                 note: note.isNotEmpty ? note : null,
                 duration: duration,
                 formattedDuration: formattedDuration,
-                walkDistance: '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
+                walkDistance:
+                '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
               );
 
-              final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
+              final activityNotifier = Provider.of<ActivityNotifier>(
+                context,
+                listen: false,
+              );
               activityNotifier.addActivity(walkActivity);
 
               Navigator.pop(context);
             }
           },
         ),
-        SizedBox(height: 16.h),
-        Container(
-          padding: EdgeInsets.all(6.w),
-          decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
-            borderRadius: BorderRadius.circular(12.r),
+
+        // Show distance selector only for walk activity
+        if (isWalkActivity) ...[
+          SizedBox(height: 16.h),
+          Container(
+            padding: EdgeInsets.all(6.w),
+            decoration: BoxDecoration(
+              color: const Color(0xFFF4F7F6),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 85.w,
+                  height: 45.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.remove, color: Colors.black, size: 28),
+                    onPressed: () {
+                      setState(() {
+                        if (_isKmUnit) {
+                          if (_walkDistanceKm >= step) {
+                            _walkDistanceKm -= step;
+                          }
+                        } else {
+                          double currentMi = _walkDistanceKm * kmToMi;
+                          if (currentMi >= step) {
+                            _walkDistanceKm = (currentMi - step) / kmToMi;
+                          }
+                        }
+                      });
+                    },
+                  ),
+                ),
+                Text(
+                  displayText,
+                  style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  width: 85.w,
+                  height: 45.h,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.add, color: Colors.black, size: 28),
+                    onPressed: () {
+                      setState(() {
+                        if (_isKmUnit) {
+                          if (_walkDistanceKm <= 99) {
+                            _walkDistanceKm += step;
+                          }
+                        } else {
+                          double currentMi = _walkDistanceKm * kmToMi;
+                          if (currentMi <= 62) {
+                            _walkDistanceKm = (currentMi + step) / kmToMi;
+                          }
+                        }
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: 85.w,
-                height: 45.h,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: IconButton(
-                  icon: const Icon(Icons.remove, color: Colors.black, size: 28),
-                  onPressed: () {
-                    setState(() {
-                      if (_isKmUnit) {
-                        if (_walkDistanceKm >= step) {
-                          _walkDistanceKm -= step;
-                        }
-                      } else {
-                        double currentMi = _walkDistanceKm * kmToMi;
-                        if (currentMi >= step) {
-                          _walkDistanceKm = (currentMi - step) / kmToMi;
-                        }
-                      }
-                    });
-                  },
-                ),
-              ),
-              Text(
-                displayText,
-                style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
-              ),
-              Container(
-                width: 85.w,
-                height: 45.h,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: IconButton(
-                  icon: const Icon(Icons.add, color: Colors.black, size: 28),
-                  onPressed: () {
-                    setState(() {
-                      if (_isKmUnit) {
-                        if (_walkDistanceKm <= 99) {
-                          _walkDistanceKm += step;
-                        }
-                      } else {
-                        double currentMi = _walkDistanceKm * kmToMi;
-                        if (currentMi <= 62) {
-                          _walkDistanceKm = (currentMi + step) / kmToMi;
-                        }
-                      }
-                    });
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(height: 12.h),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => setState(() => _isKmUnit = true),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                    decoration: BoxDecoration(
-                      color: _isKmUnit ? const Color(0xFF820DFF) : Colors.transparent,
-                      borderRadius: BorderRadius.horizontal(left: Radius.circular(12.r)),
-                    ),
-                    child: Text(
-                      'km',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: _isKmUnit ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
+          SizedBox(height: 12.h),
+          Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFFF4F7F6),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => setState(() => _isKmUnit = true),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                      decoration: BoxDecoration(
+                        color: _isKmUnit
+                            ? const Color(0xFF820DFF)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.horizontal(
+                          left: Radius.circular(12.r),
+                        ),
+                      ),
+                      child: Text(
+                        'km',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: _isKmUnit ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: GestureDetector(
-                  onTap: () => setState(() => _isKmUnit = false),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                    decoration: BoxDecoration(
-                      color: !_isKmUnit ? const Color(0xFF820DFF) : Colors.transparent,
-                      borderRadius: BorderRadius.horizontal(right: Radius.circular(12.r)),
-                    ),
-                    child: Text(
-                      'ml',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: !_isKmUnit ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => setState(() => _isKmUnit = false),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 14.h),
+                      decoration: BoxDecoration(
+                        color: !_isKmUnit
+                            ? const Color(0xFF820DFF)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.horizontal(
+                          right: Radius.circular(12.r),
+                        ),
+                      ),
+                      child: Text(
+                        'ml',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: !_isKmUnit ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
+
         SizedBox(height: 24.h),
-        Text('Started At', style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600)),
+        Text(
+          'Started At',
+          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+        ),
         SizedBox(height: 8.h),
         Row(
           children: [
@@ -1090,12 +1573,24 @@ class _AllactivityviewState extends State<Allactivityview> {
               child: GestureDetector(
                 onTap: _selectWalkStartDate,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                  decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(12.r)),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 14.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(DateFormat('MM-dd-yyyy').format(_walkStartDate), style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                      Text(
+                        DateFormat('MM-dd-yyyy').format(_walkStartDate),
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const Icon(Icons.calendar_today, color: Colors.grey),
                     ],
                   ),
@@ -1107,12 +1602,32 @@ class _AllactivityviewState extends State<Allactivityview> {
               child: GestureDetector(
                 onTap: _selectWalkStartTime,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                  decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(12.r)),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 14.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(DateFormat('HH:mm').format(DateTime(0,0,0,_walkStartTime.hour,_walkStartTime.minute)), style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                      Text(
+                        DateFormat('HH:mm').format(
+                          DateTime(
+                            0,
+                            0,
+                            0,
+                            _walkStartTime.hour,
+                            _walkStartTime.minute,
+                          ),
+                        ),
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const Icon(Icons.access_time, color: Colors.grey),
                     ],
                   ),
@@ -1122,7 +1637,10 @@ class _AllactivityviewState extends State<Allactivityview> {
           ],
         ),
         SizedBox(height: 16.h),
-        Text('Ended At', style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600)),
+        Text(
+          'Ended At',
+          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+        ),
         SizedBox(height: 8.h),
         Row(
           children: [
@@ -1130,12 +1648,24 @@ class _AllactivityviewState extends State<Allactivityview> {
               child: GestureDetector(
                 onTap: _selectWalkEndDate,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                  decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(12.r)),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 14.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(DateFormat('MM-dd-yyyy').format(_walkEndDate), style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                      Text(
+                        DateFormat('MM-dd-yyyy').format(_walkEndDate),
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const Icon(Icons.calendar_today, color: Colors.grey),
                     ],
                   ),
@@ -1147,12 +1677,32 @@ class _AllactivityviewState extends State<Allactivityview> {
               child: GestureDetector(
                 onTap: _selectWalkEndTime,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-                  decoration: BoxDecoration(color: Colors.grey[50], borderRadius: BorderRadius.circular(12.r)),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 14.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(DateFormat('HH:mm').format(DateTime(0,0,0,_walkEndTime.hour,_walkEndTime.minute)), style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                      Text(
+                        DateFormat('HH:mm').format(
+                          DateTime(
+                            0,
+                            0,
+                            0,
+                            _walkEndTime.hour,
+                            _walkEndTime.minute,
+                          ),
+                        ),
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       const Icon(Icons.access_time, color: Colors.grey),
                     ],
                   ),
@@ -1163,6 +1713,22 @@ class _AllactivityviewState extends State<Allactivityview> {
         ),
       ],
     );
+  }
+
+
+  String _getButtonTitle(String activityName) {
+    switch (activityName) {
+      case 'treat':
+        return "+ Add Treat";
+      case 'grooming':
+        return "+ Add grooming type";
+      case 'medication':
+        return "+ Add medication";
+      case 'vaccination':
+        return "+ Add vaccination";
+      default:
+        return "+ Add Food name or type";
+    }
   }
 
   @override
@@ -1234,41 +1800,45 @@ class _AllactivityviewState extends State<Allactivityview> {
 
               // Reminder Section (for all activities)
               _buildReminderSection(),
-              SizedBox(height: 16.h),
+              SizedBox(height: 10.h),
 
-              // Conditional Input Section
               if (activityName == 'drink')
                 _buildDrinkQuantitySelector()
-              else if (activityName == 'walk')
+              else if (['walk', 'play', 'crate','training'].contains(activityName))
                 _buildWalkDistanceSelector()
-              else
-                TextField(
-                  controller: _foodController,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    hintText: '+ Add food name or type',
-                    hintStyle: TextStyle(
-                      color: const Color(0xFF820DFF),
-                      fontSize: 16.sp,
-                    ),
-                    filled: true,
-                    fillColor: const Color(0xFFF4F7F6),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                      borderSide: BorderSide.none,
-                    ),
+              else if (activityName != 'pee' && activityName != 'poop')
+                if (_foodController.text.isNotEmpty)
+                  RoundButton(
+                    title: _foodController.text,
+                    isSelected: true,
+                    backgroundColors: const Color(0xFFF4F7F6),
+                    textColors: Colors.black,
+                    borderColors: const Color(0xFF820DFF),
+                    hasIcons: true,
+                    isTrailingIcon: true,
+                    icon: const Icon(Icons.edit, size: 20, color: Colors.black),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    onPress: _showFoodName1BottomSheet,
+                  )
+                else
+                  RoundButton(
+                    title: _getButtonTitle(activityName),
+                    isSelected: true,
+                    backgroundColors: const Color(0xFFF4F7F6),
+                    textColors: const Color(0xFF820DFF),
+                    onPress: _showFoodNameBottomSheet,
                   ),
-                ),
-
-              SizedBox(height: 16.h),
-
+              SizedBox(height: 10.h),
               // Activity Date & Time (for non-walk activities)
-              if (activityName != 'walk') ...[
+              if (!['walk', 'play', 'crate','training'].contains(activityName)) ...[
                 Text(
                   'Date',
-                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: 6.h),
                 GestureDetector(
                   onTap: _selectDate,
                   child: Container(
@@ -1295,11 +1865,14 @@ class _AllactivityviewState extends State<Allactivityview> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 10.h),
 
                 Text(
                   'Time',
-                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 SizedBox(height: 8.h),
                 GestureDetector(
@@ -1359,13 +1932,16 @@ class _AllactivityviewState extends State<Allactivityview> {
                   contentPadding: EdgeInsets.all(16.w),
                 ),
               ),
-              SizedBox(height: 24.h),
+              SizedBox(height: 20.h),
 
               // Add Image
               GestureDetector(
                 onTap: _showImageSourceDialog,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 14.h,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFF3F6F3),
                     borderRadius: BorderRadius.circular(12.r),
@@ -1392,7 +1968,10 @@ class _AllactivityviewState extends State<Allactivityview> {
               GestureDetector(
                 onTap: _showVideoSourceDialog,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 14.h,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFF3F6F3),
                     borderRadius: BorderRadius.circular(12.r),
@@ -1430,6 +2009,3 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
   }
 }
-
-
-

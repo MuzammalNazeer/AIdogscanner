@@ -71,6 +71,7 @@ dependencies:
   fl_chart: ^0.68.0
   intl_phone_number_input: ^0.7.4
   country_picker: ^2.0.20
+  lottie: ^3.1.0
 dependency_overrides:
   tflite_flutter: ^0.9.5
   image: ^3.2.2
@@ -110,5 +111,5 @@ flutter:
     - assets/prediction_result.json
     - assets/images/
     - assets/fonts/
-    - assets/icons/
+    - assets/animations/
 

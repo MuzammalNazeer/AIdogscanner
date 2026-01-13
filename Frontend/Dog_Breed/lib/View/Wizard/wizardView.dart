@@ -133,79 +133,86 @@ class _WizardviewState extends State<Wizardview> {
     );
   }
 }
+
+
+
 class OnboardingPage1 extends StatelessWidget {
   const OnboardingPage1({super.key});
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final bool _ = Theme.of(context).brightness == Brightness.dark;
     return Padding(
-      padding:  EdgeInsets.all(10.r),
+      padding: EdgeInsets.all(16.r),
       child: Column(
         children: [
-          SizedBox(height: 60.h,),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 360.w,
-                height: 360.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-
-                  boxShadow: [
-                    BoxShadow(
-                      color:  const Color(0xFF00D9FF).withOpacity(0.6),  // Light theme
-                      blurRadius: 54,
-                      spreadRadius: 0,
-                      offset: Offset.zero,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 340.w,
-                height: 340.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: colors.onTertiary,
-
-                ),
-              ),
-              Container(
-                width: 280.w,
-                height: 245.h,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: colors.onBackground
-                ),
-              ),
-              ClipOval(
-                child: Image.asset(
-                  'assets/images/Ellipse 777.png',
-                  width: 246.w,
-                  height: 266.h,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 210.h),
+          SizedBox(height: 60.h),
           Text(
-            "Find Out Your Dog's\nBreed Fast!",
+            "Satellite Director",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 26.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.white
+              fontSize: 30.sp,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: 12.h),
           Text(
-            "Capture a photo or upload from your gallery\nand discover your dog’s breed instantly!",
+            "Explore Nearby Places with GPS Satellite\nMapping & Find Satellite",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14.sp, color: Colors.white,),
+            style: TextStyle(
+              fontSize: 14.sp,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(height: 40.h),
+          Expanded(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                // Outer glow
+                Container(
+                  width: 360.w,
+                  height: 360.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF00D9FF).withOpacity(0.6),
+                        blurRadius: 54,
+                        spreadRadius: 0,
+                        offset: Offset.zero,
+                      ),
+                    ],
+                  ),
+                ),
+                // Middle Circle
+                Container(
+                  width: 300.w,
+                  height: 300.w,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: colors.onTertiary,
+                  ),
+                ),
+                // Inner Circle
+                Container(
+                  width: 240.w,
+                  height: 240.w,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF7B2CBF),
+                  ),
+                ),
+                // Dog Image
+                Image.asset(
+                  'assets/images/ddoogg 1.png',
+                  width: 350.w,
+                  height: 400.h,
+                  fit: BoxFit.contain,
+                ),
+              ],
+            ),
           ),
         ],
       ),

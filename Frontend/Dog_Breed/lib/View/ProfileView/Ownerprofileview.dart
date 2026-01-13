@@ -58,10 +58,10 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
     final prefs = await SharedPreferences.getInstance();
 
     setState(() {
-      firstName = prefs.getString(_keyFirstName) ?? 'Tehseen Khan';
+      firstName = prefs.getString(_keyFirstName) ?? 'Muzammal';
       lastName = prefs.getString(_keyLastName) ?? '';
       gender = prefs.getString(_keyGender) ?? '';
-      email = prefs.getString(_keyEmail) ?? 'tehseenkhan@gmail.com';
+      email = prefs.getString(_keyEmail) ?? 'anapplemuzammal@gmail.com';
       phone = prefs.getString(_keyPhone) ?? '';
       country = prefs.getString(_keyCountry) ?? 'Pakistan';
       city = prefs.getString(_keyCity) ?? '';

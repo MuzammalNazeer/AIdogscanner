@@ -38,8 +38,12 @@ import '../../View/forget/newpasswordview.dart';
 import '../../View/pro/proView.dart';
 import '../../View/setting/FeedbackView.dart';
 import '../../View/setting/settingView.dart';
+import '../../View/shop/product_detail_view.dart';
 import '../../View/shop/shopview.dart';
 import '../../View/signup/signupview.dart';
+import '../../config/components/changePassword.dart';
+import '../../config/components/NotificationView.dart';
+import '../../config/components/TermsOfUseView.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -91,6 +95,16 @@ class Routes {
         return MaterialPageRoute(
             builder: (BuildContext context) =>   Ownerprofileview());
 
+      case RoutesName.changePassword:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>   Changepassword());
+      case RoutesName.notification:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>   const NotificationView());
+      case RoutesName.termsOfUse:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>   const TermsOfUseView());
+
 
 
 
@@ -110,6 +124,11 @@ class Routes {
       case RoutesName.shop:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Shopview());
+      case RoutesName.productDetail:
+        final args = settings.arguments;
+        final Map<String, dynamic> product = args is Map<String, dynamic> ? args : {};
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>  ProductDetailView(product: product));
       case RoutesName.walk:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Walkview());

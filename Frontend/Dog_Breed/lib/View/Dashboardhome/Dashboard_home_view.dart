@@ -38,6 +38,60 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
     ];
   }
 
+
+  Widget _buildAddPetFAB() {
+    return SizedBox(
+      width: 70.w,
+      height: 70.h,
+      child: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, RoutesName.addPet);
+        },
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        shape: const CircleBorder(),
+        child: Container(
+          width: 65.w,
+          height: 65.h,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: const Color(0xFF820DFF),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0x1919190D).withOpacity(0.15),
+                offset: const Offset(0, 8),
+                blurRadius: 20,
+              ),
+              BoxShadow(
+                color: const Color(0x16223308).withOpacity(0.1),
+                offset: const Offset(0, 4),
+                blurRadius: 10,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.add, color: Colors.white, size: 24.w),
+              SizedBox(height: 2.h),
+              Text(
+                'Add Pet',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Sora',
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  height: 1.1,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildFloatingActionButton(bool isOverlayView) {
     return Padding(
       padding: isOverlayView ? EdgeInsets.only(bottom: 30.h) : EdgeInsets.zero,
@@ -80,54 +134,54 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         index: homeProvider.selectedIndex,
         children: _widgetOptions,
       ),
-      floatingActionButton: _buildAddPetFAB(),
+      floatingActionButton:_buildAddPetFAB(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _buildBottomNavigationBar(homeProvider),
     );
   }
 
-  Widget _buildAddPetFAB() {
-    return SizedBox(
-      width: 80.w,
-      height: 80.h,
-      child: FloatingActionButton(
-        onPressed: () {
-
-          Navigator.pushNamed(context, RoutesName.addPet);
-        },
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        shape: const CircleBorder(),
-        child: Container(
-          width: 65.w,
-          height: 65.h,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.onTertiary,
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0x1919190D).withOpacity(0.15),
-                offset: const Offset(0, 8),
-                blurRadius: 20,
-              ),
-              BoxShadow(
-                color: const Color(0x16223308).withOpacity(0.1),
-                offset: const Offset(0, 4),
-                blurRadius: 10,
-              ),
-            ],
-          ),
-          child: const Center(
-            child: Icon(
-              Icons.camera_alt_outlined,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _buildAddPetFAB() {
+  //   return SizedBox(
+  //     width: 80.w,
+  //     height: 80.h,
+  //     child: FloatingActionButton(
+  //       onPressed: () {
+  //
+  //         Navigator.pushNamed(context, RoutesName.addPet);
+  //       },
+  //       backgroundColor: Colors.transparent,
+  //       elevation: 0,
+  //       shape: const CircleBorder(),
+  //       child: Container(
+  //         width: 65.w,
+  //         height: 65.h,
+  //         decoration: BoxDecoration(
+  //           shape: BoxShape.circle,
+  //           color: Theme.of(context).colorScheme.onTertiary,
+  //           boxShadow: [
+  //             BoxShadow(
+  //               color: const Color(0x1919190D).withOpacity(0.15),
+  //               offset: const Offset(0, 8),
+  //               blurRadius: 20,
+  //             ),
+  //             BoxShadow(
+  //               color: const Color(0x16223308).withOpacity(0.1),
+  //               offset: const Offset(0, 4),
+  //               blurRadius: 10,
+  //             ),
+  //           ],
+  //         ),
+  //         child: const Center(
+  //           child: Icon(
+  //             Icons.camera_alt_outlined,
+  //             color: Colors.white,
+  //             size: 30,
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildBottomNavigationBar(HomeViewModel homeProvider) {
     final colors = Theme.of(context).colorScheme;

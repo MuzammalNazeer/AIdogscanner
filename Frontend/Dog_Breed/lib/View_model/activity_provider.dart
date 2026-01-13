@@ -7,13 +7,48 @@ import '../activity_model.dart';
 class ActivityNotifier extends ChangeNotifier {
   List<Activity> _activities = [];
   static const String _storageKey = 'dog_activities_list';
+  static const String _visibilityStorageKey = 'dog_activities_visibility';
 
   List<Activity> get activities => List.unmodifiable(_activities);
+  Map<String, bool> _visibilitySettings = {};
+  Map<String, bool> get visibilitySettings => Map.unmodifiable(_visibilitySettings);
 
   ActivityNotifier() {
     _loadActivities();
+    _loadVisibilitySettings();
   }
 
+  Future<void> _loadVisibilitySettings() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final jsonString = prefs.getString(_visibilityStorageKey);
+      if (jsonString != null && jsonString.isNotEmpty) {
+        _visibilitySettings = Map<String, bool>.from(jsonDecode(jsonString));
+        notifyListeners();
+      }
+    } catch (e) {
+      debugPrint('Error loading visibility settings: $e');
+    }
+  }
+
+  Future<void> toggleVisibility(String activityName, bool isVisible) async {
+    _visibilitySettings[activityName] = isVisible;
+    notifyListeners();
+    await _saveVisibilitySettings();
+  }
+
+  Future<void> _saveVisibilitySettings() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_visibilityStorageKey, jsonEncode(_visibilitySettings));
+    } catch (e) {
+      debugPrint('Error saving visibility settings: $e');
+    }
+  }
+
+  bool isActivityVisible(String name) {
+    return _visibilitySettings[name] ?? true;
+  }
 
   /// Load activities from SharedPreferences
   Future<void> _loadActivities() async {

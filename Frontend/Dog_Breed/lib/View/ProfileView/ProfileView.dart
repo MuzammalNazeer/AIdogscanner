@@ -14,6 +14,8 @@ class Profileview extends StatefulWidget {
 }
 
 class _ProfileviewState extends State<Profileview> {
+  bool _isProfileDeleted = false;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
@@ -41,20 +43,20 @@ class _ProfileviewState extends State<Profileview> {
               child: ListView(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 children: [
-                  _buildSettingsTile(
-                    icon: Icons.person_outline,
-                    title: l10n.editProfile,
-                    onTap: () => Navigator.pushNamed(context, RoutesName.editProfile),
-                  ),
+                    _buildSettingsTile(
+                      icon: Icons.person_outline,
+                      title: l10n.editProfile,
+                      onTap: () => Navigator.pushNamed(context, RoutesName.editProfile),
+                    ),
                   _buildSettingsTile(
                     icon: Icons.lock_outline,
                     title: l10n.changePassword,
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, RoutesName.changePassword),
                   ),
                   _buildSettingsTile(
                     icon: Icons.notifications_outlined,
                     title: l10n.notifications,
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, RoutesName.notification),
                   ),
                   _buildSettingsTile(
                     icon: Icons.language,
@@ -66,11 +68,7 @@ class _ProfileviewState extends State<Profileview> {
                     title: l10n.premiumSubscription,
                     onTap: () => Navigator.pushNamed(context, RoutesName.pro),
                   ),
-                  _buildSettingsTile(
-                    icon: Icons.info_outline,
-                    title: l10n.aboutUs,
-                    onTap: () {},
-                  ),
+
                   _buildSettingsTile(
                     icon: Icons.help_outline,
                     title: l10n.faq,
@@ -86,14 +84,9 @@ class _ProfileviewState extends State<Profileview> {
                   _buildSettingsTile(
                     icon: Icons.description_outlined,
                     title: l10n.termsOfUse,
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, RoutesName.termsOfUse),
                   ),
-                  _buildSettingsTile(
-                    icon: Icons.pets,
-                    title: l10n.supportAnimalIdProject,
-                    isRed: true,
-                    onTap: () {},
-                  ),
+
                   _buildSettingsTile(
                     icon: Icons.delete_outline,
                     title: l10n.deleteOwnerProfile,
@@ -156,43 +149,6 @@ class _ProfileviewState extends State<Profileview> {
     );
   }
 
-  // void _showDeleteConfirmationDialog() {
-  //   final l10n = AppLocalizations.of(context)!;
-  //   showDialog(
-  //     context: context,
-  //     builder: (_) => AlertDialog(
-  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
-  //       title: Text(
-  //         l10n.dialogDeleteProfileTitle,
-  //         style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
-  //       ),
-  //       content: Text(
-  //         l10n.dialogDeleteProfileMessage,
-  //         style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
-  //       ),
-  //       actions: [
-  //         TextButton(
-  //           onPressed: () => Navigator.pop(context),
-  //           child: Text(
-  //             l10n.dialogCancel,
-  //             style: TextStyle(fontSize: 14.sp, color: Colors.grey[600]),
-  //           ),
-  //         ),
-  //         TextButton(
-  //           onPressed: () {
-  //             Navigator.pop(context);
-  //
-  //           },
-  //           style: TextButton.styleFrom(foregroundColor: Colors.red),
-  //           child: Text(
-  //             l10n.dialogDelete,
-  //             style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   void _showDeleteConfirmationDialog() {
     final l10n = AppLocalizations.of(context)!;
@@ -204,14 +160,15 @@ class _ProfileviewState extends State<Profileview> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
-        contentPadding: EdgeInsets.zero, // To control padding ourselves
+        contentPadding: EdgeInsets.zero,
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            SizedBox(height: 24.h),
             // Dog Illustration
             SvgPicture.asset(
-              'assets/images/DOG.svg',
-              height: 40.h,
+              'assets/images/Dog.svg',
+              height: 120.h,
             ),
 
             SizedBox(height: 24.h),
@@ -220,11 +177,7 @@ class _ProfileviewState extends State<Profileview> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               child: Text(
-                "Warning! The profile and all its content will be "
-                "deleted permanent and cannot be recovered"
-              "if your have an active Premium Subscription"
-                "Deactivate it in your App Store Subscriptio"
-              "settigns",
+                "Warning! The profile and all its content will be deleted permanently and cannot be recovered. If you have an active Premium Subscription, deactivate it in your App Store Subscription settings",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.sp,
@@ -248,10 +201,9 @@ class _ProfileviewState extends State<Profileview> {
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.pop(context);
-
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFC8C8C8),
+                          backgroundColor: const Color(0xFFC8C8C8),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.r),
                           ),
@@ -276,10 +228,10 @@ class _ProfileviewState extends State<Profileview> {
                       height: 48.h,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pop(context);
+
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFDB5959),
+                          backgroundColor: const Color(0xFFDB5959),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(24.r),
                           ),
@@ -306,6 +258,7 @@ class _ProfileviewState extends State<Profileview> {
       ),
     );
   }
+
 
   void _showLogoutConfirmationDialog() {
     final l10n = AppLocalizations.of(context)!;

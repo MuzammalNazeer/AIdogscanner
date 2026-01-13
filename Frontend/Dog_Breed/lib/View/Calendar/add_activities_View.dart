@@ -1,13 +1,21 @@
-// add_activities_View.dart
 import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
+import '../../View_model/activity_provider.dart';
 import '../../activity_model.dart';
 import 'allActivityView.dart';
 
 class AddActivitiesView extends StatefulWidget {
-  const AddActivitiesView({super.key});
+  final String? initialActivityName;
+  final DateTime? initialDate;
+
+  const AddActivitiesView({
+    super.key,
+    this.initialActivityName,
+    this.initialDate,
+  });
 
   @override
   State<AddActivitiesView> createState() => _AddActivitiesViewState();
@@ -17,136 +25,55 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
   Activity? _selectedActivity;
 
   final List<Activity> _activities = [
-    Activity(
-      name: 'Veterinary',
-      imagePath: 'assets/images/61.png',
-      color: const Color(0xFFB9E6FF),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Pee',
-      imagePath: 'assets/images/62.png',
-      color: const Color(0xFFFFD6C9),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Eat',
-      imagePath: 'assets/images/63.png',
-      color: const Color(0xFFFFE3B9),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Drink',
-      imagePath: 'assets/images/64.png',
-      color: const Color(0xFFB9DFFF),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Play',
-      imagePath: 'assets/images/65.png',
-      color: const Color(0xFFC5F9FF),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Poop',
-      imagePath: 'assets/images/66.png',
-      color: const Color(0xFFFFDEC5),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Walk',
-      imagePath: 'assets/images/67.png',
-      color: const Color(0xFFF2F2F2),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Crate',
-      imagePath: 'assets/images/68.png',
-      color: const Color(0xFFFFCFC7),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Sleep',
-      imagePath: 'assets/images/69.png',
-      color: const Color(0xFFFFDDC2),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Training',
-      imagePath: 'assets/images/70.png',
-      color: const Color(0xFFFFF1C2),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Treat',
-      imagePath: 'assets/images/71.png',
-      color: const Color(0xFFFFEBD3),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Grooming',
-      imagePath: 'assets/images/72.png',
-      color: const Color(0xFFD0FAFF),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Cleaning',
-      imagePath: 'assets/images/73.png',
-      color: const Color(0xFFFFCFD5),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Medication',
-      imagePath: 'assets/images/74.png',
-      color: const Color(0xFFFFEBEE),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Vaccination',
-      imagePath: 'assets/images/75.png',
-      color: const Color(0xFFFFEAE3),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Weight',
-      imagePath: 'assets/images/76.png',
-      color: const Color(0xFFD2F3FF),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Height',
-      imagePath: 'assets/images/77.png',
-      color: const Color(0xFFEAD8D5),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Temperature',
-      imagePath: 'assets/images/78.png',
-      color: const Color(0xFFE0EEFF),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Health Condition',
-      imagePath: 'assets/images/79.png',
-      color: const Color(0xFFFFE7C0),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Accident',
-      imagePath: 'assets/images/80.png',
-      color: const Color(0xFFFDFFD9),
-      dateTime: DateTime.now(),
-    ),
-    Activity(
-      name: 'Journal',
-      imagePath: 'assets/images/81.png',
-      color: const Color(0xFFFFD5CA),
-      dateTime: DateTime.now(),
-    ),
+    Activity(name: 'Veterinary', imagePath: 'assets/images/61.png', color: const Color(0xFFB9E6FF), dateTime: DateTime.now()),
+    Activity(name: 'Pee', imagePath: 'assets/images/62.png', color: const Color(0xFFFFD6C9), dateTime: DateTime.now()),
+    Activity(name: 'Eat', imagePath: 'assets/images/63.png', color: const Color(0xFFFFE3B9), dateTime: DateTime.now()),
+    Activity(name: 'Drink', imagePath: 'assets/images/64.png', color: const Color(0xFFB9DFFF), dateTime: DateTime.now()),
+    Activity(name: 'Play', imagePath: 'assets/images/65.png', color: const Color(0xFFC5F9FF), dateTime: DateTime.now()),
+    Activity(name: 'Poop', imagePath: 'assets/images/66.png', color: const Color(0xFFFFDEC5), dateTime: DateTime.now()),
+    Activity(name: 'Walk', imagePath: 'assets/images/67.png', color: const Color(0xFFF2F2F2), dateTime: DateTime.now()),
+    Activity(name: 'Crate', imagePath: 'assets/images/68.png', color: const Color(0xFFFFCFC7), dateTime: DateTime.now()),
+    Activity(name: 'Sleep', imagePath: 'assets/images/69.png', color: const Color(0xFFFFDDC2), dateTime: DateTime.now()),
+    Activity(name: 'Training', imagePath: 'assets/images/70.png', color: const Color(0xFFFFF1C2), dateTime: DateTime.now()),
+    Activity(name: 'Treat', imagePath: 'assets/images/71.png', color: const Color(0xFFFFEBD3), dateTime: DateTime.now()),
+    Activity(name: 'Grooming', imagePath: 'assets/images/72.png', color: const Color(0xFFD0FAFF), dateTime: DateTime.now()),
+    Activity(name: 'Cleaning', imagePath: 'assets/images/73.png', color: const Color(0xFFFFCFD5), dateTime: DateTime.now()),
+    Activity(name: 'Medication', imagePath: 'assets/images/74.png', color: const Color(0xFFFFEBEE), dateTime: DateTime.now()),
+    Activity(name: 'Vaccination', imagePath: 'assets/images/75.png', color: const Color(0xFFFFEAE3), dateTime: DateTime.now()),
+    Activity(name: 'Weight', imagePath: 'assets/images/76.png', color: const Color(0xFFD2F3FF), dateTime: DateTime.now()),
+    Activity(name: 'Height', imagePath: 'assets/images/77.png', color: const Color(0xFFEAD8D5), dateTime: DateTime.now()),
+    Activity(name: 'Temperature', imagePath: 'assets/images/78.png', color: const Color(0xFFE0EEFF), dateTime: DateTime.now()),
+    Activity(name: 'Health Condition', imagePath: 'assets/images/79.png', color: const Color(0xFFFFE7C0), dateTime: DateTime.now()),
+    Activity(name: 'Accident', imagePath: 'assets/images/80.png', color: const Color(0xFFFDFFD9), dateTime: DateTime.now()),
+    Activity(name: 'Journal', imagePath: 'assets/images/81.png', color: const Color(0xFFFFD5CA), dateTime: DateTime.now()),
   ];
 
   @override
+  void initState() {
+    super.initState();
+
+    // Auto-select activity if passed from home screen
+    if (widget.initialActivityName != null) {
+      try {
+        _selectedActivity = _activities.firstWhere(
+              (a) => a.name.toLowerCase() == widget.initialActivityName!.toLowerCase(),
+          orElse: () => _activities[0], // fallback
+        );
+      } catch (e) {
+        // not found → no selection
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final activityNotifier = Provider.of<ActivityNotifier>(context);
+    
+    // Filter activities based on visibility settings
+    final visibleActivities = _activities.where((activity) {
+      return activityNotifier.isActivityVisible(activity.name);
+    }).toList();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -154,12 +81,12 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
         child: SafeArea(
           child: Column(
             children: [
-              Center(
+              const Center(
                 child: Text(
                   "Add Activity",
                   style: TextStyle(
-                    color: const Color(0xFF000000),
-                    fontSize: 20.sp,
+                    color: Color(0xFF000000),
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -175,26 +102,32 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
                       mainAxisSpacing: 10.h,
                       childAspectRatio: 0.8,
                     ),
-                    itemCount: _activities.length,
+                    itemCount: visibleActivities.length,
                     itemBuilder: (context, index) {
-                      final activity = _activities[index];
+                      final activity = visibleActivities[index];
+                      final isSelected = _selectedActivity?.name == activity.name;
+
                       return GestureDetector(
                         onTap: () {
                           setState(() {
                             _selectedActivity = activity;
                           });
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Allactivityview(
                                 selectedActivity: activity,
+                                initialDate: widget.initialDate,
                               ),
                             ),
-                          );
+                          ).then((_) {
+
+                          });
                         },
                         child: _ActivityCard(
                           activity: activity,
-                          isSelected: _selectedActivity?.name == activity.name,
+                          isSelected: isSelected,
                         ),
                       );
                     },
@@ -208,7 +141,7 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
                 textColors: const Color(0xFFFFFFFF),
                 backgroundColors: const Color(0xFF820DFF),
                 onPress: () {
-                  // Add your logic here for adding new activities
+                  // TODO: Implement custom activity addition
                 },
               ),
               SizedBox(height: 16.h),
@@ -241,9 +174,9 @@ class _ActivityCard extends StatelessWidget {
           decoration: BoxDecoration(
             color: activity.color,
             borderRadius: BorderRadius.circular(10.r),
-            // border: isSelected
-            //     ? Border.all(color: const Color(0xFF820DFF), width: 2)
-            //     : null,
+            border: isSelected
+                ? Border.all(color: Colors.red, width: 3.w)
+                : null,
           ),
           child: Center(
             child: Image.asset(
@@ -267,7 +200,7 @@ class _ActivityCard extends StatelessWidget {
           style: TextStyle(
             fontSize: 10.sp,
             fontWeight: FontWeight.bold,
-            color: isSelected ? const Color(0xFF820DFF) : Colors.black,
+            color: isSelected ? const Color(0xFF820DFF) : Colors.black87,
           ),
           textAlign: TextAlign.center,
           maxLines: 1,
@@ -277,5 +210,3 @@ class _ActivityCard extends StatelessWidget {
     );
   }
 }
-
-

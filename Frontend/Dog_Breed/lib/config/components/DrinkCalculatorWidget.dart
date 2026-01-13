@@ -57,7 +57,6 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
       _ => '${roundedML.toStringAsFixed(roundedML % 1 == 0 ? 0 : 1)} mL',
     };
   }
-
   @override
   void dispose() {
     _weightController.dispose();
@@ -97,6 +96,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,16 +148,17 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
             decoration: BoxDecoration(
-              color: Colors.black87,
+              color: Colors.grey.shade400,
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Daily Water Intake',
+                  'Your Dog will need',
                   style: TextStyle(color: Colors.white70, fontSize: 16.sp),
                 ),
+
                 SizedBox(height: 16.h),
                 SingleChildScrollView(
                   scrollDirection:Axis.horizontal,
@@ -178,19 +179,16 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                         resultParts.length > 1 ? '${resultParts.sublist(1).join(' ')} / day' : '/ day',
                         style: TextStyle(color: Colors.white70, fontSize: 16.sp),
                       ),
+                      SizedBox(width: 40.w),
+                      SizedBox(
+                        width: 150.w,  // ← adjust this value (140–180.w usually looks good)
+                        child: _buildResultUnitDropdown(),
+                      ),
+
                     ],
                   ),
                 ),
-                SizedBox(height: 24.h),
 
-                // Result Unit Dropdown
-                _buildResultUnitDropdown(),
-
-                SizedBox(height: 16.h),
-                Text(
-                  'Note: Always consult your veterinarian for personalized advice.',
-                  style: TextStyle(color: Colors.white54, fontSize: 12.sp),
-                ),
               ],
             ),
           ),
