@@ -40,8 +40,8 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 
   Widget _buildAddPetFAB() {
     return SizedBox(
-      width: 87.w,
-      height: 87.h,
+      width: 97.w,
+      height: 97.h,
       child: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, RoutesName.addPet);
@@ -50,8 +50,8 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         elevation: 0,
         shape: const CircleBorder(),
         child: Container(
-          width: 73.w,
-          height: 73.h,
+          width: 87.w,
+          height: 87.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,
@@ -61,11 +61,11 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 offset: const Offset(0, 8),
                 blurRadius: 20,
               ),
-              BoxShadow(
-                color: const Color(0x16223308).withOpacity(0.1),
-                offset: const Offset(0, 4),
-                blurRadius: 10,
-              ),
+              // BoxShadow(
+              //   color: const Color(0x16223308).withOpacity(0.1),
+              //   offset: const Offset(0, 4),
+              //   blurRadius: 10,
+              // ),
             ],
           ),
           child: Center(
@@ -76,7 +76,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 shape: BoxShape.circle,
                 color: Color(0xFF820DFF),
               ),
-              child: const Padding(
+              child:  Padding(
                 padding: EdgeInsets.all(4.0),
                 child: Center(
                   child: Column(
@@ -87,7 +87,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                         size: 30,
                       ),
                       SizedBox(height: 2,),
-                      Text("Add Pet",style: TextStyle(fontSize:12,color: Colors.white),),
+                      Text("Add Pet",style: TextStyle(fontSize:12.sp,color: Colors.white),),
                     ],
                   ),
                 ),

@@ -110,7 +110,7 @@ class _ProviewState extends State<Proview> {
                   height: 45.2 / 28,
                   letterSpacing: 0,
                   fontWeight: FontWeight.bold,
-                  color:  Theme.of(context).colorScheme.onSurface,
+                  color:  AppColors.vibrantPurple,
                   fontFamily: "Inter",
                 ),
               ),
@@ -121,7 +121,7 @@ class _ProviewState extends State<Proview> {
                   fontSize: 16.sp,
                   height: 45.2 / 16,
                   letterSpacing: 0,
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: Color(0xFF6F7D86),
                   fontFamily: "Inter",
                 ),
               ),
@@ -134,7 +134,7 @@ class _ProviewState extends State<Proview> {
                     Text(
                       "Premium",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.surface,
+                        color:  Color(0xFF6F7D86),
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                       ),
@@ -143,7 +143,7 @@ class _ProviewState extends State<Proview> {
                     Text(
                       "Free",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.surface,
+                        color:  Color(0xFF6F7D86),
                         fontWeight: FontWeight.bold,
                         fontSize: 15.sp,
                       ),
@@ -153,27 +153,27 @@ class _ProviewState extends State<Proview> {
               ),
               SizedBox(height: 5.h),
               const _FeatureRow(
-                title: "Camera Detector (Flash Mode)",
+                title: "Unlimited Dog Scans",
                 premium: true,
                 free: true,
               ),
               const _FeatureRow(
-                title: "Device Scanner (WiFi)",
+                title: "Supported Breed Detection",
                 premium: true,
                 free: true,
               ),
               const _FeatureRow(
-                title: "Camera Detector (Magnetic)",
+                title: "Multiple Pet Profiles",
                 premium: true,
                 free: true,
               ),
               const _FeatureRow(
-                title: "Remove Ads",
+                title: "remove ads",
                 premium: true,
                 free: false,
               ),
               const _FeatureRow(
-                title: "VIP Customer Support",
+                title: "VIP Customer support",
                 premium: true,
                 free: false,
               ),
@@ -193,8 +193,9 @@ class _ProviewState extends State<Proview> {
               SizedBox(height: 8.h),
               RoundButton(
                 title: "START FREE TRIAL",
-                height: 56.h,
+                height: 62.h,
                 width: 379.w,
+                borderRadius: 41.r,
                 backgroundColors: colors.onBackground,
                 isSelected: true,
                 onPress: () {

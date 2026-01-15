@@ -1778,18 +1778,27 @@ class _AllactivityviewState extends State<Allactivityview> {
               final formattedDuration = result['formattedDuration'] as String;
               final note = result['note'] as String;
 
+              final walkDateTime = DateTime(
+                _walkStartDate.year,
+                _walkStartDate.month,
+                _walkStartDate.day,
+                _walkStartTime.hour,
+                _walkStartTime.minute,
+              );
+
               final walkActivity = Activity(
                 name: _currentActivity?.name ?? 'Walk',
                 imagePath: _currentActivity!.imagePath,
                 color: _currentActivity!.color,
                 food:
-                '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
-                dateTime: DateTime.now(),
+                    '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
+                dateTime: walkDateTime,
                 note: note.isNotEmpty ? note : null,
                 duration: duration,
                 formattedDuration: formattedDuration,
                 walkDistance:
-                '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
+                    '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
+                petId: _currentActivity?.petId ?? widget.selectedPetId,
               );
 
               final activityNotifier = Provider.of<ActivityNotifier>(

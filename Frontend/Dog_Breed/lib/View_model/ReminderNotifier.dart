@@ -78,11 +78,11 @@ class ReminderNotifier with ChangeNotifier {
 
     final reminderId = DateTime.now().millisecondsSinceEpoch.toString();
 
-    // Persist locally for UI/state
+    // Persist locally for UI/state (only JSON-safe values)
     _reminders.add({
       'id': reminderId,
       'activityName': activity.name,
-      'reminderDateTime': scheduledDate,
+      'reminderDateTime': scheduledDate.toIso8601String(),
       'activityNote': activity.note,
       'scheduledTime': scheduledDate.toIso8601String(),
       'petId': activity.petId,

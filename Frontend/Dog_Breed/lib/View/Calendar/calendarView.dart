@@ -225,18 +225,55 @@ class _CalendarviewState extends State<Calendarview> {
     final petProvider = Provider.of<PetProvider>(context);
     final effectivePetId = _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
 
-    final activities = activityNotifier.activities;
 
+    final activities = activityNotifier.activities;
     final filteredActivities = activities.where((activity) {
-      // final isVisible = activityNotifier.isActivityVisible(activity.name);
-      final isSameDay = activity.dateTime.year == _selectedDate.year &&
+      // Check if the activity itself happened on the selected date
+      final isActivityDay = activity.dateTime.year == _selectedDate.year &&
           activity.dateTime.month == _selectedDate.month &&
           activity.dateTime.day == _selectedDate.day;
-      
+
+      // Check if the reminder is scheduled for the selected date
+      final isReminderDay = activity.hasReminder &&
+          activity.reminderDateTime != null &&
+          activity.reminderDateTime!.year == _selectedDate.year &&
+          activity.reminderDateTime!.month == _selectedDate.month &&
+          activity.reminderDateTime!.day == _selectedDate.day;
+
+      // Pet filter (if you're showing activities for specific pet or all pets)
       final isSamePet = effectivePetId == null || activity.petId == effectivePetId;
 
-      return isSameDay && isSamePet;
+      // Show activity if:
+      // - it happened today OR
+      // - it has a reminder for today
+      // AND it belongs to the selected pet (or all pets)
+      return (isActivityDay || isReminderDay) && isSamePet;
     }).toList();
+
+    // final activities = activityNotifier.activities;
+    // final filteredActivities = activities.where((activity) {
+    //   // final isVisible = activityNotifier.isActivityVisible(activity.name);
+    //   return /*isVisible &&*/ activity.dateTime.year == _selectedDate.year &&
+    //       activity.dateTime.month == _selectedDate.month &&
+    //       activity.dateTime.day == _selectedDate.day;
+    // }).toList();
+    // final filteredActivities = activities.where((activity) {
+    //   final isActivityDay =
+    //       activity.dateTime.year == _selectedDate.year &&
+    //           activity.dateTime.month == _selectedDate.month &&
+    //           activity.dateTime.day == _selectedDate.day;
+    //
+    //   final isReminderDay = activity.hasReminder &&
+    //       activity.reminderDateTime != null &&
+    //       activity.reminderDateTime!.year == _selectedDate.year &&
+    //       activity.reminderDateTime!.month == _selectedDate.month &&
+    //       activity.reminderDateTime!.day == _selectedDate.day;
+    //
+    //   final isSamePet =
+    //       effectivePetId == null || activity.petId == effectivePetId;
+    //
+    //   return (isActivityDay || isReminderDay) && isSamePet;
+    // }).toList();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -303,7 +340,7 @@ class _CalendarviewState extends State<Calendarview> {
                 },
               ),
             ),
-
+   
             SizedBox(height: 16.h),
             if (_selectedTab == 0) ...[
               _buildSelectedPetHeader(),
@@ -498,13 +535,10 @@ class _CalendarviewState extends State<Calendarview> {
                             builder: (context, reminderNotifier, child) {
                               final count = reminderNotifier
                                   .getRemindersCountForDate(date, petId: effectivePetId);
-
                               if (count > 0) {
                                 return Positioned(
                                   top: -1.h,
-
                                   right: 0,
-
                                   child: Container(
                                     width: 22.w,
 
@@ -562,9 +596,10 @@ class _CalendarviewState extends State<Calendarview> {
       case 0: // Activities
 
         return _buildActivitiesList(filteredActivities);
-
       case 1:
         return AddReminderView(selectedPetId: effectivePetId);
+      // case 1:
+      //   return AddReminderView(selectedPetId: effectivePetId);
       case 2: // Progress
 
         return _buildProgressList(filteredActivities);
@@ -1751,6 +1786,8 @@ class _CalendarviewState extends State<Calendarview> {
     );
   }
 
+
+
   Widget _buildActivityCard(Activity activity, int index) {
     final String activityName = activity.name.toLowerCase();
 
@@ -2145,6 +2182,405 @@ class _CalendarviewState extends State<Calendarview> {
       ),
     );
   }
+
+
+
+
+
+  // Widget _buildActivityCard(Activity activity, int index) {
+  //   final String activityName = activity.name.toLowerCase();
+  //
+  //   final bool isDrink = activityName == 'drink';
+  //
+  //   final bool isEat = activityName == 'eat';
+  //   final bool isTreat = activityName == 'treat';
+  //   final bool isGrooming = activityName == 'grooming';
+  //   final bool isMedication = activityName == 'medication';
+  //   final bool isVaccination = activityName == 'vaccination';
+  //   final bool isWeight = activityName == 'weight';
+  //   final bool isHeight = activityName == 'height';
+  //   final bool isTemperature = activityName == 'temperature';
+  //   final bool isHealth = activityName == 'health condition';
+  //   final bool isAccident = activityName == 'accident';
+  //   final bool isJournal = activityName == 'journal';
+  //   final bool isCleaning = activityName == 'cleaning';
+  //
+  //   final bool isWalk = activityName == 'walk';
+  //   final bool isPlay = activityName == 'play';
+  //   final bool isCrate = activityName == 'crate';
+  //   final bool isTraining = activityName == 'training';
+  //   final bool isSleep = activityName == 'sleep';
+  //   final bool isTimerActivity =
+  //       isWalk || isPlay || isCrate || isTraining || isSleep;
+  //
+  //   final bool hasNote = activity.note != null && activity.note!.isNotEmpty;
+  //
+  //   String distanceText = '';
+  //   String durationText = '';
+  //   String displayName = activity.name;
+  //   if (isTimerActivity) {
+  //     if (isWalk && activity.food != null && activity.food!.isNotEmpty) {
+  //       distanceText = activity.food!;
+  //     }
+  //
+  //     durationText = activity.displayDuration;
+  //   } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
+  //     String food = activity.food!;
+  //     final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
+  //     final match = quantityRegex.firstMatch(food);
+  //
+  //     if (match != null) {
+  //       distanceText = match.group(1)?.trim() ?? '';
+  //       String namePart = match.group(2)?.trim() ?? '';
+  //       if (namePart.isNotEmpty) {
+  //         displayName = namePart;
+  //       }
+  //     } else {
+  //       // If no quantity pattern found, treat the whole string as the name
+  //       displayName = food;
+  //     }
+  //   }
+  //
+  //   return Dismissible(
+  //     key: Key(
+  //       'activity_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}',
+  //     ),
+  //
+  //     background: _buildSwipeBackground(isLeft: true),
+  //
+  //     secondaryBackground: _buildSwipeBackground(isLeft: false),
+  //
+  //     confirmDismiss: (direction) async {
+  //       if (direction == DismissDirection.endToStart) {
+  //         return await _showDeleteConfirmation(activity);
+  //       }
+  //
+  //       // _editActivity(activity);
+  //
+  //       return false;
+  //     },
+  //
+  //     child: Card(
+  //       margin: EdgeInsets.symmetric(vertical: 4.h),
+  //       elevation: 0,
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(12.r),
+  //       ),
+  //       color: const Color(0xFFF4F7F6),
+  //       child: Container(
+  //         padding: EdgeInsets.all(10.w),
+  //         child: Column(
+  //           children: [
+  //             Row(
+  //               crossAxisAlignment: CrossAxisAlignment.start,
+  //
+  //               children: [
+  //                 Padding(
+  //                   padding: const EdgeInsets.symmetric(vertical: 10),
+  //                   child: Stack(
+  //                     clipBehavior: Clip.none,
+  //                     children: [
+  //                       Container(
+  //                         width: 70.w,
+  //                         height: 70.h,
+  //                         decoration: BoxDecoration(
+  //                           shape: BoxShape.circle,
+  //
+  //                           color: Colors.white,
+  //
+  //                           boxShadow: [
+  //                             BoxShadow(
+  //                               color: Colors.black.withOpacity(0.1),
+  //                               blurRadius: 4,
+  //                               offset: const Offset(0, 2),
+  //                             ),
+  //                           ],
+  //                         ),
+  //
+  //                         child: Center(
+  //                           child: ClipOval(
+  //                             child: Image.asset(
+  //                               activity.imagePath,
+  //
+  //                               fit: BoxFit.cover,
+  //
+  //                               width: 54.w,
+  //
+  //                               height: 54.h,
+  //
+  //                               errorBuilder: (_, __, ___) => Icon(
+  //                                 Icons.pets,
+  //                                 color: activity.color,
+  //                                 size: 28.w,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       if (activity.hasReminder &&
+  //                           activity.reminderDateTime != null)
+  //                         Positioned(
+  //                           top: -2,
+  //                           right: -2,
+  //                           child: Container(
+  //                             width: 16.w,
+  //                             height: 16.h,
+  //                             decoration: BoxDecoration(
+  //                               color: Colors.orange,
+  //                               shape: BoxShape.circle,
+  //                               border: Border.all(
+  //                                 color: Colors.white,
+  //                                 width: 1.5,
+  //                               ),
+  //                             ),
+  //                             child: Center(
+  //                               child: Icon(
+  //                                 Icons.notifications,
+  //                                 size: 10.w,
+  //                                 color: Colors.white,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //
+  //                 SizedBox(width: 12.w),
+  //
+  //                 Expanded(
+  //                   child: Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //
+  //                     children: [
+  //                       Row(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                         children: [
+  //                           Expanded(
+  //                             child: Padding(
+  //                               padding: const EdgeInsets.symmetric(
+  //                                 vertical: 20,
+  //                               ),
+  //                               child: Column(
+  //                                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                                 children: [
+  //                                   if (isDrink && distanceText.isNotEmpty)
+  //                                     Column(
+  //                                       crossAxisAlignment:
+  //                                       CrossAxisAlignment.start,
+  //                                       children: [
+  //                                         Text(
+  //                                           activity.name,
+  //                                           style: TextStyle(
+  //                                             fontSize: 18.sp,
+  //                                             fontWeight: FontWeight.bold,
+  //                                           ),
+  //                                         ),
+  //                                         SizedBox(height: 4.h),
+  //                                         Text(
+  //                                           distanceText,
+  //                                           style: TextStyle(
+  //                                             fontSize: 14.sp,
+  //                                             fontWeight: FontWeight.bold,
+  //                                             color: const Color(0xFF7D7D7D),
+  //                                           ),
+  //                                         ),
+  //                                         SizedBox(height: 4.h),
+  //                                         Text(
+  //                                           displayName,
+  //                                           style: TextStyle(
+  //                                             fontSize: 14.sp,
+  //                                             fontWeight: FontWeight.bold,
+  //                                             color: const Color(0xFF7D7D7D),
+  //                                           ),
+  //                                         ),
+  //                                       ],
+  //                                     )
+  //                                   else ...[
+  //                                     Text(
+  //                                       displayName,
+  //                                       style: TextStyle(
+  //                                         fontSize: 18.sp,
+  //                                         fontWeight: FontWeight.bold,
+  //                                       ),
+  //                                     ),
+  //                                     SizedBox(height: 6.h),
+  //                                     if (isTimerActivity)
+  //                                       Row(
+  //                                         children: [
+  //                                           if (distanceText.isNotEmpty)
+  //                                             Row(
+  //                                               children: [
+  //                                                 Icon(
+  //                                                   Icons.directions_walk,
+  //                                                   size: 16.sp,
+  //                                                   color: const Color(
+  //                                                     0xFF7D7D7D,
+  //                                                   ),
+  //                                                 ),
+  //                                                 SizedBox(width: 4.w),
+  //                                                 Text(
+  //                                                   distanceText,
+  //                                                   style: TextStyle(
+  //                                                     fontSize: 14.sp,
+  //                                                     fontWeight:
+  //                                                     FontWeight.bold,
+  //                                                     color: const Color(
+  //                                                       0xFF7D7D7D,
+  //                                                     ),
+  //                                                   ),
+  //                                                 ),
+  //                                               ],
+  //                                             ),
+  //                                           SizedBox(width: 5.w),
+  //                                           if (durationText.isNotEmpty)
+  //                                             Text(
+  //                                               durationText,
+  //                                               style: TextStyle(
+  //                                                 fontSize: 14.sp,
+  //                                                 fontWeight: FontWeight.bold,
+  //                                                 color: const Color(
+  //                                                   0xFF7D7D7D,
+  //                                                 ),
+  //                                               ),
+  //                                             ),
+  //                                         ],
+  //                                       )
+  //                                     else if ((isEat ||
+  //                                         isTreat ||
+  //                                         isGrooming ||
+  //                                         isMedication ||
+  //                                         isVaccination ||
+  //                                         isWeight ||
+  //                                         isHeight ||
+  //                                         isTemperature ||
+  //                                         isHealth ||
+  //                                         isAccident ||
+  //                                         isJournal ||
+  //                                         isCleaning) &&
+  //                                         activity.food != null &&
+  //                                         activity.food!.isNotEmpty)
+  //                                       Text(
+  //                                         activity.food!,
+  //                                         style: TextStyle(
+  //                                           fontSize: 14.sp,
+  //                                           fontWeight: FontWeight.bold,
+  //                                           color: const Color(0xFF7D7D7D),
+  //                                         ),
+  //                                       ),
+  //                                   ],
+  //                                 ],
+  //                               ),
+  //                             ),
+  //                           ),
+  //
+  //                           Padding(
+  //                             padding: const EdgeInsets.symmetric(vertical: 20),
+  //
+  //                             child: Column(
+  //                               crossAxisAlignment: CrossAxisAlignment.end,
+  //
+  //                               children: [
+  //                                 Text(
+  //                                   DateFormat(
+  //                                     'MMM dd, yyyy',
+  //                                   ).format(activity.dateTime).toLowerCase(),
+  //
+  //                                   style: TextStyle(
+  //                                     fontSize: 12.sp,
+  //                                     color: Colors.grey[700],
+  //                                   ),
+  //                                 ),
+  //
+  //                                 SizedBox(height: 5.h),
+  //
+  //                                 Row(
+  //                                   mainAxisSize: MainAxisSize.min,
+  //
+  //                                   children: [
+  //                                     Icon(
+  //                                       Icons.access_time,
+  //                                       size: 16.w,
+  //                                       color: Colors.grey[600],
+  //                                     ),
+  //
+  //                                     SizedBox(width: 4.w),
+  //
+  //                                     Text(
+  //                                       DateFormat(
+  //                                         'hh:mm a',
+  //                                       ).format(activity.dateTime),
+  //
+  //                                       style: TextStyle(
+  //                                         fontSize: 17.sp,
+  //                                         color: Colors.grey[600],
+  //                                       ),
+  //                                     ),
+  //                                   ],
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //
+  //             const Divider(thickness: 1, height: 1, color: Color(0xFFCBE4DC)),
+  //
+  //             SizedBox(height: 2.h),
+  //
+  //             if (hasNote)
+  //               Padding(
+  //                 padding: EdgeInsets.only(top: 8.h),
+  //
+  //                 child: Row(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //
+  //                   children: [
+  //                     SizedBox(width: 8.w),
+  //
+  //                     Expanded(
+  //                       child: Row(
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //
+  //                         children: [
+  //                           Text(
+  //                             'Note:',
+  //                             style: TextStyle(
+  //                               fontSize: 16.sp,
+  //                               fontWeight: FontWeight.w600,
+  //                               color: Colors.grey[800],
+  //                             ),
+  //                           ),
+  //
+  //                           SizedBox(width: 5.w),
+  //
+  //                           Expanded(
+  //                             child: Text(
+  //                               activity.note!,
+  //                               style: TextStyle(
+  //                                 fontSize: 16.sp,
+  //                                 color: Colors.black87,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildSwipeBackground({required bool isLeft}) {
     return Container(

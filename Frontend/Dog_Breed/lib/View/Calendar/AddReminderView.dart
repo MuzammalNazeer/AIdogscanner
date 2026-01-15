@@ -150,9 +150,15 @@ class _AddReminderViewState extends State<AddReminderView> {
           return isSamePet;
         })
         .toList()
-      ..sort(
-        (a, b) => b.dateTime.compareTo(a.dateTime),
-      );
+      ..sort((a, b) {
+        final aTime = (a.hasReminder && a.reminderDateTime != null)
+            ? a.reminderDateTime!
+            : a.dateTime;
+        final bTime = (b.hasReminder && b.reminderDateTime != null)
+            ? b.reminderDateTime!
+            : b.dateTime;
+        return bTime.compareTo(aTime);
+      });
 
     final filteredReminders = allReminders
         .where((reminder) {
@@ -389,6 +395,7 @@ class _AddReminderViewState extends State<AddReminderView> {
     );
   }
 
+
   Widget _buildActivityCard(Activity activity) {
     final String activityName = activity.name.toLowerCase();
     final bool isDrink = activityName == 'drink';
@@ -424,7 +431,8 @@ class _AddReminderViewState extends State<AddReminderView> {
       durationText = activity.displayDuration;
     } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
       String food = activity.food!;
-      final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
+      final RegExp quantityRegex =
+          RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
       final match = quantityRegex.firstMatch(food);
 
       if (match != null) {
@@ -437,6 +445,13 @@ class _AddReminderViewState extends State<AddReminderView> {
         displayName = food;
       }
     }
+
+    final DateTime effectiveDateTime = (activity.hasReminder &&
+            activity.reminderDateTime != null)
+        ? activity.reminderDateTime!
+        : activity.dateTime;
+    final String dateLabel = DateFormat('EEE MMM d').format(effectiveDateTime);
+    final String timeLabel = DateFormat('h:mm a').format(effectiveDateTime);
 
     return Dismissible(
       key: Key(
@@ -527,277 +542,129 @@ class _AddReminderViewState extends State<AddReminderView> {
                           ),
                       ],
                     ),
-                    SizedBox(width: 10.w), // Reduced spacing
+                    SizedBox(width: 10.w),
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8), // Reduced vertical padding
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      if (isDrink && distanceText.isNotEmpty)
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  activity.name,
-                                                  style: TextStyle(
-                                                    fontSize: 16.sp, // Smaller font
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                SizedBox(width: 6.w),
-                                                // Reminder time if set
-                                                if (activity.hasReminder && activity.reminderDateTime != null)
-                                                  Container(
-                                                    padding: EdgeInsets.symmetric(
-                                                      horizontal: 5.w,
-                                                      vertical: 1.h,
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.orange.withOpacity(0.1),
-                                                      borderRadius: BorderRadius.circular(3.r),
-                                                      border: Border.all(
-                                                        color: Colors.orange.withOpacity(0.3),
-                                                        width: 0.5,
-                                                      ),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisSize: MainAxisSize.min,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.notifications,
-                                                          size: 10.w,
-                                                          color: Colors.orange,
-                                                        ),
-                                                        SizedBox(width: 3.w),
-                                                        Text(
-                                                          DateFormat('h:mm a').format(activity.reminderDateTime!),
-                                                          style: TextStyle(
-                                                            fontSize: 9.sp,
-                                                            color: Colors.orange,
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                            SizedBox(height: 3.h),
-                                            Text(
-                                              distanceText,
-                                              style: TextStyle(
-                                                fontSize: 13.sp, // Smaller font
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xFF7D7D7D),
-                                              ),
-                                            ),
-                                            SizedBox(height: 3.h),
-                                            Text(
-                                              displayName,
-                                              style: TextStyle(
-                                                fontSize: 13.sp, // Smaller font
-                                                fontWeight: FontWeight.bold,
-                                                color: const Color(0xFF7D7D7D),
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      else ...[
-                                        Text(
-                                          displayName,
-                                          style: TextStyle(
-                                            fontSize: 16.sp, // Smaller font
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        if ((isEat ||
-                                            isTreat ||
-                                            isGrooming ||
-                                            isMedication ||
-                                            isVaccination ||
-                                            isWeight ||
-                                            isHeight ||
-                                            isTemperature
-                                            || isHealth ||
-                                            isAccident ||
-                                            isJournal || isCleaning) &&
-                                            activity.food != null &&
-                                            activity.food!.isNotEmpty)
-                                          Text(
-                                            activity.food!,
-                                            style: TextStyle(
-                                              fontSize: 13.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF7D7D7D),
-                                            ),
-                                          ),
-                                      ],
-                                      SizedBox(height: 4.h), // Reduced spacing
-
-                                      if (isTimerActivity)
-                                        Row(
-                                          children: [
-                                            if (distanceText.isNotEmpty)
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.directions_walk,
-                                                    size: 14.sp, // Smaller icon
-                                                    color: const Color(0xFF7D7D7D),
-                                                  ),
-                                                  SizedBox(width: 3.w),
-                                                  Text(
-                                                    distanceText,
-                                                    style: TextStyle(
-                                                      fontSize: 13.sp, // Smaller font
-                                                      fontWeight: FontWeight.bold,
-                                                      color: const Color(0xFF7D7D7D),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            if (distanceText.isNotEmpty && durationText.isNotEmpty)
-                                              SizedBox(width: 4.w),
-                                            if (durationText.isNotEmpty)
-                                              Text(
-                                                durationText,
-                                                style: TextStyle(
-                                                  fontSize: 13.sp, // Smaller font
-                                                  fontWeight: FontWeight.bold,
-                                                  color: const Color(0xFF7D7D7D),
-                                                ),
-                                              ),
-                                          ],
-                                        )
-                                      else if (isEat && activity.food != null && activity.food!.isNotEmpty)
-                                        Text(
-                                          activity.food!,
-                                          style: TextStyle(
-                                            fontSize: 13.sp, // Smaller font
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xFF7D7D7D),
-                                          ),
-                                        ),
-                                    ],
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                displayName,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            SizedBox(width: 8.w),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                // Text(
+                                //   '$dateLabel $timeLabel',
+                                //   style: TextStyle(
+                                //     fontSize: 11.sp,
+                                //     color: Colors.grey[700],
+                                //   ),
+                                // ),
+                                Text(
+                                  DateFormat('EEE MMM d').format(activity.dateTime).toLowerCase(),
+                                  style: TextStyle(
+                                    fontSize: 13.5.sp,
+                                    color: const Color(0xFF555555),
+                                    height: 1.1,
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 4),
-                                child: IconButton(
-                                  onPressed: () => _showReminderOptions(activity),
-                                  icon: Icon(
-                                    activity.hasReminder
-                                        ? Icons.notifications_active
-                                        : Icons.notifications_none,
-                                    color: activity.hasReminder
-                                        ? Colors.orange
-                                        : Colors.grey[600],
-                                    size: 20.w, // Smaller icon
-                                  ),
+                                SizedBox(height: 4.h),
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      activity.hasReminder
+                                          ? Icons.notifications_active
+                                          : Icons.notifications_active,
+                                      size: 18.w,
+                                      color: activity.hasReminder
+                                          ? Colors.orange
+                                          : const Color(0xFF868686),
+                                    ),
+                                    SizedBox(width: 4.w),
+                                    Text(
+                                      timeLabel,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: activity.hasReminder
+                                            ? Colors.orange
+                                            : const Color(0xFF868686),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 8.h), // Reduced spacing
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 2),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        DateFormat('MMM dd, yyyy').format(activity.dateTime).toLowerCase(),
-                        style: TextStyle(
-                          fontSize: 11.sp, // Smaller font
-                          color: Colors.grey[700],
-                        ),
-                      ),
-                      SizedBox(height: 2.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(
-                            Icons.access_time,
-                            size: 14.w, // Smaller icon
-                            color: Colors.grey[600],
-                          ),
-                          SizedBox(width: 3.w),
-                          Text(
-                            DateFormat('hh:mm a').format(activity.dateTime),
-                            style: TextStyle(
-                              fontSize: 11.sp, // Smaller font
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                const Divider(
-                  thickness: 0.5, // Thinner divider
-                  height: 1,
-                  color: Color(0xFFCBE4DC),
-                ),
-                SizedBox(height: 2.h),
 
-                if (hasNote)
-                  Padding(
-                    padding: EdgeInsets.only(top: 8.h),
 
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-                        SizedBox(width: 8.w),
-
-                        Expanded(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-
-                            children: [
-                              Text(
-                                'Note:',
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey[800],
-                                ),
-                              ),
-
-                              SizedBox(width: 5.w),
-
-                              Expanded(
-                                child: Text(
-                                  activity.note!,
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                // SizedBox(height: 8.h),
+                // const Divider(
+                //   thickness: 0.5, // Thinner divider
+                //   height: 1,
+                //   color: Color(0xFFCBE4DC),
+                // ),
+                // SizedBox(height: 2.h),
+                //
+                // if (hasNote)
+                //   Padding(
+                //     padding: EdgeInsets.only(top: 8.h),
+                //
+                //     child: Row(
+                //       crossAxisAlignment: CrossAxisAlignment.start,
+                //
+                //       children: [
+                //         SizedBox(width: 8.w),
+                //
+                //         Expanded(
+                //           child: Row(
+                //             crossAxisAlignment: CrossAxisAlignment.start,
+                //
+                //             children: [
+                //               Text(
+                //                 'Note:',
+                //                 style: TextStyle(
+                //                   fontSize: 16.sp,
+                //                   fontWeight: FontWeight.w600,
+                //                   color: Colors.grey[800],
+                //                 ),
+                //               ),
+                //
+                //               SizedBox(width: 5.w),
+                //
+                //               Expanded(
+                //                 child: Text(
+                //                   activity.note!,
+                //                   style: TextStyle(
+                //                     fontSize: 16.sp,
+                //                     color: Colors.black87,
+                //                   ),
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ),
               ],
             ),
           ),
@@ -805,6 +672,427 @@ class _AddReminderViewState extends State<AddReminderView> {
       ),
     );
   }
+
+
+
+
+
+
+  // Widget _buildActivityCard(Activity activity) {
+  //   final String activityName = activity.name.toLowerCase();
+  //   final bool isDrink = activityName == 'drink';
+  //   final bool isEat = activityName == 'eat';
+  //   final bool isTreat = activityName == 'treat';
+  //   final bool isGrooming = activityName == 'grooming';
+  //   final bool isMedication = activityName == 'medication';
+  //   final bool isVaccination = activityName == 'vaccination';
+  //   final bool isWeight = activityName == 'weight';
+  //   final bool isHeight = activityName == 'height';
+  //   final bool isTemperature = activityName == 'temperature';
+  //   final bool isHealth = activityName == 'health condition';
+  //   final bool isAccident = activityName == 'accident';
+  //   final bool isJournal = activityName == 'journal';
+  //   final bool isCleaning = activityName == 'cleaning';
+  //   final bool isWalk = activityName == 'walk';
+  //   final bool isPlay = activityName == 'play';
+  //   final bool isCrate = activityName == 'crate';
+  //   final bool isTraining = activityName == 'training';
+  //   final bool isSleep = activityName == 'sleep';
+  //   final bool isTimerActivity = isWalk || isPlay || isCrate|| isTraining ||isSleep;
+  //   final bool hasNote = activity.note != null && activity.note!.isNotEmpty;
+  //
+  //   String distanceText = '';
+  //   String durationText = '';
+  //   String displayName = activity.name;
+  //
+  //   if (isTimerActivity) {
+  //     if (isWalk && activity.food != null && activity.food!.isNotEmpty) {
+  //       distanceText = activity.food!;
+  //     }
+  //
+  //     durationText = activity.displayDuration;
+  //   } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
+  //     String food = activity.food!;
+  //     final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
+  //     final match = quantityRegex.firstMatch(food);
+  //
+  //     if (match != null) {
+  //       distanceText = match.group(1)?.trim() ?? '';
+  //       String namePart = match.group(2)?.trim() ?? '';
+  //       if (namePart.isNotEmpty) {
+  //         displayName = namePart;
+  //       }
+  //     } else {
+  //       displayName = food;
+  //     }
+  //   }
+  //
+  //   return Dismissible(
+  //     key: Key(
+  //       'activity_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}',
+  //     ),
+  //     background: _buildSwipeBackground(isLeft: true),
+  //     secondaryBackground: _buildSwipeBackground(isLeft: false),
+  //     confirmDismiss: (direction) async {
+  //       if (direction == DismissDirection.endToStart) {
+  //         return await _showDeleteConfirmation(activity);
+  //       }
+  //       // _editActivity(activity);
+  //       return false;
+  //     },
+  //     child: Card(
+  //       margin: EdgeInsets.symmetric(vertical: 4.h),
+  //       elevation: 0,
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(10.r), // Slightly smaller border radius
+  //       ),
+  //       color: const Color(0xFFF4F7F6),
+  //       child: InkWell(
+  //         onTap: () => _showReminderOptions(activity),
+  //         child: Container(
+  //           padding: EdgeInsets.all(12.w), // Reduced padding
+  //           child: Column(
+  //             children: [
+  //               Row(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   // Activity Image with reminder badge
+  //                   Stack(
+  //                     children: [
+  //                       Container(
+  //                         width: 56.w, // Smaller image container
+  //                         height: 56.h,
+  //                         decoration: BoxDecoration(
+  //                           shape: BoxShape.circle,
+  //                           color: Colors.white,
+  //                           boxShadow: [
+  //                             BoxShadow(
+  //                               color: Colors.black.withOpacity(0.05), // Lighter shadow
+  //                               blurRadius: 3,
+  //                               offset: const Offset(0, 1),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                         child: Center(
+  //                           child: ClipOval(
+  //                             child: Image.asset(
+  //                               activity.imagePath,
+  //                               fit: BoxFit.cover,
+  //                               width: 44.w, // Smaller image
+  //                               height: 44.h,
+  //                               errorBuilder: (_, __, ___) => Icon(
+  //                                 Icons.pets,
+  //                                 color: activity.color,
+  //                                 size: 24.w, // Smaller icon
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       // Reminder indicator badge
+  //                       if (activity.hasReminder && activity.reminderDateTime != null)
+  //                         Positioned(
+  //                           top: 4,
+  //                           right: 0,
+  //                           child: Container(
+  //                             width: 16.w,
+  //                             height: 16.h,
+  //                             decoration: BoxDecoration(
+  //                               color: Colors.orange,
+  //                               shape: BoxShape.circle,
+  //                               border: Border.all(
+  //                                 color: Colors.white,
+  //                                 width: 1.5,
+  //                               ),
+  //                             ),
+  //                             child: Center(
+  //                               child: Icon(
+  //                                 Icons.notifications,
+  //                                 size: 8.w, // Smaller icon
+  //                                 color: Colors.white,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                     ],
+  //                   ),
+  //                   SizedBox(width: 10.w), // Reduced spacing
+  //                   Expanded(
+  //                     child: Column(
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: [
+  //                         Row(
+  //                           crossAxisAlignment: CrossAxisAlignment.start,
+  //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                           children: [
+  //                             Expanded(
+  //                               child: Padding(
+  //                                 padding: const EdgeInsets.symmetric(vertical: 8), // Reduced vertical padding
+  //                                 child: Column(
+  //                                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                                   children: [
+  //                                     if (isDrink && distanceText.isNotEmpty)
+  //                                       Column(
+  //                                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                                         children: [
+  //                                           Row(
+  //                                             children: [
+  //                                               Text(
+  //                                                 activity.name,
+  //                                                 style: TextStyle(
+  //                                                   fontSize: 16.sp, // Smaller font
+  //                                                   fontWeight: FontWeight.bold,
+  //                                                 ),
+  //                                               ),
+  //                                               SizedBox(width: 6.w),
+  //                                               // Reminder time if set
+  //                                               if (activity.hasReminder && activity.reminderDateTime != null)
+  //                                                 Container(
+  //                                                   padding: EdgeInsets.symmetric(
+  //                                                     horizontal: 5.w,
+  //                                                     vertical: 1.h,
+  //                                                   ),
+  //                                                   decoration: BoxDecoration(
+  //                                                     color: Colors.orange.withOpacity(0.1),
+  //                                                     borderRadius: BorderRadius.circular(3.r),
+  //                                                     border: Border.all(
+  //                                                       color: Colors.orange.withOpacity(0.3),
+  //                                                       width: 0.5,
+  //                                                     ),
+  //                                                   ),
+  //                                                   child: Row(
+  //                                                     mainAxisSize: MainAxisSize.min,
+  //                                                     children: [
+  //                                                       Icon(
+  //                                                         Icons.notifications,
+  //                                                         size: 10.w,
+  //                                                         color: Colors.orange,
+  //                                                       ),
+  //                                                       SizedBox(width: 3.w),
+  //                                                       Text(
+  //                                                         DateFormat('h:mm a').format(activity.reminderDateTime!),
+  //                                                         style: TextStyle(
+  //                                                           fontSize: 9.sp,
+  //                                                           color: Colors.orange,
+  //                                                           fontWeight: FontWeight.bold,
+  //                                                         ),
+  //                                                       ),
+  //                                                     ],
+  //                                                   ),
+  //                                                 ),
+  //                                             ],
+  //                                           ),
+  //                                           SizedBox(height: 3.h),
+  //                                           Text(
+  //                                             distanceText,
+  //                                             style: TextStyle(
+  //                                               fontSize: 13.sp, // Smaller font
+  //                                               fontWeight: FontWeight.bold,
+  //                                               color: const Color(0xFF7D7D7D),
+  //                                             ),
+  //                                           ),
+  //                                           SizedBox(height: 3.h),
+  //                                           Text(
+  //                                             displayName,
+  //                                             style: TextStyle(
+  //                                               fontSize: 13.sp, // Smaller font
+  //                                               fontWeight: FontWeight.bold,
+  //                                               color: const Color(0xFF7D7D7D),
+  //                                             ),
+  //                                           ),
+  //                                         ],
+  //                                       )
+  //                                     else ...[
+  //                                       Text(
+  //                                         displayName,
+  //                                         style: TextStyle(
+  //                                           fontSize: 16.sp, // Smaller font
+  //                                           fontWeight: FontWeight.bold,
+  //                                         ),
+  //                                       ),
+  //                                       if ((isEat ||
+  //                                           isTreat ||
+  //                                           isGrooming ||
+  //                                           isMedication ||
+  //                                           isVaccination ||
+  //                                           isWeight ||
+  //                                           isHeight ||
+  //                                           isTemperature
+  //                                           || isHealth ||
+  //                                           isAccident ||
+  //                                           isJournal || isCleaning) &&
+  //                                           activity.food != null &&
+  //                                           activity.food!.isNotEmpty)
+  //                                         Text(
+  //                                           activity.food!,
+  //                                           style: TextStyle(
+  //                                             fontSize: 13.sp,
+  //                                             fontWeight: FontWeight.bold,
+  //                                             color: const Color(0xFF7D7D7D),
+  //                                           ),
+  //                                         ),
+  //                                     ],
+  //                                     SizedBox(height: 4.h), // Reduced spacing
+  //                                     if (isTimerActivity)
+  //                                       Row(
+  //                                         children: [
+  //                                           if (distanceText.isNotEmpty)
+  //                                             Row(
+  //                                               children: [
+  //                                                 Icon(
+  //                                                   Icons.directions_walk,
+  //                                                   size: 14.sp, // Smaller icon
+  //                                                   color: const Color(0xFF7D7D7D),
+  //                                                 ),
+  //                                                 SizedBox(width: 3.w),
+  //                                                 Text(
+  //                                                   distanceText,
+  //                                                   style: TextStyle(
+  //                                                     fontSize: 13.sp, // Smaller font
+  //                                                     fontWeight: FontWeight.bold,
+  //                                                     color: const Color(0xFF7D7D7D),
+  //                                                   ),
+  //                                                 ),
+  //                                               ],
+  //                                             ),
+  //                                           if (distanceText.isNotEmpty && durationText.isNotEmpty)
+  //                                             SizedBox(width: 4.w),
+  //                                           if (durationText.isNotEmpty)
+  //                                             Text(
+  //                                               durationText,
+  //                                               style: TextStyle(
+  //                                                 fontSize: 13.sp, // Smaller font
+  //                                                 fontWeight: FontWeight.bold,
+  //                                                 color: const Color(0xFF7D7D7D),
+  //                                               ),
+  //                                             ),
+  //                                         ],
+  //                                       )
+  //                                     else if (isEat && activity.food != null && activity.food!.isNotEmpty)
+  //                                       Text(
+  //                                         activity.food!,
+  //                                         style: TextStyle(
+  //                                           fontSize: 13.sp, // Smaller font
+  //                                           fontWeight: FontWeight.bold,
+  //                                           color: const Color(0xFF7D7D7D),
+  //                                         ),
+  //                                       ),
+  //                                   ],
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                             Padding(
+  //                               padding: const EdgeInsets.only(top: 4),
+  //                               child: IconButton(
+  //                                 onPressed: () => _showReminderOptions(activity),
+  //                                 icon: Icon(
+  //                                   activity.hasReminder
+  //                                       ? Icons.notifications_active
+  //                                       : Icons.notifications_none,
+  //                                   color: activity.hasReminder
+  //                                       ? Colors.orange
+  //                                       : Colors.grey[600],
+  //                                   size: 20.w, // Smaller icon
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //               SizedBox(height: 8.h), // Reduced spacing
+  //               Padding(
+  //                 padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 2),
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.end,
+  //                   children: [
+  //                     Text(
+  //                       DateFormat('MMM dd, yyyy').format(activity.dateTime).toLowerCase(),
+  //                       style: TextStyle(
+  //                         fontSize: 11.sp, // Smaller font
+  //                         color: Colors.grey[700],
+  //                       ),
+  //                     ),
+  //                     SizedBox(height: 2.h),
+  //                     Row(
+  //                       mainAxisAlignment: MainAxisAlignment.end,
+  //                       children: [
+  //                         Icon(
+  //                           Icons.access_time,
+  //                           size: 14.w, // Smaller icon
+  //                           color: Colors.grey[600],
+  //                         ),
+  //                         SizedBox(width: 3.w),
+  //                         Text(
+  //                           DateFormat('hh:mm a').format(activity.dateTime),
+  //                           style: TextStyle(
+  //                             fontSize: 11.sp, // Smaller font
+  //                             color: Colors.grey[600],
+  //                           ),
+  //                         ),
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //               const Divider(
+  //                 thickness: 0.5, // Thinner divider
+  //                 height: 1,
+  //                 color: Color(0xFFCBE4DC),
+  //               ),
+  //               SizedBox(height: 2.h),
+  //
+  //               if (hasNote)
+  //                 Padding(
+  //                   padding: EdgeInsets.only(top: 8.h),
+  //
+  //                   child: Row(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //
+  //                     children: [
+  //                       SizedBox(width: 8.w),
+  //
+  //                       Expanded(
+  //                         child: Row(
+  //                           crossAxisAlignment: CrossAxisAlignment.start,
+  //
+  //                           children: [
+  //                             Text(
+  //                               'Note:',
+  //                               style: TextStyle(
+  //                                 fontSize: 16.sp,
+  //                                 fontWeight: FontWeight.w600,
+  //                                 color: Colors.grey[800],
+  //                               ),
+  //                             ),
+  //
+  //                             SizedBox(width: 5.w),
+  //
+  //                             Expanded(
+  //                               child: Text(
+  //                                 activity.note!,
+  //                                 style: TextStyle(
+  //                                   fontSize: 16.sp,
+  //                                   color: Colors.black87,
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
 
 
@@ -1488,6 +1776,9 @@ class _AddReminderViewState extends State<AddReminderView> {
     return days;
   }
 }
+
+
+
 
 //
 // import 'dart:io';
