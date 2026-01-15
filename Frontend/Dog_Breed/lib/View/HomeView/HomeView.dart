@@ -14,7 +14,9 @@ import '../Calendar/add_activities_View.dart';
 import '../MyPetsView/DogResultScreen.dart';
 
 class Homeview extends StatefulWidget {
-  const Homeview({super.key});
+  final void Function(String message)? onShowSnackBar;
+
+  const Homeview({super.key, this.onShowSnackBar});
 
   @override
   State<Homeview> createState() => _HomeviewState();
@@ -106,9 +108,9 @@ class _HomeviewState extends State<Homeview> {
               borderRadius: BorderRadius.circular(25.r),
             ),
             child: Container(
-              width: 57.w,
-              height: 57.h,
-              padding: EdgeInsets.all(6.w),
+              width: 52.w,
+              height: 66.h,
+              padding: EdgeInsets.all(8.w),
               decoration: BoxDecoration(
                 color: color,
                 borderRadius: BorderRadius.circular(12.r),
@@ -326,9 +328,6 @@ class _HomeviewState extends State<Homeview> {
         quickActionButton(
           image: SvgPicture.asset(
             'assets/images/Group77.svg',
-            width: 46.w,
-            height: 46.h,
-            fit: BoxFit.contain,
           ),
           label: 'Hygiene',
           color: const Color(0xFFEF5DA8),
@@ -338,9 +337,6 @@ class _HomeviewState extends State<Homeview> {
         quickActionButton(
           image: SvgPicture.asset(
             'assets/images/Group88.svg',
-            width: 52.w,
-            height: 66.h,
-            fit: BoxFit.contain,
           ),
           label: 'Cleaning',
           color: const Color(0xFFAEAFF7),
@@ -350,9 +346,6 @@ class _HomeviewState extends State<Homeview> {
         quickActionButton(
           image: SvgPicture.asset(
             'assets/images/medical.svg',
-            width: 52.w,
-            height: 56.h,
-            fit: BoxFit.contain,
           ),
           label: 'Medical',
           color: const Color(0xFFECEF8B),
@@ -362,9 +355,6 @@ class _HomeviewState extends State<Homeview> {
         quickActionButton(
           image: SvgPicture.asset(
             'assets/images/Group991.svg',
-            width: 52.w,
-            height: 66.h,
-            fit: BoxFit.contain,
           ),
           label: 'Booking',
           color: const Color(0xFFA0E3E2),
@@ -555,15 +545,19 @@ class _HomeviewState extends State<Homeview> {
                             (scanData['confidence']! * 100).toStringAsFixed(
                               1,
                             );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  '✅ Saved: ${scanData['formattedBreedName']} ($confidencePercent% confidence)',
+                            final message =
+                                '✅ Saved: ${scanData['formattedBreedName']} ($confidencePercent% confidence)';
+                            if (widget.onShowSnackBar != null) {
+                              widget.onShowSnackBar!(message);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(message),
+                                  duration: const Duration(seconds: 3),
+                                  backgroundColor: Colors.green,
                                 ),
-                                duration: const Duration(seconds: 3),
-                                backgroundColor: Colors.green,
-                              ),
-                            );
+                              );
+                            }
 
                             if (kDebugMode) {
                               print('💾 Scan saved via provider!');
@@ -584,12 +578,17 @@ class _HomeviewState extends State<Homeview> {
                         if (kDebugMode) {
                           print('❌ Error in scan flow: $e');
                         }
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Error: $e'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
+                        final message = 'Error: $e';
+                        if (widget.onShowSnackBar != null) {
+                          widget.onShowSnackBar!(message);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(message),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
                       }
                     },
                     child: Text(

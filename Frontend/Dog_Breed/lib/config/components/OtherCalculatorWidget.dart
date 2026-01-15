@@ -11,12 +11,14 @@ class Othercalculatorwidget extends StatefulWidget {
   final int initialTab;
   final String activityTitle;
   final int activityCount;
+  final String? selectedPetId;
 
   const Othercalculatorwidget({
     super.key,
     this.initialTab = 0,
     required this.activityTitle,
     required this.activityCount,
+    this.selectedPetId,
   });
 
   @override
@@ -173,7 +175,9 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
 
       // Use dynamic activity title for filtering
       final filteredActivities = allActivities.where((a) {
-        return a.name.toLowerCase().contains(widget.activityTitle.toLowerCase());
+        final matchesName = a.name.toLowerCase().contains(widget.activityTitle.toLowerCase());
+        final matchesPet = widget.selectedPetId == null || a.petId == widget.selectedPetId;
+        return matchesName && matchesPet;
       }).toList();
 
       final Map<int, Map<int, int>> heatmapData = {};

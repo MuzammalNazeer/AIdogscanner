@@ -6,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Shopview extends StatefulWidget {
-  const Shopview({super.key});
+  final void Function(String message)? onShowSnackBar;
+
+  const Shopview({super.key, this.onShowSnackBar});
 
   @override
   State<Shopview> createState() => _ShopviewState();

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Activitesview extends StatefulWidget {
-  const Activitesview({super.key});
+  final void Function(String message)? onShowSnackBar;
+
+  const Activitesview({super.key, this.onShowSnackBar});
 
   @override
   State<Activitesview> createState() => _ActivitesviewState();

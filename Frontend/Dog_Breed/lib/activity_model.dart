@@ -13,6 +13,7 @@ class Activity {
   final Duration? duration; // For walk activities
   final String? formattedDuration; // For walk activities: "1 hr 30 min"
   final String? walkDistance; // For walk: distance in km/mi
+  final String? petId; // Associated Pet ID
   bool hasReminder;
   DateTime? reminderDateTime;
   String? reminderId;
@@ -28,6 +29,7 @@ class Activity {
     this.duration,
     this.formattedDuration,
     this.walkDistance,
+    this.petId,
     this.hasReminder = false,
     this.reminderDateTime,
     this.reminderId,
@@ -53,6 +55,7 @@ class Activity {
       duration: duration,
       formattedDuration: json['formattedDuration'] as String?,
       walkDistance: json['walkDistance'] as String?,
+      petId: json['petId'] as String?,
       hasReminder: json['hasReminder'] as bool? ?? false,
       reminderDateTime: json['reminderDateTime'] != null
           ? DateTime.parse(json['reminderDateTime'] as String)
@@ -75,6 +78,7 @@ class Activity {
       'durationSeconds': duration?.inSeconds,
       'formattedDuration': formattedDuration,
       'walkDistance': walkDistance,
+      'petId': petId,
       'hasReminder': hasReminder,
       'reminderDateTime': reminderDateTime?.toIso8601String(),
       'reminderId': reminderId,
@@ -93,11 +97,24 @@ class Activity {
     if (duration != null) {
       final hours = duration!.inHours;
       final minutes = duration!.inMinutes.remainder(60);
-      if (hours > 0) {
-        return '$hours hr ${minutes > 0 ? '$minutes min' : ''}'.trim();
-      } else {
-        return '$minutes min';
+      final seconds = duration!.inSeconds.remainder(60);
+
+      if (hours == 0 && minutes == 0 && seconds == 0) {
+        return '';
       }
+
+      if (hours > 0) {
+        return '$hours hr '
+                '${minutes > 0 ? '$minutes min ' : ''}'
+                '${seconds > 0 ? '$seconds sec' : ''}'
+            .trim();
+      }
+
+      if (minutes > 0) {
+        return '$minutes min ${seconds > 0 ? '$seconds sec' : ''}'.trim();
+      }
+
+      return '$seconds sec';
     }
     return '';
   }

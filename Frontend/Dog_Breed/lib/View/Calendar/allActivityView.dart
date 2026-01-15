@@ -18,8 +18,14 @@ import '../../utils/routes/routes_name.dart';
 class Allactivityview extends StatefulWidget {
   final Activity? selectedActivity;
   final DateTime? initialDate;
+  final String? selectedPetId;
 
-  const Allactivityview({super.key, this.selectedActivity, this.initialDate});
+  const Allactivityview({
+    super.key,
+    this.selectedActivity,
+    this.initialDate,
+    this.selectedPetId,
+  });
 
   @override
   State<Allactivityview> createState() => _AllactivityviewState();
@@ -48,6 +54,15 @@ class _AllactivityviewState extends State<Allactivityview> {
 
   double _walkDistanceKm = 0.0;
   bool _isKmUnit = true;
+
+  double _weightValue = 1.0;
+  bool _isLbsUnit = true;
+
+  double _heightValue = 1.0;
+  bool _isInchesUnit = true;
+
+  double _temperatureValue = 100.0;
+  bool _isFahrenheitUnit = true;
 
   bool _hasReminder = false;
 
@@ -127,7 +142,6 @@ class _AllactivityviewState extends State<Allactivityview> {
     }
   }
 
-  // Activity date selection
   void _selectDate() async {
     final DateTime? picked = await showDialog<DateTime>(
       context: context,
@@ -352,6 +366,27 @@ class _AllactivityviewState extends State<Allactivityview> {
       if (_foodController.text.trim().isNotEmpty) {
         foodValue = '$foodValue ${_foodController.text.trim()}';
       }
+    } else if (activityName == 'weight') {
+      if (_weightValue <= 0) {
+        _showErrorSnackBar('Please enter a valid weight');
+        return;
+      }
+      foodValue =
+          '${_weightValue.toStringAsFixed(1)} ${_isLbsUnit ? 'lbs' : 'kg'}';
+    } else if (activityName == 'height') {
+      if (_heightValue <= 0) {
+        _showErrorSnackBar('Please enter a valid height');
+        return;
+      }
+      foodValue =
+          '${_heightValue.toStringAsFixed(1)} ${_isInchesUnit ? 'Inches' : 'cm'}';
+    } else if (activityName == 'temperature') {
+      if (_temperatureValue <= 0) {
+        _showErrorSnackBar('Please enter a valid temperature');
+        return;
+      }
+      foodValue =
+          '${_temperatureValue.toStringAsFixed(1)} ${_isFahrenheitUnit ? '°F' : '°C'}';
     } else if (['walk', 'play', 'crate'].contains(activityName)) {
       const double kmToMi = 0.621371;
       double amount = _isKmUnit ? _walkDistanceKm : _walkDistanceKm * kmToMi;
@@ -411,6 +446,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         hasReminder: _hasReminder,
         reminderDateTime: reminderDateTime,
         reminderId: _currentActivity?.reminderId,
+        petId: _currentActivity?.petId ?? widget.selectedPetId,
       );
 
       final activityNotifier = Provider.of<ActivityNotifier>(
@@ -925,13 +961,13 @@ class _AllactivityviewState extends State<Allactivityview> {
               Text(
                 'Name',
                 style: TextStyle(
-                  fontSize: 16.sp, 
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
                   color: Colors.black,
                 ),
               ),
               SizedBox(height: 8.h),
-              
+
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -953,7 +989,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 ),
               ),
               SizedBox(height: 24.h),
-              
+
               RoundButton(
                 title: 'save',
                 height: 53.h,
@@ -1166,49 +1202,6 @@ class _AllactivityviewState extends State<Allactivityview> {
 
 
 
-  void _deleteDrinkName() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        padding: EdgeInsets.all(24.w),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Delete Drink Name?',
-              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16.h),
-            RoundButton(
-              title: 'Delete',
-              isSelected: true,
-              backgroundColors: Colors.red,
-              textColors: Colors.white,
-              onPress: () {
-                setState(() {
-                  _foodController.clear();
-                });
-                Navigator.pop(context); // Close delete sheet
-              },
-            ),
-            SizedBox(height: 12.h),
-            RoundButton(
-              title: 'Cancel',
-              isSelected: true,
-              backgroundColors: Colors.grey.shade200,
-              textColors: Colors.black,
-              onPress: () => Navigator.pop(context),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _buildDrinkQuantitySelector() {
     // ... (keep existing drink selector code)
@@ -1367,6 +1360,387 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
   }
 
+  Widget _buildWeightSelector() {
+    const double lbsToKg = 0.45359237;
+    const double step = 0.1;
+
+    double displayValue = _weightValue;
+
+    void increment() {
+      setState(() {
+        if (displayValue < 999) {
+          _weightValue = (_weightValue + step);
+        }
+      });
+    }
+
+    void decrement() {
+      setState(() {
+        if (_weightValue > step) {
+          _weightValue = (_weightValue - step);
+        }
+      });
+    }
+
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(6.w),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF4F7F6),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
+                onPressed: decrement,
+              ),
+              Text(
+                displayValue.toStringAsFixed(1),
+                style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
+                onPressed: increment,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 12.h),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFF4F7F6),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (!_isLbsUnit) {
+                        _weightValue = _weightValue / lbsToKg;
+                        _isLbsUnit = true;
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    decoration: BoxDecoration(
+                      color: _isLbsUnit
+                          ? const Color(0xFF820DFF)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(12.r),
+                      ),
+                    ),
+                    child: Text(
+                      'lbs',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: _isLbsUnit ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (_isLbsUnit) {
+                        _weightValue = _weightValue * lbsToKg;
+                        _isLbsUnit = false;
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    decoration: BoxDecoration(
+                      color: !_isLbsUnit
+                          ? const Color(0xFF820DFF)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.horizontal(
+                        right: Radius.circular(12.r),
+                      ),
+                    ),
+                    child: Text(
+                      'kg',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: !_isLbsUnit ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildHeightSelector() {
+    const double inchToCm = 2.54;
+    const double step = 0.5;
+
+    double displayValue = _heightValue;
+
+    void increment() {
+      setState(() {
+        if (displayValue < 300) {
+          _heightValue = (_heightValue + step);
+        }
+      });
+    }
+
+    void decrement() {
+      setState(() {
+        if (_heightValue > step) {
+          _heightValue = (_heightValue - step);
+        }
+      });
+    }
+
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(6.w),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF4F7F6),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
+                onPressed: decrement,
+              ),
+              Text(
+                displayValue.toStringAsFixed(1),
+                style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
+                onPressed: increment,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 12.h),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFF4F7F6),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (!_isInchesUnit) {
+                        _heightValue = _heightValue / inchToCm;
+                        _isInchesUnit = true;
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    decoration: BoxDecoration(
+                      color: _isInchesUnit
+                          ? const Color(0xFF820DFF)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(12.r),
+                      ),
+                    ),
+                    child: Text(
+                      'Inches',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: _isInchesUnit ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (_isInchesUnit) {
+                        _heightValue = _heightValue * inchToCm;
+                        _isInchesUnit = false;
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    decoration: BoxDecoration(
+                      color: !_isInchesUnit
+                          ? const Color(0xFF820DFF)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.horizontal(
+                        right: Radius.circular(12.r),
+                      ),
+                    ),
+                    child: Text(
+                      'cm',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: !_isInchesUnit ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTemperatureSelector() {
+    const double step = 0.5;
+
+    double displayValue = _temperatureValue;
+
+    void increment() {
+      setState(() {
+        if (displayValue < 200) {
+          _temperatureValue = (_temperatureValue + step);
+        }
+      });
+    }
+
+    void decrement() {
+      setState(() {
+        if (_temperatureValue > step) {
+          _temperatureValue = (_temperatureValue - step);
+        }
+      });
+    }
+
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(6.w),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF4F7F6),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
+                onPressed: decrement,
+              ),
+              Text(
+                displayValue.toStringAsFixed(1),
+                style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
+                onPressed: increment,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 12.h),
+        Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFFF4F7F6),
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (!_isFahrenheitUnit) {
+                        _temperatureValue = (_temperatureValue * 9 / 5) + 32;
+                        _isFahrenheitUnit = true;
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    decoration: BoxDecoration(
+                      color: _isFahrenheitUnit
+                          ? const Color(0xFF820DFF)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(12.r),
+                      ),
+                    ),
+                    child: Text(
+                      '°F',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: _isFahrenheitUnit ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (_isFahrenheitUnit) {
+                        _temperatureValue =
+                            (_temperatureValue - 32) * 5 / 9;
+                        _isFahrenheitUnit = false;
+                      }
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    decoration: BoxDecoration(
+                      color: !_isFahrenheitUnit
+                          ? const Color(0xFF820DFF)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.horizontal(
+                        right: Radius.circular(12.r),
+                      ),
+                    ),
+                    child: Text(
+                      '°C',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: !_isFahrenheitUnit ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
 
   Widget _buildWalkDistanceSelector() {
     final String activityName = _currentActivity?.name.toLowerCase() ?? '';
@@ -1377,7 +1751,7 @@ class _AllactivityviewState extends State<Allactivityview> {
     double rawDisplayValue = _isKmUnit ? baseKm : baseKm * kmToMi;
     double step = 1.0;
     String displayText = _isKmUnit
-        ? '${rawDisplayValue.toStringAsFixed(1)}'
+        ? rawDisplayValue.toStringAsFixed(1)
         : '${rawDisplayValue.round()} ';
 
     return Column(
@@ -1716,6 +2090,9 @@ class _AllactivityviewState extends State<Allactivityview> {
   }
 
 
+
+
+
   String _getButtonTitle(String activityName) {
     switch (activityName) {
       case 'treat':
@@ -1726,6 +2103,12 @@ class _AllactivityviewState extends State<Allactivityview> {
         return "+ Add medication";
       case 'vaccination':
         return "+ Add vaccination";
+        case 'health condition':
+        return "+ Add health condition";
+        case 'accident':
+        return "+ Add accident type";
+        case 'cleaning':
+        return "+ Add Cleaning type";
       default:
         return "+ Add Food name or type";
     }
@@ -1804,9 +2187,15 @@ class _AllactivityviewState extends State<Allactivityview> {
 
               if (activityName == 'drink')
                 _buildDrinkQuantitySelector()
-              else if (['walk', 'play', 'crate','training'].contains(activityName))
+              else if (activityName == 'weight')
+                _buildWeightSelector()
+              else if (activityName == 'height')
+                _buildHeightSelector()
+              else if (activityName == 'temperature')
+                _buildTemperatureSelector()
+              else if (['walk', 'play', 'crate','training','sleep'].contains(activityName))
                 _buildWalkDistanceSelector()
-              else if (activityName != 'pee' && activityName != 'poop')
+              else if (activityName != 'pee' && activityName != 'poop' && activityName != 'journal')
                 if (_foodController.text.isNotEmpty)
                   RoundButton(
                     title: _foodController.text,
@@ -1820,7 +2209,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     onPress: _showFoodName1BottomSheet,
                   )
-                else
+              else
                   RoundButton(
                     title: _getButtonTitle(activityName),
                     isSelected: true,
@@ -1829,8 +2218,168 @@ class _AllactivityviewState extends State<Allactivityview> {
                     onPress: _showFoodNameBottomSheet,
                   ),
               SizedBox(height: 10.h),
-              // Activity Date & Time (for non-walk activities)
-              if (!['walk', 'play', 'crate','training'].contains(activityName)) ...[
+
+              if (['weight', 'height', 'temperature'].contains(activityName))
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 4.h),
+                      Text(
+                        'Started At',
+                        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(height: 8.h),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: _selectWalkStartDate,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w,
+                                  vertical: 14.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[50],
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      DateFormat('MM-dd-yyyy').format(_walkStartDate),
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Icon(Icons.calendar_today, color: Colors.grey),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 12.w),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: _selectWalkStartTime,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w,
+                                  vertical: 14.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[50],
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      DateFormat('HH:mm').format(
+                                        DateTime(
+                                          0,
+                                          0,
+                                          0,
+                                          _walkStartTime.hour,
+                                          _walkStartTime.minute,
+                                        ),
+                                      ),
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Icon(Icons.access_time, color: Colors.grey),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 16.h),
+                      Text(
+                        'Ended At',
+                        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(height: 8.h),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: _selectWalkEndDate,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w,
+                                  vertical: 14.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[50],
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      DateFormat('MM-dd-yyyy').format(_walkEndDate),
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Icon(Icons.calendar_today, color: Colors.grey),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 12.w),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: _selectWalkEndTime,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 16.w,
+                                  vertical: 14.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[50],
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      DateFormat('HH:mm').format(
+                                        DateTime(
+                                          0,
+                                          0,
+                                          0,
+                                          _walkEndTime.hour,
+                                          _walkEndTime.minute,
+                                        ),
+                                      ),
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Icon(Icons.access_time, color: Colors.grey),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ),
+              if (!['walk', 'play', 'crate','training','weight','height','temperature']
+                  .contains(activityName)) ...[
                 Text(
                   'Date',
                   style: TextStyle(

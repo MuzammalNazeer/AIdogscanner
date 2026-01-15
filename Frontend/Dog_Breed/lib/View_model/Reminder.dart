@@ -15,6 +15,7 @@ class Reminder {
   final String? note;
   final bool isCompleted;
   final DateTime? completedAt;
+  final String? petId;
 
 
   Reminder({
@@ -28,6 +29,7 @@ class Reminder {
     this.note,
     this.isCompleted = false,
     this.completedAt,
+    this.petId,
   }) : id = id ?? const Uuid().v4();
 
   // Get activity color based on type
@@ -100,6 +102,7 @@ class Reminder {
     String? note,
     bool? isCompleted,
     DateTime? completedAt,
+    String? petId,
   }) {
     return Reminder(
       id: id ?? this.id,
@@ -112,6 +115,7 @@ class Reminder {
       note: note ?? this.note,
       isCompleted: isCompleted ?? this.isCompleted,
       completedAt: completedAt ?? this.completedAt,
+      petId: petId ?? this.petId,
     );
   }
 
@@ -128,6 +132,7 @@ class Reminder {
       'note': note,
       'isCompleted': isCompleted,
       'completedAt': completedAt?.toIso8601String(),
+      'petId': petId,
     };
   }
 
@@ -146,6 +151,7 @@ class Reminder {
       completedAt: map['completedAt'] != null
           ? DateTime.parse(map['completedAt'])
           : null,
+      petId: map['petId'],
     );
   }
 

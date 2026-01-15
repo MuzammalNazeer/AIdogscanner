@@ -11,7 +11,9 @@ import '../../View_model/home/Pet.dart';
 import '../../utils/routes/routes_name.dart';
 
 class Mypetsview extends StatefulWidget {
-  const Mypetsview({super.key});
+  final void Function(String message)? onShowSnackBar;
+
+  const Mypetsview({super.key, this.onShowSnackBar});
 
   @override
   State<Mypetsview> createState() => _MypetsviewState();

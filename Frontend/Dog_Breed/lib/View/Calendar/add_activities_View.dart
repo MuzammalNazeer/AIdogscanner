@@ -10,11 +10,13 @@ import 'allActivityView.dart';
 class AddActivitiesView extends StatefulWidget {
   final String? initialActivityName;
   final DateTime? initialDate;
+  final String? selectedPetId;
 
   const AddActivitiesView({
     super.key,
     this.initialActivityName,
     this.initialDate,
+    this.selectedPetId,
   });
 
   @override
@@ -119,6 +121,7 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
                               builder: (context) => Allactivityview(
                                 selectedActivity: activity,
                                 initialDate: widget.initialDate,
+                                selectedPetId: widget.selectedPetId,
                               ),
                             ),
                           ).then((_) {

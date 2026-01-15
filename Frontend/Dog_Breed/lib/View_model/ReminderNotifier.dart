@@ -55,6 +55,10 @@ class ReminderNotifier with ChangeNotifier {
     required Activity activity,
     required DateTime reminderDateTime,
   }) async {
+    final prefs = await SharedPreferences.getInstance();
+    final notificationsEnabled =
+        prefs.getBool('notifications_enabled') ?? true;
+
     DateTime scheduledDate = reminderDateTime;
     final now = DateTime.now();
 
@@ -81,6 +85,7 @@ class ReminderNotifier with ChangeNotifier {
       'reminderDateTime': scheduledDate,
       'activityNote': activity.note,
       'scheduledTime': scheduledDate.toIso8601String(),
+      'petId': activity.petId,
     });
 
     // Create notification details
@@ -106,17 +111,19 @@ class ReminderNotifier with ChangeNotifier {
       throw Exception('Scheduled time ${tzTime} is before now ${tz.TZDateTime.now(tz.local)}');
     }
 
-    final notifId = reminderId.hashCode & 0x7fffffff;
+    if (notificationsEnabled) {
+      final notifId = reminderId.hashCode & 0x7fffffff;
 
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      notifId,
-      activity.name,
-      activity.note?.isNotEmpty == true ? activity.note! : 'Reminder',
-      tzTime,
-      details,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      payload: activity.name,
-    );
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        notifId,
+        activity.name,
+        activity.note?.isNotEmpty == true ? activity.note! : 'Reminder',
+        tzTime,
+        details,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        payload: activity.name,
+      );
+    }
 
     notifyListeners();
     await _saveReminders();
@@ -197,12 +204,14 @@ class ReminderNotifier with ChangeNotifier {
     }).toList();
   }
 
-  int getRemindersCountForDate(DateTime date) {
+  int getRemindersCountForDate(DateTime date, {String? petId}) {
     return _reminders.where((reminder) {
       final reminderTime = DateTime.parse(reminder['scheduledTime']);
-      return reminderTime.year == date.year &&
+      final isSameDay = reminderTime.year == date.year &&
           reminderTime.month == date.month &&
           reminderTime.day == date.day;
+      final isSamePet = petId == null || reminder['petId'] == petId;
+      return isSameDay && isSamePet;
     }).length;
   }
 

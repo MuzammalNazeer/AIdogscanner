@@ -13,7 +13,8 @@ import 'add_activities_View.dart';
 import 'allactivityview.dart';
 
 class AddReminderView extends StatefulWidget {
-  const AddReminderView({super.key});
+  final String? selectedPetId;
+  const AddReminderView({super.key, this.selectedPetId});
 
   @override
   State<AddReminderView> createState() => _AddReminderViewState();
@@ -138,44 +139,68 @@ class _AddReminderViewState extends State<AddReminderView> {
   Widget build(BuildContext context) {
     final activityNotifier = Provider.of<ActivityNotifier>(context);
     final activities = activityNotifier.activities;
+    final reminderNotifier = Provider.of<ReminderNotifier>(context);
+    final allReminders = reminderNotifier.reminders;
 
-    final filteredActivities = activities.where((activity) {
-      // final isVisible = activityNotifier.isActivityVisible(activity.name);
-      return /*isVisible &&*/ activity.dateTime.year == _selectedDate.year &&
-          activity.dateTime.month == _selectedDate.month &&
-          activity.dateTime.day == _selectedDate.day;
-    }).toList();
+    final filteredActivities = activities
+        .where((activity) {
+          final isSamePet = widget.selectedPetId == null ||
+              activity.petId == null ||
+              activity.petId == widget.selectedPetId;
+          return isSamePet;
+        })
+        .toList()
+      ..sort(
+        (a, b) => b.dateTime.compareTo(a.dateTime),
+      );
+
+    final filteredReminders = allReminders
+        .where((reminder) {
+          final petId = reminder['petId'];
+          final isSamePet = widget.selectedPetId == null ||
+              petId == null ||
+              petId == widget.selectedPetId;
+          return isSamePet;
+        })
+        .toList()
+      ..sort(
+        (a, b) => DateTime.parse(b['scheduledTime'])
+            .compareTo(DateTime.parse(a['scheduledTime'])),
+      );
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
-        child: Column(
-          children: [Expanded(child: _buildTabContent(filteredActivities))],
-        ),
+      body: Column(
+        children: [
+          Expanded(child: _buildTabContent(filteredActivities, filteredReminders)),
+        ],
       ),
     );
   }
 
-  Widget _buildTabContent(List<Activity> filteredActivities) {
+  Widget _buildTabContent(
+    List<Activity> filteredActivities,
+    List<Map<String, dynamic>> filteredReminders,
+  ) {
     switch (_selectedTab) {
       case 0:
-        return _buildActivitiesList(filteredActivities);
+        return _buildActivitiesList(filteredActivities, filteredReminders);
       default:
         return const Center(child: Text('Coming soon...'));
     }
   }
 
-  Widget _buildActivitiesList(List<Activity> activities) {
+  Widget _buildActivitiesList(
+    List<Activity> activities,
+    List<Map<String, dynamic>> reminders,
+  ) {
     final hasActivities = activities.isNotEmpty;
+    final hasReminders = reminders.isNotEmpty;
     final formattedDate = DateFormat('EEEE, MMMM d').format(_selectedDate);
-    final dateFormat = DateFormat('MMM dd, yyyy');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 16.h),
-        // Add Activity Header
         Container(
           height: 70.h,
           margin: EdgeInsets.symmetric(horizontal: 8.w),
@@ -195,8 +220,16 @@ class _AddReminderViewState extends State<AddReminderView> {
                     _buildHeaderIcon('assets/images/62.png'),
                     SizedBox(width: 8.w),
                     _buildHeaderIcon('assets/images/63.png'),
+                    SizedBox(width: 6.w),
+                    SizedBox(
+                        width: 40.w,
+                        height: 40.h,
+                        child: Image.asset('assets/images/a2.png')
+                    ),
                   ],
                 ),
+                SizedBox(width: 6.w),
+
                 GestureDetector(
                   onTap: () => _showAddActivitySheet(context),
                   child: const Text(
@@ -224,45 +257,135 @@ class _AddReminderViewState extends State<AddReminderView> {
             ),
           ),
         ),
-
         SizedBox(height: 24.h),
-
-        if (hasActivities)
-          Expanded(
-            child: ListView.builder(
-              itemCount: activities.length,
-              itemBuilder: (context, index) {
-                final activity = activities[index];
-                return _buildActivityCard(activity);
-              },
-            ),
-          )
-        else
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/images136.png',
-                    width: 100.w,
-                    height: 110.h,
+        Expanded(
+          child: ListView(
+            children: [
+              if (hasActivities)
+                ...activities.map(_buildActivityCard).toList()
+              else
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 40.h),
+                    Image.asset(
+                      'assets/images/images136.png',
+                      width: 100.w,
+                      height: 110.h,
+                    ),
+                    SizedBox(height: 20.h),
+                    const Text(
+                      'No Activity Logged',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      formattedDate,
+                      style:
+                          TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+              SizedBox(height: 24.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Text(
+                  'Reminders',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
                   ),
-                  SizedBox(height: 20.h),
-                  const Text(
-                    'No Activity Logged',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8.h),
-                  Text(
-                    formattedDate,
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                  ),
-                ],
+                ),
               ),
-            ),
+              SizedBox(height: 12.h),
+              if (hasReminders)
+                ...reminders.map(_buildReminderCard).toList()
+              else
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Text(
+                    'No reminders set for this day',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ),
+            ],
           ),
+        ),
       ],
+    );
+  }
+
+  Widget _buildReminderCard(Map<String, dynamic> reminder) {
+    final scheduledTime = DateTime.parse(reminder['scheduledTime']);
+    final title = reminder['activityName']?.toString() ?? 'Reminder';
+    final note = reminder['activityNote']?.toString();
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        color: const Color(0xFFF4F7F6),
+        child: Padding(
+          padding: EdgeInsets.all(12.w),
+          child: Row(
+            children: [
+              Container(
+                width: 40.w,
+                height: 40.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.orange.withOpacity(0.1),
+                ),
+                child: const Icon(
+                  Icons.notifications_active,
+                  color: Colors.orange,
+                ),
+              ),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      '${DateFormat('MMM dd, yyyy').format(scheduledTime)} • ${DateFormat('hh:mm a').format(scheduledTime)}',
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                    if (note != null && note.isNotEmpty) ...[
+                      SizedBox(height: 4.h),
+                      Text(
+                        note,
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -273,10 +396,20 @@ class _AddReminderViewState extends State<AddReminderView> {
     final bool isTreat = activityName == 'treat';
     final bool isGrooming = activityName == 'grooming';
     final bool isMedication = activityName == 'medication';
+    final bool isVaccination = activityName == 'vaccination';
+    final bool isWeight = activityName == 'weight';
+    final bool isHeight = activityName == 'height';
+    final bool isTemperature = activityName == 'temperature';
+    final bool isHealth = activityName == 'health condition';
+    final bool isAccident = activityName == 'accident';
+    final bool isJournal = activityName == 'journal';
+    final bool isCleaning = activityName == 'cleaning';
     final bool isWalk = activityName == 'walk';
     final bool isPlay = activityName == 'play';
     final bool isCrate = activityName == 'crate';
-    final bool isTimerActivity = isWalk || isPlay || isCrate;
+    final bool isTraining = activityName == 'training';
+    final bool isSleep = activityName == 'sleep';
+    final bool isTimerActivity = isWalk || isPlay || isCrate|| isTraining ||isSleep;
     final bool hasNote = activity.note != null && activity.note!.isNotEmpty;
 
     String distanceText = '';
@@ -288,16 +421,7 @@ class _AddReminderViewState extends State<AddReminderView> {
         distanceText = activity.food!;
       }
 
-      if (activity.formattedDuration != null &&
-          activity.formattedDuration!.isNotEmpty) {
-        durationText = activity.formattedDuration!;
-      } else if (activity.duration != null) {
-        final hours = activity.duration!.inHours;
-        final minutes = activity.duration!.inMinutes.remainder(60);
-        durationText = hours > 0
-            ? '$hours hr ${minutes > 0 ? '$minutes min' : ''}'.trim()
-            : '$minutes min';
-      }
+      durationText = activity.displayDuration;
     } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
       String food = activity.food!;
       final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
@@ -324,7 +448,7 @@ class _AddReminderViewState extends State<AddReminderView> {
         if (direction == DismissDirection.endToStart) {
           return await _showDeleteConfirmation(activity);
         }
-        _editActivity(activity);
+        // _editActivity(activity);
         return false;
       },
       child: Card(
@@ -498,9 +622,16 @@ class _AddReminderViewState extends State<AddReminderView> {
                                           ),
                                         ),
                                         if ((isEat ||
-                                                isTreat ||
-                                                isGrooming ||
-                                                isMedication) &&
+                                            isTreat ||
+                                            isGrooming ||
+                                            isMedication ||
+                                            isVaccination ||
+                                            isWeight ||
+                                            isHeight ||
+                                            isTemperature
+                                            || isHealth ||
+                                            isAccident ||
+                                            isJournal || isCleaning) &&
                                             activity.food != null &&
                                             activity.food!.isNotEmpty)
                                           Text(
@@ -1052,7 +1183,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                                   color: Colors.red,
                                 ),
                                 SizedBox(width: 8.w),
-                                Text(
+                                const Text(
                                   'Remove',
                                   style: TextStyle(
                                     color: Colors.red,
@@ -1078,8 +1209,14 @@ class _AddReminderViewState extends State<AddReminderView> {
                               selectedTime.minute,
                             );
 
-                            // Validation: Check if time is in the past
                             if (reminderDateTime.isBefore(DateTime.now())) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                      'Reminder time must be in the future'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
                               return;
                             }
 
@@ -1173,14 +1310,16 @@ class _AddReminderViewState extends State<AddReminderView> {
       // Update in activity provider
       activityNotifier.updateActivity(updatedActivity);
 
-      if (mounted) {}
-
-      // Refresh UI
       if (mounted) setState(() {});
     } catch (e) {
       debugPrint('Failed to set reminder: $e');
       if (mounted) {
-        // Optional: Show error to user if critical, or keep silent if desired
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to set reminder'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
   }
@@ -1209,23 +1348,13 @@ class _AddReminderViewState extends State<AddReminderView> {
 
       // Show success message
       if (!silent) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Reminder removed'),
-            backgroundColor: Colors.orange,
-          ),
-        );
+
       }
 
       // Refresh UI
       if (mounted) setState(() {});
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to remove reminder: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+
     }
   }
 
@@ -1291,20 +1420,23 @@ class _AddReminderViewState extends State<AddReminderView> {
   }
 
   // Edit activity function
-  void _editActivity(Activity activity) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Allactivityview(selectedActivity: activity),
-      ),
-    ).then((edited) {
-      if (edited == true) {
-        if (context.mounted) {
-          setState(() {});
-        }
-      }
-    });
-  }
+  // void _editActivity(Activity activity) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => Allactivityview(
+  //         selectedActivity: activity,
+  //         selectedPetId: widget.selectedPetId,
+  //       ),
+  //     ),
+  //   ).then((edited) {
+  //     if (edited == true) {
+  //       if (context.mounted) {
+  //         setState(() {});
+  //       }
+  //     }
+  //   });
+  // }
 
   Widget _buildHeaderIcon(String path) {
     return Container(
@@ -1330,6 +1462,7 @@ class _AddReminderViewState extends State<AddReminderView> {
         height: MediaQuery.of(context).size.height * 0.92,
         child: AddActivitiesView(
           initialDate: _selectedDate,
+          selectedPetId: widget.selectedPetId,
         ),
       ),
     );

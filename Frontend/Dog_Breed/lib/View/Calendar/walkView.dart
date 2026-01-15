@@ -25,23 +25,38 @@ class _WalkviewState extends State<Walkview> {
   Duration _duration = Duration.zero;
   bool _isRunning = false;
 
-  // Format duration to "X hr Y min" for display in card
+  // Format duration to include hours, minutes, and seconds for display in card
   String get _formattedDuration {
     final hours = _duration.inHours;
     final minutes = _duration.inMinutes.remainder(60);
+    final seconds = _duration.inSeconds.remainder(60);
+
+    if (hours == 0 && minutes == 0 && seconds == 0) {
+      return '';
+    }
 
     if (hours > 0) {
-      return '$hours hr ${minutes > 0 ? '$minutes min' : ''}'.trim();
-    } else {
-      return '$minutes min';
+      return '$hours hr '
+              '${minutes > 0 ? '$minutes min ' : ''}'
+              '${seconds > 0 ? '$seconds sec' : ''}'
+          .trim();
     }
+
+    if (minutes > 0) {
+      return '$minutes min ${seconds > 0 ? '$seconds sec' : ''}'.trim();
+    }
+
+    return '$seconds sec';
   }
 
-  // Format duration for the timer display (MM:SS)
+  // Format duration for the timer display (HH:MM:SS)
   String get _formattedTime {
-    final minutes = _duration.inMinutes.remainder(60).toString().padLeft(2, '0');
-    final seconds = _duration.inSeconds.remainder(60).toString().padLeft(2, '0');
-    return '$minutes:$seconds';
+    final hours = _duration.inHours.toString().padLeft(2, '0');
+    final minutes =
+        _duration.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final seconds =
+        _duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    return '$hours:$minutes:$seconds';
   }
 
   // Start or Pause timer
@@ -259,8 +274,8 @@ class _WalkviewState extends State<Walkview> {
                         children: [
                           // Background ticks
                           SizedBox(
-                            width: 260.w,
-                            height: 260.h,
+                            width: 360.w,
+                            height: 360.h,
                             child: CustomPaint(
                               painter: MinimalTickPainter(),
                             ),
@@ -268,8 +283,8 @@ class _WalkviewState extends State<Walkview> {
 
                           // Gray background ring
                           SizedBox(
-                            width: 240.w,
-                            height: 240.h,
+                            width: 340.w,
+                            height: 340.h,
                             child: const CircularProgressIndicator(
                               value: 1.0,
                               strokeWidth: 12,
@@ -281,8 +296,8 @@ class _WalkviewState extends State<Walkview> {
 
                           // Purple progress ring
                           SizedBox(
-                            width: 240.w,
-                            height: 240.h,
+                            width: 340.w,
+                            height: 340.h,
                             child: CircularProgressIndicator(
                               value:
                                   (_duration.inSeconds / 3600.0).clamp(0.0, 1.0),

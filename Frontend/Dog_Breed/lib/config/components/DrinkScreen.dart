@@ -10,8 +10,9 @@ import 'DrinkCalculatorWidget.dart';
 
 class DrinkScreen extends StatefulWidget {
   final int initialTab;
+  final String? selectedPetId;
 
-  const DrinkScreen({super.key, this.initialTab = 0});
+  const DrinkScreen({super.key, this.initialTab = 0, this.selectedPetId});
 
   @override
   State<DrinkScreen> createState() => _DrinkScreenState();
@@ -158,7 +159,9 @@ class _DrinkScreenState extends State<DrinkScreen> {
       final allActivities = activityNotifier.activities;
 
       final drinkActivities = allActivities.where((a) {
-        return a.name.toLowerCase().contains('drink');
+        final matchesName = a.name.toLowerCase().contains('drink');
+        final matchesPet = widget.selectedPetId == null || a.petId == widget.selectedPetId;
+        return matchesName && matchesPet;
       }).toList();
 
       final Map<int, Map<int, int>> heatmapData = {};

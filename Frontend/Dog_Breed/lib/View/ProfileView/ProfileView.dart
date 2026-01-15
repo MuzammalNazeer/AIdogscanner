@@ -7,7 +7,9 @@ import '../../config/components/FAQView.dart';
 import '../../utils/routes/routes_name.dart';
 
 class Profileview extends StatefulWidget {
-  const Profileview({super.key});
+  final void Function(String message)? onShowSnackBar;
+
+  const Profileview({super.key, this.onShowSnackBar});
 
   @override
   State<Profileview> createState() => _ProfileviewState();
@@ -39,67 +41,75 @@ class _ProfileviewState extends State<Profileview> {
                 ),
               ),
             ),
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+              child: Container(
+                height: 550.h,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF686868).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(18.r),
+                ),
+                child: ListView(
+                  children: [
+                      _buildSettingsTile(
+                        icon: Icons.person_outline,
+                        title: l10n.editProfile,
+                        onTap: () => Navigator.pushNamed(context, RoutesName.editProfile),
+                      ),
                     _buildSettingsTile(
-                      icon: Icons.person_outline,
-                      title: l10n.editProfile,
-                      onTap: () => Navigator.pushNamed(context, RoutesName.editProfile),
+                      icon: Icons.lock_outline,
+                      title: l10n.changePassword,
+                      onTap: () => Navigator.pushNamed(context, RoutesName.changePassword),
                     ),
-                  _buildSettingsTile(
-                    icon: Icons.lock_outline,
-                    title: l10n.changePassword,
-                    onTap: () => Navigator.pushNamed(context, RoutesName.changePassword),
-                  ),
-                  _buildSettingsTile(
-                    icon: Icons.notifications_outlined,
-                    title: l10n.notifications,
-                    onTap: () => Navigator.pushNamed(context, RoutesName.notification),
-                  ),
-                  _buildSettingsTile(
-                    icon: Icons.language,
-                    title: l10n.appLanguageTitle,
-                    onTap: () => Navigator.pushNamed(context, RoutesName.appLanguage),
-                  ),
-                  _buildSettingsTile(
-                    icon: Icons.diamond_outlined,
-                    title: l10n.premiumSubscription,
-                    onTap: () => Navigator.pushNamed(context, RoutesName.pro),
-                  ),
+                    _buildSettingsTile(
+                      icon: Icons.notifications_outlined,
+                      title: l10n.notifications,
+                      onTap: () => Navigator.pushNamed(context, RoutesName.notification),
+                    ),
+                    _buildSettingsTile(
+                      icon: Icons.language,
+                      title: l10n.appLanguageTitle,
+                      onTap: () => Navigator.pushNamed(context, RoutesName.appLanguage),
+                    ),
+                    _buildSettingsTile(
+                      icon: Icons.diamond_outlined,
+                      title: l10n.premiumSubscription,
+                      onTap: () => Navigator.pushNamed(context, RoutesName.pro),
+                    ),
 
-                  _buildSettingsTile(
-                    icon: Icons.help_outline,
-                    title: l10n.faq,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const FAQView(),
-                        ),
-                      );
-                    },
-                  ),
-                  _buildSettingsTile(
-                    icon: Icons.description_outlined,
-                    title: l10n.termsOfUse,
-                    onTap: () => Navigator.pushNamed(context, RoutesName.termsOfUse),
-                  ),
+                    _buildSettingsTile(
+                      icon: Icons.help_outline,
+                      title: l10n.faq,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FAQView(),
+                          ),
+                        );
+                      },
+                    ),
+                    _buildSettingsTile(
+                      icon: Icons.description_outlined,
+                      title: l10n.termsOfUse,
+                      onTap: () => Navigator.pushNamed(context, RoutesName.termsOfUse),
+                    ),
 
-                  _buildSettingsTile(
-                    icon: Icons.delete_outline,
-                    title: l10n.deleteOwnerProfile,
-                    isRed: true,
-                    onTap: () => _showDeleteConfirmationDialog(),
-                  ),
-                  _buildSettingsTile(
-                    icon: Icons.logout,
-                    title: l10n.logout,
-                    isRed: true,
-                    onTap: () => _showLogoutConfirmationDialog(),
-                  ),
-                ],
+                    _buildSettingsTile(
+                      icon: Icons.delete_outline,
+                      title: l10n.deleteOwnerProfile,
+                      isRed: true,
+                      onTap: () => _showDeleteConfirmationDialog(),
+                    ),
+                    _buildSettingsTile(
+                      icon: Icons.logout,
+                      title: l10n.logout,
+                      isRed: true,
+                      onTap: () => _showLogoutConfirmationDialog(),
+                      showDivider: false,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -113,11 +123,13 @@ class _ProfileviewState extends State<Profileview> {
     required String title,
     required VoidCallback onTap,
     bool isRed = false,
+    bool showDivider = true,
   }) {
     return Column(
       children: [
-        Container(
-          color: const Color(0xFF686868).withOpacity(0.1),
+
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 16.w,),
             leading: Icon(
@@ -138,13 +150,13 @@ class _ProfileviewState extends State<Profileview> {
             dense: true,
           ),
         ),
-        Divider(
-          color: Colors.grey.shade400,
-          height: 1.h,
-          thickness: 1.h,
-          indent: 0.w,
-          endIndent: 0.w,
-        ),
+        if (showDivider)
+          Divider(
+            color: const Color(0xFFE4E4E4),
+            height: 0,
+            thickness: 1,
+            indent: 0.w,
+          ),
       ],
     );
   }

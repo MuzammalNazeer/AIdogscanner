@@ -38,11 +38,10 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
     ];
   }
 
-
   Widget _buildAddPetFAB() {
     return SizedBox(
-      width: 70.w,
-      height: 70.h,
+      width: 87.w,
+      height: 87.h,
       child: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, RoutesName.addPet);
@@ -51,11 +50,11 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         elevation: 0,
         shape: const CircleBorder(),
         child: Container(
-          width: 65.w,
-          height: 65.h,
+          width: 73.w,
+          height: 73.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: const Color(0xFF820DFF),
+            color: Colors.white,
             boxShadow: [
               BoxShadow(
                 color: const Color(0x1919190D).withOpacity(0.15),
@@ -69,23 +68,31 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
               ),
             ],
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.add, color: Colors.white, size: 24.w),
-              SizedBox(height: 2.h),
-              Text(
-                'Add Pet',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'Sora',
-                  fontSize: 10.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                  height: 1.1,
+          child: Center(
+            child: Container(
+              width: 73.w,
+              height: 73.h,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFF820DFF),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.add,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      SizedBox(height: 2,),
+                      Text("Add Pet",style: TextStyle(fontSize:12,color: Colors.white),),
+                    ],
+                  ),
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -100,8 +107,8 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         onPressed: () {
           Navigator.pushNamed(context, RoutesName.addPet);
         },
-        child: const Icon(Icons.add, color: Colors.white),
         elevation: 4,
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }
@@ -186,14 +193,14 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
   Widget _buildBottomNavigationBar(HomeViewModel homeProvider) {
     final colors = Theme.of(context).colorScheme;
     return Container(
-      height: 70.h,
+      height: 82.h,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.background,
-            blurRadius: 10,
-            offset: const Offset(0, -2),
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 12,
+            offset: const Offset(0, -4),
           ),
         ],
       ),
@@ -201,7 +208,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         padding: EdgeInsets.only(bottom: 0.h),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+          backgroundColor: Colors.white,
           currentIndex: _getCurrentIndexForNavigationBar(homeProvider.selectedIndex),
           selectedFontSize: 12.sp,
           unselectedFontSize: 12.sp,
