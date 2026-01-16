@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +9,6 @@ import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/activity_provider.dart';
 import '../../activity_model.dart';
 import 'add_activities_View.dart';
-import 'allactivityview.dart';
 
 class AddReminderView extends StatefulWidget {
   final String? selectedPetId;
@@ -137,6 +135,8 @@ class _AddReminderViewState extends State<AddReminderView> {
 
   @override
   Widget build(BuildContext context) {
+
+    final now = DateTime.now();
     final activityNotifier = Provider.of<ActivityNotifier>(context);
     final activities = activityNotifier.activities;
     final reminderNotifier = Provider.of<ReminderNotifier>(context);
@@ -144,11 +144,17 @@ class _AddReminderViewState extends State<AddReminderView> {
 
     final filteredActivities = activities
         .where((activity) {
-          final isSamePet = widget.selectedPetId == null ||
-              activity.petId == null ||
-              activity.petId == widget.selectedPetId;
-          return isSamePet;
-        })
+      final isSamePet = widget.selectedPetId == null ||
+          activity.petId == null ||
+          activity.petId == widget.selectedPetId;
+
+      if (activity.hasReminder &&
+          activity.reminderDateTime != null &&
+          !activity.reminderDateTime!.isBefore(now)) {
+        return false;  // ← don't show in activities list
+      }
+      return isSamePet;
+    })
         .toList()
       ..sort((a, b) {
         final aTime = (a.hasReminder && a.reminderDateTime != null)
@@ -162,17 +168,61 @@ class _AddReminderViewState extends State<AddReminderView> {
 
     final filteredReminders = allReminders
         .where((reminder) {
-          final petId = reminder['petId'];
-          final isSamePet = widget.selectedPetId == null ||
-              petId == null ||
-              petId == widget.selectedPetId;
-          return isSamePet;
-        })
+      final petId = reminder['petId'];
+      final isSamePet = widget.selectedPetId == null ||
+          petId == null ||
+          petId == widget.selectedPetId;
+      final scheduled = DateTime.parse(reminder['scheduledTime']);
+      return isSamePet && scheduled.isAfter(now);
+      return isSamePet;
+    })
         .toList()
       ..sort(
-        (a, b) => DateTime.parse(b['scheduledTime'])
+            (a, b) => DateTime.parse(b['scheduledTime'])
             .compareTo(DateTime.parse(a['scheduledTime'])),
       );
+
+
+
+
+
+
+    // final activityNotifier = Provider.of<ActivityNotifier>(context);
+    // final activities = activityNotifier.activities;
+    // final reminderNotifier = Provider.of<ReminderNotifier>(context);
+    // final allReminders = reminderNotifier.reminders;
+    //
+    // final filteredActivities = activities
+    //     .where((activity) {
+    //       final isSamePet = widget.selectedPetId == null ||
+    //           activity.petId == null ||
+    //           activity.petId == widget.selectedPetId;
+    //       return isSamePet;
+    //     })
+    //     .toList()
+    //   ..sort((a, b) {
+    //     final aTime = (a.hasReminder && a.reminderDateTime != null)
+    //         ? a.reminderDateTime!
+    //         : a.dateTime;
+    //     final bTime = (b.hasReminder && b.reminderDateTime != null)
+    //         ? b.reminderDateTime!
+    //         : b.dateTime;
+    //     return bTime.compareTo(aTime);
+    //   });
+    //
+    // final filteredReminders = allReminders
+    //     .where((reminder) {
+    //       final petId = reminder['petId'];
+    //       final isSamePet = widget.selectedPetId == null ||
+    //           petId == null ||
+    //           petId == widget.selectedPetId;
+    //       return isSamePet;
+    //     })
+    //     .toList()
+    //   ..sort(
+    //     (a, b) => DateTime.parse(b['scheduledTime'])
+    //         .compareTo(DateTime.parse(a['scheduledTime'])),
+    //   );
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -280,16 +330,16 @@ class _AddReminderViewState extends State<AddReminderView> {
                       height: 110.h,
                     ),
                     SizedBox(height: 20.h),
-                    const Text(
+                    Text(
                       'No Activity Logged',
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20.sp, color: const Color(0xFF000000)),
                     ),
+
                     SizedBox(height: 8.h),
+
                     Text(
                       formattedDate,
-                      style:
-                          TextStyle(fontSize: 16, color: Colors.grey[600]),
+                      style:  TextStyle(fontSize: 12.sp, color: const Color(0xFF878787)),
                     ),
                   ],
                 ),
@@ -2785,3 +2835,7 @@ class _AddReminderViewState extends State<AddReminderView> {
 //
 //
 //
+ // }
+// //
+// //
+// //

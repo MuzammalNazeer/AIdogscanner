@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
+import ' PremiumBanner.dart';
 import '../../View_model/ScanProvider.dart';
 import '../Calendar/add_activities_View.dart';
 import '../MyPetsView/DogResultScreen.dart';
@@ -31,17 +32,23 @@ class _HomeviewState extends State<Homeview> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 24.w, right: 23.w, top: 18.h), // Fixed: Added .h and .w
+          padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 18.h), // Fixed: Added .h and .w
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
-              SizedBox(height: 17.h),
+              SizedBox(height: 12.h),
+              Transform.translate(
+                offset: Offset(0, -30.h),
+              ),
               _buildSearchBar(),
-              SizedBox(height: 15.h),
-              _buildPremiumBanner(),
-              SizedBox(height: 17.h),
-              _buildQuickActions(),
+              SizedBox(height: 18.h),
+              PremiumBanner(onGetIt: () =>{Navigator.pushNamed(context, RoutesName.pro, arguments: 'home')}),
+              SizedBox(height: 14.h),
+              Padding(
+                padding:  EdgeInsets.only(left: 8.w,right: 8.w),
+                child: _buildQuickActions(),
+              ),
               SizedBox(height: 6.h),
               _buildIdentifyDogCard(),
               SizedBox(height: 6.h),
@@ -123,14 +130,74 @@ class _HomeviewState extends State<Homeview> {
             label,
             style: TextStyle(
               fontSize: 16.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
+              // fontWeight: FontWeight.bold,
+              color: const Color(0xFF371B34),
             ),
           ),
         ],
       ),
     );
   }
+
+
+
+  // Widget _buildHeader() {
+  //   final colors = Theme.of(context).colorScheme;
+  //   return SizedBox(
+  //     height: 80.h,
+  //     child: Stack(
+  //       children: [
+  //         Row(
+  //           crossAxisAlignment: CrossAxisAlignment.center,
+  //           children: [
+  //             SvgPicture.asset(
+  //               "assets/images/Group2.svg",
+  //               width: 72.w,
+  //               height: 37.h,
+  //               fit: BoxFit.contain,
+  //             ),
+  //             const SizedBox(width: 5),
+  //             Text(
+  //               'Manager',
+  //               style: TextStyle(
+  //                 fontFamily: 'Sora',
+  //                 fontWeight: FontWeight.w400,
+  //                 fontStyle: FontStyle.normal,
+  //                 fontSize: 30.sp,
+  //                 height: 1.0,
+  //                 letterSpacing: 0.0,
+  //                 color: Theme.of(context).colorScheme.onSurface,
+  //               ),
+  //             ),
+  //             const Spacer(),
+  //           ],
+  //         ),
+  //
+  //         Positioned(
+  //           bottom: 5,
+  //           right: 10,
+  //           child: SizedBox(
+  //             height: 78.h,
+  //             width: 80.w,
+  //             child: Center(
+  //               child: Transform.rotate(
+  //                 angle: -81.51,
+  //                 child: SvgPicture.asset(
+  //                   "assets/images/Group099.svg",
+  //                   width: 92.w,
+  //                   height: 92.h,
+  //                   // color: const Color(0xFFE9ECE9),
+  //                   color: colors.surfaceContainerLow,
+  //                   fit: BoxFit.contain,
+  //                 ),
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildHeader() {
     return Stack(
@@ -165,7 +232,7 @@ class _HomeviewState extends State<Homeview> {
                     ),
                   ],
                 ),
-                SizedBox(height: 22.h),
+                SizedBox(height: 29.h),
                 RichText(
                   text: TextSpan(
                     style: TextStyle(
@@ -189,19 +256,22 @@ class _HomeviewState extends State<Homeview> {
                 ),
               ],
             ),
-            SizedBox(width: 38.w),
-            SizedBox(
-              height: 92.h,
-              width: 92.w,
-              child: Center(
-                child: Transform.rotate(
-                  angle: -80.11,
-                  child: Image.asset(
-                    'assets/images/Group88.png',
-                    width: 92.w,
-                    height: 92.h,
-                    color: const Color(0xFFF3F6F3),
-                    fit: BoxFit.contain,
+            SizedBox(width: 68.w),
+            Align(
+              alignment:Alignment.bottomRight,
+              child: SizedBox(
+                height: 92.h,
+                width: 92.w,
+                child: Center(
+                  child: Transform.rotate(
+                    angle: -80.11,
+                    child: Image.asset(
+                      'assets/images/Group88.png',
+                      width: 92.w,
+                      height: 92.h,
+                      color: const Color(0xFFF3F6F3),
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
@@ -327,6 +397,7 @@ class _HomeviewState extends State<Homeview> {
       children: [
         quickActionButton(
           image: SvgPicture.asset(
+            color: const Color(0xFF711544),
             'assets/images/Group77.svg',
           ),
           label: 'Hygiene',
@@ -336,6 +407,7 @@ class _HomeviewState extends State<Homeview> {
         SizedBox(width: 7.w),
         quickActionButton(
           image: SvgPicture.asset(
+            color: const Color(0xFF4B4B89),
             'assets/images/Group88.svg',
           ),
           label: 'Cleaning',
@@ -345,6 +417,7 @@ class _HomeviewState extends State<Homeview> {
         SizedBox(width: 7.w),
         quickActionButton(
           image: SvgPicture.asset(
+            color: const Color(0xFF938200),
             'assets/images/medical.svg',
           ),
           label: 'Medical',
@@ -354,6 +427,7 @@ class _HomeviewState extends State<Homeview> {
         SizedBox(width: 7.w),
         quickActionButton(
           image: SvgPicture.asset(
+            color: const Color(0xFF1C7372),
             'assets/images/Group991.svg',
           ),
           label: 'Booking',

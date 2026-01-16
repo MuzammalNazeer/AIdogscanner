@@ -91,10 +91,10 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                     if (_selectedTab == 0) ...[
                       _buildInfoSection(),
                       SizedBox(height: 10.h),
-                      _buildCompareDropdown(),
-                      SizedBox(height: 10.h),
-                      _buildDateRangeSelector(),
-                      SizedBox(height: 16.h),
+                      // _buildCompareDropdown(),
+                      // SizedBox(height: 10.h),
+                      // _buildDateRangeSelector(),
+                      // SizedBox(height: 16.h),
                     ],
                     _buildTabContent(),
                   ],
@@ -495,39 +495,39 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
 
     return Column(
       children: [
-        GestureDetector(
-          onTap: () {
-            if (kDebugMode) print('Edit date range tapped');
-          },
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16.w),
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-            decoration: BoxDecoration(
-              color: const Color(0xFF820DFF),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.calendar_today, color: Colors.white, size: 22),
-                    SizedBox(width: 12.w),
-                    Text(
-                      dateRangeText,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                const Icon(Icons.edit, color: Colors.white, size: 22),
-              ],
-            ),
-          ),
-        ),
+        // GestureDetector(
+        //   onTap: () {
+        //     if (kDebugMode) print('Edit date range tapped');
+        //   },
+        //   child: Container(
+        //     margin: EdgeInsets.symmetric(horizontal: 16.w),
+        //     padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+        //     decoration: BoxDecoration(
+        //       color: const Color(0xFF820DFF),
+        //       borderRadius: BorderRadius.circular(12.r),
+        //     ),
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: [
+        //         Row(
+        //           children: [
+        //             const Icon(Icons.calendar_today, color: Colors.white, size: 22),
+        //             SizedBox(width: 12.w),
+        //             Text(
+        //               dateRangeText,
+        //               style: TextStyle(
+        //                 color: Colors.white,
+        //                 fontSize: 16.sp,
+        //                 fontWeight: FontWeight.w600,
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //         const Icon(Icons.edit, color: Colors.white, size: 22),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         SizedBox(height: 32.h),
         _buildLineChartCard(
           title: 'Amount in mL',
@@ -752,74 +752,74 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
     );
   }
 
-  Widget _buildCompareDropdown() {
-    return GestureDetector(
-      onTap: () {
-        if (kDebugMode) print('Compare With Similar Activities');
-      },
-      child: Container(
-        height: 66.h,
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-        decoration: BoxDecoration(
-          color: const Color(0xFF6A00FF),
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Compare With Similar Activities',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 16.sp,
-              ),
-            ),
-            const Icon(Icons.keyboard_arrow_down, color: Colors.white),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDateRangeSelector() {
-    final now = DateTime.now();
-    final lastWeek = now.subtract(const Duration(days: 7));
-
-    return GestureDetector(
-      onTap: () {
-        if (kDebugMode) print('Edit date range');
-      },
-      child: Container(
-        height: 66.h,
-        padding: EdgeInsets.all(12.w),
-        decoration: BoxDecoration(
-          color: const Color(0xFF6A00FF),
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.calendar_today, color: Colors.white),
-                SizedBox(width: 10.w),
-                Text(
-                  '${DateFormat('MMMM d, y').format(lastWeek)} - ${DateFormat('MMMM d, y').format(now)}',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14.sp,
-                  ),
-                ),
-              ],
-            ),
-            const Icon(Icons.edit, color: Colors.white),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _buildCompareDropdown() {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       if (kDebugMode) print('Compare With Similar Activities');
+  //     },
+  //     child: Container(
+  //       height: 66.h,
+  //       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+  //       decoration: BoxDecoration(
+  //         color: const Color(0xFF6A00FF),
+  //         borderRadius: BorderRadius.circular(8.r),
+  //       ),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Text(
+  //             'Compare With Similar Activities',
+  //             style: TextStyle(
+  //               color: Colors.white,
+  //               fontWeight: FontWeight.w500,
+  //               fontSize: 16.sp,
+  //             ),
+  //           ),
+  //           const Icon(Icons.keyboard_arrow_down, color: Colors.white),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+  //
+  // Widget _buildDateRangeSelector() {
+  //   final now = DateTime.now();
+  //   final lastWeek = now.subtract(const Duration(days: 7));
+  //
+  //   return GestureDetector(
+  //     onTap: () {
+  //       if (kDebugMode) print('Edit date range');
+  //     },
+  //     child: Container(
+  //       height: 66.h,
+  //       padding: EdgeInsets.all(12.w),
+  //       decoration: BoxDecoration(
+  //         color: const Color(0xFF6A00FF),
+  //         borderRadius: BorderRadius.circular(12.r),
+  //       ),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Row(
+  //             children: [
+  //               const Icon(Icons.calendar_today, color: Colors.white),
+  //               SizedBox(width: 10.w),
+  //               Text(
+  //                 '${DateFormat('MMMM d, y').format(lastWeek)} - ${DateFormat('MMMM d, y').format(now)}',
+  //                 style: TextStyle(
+  //                   color: Colors.white,
+  //                   fontWeight: FontWeight.w600,
+  //                   fontSize: 14.sp,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           const Icon(Icons.edit, color: Colors.white),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 

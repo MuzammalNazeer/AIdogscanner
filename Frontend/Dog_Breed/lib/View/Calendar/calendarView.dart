@@ -16,12 +16,7 @@ import '../../activity_model.dart';
 import '../../config/components/DocumentsScreen.dart';
 import '../../config/components/DrinkScreen.dart';
 import '../../config/components/OtherCalculatorWidget.dart';
-import '../../utils/routes/routes_name.dart';
-
 import 'add_activities_View.dart';
-
-import 'allactivityview.dart';
-
 class Calendarview extends StatefulWidget {
   final void Function(String message)? onShowSnackBar;
 
@@ -198,7 +193,7 @@ class _CalendarviewState extends State<Calendarview> {
     final double targetOffset =
         selectedIndex * itemWidth - (viewportWidth - itemWidth) / 2;
     final double maxScrollExtent = _scrollController!.position.maxScrollExtent;
-    final double offset = targetOffset.clamp(0.0, maxScrollExtent) as double;
+    final double offset = targetOffset.clamp(0.0, maxScrollExtent);
     _scrollController!.animateTo(
       offset,
       duration: const Duration(milliseconds: 400),
@@ -340,7 +335,7 @@ class _CalendarviewState extends State<Calendarview> {
                 },
               ),
             ),
-   
+
             SizedBox(height: 16.h),
             if (_selectedTab == 0) ...[
               _buildSelectedPetHeader(),
@@ -1408,55 +1403,166 @@ class _CalendarviewState extends State<Calendarview> {
     );
   }
 
+  // void _showPetPicker(PetProvider petProvider) {
+  //   if (!petProvider.hasPets) return;
+  //
+  //   showModalBottomSheet(
+  //     context: context,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+  //     ),
+  //     builder: (context) {
+  //       return SizedBox(
+  //         height: 300.h,
+  //         child: ListView.separated(
+  //           itemCount: petProvider.pets.length,
+  //           separatorBuilder: (_, __) => Divider(height: 1.h),
+  //           itemBuilder: (context, index) {
+  //             final pet = petProvider.pets[index];
+  //             return ListTile(
+  //               leading: Container(
+  //                 width: 40.w,
+  //                 height: 40.h,
+  //                 decoration: BoxDecoration(
+  //                   shape: BoxShape.circle,
+  //                   border: Border.all(
+  //                     color: const Color(0xFF820DFF),
+  //                     width: 2,
+  //                   ),
+  //                 ),
+  //                 child: ClipOval(
+  //                   child: pet.imageBytes != null
+  //                       ? Image.memory(
+  //                           pet.imageBytes!,
+  //                           fit: BoxFit.cover,
+  //                         )
+  //                       : Image.asset(
+  //                           'assets/images/a2.png',
+  //                           fit: BoxFit.cover,
+  //                         ),
+  //                 ),
+  //               ),
+  //               title: Text(pet.name),
+  //               subtitle: Text(pet.breed),
+  //               onTap: () {
+  //                 setState(() {
+  //                   _selectedPetId = pet.id;
+  //                 });
+  //                 Navigator.pop(context);
+  //               },
+  //             );
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
   void _showPetPicker(PetProvider petProvider) {
     if (!petProvider.hasPets) return;
 
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
       ),
       builder: (context) {
+        final currentSelectedId =
+            _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
+
         return SizedBox(
-          height: 300.h,
-          child: ListView.separated(
-            itemCount: petProvider.pets.length,
-            separatorBuilder: (_, __) => Divider(height: 1.h),
-            itemBuilder: (context, index) {
-              final pet = petProvider.pets[index];
-              return ListTile(
-                leading: Container(
-                  width: 40.w,
-                  height: 40.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: const Color(0xFF820DFF),
-                      width: 2,
-                    ),
-                  ),
-                  child: ClipOval(
-                    child: pet.imageBytes != null
-                        ? Image.memory(
-                            pet.imageBytes!,
-                            fit: BoxFit.cover,
-                          )
-                        : Image.asset(
-                            'assets/images/a2.png',
-                            fit: BoxFit.cover,
-                          ),
-                  ),
+          height: 320.h,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 8.h),
+              Container(
+                width: 40.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(20.r),
                 ),
-                title: Text(pet.name),
-                subtitle: Text(pet.breed),
-                onTap: () {
-                  setState(() {
-                    _selectedPetId = pet.id;
-                  });
-                  Navigator.pop(context);
-                },
-              );
-            },
+              ),
+              SizedBox(height: 12.h),
+              Text(
+                'Select Pet',
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 12.h),
+              Expanded(
+                child: ListView.separated(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  itemCount: petProvider.pets.length,
+                  separatorBuilder: (_, __) => SizedBox(height: 8.h),
+                  itemBuilder: (context, index) {
+                    final pet = petProvider.pets[index];
+                    final bool isSelected = pet.id == currentSelectedId;
+
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedPetId = pet.id;
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? const Color(0xFF820DFF)
+                              : const Color(0xFFF4F7F6),
+                          borderRadius: BorderRadius.circular(18.r),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 44.w,
+                              height: 44.h,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: isSelected
+                                      ? Colors.grey.shade200
+                                      : const Color(0xFF820DFF),
+                                  width: 2,
+                                ),
+                              ),
+                              child: ClipOval(
+                                child: pet.imageBytes != null
+                                    ? Image.memory(
+                                        pet.imageBytes!,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : Image.asset(
+                                        'assets/images/a2.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
+                            ),
+                            SizedBox(width: 12.w),
+                            Expanded(
+                              child: Text(
+                                pet.name,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: isSelected ? Colors.white : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         );
       },
@@ -1563,16 +1669,16 @@ class _CalendarviewState extends State<Calendarview> {
 
                   SizedBox(height: 20.h),
 
-                  const Text(
+                  Text(
                     'No Activity Logged',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20.sp, color: const Color(0xFF000000)),
                   ),
 
                   SizedBox(height: 8.h),
 
                   Text(
                     formattedDate,
-                    style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                    style:  TextStyle(fontSize: 12.sp, color: Color(0xFF878787)),
                   ),
                 ],
               ),
@@ -1846,21 +1952,28 @@ class _CalendarviewState extends State<Calendarview> {
       key: Key(
         'activity_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}',
       ),
-
       background: _buildSwipeBackground(isLeft: true),
-
       secondaryBackground: _buildSwipeBackground(isLeft: false),
-
       confirmDismiss: (direction) async {
         if (direction == DismissDirection.endToStart) {
           return await _showDeleteConfirmation(activity);
         }
-
-        // _editActivity(activity);
-
         return false;
       },
+      onDismissed: (direction) {
+        if (direction == DismissDirection.endToStart) {
+          final activityNotifier =
+              Provider.of<ActivityNotifier>(context, listen: false);
+          final reminderNotifier =
+              Provider.of<ReminderNotifier>(context, listen: false);
 
+          if (activity.reminderId != null) {
+            reminderNotifier.cancelReminder(activity.reminderId!);
+          }
+
+          activityNotifier.deleteActivity(activity);
+        }
+      },
       child: Card(
         margin: EdgeInsets.symmetric(vertical: 4.h),
         elevation: 0,
