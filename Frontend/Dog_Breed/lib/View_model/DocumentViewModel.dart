@@ -163,7 +163,7 @@ class DocumentViewModel extends ChangeNotifier {
   }
 
   // Pick and upload file
-  Future<void> pickAndUploadFile(BuildContext context) async {
+  Future<void> pickAndUploadFile(BuildContext context, {String? petId}) async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
@@ -202,6 +202,7 @@ class DocumentViewModel extends ChangeNotifier {
           final newDocument = document.copyWith(
             id: DateTime.now().millisecondsSinceEpoch.toString(),
             filePath: filePath ?? '',
+            petId: petId,
           );
 
           _documents.insert(0, newDocument);

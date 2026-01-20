@@ -17,7 +17,7 @@ class Cameraview extends StatefulWidget {
 class _CameraviewState extends State<Cameraview> with WidgetsBindingObserver {
   CameraController? _controller;
   late Future<void> _initializeControllerFuture;
-  bool _isRearCamera = true;
+  final bool _isRearCamera = true;
   bool _isFlashOn = false;
 
   @override

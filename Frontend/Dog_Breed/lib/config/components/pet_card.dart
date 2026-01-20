@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/cupertino.dart';
@@ -200,6 +201,12 @@ class PetCard extends StatelessWidget {
           fit: BoxFit.cover,
           errorBuilder: (_, __, ___) => _errorImage(),
         );
+      } else if (File(imageUrl!).existsSync()) {
+         return Image.file(
+           File(imageUrl!),
+           fit: BoxFit.cover,
+           errorBuilder: (_, __, ___) => _errorImage(),
+         );
       } else {
         return Image.asset(
           imageUrl!,

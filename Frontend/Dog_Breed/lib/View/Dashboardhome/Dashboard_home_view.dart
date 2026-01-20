@@ -6,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/View_model/home/home_view_model.dart';
+import 'package:dog_breed/View_model/PetProvider.dart';
+import 'package:dog_breed/config/components/roundButton.dart';
 
+import 'package:dog_breed/View/MyPetsView/addPetView.dart';
 import '../Calendar/calendarView.dart';
 import '../ProfileView/ProfileView.dart';
 
@@ -30,6 +33,118 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
       const Profileview(),
     ];
   }
+  void _showAddActivity1Sheet(BuildContext context) {
+    final petProvider = Provider.of<PetProvider>(context, listen: false);
+    final effectivePetId = _selectedPetId ??
+        (petProvider.hasPets ? petProvider.pets.first.id : null);
+
+    // ──────────────────────────────────────────────────────────────
+    // If no pets exist → show nice "Add Pet" overlay/bottom sheet
+    // ──────────────────────────────────────────────────────────────
+    if (!petProvider.hasPets) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (context) => Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(vertical: 32.h, horizontal: 24.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(28.r)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.12),
+                  blurRadius: 20,
+                  spreadRadius: 4,
+                  offset: const Offset(0, -4),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Optional cute icon or illustration
+                Icon(
+                  Icons.pets_rounded,
+                  size: 64.sp,
+                  color: AppColors.vibrantPurple.withOpacity(0.7),
+                ),
+                SizedBox(height: 16.h),
+
+                Text(
+                  'No Pets Yet!',
+                  style: TextStyle(
+                    fontSize: 22.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+                SizedBox(height: 12.h),
+
+                Text(
+                  'Add at least one pet to start logging activities\nand setting reminders.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    color: Colors.grey[700],
+                    height: 1.4,
+                  ),
+                ),
+                SizedBox(height: 32.h),
+
+                // Primary action: Add Pet
+                RoundButton(
+                  title: '+ Add Pet',
+                  height: 56.h,
+                  width: double.infinity,
+                  isSelected: true,
+                  backgroundColors: AppColors.vibrantPurple,
+                  textColors: Colors.white,
+                  onPress: () {
+                    Navigator.pop(context); // close bottom sheet
+                    Navigator.pushNamed(context, RoutesName.addPet);
+                  },
+                ),
+
+                SizedBox(height: 16.h),
+
+                // Secondary action: Cancel / Got it
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'Got it',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: Colors.grey[700],
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      return;
+    }
+
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height * 0.92,
+        child: AddActivitiesView(
+          initialDate: _selectedDate,
+          selectedPetId: effectivePetId,
+        ),
+      ),
+    );
+  }
 
   Widget _buildAddPetFAB() {
     return SizedBox(
@@ -37,7 +152,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
       height: 97.h,
       child: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, RoutesName.addPet);
+          Navigator.pushNamed(context, RoutesName.camera);
         },
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -71,18 +186,11 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.add,
+                        Icons.camera_alt_outlined,
                         color: Colors.white,
                         size: 30,
                       ),
-                      SizedBox(height: 2),
-                      Text(
-                        "Add Pet",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Colors.white,
-                        ),
-                      ),
+
                     ],
                   ),
                 ),

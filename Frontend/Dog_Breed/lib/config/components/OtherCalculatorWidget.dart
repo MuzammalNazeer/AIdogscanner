@@ -483,7 +483,14 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
         if (act.food != null && act.food!.isNotEmpty) {
           final numStr = act.food!.replaceAll(RegExp(r'[^0-9.]'), '');
           final num = double.tryParse(numStr) ?? 0;
-          totalML += act.food!.toLowerCase().contains('l') ? num * 1000 : num;
+          String food = act.food!.toLowerCase();
+          if (food.contains('ml') || food.contains('milliliter')) {
+            totalML += num;
+          } else if (food.contains('l') || food.contains('liter')) {
+            totalML += num * 1000;
+          } else {
+            totalML += num;
+          }
         }
       }
       amountData.add(totalML);
@@ -552,7 +559,9 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
     required double maxValue,
     required List<String> days,
   }) {
-    List<double> normalized = rawData.map((v) => (v as num) / maxValue).toList();
+    // List<double> normalized = rawData.map((v) => (v as num) / maxValue).toList();
+    // Dynamic interval based on maxValue
+    final double interval = maxValue > 0 ? maxValue / 5 : 1.0;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -615,7 +624,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                   show: true,
                   drawVerticalLine: true,
                   drawHorizontalLine: true,
-                  horizontalInterval: 0.2,
+                  horizontalInterval: interval,
                   verticalInterval: 1,
                   getDrawingHorizontalLine: (_) => FlLine(color: Colors.grey[300], strokeWidth: 1),
                   getDrawingVerticalLine: (_) => FlLine(color: Colors.grey[300], strokeWidth: 1),
@@ -647,21 +656,23 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      interval: 0.2,
+                      interval: interval,
                       reservedSize: 50.w,
                       getTitlesWidget: (value, meta) {
-                        final labels = ['0', '0.2', '0.4', '0.6', '0.8', '1'];
-                        final index = (value * 5).round();
-                        if (index >= 0 && index < labels.length) {
-                          return Padding(
-                            padding: EdgeInsets.only(right: 8.w),
-                            child: Text(
-                              labels[index],
-                              style: TextStyle(color: Colors.grey[600], fontSize: 12.sp),
-                            ),
-                          );
+                        if (value < 0 || value > maxValue * 1.05) {
+                          return const SizedBox();
                         }
-                        return const Text('');
+                        String text = value.toStringAsFixed(1);
+                        if (text.endsWith('.0')) text = text.substring(0, text.length - 2);
+                        if (text.endsWith('0') && text.contains('.')) text = text.substring(0, text.length - 1);
+
+                        return Padding(
+                          padding: EdgeInsets.only(right: 8.w),
+                          child: Text(
+                            text,
+                            style: TextStyle(color: Colors.grey[600], fontSize: 12.sp),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -672,10 +683,10 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                 minX: 0,
                 maxX: 6,
                 minY: 0,
-                maxY: 1.0,
+                maxY: maxValue,
                 lineBarsData: [
                   LineChartBarData(
-                    spots: normalized.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value)).toList(),
+                    spots: rawData.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value)).toList(),
                     isCurved: true,
                     color: const Color(0xFF820DFF),
                     barWidth: 3,

@@ -1,5 +1,6 @@
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/View/Calendar/AddReminderView.dart';
+import 'package:dog_breed/View/MyPetsView/addPetView.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:dog_breed/View_model/home/home_view_model.dart';
 import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/activity_provider.dart';
 import '../../View_model/PetProvider.dart';
@@ -17,6 +19,8 @@ import '../../config/components/DocumentsScreen.dart';
 import '../../config/components/DrinkScreen.dart';
 import '../../config/components/OtherCalculatorWidget.dart';
 import 'add_activities_View.dart';
+import 'allActivityView.dart';
+import '../../utils/routes/routes_name.dart';
 class Calendarview extends StatefulWidget {
   final void Function(String message)? onShowSnackBar;
 
@@ -216,34 +220,118 @@ class _CalendarviewState extends State<Calendarview> {
 
   @override
   Widget build(BuildContext context) {
+    final now = DateTime.now();
     final activityNotifier = Provider.of<ActivityNotifier>(context);
     final petProvider = Provider.of<PetProvider>(context);
+ if (!petProvider.hasPets) {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/pet.png',
+                height: 100.h,
+                width: 100.w,
+                errorBuilder: (context, error, stackTrace) => Icon(
+                  Icons.pets,
+                  size: 100.w,
+                  color: Colors.grey[300],
+                ),
+              ),
+              SizedBox(height: 24.h),
+              Text(
+                'No pets have been added yet',
+                style: TextStyle(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 12.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40.w),
+                child: Text(
+                  'Add at least one pet to start adding activities and reminders.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: Colors.grey[700],
+                  ),
+                ),
+              ),
+              SizedBox(height: 40.h),
+              RoundButton(
+                title: '+  Add Pet',
+                height: 56.h,
+                width: 240.w,
+                isSelected: true,
+                backgroundColors: AppColors.vibrantPurple,
+                textColors: Colors.white,
+                onPress: () {
+                  // Switch to Pets tab (index 2)
+                  Provider.of<HomeViewModel>(context, listen: false).selectedIndex = 2;
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+    }
     final effectivePetId = _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
 
-
     final activities = activityNotifier.activities;
-    final filteredActivities = activities.where((activity) {
-      // Check if the activity itself happened on the selected date
-      final isActivityDay = activity.dateTime.year == _selectedDate.year &&
-          activity.dateTime.month == _selectedDate.month &&
-          activity.dateTime.day == _selectedDate.day;
+    final filteredActivities = activities
+        .where((activity) {
+      final isSamePet = effectivePetId == null || activity.petId == effectivePetId;
+      if (!isSamePet) return false;
 
-      // Check if the reminder is scheduled for the selected date
-      final isReminderDay = activity.hasReminder &&
+      final isActivityToday =
+          activity.dateTime.year == _selectedDate.year &&
+              activity.dateTime.month == _selectedDate.month &&
+              activity.dateTime.day == _selectedDate.day;
+
+      final isReminderToday = activity.hasReminder &&
           activity.reminderDateTime != null &&
+          !activity.reminderDateTime!.isBefore(now) &&
           activity.reminderDateTime!.year == _selectedDate.year &&
           activity.reminderDateTime!.month == _selectedDate.month &&
           activity.reminderDateTime!.day == _selectedDate.day;
 
-      // Pet filter (if you're showing activities for specific pet or all pets)
-      final isSamePet = effectivePetId == null || activity.petId == effectivePetId;
+      return isActivityToday || isReminderToday;
+    })
+        .toList()
+      ..sort((a, b) => b.dateTime.compareTo(a.dateTime)); // newest first
 
-      // Show activity if:
-      // - it happened today OR
-      // - it has a reminder for today
-      // AND it belongs to the selected pet (or all pets)
-      return (isActivityDay || isReminderDay) && isSamePet;
-    }).toList();
+    // final activityNotifier = Provider.of<ActivityNotifier>(context);
+    // final petProvider = Provider.of<PetProvider>(context);
+    // final effectivePetId = _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
+    //
+    //
+    // final activities = activityNotifier.activities;
+    // final filteredActivities = activities.where((activity) {
+    //   // Check if the activity itself happened on the selected date
+    //   final isActivityDay = activity.dateTime.year == _selectedDate.year &&
+    //       activity.dateTime.month == _selectedDate.month &&
+    //       activity.dateTime.day == _selectedDate.day;
+    //
+    //   // Check if the reminder is scheduled for the selected date
+    //   final isReminderDay = activity.hasReminder &&
+    //       activity.reminderDateTime != null &&
+    //       activity.reminderDateTime!.year == _selectedDate.year &&
+    //       activity.reminderDateTime!.month == _selectedDate.month &&
+    //       activity.reminderDateTime!.day == _selectedDate.day;
+    //
+    //   // Pet filter (if you're showing activities for specific pet or all pets)
+    //   final isSamePet = effectivePetId == null || activity.petId == effectivePetId;
+    //
+    //   // Show activity if:
+    //   // - it happened today OR
+    //   // - it has a reminder for today
+    //   // AND it belongs to the selected pet (or all pets)
+    //   return (isActivityDay || isReminderDay) && isSamePet;
+    // }).toList();
 
     // final activities = activityNotifier.activities;
     // final filteredActivities = activities.where((activity) {
@@ -300,6 +388,10 @@ class _CalendarviewState extends State<Calendarview> {
                   final isSelected = _selectedTab == index;
                   return GestureDetector(
                     onTap: () {
+                      if (!petProvider.hasPets) {
+                        _showNoPetsDialog(context);
+                        return;
+                      }
                       setState(() => _selectedTab = index);
                       if (_shouldShowCalendar) {
                         WidgetsBinding.instance.addPostFrameCallback(
@@ -460,6 +552,10 @@ class _CalendarviewState extends State<Calendarview> {
                             date.day == _selectedDate.day;
                     return GestureDetector(
                       onTap: () {
+                        if (!petProvider.hasPets) {
+                          _showNoPetsDialog(context);
+                          return;
+                        }
                         setState(() => _selectedDate = date);
 
                         _scrollToSelectedDate();
@@ -601,7 +697,7 @@ class _CalendarviewState extends State<Calendarview> {
 
       case 3: // Documents
 
-        return const DocumentsScreen();
+        return DocumentsScreen(selectedPetId: effectivePetId);
 
       case 4: // Settings
 
@@ -1293,33 +1389,33 @@ class _CalendarviewState extends State<Calendarview> {
             ),
           ),
         ),
-        SizedBox(height: 16.h),
-        Container(
-          height: 66.h,
-          margin: EdgeInsets.symmetric(horizontal: 16.w),
-          decoration: BoxDecoration(
-            color: const Color(0xFF820DFF),
-            borderRadius: BorderRadius.circular(8.r),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.calendar_today, color: Colors.white, size: 20),
-              SizedBox(width: 8.w),
-              Text(
-                dateRangeText,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              SizedBox(width: 8.w),
-              const Icon(Icons.edit, color: Colors.white, size: 20),
-            ],
-          ),
-        ),
-        SizedBox(height: 80.h),
+        // SizedBox(height: 16.h),
+        // Container(
+        //   height: 66.h,
+        //   margin: EdgeInsets.symmetric(horizontal: 16.w),
+        //   decoration: BoxDecoration(
+        //     color: const Color(0xFF820DFF),
+        //     borderRadius: BorderRadius.circular(8.r),
+        //   ),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       const Icon(Icons.calendar_today, color: Colors.white, size: 20),
+        //       SizedBox(width: 8.w),
+        //       Text(
+        //         dateRangeText,
+        //         style: TextStyle(
+        //           color: Colors.white,
+        //           fontSize: 14.sp,
+        //           fontWeight: FontWeight.w600,
+        //         ),
+        //       ),
+        //       SizedBox(width: 8.w),
+        //       const Icon(Icons.edit, color: Colors.white, size: 20),
+        //     ],
+        //   ),
+        // ),
+        // SizedBox(height: 80.h),
       ],
     );
   }
@@ -1613,7 +1709,15 @@ class _CalendarviewState extends State<Calendarview> {
                 ),
                 SizedBox(width: 6.w),
                 GestureDetector(
-                  onTap: () => _showAddActivitySheet(context),
+                  onTap: () {
+                    final petProvider =
+                        Provider.of<PetProvider>(context, listen: false);
+                    if (!petProvider.hasPets) {
+                      _showNoPetsDialog(context);
+                      return;
+                    }
+                    _showAddActivitySheet(context);
+                  },
                   child: const Text(
                     'Add Activity',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -1635,7 +1739,15 @@ class _CalendarviewState extends State<Calendarview> {
                       height: 28.h,
                     ),
 
-                    onPressed: () => _showAddActivitySheet(context),
+                    onPressed: () {
+                      final petProvider =
+                          Provider.of<PetProvider>(context, listen: false);
+                      if (!petProvider.hasPets) {
+                        _showNoPetsDialog(context);
+                        return;
+                      }
+                      _showAddActivitySheet(context);
+                    },
                   ),
                 ),
               ],
@@ -1895,6 +2007,10 @@ class _CalendarviewState extends State<Calendarview> {
 
 
   Widget _buildActivityCard(Activity activity, int index) {
+    final DateTime effectiveDateTime = (activity.hasReminder &&
+            activity.reminderDateTime != null)
+        ? activity.reminderDateTime!
+        : activity.dateTime;
     final String activityName = activity.name.toLowerCase();
 
     final bool isDrink = activityName == 'drink';
@@ -1958,6 +2074,7 @@ class _CalendarviewState extends State<Calendarview> {
         if (direction == DismissDirection.endToStart) {
           return await _showDeleteConfirmation(activity);
         }
+        _editActivity(activity);
         return false;
       },
       onDismissed: (direction) {
@@ -1970,7 +2087,6 @@ class _CalendarviewState extends State<Calendarview> {
           if (activity.reminderId != null) {
             reminderNotifier.cancelReminder(activity.reminderId!);
           }
-
           activityNotifier.deleteActivity(activity);
         }
       },
@@ -2199,11 +2315,11 @@ class _CalendarviewState extends State<Calendarview> {
                                   Text(
                                     DateFormat(
                                       'MMM dd, yyyy',
-                                    ).format(activity.dateTime).toLowerCase(),
+                                    ).format(effectiveDateTime).toLowerCase(),
 
                                     style: TextStyle(
                                       fontSize: 12.sp,
-                                      color: Colors.grey[700],
+                                      color: activity.hasReminder ? Colors.orange : Colors.grey[700],
                                     ),
                                   ),
 
@@ -2214,9 +2330,9 @@ class _CalendarviewState extends State<Calendarview> {
 
                                     children: [
                                       Icon(
-                                        Icons.access_time,
+                                        activity.hasReminder ? Icons.notifications_active : Icons.access_time,
                                         size: 16.w,
-                                        color: Colors.grey[600],
+                                        color: activity.hasReminder ? Colors.orange : Colors.grey[600],
                                       ),
 
                                       SizedBox(width: 4.w),
@@ -2224,11 +2340,11 @@ class _CalendarviewState extends State<Calendarview> {
                                       Text(
                                         DateFormat(
                                           'hh:mm a',
-                                        ).format(activity.dateTime),
+                                        ).format(effectiveDateTime),
 
                                         style: TextStyle(
                                           fontSize: 17.sp,
-                                          color: Colors.grey[600],
+                                          color: activity.hasReminder ? Colors.orange : Colors.grey[600],
                                         ),
                                       ),
                                     ],
@@ -2767,23 +2883,23 @@ class _CalendarviewState extends State<Calendarview> {
     return result ?? false;
   }
 
-  // void _editActivity(Activity activity) {
-  //   final petProvider = Provider.of<PetProvider>(context, listen: false);
-  //   final effectivePetId = _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
-  //
-  //   Navigator.push(
-  //     context,
-  //
-  //     MaterialPageRoute(
-  //       builder: (context) => Allactivityview(
-  //         selectedActivity: activity,
-  //         selectedPetId: effectivePetId,
-  //       ),
-  //     ),
-  //   ).then((edited) {
-  //     if (edited == true && mounted) setState(() {});
-  //   });
-  // }
+  void _editActivity(Activity activity) {
+    final petProvider = Provider.of<PetProvider>(context, listen: false);
+    final effectivePetId = _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
+
+    Navigator.push(
+      context,
+
+      MaterialPageRoute(
+        builder: (context) => Allactivityview(
+          selectedActivity: activity,
+          selectedPetId: effectivePetId,
+        ),
+      ),
+    ).then((edited) {
+      if (edited == true && mounted) setState(() {});
+    });
+  }
 
   Widget _buildHeaderIcon(String path) {
     return Container(
@@ -2799,6 +2915,71 @@ class _CalendarviewState extends State<Calendarview> {
       child: Padding(
         padding: EdgeInsets.all(8.w),
         child: Image.asset(path, width: 24.w, height: 24.h),
+      ),
+    );
+  }
+
+  void _showNoPetsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+        child: Padding(
+          padding: EdgeInsets.all(20.w),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                'assets/images/pet.png',
+                height: 85.h,
+                width: 85.w,
+                errorBuilder: (context, error, stackTrace) =>
+                    Icon(Icons.pets, size: 85.w, color: Colors.grey[300]),
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Actions Required',
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 8.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Text(
+                  'Add at least one pet to start adding activities and reminders.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              SizedBox(height: 24.h),
+              RoundButton(
+                title: 'Got it',
+                height: 50.h,
+                width: 200.w,
+                isSelected: true,
+                backgroundColors: AppColors.vibrantPurple,
+                textColors: Colors.white,
+                onPress: () {
+                  Navigator.pop(context);
+                  Provider.of<HomeViewModel>(context, listen: false).selectedIndex = 2;
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    useSafeArea: true,
+                    builder: (context) => const AddPetView(),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -2820,6 +3001,121 @@ class _CalendarviewState extends State<Calendarview> {
       ),
     );
   }
+
+
+  void _showAddActivity1Sheet(BuildContext context) {
+    final petProvider = Provider.of<PetProvider>(context, listen: false);
+    final effectivePetId = _selectedPetId ??
+        (petProvider.hasPets ? petProvider.pets.first.id : null);
+
+    // ──────────────────────────────────────────────────────────────
+    // If no pets exist → show nice "Add Pet" overlay/bottom sheet
+    // ──────────────────────────────────────────────────────────────
+    if (!petProvider.hasPets) {
+      showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (context) => Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(vertical: 32.h, horizontal: 24.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(28.r)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.12),
+                  blurRadius: 20,
+                  spreadRadius: 4,
+                  offset: const Offset(0, -4),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Optional cute icon or illustration
+                Icon(
+                  Icons.pets_rounded,
+                  size: 64.sp,
+                  color: AppColors.vibrantPurple.withOpacity(0.7),
+                ),
+                SizedBox(height: 16.h),
+
+                Text(
+                  'No Pets Yet!',
+                  style: TextStyle(
+                    fontSize: 22.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                ),
+                SizedBox(height: 12.h),
+
+                Text(
+                  'Add at least one pet to start logging activities\nand setting reminders.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    color: Colors.grey[700],
+                    height: 1.4,
+                  ),
+                ),
+                SizedBox(height: 32.h),
+
+                // Primary action: Add Pet
+                RoundButton(
+                  title: '+ Add Pet',
+                  height: 56.h,
+                  width: double.infinity,
+                  isSelected: true,
+                  backgroundColors: AppColors.vibrantPurple,
+                  textColors: Colors.white,
+                  onPress: () {
+                    Navigator.pop(context); // close bottom sheet
+                    Navigator.pushNamed(context, RoutesName.addPet);
+                  },
+                ),
+
+                SizedBox(height: 16.h),
+
+                // Secondary action: Cancel / Got it
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'Got it',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      color: Colors.grey[700],
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      return;
+    }
+
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height * 0.92,
+        child: AddActivitiesView(
+          initialDate: _selectedDate,
+          selectedPetId: effectivePetId,
+        ),
+      ),
+    );
+  }
+
 }
 
 

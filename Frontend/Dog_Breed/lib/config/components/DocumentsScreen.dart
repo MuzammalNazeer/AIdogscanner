@@ -10,7 +10,8 @@ import '../../View_model/DocumentViewModel.dart';
 import 'Document.dart';
 
 class DocumentsScreen extends StatefulWidget {
-  const DocumentsScreen({Key? key}) : super(key: key);
+  final String? selectedPetId;
+  const DocumentsScreen({Key? key, this.selectedPetId}) : super(key: key);
 
   @override
   State<DocumentsScreen> createState() => _DocumentsScreenState();
@@ -71,7 +72,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                       context,
                       listen: false,
                     );
-                    viewModel.pickAndUploadFile(context);
+                    viewModel.pickAndUploadFile(context, petId: widget.selectedPetId);
                   },
                 ),
               ),
@@ -87,6 +88,14 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
       BuildContext context,
       DocumentViewModel viewModel,
       ) {
+    // Filter documents by pet ID
+    final filteredDocs = viewModel.filteredDocuments.where((doc) {
+      if (widget.selectedPetId != null) {
+        return doc.petId == widget.selectedPetId;
+      }
+      return true;
+    }).toList();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -157,7 +166,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                   ),
                 ),
                 Text(
-                  '${viewModel.filteredDocuments.length} documents',
+                  '${filteredDocs.length} documents',
                   style: TextStyle(fontSize: 14.sp, color: Colors.grey),
                 ),
               ],
@@ -166,19 +175,18 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
         SizedBox(height: 12.h),
         Expanded(
           child: Container(
-            padding: EdgeInsets.all(12.w),
+            padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
               color: const Color(0xFF686868).withOpacity(0.08),
               borderRadius: BorderRadius.circular(16.r),
             ),
-            child: viewModel.filteredDocuments.isNotEmpty
+            child: filteredDocs.isNotEmpty
                 ? RefreshIndicator(
                     onRefresh: () async {
-                      await viewModel.refresh();
                     },
                     child: ListView.separated(
                       physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: viewModel.filteredDocuments.length,
+                      itemCount: filteredDocs.length,
                       separatorBuilder: (_, __) => Divider(
                         color: const Color(0xFFE4E4E4),
                         height: 0,
@@ -186,7 +194,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                         indent: 0.w,
                       ),
                       itemBuilder: (context, index) {
-                        final doc = viewModel.filteredDocuments[index];
+                        final doc = filteredDocs[index];
                         return _buildDocumentItem(context, viewModel, doc);
                       },
                     ),

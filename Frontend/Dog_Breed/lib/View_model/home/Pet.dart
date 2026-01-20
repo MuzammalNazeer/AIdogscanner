@@ -9,6 +9,7 @@ class Pet with ChangeNotifier {
   String gender;
   DateTime birthday;
   Uint8List? imageBytes;
+  String? imageUrl;
 
   Pet({
     this.id,
@@ -17,6 +18,7 @@ class Pet with ChangeNotifier {
     required this.gender,
     required this.birthday,
     this.imageBytes,
+    this.imageUrl,
   });
 
   // Generate a unique ID if not provided
@@ -34,6 +36,7 @@ class Pet with ChangeNotifier {
       'gender': gender,
       'birthday': birthday.toIso8601String(),
       'imageBytes': imageBytes?.toList(),
+      'imageUrl': imageUrl,
     };
   }
 
@@ -48,6 +51,7 @@ class Pet with ChangeNotifier {
       imageBytes: map['imageBytes'] != null
           ? Uint8List.fromList(List<int>.from(map['imageBytes']))
           : null,
+      imageUrl: map['imageUrl'],
     );
   }
 }

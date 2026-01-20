@@ -42,7 +42,7 @@ class _HomeviewState extends State<Homeview> {
                 offset: Offset(0, -30.h),
               ),
               _buildSearchBar(),
-              SizedBox(height: 18.h),
+              SizedBox(height: 6.h),
               PremiumBanner(onGetIt: () =>{Navigator.pushNamed(context, RoutesName.pro, arguments: 'home')}),
               SizedBox(height: 14.h),
               Padding(

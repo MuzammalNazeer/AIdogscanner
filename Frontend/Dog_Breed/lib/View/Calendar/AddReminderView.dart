@@ -9,6 +9,7 @@ import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/activity_provider.dart';
 import '../../activity_model.dart';
 import 'add_activities_View.dart';
+import 'allActivityView.dart';
 
 class AddReminderView extends StatefulWidget {
   final String? selectedPetId;
@@ -19,9 +20,9 @@ class AddReminderView extends StatefulWidget {
 }
 
 class _AddReminderViewState extends State<AddReminderView> {
-  int _selectedTab = 0;
+  final int _selectedTab = 0;
   DateTime _selectedDate = DateTime.now();
-  DateTime _currentMonth = DateTime.now();
+  final DateTime _currentMonth = DateTime.now();
 
   final List<String> tabs = [
     'Activities',
@@ -134,7 +135,14 @@ class _AddReminderViewState extends State<AddReminderView> {
   }
 
   @override
+
+
+
   Widget build(BuildContext context) {
+
+
+    
+
 
     final now = DateTime.now();
     final activityNotifier = Provider.of<ActivityNotifier>(context);
@@ -144,17 +152,10 @@ class _AddReminderViewState extends State<AddReminderView> {
 
     final filteredActivities = activities
         .where((activity) {
-      final isSamePet = widget.selectedPetId == null ||
-          activity.petId == null ||
-          activity.petId == widget.selectedPetId;
-
-      if (activity.hasReminder &&
-          activity.reminderDateTime != null &&
-          !activity.reminderDateTime!.isBefore(now)) {
-        return false;  // ← don't show in activities list
-      }
-      return isSamePet;
-    })
+          final isSamePet = widget.selectedPetId == null ||
+              activity.petId == widget.selectedPetId;
+          return isSamePet;
+        })
         .toList()
       ..sort((a, b) {
         final aTime = (a.hasReminder && a.reminderDateTime != null)
@@ -168,17 +169,15 @@ class _AddReminderViewState extends State<AddReminderView> {
 
     final filteredReminders = allReminders
         .where((reminder) {
-      final petId = reminder['petId'];
-      final isSamePet = widget.selectedPetId == null ||
-          petId == null ||
-          petId == widget.selectedPetId;
-      final scheduled = DateTime.parse(reminder['scheduledTime']);
-      return isSamePet && scheduled.isAfter(now);
-      return isSamePet;
-    })
+          final petId = reminder['petId'];
+          final isSamePet = widget.selectedPetId == null ||
+              petId == widget.selectedPetId;
+          final scheduled = DateTime.parse(reminder['scheduledTime']);
+          return isSamePet && scheduled.isAfter(now);
+        })
         .toList()
       ..sort(
-            (a, b) => DateTime.parse(b['scheduledTime'])
+        (a, b) => DateTime.parse(b['scheduledTime'])
             .compareTo(DateTime.parse(a['scheduledTime'])),
       );
 
@@ -187,42 +186,6 @@ class _AddReminderViewState extends State<AddReminderView> {
 
 
 
-    // final activityNotifier = Provider.of<ActivityNotifier>(context);
-    // final activities = activityNotifier.activities;
-    // final reminderNotifier = Provider.of<ReminderNotifier>(context);
-    // final allReminders = reminderNotifier.reminders;
-    //
-    // final filteredActivities = activities
-    //     .where((activity) {
-    //       final isSamePet = widget.selectedPetId == null ||
-    //           activity.petId == null ||
-    //           activity.petId == widget.selectedPetId;
-    //       return isSamePet;
-    //     })
-    //     .toList()
-    //   ..sort((a, b) {
-    //     final aTime = (a.hasReminder && a.reminderDateTime != null)
-    //         ? a.reminderDateTime!
-    //         : a.dateTime;
-    //     final bTime = (b.hasReminder && b.reminderDateTime != null)
-    //         ? b.reminderDateTime!
-    //         : b.dateTime;
-    //     return bTime.compareTo(aTime);
-    //   });
-    //
-    // final filteredReminders = allReminders
-    //     .where((reminder) {
-    //       final petId = reminder['petId'];
-    //       final isSamePet = widget.selectedPetId == null ||
-    //           petId == null ||
-    //           petId == widget.selectedPetId;
-    //       return isSamePet;
-    //     })
-    //     .toList()
-    //   ..sort(
-    //     (a, b) => DateTime.parse(b['scheduledTime'])
-    //         .compareTo(DateTime.parse(a['scheduledTime'])),
-    //   );
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -513,7 +476,7 @@ class _AddReminderViewState extends State<AddReminderView> {
         if (direction == DismissDirection.endToStart) {
           return await _showDeleteConfirmation(activity);
         }
-        // _editActivity(activity);
+        _editActivity(activity);
         return false;
       },
       child: Card(
@@ -1758,23 +1721,23 @@ class _AddReminderViewState extends State<AddReminderView> {
   }
 
   // Edit activity function
-  // void _editActivity(Activity activity) {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => Allactivityview(
-  //         selectedActivity: activity,
-  //         selectedPetId: widget.selectedPetId,
-  //       ),
-  //     ),
-  //   ).then((edited) {
-  //     if (edited == true) {
-  //       if (context.mounted) {
-  //         setState(() {});
-  //       }
-  //     }
-  //   });
-  // }
+  void _editActivity(Activity activity) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Allactivityview(
+          selectedActivity: activity,
+          selectedPetId: widget.selectedPetId,
+        ),
+      ),
+    ).then((edited) {
+      if (edited == true) {
+        if (context.mounted) {
+          setState(() {});
+        }
+      }
+    });
+  }
 
   Widget _buildHeaderIcon(String path) {
     return Container(
@@ -1826,6 +1789,25 @@ class _AddReminderViewState extends State<AddReminderView> {
     return days;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -12,6 +12,8 @@ class Document {
   final String fileType;
   final IconData icon;
 
+  final String? petId;
+
   Document({
     required this.id,
     required this.title,
@@ -22,6 +24,7 @@ class Document {
     required this.fileSize,
     required this.fileType,
     required this.icon,
+    this.petId,
   });
 
   Map<String, dynamic> toJson() {
@@ -35,6 +38,7 @@ class Document {
       'fileSize': fileSize,
       'fileType': fileType,
       'icon': _iconToCode(icon),
+      'petId': petId,
     };
   }
 
@@ -49,6 +53,7 @@ class Document {
       fileSize: json['fileSize'],
       fileType: json['fileType'],
       icon: _codeToIcon(json['icon']),
+      petId: json['petId'],
     );
   }
 
@@ -106,6 +111,7 @@ class Document {
     String? fileSize,
     String? fileType,
     IconData? icon,
+    String? petId,
   }) {
     return Document(
       id: id ?? this.id,
@@ -117,6 +123,7 @@ class Document {
       fileSize: fileSize ?? this.fileSize,
       fileType: fileType ?? this.fileType,
       icon: icon ?? this.icon,
+      petId: petId ?? this.petId,
     );
   }
 }
