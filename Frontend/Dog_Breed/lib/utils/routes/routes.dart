@@ -28,8 +28,10 @@ import '../../View/Calendar/walkView.dart';
 import '../../View/Favourites/favouritesView.dart';
 import '../../View/Favourites/myFavouritesview.dart';
 import '../../View/History/historyView.dart';
+import '../../View/MyPetsView/AddMyPetView.dart';
 import '../../View/MyPetsView/dogtreslutsave.dart';
 import '../../View/ProfileView/Ownerprofileview.dart';
+import '../../View/ProfileView/listSave.dart';
 import '../../View/Splash/splashView.dart';
 import '../../View/forget/confirmpasswordview.dart';
 import '../../View/forget/forgotPasswordEmailView.dart';
@@ -105,7 +107,12 @@ class Routes {
         return MaterialPageRoute(
             builder: (BuildContext context) =>   const TermsOfUseView());
 
-
+      case RoutesName.listsave:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>   Listsave());
+      case RoutesName.myAdd:
+        return MaterialPageRoute(
+          builder: (BuildContext context) =>    Addmypetview(),settings: settings,);
 
 
       case RoutesName.history:

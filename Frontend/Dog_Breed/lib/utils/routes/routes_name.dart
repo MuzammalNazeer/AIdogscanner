@@ -40,6 +40,8 @@ class RoutesName {
   static const String notification = 'NotificationView';
   static const String termsOfUse = 'TermsOfUseView';
 
+  static const String listsave = 'Listsave';
+  static const String myAdd = 'Addmypetview';
 
 }
 
