@@ -163,11 +163,68 @@ class _CalendarviewState extends State<Calendarview> {
   void initState() {
     super.initState();
     _loadSelectedProgressTab();
+    _loadSelectedPetId();
     _scrollController = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToSelectedDate();
     });
   }
+
+  Future<void> _loadSelectedPetId() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedPetId = prefs.getString('selectedPetId');
+
+    final petProvider = Provider.of<PetProvider>(context, listen: false);
+
+    if (petProvider.hasPets) {
+      // If saved ID exists and is still valid → keep it
+      if (savedPetId != null && petProvider.pets.any((p) => p.id == savedPetId)) {
+        setState(() {
+          _selectedPetId = savedPetId;
+        });
+      }
+      // If no saved ID or saved ID is invalid → auto-select first pet
+      else {
+        setState(() {
+          _selectedPetId = petProvider.pets.first.id;
+        });
+        await prefs.setString('selectedPetId', _selectedPetId!);
+      }
+    } else {
+      // No pets → clear any old saved value
+      setState(() {
+        _selectedPetId = null;
+      });
+      await prefs.remove('selectedPetId');
+    }
+  }
+  Future<void> _saveSelectedPetId(String? petId) async {
+    final prefs = await SharedPreferences.getInstance();
+    if (petId != null && petId.isNotEmpty) {
+      await prefs.setString('selectedPetId', petId);
+    } else {
+      await prefs.remove('selectedPetId');
+    }
+  }
+
+  // Future<void> _loadSelectedPetId() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final savedPetId = prefs.getString('selectedPetId');
+  //   if (mounted && savedPetId != null) {
+  //     setState(() {
+  //       _selectedPetId = savedPetId;
+  //     });
+  //   }
+  // }
+  //
+  // Future<void> _saveSelectedPetId(String? petId) async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   if (petId != null) {
+  //     await prefs.setString('selectedPetId', petId);
+  //   } else {
+  //     await prefs.remove('selectedPetId');
+  //   }
+  // }
 
   Future<void> _loadSelectedProgressTab() async {
     final prefs = await SharedPreferences.getInstance();
@@ -1222,26 +1279,117 @@ class _CalendarviewState extends State<Calendarview> {
     );
   }
 
+  // Widget _buildSelectedPetHeader() {
+  //   final petProvider = Provider.of<PetProvider>(context);
+  //   final hasPets = petProvider.hasPets;
+  //   final pets = petProvider.pets;
+  //
+  //   String displayName = 'My Lovely Tomy';
+  //   Uint8List? displayImage;
+  //
+  //   if (hasPets) {
+  //     if (_selectedPetId != null) {
+  //       try {
+  //         final pet = pets.firstWhere((p) => p.id == _selectedPetId);
+  //         displayName = pet.name;
+  //         displayImage = pet.imageBytes;
+  //       } catch (_) {
+  //
+  //       }
+  //     } else {
+  //
+  //     }
+  //   }
+  //
+  //   return GestureDetector(
+  //     onTap: hasPets ? () => _showPetPicker(petProvider) : null,
+  //     child: Container(
+  //       height: 66.h,
+  //       margin: EdgeInsets.symmetric(horizontal: 8.w),
+  //       decoration: BoxDecoration(
+  //         color: const Color(0xFFF4F7F6),
+  //         borderRadius: BorderRadius.circular(16.r),
+  //       ),
+  //       child: Padding(
+  //         padding: EdgeInsets.symmetric(horizontal: 16.w),
+  //         child: Row(
+  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //           children: [
+  //             Row(
+  //               children: [
+  //                 Container(
+  //                   width: 40.w,
+  //                   height: 40.h,
+  //                   decoration: BoxDecoration(
+  //                     shape: BoxShape.circle,
+  //                     border: Border.all(
+  //                       color: const Color(0xFF820DFF),
+  //                       width: 3,
+  //                     ),
+  //                   ),
+  //                   child: ClipOval(
+  //                     child: displayImage != null
+  //                         ? Image.memory(
+  //                       displayImage,
+  //                       fit: BoxFit.cover,
+  //                     )
+  //                         : Image.asset(
+  //                       'assets/images/a2.png',
+  //                       fit: BoxFit.cover,
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 SizedBox(width: 12.w),
+  //                 Text(
+  //                   displayName,
+  //                   style: TextStyle(
+  //                     fontSize: 18.sp,
+  //                     fontWeight: FontWeight.w600,
+  //                     color: const Color(0xFF301934),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //             const Icon(
+  //               Icons.keyboard_arrow_down,
+  //               size: 24,
+  //               color: Colors.black,
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+
   Widget _buildSelectedPetHeader() {
     final petProvider = Provider.of<PetProvider>(context);
     final hasPets = petProvider.hasPets;
     final pets = petProvider.pets;
 
-    String displayName = 'My Lovely Tomy';
+    String displayName = hasPets ? 'Select Pet' : 'No Pet Selected';
     Uint8List? displayImage;
+    Color borderColor = Colors.grey;
+
+    Pet? displayedPet;
 
     if (hasPets) {
+      // Priority 1: use explicitly selected pet
       if (_selectedPetId != null) {
         try {
-          final pet = pets.firstWhere((p) => p.id == _selectedPetId);
-          displayName = pet.name;
-          displayImage = pet.imageBytes;
+          displayedPet = pets.firstWhere((p) => p.id == _selectedPetId);
         } catch (_) {
-
+          // invalid ID → fallback to first
         }
-      } else {
-
       }
+
+      // Priority 2: fallback to first pet if nothing selected or invalid
+      displayedPet ??= pets.first;
+
+      displayName = displayedPet.name;
+      displayImage = displayedPet.imageBytes;
+      borderColor = const Color(0xFF820DFF);
     }
 
     return GestureDetector(
@@ -1265,17 +1413,11 @@ class _CalendarviewState extends State<Calendarview> {
                     height: 40.h,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: const Color(0xFF820DFF),
-                        width: 3,
-                      ),
+                      border: Border.all(color: borderColor, width: 3),
                     ),
                     child: ClipOval(
                       child: displayImage != null
-                          ? Image.memory(
-                        displayImage,
-                        fit: BoxFit.cover,
-                      )
+                          ? Image.memory(displayImage, fit: BoxFit.cover)
                           : Image.asset(
                         'assets/images/a2.png',
                         fit: BoxFit.cover,
@@ -1318,7 +1460,7 @@ class _CalendarviewState extends State<Calendarview> {
         final currentSelectedId = _selectedPetId;
 
         return SizedBox(
-          height: 320.h,
+          height: 360.h,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -1331,51 +1473,47 @@ class _CalendarviewState extends State<Calendarview> {
                   borderRadius: BorderRadius.circular(20.r),
                 ),
               ),
-              SizedBox(height: 12.h),
+              SizedBox(height: 16.h),
               Text(
                 'Select Pet',
                 style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 12.h),
+              SizedBox(height: 16.h),
               Expanded(
                 child: ListView.separated(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                  itemCount: petProvider.pets.length + 1,
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  itemCount: petProvider.pets.length + 1, // +1 for "No pet" option
                   separatorBuilder: (_, __) => SizedBox(height: 8.h),
                   itemBuilder: (context, index) {
                     if (index == 0) {
+                      // "No pet selected" / default option
                       final isSelected = currentSelectedId == null;
                       return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _selectedPetId = null;
-                          });
-                          Navigator.pop(context);
+                        onTap: () async {
+                          setState(() => _selectedPetId = null);
+                          await _saveSelectedPetId(null);
+                          if (mounted) Navigator.pop(context);
                         },
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+                          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                           decoration: BoxDecoration(
-                            color: isSelected
-                                ? const Color(0xFF820DFF)
-                                : const Color(0xFFF4F7F6),
-                            borderRadius: BorderRadius.circular(18.r),
+                            color: isSelected ? const Color(0xFF820DFF) : const Color(0xFFF4F7F6),
+                            borderRadius: BorderRadius.circular(16.r),
                           ),
                           child: Row(
                             children: [
                               Container(
-                                width: 44.w,
-                                height: 44.h,
+                                width: 48.w,
+                                height: 48.h,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: isSelected
-                                        ? Colors.grey.shade200
-                                        : const Color(0xFF820DFF),
-                                    width: 2,
+                                    color: isSelected ? Colors.white : const Color(0xFF820DFF),
+                                    width: 3,
                                   ),
                                 ),
                                 child: ClipOval(
@@ -1385,14 +1523,14 @@ class _CalendarviewState extends State<Calendarview> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 12.w),
+                              SizedBox(width: 16.w),
                               Expanded(
                                 child: Text(
-                                  'My Lovely Tomy',
+                                  'No pet selected',
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: isSelected ? Colors.white : Colors.black,
+                                    color: isSelected ? Colors.white : Colors.black87,
                                   ),
                                 ),
                               ),
@@ -1401,58 +1539,48 @@ class _CalendarviewState extends State<Calendarview> {
                         ),
                       );
                     }
+
                     final pet = petProvider.pets[index - 1];
-                    final bool isSelected = pet.id == currentSelectedId;
+                    final isSelected = pet.id == currentSelectedId;
 
                     return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedPetId = pet.id;
-                        });
-                        Navigator.pop(context);
+                      onTap: () async {
+                        setState(() => _selectedPetId = pet.id);
+                        await _saveSelectedPetId(pet.id);
+                        if (mounted) Navigator.pop(context);
                       },
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+                        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                         decoration: BoxDecoration(
-                          color: isSelected
-                              ? const Color(0xFF820DFF)
-                              : const Color(0xFFF4F7F6),
-                          borderRadius: BorderRadius.circular(18.r),
+                          color: isSelected ? const Color(0xFF820DFF) : const Color(0xFFF4F7F6),
+                          borderRadius: BorderRadius.circular(16.r),
                         ),
                         child: Row(
                           children: [
                             Container(
-                              width: 44.w,
-                              height: 44.h,
+                              width: 48.w,
+                              height: 48.h,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: isSelected
-                                      ? Colors.grey.shade200
-                                      : const Color(0xFF820DFF),
-                                  width: 2,
+                                  color: isSelected ? Colors.white : const Color(0xFF820DFF),
+                                  width: 3,
                                 ),
                               ),
                               child: ClipOval(
                                 child: pet.imageBytes != null
-                                    ? Image.memory(
-                                  pet.imageBytes!,
-                                  fit: BoxFit.cover,
-                                )
-                                    : Image.asset(
-                                  'assets/images/a2.png',
-                                  fit: BoxFit.cover,
-                                ),
+                                    ? Image.memory(pet.imageBytes!, fit: BoxFit.cover)
+                                    : Image.asset('assets/images/a2.png', fit: BoxFit.cover),
                               ),
                             ),
-                            SizedBox(width: 12.w),
+                            SizedBox(width: 16.w),
                             Expanded(
                               child: Text(
                                 pet.name,
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: isSelected ? Colors.white : Colors.black,
+                                  color: isSelected ? Colors.white : Colors.black87,
                                 ),
                               ),
                             ),
@@ -1469,6 +1597,173 @@ class _CalendarviewState extends State<Calendarview> {
       },
     );
   }
+
+  // void _showPetPicker(PetProvider petProvider) {
+  //   if (!petProvider.hasPets) return;
+  //
+  //   showModalBottomSheet(
+  //     context: context,
+  //     backgroundColor: Colors.white,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+  //     ),
+  //     builder: (context) {
+  //       final currentSelectedId = _selectedPetId;
+  //
+  //       return SizedBox(
+  //         height: 320.h,
+  //         child: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           children: [
+  //             SizedBox(height: 8.h),
+  //             Container(
+  //               width: 40.w,
+  //               height: 4.h,
+  //               decoration: BoxDecoration(
+  //                 color: Colors.grey[300],
+  //                 borderRadius: BorderRadius.circular(20.r),
+  //               ),
+  //             ),
+  //             SizedBox(height: 12.h),
+  //             Text(
+  //               'Select Pet',
+  //               style: TextStyle(
+  //                 fontSize: 18.sp,
+  //                 fontWeight: FontWeight.w600,
+  //                 color: Colors.black,
+  //               ),
+  //             ),
+  //             SizedBox(height: 12.h),
+  //             Expanded(
+  //               child: ListView.separated(
+  //                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+  //                 itemCount: petProvider.pets.length + 1,
+  //                 separatorBuilder: (_, __) => SizedBox(height: 8.h),
+  //                 itemBuilder: (context, index) {
+  //                   if (index == 0) {
+  //                     final isSelected = currentSelectedId == null;
+  //                     return GestureDetector(
+  //                       onTap: () {
+  //                         setState(() {
+  //                           _selectedPetId = null;
+  //                         });
+  //                         Navigator.pop(context);
+  //                       },
+  //                       child: Container(
+  //                         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+  //                         decoration: BoxDecoration(
+  //                           color: isSelected
+  //                               ? const Color(0xFF820DFF)
+  //                               : const Color(0xFFF4F7F6),
+  //                           borderRadius: BorderRadius.circular(18.r),
+  //                         ),
+  //                         child: Row(
+  //                           children: [
+  //                             Container(
+  //                               width: 44.w,
+  //                               height: 44.h,
+  //                               decoration: BoxDecoration(
+  //                                 shape: BoxShape.circle,
+  //                                 border: Border.all(
+  //                                   color: isSelected
+  //                                       ? Colors.grey.shade200
+  //                                       : const Color(0xFF820DFF),
+  //                                   width: 2,
+  //                                 ),
+  //                               ),
+  //                               child: ClipOval(
+  //                                 child: Image.asset(
+  //                                   'assets/images/a2.png',
+  //                                   fit: BoxFit.cover,
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                             SizedBox(width: 12.w),
+  //                             Expanded(
+  //                               child: Text(
+  //                                 'My Lovely Tomy',
+  //                                 style: TextStyle(
+  //                                   fontSize: 16.sp,
+  //                                   fontWeight: FontWeight.w600,
+  //                                   color: isSelected ? Colors.white : Colors.black,
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                       ),
+  //                     );
+  //                   }
+  //                   final pet = petProvider.pets[index - 1];
+  //                   final bool isSelected = pet.id == currentSelectedId;
+  //
+  //                   return GestureDetector(
+  //                     onTap: () {
+  //                       setState(() {
+  //                         _selectedPetId = pet.id;
+  //                       });
+  //                       Navigator.pop(context);
+  //                     },
+  //                     child: Container(
+  //                       padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
+  //                       decoration: BoxDecoration(
+  //                         color: isSelected
+  //                             ? const Color(0xFF820DFF)
+  //                             : const Color(0xFFF4F7F6),
+  //                         borderRadius: BorderRadius.circular(18.r),
+  //                       ),
+  //                       child: Row(
+  //                         children: [
+  //                           Container(
+  //                             width: 44.w,
+  //                             height: 44.h,
+  //                             decoration: BoxDecoration(
+  //                               shape: BoxShape.circle,
+  //                               border: Border.all(
+  //                                 color: isSelected
+  //                                     ? Colors.grey.shade200
+  //                                     : const Color(0xFF820DFF),
+  //                                 width: 2,
+  //                               ),
+  //                             ),
+  //                             child: ClipOval(
+  //                               child: pet.imageBytes != null
+  //                                   ? Image.memory(
+  //                                 pet.imageBytes!,
+  //                                 fit: BoxFit.cover,
+  //                               )
+  //                                   : Image.asset(
+  //                                 'assets/images/a2.png',
+  //                                 fit: BoxFit.cover,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                           SizedBox(width: 12.w),
+  //                           Expanded(
+  //                             child: Text(
+  //                               pet.name,
+  //                               style: TextStyle(
+  //                                 fontSize: 16.sp,
+  //                                 fontWeight: FontWeight.w600,
+  //                                 color: isSelected ? Colors.white : Colors.black,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   );
+  //                 },
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+
 
   Widget _buildActivitiesList(List<Activity> activities) {
     final hasActivities = activities.isNotEmpty;
@@ -1588,6 +1883,8 @@ class _CalendarviewState extends State<Calendarview> {
       ],
     );
   }
+
+
 
   Widget _buildSettingList() {
     final activityNotifier = Provider.of<ActivityNotifier>(context);
@@ -1795,417 +2092,11 @@ class _CalendarviewState extends State<Calendarview> {
 
 
 
-  Widget _buildActivityCard(Activity activity, int index) {
-    final DateTime effectiveDateTime = (activity.hasReminder &&
-        activity.reminderDateTime != null)
-        ? activity.reminderDateTime!
-        : activity.dateTime;
-    final String activityName = activity.name.toLowerCase();
-
-    final bool isDrink = activityName == 'drink';
-
-    final bool isEat = activityName == 'eat';
-    final bool isTreat = activityName == 'treat';
-    final bool isGrooming = activityName == 'grooming';
-    final bool isMedication = activityName == 'medication';
-    final bool isVaccination = activityName == 'vaccination';
-    final bool isWeight = activityName == 'weight';
-    final bool isHeight = activityName == 'height';
-    final bool isTemperature = activityName == 'temperature';
-    final bool isHealth = activityName == 'health condition';
-    final bool isAccident = activityName == 'accident';
-    final bool isJournal = activityName == 'journal';
-    final bool isCleaning = activityName == 'cleaning';
-
-    final bool isWalk = activityName == 'walk';
-    final bool isPlay = activityName == 'play';
-    final bool isCrate = activityName == 'crate';
-    final bool isTraining = activityName == 'training';
-    final bool isSleep = activityName == 'sleep';
-    final bool isTimerActivity =
-        isWalk || isPlay || isCrate || isTraining || isSleep;
-
-    final bool hasNote = activity.note != null && activity.note!.isNotEmpty;
-
-    String distanceText = '';
-    String durationText = '';
-    String displayName = activity.name;
-    if (isTimerActivity) {
-      if (isWalk && activity.food != null && activity.food!.isNotEmpty) {
-        distanceText = activity.food!;
-      }
-
-      durationText = activity.displayDuration;
-    } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
-      String food = activity.food!;
-      final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
-      final match = quantityRegex.firstMatch(food);
-
-      if (match != null) {
-        distanceText = match.group(1)?.trim() ?? '';
-        String namePart = match.group(2)?.trim() ?? '';
-        if (namePart.isNotEmpty) {
-          displayName = namePart;
-        }
-      } else {
-        // If no quantity pattern found, treat the whole string as the name
-        displayName = food;
-      }
-    }
-
-    return Dismissible(
-      key: Key(
-        'activity_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}',
-      ),
-      background: _buildSwipeBackground(isLeft: true),
-      secondaryBackground: _buildSwipeBackground(isLeft: false),
-      confirmDismiss: (direction) async {
-        if (direction == DismissDirection.endToStart) {
-          return await _showDeleteConfirmation(activity);
-        }
-        _editActivity(activity);
-        return false;
-      },
-      onDismissed: (direction) {
-        if (direction == DismissDirection.endToStart) {
-          final activityNotifier =
-          Provider.of<ActivityNotifier>(context, listen: false);
-          final reminderNotifier =
-          Provider.of<ReminderNotifier>(context, listen: false);
-
-          if (activity.reminderId != null) {
-            reminderNotifier.cancelReminder(activity.reminderId!);
-          }
-          activityNotifier.deleteActivity(activity);
-        }
-      },
-      child: Card(
-        margin: EdgeInsets.symmetric(vertical: 4.h),
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        color: const Color(0xFFF4F7F6),
-        child: Container(
-          padding: EdgeInsets.all(10.w),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Container(
-                          width: 70.w,
-                          height: 70.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-
-                            color: Colors.white,
-
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-
-                          child: Center(
-                            child: ClipOval(
-                              child: Image.asset(
-                                activity.imagePath,
-
-                                fit: BoxFit.cover,
-
-                                width: 54.w,
-
-                                height: 54.h,
-
-                                errorBuilder: (_, __, ___) => Icon(
-                                  Icons.pets,
-                                  color: activity.color,
-                                  size: 28.w,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        if (activity.hasReminder &&
-                            activity.reminderDateTime != null)
-                          Positioned(
-                            top: -2,
-                            right: -2,
-                            child: Container(
-                              width: 16.w,
-                              height: 16.h,
-                              decoration: BoxDecoration(
-                                color: Colors.orange,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 1.5,
-                                ),
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  Icons.notifications,
-                                  size: 10.w,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(width: 12.w),
-
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 20,
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    if (isDrink && distanceText.isNotEmpty)
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            activity.name,
-                                            style: TextStyle(
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          SizedBox(height: 4.h),
-                                          Text(
-                                            distanceText,
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF7D7D7D),
-                                            ),
-                                          ),
-                                          SizedBox(height: 4.h),
-                                          Text(
-                                            displayName,
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: const Color(0xFF7D7D7D),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    else ...[
-                                      Text(
-                                        displayName,
-                                        style: TextStyle(
-                                          fontSize: 18.sp,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(height: 6.h),
-                                      if (isTimerActivity)
-                                        Row(
-                                          children: [
-                                            if (distanceText.isNotEmpty)
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.directions_walk,
-                                                    size: 16.sp,
-                                                    color: const Color(
-                                                      0xFF7D7D7D,
-                                                    ),
-                                                  ),
-                                                  SizedBox(width: 4.w),
-                                                  Text(
-                                                    distanceText,
-                                                    style: TextStyle(
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                      FontWeight.bold,
-                                                      color: const Color(
-                                                        0xFF7D7D7D,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            SizedBox(width: 5.w),
-                                            if (durationText.isNotEmpty)
-                                              Text(
-                                                durationText,
-                                                style: TextStyle(
-                                                  fontSize: 14.sp,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: const Color(
-                                                    0xFF7D7D7D,
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
-                                        )
-                                      else if ((isEat ||
-                                          isTreat ||
-                                          isGrooming ||
-                                          isMedication ||
-                                          isVaccination ||
-                                          isWeight ||
-                                          isHeight ||
-                                          isTemperature ||
-                                          isHealth ||
-                                          isAccident ||
-                                          isJournal ||
-                                          isCleaning) &&
-                                          activity.food != null &&
-                                          activity.food!.isNotEmpty)
-                                        Text(
-                                          activity.food!,
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xFF7D7D7D),
-                                          ),
-                                        ),
-                                    ],
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-
-                                children: [
-                                  Text(
-                                    DateFormat(
-                                      'MMM dd, yyyy',
-                                    ).format(effectiveDateTime).toLowerCase(),
-
-                                    style: TextStyle(
-                                      fontSize: 12.sp,
-                                      color: activity.hasReminder ? Colors.orange : Colors.grey[700],
-                                    ),
-                                  ),
-
-                                  SizedBox(height: 5.h),
-
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-
-                                    children: [
-                                      Icon(
-                                        activity.hasReminder ? Icons.notifications_active : Icons.access_time,
-                                        size: 16.w,
-                                        color: activity.hasReminder ? Colors.orange : Colors.grey[600],
-                                      ),
-
-                                      SizedBox(width: 4.w),
-
-                                      Text(
-                                        DateFormat(
-                                          'hh:mm a',
-                                        ).format(effectiveDateTime),
-
-                                        style: TextStyle(
-                                          fontSize: 17.sp,
-                                          color: activity.hasReminder ? Colors.orange : Colors.grey[600],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
-              const Divider(thickness: 1, height: 1, color: Color(0xFFCBE4DC)),
-
-              SizedBox(height: 2.h),
-
-              if (hasNote)
-                Padding(
-                  padding: EdgeInsets.only(top: 8.h),
-
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-
-                    children: [
-                      SizedBox(width: 8.w),
-
-                      Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-
-                          children: [
-                            Text(
-                              'Note:',
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.grey[800],
-                              ),
-                            ),
-
-                            SizedBox(width: 5.w),
-
-                            Expanded(
-                              child: Text(
-                                activity.note!,
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-
-
-
-
   // Widget _buildActivityCard(Activity activity, int index) {
+  //   final DateTime effectiveDateTime = (activity.hasReminder &&
+  //       activity.reminderDateTime != null)
+  //       ? activity.reminderDateTime!
+  //       : activity.dateTime;
   //   final String activityName = activity.name.toLowerCase();
   //
   //   final bool isDrink = activityName == 'drink';
@@ -2263,21 +2154,28 @@ class _CalendarviewState extends State<Calendarview> {
   //     key: Key(
   //       'activity_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}',
   //     ),
-  //
   //     background: _buildSwipeBackground(isLeft: true),
-  //
   //     secondaryBackground: _buildSwipeBackground(isLeft: false),
-  //
   //     confirmDismiss: (direction) async {
   //       if (direction == DismissDirection.endToStart) {
   //         return await _showDeleteConfirmation(activity);
   //       }
-  //
-  //       // _editActivity(activity);
-  //
+  //       _editActivity(activity);
   //       return false;
   //     },
+  //     onDismissed: (direction) {
+  //       if (direction == DismissDirection.endToStart) {
+  //         final activityNotifier =
+  //         Provider.of<ActivityNotifier>(context, listen: false);
+  //         final reminderNotifier =
+  //         Provider.of<ReminderNotifier>(context, listen: false);
   //
+  //         if (activity.reminderId != null) {
+  //           reminderNotifier.cancelReminder(activity.reminderId!);
+  //         }
+  //         activityNotifier.deleteActivity(activity);
+  //       }
+  //     },
   //     child: Card(
   //       margin: EdgeInsets.symmetric(vertical: 4.h),
   //       elevation: 0,
@@ -2503,11 +2401,11 @@ class _CalendarviewState extends State<Calendarview> {
   //                                 Text(
   //                                   DateFormat(
   //                                     'MMM dd, yyyy',
-  //                                   ).format(activity.dateTime).toLowerCase(),
+  //                                   ).format(effectiveDateTime).toLowerCase(),
   //
   //                                   style: TextStyle(
   //                                     fontSize: 12.sp,
-  //                                     color: Colors.grey[700],
+  //                                     color: activity.hasReminder ? Colors.orange : Colors.grey[700],
   //                                   ),
   //                                 ),
   //
@@ -2518,9 +2416,9 @@ class _CalendarviewState extends State<Calendarview> {
   //
   //                                   children: [
   //                                     Icon(
-  //                                       Icons.access_time,
+  //                                       activity.hasReminder ? Icons.notifications_active : Icons.access_time,
   //                                       size: 16.w,
-  //                                       color: Colors.grey[600],
+  //                                       color: activity.hasReminder ? Colors.orange : Colors.grey[600],
   //                                     ),
   //
   //                                     SizedBox(width: 4.w),
@@ -2528,11 +2426,11 @@ class _CalendarviewState extends State<Calendarview> {
   //                                     Text(
   //                                       DateFormat(
   //                                         'hh:mm a',
-  //                                       ).format(activity.dateTime),
+  //                                       ).format(effectiveDateTime),
   //
   //                                       style: TextStyle(
   //                                         fontSize: 17.sp,
-  //                                         color: Colors.grey[600],
+  //                                         color: activity.hasReminder ? Colors.orange : Colors.grey[600],
   //                                       ),
   //                                     ),
   //                                   ],
@@ -2599,6 +2497,345 @@ class _CalendarviewState extends State<Calendarview> {
   //     ),
   //   );
   // }
+
+
+
+  Widget _buildActivityCard(Activity activity, int index) {
+    final DateTime effectiveDateTime = (activity.hasReminder && activity.reminderDateTime != null)
+        ? activity.reminderDateTime!
+        : activity.dateTime;
+
+    final String activityName = activity.name.toLowerCase();
+
+    final bool isDrink = activityName == 'drink';
+    final bool isEat = activityName == 'eat';
+    final bool isTreat = activityName == 'treat';
+    final bool isGrooming = activityName == 'grooming';
+    final bool isMedication = activityName == 'medication';
+    final bool isVaccination = activityName == 'vaccination';
+    final bool isWeight = activityName == 'weight';
+    final bool isHeight = activityName == 'height';
+    final bool isTemperature = activityName == 'temperature';
+    final bool isHealth = activityName == 'health condition';
+    final bool isAccident = activityName == 'accident';
+    final bool isJournal = activityName == 'journal';
+    final bool isCleaning = activityName == 'cleaning';
+
+    final bool isWalk = activityName == 'walk';
+    final bool isPlay = activityName == 'play';
+    final bool isCrate = activityName == 'crate';
+    final bool isTraining = activityName == 'training';
+    final bool isSleep = activityName == 'sleep';
+    final bool isTimerActivity = isWalk || isPlay || isCrate || isTraining || isSleep;
+
+    final bool hasNote = activity.note != null && activity.note!.isNotEmpty;
+
+    String distanceText = '';
+    String durationText = '';
+    String displayName = activity.name;
+
+    if (isTimerActivity) {
+      if (isWalk && activity.food != null && activity.food!.isNotEmpty) {
+        distanceText = activity.food!;
+      }
+      durationText = activity.displayDuration;
+    } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
+      String food = activity.food!;
+      final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
+      final match = quantityRegex.firstMatch(food);
+
+      if (match != null) {
+        distanceText = match.group(1)?.trim() ?? '';
+        String namePart = match.group(2)?.trim() ?? '';
+        if (namePart.isNotEmpty) {
+          displayName = namePart;
+        }
+      } else {
+        displayName = food;
+      }
+    }
+
+    return Dismissible(
+      key: Key('activity_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}'),
+      background: _buildSwipeBackground(isLeft: true),
+      secondaryBackground: _buildSwipeBackground(isLeft: false),
+      confirmDismiss: (direction) async {
+        if (direction == DismissDirection.endToStart) {
+          return await _showDeleteConfirmation(activity);
+        }
+        _editActivity(activity);
+        return false;
+      },
+      onDismissed: (direction) {
+        if (direction == DismissDirection.endToStart) {
+          final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
+          final reminderNotifier = Provider.of<ReminderNotifier>(context, listen: false);
+
+          if (activity.reminderId != null) {
+            reminderNotifier.cancelReminder(activity.reminderId!);
+          }
+          activityNotifier.deleteActivity(activity);
+        }
+      },
+      child: Card(
+        margin: EdgeInsets.symmetric(vertical: 4.h),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        color: const Color(0xFFF4F7F6),
+        child: Container(
+          padding: EdgeInsets.all(10.w),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Container(
+                      width: 70.w,
+                      height: 70.h,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 4,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: ClipOval(
+                          child: Image.asset(
+                            activity.imagePath,
+                            fit: BoxFit.cover,
+                            width: 54.w,
+                            height: 54.h,
+                            errorBuilder: (_, __, ___) => Icon(
+                              Icons.pets,
+                              color: activity.color,
+                              size: 28.w,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (isDrink && distanceText.isNotEmpty)
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            activity.name,
+                                            style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(height: 4.h),
+                                          Text(
+                                            distanceText,
+                                            style: TextStyle(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xFF7D7D7D),
+                                            ),
+                                          ),
+                                          SizedBox(height: 4.h),
+                                          Text(
+                                            displayName,
+                                            style: TextStyle(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: const Color(0xFF7D7D7D),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    else ...[
+                                      Text(
+                                        displayName,
+                                        style: TextStyle(
+                                          fontSize: 18.sp,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 6.h),
+                                      if (isTimerActivity)
+                                        Row(
+                                          children: [
+                                            if (distanceText.isNotEmpty)
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.directions_walk,
+                                                    size: 16.sp,
+                                                    color: const Color(0xFF7D7D7D),
+                                                  ),
+                                                  SizedBox(width: 4.w),
+                                                  Text(
+                                                    distanceText,
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: const Color(0xFF7D7D7D),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            SizedBox(width: 5.w),
+                                            if (durationText.isNotEmpty)
+                                              Text(
+                                                durationText,
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: const Color(0xFF7D7D7D),
+                                                ),
+                                              ),
+                                          ],
+                                        )
+                                      else if ((isEat ||
+                                          isTreat ||
+                                          isGrooming ||
+                                          isMedication ||
+                                          isVaccination ||
+                                          isWeight ||
+                                          isHeight ||
+                                          isTemperature ||
+                                          isHealth ||
+                                          isAccident ||
+                                          isJournal ||
+                                          isCleaning) &&
+                                          activity.food != null &&
+                                          activity.food!.isNotEmpty)
+                                        Text(
+                                          activity.food!,
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF7D7D7D),
+                                          ),
+                                        ),
+                                    ],
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    DateFormat('MMM dd, yyyy')
+                                        .format(effectiveDateTime)
+                                        .toLowerCase(),
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.h),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.access_time,
+                                        size: 16.w,
+                                        color: Colors.grey[600],
+                                      ),
+                                      SizedBox(width: 4.w),
+                                      Text(
+                                        DateFormat('hh:mm a')
+                                            .format(effectiveDateTime),
+                                        style: TextStyle(
+                                          fontSize: 17.sp,
+                                          color: Colors.grey[600],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(thickness: 1, height: 1, color: Color(0xFFCBE4DC)),
+              SizedBox(height: 2.h),
+              if (hasNote)
+                Padding(
+                  padding: EdgeInsets.only(top: 8.h),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 8.w),
+                      Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Note:',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey[800],
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            Expanded(
+                              child: Text(
+                                activity.note!,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
+
+
+
+
+
+
 
   Widget _buildSwipeBackground({required bool isLeft}) {
     return Container(

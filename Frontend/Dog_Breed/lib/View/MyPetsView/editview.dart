@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:dog_breed/View_model/home/Pet.dart';
@@ -37,7 +36,128 @@ class _EditviewState extends State<Editview> {
   late Uint8List? _selectedImage;
 
   final List<String> _genders = ['Male', 'Female', 'Other'];
-  List<String> _breeds = ['Affenpinscher', 'Afghan Hound', 'African Hunting Dog', 'Airedale', 'American Staffordshire Terrier', 'Appenzeller', 'Australian Terrier', 'Basenji', 'Basset', 'Beagle', 'Bedlington Terrier', 'Bernese Mountain Dog', 'Black-and-tan Coonhound', 'Blenheim Spaniel', 'Bloodhound', 'Bluetick', 'Border Collie', 'Border Terrier', 'Borzoi', 'Boston Bull', 'Bouvier Des Flandres', 'Boxer', 'Brabancon Griffon', 'Briard', 'Brittany Spaniel', 'Bull Mastiff', 'Cairn', 'Cardigan', 'Chesapeake Bay Retriever', 'Chihuahua', 'Chow', 'Clumber', 'Cocker Spaniel', 'Collie', 'Curly-coated Retriever', 'Dandie Dinmont', 'Dhole', 'Dingo', 'Doberman', 'English Foxhound', 'English Setter', 'English Springer', 'EntleBucher', 'Eskimo Dog', 'Flat-coated Retriever', 'French Bulldog', 'German Shepherd', 'German Short-haired Pointer', 'Giant Schnauzer', 'Golden Retriever', 'Gordon Setter', 'Great Dane', 'Great Pyrenees', 'Greater Swiss Mountain Dog', 'Groenendael', 'Ibizan Hound', 'Irish Setter', 'Irish Terrier', 'Irish Water Spaniel', 'Irish Wolfhound', 'Italian Greyhound', 'Japanese Spaniel', 'Keeshond', 'Kelpie', 'Kerry Blue Terrier', 'Komondor', 'Kuvasz', 'Labrador Retriever', 'Lakeland Terrier', 'Leonberg', 'Lhasa', 'Malamute', 'Malinois', 'Maltese Dog', 'Mexican Hairless', 'Miniature Pinscher', 'Miniature Poodle', 'Miniature Schnauzer', 'Newfoundland', 'Norfolk Terrier', 'Norwegian Elkhound', 'Norwich Terrier', 'Old English Sheepdog', 'Otterhound', 'Papillon', 'Pekinese', 'Pembroke', 'Pomeranian', 'Pug', 'Redbone', 'Rhodesian Ridgeback', 'Rottweiler', 'Saint Bernard', 'Saluki', 'Samoyed', 'Schipperke', 'Scotch Terrier', 'Scottish Deerhound', 'Sealyham Terrier', 'Shetland Sheepdog', 'Shih-Tzu', 'Siberian Husky', 'Silky Terrier', 'Soft-coated Wheaten Terrier', 'Staffordshire Bullterrier', 'Standard Poodle', 'Standard Schnauzer', 'Sussex Spaniel', 'Tibetan Mastiff', 'Tibetan Terrier', 'Toy Poodle', 'Toy Terrier', 'Vizsla', 'Walker Hound', 'Weimaraner', 'Welsh Springer Spaniel', 'West Highland White Terrier', 'Whippet', 'Wire-haired Fox Terrier', 'Yorkshire Terrier'];
+  final List<String> _breeds = [
+    'Affenpinscher',
+    'Afghan Hound',
+    'African Hunting Dog',
+    'Airedale',
+    'American Staffordshire Terrier',
+    'Appenzeller',
+    'Australian Terrier',
+    'Basenji',
+    'Basset',
+    'Beagle',
+    'Bedlington Terrier',
+    'Bernese Mountain Dog',
+    'Black-and-tan Coonhound',
+    'Blenheim Spaniel',
+    'Bloodhound',
+    'Bluetick',
+    'Border Collie',
+    'Border Terrier',
+    'Borzoi',
+    'Boston Bull',
+    'Bouvier Des Flandres',
+    'Boxer',
+    'Brabancon Griffon',
+    'Briard',
+    'Brittany Spaniel',
+    'Bull Mastiff',
+    'Cairn',
+    'Cardigan',
+    'Chesapeake Bay Retriever',
+    'Chihuahua',
+    'Chow',
+    'Clumber',
+    'Cocker Spaniel',
+    'Collie',
+    'Curly-coated Retriever',
+    'Dandie Dinmont',
+    'Dhole',
+    'Dingo',
+    'Doberman',
+    'English Foxhound',
+    'English Setter',
+    'English Springer',
+    'EntleBucher',
+    'Eskimo Dog',
+    'Flat-coated Retriever',
+    'French Bulldog',
+    'German Shepherd',
+    'German Short-haired Pointer',
+    'Giant Schnauzer',
+    'Golden Retriever',
+    'Gordon Setter',
+    'Great Dane',
+    'Great Pyrenees',
+    'Greater Swiss Mountain Dog',
+    'Groenendael',
+    'Ibizan Hound',
+    'Irish Setter',
+    'Irish Terrier',
+    'Irish Water Spaniel',
+    'Irish Wolfhound',
+    'Italian Greyhound',
+    'Japanese Spaniel',
+    'Keeshond',
+    'Kelpie',
+    'Kerry Blue Terrier',
+    'Komondor',
+    'Kuvasz',
+    'Labrador Retriever',
+    'Lakeland Terrier',
+    'Leonberg',
+    'Lhasa',
+    'Malamute',
+    'Malinois',
+    'Maltese Dog',
+    'Mexican Hairless',
+    'Miniature Pinscher',
+    'Miniature Poodle',
+    'Miniature Schnauzer',
+    'Newfoundland',
+    'Norfolk Terrier',
+    'Norwegian Elkhound',
+    'Norwich Terrier',
+    'Old English Sheepdog',
+    'Otterhound',
+    'Papillon',
+    'Pekinese',
+    'Pembroke',
+    'Pomeranian',
+    'Pug',
+    'Redbone',
+    'Rhodesian Ridgeback',
+    'Rottweiler',
+    'Saint Bernard',
+    'Saluki',
+    'Samoyed',
+    'Schipperke',
+    'Scotch Terrier',
+    'Scottish Deerhound',
+    'Sealyham Terrier',
+    'Shetland Sheepdog',
+    'Shih-Tzu',
+    'Siberian Husky',
+    'Silky Terrier',
+    'Soft-coated Wheaten Terrier',
+    'Staffordshire Bullterrier',
+    'Standard Poodle',
+    'Standard Schnauzer',
+    'Sussex Spaniel',
+    'Tibetan Mastiff',
+    'Tibetan Terrier',
+    'Toy Poodle',
+    'Toy Terrier',
+    'Vizsla',
+    'Walker Hound',
+    'Weimaraner',
+    'Welsh Springer Spaniel',
+    'West Highland White Terrier',
+    'Whippet',
+    'Wire-haired Fox Terrier',
+    'Yorkshire Terrier',
+  ];
   final ImagePicker _picker = ImagePicker();
 
   @override
@@ -73,29 +193,31 @@ class _EditviewState extends State<Editview> {
         if (!_breeds.contains(pet.breed)) {
           // Check if it's a formatting issue (e.g. "N02085782 Japanese_spaniel")
           String normalized = pet.breed;
-          
+
           // Try to clean up the breed name if it looks like "ID Name" or has underscores
           if (normalized.contains(' ')) {
-             final parts = normalized.split(' ');
-             // If first part is alphanumeric ID (e.g. N02085782), remove it
-             if (parts.length > 1 && parts[0].length > 3 && parts[0].contains(RegExp(r'[0-9]'))) {
-                normalized = parts.sublist(1).join(' ');
-             }
+            final parts = normalized.split(' ');
+            // If first part is alphanumeric ID (e.g. N02085782), remove it
+            if (parts.length > 1 &&
+                parts[0].length > 3 &&
+                parts[0].contains(RegExp(r'[0-9]'))) {
+              normalized = parts.sublist(1).join(' ');
+            }
           }
           normalized = normalized.replaceAll('_', ' ');
-          
+
           // Check if normalized version exists (case-insensitive)
           final match = _breeds.firstWhere(
             (b) => b.toLowerCase() == normalized.toLowerCase(),
             orElse: () => '',
           );
-          
+
           if (match.isNotEmpty) {
             _selectedBreed = match;
           } else {
             // If still not found, add the original breed to the list to prevent crash
             _breeds.add(pet.breed);
-            _breeds.sort(); 
+            _breeds.sort();
             _selectedBreed = pet.breed;
           }
         } else {
@@ -108,7 +230,7 @@ class _EditviewState extends State<Editview> {
         } else {
           _selectedGender = _genders.first;
         }
-        
+
         _selectedDate = pet.birthday;
 
         // Only use widget imageBytes if pet doesn't have one
@@ -161,9 +283,9 @@ class _EditviewState extends State<Editview> {
         });
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to pick image: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to pick image: $e')));
     }
   }
 
@@ -231,39 +353,53 @@ class _EditviewState extends State<Editview> {
                       ),
                       child: _selectedImage != null
                           ? ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.memory(
-                          _selectedImage!,
-                          width: 130,
-                          height: 130,
-                          fit: BoxFit.cover,
-                        ),
-                      )
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.memory(
+                                _selectedImage!,
+                                width: 130,
+                                height: 130,
+                                fit: BoxFit.cover,
+                              ),
+                            )
                           : widget.imageBytes != null
                           ? ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.memory(
-                          widget.imageBytes!,
-                          width: 130,
-                          height: 130,
-                          fit: BoxFit.cover,
-                        ),
-                      )
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.memory(
+                                widget.imageBytes!,
+                                width: 130,
+                                height: 130,
+                                fit: BoxFit.cover,
+                              ),
+                            )
                           : const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.camera_alt, color: Colors.grey, size: 32),
-                          SizedBox(height: 3),
-                          Text('Photo', style: TextStyle(color: Colors.grey, fontSize: 14)),
-                        ],
-                      ),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.grey,
+                                  size: 32,
+                                ),
+                                SizedBox(height: 3),
+                                Text(
+                                  'Photo',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
                     ),
                   ),
                 ),
                 SizedBox(height: 23.h),
                 const Text(
                   'Pet Name',
-                  style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86)),
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 12,
+                    color: Color(0xFF6F7D86),
+                  ),
                 ),
                 SizedBox(height: 4.h),
                 SizedBox(
@@ -278,7 +414,10 @@ class _EditviewState extends State<Editview> {
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
                       ),
                     ),
                   ),
@@ -286,7 +425,11 @@ class _EditviewState extends State<Editview> {
                 SizedBox(height: 17.h),
                 Text(
                   'Breed',
-                  style: TextStyle(fontFamily: 'Inter', fontSize: 12.sp, color: const Color(0xFF6F7D86)),
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 12.sp,
+                    color: const Color(0xFF6F7D86),
+                  ),
                 ),
                 SizedBox(height: 4.h),
                 Center(
@@ -302,20 +445,27 @@ class _EditviewState extends State<Editview> {
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                        ),
                       ),
                       items: _breeds
-                          .map((b) => DropdownMenuItem(
-                        value: b,
-                        child: Text(
-                          b,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                      ))
+                          .map(
+                            (b) => DropdownMenuItem(
+                              value: b,
+                              child: Text(
+                                b,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                            ),
+                          )
                           .toList(),
                       onChanged: (v) => setState(() => _selectedBreed = v),
-                      icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.grey,
+                      ),
                       dropdownColor: Colors.white,
                       isExpanded: true,
                     ),
@@ -324,7 +474,11 @@ class _EditviewState extends State<Editview> {
                 SizedBox(height: 17.h),
                 Text(
                   'Gender',
-                  style: TextStyle(fontFamily: 'Inter', fontSize: 12.sp, color: const Color(0xFF6F7D86)),
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 12.sp,
+                    color: const Color(0xFF6F7D86),
+                  ),
                 ),
                 SizedBox(height: 4.h),
                 Center(
@@ -339,16 +493,21 @@ class _EditviewState extends State<Editview> {
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
                         ),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 0),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 0,
+                        ),
                       ),
                       items: _genders
-                          .map((g) => DropdownMenuItem(
-                        value: g,
-                        child: Text(g),
-                      ))
+                          .map(
+                            (g) => DropdownMenuItem(value: g, child: Text(g)),
+                          )
                           .toList(),
                       onChanged: (v) => setState(() => _selectedGender = v),
-                      icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Colors.grey,
+                      ),
                       dropdownColor: Colors.white,
                       isExpanded: true,
                     ),
@@ -357,7 +516,11 @@ class _EditviewState extends State<Editview> {
                 SizedBox(height: 17.h),
                 const Text(
                   'Birthday',
-                  style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86)),
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 12,
+                    color: Color(0xFF6F7D86),
+                  ),
                 ),
                 SizedBox(height: 4.h),
                 GestureDetector(
@@ -378,11 +541,17 @@ class _EditviewState extends State<Editview> {
                               ? '${_selectedDate!.day.toString().padLeft(2, '0')}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.year}'
                               : 'DD-MM-YYYY',
                           style: TextStyle(
-                            color: _selectedDate != null ? Colors.black87 : Colors.grey,
+                            color: _selectedDate != null
+                                ? Colors.black87
+                                : Colors.grey,
                             fontSize: 16,
                           ),
                         ),
-                        const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
+                        const Icon(
+                          Icons.calendar_today,
+                          color: Colors.grey,
+                          size: 20,
+                        ),
                       ],
                     ),
                   ),
@@ -413,20 +582,24 @@ class _EditviewState extends State<Editview> {
                       imageBytes: _selectedImage,
                     );
 
-                    final petProvider = Provider.of<PetProvider>(context, listen: false);
+                    final petProvider = Provider.of<PetProvider>(
+                      context,
+                      listen: false,
+                    );
 
                     if (widget.isEditing && widget.petId != null) {
                       // Update existing pet
                       pet.id = widget.petId!;
-                      final success = await petProvider.updatePet(widget.petId!, pet);
+                      final success = await petProvider.updatePet(
+                        widget.petId!,
+                        pet,
+                      );
                       if (success) {
                         // ScaffoldMessenger.of(context).showSnackBar(
                         //   const SnackBar(content: Text('Pet updated successfully!')),
                         // );
                         Navigator.pop(context, true);
-                      } else {
-
-                      }
+                      } else {}
                     } else {
                       // Add new pet
                       final success = await petProvider.addPet(pet);
@@ -451,7 +624,6 @@ class _EditviewState extends State<Editview> {
     );
   }
 }
-
 
 // import 'dart:typed_data';
 //

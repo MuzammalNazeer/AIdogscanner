@@ -282,7 +282,7 @@ class _AddReminderViewState extends State<AddReminderView> {
           child: ListView(
             children: [
               if (hasActivities)
-                ...activities.map(_buildActivityCard).toList()
+                ...activities.map(_buildAddReminderCard).toList()
               else
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -410,47 +410,297 @@ class _AddReminderViewState extends State<AddReminderView> {
   }
 
 
-  Widget _buildActivityCard(Activity activity) {
-    final String activityName = activity.name.toLowerCase();
-    final bool isDrink = activityName == 'drink';
-    final bool isEat = activityName == 'eat';
-    final bool isTreat = activityName == 'treat';
-    final bool isGrooming = activityName == 'grooming';
-    final bool isMedication = activityName == 'medication';
-    final bool isVaccination = activityName == 'vaccination';
-    final bool isWeight = activityName == 'weight';
-    final bool isHeight = activityName == 'height';
-    final bool isTemperature = activityName == 'temperature';
-    final bool isHealth = activityName == 'health condition';
-    final bool isAccident = activityName == 'accident';
-    final bool isJournal = activityName == 'journal';
-    final bool isCleaning = activityName == 'cleaning';
-    final bool isWalk = activityName == 'walk';
-    final bool isPlay = activityName == 'play';
-    final bool isCrate = activityName == 'crate';
-    final bool isTraining = activityName == 'training';
-    final bool isSleep = activityName == 'sleep';
-    final bool isTimerActivity = isWalk || isPlay || isCrate|| isTraining ||isSleep;
-    final bool hasNote = activity.note != null && activity.note!.isNotEmpty;
+  // Widget _buildAddReminderCard(Activity activity) {
+  //   final String activityName = activity.name.toLowerCase();
+  //   final bool isDrink = activityName == 'drink';
+  //   final bool isEat = activityName == 'eat';
+  //   final bool isTreat = activityName == 'treat';
+  //   final bool isGrooming = activityName == 'grooming';
+  //   final bool isMedication = activityName == 'medication';
+  //   final bool isVaccination = activityName == 'vaccination';
+  //   final bool isWeight = activityName == 'weight';
+  //   final bool isHeight = activityName == 'height';
+  //   final bool isTemperature = activityName == 'temperature';
+  //   final bool isHealth = activityName == 'health condition';
+  //   final bool isAccident = activityName == 'accident';
+  //   final bool isJournal = activityName == 'journal';
+  //   final bool isCleaning = activityName == 'cleaning';
+  //   final bool isWalk = activityName == 'walk';
+  //   final bool isPlay = activityName == 'play';
+  //   final bool isCrate = activityName == 'crate';
+  //   final bool isTraining = activityName == 'training';
+  //   final bool isSleep = activityName == 'sleep';
+  //   final bool isTimerActivity = isWalk || isPlay || isCrate|| isTraining ||isSleep;
+  //   final bool hasNote = activity.note != null && activity.note!.isNotEmpty;
+  //
+  //   String distanceText = '';
+  //   String durationText = '';
+  //   String displayName = activity.name;
+  //
+  //   if (isTimerActivity) {
+  //     if (isWalk && activity.food != null && activity.food!.isNotEmpty) {
+  //       distanceText = activity.food!;
+  //     }
+  //
+  //     durationText = activity.displayDuration;
+  //   } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
+  //     String food = activity.food!;
+  //     final RegExp quantityRegex =
+  //         RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
+  //     final match = quantityRegex.firstMatch(food);
+  //
+  //     if (match != null) {
+  //       distanceText = match.group(1)?.trim() ?? '';
+  //       String namePart = match.group(2)?.trim() ?? '';
+  //       if (namePart.isNotEmpty) {
+  //         displayName = namePart;
+  //       }
+  //     } else {
+  //       displayName = food;
+  //     }
+  //   }
+  //
+  //   final DateTime effectiveDateTime = (activity.hasReminder &&
+  //           activity.reminderDateTime != null)
+  //       ? activity.reminderDateTime!
+  //       : activity.dateTime;
+  //   final String dateLabel = DateFormat('EEE MMM d').format(effectiveDateTime);
+  //   final String timeLabel = DateFormat('h:mm a').format(effectiveDateTime);
+  //
+  //   return Dismissible(
+  //     key: Key(
+  //       'activity_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}',
+  //     ),
+  //     background: _buildSwipeBackground(isLeft: true),
+  //     secondaryBackground: _buildSwipeBackground(isLeft: false),
+  //     confirmDismiss: (direction) async {
+  //       if (direction == DismissDirection.endToStart) {
+  //         return await _showDeleteConfirmation(activity);
+  //       }
+  //       _editActivity(activity);
+  //       return false;
+  //     },
+  //     child: Card(
+  //       margin: EdgeInsets.symmetric(vertical: 4.h),
+  //       elevation: 0,
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(10.r), // Slightly smaller border radius
+  //       ),
+  //       color: const Color(0xFFF4F7F6),
+  //       child: InkWell(
+  //         onTap: () => _showReminderOptions(activity),
+  //         child: Container(
+  //           padding: EdgeInsets.all(12.w), // Reduced padding
+  //           child: Column(
+  //             children: [
+  //               Row(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   // Activity Image with reminder badge
+  //                   Stack(
+  //                     children: [
+  //                       Container(
+  //                         width: 56.w, // Smaller image container
+  //                         height: 56.h,
+  //                         decoration: BoxDecoration(
+  //                           shape: BoxShape.circle,
+  //                           color: Colors.white,
+  //                           boxShadow: [
+  //                             BoxShadow(
+  //                               color: Colors.black.withOpacity(0.05), // Lighter shadow
+  //                               blurRadius: 3,
+  //                               offset: const Offset(0, 1),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                         child: Center(
+  //                           child: ClipOval(
+  //                             child: Image.asset(
+  //                               activity.imagePath,
+  //                               fit: BoxFit.cover,
+  //                               width: 44.w, // Smaller image
+  //                               height: 44.h,
+  //                               errorBuilder: (_, __, ___) => Icon(
+  //                                 Icons.pets,
+  //                                 color: activity.color,
+  //                                 size: 24.w, // Smaller icon
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       // Reminder indicator badge
+  //                       if (activity.hasReminder && activity.reminderDateTime != null)
+  //                         Positioned(
+  //                           top: 4,
+  //                           right: 0,
+  //                           child: Container(
+  //                             width: 16.w,
+  //                             height: 16.h,
+  //                             decoration: BoxDecoration(
+  //                               color: Colors.orange,
+  //                               shape: BoxShape.circle,
+  //                               border: Border.all(
+  //                                 color: Colors.white,
+  //                                 width: 1.5,
+  //                               ),
+  //                             ),
+  //                             child: Center(
+  //                               child: Icon(
+  //                                 Icons.notifications,
+  //                                 size: 8.w, // Smaller icon
+  //                                 color: Colors.white,
+  //                               ),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                     ],
+  //                   ),
+  //                   SizedBox(width: 10.w),
+  //                   Expanded(
+  //                     child: Padding(
+  //                       padding: const EdgeInsets.symmetric(vertical: 8),
+  //                       child: Row(
+  //                         crossAxisAlignment: CrossAxisAlignment.center,
+  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                         children: [
+  //                           Expanded(
+  //                             child: Text(
+  //                               displayName,
+  //                               style: TextStyle(
+  //                                 fontSize: 16.sp,
+  //                                 fontWeight: FontWeight.bold,
+  //                               ),
+  //                               maxLines: 1,
+  //                               overflow: TextOverflow.ellipsis,
+  //                             ),
+  //                           ),
+  //                           SizedBox(width: 8.w),
+  //                           Column(
+  //                             crossAxisAlignment: CrossAxisAlignment.end,
+  //                             children: [
+  //                               // Text(
+  //                               //   '$dateLabel $timeLabel',
+  //                               //   style: TextStyle(
+  //                               //     fontSize: 11.sp,
+  //                               //     color: Colors.grey[700],
+  //                               //   ),
+  //                               // ),
+  //                               Text(
+  //                                 DateFormat('EEE MMM d').format(activity.dateTime).toLowerCase(),
+  //                                 style: TextStyle(
+  //                                   fontSize: 13.5.sp,
+  //                                   color: const Color(0xFF555555),
+  //                                   height: 1.1,
+  //                                 ),
+  //                               ),
+  //                               SizedBox(height: 4.h),
+  //                               Row(
+  //                                 mainAxisSize: MainAxisSize.min,
+  //                                 children: [
+  //                                   Icon(
+  //                                     activity.hasReminder
+  //                                         ? Icons.notifications_active
+  //                                         : Icons.notifications_active,
+  //                                     size: 18.w,
+  //                                     color: activity.hasReminder
+  //                                         ? Colors.orange
+  //                                         : const Color(0xFF868686),
+  //                                   ),
+  //                                   SizedBox(width: 4.w),
+  //                                   Text(
+  //                                     timeLabel,
+  //                                     style: TextStyle(
+  //                                       fontSize: 15.sp,
+  //                                       color: activity.hasReminder
+  //                                           ? Colors.orange
+  //                                           : const Color(0xFF868686),
+  //                                       fontWeight: FontWeight.bold,
+  //                                     ),
+  //                                   ),
+  //                                 ],
+  //                               ),
+  //                             ],
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //
+  //
+  //               // SizedBox(height: 8.h),
+  //               // const Divider(
+  //               //   thickness: 0.5, // Thinner divider
+  //               //   height: 1,
+  //               //   color: Color(0xFFCBE4DC),
+  //               // ),
+  //               // SizedBox(height: 2.h),
+  //               //
+  //               // if (hasNote)
+  //               //   Padding(
+  //               //     padding: EdgeInsets.only(top: 8.h),
+  //               //
+  //               //     child: Row(
+  //               //       crossAxisAlignment: CrossAxisAlignment.start,
+  //               //
+  //               //       children: [
+  //               //         SizedBox(width: 8.w),
+  //               //
+  //               //         Expanded(
+  //               //           child: Row(
+  //               //             crossAxisAlignment: CrossAxisAlignment.start,
+  //               //
+  //               //             children: [
+  //               //               Text(
+  //               //                 'Note:',
+  //               //                 style: TextStyle(
+  //               //                   fontSize: 16.sp,
+  //               //                   fontWeight: FontWeight.w600,
+  //               //                   color: Colors.grey[800],
+  //               //                 ),
+  //               //               ),
+  //               //
+  //               //               SizedBox(width: 5.w),
+  //               //
+  //               //               Expanded(
+  //               //                 child: Text(
+  //               //                   activity.note!,
+  //               //                   style: TextStyle(
+  //               //                     fontSize: 16.sp,
+  //               //                     color: Colors.black87,
+  //               //                   ),
+  //               //                 ),
+  //               //               ),
+  //               //             ],
+  //               //           ),
+  //               //         ),
+  //               //       ],
+  //               //     ),
+  //               //   ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
-    String distanceText = '';
-    String durationText = '';
+  Widget _buildAddReminderCard(Activity activity) {
+    final String activityName = activity.name.toLowerCase();
+
+    // Only needed for displayName adjustment in drink case
     String displayName = activity.name;
 
-    if (isTimerActivity) {
-      if (isWalk && activity.food != null && activity.food!.isNotEmpty) {
-        distanceText = activity.food!;
-      }
-
-      durationText = activity.displayDuration;
-    } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
+    if (activityName == 'drink' &&
+        activity.food != null &&
+        activity.food!.isNotEmpty) {
       String food = activity.food!;
-      final RegExp quantityRegex =
-          RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
+      final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
       final match = quantityRegex.firstMatch(food);
 
       if (match != null) {
-        distanceText = match.group(1)?.trim() ?? '';
         String namePart = match.group(2)?.trim() ?? '';
         if (namePart.isNotEmpty) {
           displayName = namePart;
@@ -460,17 +710,17 @@ class _AddReminderViewState extends State<AddReminderView> {
       }
     }
 
-    final DateTime effectiveDateTime = (activity.hasReminder &&
-            activity.reminderDateTime != null)
+    final DateTime effectiveDateTime = (activity.hasReminder && activity.reminderDateTime != null)
         ? activity.reminderDateTime!
         : activity.dateTime;
-    final String dateLabel = DateFormat('EEE MMM d').format(effectiveDateTime);
+
+    final String dateLabel = DateFormat('EEE MMM d').format(effectiveDateTime).toLowerCase();
     final String timeLabel = DateFormat('h:mm a').format(effectiveDateTime);
 
+    final bool hasReminder = activity.hasReminder && activity.reminderDateTime != null;
+
     return Dismissible(
-      key: Key(
-        'activity_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}',
-      ),
+      key: Key('reminder_${activity.name}_${activity.dateTime.millisecondsSinceEpoch}'),
       background: _buildSwipeBackground(isLeft: true),
       secondaryBackground: _buildSwipeBackground(isLeft: false),
       confirmDismiss: (direction) async {
@@ -484,201 +734,128 @@ class _AddReminderViewState extends State<AddReminderView> {
         margin: EdgeInsets.symmetric(vertical: 4.h),
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r), // Slightly smaller border radius
+          borderRadius: BorderRadius.circular(10.r),
         ),
         color: const Color(0xFFF4F7F6),
         child: InkWell(
           onTap: () => _showReminderOptions(activity),
           child: Container(
-            padding: EdgeInsets.all(12.w), // Reduced padding
-            child: Column(
+            padding: EdgeInsets.all(12.w),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                // Avatar + optional reminder badge
+                Stack(
                   children: [
-                    // Activity Image with reminder badge
-                    Stack(
-                      children: [
-                        Container(
-                          width: 56.w, // Smaller image container
-                          height: 56.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.05), // Lighter shadow
-                                blurRadius: 3,
-                                offset: const Offset(0, 1),
-                              ),
-                            ],
+                    Container(
+                      width: 56.w,
+                      height: 56.h,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 3,
+                            offset: const Offset(0, 1),
                           ),
-                          child: Center(
-                            child: ClipOval(
-                              child: Image.asset(
-                                activity.imagePath,
-                                fit: BoxFit.cover,
-                                width: 44.w, // Smaller image
-                                height: 44.h,
-                                errorBuilder: (_, __, ___) => Icon(
-                                  Icons.pets,
-                                  color: activity.color,
-                                  size: 24.w, // Smaller icon
-                                ),
-                              ),
+                        ],
+                      ),
+                      child: Center(
+                        child: ClipOval(
+                          child: Image.asset(
+                            activity.imagePath,
+                            fit: BoxFit.cover,
+                            width: 44.w,
+                            height: 44.h,
+                            errorBuilder: (_, __, ___) => Icon(
+                              Icons.pets,
+                              color: activity.color,
+                              size: 24.w,
                             ),
                           ),
-                        ),
-                        // Reminder indicator badge
-                        if (activity.hasReminder && activity.reminderDateTime != null)
-                          Positioned(
-                            top: 4,
-                            right: 0,
-                            child: Container(
-                              width: 16.w,
-                              height: 16.h,
-                              decoration: BoxDecoration(
-                                color: Colors.orange,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.white,
-                                  width: 1.5,
-                                ),
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  Icons.notifications,
-                                  size: 8.w, // Smaller icon
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                    SizedBox(width: 10.w),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                displayName,
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            SizedBox(width: 8.w),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                // Text(
-                                //   '$dateLabel $timeLabel',
-                                //   style: TextStyle(
-                                //     fontSize: 11.sp,
-                                //     color: Colors.grey[700],
-                                //   ),
-                                // ),
-                                Text(
-                                  DateFormat('EEE MMM d').format(activity.dateTime).toLowerCase(),
-                                  style: TextStyle(
-                                    fontSize: 13.5.sp,
-                                    color: const Color(0xFF555555),
-                                    height: 1.1,
-                                  ),
-                                ),
-                                SizedBox(height: 4.h),
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      activity.hasReminder
-                                          ? Icons.notifications_active
-                                          : Icons.notifications_active,
-                                      size: 18.w,
-                                      color: activity.hasReminder
-                                          ? Colors.orange
-                                          : const Color(0xFF868686),
-                                    ),
-                                    SizedBox(width: 4.w),
-                                    Text(
-                                      timeLabel,
-                                      style: TextStyle(
-                                        fontSize: 15.sp,
-                                        color: activity.hasReminder
-                                            ? Colors.orange
-                                            : const Color(0xFF868686),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
                         ),
                       ),
                     ),
+                    if (hasReminder)
+                      Positioned(
+                        top: 4,
+                        right: 0,
+                        child: Container(
+                          width: 16.w,
+                          height: 16.h,
+                          decoration: BoxDecoration(
+                            color: Colors.orange,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 1.5),
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.notifications,
+                              size: 8.w,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
 
+                SizedBox(width: 12.w),
 
-                // SizedBox(height: 8.h),
-                // const Divider(
-                //   thickness: 0.5, // Thinner divider
-                //   height: 1,
-                //   color: Color(0xFFCBE4DC),
-                // ),
-                // SizedBox(height: 2.h),
-                //
-                // if (hasNote)
-                //   Padding(
-                //     padding: EdgeInsets.only(top: 8.h),
-                //
-                //     child: Row(
-                //       crossAxisAlignment: CrossAxisAlignment.start,
-                //
-                //       children: [
-                //         SizedBox(width: 8.w),
-                //
-                //         Expanded(
-                //           child: Row(
-                //             crossAxisAlignment: CrossAxisAlignment.start,
-                //
-                //             children: [
-                //               Text(
-                //                 'Note:',
-                //                 style: TextStyle(
-                //                   fontSize: 16.sp,
-                //                   fontWeight: FontWeight.w600,
-                //                   color: Colors.grey[800],
-                //                 ),
-                //               ),
-                //
-                //               SizedBox(width: 5.w),
-                //
-                //               Expanded(
-                //                 child: Text(
-                //                   activity.note!,
-                //                   style: TextStyle(
-                //                     fontSize: 16.sp,
-                //                     color: Colors.black87,
-                //                   ),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       ],
-                //     ),
-                //   ),
+                // Main content
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          displayName,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            dateLabel,
+                            style: TextStyle(
+                              fontSize: 13.5.sp,
+                              color: hasReminder ? Colors.orange : const Color(0xFF555555),
+                              height: 1.1,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                hasReminder ? Icons.notifications_active : Icons.access_time,
+                                size: 18.w,
+                                color: hasReminder ? Colors.orange : const Color(0xFF868686),
+                              ),
+                              SizedBox(width: 4.w),
+                              Text(
+                                timeLabel,
+                                style: TextStyle(
+                                  fontSize: 15.sp,
+                                  color: hasReminder ? Colors.orange : const Color(0xFF868686),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -686,8 +863,6 @@ class _AddReminderViewState extends State<AddReminderView> {
       ),
     );
   }
-
-
 
 
 
