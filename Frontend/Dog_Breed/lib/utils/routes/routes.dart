@@ -24,12 +24,14 @@ import 'package:path/path.dart';
 import '../../View/Calendar/add_activities_View.dart';
 import '../../View/Calendar/allActivityView.dart';
 import '../../View/Calendar/calendarView.dart';
+import '../../View/Calendar/reminderList.dart';
 import '../../View/Calendar/walkView.dart';
 import '../../View/Favourites/favouritesView.dart';
 import '../../View/Favourites/myFavouritesview.dart';
 import '../../View/History/historyView.dart';
 import '../../View/MyPetsView/AddMyPetView.dart';
 import '../../View/MyPetsView/dogtreslutsave.dart';
+import '../../View/MyPetsView/editview.dart';
 import '../../View/ProfileView/Ownerprofileview.dart';
 import '../../View/ProfileView/listSave.dart';
 import '../../View/Splash/splashView.dart';
@@ -110,6 +112,19 @@ class Routes {
       case RoutesName.listsave:
         return MaterialPageRoute(
             builder: (BuildContext context) =>   Listsave());
+      case RoutesName.edit:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+            builder: (BuildContext context) => Editview(
+              petName: args?['petName'],
+              petId: args?['petId'],
+              imageBytes: args?['imageBytes'],
+              isEditing: args?['isEditing'] ?? false,
+            ));
+
+        case RoutesName.reminder:
+        return MaterialPageRoute(
+            builder: (BuildContext context) =>   Reminderlist());
       case RoutesName.myAdd:
         return MaterialPageRoute(
           builder: (BuildContext context) =>    Addmypetview(),settings: settings,);

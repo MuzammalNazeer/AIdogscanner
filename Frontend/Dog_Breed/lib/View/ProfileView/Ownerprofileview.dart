@@ -207,13 +207,19 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                       height: 60.h,
                       child: Row(
                         children: [
-                          IconButton(
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.black,
-                              size: 20,
+                          GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              width: 40.w,
+                              height: 40.h,
+                              decoration:  BoxDecoration(
+                                color: Colors.grey.shade200,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20.sp),
+                              ),
                             ),
-                            onPressed: () => Navigator.pop(context),
                           ),
                           const Expanded(
                             child: Center(

@@ -33,7 +33,7 @@ class Calendarview extends StatefulWidget {
 }
 
 class _CalendarviewState extends State<Calendarview> {
-  int _selectedTab = 0;
+  // int _selectedTab = 0; // Managed by HomeViewModel
   int _selectedProgressTab = 0; // 0: Calendar, 1: Chart, 2: Compare
 
   DateTime _selectedDate = DateTime.now();
@@ -51,7 +51,7 @@ class _CalendarviewState extends State<Calendarview> {
   final List<Map<String, dynamic>> _allActivityTypes = [
     {
       'name': 'Veterinary',
-      'image': 'assets/images/Veter.png',
+      'image': 'assets/images/Veterinary.png',
       'color': const Color(0xFFB9E6FF),
     },
     {
@@ -61,7 +61,7 @@ class _CalendarviewState extends State<Calendarview> {
     },
     {
       'name': 'Eat',
-      'image': 'assets/images/eat.png',
+      'image': 'assets/images/image 1556.png',
       'color': const Color(0xFFFFE3B9),
     },
     {
@@ -81,7 +81,7 @@ class _CalendarviewState extends State<Calendarview> {
     },
     {
       'name': 'Walk',
-      'image': 'assets/images/walk.png',
+      'image': 'assets/images/walk1.png',
       'color': const Color(0xFFF2F2F2),
     },
     {
@@ -121,7 +121,7 @@ class _CalendarviewState extends State<Calendarview> {
     },
     {
       'name': 'Vaccination',
-      'image': 'assets/images/vacti.png',
+      'image': 'assets/images/vacc.png',
       'color': const Color(0xFFFFEAE3),
     },
     {
@@ -146,7 +146,7 @@ class _CalendarviewState extends State<Calendarview> {
     },
     {
       'name': 'Accident',
-      'image': 'assets/images/acc.png',
+      'image': 'assets/images/healt.png',
       'color': const Color(0xFFFDFFD9),
     },
     {
@@ -218,7 +218,7 @@ class _CalendarviewState extends State<Calendarview> {
     return days;
   }
 
-  bool get _shouldShowCalendar => _selectedTab == 0 || _selectedTab == 1;
+  // bool get _shouldShowCalendar => _selectedTab == 0 || _selectedTab == 1;
 
   @override
   void didChangeDependencies() {
@@ -232,6 +232,10 @@ class _CalendarviewState extends State<Calendarview> {
 
   @override
   Widget build(BuildContext context) {
+    final homeViewModel = Provider.of<HomeViewModel>(context);
+    final int _selectedTab = homeViewModel.calendarTabIndex;
+    final bool _shouldShowCalendar = _selectedTab == 0 || _selectedTab == 1;
+
     final now = DateTime.now();
     final activityNotifier = Provider.of<ActivityNotifier>(context);
     final petProvider = Provider.of<PetProvider>(context);
@@ -295,8 +299,8 @@ class _CalendarviewState extends State<Calendarview> {
                         _showNoPetsDialog(context);
                         return;
                       }
-                      setState(() => _selectedTab = index);
-                      if (_shouldShowCalendar) {
+                      homeViewModel.calendarTabIndex = index;
+                      if (index == 0 || index == 1) {
                         WidgetsBinding.instance.addPostFrameCallback(
                               (_) => _scrollToSelectedDate(),
                         );
@@ -574,18 +578,18 @@ class _CalendarviewState extends State<Calendarview> {
             ],
 
             // Tab Content
-            Expanded(child: _buildTabContent(filteredActivities)),
+            Expanded(child: _buildTabContent(filteredActivities, _selectedTab)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTabContent(List<Activity> filteredActivities) {
+  Widget _buildTabContent(List<Activity> filteredActivities, int selectedTab) {
     final petProvider = Provider.of<PetProvider>(context);
     final effectivePetId = _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
 
-    switch (_selectedTab) {
+    switch (selectedTab) {
       case 0: // Activities
 
         return _buildActivitiesList(filteredActivities);
@@ -683,11 +687,11 @@ class _CalendarviewState extends State<Calendarview> {
 
   Widget _buildProgressChartView(List<Activity> dailyActivities) {
     final List<Map<String, dynamic>> progressItems = [
-      {'title': 'Eat', 'icon': 'assets/images/eat.png'},
+      {'title': 'Eat', 'icon': 'assets/images/image 1556.png'},
       {'title': 'Pee', 'icon': 'assets/images/62.png'},
       {'title': 'Drink', 'icon': 'assets/images/drink.png'},
       {'title': 'Poop', 'icon': 'assets/images/poop.png'},
-      {'title': 'Walk', 'icon': 'assets/images/walk.png'},
+      {'title': 'Walk', 'icon': 'assets/images/walk1.png'},
       {'title': 'Play', 'icon': 'assets/images/play.png'},
       {'title': 'Crate', 'icon': 'assets/images/crate.png'},
       {'title': 'Sleep', 'icon': 'assets/images/sleep.png'},
@@ -696,7 +700,7 @@ class _CalendarviewState extends State<Calendarview> {
       {'title': 'Grooming', 'icon': 'assets/images/grooming.png'},
       {'title': 'Cleaning', 'icon': 'assets/images/73.png'},
       {'title': 'Medication', 'icon': 'assets/images/medi.png'},
-      {'title': 'Vaccination', 'icon': 'assets/images/vacti.png'},
+      {'title': 'Vaccination', 'icon': 'assets/images/vacc.png'},
       {'title': 'Weight', 'icon': 'assets/images/weight.png'},
       {'title': 'Height', 'icon': 'assets/images/height.png'},
       {'title': 'Temperature', 'icon': 'assets/images/temp.png'},
@@ -1233,10 +1237,10 @@ class _CalendarviewState extends State<Calendarview> {
           displayName = pet.name;
           displayImage = pet.imageBytes;
         } catch (_) {
-          displayName = 'All Pets';
+
         }
       } else {
-        displayName = 'All Pets';
+
       }
     }
 
@@ -1384,7 +1388,7 @@ class _CalendarviewState extends State<Calendarview> {
                               SizedBox(width: 12.w),
                               Expanded(
                                 child: Text(
-                                  'All Pets',
+                                  'My Lovely Tomy',
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w600,

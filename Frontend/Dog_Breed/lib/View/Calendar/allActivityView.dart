@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/activity_provider.dart';
+import '../../View_model/home/home_view_model.dart';
 import '../../activity_model.dart';
 import '../../config/components/CustomDatePicker.dart';
 import '../../utils/routes/routes_name.dart';
@@ -477,7 +478,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         await reminderNotifier.cancelReminder(_currentActivity!.reminderId!);
       }
 
-      Navigator.pop(context); // close loading
+      Navigator.pop(context);
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -489,12 +490,11 @@ class _AllactivityviewState extends State<Allactivityview> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       );
+      final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+      homeViewModel.selectedIndex = 1; // Index for Calendar
+      homeViewModel.calendarTabIndex = 0; // Index for Calendar
+      Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
 
-      Future.delayed(const Duration(milliseconds: 800), () {
-        if (context.mounted) {
-          Navigator.pop(context, true);
-        }
-      });
     } catch (e) {
       Navigator.pop(context);
       _showErrorSnackBar('Failed to save: $e');

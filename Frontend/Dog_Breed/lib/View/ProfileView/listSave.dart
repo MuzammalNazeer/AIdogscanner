@@ -51,16 +51,50 @@ class _ListsaveState extends State<Listsave> {
       body: SafeArea(
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 19.w),
-                child: Column(
+              // Padding(
+              //   padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 19.w),
+              //   child: Column(
+              //     children: [
+              //       _buildHeader(),
+              //     ],
+              //   ),
+              // ),
+
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                height: 60.h,
+                child: Row(
                   children: [
-                    _buildHeader(),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        width: 40.w,
+                        height: 40.h,
+                        decoration:  BoxDecoration(
+                          color: Colors.grey.shade200,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20.sp),
+                        ),
+                      ),
+                    ),
+                    const Expanded(
+                      child: Center(
+                        child: Text(
+                          "Recent Scans",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 48.w),
                   ],
                 ),
               ),
-
-
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(horizontal: 19.w),

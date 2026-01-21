@@ -11,6 +11,8 @@ class PetProvider with ChangeNotifier {
 
   List<Pet> get pets => List.unmodifiable(_pets);
 
+
+
   // Key for shared preferences
   static const String _petsKey = 'saved_pets';
 
@@ -86,10 +88,8 @@ class PetProvider with ChangeNotifier {
       if (index != -1) {
         updatedPet.id = id; // Keep the same ID
         _pets[index] = updatedPet;
+        notifyListeners(); // Update UI immediately
         final success = await _savePets();
-        if (success) {
-          notifyListeners();
-        }
         return success;
       }
       return false;

@@ -73,6 +73,7 @@ dependencies:
   intl_phone_number_input: ^0.7.4
   country_picker: ^2.0.20
   lottie: ^3.1.0
+  dropdown_search: ^5.0.6
 dependency_overrides:
   tflite_flutter: ^0.9.5
   image: ^3.2.2

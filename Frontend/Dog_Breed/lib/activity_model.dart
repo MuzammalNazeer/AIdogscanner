@@ -180,7 +180,7 @@ class Activity {
 //
 // class Activity {
 //   final String name;
-//   final String imagePath; // e.g., 'assets/images/walk.svg' or 'assets/images/eat.png'
+//   final String imagePath; // e.g., 'assets/images/walking1.png' or 'assets/images/feed.png'
 //   final Color color;
 //
 //   // Saved activity fields

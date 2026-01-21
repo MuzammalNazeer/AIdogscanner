@@ -45,7 +45,7 @@ class _ProfileviewState extends State<Profileview> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
               child: Container(
-                height: 550.h,
+                height: 610.h,
                 decoration: BoxDecoration(
                   color: const Color(0xFF686868).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(18.r),

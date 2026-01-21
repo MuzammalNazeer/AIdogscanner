@@ -8,7 +8,9 @@ import 'package:provider/provider.dart';
 
 import '../../View_model/PetProvider.dart';
 import '../../View_model/home/Pet.dart';
+import '../../View_model/home/home_view_model.dart';
 import '../../config/components/roundButton.dart';
+import '../../utils/routes/routes_name.dart';
 
 class Addmypetview extends StatefulWidget {
   const Addmypetview({super.key});
@@ -157,19 +159,23 @@ class _AddmypetviewState extends State<Addmypetview> {
 
     Provider.of<PetProvider>(context, listen: false).addPet(newPet);
 
-    // Show success message
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Pet added successfully!'),
-        backgroundColor: Colors.green,
-        duration: Duration(seconds: 1),
-      ),
-    );
-
-    // Navigate back after a short delay
-    Future.delayed(const Duration(milliseconds: 500), () {
-      Navigator.pop(context);
-    });
+    // // Show success message
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(
+    //     content: Text('Pet added successfully!'),
+    //     backgroundColor: Colors.green,
+    //     duration: Duration(seconds: 1),
+    //   ),
+    // );
+    final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+    homeViewModel.selectedIndex = 2; // Index for MyPetsView
+    Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
+    // Navigate to MyPetsView via Dashboard
+    // Future.delayed(const Duration(milliseconds: 500), () {
+    //   final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+    //   homeViewModel.selectedIndex = 2; // Index for MyPetsView
+    //   Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
+    // });
   }
 
   @override
@@ -543,7 +549,9 @@ class _AddmypetviewState extends State<Addmypetview> {
 
 
 
-//
+
+
+
 //
 // import 'dart:typed_data';
 // import 'dart:convert';
@@ -565,11 +573,19 @@ class _AddmypetviewState extends State<Addmypetview> {
 //
 // class _AddmypetviewState extends State<Addmypetview> {
 //   final TextEditingController _nameController = TextEditingController();
+//   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 //
 //   Uint8List? _imageBytes;
 //   String? _breedName;
 //   String? _selectedGender;
 //   DateTime? _selectedDate;
+//
+//   // Track validation state
+//   bool _isNameValid = true;
+//   bool _isGenderValid = true;
+//   bool _isDateValid = true;
+//   bool _isBreedValid = true;
+//
 //   Future<void> _selectDate(BuildContext context) async {
 //     final DateTime? picked = await showDatePicker(
 //       context: context,
@@ -580,26 +596,34 @@ class _AddmypetviewState extends State<Addmypetview> {
 //         return Theme(
 //           data: ThemeData.light().copyWith(
 //             colorScheme: const ColorScheme.light(
-//               primary: Color(0xFF820DFF), // Your app's primary color
+//               primary: Color(0xFF820DFF),
 //               onPrimary: Colors.white,
 //             ),
-//             dialogBackgroundColor: Colors.white, // White background for dialog
+//             dialogBackgroundColor: Colors.white,
 //           ),
 //           child: child!,
 //         );
 //       },
 //     );
-//     if (picked != null) setState(() => _selectedDate = picked);
+//     if (picked != null) {
+//       setState(() {
+//         _selectedDate = picked;
+//         _isDateValid = true; // Reset validation when date is selected
+//       });
+//     }
 //   }
+//
 //   final List<String> _genders = ['Male', 'Female', 'Other'];
 //
 //   @override
 //   void initState() {
 //     super.initState();
 //
-//     _nameController.text = 'Super Dog';
-//     _selectedGender = 'Male';
-//     _selectedDate = DateTime(2020, 2, 2);
+//     // REMOVE DEFAULT VALUES - Let user input them
+//     // _nameController.text = 'Super Dog';
+//     // _selectedGender = 'Male';
+//     // _selectedDate = DateTime(2020, 2, 2);
+//
 //     WidgetsBinding.instance.addPostFrameCallback((_) {
 //       final args =
 //       ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
@@ -610,6 +634,7 @@ class _AddmypetviewState extends State<Addmypetview> {
 //         setState(() {
 //           _imageBytes = _parseImageData(scanData['imageBytes']);
 //           _breedName = _normalizeBreed(scanData['breedName']);
+//           _isBreedValid = _breedName != null && _breedName!.isNotEmpty && _breedName != 'Unknown Breed';
 //         });
 //       }
 //     });
@@ -634,18 +659,50 @@ class _AddmypetviewState extends State<Addmypetview> {
 //   }
 //
 //   void _savePet() {
-//     if (_nameController.text.isEmpty ||
-//         _breedName == null ||
-//         _selectedGender == null ||
-//         _selectedDate == null) {
+//     // Validate all fields
+//     bool isValid = true;
+//
+//     if (_nameController.text.trim().isEmpty) {
+//       setState(() => _isNameValid = false);
+//       isValid = false;
+//     } else {
+//       setState(() => _isNameValid = true);
+//     }
+//
+//     if (_breedName == null || _breedName!.isEmpty || _breedName == 'Unknown Breed') {
+//       setState(() => _isBreedValid = false);
+//       isValid = false;
+//     } else {
+//       setState(() => _isBreedValid = true);
+//     }
+//
+//     if (_selectedGender == null) {
+//       setState(() => _isGenderValid = false);
+//       isValid = false;
+//     } else {
+//       setState(() => _isGenderValid = true);
+//     }
+//
+//     if (_selectedDate == null) {
+//       setState(() => _isDateValid = false);
+//       isValid = false;
+//     } else {
+//       setState(() => _isDateValid = true);
+//     }
+//
+//     if (!isValid) {
 //       ScaffoldMessenger.of(context).showSnackBar(
-//         const SnackBar(content: Text('Please fill all fields')),
+//         const SnackBar(
+//           content: Text('Please fill all required fields'),
+//           backgroundColor: Colors.red,
+//           duration: Duration(seconds: 2),
+//         ),
 //       );
 //       return;
 //     }
 //
 //     final newPet = Pet(
-//       name: _nameController.text,
+//       name: _nameController.text.trim(),
 //       breed: _breedName!,
 //       gender: _selectedGender!,
 //       birthday: _selectedDate!,
@@ -654,7 +711,19 @@ class _AddmypetviewState extends State<Addmypetview> {
 //
 //     Provider.of<PetProvider>(context, listen: false).addPet(newPet);
 //
-//     Navigator.pop(context);
+//     // Show success message
+//     ScaffoldMessenger.of(context).showSnackBar(
+//       const SnackBar(
+//         content: Text('Pet added successfully!'),
+//         backgroundColor: Colors.green,
+//         duration: Duration(seconds: 1),
+//       ),
+//     );
+//
+//     // Navigate back after a short delay
+//     Future.delayed(const Duration(milliseconds: 500), () {
+//       Navigator.pop(context);
+//     });
 //   }
 //
 //   @override
@@ -680,7 +749,7 @@ class _AddmypetviewState extends State<Addmypetview> {
 //                           color: const Color(0xFFF3F6F3),
 //                           borderRadius: BorderRadius.circular(8.96),
 //                         ),
-//                         child:  Icon(CupertinoIcons.chevron_left,
+//                         child: Icon(CupertinoIcons.chevron_left,
 //                             size: 20.sp, color: Colors.black),
 //                       ),
 //                     ),
@@ -707,9 +776,14 @@ class _AddmypetviewState extends State<Addmypetview> {
 //                     decoration: BoxDecoration(
 //                       color: const Color(0xFFF3F6F3),
 //                       borderRadius: BorderRadius.circular(27.83),
+//                       border: Border.all(
+//                         color: _imageBytes == null ? Colors.grey.shade300 : Colors.transparent,
+//                         width: 1,
+//                       ),
 //                     ),
 //                     child: _imageBytes != null
 //                         ? ClipRRect(
+//                       borderRadius: BorderRadius.circular(27.83),
 //                       child: Image.memory(
 //                         _imageBytes!,
 //                         fit: BoxFit.cover,
@@ -717,60 +791,149 @@ class _AddmypetviewState extends State<Addmypetview> {
 //                     )
 //                         : Icon(
 //                       Icons.pets,
-//                       color: Colors.white.withOpacity(0.8),
+//                       color: Colors.grey.withOpacity(0.5),
 //                       size: 28.r,
 //                     ),
 //                   ),
 //                 ),
 //                 SizedBox(height: 23.h),
-//                 const Text('Pet Name', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
+//
+//                 // Pet Name Field with validation
+//                 Row(
+//                   children: [
+//                     Text(
+//                       'Pet Name',
+//                       style: TextStyle(
+//                         fontFamily: 'Inter',
+//                         fontSize: 12.sp,
+//                         color: const Color(0xFF6F7D86),
+//                       ),
+//                     ),
+//                     if (!_isNameValid)
+//                       Text(
+//                         ' (Required)',
+//                         style: TextStyle(
+//                           fontFamily: 'Inter',
+//                           fontSize: 12.sp,
+//                           color: Colors.red,
+//                         ),
+//                       ),
+//                   ],
+//                 ),
 //                 SizedBox(height: 4.h),
 //                 SizedBox(
 //                   height: 58.h,
-//                   child: Center(
-//                     child: TextField(
-//                       controller: _nameController,
-//                       decoration: InputDecoration(
-//                         filled: true,
-//                         fillColor: const Color(0xFFF5F5F5),
-//                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: BorderSide.none),
-//                         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+//                   child: TextField(
+//                     controller: _nameController,
+//                     decoration: InputDecoration(
+//                       filled: true,
+//                       fillColor: _isNameValid ? const Color(0xFFF5F5F5) : const Color(0xFFFFF0F0),
+//                       border: OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(12.r),
+//                         borderSide: BorderSide.none,
 //                       ),
+//                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+//                       hintText: 'Enter pet name',
+//                       hintStyle: const TextStyle(color: Colors.grey),
+//                       errorBorder: !_isNameValid
+//                           ? OutlineInputBorder(
+//                         borderRadius: BorderRadius.circular(12.r),
+//                         borderSide: const BorderSide(color: Colors.red, width: 1),
+//                       )
+//                           : null,
 //                     ),
+//                     onChanged: (value) {
+//                       if (value.trim().isNotEmpty) {
+//                         setState(() => _isNameValid = true);
+//                       }
+//                     },
 //                   ),
 //                 ),
 //
 //                 SizedBox(height: 16.h),
-//                 Text(
-//                   'Breed',
-//                   style: TextStyle(
-//                     fontFamily: 'Inter',
-//                     fontSize: 12.sp,
-//                     color: const Color(0xFF6F7D86),
-//                   ),
+//
+//                 // Breed Field with validation
+//                 Row(
+//                   children: [
+//                     Text(
+//                       'Breed',
+//                       style: TextStyle(
+//                         fontFamily: 'Inter',
+//                         fontSize: 12.sp,
+//                         color: const Color(0xFF6F7D86),
+//                       ),
+//                     ),
+//                     if (!_isBreedValid)
+//                       Text(
+//                         ' (Required)',
+//                         style: TextStyle(
+//                           fontFamily: 'Inter',
+//                           fontSize: 12.sp,
+//                           color: Colors.red,
+//                         ),
+//                       ),
+//                   ],
 //                 ),
 //                 SizedBox(height: 4.h),
-//                 Container(
-//                   width: double.infinity,
-//                   height: 58.h,
-//                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-//                   alignment: Alignment.centerLeft,
-//                   decoration: BoxDecoration(
-//                     color: const Color(0xFFF5F5F5),
-//                     borderRadius: BorderRadius.circular(12.r),
-//                   ),
-//                   child: Text(
-//                     _breedName ?? 'Unknown Breed',
-//                     style: TextStyle(
-//                       fontSize: 20.sp,
-//                       fontFamily: 'Inter',
-//                       color: const Color(0xFF000000),
+//                 GestureDetector(
+//                   onTap: () {
+//                     // You can add a breed selection dialog here
+//                     ScaffoldMessenger.of(context).showSnackBar(
+//                       const SnackBar(
+//                         content: Text('Breed is detected from scan. To change breed, please rescan.'),
+//                       ),
+//                     );
+//                   },
+//                   child: Container(
+//                     width: double.infinity,
+//                     height: 58.h,
+//                     padding: EdgeInsets.symmetric(horizontal: 16.w),
+//                     alignment: Alignment.centerLeft,
+//                     decoration: BoxDecoration(
+//                       color: _isBreedValid ? const Color(0xFFF5F5F5) : const Color(0xFFFFF0F0),
+//                       borderRadius: BorderRadius.circular(12.r),
+//                       border: !_isBreedValid
+//                           ? Border.all(color: Colors.red, width: 1)
+//                           : null,
 //                     ),
-//                     overflow: TextOverflow.ellipsis,
+//                     child: Text(
+//                       _breedName ?? 'Tap to scan for breed',
+//                       style: TextStyle(
+//                         fontSize: 16.sp,
+//                         fontFamily: 'Inter',
+//                         color: _breedName != null && _breedName != 'Unknown Breed'
+//                             ? const Color(0xFF000000)
+//                             : Colors.grey,
+//                       ),
+//                       overflow: TextOverflow.ellipsis,
+//                     ),
 //                   ),
 //                 ),
+//
 //                 SizedBox(height: 17.h),
-//                 Text('Gender', style: TextStyle(fontFamily: 'Inter', fontSize: 12.sp, color: const Color(0xFF6F7D86))),
+//
+//                 // Gender Field with validation
+//                 Row(
+//                   children: [
+//                     Text(
+//                       'Gender',
+//                       style: TextStyle(
+//                         fontFamily: 'Inter',
+//                         fontSize: 12.sp,
+//                         color: const Color(0xFF6F7D86),
+//                       ),
+//                     ),
+//                     if (!_isGenderValid)
+//                       Text(
+//                         ' (Required)',
+//                         style: TextStyle(
+//                           fontFamily: 'Inter',
+//                           fontSize: 12.sp,
+//                           color: Colors.red,
+//                         ),
+//                       ),
+//                   ],
+//                 ),
 //                 SizedBox(height: 4.h),
 //                 Center(
 //                   child: SizedBox(
@@ -779,23 +942,73 @@ class _AddmypetviewState extends State<Addmypetview> {
 //                       value: _selectedGender,
 //                       decoration: InputDecoration(
 //                         filled: true,
-//                         fillColor: const Color(0xFFF5F5F5),
+//                         fillColor: _isGenderValid ? const Color(0xFFF5F5F5) : const Color(0xFFFFF0F0),
 //                         border: OutlineInputBorder(
-//                             borderRadius: BorderRadius.circular(12.r),
-//                             borderSide: BorderSide.none
+//                           borderRadius: BorderRadius.circular(12.r),
+//                           borderSide: BorderSide.none,
 //                         ),
 //                         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 0),
+//                         hintText: 'Select gender',
+//                         errorBorder: !_isGenderValid
+//                             ? OutlineInputBorder(
+//                           borderRadius: BorderRadius.circular(12.r),
+//                           borderSide: const BorderSide(color: Colors.red, width: 1),
+//                         )
+//                             : null,
 //                       ),
-//                       items: _genders.map((g) => DropdownMenuItem(value: g, child: Text(g))).toList(),
-//                       onChanged: (v) => setState(() => _selectedGender = v),
+//                       items: [
+//                         const DropdownMenuItem<String>(
+//                           value: null,
+//                           child: Text(
+//                             'Select gender',
+//                             style: TextStyle(color: Colors.grey),
+//                           ),
+//                         ),
+//                         ..._genders.map((g) => DropdownMenuItem(
+//                           value: g,
+//                           child: Text(g),
+//                         )).toList(),
+//                       ],
+//                       onChanged: (v) {
+//                         setState(() {
+//                           _selectedGender = v;
+//                           if (v != null) _isGenderValid = true;
+//                         });
+//                       },
 //                       icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
 //                       dropdownColor: Colors.white,
 //                       isExpanded: true,
+//                       validator: (value) {
+//                         return value == null ? 'Please select gender' : null;
+//                       },
 //                     ),
 //                   ),
 //                 ),
+//
 //                 SizedBox(height: 17.h),
-//                 const Text('Birthday', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Color(0xFF6F7D86))),
+//
+//                 // Birthday Field with validation
+//                 Row(
+//                   children: [
+//                     Text(
+//                       'Birthday',
+//                       style: TextStyle(
+//                         fontFamily: 'Inter',
+//                         fontSize: 12.sp,
+//                         color: const Color(0xFF6F7D86),
+//                       ),
+//                     ),
+//                     if (!_isDateValid)
+//                       Text(
+//                         ' (Required)',
+//                         style: TextStyle(
+//                           fontFamily: 'Inter',
+//                           fontSize: 12.sp,
+//                           color: Colors.red,
+//                         ),
+//                       ),
+//                   ],
+//                 ),
 //                 SizedBox(height: 4.h),
 //                 GestureDetector(
 //                   onTap: () => _selectDate(context),
@@ -804,8 +1017,11 @@ class _AddmypetviewState extends State<Addmypetview> {
 //                     padding: const EdgeInsets.symmetric(horizontal: 16),
 //                     alignment: Alignment.center,
 //                     decoration: BoxDecoration(
-//                       color: Colors.white,
+//                       color: _isDateValid ? const Color(0xFFF5F5F5) : const Color(0xFFFFF0F0),
 //                       borderRadius: BorderRadius.circular(12.r),
+//                       border: !_isDateValid
+//                           ? Border.all(color: Colors.red, width: 1)
+//                           : Border.all(color: Colors.grey.shade300, width: 1),
 //                     ),
 //                     child: Row(
 //                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -815,24 +1031,60 @@ class _AddmypetviewState extends State<Addmypetview> {
 //                               ? '${_selectedDate!.day.toString().padLeft(2, '0')}-${_selectedDate!.month.toString().padLeft(2, '0')}-${_selectedDate!.year}'
 //                               : 'DD-MM-YYYY',
 //                           style: TextStyle(
-//                               color: _selectedDate != null ? Colors.black87 : Colors.grey,
-//                               fontSize: 16),
+//                             color: _selectedDate != null ? Colors.black87 : Colors.grey,
+//                             fontSize: 16.sp,
+//                           ),
 //                         ),
-//                         const Icon(Icons.calendar_today, color: Colors.grey, size: 20),
-//
+//                         Icon(
+//                           Icons.calendar_today,
+//                           color: _selectedDate != null ? const Color(0xFF820DFF) : Colors.grey,
+//                           size: 20,
+//                         ),
 //                       ],
 //                     ),
 //                   ),
 //                 ),
-//                 SizedBox(height: 124.h),
+//
+//                 SizedBox(height: 24.h),
+//
+//                 // Validation summary
+//                 if (!_isNameValid || !_isBreedValid || !_isGenderValid || !_isDateValid)
+//                   Container(
+//                     padding: EdgeInsets.all(12.w),
+//                     decoration: BoxDecoration(
+//                       color: Colors.red.shade50,
+//                       borderRadius: BorderRadius.circular(12.r),
+//                       border: Border.all(color: Colors.red.shade100, width: 1),
+//                     ),
+//                     child: Row(
+//                       children: [
+//                         Icon(Icons.error_outline, color: Colors.red, size: 16.sp),
+//                         SizedBox(width: 8.w),
+//                         Expanded(
+//                           child: Text(
+//                             'Please fill all required fields before saving',
+//                             style: TextStyle(
+//                               color: Colors.red,
+//                               fontSize: 12.sp,
+//                             ),
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//
+//                 SizedBox(height: 24.h),
+//
 //                 RoundButton(
-//                   title: "Save",
+//                   title: "Save ",
 //                   height: 50,
 //                   width: 379,
 //                   backgroundColors: const Color(0xFF820DFF),
 //                   isSelected: true,
-//                   onPress:_savePet
+//                   onPress: _savePet,
 //                 ),
+//
+//                 SizedBox(height: 16.h),
 //               ],
 //             ),
 //           ),
@@ -841,4 +1093,7 @@ class _AddmypetviewState extends State<Addmypetview> {
 //     );
 //   }
 // }
+//
+//
+//
 //
