@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../Valid/AppColors.dart';
 import '../../config/components/roundButton.dart';
 import '../../utils/routes/routes_name.dart';
+import '../../l10n/app_localizations.dart';
 
 class Proview extends StatefulWidget {
   const Proview({super.key});
@@ -105,7 +106,7 @@ class _ProviewState extends State<Proview> {
               // ),
               SizedBox(height: 10.h),
               Text(
-                "Start Like A Pro",
+                AppLocalizations.of(context)!.startLikeAPro,
                 style: TextStyle(
                   fontSize: 28.sp,
                   height: 45.2 / 28,
@@ -117,7 +118,7 @@ class _ProviewState extends State<Proview> {
               ),
               SizedBox(height: 4.h),
               Text(
-                "unlock All Features",
+                AppLocalizations.of(context)!.unlockAllFeatures,
                 style: TextStyle(
                   fontSize: 16.sp,
                   height: 45.2 / 16,
@@ -133,7 +134,7 @@ class _ProviewState extends State<Proview> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      "Premium",
+                      AppLocalizations.of(context)!.premium,
                       style: TextStyle(
                         color:  Color(0xFF6F7D86),
                         fontSize: 15.sp,
@@ -142,7 +143,7 @@ class _ProviewState extends State<Proview> {
                     ),
                     SizedBox(width: 20.w),
                     Text(
-                      "Free",
+                      AppLocalizations.of(context)!.free,
                       style: TextStyle(
                         color:  Color(0xFF6F7D86),
                         fontWeight: FontWeight.bold,
@@ -153,34 +154,34 @@ class _ProviewState extends State<Proview> {
                 ),
               ),
               SizedBox(height: 5.h),
-              const _FeatureRow(
-                title: "Unlimited Dog Scans",
+              _FeatureRow(
+                title: AppLocalizations.of(context)!.unlimitedDogScans,
                 premium: true,
                 free: true,
               ),
-              const _FeatureRow(
-                title: "Supported Breed Detection",
+              _FeatureRow(
+                title: AppLocalizations.of(context)!.supportedBreedDetection,
                 premium: true,
                 free: true,
               ),
-              const _FeatureRow(
-                title: "Multiple Pet Profiles",
+              _FeatureRow(
+                title: AppLocalizations.of(context)!.multiplePetProfiles,
                 premium: true,
                 free: true,
               ),
-              const _FeatureRow(
-                title: "remove ads",
+              _FeatureRow(
+                title: AppLocalizations.of(context)!.removeAds,
                 premium: true,
                 free: false,
               ),
-              const _FeatureRow(
-                title: "VIP Customer support",
+              _FeatureRow(
+                title: AppLocalizations.of(context)!.vipCustomerSupport,
                 premium: true,
                 free: false,
               ),
               SizedBox(height: 130.h),
               Text(
-                "3-Days FREE Trial, Rs 2550/Week After",
+                AppLocalizations.of(context)!.trialOffer,
                 style: TextStyle(
                   fontSize: 14.sp,
                   height: 24 / 14,
@@ -193,7 +194,7 @@ class _ProviewState extends State<Proview> {
               ),
               SizedBox(height: 8.h),
               RoundButton(
-                title: "START FREE TRIAL",
+                title: AppLocalizations.of(context)!.startFreeTrial,
                 height: 62.h,
                 width: 379.w,
                 borderRadius: 41.r,
@@ -207,7 +208,7 @@ class _ProviewState extends State<Proview> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 36.w),
                 child: Text(
-                  "By continuing you agree to our Terms and Privacy policy, subscription is billed after the trial ends and will auto-renew. Cancel subscription anytime before trial ends to avoid charges.",
+                  AppLocalizations.of(context)!.subscriptionDisclaimer,
                   style: TextStyle(
                     fontSize: 10.sp,
                     height: 18 / 10,

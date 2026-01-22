@@ -3,6 +3,7 @@ import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../l10n/app_localizations.dart';
 
 class Splashview extends StatefulWidget {
   const Splashview({super.key});
@@ -78,8 +79,8 @@ class _SplashviewState extends State<Splashview> {
                       fit: BoxFit.contain,
                     ),
                     const SizedBox(width: 5),
-                    const Text(
-                      'Manager',
+                    Text(
+                      AppLocalizations.of(context)!.manager,
                       style: TextStyle(
                         fontFamily: 'Sora',
                         fontWeight: FontWeight.w200, // ExtraLight
@@ -95,9 +96,9 @@ class _SplashviewState extends State<Splashview> {
               // Subtitle
               SizedBox(
                 width: 254,
-                height: 21,
+                height: 42, // Increased height to accommodate translated text if needed
                 child: Text(
-                  'Manage Your Dog daily Activity, Health',
+                  AppLocalizations.of(context)!.splashSubtitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Inter',

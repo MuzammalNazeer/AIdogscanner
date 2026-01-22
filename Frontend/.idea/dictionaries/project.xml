@@ -17,12 +17,14 @@
       <w>hiddencamerafinder</w>
       <w>historyview</w>
       <w>homeview</w>
+      <w>impostazioni</w>
       <w>iplice</w>
       <w>lastnameview</w>
       <w>muzammal</w>
       <w>myfavouritesview</w>
       <w>mypetsview</w>
       <w>proview</w>
+      <w>razza</w>
       <w>reminderlist</w>
       <w>screenutil</w>
       <w>settingview</w>
@@ -30,6 +32,7 @@
       <w>snackbar</w>
       <w>soro</w>
       <w>splashview</w>
+      <w>správce</w>
       <w>tflite</w>
       <w>walkview</w>
       <w>wizardview</w>

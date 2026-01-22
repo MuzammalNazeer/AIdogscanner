@@ -153,6 +153,12 @@ class _AddReminderViewState extends State<AddReminderView> {
               _headerIcon('assets/images/62.png'),
               SizedBox(width: 8.w),
               _headerIcon('assets/images/63.png'),
+              SizedBox(width: 6.w),
+              SizedBox(
+                  width: 40.w,
+                  height: 40.h,
+                  child: Image.asset('assets/images/a2.png')
+              ),
             ],
           ),
           GestureDetector(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 
 class PremiumBanner extends StatelessWidget {
@@ -26,12 +27,12 @@ class PremiumBanner extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Try Premium Features 🌵', style: TextStyle
+                Text(AppLocalizations.of(context)!.tryPremiumFeatures, style: TextStyle
                   (color: Colors.white, fontFamily: 'Sora', fontSize: 15.sp, fontWeight:
                 FontWeight
                     .w600)),
                 SizedBox(height: 6.h),
-                Text('Claim your offer now and get unlimited recognition, health check and more',
+                Text(AppLocalizations.of(context)!.premiumOfferDescription,
                     style: TextStyle(fontFamily: 'Inter', fontSize: 12.sp,
                         color: Colors.white)),
               ],
@@ -50,7 +51,7 @@ class PremiumBanner extends StatelessWidget {
                 elevation: 0,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Shrinks the tap area
               ),
-              child: Text('GET IT', style: TextStyle(fontFamily: 'Inter',
+              child: Text(AppLocalizations.of(context)!.getIt, style: TextStyle(fontFamily: 'Inter',
                   fontSize: 12.sp,  color: Colors.white)),
             ),
           )

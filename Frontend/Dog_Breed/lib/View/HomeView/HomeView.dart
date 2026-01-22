@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 import ' PremiumBanner.dart';
 import '../../View_model/ScanProvider.dart';
@@ -45,10 +46,7 @@ class _HomeviewState extends State<Homeview> {
               SizedBox(height: 6.h),
               PremiumBanner(onGetIt: () =>{Navigator.pushNamed(context, RoutesName.pro, arguments: 'home')}),
               SizedBox(height: 14.h),
-              Padding(
-                padding:  EdgeInsets.only(left: 8.w,right: 8.w),
-                child: _buildQuickActions(),
-              ),
+              _buildQuickActions(),
               SizedBox(height: 6.h),
               _buildIdentifyDogCard(),
               SizedBox(height: 6.h),
@@ -80,7 +78,7 @@ class _HomeviewState extends State<Homeview> {
           SizedBox(width: 8.w),
           Expanded(
             child: Text(
-              'Search for Dog',
+              AppLocalizations.of(context)!.searchForDog,
               style: TextStyle(
                 color: const Color(0x99000000),
                 fontFamily: 'Sora',
@@ -206,56 +204,58 @@ class _HomeviewState extends State<Homeview> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/images/Group2.svg",
-                      width: 72.w,
-                      height: 37.h,
-                      fit: BoxFit.contain,
-                    ),
-                    SizedBox(width: 5.w), // Fixed: Added .w
-                    Text(
-                      'Manager',
-                      style: TextStyle(
-                        fontFamily: 'Sora',
-                        fontWeight: FontWeight.w200,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 30.sp,
-                        height: 1.0,
-                        letterSpacing: 0.0,
-                        color: AppColors.jet,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 29.h),
-                RichText(
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontSize: 22.sp,
-                      height: 1.0,
-                      letterSpacing: 0.0,
-                      color: Colors.black,
-                    ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     children: [
-                      const TextSpan(
-                        text: 'Welcome back, ',
-                        style: TextStyle(fontWeight: FontWeight.w400),
+                      SvgPicture.asset(
+                        "assets/images/Group2.svg",
+                        width: 72.w,
+                        height: 37.h,
+                        fit: BoxFit.contain,
                       ),
-                      TextSpan(
-                        text: '$userName!',
-                        style: const TextStyle(fontWeight: FontWeight.w700),
+                      SizedBox(width: 5.w), // Fixed: Added .w
+                      Text(
+                        AppLocalizations.of(context)!.manager,
+                        style: TextStyle(
+                          fontFamily: 'Sora',
+                          fontWeight: FontWeight.w200,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 30.sp,
+                          height: 1.0,
+                          letterSpacing: 0.0,
+                          color: AppColors.jet,
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(height: 29.h),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: 'Sora',
+                        fontSize: 22.sp,
+                        height: 1.0,
+                        letterSpacing: 0.0,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: AppLocalizations.of(context)!.welcomeBack,
+                          style: const TextStyle(fontWeight: FontWeight.w400),
+                        ),
+                        TextSpan(
+                          text: '$userName!',
+                          style: const TextStyle(fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(width: 68.w),
             Align(
@@ -310,7 +310,7 @@ class _HomeviewState extends State<Homeview> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Try Premium Features 🌵',
+                            AppLocalizations.of(context)!.tryPremiumFeatures,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16.sp,
@@ -320,7 +320,7 @@ class _HomeviewState extends State<Homeview> {
                           ),
                           SizedBox(height: 4.h), // Added spacing
                           Text(
-                            'Claim your offer now and get unlimited recognition, health check and more',
+                            AppLocalizations.of(context)!.premiumOfferDescription,
                             style: TextStyle(
                               color: Colors.white70,
                               fontSize: 14.sp,
@@ -370,7 +370,7 @@ class _HomeviewState extends State<Homeview> {
                             ),
                             child: FittedBox(
                               child: Text(
-                                'GET IT',
+                                AppLocalizations.of(context)!.getIt,
                                 style: TextStyle(
                                   color: Colors.black87,
                                   fontWeight: FontWeight.bold,
@@ -403,7 +403,7 @@ class _HomeviewState extends State<Homeview> {
             height: 57.h,
             width: 57.w,
           ),
-          label: 'Hygiene',
+          label: AppLocalizations.of(context)!.hygiene,
           color: const Color(0xFFEF5DA8),
           onTap: () => _goToActivity('Grooming'),
         ),
@@ -415,7 +415,7 @@ class _HomeviewState extends State<Homeview> {
             height: 66.h,
             width: 52.w,
           ),
-          label: 'Cleaning',
+          label: AppLocalizations.of(context)!.cleaning,
           color: const Color(0xFFAEAFF7),
           onTap: () => _goToActivity('Cleaning'),
         ),
@@ -427,7 +427,7 @@ class _HomeviewState extends State<Homeview> {
             height: 44.h,
             width: 44.w,
           ),
-          label: 'Medical',
+          label: AppLocalizations.of(context)!.medical,
           color: const Color(0xFFECEF8B),
           onTap: () => _goToActivity('Medication'),
         ),
@@ -439,7 +439,7 @@ class _HomeviewState extends State<Homeview> {
             height: 40.h,
             width: 40.w,
           ),
-          label: 'Booking',
+          label: AppLocalizations.of(context)!.booking,
           color: const Color(0xFFA0E3E2),
           onTap: () => _goToActivity('Veterinary'),
         ),
@@ -522,7 +522,7 @@ class _HomeviewState extends State<Homeview> {
 
   Widget _buildIdentifyDogCard() {
     return Container(
-      height: 157.h,
+      height: 166.h,
       width: 384.w,
       padding: EdgeInsets.all(10.w),
       decoration: BoxDecoration(
@@ -538,7 +538,7 @@ class _HomeviewState extends State<Homeview> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Identify Dog',
+                    AppLocalizations.of(context)!.identifyDog,
                     style: TextStyle(
                       fontFamily: 'Sora',
                       fontWeight: FontWeight.w400,
@@ -550,7 +550,7 @@ class _HomeviewState extends State<Homeview> {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    'Instantly scan and identify your dog using AI',
+                    AppLocalizations.of(context)!.identifyDogDescription,
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w300,
@@ -601,7 +601,7 @@ class _HomeviewState extends State<Homeview> {
                               'image': dogResult['image'] ?? cameraResult,
                               'breedName':
                               dogResult['breedName']?.toString() ??
-                                  'Unknown Breed',
+                                  AppLocalizations.of(context)!.unknownBreed,
                               'confidence':
                               (dogResult['confidence'] ?? 0.0) is double
                                   ? dogResult['confidence'] as double
@@ -610,7 +610,7 @@ class _HomeviewState extends State<Homeview> {
                               dogResult['formattedBreedName']?.toString() ??
                                   _formatBreedName(
                                     dogResult['breedName']?.toString() ??
-                                        'Unknown Breed',
+                                        AppLocalizations.of(context)!.unknownBreed,
                                   ),
                               'timestamp': DateTime.now(),
                               'isFavorite': false,
@@ -629,7 +629,7 @@ class _HomeviewState extends State<Homeview> {
                               1,
                             );
                             final message =
-                                '✅ Saved: ${scanData['formattedBreedName']} ($confidencePercent% confidence)';
+                                AppLocalizations.of(context)!.savedScanMessage(scanData['formattedBreedName'], confidencePercent);
                             if (widget.onShowSnackBar != null) {
                               widget.onShowSnackBar!(message);
                             } else {
@@ -661,7 +661,7 @@ class _HomeviewState extends State<Homeview> {
                         if (kDebugMode) {
                           print('❌ Error in scan flow: $e');
                         }
-                        final message = 'Error: $e';
+                        final message = AppLocalizations.of(context)!.errorMessage(e.toString());
                         if (widget.onShowSnackBar != null) {
                           widget.onShowSnackBar!(message);
                         } else {
@@ -675,7 +675,7 @@ class _HomeviewState extends State<Homeview> {
                       }
                     },
                     child: Text(
-                      'Scan Now',
+                      AppLocalizations.of(context)!.scanNow,
                       style: TextStyle(
                         fontFamily: 'Sora',
                         fontWeight: FontWeight.w600,
@@ -736,7 +736,7 @@ class _HomeviewState extends State<Homeview> {
 
   Widget _buildVisitsDogCard() {
     return Container(
-      height: 157.h,
+      height: 163.h,
       width: 384.w,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -751,7 +751,7 @@ class _HomeviewState extends State<Homeview> {
               children: [
                 SizedBox(height: 10.h),
                 Text(
-                  'Vet Visits',
+                  AppLocalizations.of(context)!.vetVisits,
                   style: TextStyle(
                     fontFamily: 'Sora',
                     fontWeight: FontWeight.w400,
@@ -763,7 +763,7 @@ class _HomeviewState extends State<Homeview> {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  'Schedule checkups and  keep \n track of vet visits',
+                  AppLocalizations.of(context)!.vetVisitsDescription,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w300,
@@ -778,7 +778,7 @@ class _HomeviewState extends State<Homeview> {
                 GestureDetector(
                   onTap:() => _goToActivity('Veterinary'),
                   child: Text(
-                    'Create Visit',
+                    AppLocalizations.of(context)!.createVisit,
                     style: TextStyle(
                       fontFamily: 'Sora',
                       fontWeight: FontWeight.w600,
@@ -829,7 +829,7 @@ class _HomeviewState extends State<Homeview> {
 
   Widget _buildFoodManagementCard() {
     return Container(
-      height: 157.h,
+      height: 163.h,
       width: 384.w,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -844,7 +844,7 @@ class _HomeviewState extends State<Homeview> {
               children: [
                 SizedBox(height: 10.h),
                 Text(
-                  'Food Management',
+                  AppLocalizations.of(context)!.foodManagement,
                   style: TextStyle(
                     fontFamily: 'Sora',
                     fontWeight: FontWeight.w400,
@@ -856,7 +856,7 @@ class _HomeviewState extends State<Homeview> {
                 ),
                 SizedBox(height: 8.h),
                 Text(
-                  'Track meals and manage your \n pet’s daily nutrition',
+                  AppLocalizations.of(context)!.foodManagementDescription,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w300,
@@ -871,7 +871,7 @@ class _HomeviewState extends State<Homeview> {
                 GestureDetector(
                   onTap: () => _goToActivity('Eat'),
                   child: Text(
-                    'Check Schedule',
+                    AppLocalizations.of(context)!.checkSchedule,
                     style: TextStyle(
                       fontFamily: 'Sora',
                       fontWeight: FontWeight.w600,
@@ -929,6 +929,11 @@ class _HomeviewState extends State<Homeview> {
 
 
 
+
+
+
+
+
 // import 'dart:io';
 // import 'dart:math';
 //
@@ -940,11 +945,15 @@ class _HomeviewState extends State<Homeview> {
 // import 'package:flutter_svg/svg.dart';
 // import 'package:provider/provider.dart';
 //
+// import ' PremiumBanner.dart';
 // import '../../View_model/ScanProvider.dart';
+// import '../Calendar/add_activities_View.dart';
 // import '../MyPetsView/DogResultScreen.dart';
 //
 // class Homeview extends StatefulWidget {
-//   const Homeview({super.key});
+//   final void Function(String message)? onShowSnackBar;
+//
+//   const Homeview({super.key, this.onShowSnackBar});
 //
 //   @override
 //   State<Homeview> createState() => _HomeviewState();
@@ -959,17 +968,23 @@ class _HomeviewState extends State<Homeview> {
 //       backgroundColor: Colors.white,
 //       body: SafeArea(
 //         child: SingleChildScrollView(
-//           padding: EdgeInsets.only(left: 24.w, right: 23.w, top: 18.h), // Fixed: Added .h and .w
+//           padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 18.h), // Fixed: Added .h and .w
 //           child: Column(
 //             crossAxisAlignment: CrossAxisAlignment.start,
 //             children: [
 //               _buildHeader(),
-//               SizedBox(height: 17.h),
+//               SizedBox(height: 12.h),
+//               Transform.translate(
+//                 offset: Offset(0, -30.h),
+//               ),
 //               _buildSearchBar(),
-//               SizedBox(height: 15.h),
-//               _buildPremiumBanner(),
-//               SizedBox(height: 17.h),
-//               _buildQuickActions(),
+//               SizedBox(height: 6.h),
+//               PremiumBanner(onGetIt: () =>{Navigator.pushNamed(context, RoutesName.pro, arguments: 'home')}),
+//               SizedBox(height: 14.h),
+//               Padding(
+//                 padding:  EdgeInsets.only(left: 8.w,right: 8.w),
+//                 child: _buildQuickActions(),
+//               ),
 //               SizedBox(height: 6.h),
 //               _buildIdentifyDogCard(),
 //               SizedBox(height: 6.h),
@@ -1030,15 +1045,16 @@ class _HomeviewState extends State<Homeview> {
 //           Container(
 //             width: 86.w,
 //             height: 90.h,
-//             padding: EdgeInsets.all(6.w), // Fixed: Added .w
+//             padding: EdgeInsets.all(6.w),
 //             decoration: BoxDecoration(
 //               color: color,
 //               borderRadius: BorderRadius.circular(25.r),
 //             ),
 //             child: Container(
-//               width: 57.w,
-//               height: 57.h,
-//               padding: EdgeInsets.all(6.w), // Fixed: Added .w
+//               width: 52.w,
+//               height: 66.h,
+//               padding: EdgeInsets.all(8.w),
+//               alignment: Alignment.center,
 //               decoration: BoxDecoration(
 //                 color: color,
 //                 borderRadius: BorderRadius.circular(12.r),
@@ -1051,14 +1067,74 @@ class _HomeviewState extends State<Homeview> {
 //             label,
 //             style: TextStyle(
 //               fontSize: 16.sp,
-//               fontWeight: FontWeight.w600,
-//               color: Colors.black87,
+//               // fontWeight: FontWeight.bold,
+//               color: const Color(0xFF371B34),
 //             ),
 //           ),
 //         ],
 //       ),
 //     );
 //   }
+//
+//
+//
+//   // Widget _buildHeader() {
+//   //   final colors = Theme.of(context).colorScheme;
+//   //   return SizedBox(
+//   //     height: 80.h,
+//   //     child: Stack(
+//   //       children: [
+//   //         Row(
+//   //           crossAxisAlignment: CrossAxisAlignment.center,
+//   //           children: [
+//   //             SvgPicture.asset(
+//   //               "assets/images/Group2.svg",
+//   //               width: 72.w,
+//   //               height: 37.h,
+//   //               fit: BoxFit.contain,
+//   //             ),
+//   //             const SizedBox(width: 5),
+//   //             Text(
+//   //               'Manager',
+//   //               style: TextStyle(
+//   //                 fontFamily: 'Sora',
+//   //                 fontWeight: FontWeight.w400,
+//   //                 fontStyle: FontStyle.normal,
+//   //                 fontSize: 30.sp,
+//   //                 height: 1.0,
+//   //                 letterSpacing: 0.0,
+//   //                 color: Theme.of(context).colorScheme.onSurface,
+//   //               ),
+//   //             ),
+//   //             const Spacer(),
+//   //           ],
+//   //         ),
+//   //
+//   //         Positioned(
+//   //           bottom: 5,
+//   //           right: 10,
+//   //           child: SizedBox(
+//   //             height: 78.h,
+//   //             width: 80.w,
+//   //             child: Center(
+//   //               child: Transform.rotate(
+//   //                 angle: -81.51,
+//   //                 child: SvgPicture.asset(
+//   //                   "assets/images/Group099.svg",
+//   //                   width: 92.w,
+//   //                   height: 92.h,
+//   //                   // color: const Color(0xFFE9ECE9),
+//   //                   color: colors.surfaceContainerLow,
+//   //                   fit: BoxFit.contain,
+//   //                 ),
+//   //               ),
+//   //             ),
+//   //           ),
+//   //         ),
+//   //       ],
+//   //     ),
+//   //   );
+//   // }
 //
 //   Widget _buildHeader() {
 //     return Stack(
@@ -1093,7 +1169,7 @@ class _HomeviewState extends State<Homeview> {
 //                     ),
 //                   ],
 //                 ),
-//                 SizedBox(height: 22.h),
+//                 SizedBox(height: 29.h),
 //                 RichText(
 //                   text: TextSpan(
 //                     style: TextStyle(
@@ -1117,19 +1193,22 @@ class _HomeviewState extends State<Homeview> {
 //                 ),
 //               ],
 //             ),
-//             SizedBox(width: 38.w),
-//             SizedBox(
-//               height: 92.h,
-//               width: 92.w,
-//               child: Center(
-//                 child: Transform.rotate(
-//                   angle: -80.11,
-//                   child: Image.asset(
-//                     'assets/images/Group88.png',
-//                     width: 92.w,
-//                     height: 92.h,
-//                     color: const Color(0xFFF3F6F3),
-//                     fit: BoxFit.contain,
+//             SizedBox(width: 68.w),
+//             Align(
+//               alignment:Alignment.bottomRight,
+//               child: SizedBox(
+//                 height: 92.h,
+//                 width: 92.w,
+//                 child: Center(
+//                   child: Transform.rotate(
+//                     angle: -80.11,
+//                     child: Image.asset(
+//                       'assets/images/Group88.png',
+//                       width: 92.w,
+//                       height: 92.h,
+//                       color: const Color(0xFFF3F6F3),
+//                       fit: BoxFit.contain,
+//                     ),
 //                   ),
 //                 ),
 //               ),
@@ -1251,63 +1330,131 @@ class _HomeviewState extends State<Homeview> {
 //
 //   Widget _buildQuickActions() {
 //     return Row(
-//       mainAxisSize: MainAxisSize.min,
 //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //       children: [
 //         quickActionButton(
 //           image: SvgPicture.asset(
 //             'assets/images/Group77.svg',
-//             width: 52.w,
-//             height: 66.h,
-//             fit: BoxFit.contain,
+//             color: const Color(0xFF711544),
+//             height: 57.h,
+//             width: 57.w,
 //           ),
 //           label: 'Hygiene',
 //           color: const Color(0xFFEF5DA8),
-//           onTap: () {
-//             Navigator.pushNamed(context, RoutesName.hygiene);
-//           },
+//           onTap: () => _goToActivity('Grooming'),
 //         ),
-//         SizedBox(width: 9.w), // Fixed: Added .w
+//         SizedBox(width: 7.w),
 //         quickActionButton(
 //           image: SvgPicture.asset(
 //             'assets/images/Group88.svg',
-//             width: 52.w,
+//             color: const Color(0xFF4B4B89),
 //             height: 66.h,
-//             fit: BoxFit.contain,
+//             width: 52.w,
 //           ),
 //           label: 'Cleaning',
 //           color: const Color(0xFFAEAFF7),
-//           onTap: () {
-//             Navigator.pushNamed(context, RoutesName.cleaning);
-//           },
+//           onTap: () => _goToActivity('Cleaning'),
 //         ),
-//         SizedBox(width: 9.w), // Fixed: Added .w
+//         SizedBox(width: 7.w),
 //         quickActionButton(
 //           image: SvgPicture.asset(
-//             'assets/images/Group99.svg',
-//             width: 52.w,
-//             height: 66.h,
-//             fit: BoxFit.contain,
+//             'assets/images/medical.svg',
+//             color: const Color(0xFF938200),
+//             height: 44.h,
+//             width: 44.w,
 //           ),
 //           label: 'Medical',
 //           color: const Color(0xFFECEF8B),
-//           onTap: () {},
+//           onTap: () => _goToActivity('Medication'),
 //         ),
-//         SizedBox(width: 9.w), // Fixed: Added .w
+//         SizedBox(width: 7.w),
 //         quickActionButton(
 //           image: SvgPicture.asset(
 //             'assets/images/Group991.svg',
-//             width: 52.w,
-//             height: 66.h,
-//             fit: BoxFit.contain,
+//             color: const Color(0xFF1C7372),
+//             height: 40.h,
+//             width: 40.w,
 //           ),
 //           label: 'Booking',
 //           color: const Color(0xFFA0E3E2),
-//           onTap: () {},
+//           onTap: () => _goToActivity('Veterinary'),
 //         ),
 //       ],
 //     );
 //   }
+//
+// // Helper method
+//   void _goToActivity(String activityName) {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(
+//         builder: (context) => AddActivitiesView(
+//           initialActivityName: activityName,
+//         ),
+//       ),
+//     );
+//   }
+//
+//
+//   // Widget _buildQuickActions() {
+//   //   return Row(
+//   //     mainAxisSize: MainAxisSize.min,
+//   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//   //     children: [
+//   //       quickActionButton(
+//   //         image: SvgPicture.asset(
+//   //           'assets/images/Group77.svg',
+//   //           width: 52.w,
+//   //           height: 66.h,
+//   //           fit: BoxFit.contain,
+//   //         ),
+//   //         label: 'Hygiene',
+//   //         color: const Color(0xFFEF5DA8),
+//   //         onTap: () {
+//   //           Navigator.pushNamed(context, RoutesName.hygiene);
+//   //         },
+//   //       ),
+//   //       SizedBox(width: 9.w), // Fixed: Added .w
+//   //       quickActionButton(
+//   //         image: SvgPicture.asset(
+//   //           'assets/images/Group88.svg',
+//   //           width: 52.w,
+//   //           height: 66.h,
+//   //           fit: BoxFit.contain,
+//   //         ),
+//   //         label: 'Cleaning',
+//   //         color: const Color(0xFFAEAFF7),
+//   //         onTap: () {
+//   //           Navigator.pushNamed(context, RoutesName.cleaning);
+//   //         },
+//   //       ),
+//   //       SizedBox(width: 9.w), // Fixed: Added .w
+//   //       quickActionButton(
+//   //         image: SvgPicture.asset(
+//   //           'assets/images/Group99.svg',
+//   //           width: 52.w,
+//   //           height: 66.h,
+//   //           fit: BoxFit.contain,
+//   //         ),
+//   //         label: 'Medical',
+//   //         color: const Color(0xFFECEF8B),
+//   //         onTap: () {},
+//   //       ),
+//   //       SizedBox(width: 9.w), // Fixed: Added .w
+//   //       quickActionButton(
+//   //         image: SvgPicture.asset(
+//   //           'assets/images/Group991.svg',
+//   //           width: 52.w,
+//   //           height: 66.h,
+//   //           fit: BoxFit.contain,
+//   //         ),
+//   //         label: 'Booking',
+//   //         color: const Color(0xFFA0E3E2),
+//   //         onTap: () {},
+//   //       ),
+//   //     ],
+//   //   );
+//   // }
 //
 //   Widget _buildIdentifyDogCard() {
 //     return Container(
@@ -1321,151 +1468,162 @@ class _HomeviewState extends State<Homeview> {
 //       child: Row(
 //         children: [
 //           Expanded(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 SizedBox(height: 10.h),
-//                 Text(
-//                   'Identify Dog',
-//                   style: TextStyle(
-//                     fontFamily: 'Sora',
-//                     fontWeight: FontWeight.w400,
-//                     fontSize: 22.sp,
-//                     height: 1.0,
-//                     letterSpacing: 0,
-//                     color: const Color(0xFF371B34),
-//                   ),
-//                 ),
-//                 SizedBox(height: 8.h),
-//                 Text(
-//                   'Instantly scan and identify your dog using AI',
-//                   style: TextStyle(
-//                     fontFamily: 'Inter',
-//                     fontWeight: FontWeight.w300,
-//                     fontSize: 14.sp,
-//                     height: 1.0,
-//                     letterSpacing: 0,
-//                     color: const Color(0xFF371B34),
-//                   ),
-//                   maxLines: 2,
-//                 ),
-//                 SizedBox(height: 19.h),
-//                 GestureDetector(
-//                   onTap: () async {
-//                     if (kDebugMode) {
-//                       print('📸 Starting scan process...');
-//                     }
-//
-//                     try {
-//                       final cameraResult = await Navigator.pushNamed(
-//                         context,
-//                         RoutesName.camera,
-//                       );
-//                       if (cameraResult != null && cameraResult is File) {
-//                         if (kDebugMode) {
-//                           print('📷 Image captured: ${cameraResult.path}');
-//                         }
-//                         final dogResult = await Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                             builder: (context) =>
-//                                 DogResultScreen(imageFile: cameraResult),
-//                           ),
-//                         );
-//                         if (dogResult != null &&
-//                             dogResult is Map<String, dynamic>) {
-//                           if (kDebugMode) {
-//                             print('✅ Received valid scan data!');
-//                           }
-//
-//                           final scanProvider = Provider.of<ScanProvider>(
-//                             context,
-//                             listen: false,
-//                           );
-//
-//                           final scanData = {
-//                             'id': DateTime.now().millisecondsSinceEpoch
-//                                 .toString(),
-//                             'image': dogResult['image'] ?? cameraResult,
-//                             'breedName':
-//                             dogResult['breedName']?.toString() ??
-//                                 'Unknown Breed',
-//                             'confidence':
-//                             (dogResult['confidence'] ?? 0.0) is double
-//                                 ? dogResult['confidence'] as double
-//                                 : 0.0,
-//                             'formattedBreedName':
-//                             dogResult['formattedBreedName']?.toString() ??
-//                                 _formatBreedName(
-//                                   dogResult['breedName']?.toString() ??
-//                                       'Unknown Breed',
-//                                 ),
-//                             'timestamp': DateTime.now(),
-//                             'isFavorite': false,
-//                           };
-//
-//                           if (kDebugMode) {
-//                             print(
-//                               ' Adding scan to provider: ${scanData['breedName']}',
-//                             );
-//                           }
-//
-//                           scanProvider.addScan(scanData);
-//
-//                           final confidencePercent =
-//                           (scanData['confidence']! * 100).toStringAsFixed(
-//                             1,
-//                           );
-//                           ScaffoldMessenger.of(context).showSnackBar(
-//                             SnackBar(
-//                               content: Text(
-//                                 '✅ Saved: ${scanData['formattedBreedName']} ($confidencePercent% confidence)',
-//                               ),
-//                               duration: const Duration(seconds: 3),
-//                               backgroundColor: Colors.green,
-//                             ),
-//                           );
-//
-//                           if (kDebugMode) {
-//                             print('💾 Scan saved via provider!');
-//                           }
-//                         } else if (dogResult == null) {
-//                           if (kDebugMode) {
-//                             print(
-//                               '⚠️ User cancelled or went back without saving',
-//                             );
-//                           }
-//                         }
-//                       } else {
-//                         if (kDebugMode) {
-//                           print('❌ No image returned from camera');
-//                         }
-//                       }
-//                     } catch (e) {
-//                       if (kDebugMode) {
-//                         print('❌ Error in scan flow: $e');
-//                       }
-//                       ScaffoldMessenger.of(context).showSnackBar(
-//                         SnackBar(
-//                           content: Text('Error: $e'),
-//                           backgroundColor: Colors.red,
-//                         ),
-//                       );
-//                     }
-//                   },
-//                   child: Text(
-//                     'Scan Now',
+//             child: Padding(
+//               padding: EdgeInsets.symmetric(vertical: 14.h,horizontal: 12.w),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: [
+//                   Text(
+//                     'Identify Dog',
 //                     style: TextStyle(
 //                       fontFamily: 'Sora',
-//                       fontWeight: FontWeight.w600,
-//                       fontSize: 20.sp,
-//                       height: 0.9,
+//                       fontWeight: FontWeight.w400,
+//                       fontSize: 22.sp,
+//                       height: 1.0,
 //                       letterSpacing: 0,
-//                       color: AppColors.vibrantPurple,
+//                       color: const Color(0xFF371B34),
 //                     ),
 //                   ),
-//                 ),
-//               ],
+//                   SizedBox(height: 8.h),
+//                   Text(
+//                     'Instantly scan and identify your dog using AI',
+//                     style: TextStyle(
+//                       fontFamily: 'Inter',
+//                       fontWeight: FontWeight.w300,
+//                       fontSize: 14.sp,
+//                       height: 1.0,
+//                       letterSpacing: 0,
+//                       color: const Color(0xFF371B34),
+//                     ),
+//                     maxLines: 2,
+//                   ),
+//                   SizedBox(height: 16.h),
+//                   GestureDetector(
+//                     onTap: () async {
+//                       if (kDebugMode) {
+//                         print('📸 Starting scan process...');
+//                       }
+//
+//                       try {
+//                         final cameraResult = await Navigator.pushNamed(
+//                           context,
+//                           RoutesName.camera,
+//                         );
+//                         if (cameraResult != null && cameraResult is File) {
+//                           if (kDebugMode) {
+//                             print('📷 Image captured: ${cameraResult.path}');
+//                           }
+//                           final dogResult = await Navigator.push(
+//                             context,
+//                             MaterialPageRoute(
+//                               builder: (context) =>
+//                                   DogResultScreen(imageFile: cameraResult),
+//                             ),
+//                           );
+//                           if (dogResult != null &&
+//                               dogResult is Map<String, dynamic>) {
+//                             if (kDebugMode) {
+//                               print('✅ Received valid scan data!');
+//                             }
+//
+//                             final scanProvider = Provider.of<ScanProvider>(
+//                               context,
+//                               listen: false,
+//                             );
+//
+//                             final scanData = {
+//                               'id': DateTime.now().millisecondsSinceEpoch
+//                                   .toString(),
+//                               'image': dogResult['image'] ?? cameraResult,
+//                               'breedName':
+//                               dogResult['breedName']?.toString() ??
+//                                   'Unknown Breed',
+//                               'confidence':
+//                               (dogResult['confidence'] ?? 0.0) is double
+//                                   ? dogResult['confidence'] as double
+//                                   : 0.0,
+//                               'formattedBreedName':
+//                               dogResult['formattedBreedName']?.toString() ??
+//                                   _formatBreedName(
+//                                     dogResult['breedName']?.toString() ??
+//                                         'Unknown Breed',
+//                                   ),
+//                               'timestamp': DateTime.now(),
+//                               'isFavorite': false,
+//                             };
+//
+//                             if (kDebugMode) {
+//                               print(
+//                                 ' Adding scan to provider: ${scanData['breedName']}',
+//                               );
+//                             }
+//
+//                             scanProvider.addScan(scanData);
+//
+//                             final confidencePercent =
+//                             (scanData['confidence']! * 100).toStringAsFixed(
+//                               1,
+//                             );
+//                             final message =
+//                                 '✅ Saved: ${scanData['formattedBreedName']} ($confidencePercent% confidence)';
+//                             if (widget.onShowSnackBar != null) {
+//                               widget.onShowSnackBar!(message);
+//                             } else {
+//                               ScaffoldMessenger.of(context).showSnackBar(
+//                                 SnackBar(
+//                                   content: Text(message),
+//                                   duration: const Duration(seconds: 3),
+//                                   backgroundColor: Colors.green,
+//                                 ),
+//                               );
+//                             }
+//
+//                             if (kDebugMode) {
+//                               print('💾 Scan saved via provider!');
+//                             }
+//                           } else if (dogResult == null) {
+//                             if (kDebugMode) {
+//                               print(
+//                                 '⚠️ User cancelled or went back without saving',
+//                               );
+//                             }
+//                           }
+//                         } else {
+//                           if (kDebugMode) {
+//                             print('❌ No image returned from camera');
+//                           }
+//                         }
+//                       } catch (e) {
+//                         if (kDebugMode) {
+//                           print('❌ Error in scan flow: $e');
+//                         }
+//                         final message = 'Error: $e';
+//                         if (widget.onShowSnackBar != null) {
+//                           widget.onShowSnackBar!(message);
+//                         } else {
+//                           ScaffoldMessenger.of(context).showSnackBar(
+//                             SnackBar(
+//                               content: Text(message),
+//                               backgroundColor: Colors.red,
+//                             ),
+//                           );
+//                         }
+//                       }
+//                     },
+//                     child: Text(
+//                       'Scan Now',
+//                       style: TextStyle(
+//                         fontFamily: 'Sora',
+//                         fontWeight: FontWeight.w600,
+//                         fontSize: 20.sp,
+//                         height: 0.9,
+//                         letterSpacing: 0,
+//                         color: AppColors.vibrantPurple,
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
 //             ),
 //           ),
 //           SizedBox(width: 12.w),
@@ -1491,7 +1649,7 @@ class _HomeviewState extends State<Homeview> {
 //                 width: 123.w,
 //                 height: 164.h,
 //                 child: Image.asset(
-//                   'assets/images/image 45.png',
+//                   'assets/images/ddoogg21.png',
 //                   fit: BoxFit.contain,
 //                 ),
 //               ),
@@ -1554,7 +1712,7 @@ class _HomeviewState extends State<Homeview> {
 //                 ),
 //                 SizedBox(height: 19.h),
 //                 GestureDetector(
-//                   onTap: () {},
+//                   onTap:() => _goToActivity('Veterinary'),
 //                   child: Text(
 //                     'Create Visit',
 //                     style: TextStyle(
@@ -1647,7 +1805,7 @@ class _HomeviewState extends State<Homeview> {
 //                 ),
 //                 SizedBox(height: 19.h),
 //                 GestureDetector(
-//                   onTap: () {},
+//                   onTap: () => _goToActivity('Eat'),
 //                   child: Text(
 //                     'Check Schedule',
 //                     style: TextStyle(
@@ -1700,4 +1858,10 @@ class _HomeviewState extends State<Homeview> {
 //     );
 //   }
 // }
+//
+//
+//
+//
+//
+//
 //

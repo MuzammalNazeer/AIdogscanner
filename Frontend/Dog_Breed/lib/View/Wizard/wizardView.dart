@@ -1,6 +1,7 @@
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../l10n/app_localizations.dart';
 
 class Wizardview extends StatefulWidget {
   const Wizardview({super.key});
@@ -52,7 +53,7 @@ class _WizardviewState extends State<Wizardview> {
                         );
                       },
                       child:  Text(
-                        "Skip",
+                        AppLocalizations.of(context)!.skip,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 17.sp,
@@ -115,7 +116,7 @@ class _WizardviewState extends State<Wizardview> {
                         ],
                       ),
                       child: Text(
-                        currentPage == 3 ? "Get Started" : "Next",
+                        currentPage == 3 ? AppLocalizations.of(context)!.getStarted : AppLocalizations.of(context)!.next,
                         style: TextStyle(
                           color: colors.onBackground,
                           fontWeight: FontWeight.bold,
@@ -148,7 +149,7 @@ class OnboardingPage1 extends StatelessWidget {
         children: [
           SizedBox(height: 60.h),
           Text(
-            "Satellite Director",
+            AppLocalizations.of(context)!.onboardingTitle1,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 30.sp,
@@ -158,7 +159,7 @@ class OnboardingPage1 extends StatelessWidget {
           ),
           SizedBox(height: 12.h),
           Text(
-            "Explore Nearby Places with GPS Satellite\nMapping & Find Satellite",
+            AppLocalizations.of(context)!.onboardingDesc1,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14.sp,
@@ -286,7 +287,7 @@ class OnboardingPage2 extends StatelessWidget {
           ),
           SizedBox(height: 140.h),
           Text(
-            "We need your\n permission",
+            AppLocalizations.of(context)!.onboardingTitle2,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 26.sp,
@@ -296,7 +297,7 @@ class OnboardingPage2 extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           Text(
-            "We need camera permission so you can make live \nscans of your pet.",
+            AppLocalizations.of(context)!.onboardingDesc2,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14.sp, color: Colors.white,),
           ),
@@ -415,7 +416,7 @@ class OnboardingPage3 extends StatelessWidget {
           ),
           SizedBox(height: 210.h),
           Text(
-            "Maintain image quality",
+            AppLocalizations.of(context)!.onboardingTitle3,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 26.sp,
@@ -425,7 +426,7 @@ class OnboardingPage3 extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           Text(
-            "Capture the full body if possible. The head must be \nvisible.",
+            AppLocalizations.of(context)!.onboardingDesc3,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14.sp, color: Colors.white,),
           ),
@@ -535,7 +536,7 @@ class OnboardingPage4 extends StatelessWidget {
           ),
           SizedBox(height: 150.h),
           Text(
-            "Ensure your dog stays \n healthy and active.",
+            AppLocalizations.of(context)!.onboardingTitle4,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 26.sp,
@@ -545,7 +546,7 @@ class OnboardingPage4 extends StatelessWidget {
           ),
           SizedBox(height: 16.h),
           Text(
-            "Manage every detail of your dog—health, photos,\n activities, and more in one simple place.",
+            AppLocalizations.of(context)!.onboardingDesc4,
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14.sp, color: Colors.white,),
           ),

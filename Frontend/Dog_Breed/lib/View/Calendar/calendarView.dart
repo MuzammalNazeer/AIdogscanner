@@ -168,31 +168,39 @@ class _CalendarviewState extends State<Calendarview> {
 
   Future<void> _loadSelectedPetId() async {
     final prefs = await SharedPreferences.getInstance();
+    
+    // If _selectedPetId is already set (e.g. by didChangeDependencies from navigation),
+    // do NOT overwrite it with the old value from SharedPreferences.
+    if (_selectedPetId != null) {
+      return;
+    }
+
     final savedPetId = prefs.getString('selectedPetId');
 
     final petProvider = Provider.of<PetProvider>(context, listen: false);
 
+    // Optimistically set the selected pet ID from preferences
+    if (savedPetId != null) {
+      setState(() {
+        _selectedPetId = savedPetId;
+      });
+    }
+
     if (petProvider.hasPets) {
-      // If saved ID exists and is still valid → keep it
-      if (savedPetId != null && petProvider.pets.any((p) => p.id == savedPetId)) {
-        setState(() {
-          _selectedPetId = savedPetId;
-        });
-      }
-      // If no saved ID or saved ID is invalid → auto-select first pet
-      else {
+      // If we have a saved ID, check if it's valid
+      final isValid = savedPetId != null &&
+          petProvider.pets.any((p) => p.id == savedPetId);
+
+      // If no saved ID or it's invalid, fallback to the first pet
+      if (!isValid) {
         setState(() {
           _selectedPetId = petProvider.pets.first.id;
         });
         await prefs.setString('selectedPetId', _selectedPetId!);
       }
-    } else {
-      // No pets → clear any old saved value
-      setState(() {
-        _selectedPetId = null;
-      });
-      await prefs.remove('selectedPetId');
     }
+    // Note: We do NOT clear the preference if !hasPets, because PetProvider
+    // might still be loading. We wait for it to populate.
   }
   Future<void> _saveSelectedPetId(String? petId) async {
     final prefs = await SharedPreferences.getInstance();
@@ -295,7 +303,19 @@ class _CalendarviewState extends State<Calendarview> {
     final petProvider = Provider.of<PetProvider>(context);
     if (petProvider.lastAddedPetId != null) {
       _selectedPetId = petProvider.lastAddedPetId;
+      _saveSelectedPetId(_selectedPetId);
       petProvider.clearLastAddedPetId();
+    }
+
+    final homeViewModel = Provider.of<HomeViewModel>(context);
+    if (homeViewModel.selectedPetId != null) {
+      _selectedPetId = homeViewModel.selectedPetId;
+      _saveSelectedPetId(_selectedPetId);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (homeViewModel.selectedPetId != null) {
+          homeViewModel.setSelectedPetId(null);
+        }
+      });
     }
   }
 

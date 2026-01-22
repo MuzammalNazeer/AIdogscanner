@@ -252,6 +252,282 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to log out?'**
   String get dialogLogoutMessage;
+
+  /// No description provided for @manager.
+  ///
+  /// In en, this message translates to:
+  /// **'Manager'**
+  String get manager;
+
+  /// No description provided for @splashSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Your Dog daily Activity, Health'**
+  String get splashSubtitle;
+
+  /// No description provided for @startLikeAPro.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Like A Pro'**
+  String get startLikeAPro;
+
+  /// No description provided for @unlockAllFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'unlock All Features'**
+  String get unlockAllFeatures;
+
+  /// No description provided for @premium.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get premium;
+
+  /// No description provided for @free.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get free;
+
+  /// No description provided for @unlimitedDogScans.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited Dog Scans'**
+  String get unlimitedDogScans;
+
+  /// No description provided for @supportedBreedDetection.
+  ///
+  /// In en, this message translates to:
+  /// **'Supported Breed Detection'**
+  String get supportedBreedDetection;
+
+  /// No description provided for @multiplePetProfiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Multiple Pet Profiles'**
+  String get multiplePetProfiles;
+
+  /// No description provided for @removeAds.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove Ads'**
+  String get removeAds;
+
+  /// No description provided for @vipCustomerSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'VIP Customer Support'**
+  String get vipCustomerSupport;
+
+  /// No description provided for @trialOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'3-Days FREE Trial, Rs 2550/Week After'**
+  String get trialOffer;
+
+  /// No description provided for @startFreeTrial.
+  ///
+  /// In en, this message translates to:
+  /// **'START FREE TRIAL'**
+  String get startFreeTrial;
+
+  /// No description provided for @subscriptionDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing you agree to our Terms and Privacy policy, subscription is billed after the trial ends and will auto-renew. Cancel subscription anytime before trial ends to avoid charges.'**
+  String get subscriptionDisclaimer;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back, '**
+  String get welcomeBack;
+
+  /// No description provided for @searchForDog.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for Dog'**
+  String get searchForDog;
+
+  /// No description provided for @tryPremiumFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Premium Features 🌵'**
+  String get tryPremiumFeatures;
+
+  /// No description provided for @premiumOfferDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim your offer now and get unlimited recognition, health check and more'**
+  String get premiumOfferDescription;
+
+  /// No description provided for @getIt.
+  ///
+  /// In en, this message translates to:
+  /// **'GET IT'**
+  String get getIt;
+
+  /// No description provided for @hygiene.
+  ///
+  /// In en, this message translates to:
+  /// **'Hygiene'**
+  String get hygiene;
+
+  /// No description provided for @cleaning.
+  ///
+  /// In en, this message translates to:
+  /// **'Cleaning'**
+  String get cleaning;
+
+  /// No description provided for @medical.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical'**
+  String get medical;
+
+  /// No description provided for @booking.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking'**
+  String get booking;
+
+  /// No description provided for @identifyDog.
+  ///
+  /// In en, this message translates to:
+  /// **'Identify Dog'**
+  String get identifyDog;
+
+  /// No description provided for @identifyDogDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Instantly scan and identify your dog using AI'**
+  String get identifyDogDescription;
+
+  /// No description provided for @scanNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Now'**
+  String get scanNow;
+
+  /// No description provided for @vetVisits.
+  ///
+  /// In en, this message translates to:
+  /// **'Vet Visits'**
+  String get vetVisits;
+
+  /// No description provided for @vetVisitsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Schedule checkups and keep \n track of vet visits'**
+  String get vetVisitsDescription;
+
+  /// No description provided for @createVisit.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Visit'**
+  String get createVisit;
+
+  /// No description provided for @foodManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Food Management'**
+  String get foodManagement;
+
+  /// No description provided for @foodManagementDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Track meals and manage your \n pet’s daily nutrition'**
+  String get foodManagementDescription;
+
+  /// No description provided for @checkSchedule.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Schedule'**
+  String get checkSchedule;
+
+  /// No description provided for @unknownBreed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown Breed'**
+  String get unknownBreed;
+
+  /// No description provided for @savedScanMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ Saved: {breedName} ({confidence}% confidence)'**
+  String savedScanMessage(String breedName, String confidence);
+
+  /// No description provided for @errorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {error}'**
+  String errorMessage(String error);
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// No description provided for @onboardingTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Satellite Director'**
+  String get onboardingTitle1;
+
+  /// No description provided for @onboardingDesc1.
+  ///
+  /// In en, this message translates to:
+  /// **'Explore Nearby Places with GPS Satellite\nMapping & Find Satellite'**
+  String get onboardingDesc1;
+
+  /// No description provided for @onboardingTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'We need your\n permission'**
+  String get onboardingTitle2;
+
+  /// No description provided for @onboardingDesc2.
+  ///
+  /// In en, this message translates to:
+  /// **'We need camera permission so you can make live \nscans of your pet.'**
+  String get onboardingDesc2;
+
+  /// No description provided for @onboardingTitle3.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintain image quality'**
+  String get onboardingTitle3;
+
+  /// No description provided for @onboardingDesc3.
+  ///
+  /// In en, this message translates to:
+  /// **'Capture the full body if possible. The head must be \nvisible.'**
+  String get onboardingDesc3;
+
+  /// No description provided for @onboardingTitle4.
+  ///
+  /// In en, this message translates to:
+  /// **'Ensure your dog stays \n healthy and active.'**
+  String get onboardingTitle4;
+
+  /// No description provided for @onboardingDesc4.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage every detail of your dog—health, photos,\n activities, and more in one simple place.'**
+  String get onboardingDesc4;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

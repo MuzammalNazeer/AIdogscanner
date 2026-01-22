@@ -168,7 +168,7 @@ class _AddmypetviewState extends State<Addmypetview> {
     //   ),
     // );
     final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
-    homeViewModel.selectedIndex = 2; // Index for MyPetsView
+    homeViewModel.selectedIndex = 1; // Index for MyPetsView
     Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
     // Navigate to MyPetsView via Dashboard
     // Future.delayed(const Duration(milliseconds: 500), () {

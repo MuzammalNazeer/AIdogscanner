@@ -6,7 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../View_model/PetProvider.dart';
 import '../../View_model/home/Pet.dart';
+import '../../View_model/home/home_view_model.dart';
 import '../../config/components/roundButton.dart';
+import '../../utils/routes/routes_name.dart';
 
 class Editview extends StatefulWidget {
   final String? petName;
@@ -827,7 +829,19 @@ class _EditviewState extends State<Editview> {
                         pet,
                       );
                       if (success) {
-                        Navigator.pop(context, true);
+                        final homeViewModel = Provider.of<HomeViewModel>(
+                          context,
+                          listen: false,
+                        );
+                        homeViewModel.selectedIndex = 1; // Index for Calendar
+                        homeViewModel.calendarTabIndex =
+                            0; // Index for AddReminderView
+                        homeViewModel.setSelectedPetId(pet.id);
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RoutesName.dashboard,
+                          (route) => false,
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -839,7 +853,19 @@ class _EditviewState extends State<Editview> {
                     } else {
                       final success = await petProvider.addPet(pet);
                       if (success) {
-                        Navigator.pop(context, true);
+                        final homeViewModel = Provider.of<HomeViewModel>(
+                          context,
+                          listen: false,
+                        );
+                        homeViewModel.selectedIndex = 1; // Index for Calendar
+                        homeViewModel.calendarTabIndex =
+                            0; // Index for AddReminderView
+                        homeViewModel.setSelectedPetId(pet.id);
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          RoutesName.dashboard,
+                          (route) => false,
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

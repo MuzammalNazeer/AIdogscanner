@@ -21,6 +21,69 @@
   "dialogDeleteProfileTitle": "Delete Profile",
   "dialogDeleteProfileMessage": "Are you sure you want to permanently delete your profile? This cannot be undone.",
   "dialogLogoutTitle": "Logout",
-  "dialogLogoutMessage": "Are you sure you want to log out?"
+  "dialogLogoutMessage": "Are you sure you want to log out?",
+  "manager": "Manager",
+  "splashSubtitle": "Manage Your Dog daily Activity, Health",
+  "startLikeAPro": "Start Like A Pro",
+  "unlockAllFeatures": "unlock All Features",
+  "premium": "Premium",
+  "free": "Free",
+  "unlimitedDogScans": "Unlimited Dog Scans",
+  "supportedBreedDetection": "Supported Breed Detection",
+  "multiplePetProfiles": "Multiple Pet Profiles",
+  "removeAds": "Remove Ads",
+  "vipCustomerSupport": "VIP Customer Support",
+  "trialOffer": "3-Days FREE Trial, Rs 2550/Week After",
+  "startFreeTrial": "START FREE TRIAL",
+  "subscriptionDisclaimer": "By continuing you agree to our Terms and Privacy policy, subscription is billed after the trial ends and will auto-renew. Cancel subscription anytime before trial ends to avoid charges.",
+  "welcomeBack": "Welcome back, ",
+  "searchForDog": "Search for Dog",
+  "tryPremiumFeatures": "Try Premium Features 🌵",
+  "premiumOfferDescription": "Claim your offer now and get unlimited recognition, health check and more",
+  "getIt": "GET IT",
+  "hygiene": "Hygiene",
+  "cleaning": "Cleaning",
+  "medical": "Medical",
+  "booking": "Booking",
+  "identifyDog": "Identify Dog",
+  "identifyDogDescription": "Instantly scan and identify your dog using AI",
+  "scanNow": "Scan Now",
+  "vetVisits": "Vet Visits",
+  "vetVisitsDescription": "Schedule checkups and keep \n track of vet visits",
+  "createVisit": "Create Visit",
+  "foodManagement": "Food Management",
+  "foodManagementDescription": "Track meals and manage your \n pet’s daily nutrition",
+  "checkSchedule": "Check Schedule",
+  "unknownBreed": "Unknown Breed",
+  "savedScanMessage": "✅ Saved: {breedName} ({confidence}% confidence)",
+  "@savedScanMessage": {
+    "placeholders": {
+      "breedName": {
+        "type": "String"
+      },
+      "confidence": {
+        "type": "String"
+      }
+    }
+  },
+  "errorMessage": "Error: {error}",
+  "skip": "Skip",
+  "next": "Next",
+  "getStarted": "Get Started",
+  "onboardingTitle1": "Satellite Director",
+  "onboardingDesc1": "Explore Nearby Places with GPS Satellite\nMapping & Find Satellite",
+  "onboardingTitle2": "We need your\n permission",
+  "onboardingDesc2": "We need camera permission so you can make live \nscans of your pet.",
+  "onboardingTitle3": "Maintain image quality",
+  "onboardingDesc3": "Capture the full body if possible. The head must be \nvisible.",
+  "onboardingTitle4": "Ensure your dog stays \n healthy and active.",
+  "onboardingDesc4": "Manage every detail of your dog—health, photos,\n activities, and more in one simple place.",
+  "@errorMessage": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }
 
