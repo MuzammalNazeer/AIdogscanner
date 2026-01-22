@@ -670,7 +670,10 @@ class _CalendarviewState extends State<Calendarview> {
       case 0: // Activities - Show only activities (no reminders)
         return _buildActivitiesList(filteredActivities);
       case 1: // Reminders - Show only reminders
-        return AddReminderView(selectedPetId: effectivePetId);
+        return AddReminderView(
+          selectedPetId: effectivePetId,
+          selectedDate: _selectedDate,
+        );
       case 2: // Progress
         return _buildProgressList(filteredActivities);
       case 3: // Documents
