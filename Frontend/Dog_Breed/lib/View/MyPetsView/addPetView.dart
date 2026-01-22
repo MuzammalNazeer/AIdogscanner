@@ -977,49 +977,74 @@ class _AddPetViewState extends State<AddPetView> {
                   ),
                 ),
                 SizedBox(height: 4.h),
-                Center(
-                  child: SizedBox(
-                    width: double.infinity,
+                GestureDetector(
+                  onTap: _showBreedBottomSheet,
+                  child: Container(
                     height: 58.h,
-                    child: DropdownSearch<String>(
-                      popupProps: PopupProps.menu(
-                        showSelectedItems: true,
-                        showSearchBox: true,
-                        searchFieldProps: TextFieldProps(
-                          decoration: InputDecoration(
-                            hintText: "Search breed...",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                            ),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF5F5F5),
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          _selectedBreed ?? "Select Breed",
+                          style: TextStyle(
+                            color: _selectedBreed != null ? Colors.black : Colors.grey,
+                            fontSize: 16,
                           ),
                         ),
-                        menuProps: MenuProps(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      items: _breeds,
-                      dropdownDecoratorProps: DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color(0xFFF5F5F5),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                          ),
-                          hintText: "Select Breed",
-                        ),
-                      ),
-                      onChanged: (v) => setState(() => _selectedBreed = v),
-                      selectedItem: _selectedBreed,
+                        const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                      ],
                     ),
                   ),
                 ),
+
+                // Center(
+                //   child: SizedBox(
+                //     width: double.infinity,
+                //     height: 58.h,
+                //     child: DropdownSearch<String>(
+                //       popupProps: PopupProps.menu(
+                //         showSelectedItems: true,
+                //         showSearchBox: true,
+                //         searchFieldProps: TextFieldProps(
+                //           decoration: InputDecoration(
+                //             hintText: "Search breed...",
+                //             border: OutlineInputBorder(
+                //               borderRadius: BorderRadius.circular(12),
+                //             ),
+                //             contentPadding: const EdgeInsets.symmetric(
+                //               horizontal: 12,
+                //             ),
+                //           ),
+                //         ),
+                //         menuProps: MenuProps(
+                //           borderRadius: BorderRadius.circular(12),
+                //         ),
+                //       ),
+                //       items: _breeds,
+                //       dropdownDecoratorProps: DropDownDecoratorProps(
+                //         dropdownSearchDecoration: InputDecoration(
+                //           filled: true,
+                //           fillColor: const Color(0xFFF5F5F5),
+                //           border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(12),
+                //             borderSide: BorderSide.none,
+                //           ),
+                //           contentPadding: const EdgeInsets.symmetric(
+                //             horizontal: 12,
+                //           ),
+                //           hintText: "Select Breed",
+                //         ),
+                //       ),
+                //       onChanged: (v) => setState(() => _selectedBreed = v),
+                //       selectedItem: _selectedBreed,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 17.h),
                 Text(
                   'Gender',
@@ -1187,7 +1212,89 @@ class _AddPetViewState extends State<AddPetView> {
       ),
     );
   }
+
+  void _showBreedBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        String searchQuery = "";
+        List<String> filteredBreeds = _breeds;
+
+        return StatefulBuilder(
+          builder: (context, setState) {
+            filteredBreeds = _breeds
+                .where((b) =>
+                b.toLowerCase().contains(searchQuery.toLowerCase()))
+                .toList();
+
+            return Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Container(
+                height: 400.h, // adjust as needed
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 5,
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(2.5),
+                      ),
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search breed...',
+                        prefixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey[200],
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          searchQuery = value;
+                        });
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: filteredBreeds.length,
+                        itemBuilder: (context, index) {
+                          final breed = filteredBreeds[index];
+                          return ListTile(
+                            title: Text(breed),
+                            onTap: () {
+                              setState(() => _selectedBreed = breed);
+                              Navigator.pop(context);
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
 }
+
+
+
 
 
 
@@ -2102,32 +2209,32 @@ class _AddPetViewState extends State<AddPetView> {
 //                     ),
 //                     child: _selectedImage != null
 //                         ? ClipRRect(
-//                             borderRadius: BorderRadius.circular(20),
-//                             child: Image.memory(
-//                               _selectedImage!,
-//                               width: 130,
-//                               height: 130,
-//                               fit: BoxFit.cover,
-//                             ),
-//                           )
+//                       borderRadius: BorderRadius.circular(20),
+//                       child: Image.memory(
+//                         _selectedImage!,
+//                         width: 130,
+//                         height: 130,
+//                         fit: BoxFit.cover,
+//                       ),
+//                     )
 //                         : const Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: [
-//                               Icon(
-//                                 Icons.camera_alt,
-//                                 color: Colors.grey,
-//                                 size: 32,
-//                               ),
-//                               SizedBox(height: 3),
-//                               Text(
-//                                 'Photo',
-//                                 style: TextStyle(
-//                                   color: Colors.grey,
-//                                   fontSize: 14,
-//                                 ),
-//                               ),
-//                             ],
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       children: [
+//                         Icon(
+//                           Icons.camera_alt,
+//                           color: Colors.grey,
+//                           size: 32,
+//                         ),
+//                         SizedBox(height: 3),
+//                         Text(
+//                           'Photo',
+//                           style: TextStyle(
+//                             color: Colors.grey,
+//                             fontSize: 14,
 //                           ),
+//                         ),
+//                       ],
+//                     ),
 //                   ),
 //                 ),
 //                 SizedBox(height: 23.h),
@@ -2243,7 +2350,7 @@ class _AddPetViewState extends State<AddPetView> {
 //                       items: _genders
 //                           .map(
 //                             (g) => DropdownMenuItem(value: g, child: Text(g)),
-//                           )
+//                       )
 //                           .toList(),
 //                       onChanged: (v) => setState(() => _selectedGender = v),
 //                       icon: const Icon(
@@ -2381,3 +2488,6 @@ class _AddPetViewState extends State<AddPetView> {
 //     );
 //   }
 // }
+//
+//
+//

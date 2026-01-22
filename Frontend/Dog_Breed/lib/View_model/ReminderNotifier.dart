@@ -86,6 +86,8 @@ class ReminderNotifier with ChangeNotifier {
       'activityNote': activity.note,
       'scheduledTime': scheduledDate.toIso8601String(),
       'petId': activity.petId,
+      'imagePath': activity.imagePath,
+      'color': activity.color.value,
     });
 
     // Create notification details

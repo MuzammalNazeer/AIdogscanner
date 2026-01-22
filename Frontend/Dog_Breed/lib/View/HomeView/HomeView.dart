@@ -118,6 +118,7 @@ class _HomeviewState extends State<Homeview> {
               width: 52.w,
               height: 66.h,
               padding: EdgeInsets.all(8.w),
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: color,
                 borderRadius: BorderRadius.circular(12.r),
@@ -397,8 +398,10 @@ class _HomeviewState extends State<Homeview> {
       children: [
         quickActionButton(
           image: SvgPicture.asset(
-            color: const Color(0xFF711544),
             'assets/images/Group77.svg',
+            color: const Color(0xFF711544),
+            height: 57.h,
+            width: 57.w,
           ),
           label: 'Hygiene',
           color: const Color(0xFFEF5DA8),
@@ -407,8 +410,10 @@ class _HomeviewState extends State<Homeview> {
         SizedBox(width: 7.w),
         quickActionButton(
           image: SvgPicture.asset(
-            color: const Color(0xFF4B4B89),
             'assets/images/Group88.svg',
+            color: const Color(0xFF4B4B89),
+            height: 66.h,
+            width: 52.w,
           ),
           label: 'Cleaning',
           color: const Color(0xFFAEAFF7),
@@ -417,8 +422,10 @@ class _HomeviewState extends State<Homeview> {
         SizedBox(width: 7.w),
         quickActionButton(
           image: SvgPicture.asset(
-            color: const Color(0xFF938200),
             'assets/images/medical.svg',
+            color: const Color(0xFF938200),
+            height: 44.h,
+            width: 44.w,
           ),
           label: 'Medical',
           color: const Color(0xFFECEF8B),
@@ -427,8 +434,10 @@ class _HomeviewState extends State<Homeview> {
         SizedBox(width: 7.w),
         quickActionButton(
           image: SvgPicture.asset(
-            color: const Color(0xFF1C7372),
             'assets/images/Group991.svg',
+            color: const Color(0xFF1C7372),
+            height: 40.h,
+            width: 40.w,
           ),
           label: 'Booking',
           color: const Color(0xFFA0E3E2),

@@ -163,9 +163,12 @@ class _AllactivityviewState extends State<Allactivityview> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF),
+              primary: AppColors.vibrantPurple,
               onPrimary: Colors.white,
+              surface: Colors.white,
               onSurface: Colors.black,
+              secondary: AppColors.vibrantPurple,
+              onSecondary: Colors.white,
             ),
             dialogBackgroundColor: Colors.white,
             textButtonTheme: TextButtonThemeData(
@@ -192,7 +195,10 @@ class _AllactivityviewState extends State<Allactivityview> {
       lastDate: DateTime(2030),
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(primary: Color(0xFF820DFF)),
+          colorScheme: const ColorScheme.light(
+              primary: Color(0xFF820DFF)
+
+          ),
         ),
         child: child!,
       ),
@@ -206,7 +212,16 @@ class _AllactivityviewState extends State<Allactivityview> {
       initialTime: _walkStartTime,
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(primary: Color(0xFF820DFF)),
+          colorScheme: const ColorScheme.light(
+
+            primary: AppColors.vibrantPurple,
+            onPrimary: Colors.white,
+            surface: Colors.white,
+            onSurface: Colors.black,
+            secondary: AppColors.vibrantPurple,
+            onSecondary: Colors.white,
+
+          ),
         ),
         child: child!,
       ),
@@ -236,7 +251,15 @@ class _AllactivityviewState extends State<Allactivityview> {
       initialTime: _walkEndTime,
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(primary: Color(0xFF820DFF)),
+          colorScheme: const ColorScheme.light(
+            primary: AppColors.vibrantPurple,
+            onPrimary: Colors.white,
+            surface: Colors.white,
+            onSurface: Colors.black,
+            secondary: AppColors.vibrantPurple,
+            onSecondary: Colors.white,
+
+          ),
         ),
         child: child!,
       ),

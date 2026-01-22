@@ -106,9 +106,12 @@ class _ReminderlistState extends State<Reminderlist> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF),
+              primary: AppColors.vibrantPurple,
               onPrimary: Colors.white,
+              surface: Colors.white,
               onSurface: Colors.black,
+              secondary: AppColors.vibrantPurple,
+              onSecondary: Colors.white,
             ),
             dialogBackgroundColor: Colors.white,
             textButtonTheme: TextButtonThemeData(

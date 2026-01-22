@@ -6,7 +6,8 @@ class HomeViewModel extends ChangeNotifier {
 
   int _calendarTabIndex = 0;
   int get calendarTabIndex => _calendarTabIndex;
-
+  String? _selectedPetId;
+  String? get selectedPetId => _selectedPetId;
   set selectedIndex(int value) {
     if (_selectedIndex != value) {
       _selectedIndex = value;
@@ -19,5 +20,10 @@ class HomeViewModel extends ChangeNotifier {
       _calendarTabIndex = value;
       notifyListeners();
     }
+  }
+
+  void setSelectedPetId(String? petId) {
+    _selectedPetId = petId;
+    notifyListeners();
   }
 }
