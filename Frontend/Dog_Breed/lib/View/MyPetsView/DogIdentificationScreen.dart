@@ -3,6 +3,7 @@ import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import '../../l10n/app_localizations.dart';
 import 'DogResultScreen.dart';
 
 class DogIdentificationScreen extends StatefulWidget {
@@ -92,7 +93,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: 'AI identifying Your ',
+                      text: AppLocalizations.of(context)!.aiIdentifyingYour,
                       style: TextStyle(
                         fontSize: 28.sp,
                         fontFamily: 'Sora',
@@ -102,7 +103,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
                       ),
                     ),
                     TextSpan(
-                      text: 'DOG',
+                      text: AppLocalizations.of(context)!.dogText,
                       style: TextStyle(
                         fontFamily: 'Sora',
                         fontSize: 28.sp,
@@ -116,7 +117,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
               ),
               SizedBox(height: 12.h),
               Text(
-                'This usually takes up 1 minute...',
+                AppLocalizations.of(context)!.identifyingTimeText,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontFamily: 'Inter',

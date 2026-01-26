@@ -15,6 +15,7 @@ import '../../View_model/home/home_view_model.dart';
 import '../../activity_model.dart';
 import '../../config/components/CustomDatePicker.dart';
 import '../../utils/routes/routes_name.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class Allactivityview extends StatefulWidget {
   final Activity? selectedActivity;
@@ -66,6 +67,34 @@ class _AllactivityviewState extends State<Allactivityview> {
   bool _isFahrenheitUnit = true;
 
   bool _hasReminder = false;
+
+  String _getLocalizedActivityName(BuildContext context, String name) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (name) {
+      case 'Veterinary': return localizations.activityVeterinary;
+      case 'Pee': return localizations.activityPee;
+      case 'Eat': return localizations.activityEat;
+      case 'Drink': return localizations.activityDrink;
+      case 'Play': return localizations.activityPlay;
+      case 'Poop': return localizations.activityPoop;
+      case 'Walk': return localizations.activityWalk;
+      case 'Crate': return localizations.activityCrate;
+      case 'Sleep': return localizations.activitySleep;
+      case 'Training': return localizations.activityTraining;
+      case 'Treat': return localizations.activityTreat;
+      case 'Grooming': return localizations.activityGrooming;
+      case 'Cleaning': return localizations.activityCleaning;
+      case 'Medication': return localizations.activityMedication;
+      case 'Vaccination': return localizations.activityVaccination;
+      case 'Weight': return localizations.activityWeight;
+      case 'Height': return localizations.activityHeight;
+      case 'Temperature': return localizations.activityTemperature;
+      case 'Health Condition': return localizations.activityHealthCondition;
+      case 'Accident': return localizations.activityAccident;
+      case 'Journal': return localizations.activityJournal;
+      default: return name;
+    }
+  }
 
   @override
   void initState() {
@@ -299,7 +328,7 @@ class _AllactivityviewState extends State<Allactivityview> {
             children: [
               ListTile(
                 leading: const Icon(Icons.camera_alt, color: Color(0xFF820DFF)),
-                title: const Text('Take Photo'),
+                title: Text(AppLocalizations.of(context)!.pickerTakePhoto),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(ImageSource.camera);
@@ -310,7 +339,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   Icons.photo_library,
                   color: Color(0xFF820DFF),
                 ),
-                title: const Text('Choose from Gallery'),
+                title: Text(AppLocalizations.of(context)!.pickerGallery),
                 onTap: () {
                   Navigator.pop(context);
                   _pickImage(ImageSource.gallery);
@@ -333,7 +362,7 @@ class _AllactivityviewState extends State<Allactivityview> {
             children: [
               ListTile(
                 leading: const Icon(Icons.videocam, color: Color(0xFF820DFF)),
-                title: const Text('Record Video'),
+                title: Text(AppLocalizations.of(context)!.pickerRecordVideo),
                 onTap: () {
                   Navigator.pop(context);
                   _pickVideo(ImageSource.camera);
@@ -344,7 +373,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   Icons.video_library,
                   color: Color(0xFF820DFF),
                 ),
-                title: const Text('Choose from Gallery'),
+                title: Text(AppLocalizations.of(context)!.pickerGallery),
                 onTap: () {
                   Navigator.pop(context);
                   _pickVideo(ImageSource.gallery);
@@ -359,7 +388,7 @@ class _AllactivityviewState extends State<Allactivityview> {
 
   void _saveActivity() async {
     if (_currentActivity == null) {
-      _showErrorSnackBar('Please select an activity first');
+      _showErrorSnackBar(AppLocalizations.of(context)!.errorSelectActivity);
       return;
     }
 
@@ -375,7 +404,7 @@ class _AllactivityviewState extends State<Allactivityview> {
       );
 
       if (reminderDateTime.isBefore(DateTime.now())) {
-        _showErrorSnackBar('Reminder time must be in the future');
+        _showErrorSnackBar(AppLocalizations.of(context)!.errorReminderFuture);
         return;
       }
     }
@@ -386,39 +415,39 @@ class _AllactivityviewState extends State<Allactivityview> {
     if (activityName == 'drink') {
       const double ozToMl = 29.5735;
       double amount = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
-      foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? 'oz' : 'ml'}';
+      foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? AppLocalizations.of(context)!.unitOz : AppLocalizations.of(context)!.unitMl}';
       if (_foodController.text.trim().isNotEmpty) {
         foodValue = '$foodValue ${_foodController.text.trim()}';
       }
     } else if (activityName == 'weight') {
       if (_weightValue <= 0) {
-        _showErrorSnackBar('Please enter a valid weight');
+        _showErrorSnackBar(AppLocalizations.of(context)!.errorValidWeight);
         return;
       }
       foodValue =
-          '${_weightValue.toStringAsFixed(1)} ${_isLbsUnit ? 'lbs' : 'kg'}';
+          '${_weightValue.toStringAsFixed(1)} ${_isLbsUnit ? AppLocalizations.of(context)!.unitLbs : AppLocalizations.of(context)!.unitKg}';
     } else if (activityName == 'height') {
       if (_heightValue <= 0) {
-        _showErrorSnackBar('Please enter a valid height');
+        _showErrorSnackBar(AppLocalizations.of(context)!.errorValidHeight);
         return;
       }
       foodValue =
-          '${_heightValue.toStringAsFixed(1)} ${_isInchesUnit ? 'Inches' : 'cm'}';
+          '${_heightValue.toStringAsFixed(1)} ${_isInchesUnit ? AppLocalizations.of(context)!.unitInches : AppLocalizations.of(context)!.unitCm}';
     } else if (activityName == 'temperature') {
       if (_temperatureValue <= 0) {
-        _showErrorSnackBar('Please enter a valid temperature');
+        _showErrorSnackBar(AppLocalizations.of(context)!.errorValidTemp);
         return;
       }
       foodValue =
-          '${_temperatureValue.toStringAsFixed(1)} ${_isFahrenheitUnit ? '°F' : '°C'}';
+          '${_temperatureValue.toStringAsFixed(1)} ${_isFahrenheitUnit ? AppLocalizations.of(context)!.unitF : AppLocalizations.of(context)!.unitC}';
     } else if (['walk', 'play', 'crate'].contains(activityName)) {
       const double kmToMi = 0.621371;
       double amount = _isKmUnit ? _walkDistanceKm : _walkDistanceKm * kmToMi;
-      foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}';
+      foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? AppLocalizations.of(context)!.unitKm : AppLocalizations.of(context)!.unitMi}';
     } else {
       if (activityName == 'eat') {
         if (_foodController.text.trim().isEmpty) {
-          _showErrorSnackBar('Please enter food name or type');
+          _showErrorSnackBar(AppLocalizations.of(context)!.errorEnterFood);
           return;
         }
       }
@@ -506,7 +535,9 @@ class _AllactivityviewState extends State<Allactivityview> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Activity ${_hasReminder ? 'with reminder ' : ''}saved successfully!',
+            _hasReminder 
+              ? AppLocalizations.of(context)!.successActivitySavedReminder
+              : AppLocalizations.of(context)!.successActivitySaved,
           ),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
@@ -520,7 +551,7 @@ class _AllactivityviewState extends State<Allactivityview> {
 
     } catch (e) {
       Navigator.pop(context);
-      _showErrorSnackBar('Failed to save: $e');
+      _showErrorSnackBar(AppLocalizations.of(context)!.errorSaveFailed(e.toString()));
     }
   }
 
@@ -587,7 +618,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Selected Image:',
+            AppLocalizations.of(context)!.labelSelectedImage,
             style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
           ),
           SizedBox(height: 8.h),
@@ -636,7 +667,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Selected Video:',
+            AppLocalizations.of(context)!.labelSelectedVideo,
             style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
           ),
           SizedBox(height: 8.h),
@@ -764,8 +795,8 @@ class _AllactivityviewState extends State<Allactivityview> {
                 children: [
                   Text(
                     _reminderDate != null
-                        ? DateFormat('MMM dd, yyyy').format(_reminderDate!)
-                        : 'Select reminder date',
+                        ? DateFormat('MMM dd, yyyy', Localizations.localeOf(context).toString()).format(_reminderDate!)
+                        : AppLocalizations.of(context)!.pickerSelectDate,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -794,7 +825,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   Text(
                     _reminderTime != null
                         ? _reminderTime!.format(context)
-                        : 'Select reminder time',
+                        : AppLocalizations.of(context)!.pickerSelectTime,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -829,7 +860,10 @@ class _AllactivityviewState extends State<Allactivityview> {
                   SizedBox(width: 8.w),
                   Expanded(
                     child: Text(
-                      'Reminder set for ${DateFormat('MMM d, yyyy').format(_reminderDate!)} at ${_reminderTime!.format(context)}',
+                      AppLocalizations.of(context)!.reminderSetFor(
+                        DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(_reminderDate!),
+                        _reminderTime!.format(context)
+                      ),
                       style: TextStyle(
                         fontSize: 14.sp,
                         color: const Color(0xFF820DFF),
@@ -876,7 +910,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               SizedBox(height: 24.h),
 
               Text(
-                'Name',
+                AppLocalizations.of(context)!.labelName,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
@@ -894,7 +928,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 child: TextField(
                   controller: _foodController,
                   decoration: InputDecoration(
-                    hintText: 'Enter name',
+                    hintText: AppLocalizations.of(context)!.hintEnterName,
                     hintStyle: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 14.sp,
@@ -911,7 +945,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 children: [
                   Expanded(
                     child: RoundButton(
-                      title: 'save',
+                      title: AppLocalizations.of(context)!.actionSave,
                       height: 53.h,
                       isSelected: true,
                       textColors: Colors.white,
@@ -925,7 +959,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   SizedBox(width: 16.w),
                   Expanded(
                     child: RoundButton(
-                      title: 'Delete',
+                      title: AppLocalizations.of(context)!.actionDelete,
                       height: 53.h,
                       isSelected: true,
                       isOutline: true,
@@ -982,7 +1016,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               SizedBox(height: 24.h),
 
               Text(
-                'Name',
+                AppLocalizations.of(context)!.labelName,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
@@ -1000,7 +1034,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 child: TextField(
                   controller: _foodController,
                   decoration: InputDecoration(
-                    hintText: 'Enter name',
+                    hintText: AppLocalizations.of(context)!.hintEnterName,
                     hintStyle: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 14.sp,
@@ -1014,7 +1048,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               SizedBox(height: 24.h),
 
               RoundButton(
-                title: 'save',
+                title: AppLocalizations.of(context)!.actionSave,
                 height: 53.h,
                 isSelected: true,
                 textColors: Colors.white,
@@ -1063,7 +1097,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               SizedBox(height: 24.h),
 
               Text(
-                'Name',
+                AppLocalizations.of(context)!.labelName,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
@@ -1081,7 +1115,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 child: TextField(
                   controller: _foodController,
                   decoration: InputDecoration(
-                    hintText: 'Enter name',
+                    hintText: AppLocalizations.of(context)!.hintEnterName,
                     hintStyle: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 14.sp,
@@ -1098,7 +1132,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 children: [
                   Expanded(
                     child: RoundButton(
-                      title: 'save',
+                      title: AppLocalizations.of(context)!.actionSave,
                       height: 53.h,
                       isSelected: true,
                       textColors: Colors.white,
@@ -1112,7 +1146,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   SizedBox(width: 16.w),
                   Expanded(
                     child: RoundButton(
-                      title: 'Delete',
+                      title: AppLocalizations.of(context)!.actionDelete,
                       height: 53.h,
                       isSelected: true,
                       isOutline: true,
@@ -1169,7 +1203,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               SizedBox(height: 24.h),
 
               Text(
-                'Name',
+                AppLocalizations.of(context)!.labelName,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
@@ -1187,7 +1221,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 child: TextField(
                   controller: _foodController,
                   decoration: InputDecoration(
-                    hintText: 'Enter name',
+                    hintText: AppLocalizations.of(context)!.hintEnterName,
                     hintStyle: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 14.sp,
@@ -1201,7 +1235,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               SizedBox(height: 24.h),
 
               RoundButton(
-                title: 'save',
+                title: AppLocalizations.of(context)!.actionSave,
                 height: 53.h,
                 isSelected: true,
                 textColors: Colors.white,
@@ -1285,7 +1319,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           )
         else
           RoundButton(
-            title: "+ Add Drink name or type",
+            title: AppLocalizations.of(context)!.actionAdd,
             isSelected: true,
             backgroundColors: const Color(0xFFF4F7F6),
             textColors: const Color(0xFF820DFF),
@@ -1340,7 +1374,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                     ),
                     child: Text(
-                      'oz',
+                      AppLocalizations.of(context)!.unitOz,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: _isOzUnit ? Colors.white : Colors.black,
@@ -1365,7 +1399,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                     ),
                     child: Text(
-                      'mL',
+                      AppLocalizations.of(context)!.unitMl,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: !_isOzUnit ? Colors.white : Colors.black,
@@ -1460,7 +1494,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                     ),
                     child: Text(
-                      'lbs',
+                      AppLocalizations.of(context)!.unitLbs,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: _isLbsUnit ? Colors.white : Colors.black,
@@ -1492,7 +1526,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                     ),
                     child: Text(
-                      'kg',
+                      AppLocalizations.of(context)!.unitKg,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: !_isLbsUnit ? Colors.white : Colors.black,
@@ -1587,7 +1621,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                     ),
                     child: Text(
-                      'Inches',
+                      AppLocalizations.of(context)!.unitInches,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: _isInchesUnit ? Colors.white : Colors.black,
@@ -1619,7 +1653,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                     ),
                     child: Text(
-                      'cm',
+                      AppLocalizations.of(context)!.unitCm,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: !_isInchesUnit ? Colors.white : Colors.black,
@@ -1713,7 +1747,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                     ),
                     child: Text(
-                      '°F',
+                      AppLocalizations.of(context)!.unitF,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: _isFahrenheitUnit ? Colors.white : Colors.black,
@@ -1746,7 +1780,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                     ),
                     child: Text(
-                      '°C',
+                      AppLocalizations.of(context)!.unitC,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: !_isFahrenheitUnit ? Colors.white : Colors.black,
@@ -1781,7 +1815,7 @@ class _AllactivityviewState extends State<Allactivityview> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         RoundButton(
-          title: "Or start a timer",
+          title: AppLocalizations.of(context)!.actionStartTimer,
           isSelected: true,
           textColors: AppColors.vibrantPurple,
           hasIcons: true,
@@ -1814,7 +1848,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 imagePath: _currentActivity!.imagePath,
                 color: _currentActivity!.color,
                 food:
-                    '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}',
+                    '${_walkDistanceKm.toStringAsFixed(1)} ${_isKmUnit ? AppLocalizations.of(context)!.unitKm : AppLocalizations.of(context)!.unitMi}',
                 dateTime: walkDateTime,
                 note: note.isNotEmpty ? note : null,
                 duration: duration,
@@ -1969,7 +2003,7 @@ class _AllactivityviewState extends State<Allactivityview> {
 
         SizedBox(height: 24.h),
         Text(
-          'Started At',
+          AppLocalizations.of(context)!.startedAt,
           style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
         ),
         SizedBox(height: 8.h),
@@ -1991,7 +2025,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        DateFormat('MM-dd-yyyy').format(_walkStartDate),
+                        DateFormat.yMd(Localizations.localeOf(context).toString()).format(_walkStartDate),
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
@@ -2020,15 +2054,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        DateFormat('HH:mm').format(
-                          DateTime(
-                            0,
-                            0,
-                            0,
-                            _walkStartTime.hour,
-                            _walkStartTime.minute,
-                          ),
-                        ),
+                        _walkStartTime.format(context),
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
@@ -2044,7 +2070,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         ),
         SizedBox(height: 16.h),
         Text(
-          'Ended At',
+          AppLocalizations.of(context)!.endedAt,
           style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
         ),
         SizedBox(height: 8.h),
@@ -2066,7 +2092,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        DateFormat('MM-dd-yyyy').format(_walkEndDate),
+                        DateFormat.yMd(Localizations.localeOf(context).toString()).format(_walkEndDate),
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
@@ -2125,31 +2151,30 @@ class _AllactivityviewState extends State<Allactivityview> {
 
 
 
-  String _getButtonTitle(String activityName) {
+  String _getButtonTitle(BuildContext context, String activityName) {
     switch (activityName) {
       case 'treat':
-        return "+ Add Treat";
+        return AppLocalizations.of(context)!.actionAddTreat;
       case 'grooming':
-        return "+ Add grooming type";
+        return AppLocalizations.of(context)!.actionAddGrooming;
       case 'medication':
-        return "+ Add medication";
+        return AppLocalizations.of(context)!.actionAddMedication;
       case 'vaccination':
-        return "+ Add vaccination";
+        return AppLocalizations.of(context)!.actionAddVaccination;
         case 'health condition':
-        return "+ Add health condition";
+        return AppLocalizations.of(context)!.actionAddHealthCondition;
         case 'accident':
-        return "+ Add accident type";
+        return AppLocalizations.of(context)!.actionAddAccident;
         case 'cleaning':
-        return "+ Add Cleaning type";
+        return AppLocalizations.of(context)!.actionAddCleaning;
       default:
-        return "+ Add Food name or type";
+        return AppLocalizations.of(context)!.actionAddFood;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat('MM-dd-yyyy');
-    final timeFormat = DateFormat('HH:mm');
+    final dateFormat = DateFormat.yMd(Localizations.localeOf(context).toString());
     final String activityName = _currentActivity?.name.toLowerCase() ?? '';
 
     return Scaffold(
@@ -2201,7 +2226,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     SizedBox(width: 20.w),
                     Expanded(
                       child: Text(
-                        _currentActivity?.name ?? 'No Activity Selected',
+                        _currentActivity != null ? _getLocalizedActivityName(context, _currentActivity!.name) : AppLocalizations.of(context)!.noActivitySelected,
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
@@ -2243,7 +2268,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   )
               else
                   RoundButton(
-                    title: _getButtonTitle(activityName),
+                    title: _getButtonTitle(context, activityName),
                     isSelected: true,
                     backgroundColors: const Color(0xFFF4F7F6),
                     textColors: const Color(0xFF820DFF),
@@ -2259,7 +2284,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     children: [
                       SizedBox(height: 4.h),
                       Text(
-                        'Started At',
+                        AppLocalizations.of(context)!.startedAt,
                         style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
                       ),
                       SizedBox(height: 8.h),
@@ -2281,7 +2306,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      DateFormat('MM-dd-yyyy').format(_walkStartDate),
+                                      DateFormat.yMd(Localizations.localeOf(context).toString()).format(_walkStartDate),
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
@@ -2310,7 +2335,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      DateFormat('HH:mm').format(
+                                      DateFormat('HH:mm', Localizations.localeOf(context).toString()).format(
                                         DateTime(
                                           0,
                                           0,
@@ -2334,7 +2359,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        'Ended At',
+                        AppLocalizations.of(context)!.endedAt,
                         style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
                       ),
                       SizedBox(height: 8.h),
@@ -2356,7 +2381,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      DateFormat('MM-dd-yyyy').format(_walkEndDate),
+                                      DateFormat.yMd(Localizations.localeOf(context).toString()).format(_walkEndDate),
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
@@ -2385,15 +2410,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      DateFormat('HH:mm').format(
-                                        DateTime(
-                                          0,
-                                          0,
-                                          0,
-                                          _walkEndTime.hour,
-                                          _walkEndTime.minute,
-                                        ),
-                                      ),
+                                      _walkEndTime.format(context),
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
@@ -2413,7 +2430,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               if (!['walk', 'play', 'crate','training','weight','height','temperature']
                   .contains(activityName)) ...[
                 Text(
-                  'Date',
+                  AppLocalizations.of(context)!.labelDate,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
@@ -2449,7 +2466,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 SizedBox(height: 10.h),
 
                 Text(
-                  'Time',
+                  AppLocalizations.of(context)!.labelTime,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
@@ -2471,15 +2488,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          timeFormat.format(
-                            DateTime(
-                              2000,
-                              1,
-                              1,
-                              _selectedTime.hour,
-                              _selectedTime.minute,
-                            ),
-                          ),
+                          _selectedTime.format(context),
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
@@ -2495,7 +2504,7 @@ class _AllactivityviewState extends State<Allactivityview> {
 
               // Note
               Text(
-                'Note',
+                AppLocalizations.of(context)!.walkNote,
                 style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 8.h),
@@ -2503,7 +2512,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 controller: _noteController,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  hintText: 'Add a note about this activity...',
+                  hintText: AppLocalizations.of(context)!.hintAddNote,
                   filled: true,
                   fillColor: const Color(0xFFF3F6F3),
                   border: OutlineInputBorder(
@@ -2531,9 +2540,9 @@ class _AllactivityviewState extends State<Allactivityview> {
                     children: [
                       const Icon(Icons.camera_alt, color: Color(0xFF820DFF)),
                       SizedBox(width: 12.w),
-                      const Text(
-                        '+ Add Image',
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.actionAddImage,
+                        style: const TextStyle(
                           color: Color(0xFF820DFF),
                           fontWeight: FontWeight.w500,
                         ),
@@ -2561,9 +2570,9 @@ class _AllactivityviewState extends State<Allactivityview> {
                     children: [
                       const Icon(Icons.videocam, color: Color(0xFF820DFF)),
                       SizedBox(width: 12.w),
-                      const Text(
-                        '+ Add Video',
-                        style: TextStyle(
+                      Text(
+                        AppLocalizations.of(context)!.actionAddVideo,
+                        style: const TextStyle(
                           color: Color(0xFF820DFF),
                           fontWeight: FontWeight.w500,
                         ),
@@ -2577,7 +2586,7 @@ class _AllactivityviewState extends State<Allactivityview> {
 
               // Save Button
               RoundButton(
-                title: 'Save',
+                title: AppLocalizations.of(context)!.actionSave,
                 isSelected: true,
                 textColors: Colors.white,
                 backgroundColors: AppColors.vibrantPurple,

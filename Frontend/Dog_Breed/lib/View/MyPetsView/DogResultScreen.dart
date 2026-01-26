@@ -16,6 +16,7 @@ import '../../View_model/ScanProvider.dart';
 import '../../View_model/PetProvider.dart';
 import '../../View_model/home/Pet.dart';
 import '../../utils/routes/routes_name.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class DogResultScreen extends StatefulWidget {
   final File imageFile;
@@ -106,7 +107,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
     }
 
     if (viewModel.predictionResult == null) {
-      return _buildErrorScreen('No prediction results available');
+      return _buildErrorScreen(AppLocalizations.of(context)!.noPredictionResult);
     }
 
     // Check if we should auto-save (confidence >= 40%)
@@ -283,7 +284,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
               const CircularProgressIndicator(),
               SizedBox(height: 20.h),
               Text(
-                'Analyzing image...',
+                AppLocalizations.of(context)!.analyzingImage,
                 style: TextStyle(fontSize: 16.sp),
               ),
             ],
@@ -315,7 +316,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                     Icon(Icons.error_outline, size: 64.sp, color: Colors.red),
                     SizedBox(height: 20.h),
                     Text(
-                      'Error Occurred',
+                      AppLocalizations.of(context)!.errorOccurred,
                       style: TextStyle(
                         fontSize: 22.sp,
                         fontWeight: FontWeight.bold,
@@ -330,7 +331,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                     ),
                     SizedBox(height: 24.h),
                     RoundButton(
-                      title: "Go Back",
+                      title: AppLocalizations.of(context)!.goBack,
                       height: 50.h,
                       borderRadius: 12.r,
                       textColors: Colors.white,
@@ -370,7 +371,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                     Icon(Icons.pets, size: 64.sp, color: Colors.orange),
                     SizedBox(height: 20.h),
                     Text(
-                      'No Dog Detected',
+                      AppLocalizations.of(context)!.noDogDetected,
                       style: TextStyle(
                         fontSize: 24.sp,
                         fontWeight: FontWeight.bold,
@@ -379,7 +380,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                     ),
                     SizedBox(height: 12.h),
                     Text(
-                      'Please try with a clearer photo of a dog.',
+                      AppLocalizations.of(context)!.clearerPhotoPrompt,
                       style: TextStyle(fontSize: 16.sp, color: Colors.orange[700]),
                       textAlign: TextAlign.center,
                     ),
@@ -388,7 +389,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                       children: [
                         Expanded(
                           child: RoundButton(
-                            title: "Cancel",
+                            title: AppLocalizations.of(context)!.cancel,
                             height: 50.h,
                             borderRadius: 12.r,
                             textColors: Colors.red,
@@ -400,7 +401,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                         SizedBox(width: 16.w),
                         Expanded(
                           child: RoundButton(
-                            title: "Try Again",
+                            title: AppLocalizations.of(context)!.tryAgain,
                             height: 50.h,
                             borderRadius: 12.r,
                             textColors: Colors.white,
@@ -454,7 +455,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                       SizedBox(width: 8.w),
                       Expanded(
                         child: Text(
-                          'Low confidence (${confidence.toStringAsFixed(1)}%). Results may not be accurate.',
+                          AppLocalizations.of(context)!.lowConfidenceWarning(confidence.toStringAsFixed(1)),
                           style: TextStyle(
                             fontSize: 13.sp,
                             color: Colors.orange[800],
@@ -483,7 +484,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                       ),
                       SizedBox(width: 10.w),
                       Text(
-                        'Saving to recent scans...',
+                        AppLocalizations.of(context)!.savingToRecentScans,
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: Colors.green,
@@ -562,42 +563,42 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                 children: [
                   _buildCharacteristicCard(
                     iconPath: "assets/images/size.svg",
-                    title: "Size",
+                    title: AppLocalizations.of(context)!.size,
                     value: result.size,
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/shape.svg",
-                    title: "Shape",
+                    title: AppLocalizations.of(context)!.shape,
                     value: result.shape,
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/regular.svg",
-                    title: "Color",
+                    title: AppLocalizations.of(context)!.color,
                     value: result.color,
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/coat.svg",
-                    title: "Coat",
+                    title: AppLocalizations.of(context)!.coat,
                     value: result.coat,
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/flex_dog.svg",
-                    title: "Head & Face",
+                    title: AppLocalizations.of(context)!.headAndFace,
                     value: result.headFace,
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/akar.svg",
-                    title: "Purpose",
+                    title: AppLocalizations.of(context)!.purpose,
                     value: result.purpose,
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/fluent.svg",
-                    title: "Body",
+                    title: AppLocalizations.of(context)!.body,
                     value: result.body,
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/akar.svg",
-                    title: "Weight",
+                    title: AppLocalizations.of(context)!.weight,
                     value: result.weight,
                   ),
                 ],
@@ -606,7 +607,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
               SizedBox(height: 30.h),
 
               Text(
-                "Temperament & Characteristics",
+                AppLocalizations.of(context)!.temperamentAndCharacteristics,
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
@@ -619,32 +620,32 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildTemperamentCard(
-                    "Energy Level",
-                    result.temperament["Energy Level"] ?? "Moderate",
+                    AppLocalizations.of(context)!.energyLevel,
+                    result.temperament["Energy Level"] ?? AppLocalizations.of(context)!.moderate,
                   ),
                   SizedBox(height: 12.h),
 
                   _buildTemperamentCard(
-                    "Trainability",
-                    result.temperament["Trainability"] ?? "Moderate",
+                    AppLocalizations.of(context)!.trainability,
+                    result.temperament["Trainability"] ?? AppLocalizations.of(context)!.moderate,
                   ),
                   SizedBox(height: 12.h),
 
                   _buildTemperamentCard(
-                    "Social Behavior",
-                    result.temperament["Social Behavior"] ?? "Friendly",
+                    AppLocalizations.of(context)!.socialBehavior,
+                    result.temperament["Social Behavior"] ?? AppLocalizations.of(context)!.friendly,
                   ),
                   SizedBox(height: 12.h),
 
                   _buildTemperamentCard(
-                    "Family Compatibility",
-                    result.temperament["Family Compatibility"] ?? "Good",
+                    AppLocalizations.of(context)!.familyCompatibility,
+                    result.temperament["Family Compatibility"] ?? AppLocalizations.of(context)!.good,
                   ),
                   SizedBox(height: 12.h),
 
                   _buildTemperamentCard(
-                    "Child Friendliness",
-                    result.temperament["Child Friendliness"] ?? "Good",
+                    AppLocalizations.of(context)!.childFriendliness,
+                    result.temperament["Child Friendliness"] ?? AppLocalizations.of(context)!.good,
                   ),
                 ],
               ),
@@ -657,7 +658,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                   children: [
                     Flexible(
                       child: RoundButton(
-                        title: "Cancel",
+                        title: AppLocalizations.of(context)!.cancel,
                         height: 58.h,
                         borderRadius: 10.r,
                         textColors: const Color(0xFFFF0505),
@@ -669,7 +670,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                     SizedBox(width: 8.w),
                     Expanded(
                       child: RoundButton(
-                        title: "+add Pet",
+                        title: AppLocalizations.of(context)!.addPet,
                         height: 58.h,
                         borderRadius: 10.r,
                         textColors: Colors.white,
@@ -696,9 +697,9 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                         child: Opacity(
                           opacity: (!canSave || _isAutoSaved || _isSaving) ? 0.9 : 1.0,
                           child: RoundButton(
-                            title: !canSave ? "Cannot Save" :
-                            _isSaving ? "Saving..." :
-                            (_isAutoSaved ? "Saved " : "Save"),
+                            title: !canSave ? AppLocalizations.of(context)!.cannotSave :
+                            _isSaving ? AppLocalizations.of(context)!.saving :
+                            (_isAutoSaved ? AppLocalizations.of(context)!.saved : AppLocalizations.of(context)!.save),
                             height: 58.h,
                             borderRadius: 10.r,
                             textColors: Colors.white,
@@ -776,7 +777,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
         Expanded(
           child: Center(
             child: Text(
-              'Dog Results',
+              AppLocalizations.of(context)!.dogResults,
               style: TextStyle(
                 fontFamily: 'Sora',
                 fontWeight: FontWeight.w300,
@@ -813,14 +814,14 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
     if (!_shouldSaveResults(viewModel)) {
       final confidence = viewModel.predictionResult!.confidence * 100;
       _showSnackbar(
-        'Cannot save: Confidence ${confidence.toStringAsFixed(1)}% < 40%',
+        AppLocalizations.of(context)!.cannotSaveConfidence(confidence.toStringAsFixed(1)),
         Colors.orange,
       );
       return;
     }
 
     if (viewModel.predictionResult == null) {
-      _showSnackbar('No prediction result available', Colors.red);
+      _showSnackbar(AppLocalizations.of(context)!.noPredictionResult, Colors.red);
       return;
     }
 
@@ -833,7 +834,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
       final imageBytes = viewModel.imageBytes ?? _imageBytes;
 
       if (imageBytes == null) {
-        _showSnackbar('No image data to save', Colors.red);
+        _showSnackbar(AppLocalizations.of(context)!.noImageDataToSave, Colors.red);
         setState(() => _isSaving = false);
         return;
       }
@@ -867,7 +868,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
       //   print('❌ Manual save error: $e');
       //   print('Stack trace: $stackTrace');
       // }
-      _showSnackbar('Failed to save results', Colors.red);
+      _showSnackbar(AppLocalizations.of(context)!.failedToSaveResults, Colors.red);
       if (mounted) {
         setState(() {
           _isSaving = false;

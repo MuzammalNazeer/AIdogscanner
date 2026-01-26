@@ -9,6 +9,7 @@ import '../../View_model/home/Pet.dart';
 import '../../View_model/home/home_view_model.dart';
 import '../../config/components/roundButton.dart';
 import '../../utils/routes/routes_name.dart';
+import '../../l10n/app_localizations.dart';
 
 class Editview extends StatefulWidget {
   final String? petName;
@@ -246,7 +247,7 @@ class _EditviewState extends State<Editview> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Select Breed',
+                              AppLocalizations.of(context)!.hintSelectBreed,
                               style: TextStyle(
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.bold,
@@ -269,7 +270,7 @@ class _EditviewState extends State<Editview> {
                             controller: searchController,
                             autofocus: true,
                             decoration: InputDecoration(
-                              hintText: 'Search breed...',
+                              hintText: AppLocalizations.of(context)!.hintSearchBreed,
                               prefixIcon: const Icon(Icons.search, color: Colors.grey),
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.symmetric(
@@ -305,7 +306,7 @@ class _EditviewState extends State<Editview> {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'No breeds found',
+                            AppLocalizations.of(context)!.noBreedsFound,
                             style: TextStyle(
                               color: Colors.grey[600],
                               fontSize: 16.sp,
@@ -313,7 +314,7 @@ class _EditviewState extends State<Editview> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Try a different search term',
+                            AppLocalizations.of(context)!.tryDifferentSearch,
                             style: TextStyle(
                               color: Colors.grey[500],
                               fontSize: 14.sp,
@@ -378,7 +379,7 @@ class _EditviewState extends State<Editview> {
                           elevation: 0,
                         ),
                         child: Text(
-                          'Cancel',
+                          AppLocalizations.of(context)!.cancelButton,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
@@ -508,9 +509,149 @@ class _EditviewState extends State<Editview> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to pick image: $e')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.msgImagePickFailed(e))),
       );
     }
+  }
+
+  String _getLocalizedGender(BuildContext context, String gender) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (gender) {
+      case 'Male':
+        return l10n.genderMale;
+      case 'Female':
+        return l10n.genderFemale;
+      case 'Other':
+        return l10n.genderOther;
+      default:
+        return gender;
+    }
+  }
+
+  List<String> _getLocalizedBreeds(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return [
+      l10n.breedAffenpinscher,
+      l10n.breedAfghanHound,
+      l10n.breedAfricanHuntingDog,
+      l10n.breedAiredale,
+      l10n.breedAmericanStaffordshireTerrier,
+      l10n.breedAppenzeller,
+      l10n.breedAustralianTerrier,
+      l10n.breedBasenji,
+      l10n.breedBasset,
+      l10n.breedBeagle,
+      l10n.breedBedlingtonTerrier,
+      l10n.breedBerneseMountainDog,
+      l10n.breedBlackAndTanCoonhound,
+      l10n.breedBlenheimSpaniel,
+      l10n.breedBloodhound,
+      l10n.breedBluetick,
+      l10n.breedBorderCollie,
+      l10n.breedBorderTerrier,
+      l10n.breedBorzoi,
+      l10n.breedBostonBull,
+      l10n.breedBouvierDesFlandres,
+      l10n.breedBoxer,
+      l10n.breedBrabanconGriffon,
+      l10n.breedBriard,
+      l10n.breedBrittanySpaniel,
+      l10n.breedBullMastiff,
+      l10n.breedCairn,
+      l10n.breedCardigan,
+      l10n.breedChesapeakeBayRetriever,
+      l10n.breedChihuahua,
+      l10n.breedChow,
+      l10n.breedClumber,
+      l10n.breedCockerSpaniel,
+      l10n.breedCollie,
+      l10n.breedCurlyCoatedRetriever,
+      l10n.breedDandieDinmont,
+      l10n.breedDhole,
+      l10n.breedDingo,
+      l10n.breedDoberman,
+      l10n.breedEnglishFoxhound,
+      l10n.breedEnglishSetter,
+      l10n.breedEnglishSpringer,
+      l10n.breedEntleBucher,
+      l10n.breedEskimoDog,
+      l10n.breedFlatCoatedRetriever,
+      l10n.breedFrenchBulldog,
+      l10n.breedGermanShepherd,
+      l10n.breedGermanShortHairedPointer,
+      l10n.breedGiantSchnauzer,
+      l10n.breedGoldenRetriever,
+      l10n.breedGordonSetter,
+      l10n.breedGreatDane,
+      l10n.breedGreatPyrenees,
+      l10n.breedGreaterSwissMountainDog,
+      l10n.breedGroenendael,
+      l10n.breedIbizanHound,
+      l10n.breedIrishSetter,
+      l10n.breedIrishTerrier,
+      l10n.breedIrishWaterSpaniel,
+      l10n.breedIrishWolfhound,
+      l10n.breedItalianGreyhound,
+      l10n.breedJapaneseSpaniel,
+      l10n.breedKeeshond,
+      l10n.breedKelpie,
+      l10n.breedKerryBlueTerrier,
+      l10n.breedKomondor,
+      l10n.breedKuvasz,
+      l10n.breedLabradorRetriever,
+      l10n.breedLakelandTerrier,
+      l10n.breedLeonberg,
+      l10n.breedLhasa,
+      l10n.breedMalamute,
+      l10n.breedMalinois,
+      l10n.breedMalteseDog,
+      l10n.breedMexicanHairless,
+      l10n.breedMiniaturePinscher,
+      l10n.breedMiniaturePoodle,
+      l10n.breedMiniatureSchnauzer,
+      l10n.breedNewfoundland,
+      l10n.breedNorfolkTerrier,
+      l10n.breedNorwegianElkhound,
+      l10n.breedNorwichTerrier,
+      l10n.breedOldEnglishSheepdog,
+      l10n.breedOtterhound,
+      l10n.breedPapillon,
+      l10n.breedPekinese,
+      l10n.breedPembroke,
+      l10n.breedPomeranian,
+      l10n.breedPug,
+      l10n.breedRedbone,
+      l10n.breedRhodesianRidgeback,
+      l10n.breedRottweiler,
+      l10n.breedSaintBernard,
+      l10n.breedSaluki,
+      l10n.breedSamoyed,
+      l10n.breedSchipperke,
+      l10n.breedScotchTerrier,
+      l10n.breedScottishDeerhound,
+      l10n.breedSealyhamTerrier,
+      l10n.breedShetlandSheepdog,
+      l10n.breedShihTzu,
+      l10n.breedSiberianHusky,
+      l10n.breedSilkyTerrier,
+      l10n.breedSoftCoatedWheatenTerrier,
+      l10n.breedStaffordshireBullterrier,
+      l10n.breedStandardPoodle,
+      l10n.breedStandardSchnauzer,
+      l10n.breedSussexSpaniel,
+      l10n.breedTibetanMastiff,
+      l10n.breedTibetanTerrier,
+      l10n.breedToyPoodle,
+      l10n.breedToyTerrier,
+      l10n.breedVizsla,
+      l10n.breedWalkerHound,
+      l10n.breedWeimaraner,
+      l10n.breedWelshSpringerSpaniel,
+      l10n.breedWestHighlandWhiteTerrier,
+      l10n.breedWhippet,
+      l10n.breedWireHairedFoxTerrier,
+      l10n.breedYorkshireTerrier,
+    ];
   }
 
   @override
@@ -546,7 +687,7 @@ class _EditviewState extends State<Editview> {
                     Expanded(
                       child: Center(
                         child: Text(
-                          widget.isEditing ? 'Edit Pet' : 'Add Pet',
+                          widget.isEditing ? AppLocalizations.of(context)!.editPetTitle : AppLocalizations.of(context)!.addPetTitle,
                           style: TextStyle(
                             fontFamily: 'Sora',
                             fontWeight: FontWeight.w300,
@@ -589,7 +730,7 @@ class _EditviewState extends State<Editview> {
                           fit: BoxFit.cover,
                         ),
                       )
-                          : const Column(
+                          : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
@@ -599,7 +740,7 @@ class _EditviewState extends State<Editview> {
                           ),
                           SizedBox(height: 3),
                           Text(
-                            'Photo',
+                            AppLocalizations.of(context)!.labelPhoto,
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 14,
@@ -611,9 +752,9 @@ class _EditviewState extends State<Editview> {
                   ),
                 ),
                 SizedBox(height: 23.h),
-                const Text(
-                  'Pet Name',
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.labelPetName,
+                  style: const TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
                     color: Color(0xFF6F7D86),
@@ -642,7 +783,7 @@ class _EditviewState extends State<Editview> {
                 ),
                 SizedBox(height: 17.h),
                 Text(
-                  'Breed',
+                  AppLocalizations.of(context)!.labelBreed,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12.sp,
@@ -701,7 +842,7 @@ class _EditviewState extends State<Editview> {
 
                 SizedBox(height: 17.h),
                 Text(
-                  'Gender',
+                  AppLocalizations.of(context)!.labelGender,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12.sp,
@@ -730,7 +871,7 @@ class _EditviewState extends State<Editview> {
                           .map(
                             (g) => DropdownMenuItem(
                           value: g,
-                          child: Text(g),
+                          child: Text(_getLocalizedGender(context, g)),
                         ),
                       )
                           .toList(),
@@ -746,8 +887,8 @@ class _EditviewState extends State<Editview> {
                   ),
                 ),
                 SizedBox(height: 17.h),
-                const Text(
-                  'Birthday',
+                Text(
+                  AppLocalizations.of(context)!.labelDOB,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
@@ -790,7 +931,7 @@ class _EditviewState extends State<Editview> {
                 ),
                 SizedBox(height: 190.h),
                 RoundButton(
-                  title: widget.isEditing ? "Update" : "Save",
+                  title: widget.isEditing ? AppLocalizations.of(context)!.actionUpdate : AppLocalizations.of(context)!.actionSave,
                   height: 50,
                   width: 379,
                   backgroundColors: const Color(0xFF820DFF),
@@ -844,9 +985,9 @@ class _EditviewState extends State<Editview> {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Failed to update pet'),
-                            duration: Duration(seconds: 2),
+                          SnackBar(
+                            content: Text(AppLocalizations.of(context)!.msgUpdateFailed),
+                            duration: const Duration(seconds: 2),
                           ),
                         );
                       }
@@ -868,9 +1009,9 @@ class _EditviewState extends State<Editview> {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Failed to add pet'),
-                            duration: Duration(seconds: 2),
+                          SnackBar(
+                            content: Text(AppLocalizations.of(context)!.msgAddFailed),
+                            duration: const Duration(seconds: 2),
                           ),
                         );
                       }

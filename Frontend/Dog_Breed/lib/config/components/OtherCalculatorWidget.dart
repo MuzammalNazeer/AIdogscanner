@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 import '../../activity_model.dart';
 import '../../View_model/activity_provider.dart';
 
@@ -115,8 +116,8 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildTabItem("Heatmap", 0),
-          _buildTabItem("Timeline", 1),
+          _buildTabItem(AppLocalizations.of(context)!.calendarHeatmapTab, 0),
+          _buildTabItem(AppLocalizations.of(context)!.calendarTimelineTab, 1),
         ],
       ),
     );
@@ -248,7 +249,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
       if (kDebugMode) print('Heatmap error: $e');
       return Center(
         child: Text(
-          'Error loading heatmap',
+          AppLocalizations.of(context)!.calendarErrorLoadingHeatmap,
           style: TextStyle(color: Colors.red, fontSize: 14.sp),
         ),
       );
@@ -313,36 +314,41 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
   }
 
   Widget _buildTimeLabels(double totalCellHeight) {
-    final hours = [
-      '12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
-      '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM',
-      '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'
-    ];
-
     final now = DateTime.now();
     bool isCurrentHour(int i) => i == now.hour;
 
     return Column(
       children: List.generate(
         24,
-            (i) => Container(
+            (i) {
+          final time = DateTime(2024, 1, 1, i);
+          return Container(
           height: totalCellHeight,
           alignment: Alignment.center,
           child: Text(
-            hours[i],
+            DateFormat.j(Localizations.localeOf(context).toString()).format(time),
             style: TextStyle(
               fontSize: 12.sp,
               color: isCurrentHour(i) ? Colors.red : Colors.grey.shade600,
               fontWeight: isCurrentHour(i) ? FontWeight.bold : FontWeight.normal,
             ),
           ),
-        ),
+        );
+        },
       ),
     );
   }
 
   Widget _buildDayLabels() {
-    final days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    final days = [
+      AppLocalizations.of(context)!.daySun,
+      AppLocalizations.of(context)!.dayMon,
+      AppLocalizations.of(context)!.dayTue,
+      AppLocalizations.of(context)!.dayWed,
+      AppLocalizations.of(context)!.dayThu,
+      AppLocalizations.of(context)!.dayFri,
+      AppLocalizations.of(context)!.daySat,
+    ];
     final now = DateTime.now();
     final currentDayIndex = now.weekday % 7;
 
@@ -393,17 +399,17 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Activity Intensity',
+            AppLocalizations.of(context)!.calendarActivityIntensity,
             style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 8.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildLegendItem('None', Colors.grey.shade100),
-              _buildLegendItem('Low', const Color(0xFFC9B3FF)),
-              _buildLegendItem('Medium', const Color(0xFF7B4DFF)),
-              _buildLegendItem('High', const Color(0xFF4D21FF)),
+              _buildLegendItem(AppLocalizations.of(context)!.calendarLegendNone, Colors.grey.shade100),
+              _buildLegendItem(AppLocalizations.of(context)!.calendarLegendLow, const Color(0xFFC9B3FF)),
+              _buildLegendItem(AppLocalizations.of(context)!.calendarLegendMedium, const Color(0xFF7B4DFF)),
+              _buildLegendItem(AppLocalizations.of(context)!.calendarLegendHigh, const Color(0xFF4D21FF)),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                 decoration: BoxDecoration(
@@ -412,7 +418,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                   border: Border.all(color: Colors.red, width: 2.w),
                 ),
                 child: Text(
-                  'Now',
+                  AppLocalizations.of(context)!.calendarLegendNow,
                   style: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.bold,
@@ -471,7 +477,15 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
     double maxAmount = 1;
     double maxFrequency = 0;
 
-    final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    final days = [
+      AppLocalizations.of(context)!.dayMon,
+      AppLocalizations.of(context)!.dayTue,
+      AppLocalizations.of(context)!.dayWed,
+      AppLocalizations.of(context)!.dayThu,
+      AppLocalizations.of(context)!.dayFri,
+      AppLocalizations.of(context)!.daySat,
+      AppLocalizations.of(context)!.daySun,
+    ];
 
     for (int i = 1; i <= 7; i++) {
       final dayActs = grouped[i]!;
@@ -498,7 +512,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
     }
 
     final dateRangeText =
-        "${DateFormat('MMMM d, y').format(cleanStart)} - ${DateFormat('MMMM d, y').format(endOfWeek)}";
+        "${DateFormat('MMMM d, y', Localizations.localeOf(context).toString()).format(cleanStart)} - ${DateFormat('MMMM d, y', Localizations.localeOf(context).toString()).format(endOfWeek)}";
 
     return Column(
       children: [
@@ -537,14 +551,14 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
         // ),
         SizedBox(height: 32.h),
         _buildLineChartCard(
-          title: 'Amount in mL',
+          title: AppLocalizations.of(context)!.calendarChartAmount,
           rawData: amountData,
           maxValue: maxAmount,
           days: days,
         ),
         SizedBox(height: 32.h),
         _buildLineChartCard(
-          title: 'Frequency',
+          title: AppLocalizations.of(context)!.calendarChartFrequency,
           rawData: frequencyData,
           maxValue: maxFrequency,
           days: days,
@@ -591,7 +605,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                       Icon(Icons.share, color: const Color(0xFF820DFF), size: 20.w),
                       SizedBox(width: 6.w),
                       Text(
-                        'Share',
+                        AppLocalizations.of(context)!.calendarShare,
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: const Color(0xFF820DFF),
@@ -718,17 +732,17 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
       children: [
         Row(
           children: [
-            Expanded(child: _buildInfoRow('Most Active Day', '')),
+            Expanded(child: _buildInfoRow(AppLocalizations.of(context)!.calendarMostActiveDay, '')),
             SizedBox(width: 20.w),
-            Expanded(child: _buildInfoRow('', 'Wednesday')),
+            Expanded(child: _buildInfoRow('', AppLocalizations.of(context)!.dayWed)),
           ],
         ),
         SizedBox(height: 8.h),
         Row(
           children: [
-            Expanded(child: _buildInfoRow('Most Active Time', '')),
+            Expanded(child: _buildInfoRow(AppLocalizations.of(context)!.calendarMostActiveTime, '')),
             SizedBox(width: 20.w),
-            Expanded(child: _buildInfoRow('', '9 PM')),
+            Expanded(child: _buildInfoRow('', DateFormat('h a', Localizations.localeOf(context).toString()).format(DateTime(2024, 1, 1, 21)))),
           ],
         ),
       ],
@@ -1155,8 +1169,16 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
 //     );
 //   }
 //   Widget _buildDayLabels() {
-//     final days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-//     final now = DateTime.now();
+//    final days = [
+//      AppLocalizations.of(context)!.daySun,
+//      AppLocalizations.of(context)!.dayMon,
+//      AppLocalizations.of(context)!.dayTue,
+//      AppLocalizations.of(context)!.dayWed,
+//      AppLocalizations.of(context)!.dayThu,
+//      AppLocalizations.of(context)!.dayFri,
+//      AppLocalizations.of(context)!.daySat,
+//    ];
+//    final now = DateTime.now();
 //     final currentDayIndex = now.weekday % 7; // 1=Mon → 0=Sun, 2=Tue → 1, etc.
 //
 //     return Row(

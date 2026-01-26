@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:dog_breed/View_model/home/home_view_model.dart';
 import '../../View_model/ReminderNotifier.dart';
@@ -36,117 +37,138 @@ class _CalendarviewState extends State<Calendarview> {
   DateTime _selectedDate = DateTime.now();
   DateTime _currentMonth = DateTime.now();
   String? _selectedPetId;
-  final List<String> tabs = [
-    'Activities',
-    'Reminders',
-    'Progress',
-    'Documents',
-    'Settings',
+  List<String> get tabs => [
+    AppLocalizations.of(context)!.calendarTabActivities,
+    AppLocalizations.of(context)!.calendarTabReminders,
+    AppLocalizations.of(context)!.calendarTabProgress,
+    AppLocalizations.of(context)!.calendarTabDocuments,
+    AppLocalizations.of(context)!.calendarTabSettings,
   ];
 
-  final List<Map<String, dynamic>> _allActivityTypes = [
+  List<Map<String, dynamic>> get _allActivityTypes => [
     {
-      'name': 'Veterinary',
+      'key': 'Veterinary',
+      'name': AppLocalizations.of(context)!.activityVeterinary,
       'image': 'assets/images/Veterinary.png',
       'color': const Color(0xFFB9E6FF),
     },
     {
-      'name': 'Pee',
+      'key': 'Pee',
+      'name': AppLocalizations.of(context)!.activityPee,
       'image': 'assets/images/62.png',
       'color': const Color(0xFFFFD6C9),
     },
     {
-      'name': 'Eat',
+      'key': 'Eat',
+      'name': AppLocalizations.of(context)!.activityEat,
       'image': 'assets/images/image 1556.png',
       'color': const Color(0xFFFFE3B9),
     },
     {
-      'name': 'Drink',
+      'key': 'Drink',
+      'name': AppLocalizations.of(context)!.activityDrink,
       'image': 'assets/images/drink.png',
       'color': const Color(0xFFB9DFFF),
     },
     {
-      'name': 'Play',
+      'key': 'Play',
+      'name': AppLocalizations.of(context)!.activityPlay,
       'image': 'assets/images/play.png',
       'color': const Color(0xFFC5F9FF),
     },
     {
-      'name': 'Poop',
+      'key': 'Poop',
+      'name': AppLocalizations.of(context)!.activityPoop,
       'image': 'assets/images/poop.png',
       'color': const Color(0xFFFFDEC5),
     },
     {
-      'name': 'Walk',
+      'key': 'Walk',
+      'name': AppLocalizations.of(context)!.activityWalk,
       'image': 'assets/images/walk1.png',
       'color': const Color(0xFFF2F2F2),
     },
     {
-      'name': 'Crate',
+      'key': 'Crate',
+      'name': AppLocalizations.of(context)!.activityCrate,
       'image': 'assets/images/crate.png',
       'color': const Color(0xFFFFCFC7),
     },
     {
-      'name': 'Sleep',
+      'key': 'Sleep',
+      'name': AppLocalizations.of(context)!.activitySleep,
       'image': 'assets/images/sleep.png',
       'color': const Color(0xFFFFDDC2),
     },
     {
-      'name': 'Training',
+      'key': 'Training',
+      'name': AppLocalizations.of(context)!.activityTraining,
       'image': 'assets/images/training.png',
       'color': const Color(0xFFFFF1C2),
     },
     {
-      'name': 'Treat',
+      'key': 'Treat',
+      'name': AppLocalizations.of(context)!.activityTreat,
       'image': 'assets/images/treat.png',
       'color': const Color(0xFFFFEBD3),
     },
     {
-      'name': 'Grooming',
+      'key': 'Grooming',
+      'name': AppLocalizations.of(context)!.activityGrooming,
       'image': 'assets/images/grooming.png',
       'color': const Color(0xFFD0FAFF),
     },
     {
-      'name': 'Cleaning',
+      'key': 'Cleaning',
+      'name': AppLocalizations.of(context)!.activityCleaning,
       'image': 'assets/images/73.png',
       'color': const Color(0xFFFFCFD5),
     },
     {
-      'name': 'Medication',
+      'key': 'Medication',
+      'name': AppLocalizations.of(context)!.activityMedication,
       'image': 'assets/images/medi.png',
       'color': const Color(0xFFFFEBEE),
     },
     {
-      'name': 'Vaccination',
+      'key': 'Vaccination',
+      'name': AppLocalizations.of(context)!.activityVaccination,
       'image': 'assets/images/vacc.png',
       'color': const Color(0xFFFFEAE3),
     },
     {
-      'name': 'Weight',
+      'key': 'Weight',
+      'name': AppLocalizations.of(context)!.activityWeight,
       'image': 'assets/images/weight.png',
       'color': const Color(0xFFD2F3FF),
     },
     {
-      'name': 'Height',
+      'key': 'Height',
+      'name': AppLocalizations.of(context)!.activityHeight,
       'image': 'assets/images/height.png',
       'color': const Color(0xFFEAD8D5),
     },
     {
-      'name': 'Temperature',
+      'key': 'Temperature',
+      'name': AppLocalizations.of(context)!.activityTemperature,
       'image': 'assets/images/temp.png',
       'color': const Color(0xFFE0EEFF),
     },
     {
-      'name': 'Health Condition',
+      'key': 'Health Condition',
+      'name': AppLocalizations.of(context)!.activityHealthCondition,
       'image': 'assets/images/healt.png',
       'color': const Color(0xFFFFE7C0),
     },
     {
-      'name': 'Accident',
+      'key': 'Accident',
+      'name': AppLocalizations.of(context)!.activityAccident,
       'image': 'assets/images/healt.png',
       'color': const Color(0xFFFDFFD9),
     },
     {
-      'name': 'Journal',
+      'key': 'Journal',
+      'name': AppLocalizations.of(context)!.activityJournal,
       'image': 'assets/images/jour.png',
       'color': const Color(0xFFFFD5CA),
     },
@@ -319,6 +341,34 @@ class _CalendarviewState extends State<Calendarview> {
     }
   }
 
+  String _getLocalizedActivityName(BuildContext context, String name) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (name) {
+      case 'Veterinary': return localizations.activityVeterinary;
+      case 'Pee': return localizations.activityPee;
+      case 'Eat': return localizations.activityEat;
+      case 'Drink': return localizations.activityDrink;
+      case 'Play': return localizations.activityPlay;
+      case 'Poop': return localizations.activityPoop;
+      case 'Walk': return localizations.activityWalk;
+      case 'Crate': return localizations.activityCrate;
+      case 'Sleep': return localizations.activitySleep;
+      case 'Training': return localizations.activityTraining;
+      case 'Treat': return localizations.activityTreat;
+      case 'Grooming': return localizations.activityGrooming;
+      case 'Cleaning': return localizations.activityCleaning;
+      case 'Medication': return localizations.activityMedication;
+      case 'Vaccination': return localizations.activityVaccination;
+      case 'Weight': return localizations.activityWeight;
+      case 'Height': return localizations.activityHeight;
+      case 'Temperature': return localizations.activityTemperature;
+      case 'Health Condition': return localizations.activityHealthCondition;
+      case 'Accident': return localizations.activityAccident;
+      case 'Journal': return localizations.activityJournal;
+      default: return name;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final homeViewModel = Provider.of<HomeViewModel>(context);
@@ -372,7 +422,7 @@ class _CalendarviewState extends State<Calendarview> {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 12.h),
               child: Text(
-                'Manage',
+                AppLocalizations.of(context)!.calendarManage,
                 style: TextStyle(
                   fontSize: 40.sp,
                   fontWeight: FontWeight.bold,
@@ -477,7 +527,7 @@ class _CalendarviewState extends State<Calendarview> {
                   Row(
                     children: [
                       Text(
-                        DateFormat('MMMM yyyy').format(_currentMonth),
+                        DateFormat('MMMM yyyy', Localizations.localeOf(context).toString()).format(_currentMonth),
                         style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
@@ -494,7 +544,7 @@ class _CalendarviewState extends State<Calendarview> {
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Text(
-                          'Month',
+                          AppLocalizations.of(context)!.calendarMonth,
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: const Color(0xFF820DFF),
@@ -581,7 +631,7 @@ class _CalendarviewState extends State<Calendarview> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  DateFormat('MMM').format(date),
+                                  DateFormat('MMM', Localizations.localeOf(context).toString()).format(date),
                                   style: TextStyle(
                                     fontSize: 12.sp,
                                     color: isSelected
@@ -602,7 +652,7 @@ class _CalendarviewState extends State<Calendarview> {
                                 ),
                                 SizedBox(height: 2.h),
                                 Text(
-                                  DateFormat('EEE').format(date),
+                                  DateFormat('EEE', Localizations.localeOf(context).toString()).format(date),
                                   style: TextStyle(
                                     fontSize: 12.sp,
                                     color: isSelected
@@ -681,7 +731,7 @@ class _CalendarviewState extends State<Calendarview> {
       case 4: // Settings
         return _buildSettingList();
       default:
-        return const Center(child: Text('Coming soon...'));
+        return Center(child: Text(AppLocalizations.of(context)!.calendarComingSoon));
     }
   }
 
@@ -690,7 +740,7 @@ class _CalendarviewState extends State<Calendarview> {
         ? activities.sublist(0, limit)
         : activities;
     final hasActivities = displayActivities.isNotEmpty;
-    final formattedDate = DateFormat('EEEE, MMMM d').format(_selectedDate);
+    final formattedDate = DateFormat('EEEE, MMMM d', Localizations.localeOf(context).toString()).format(_selectedDate);
 
     Widget content;
     if (hasActivities) {
@@ -712,7 +762,7 @@ class _CalendarviewState extends State<Calendarview> {
             ),
             SizedBox(height: 20.h),
             Text(
-              'No Activity Logged',
+              AppLocalizations.of(context)!.calendarNoActivityLogged,
               style: TextStyle(fontSize: 20.sp, color: const Color(0xFF000000)),
             ),
             SizedBox(height: 8.h),
@@ -743,11 +793,11 @@ class _CalendarviewState extends State<Calendarview> {
                 Row(
                   children: [
                     _buildHeaderIcon('assets/images/61.png'),
-                    SizedBox(width: 6.w),
+                    SizedBox(width: 5.w),
                     _buildHeaderIcon('assets/images/62.png'),
-                    SizedBox(width: 6.w),
+                    SizedBox(width: 5.w),
                     _buildHeaderIcon('assets/images/63.png'),
-                    SizedBox(width: 6.w),
+                    SizedBox(width: 5.w),
                     SizedBox(
                         width: 40.w,
                         height: 40.h,
@@ -755,12 +805,12 @@ class _CalendarviewState extends State<Calendarview> {
                     ),
                   ],
                 ),
-                SizedBox(width: 6.w),
+                SizedBox(width: 5.w),
                 GestureDetector(
                   onTap: () => _showAddActivitySheet(context),
-                  child: const Text(
-                    'Add Activity',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  child: Text(
+                    AppLocalizations.of(context)!.calendarAddActivity,
+                    style:  TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
@@ -800,9 +850,9 @@ class _CalendarviewState extends State<Calendarview> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildProgressTabItem("Calendar", 0),
-              _buildProgressTabItem("Chart", 1),
-              _buildProgressTabItem("Compare", 2),
+              _buildProgressTabItem(AppLocalizations.of(context)!.progressTabCalendar, 0),
+              _buildProgressTabItem(AppLocalizations.of(context)!.progressTabChart, 1),
+              _buildProgressTabItem(AppLocalizations.of(context)!.progressTabCompare, 2),
             ],
           ),
         ),
@@ -862,26 +912,26 @@ class _CalendarviewState extends State<Calendarview> {
 
   Widget _buildProgressChartView(List<Activity> dailyActivities) {
     final List<Map<String, dynamic>> progressItems = [
-      {'title': 'Eat', 'icon': 'assets/images/image 1556.png'},
-      {'title': 'Pee', 'icon': 'assets/images/62.png'},
-      {'title': 'Drink', 'icon': 'assets/images/drink.png'},
-      {'title': 'Poop', 'icon': 'assets/images/poop.png'},
-      {'title': 'Walk', 'icon': 'assets/images/walk1.png'},
-      {'title': 'Play', 'icon': 'assets/images/play.png'},
-      {'title': 'Crate', 'icon': 'assets/images/crate.png'},
-      {'title': 'Sleep', 'icon': 'assets/images/sleep.png'},
-      {'title': 'Training', 'icon': 'assets/images/training.png'},
-      {'title': 'Treat', 'icon': 'assets/images/treat.png'},
-      {'title': 'Grooming', 'icon': 'assets/images/grooming.png'},
-      {'title': 'Cleaning', 'icon': 'assets/images/73.png'},
-      {'title': 'Medication', 'icon': 'assets/images/medi.png'},
-      {'title': 'Vaccination', 'icon': 'assets/images/vacc.png'},
-      {'title': 'Weight', 'icon': 'assets/images/weight.png'},
-      {'title': 'Height', 'icon': 'assets/images/height.png'},
-      {'title': 'Temperature', 'icon': 'assets/images/temp.png'},
-      {'title': 'Health Condition', 'icon': 'assets/images/healt.png'},
-      {'title': 'Accident', 'icon': 'assets/images/acc.png'},
-      {'title': 'Journal', 'icon': 'assets/images/jour.png'},
+      {'key': 'Eat', 'title': AppLocalizations.of(context)!.activityEat, 'icon': 'assets/images/image 1556.png'},
+      {'key': 'Pee', 'title': AppLocalizations.of(context)!.activityPee, 'icon': 'assets/images/62.png'},
+      {'key': 'Drink', 'title': AppLocalizations.of(context)!.activityDrink, 'icon': 'assets/images/drink.png'},
+      {'key': 'Poop', 'title': AppLocalizations.of(context)!.activityPoop, 'icon': 'assets/images/poop.png'},
+      {'key': 'Walk', 'title': AppLocalizations.of(context)!.activityWalk, 'icon': 'assets/images/walk1.png'},
+      {'key': 'Play', 'title': AppLocalizations.of(context)!.activityPlay, 'icon': 'assets/images/play.png'},
+      {'key': 'Crate', 'title': AppLocalizations.of(context)!.activityCrate, 'icon': 'assets/images/crate.png'},
+      {'key': 'Sleep', 'title': AppLocalizations.of(context)!.activitySleep, 'icon': 'assets/images/sleep.png'},
+      {'key': 'Training', 'title': AppLocalizations.of(context)!.activityTraining, 'icon': 'assets/images/training.png'},
+      {'key': 'Treat', 'title': AppLocalizations.of(context)!.activityTreat, 'icon': 'assets/images/treat.png'},
+      {'key': 'Grooming', 'title': AppLocalizations.of(context)!.activityGrooming, 'icon': 'assets/images/grooming.png'},
+      {'key': 'Cleaning', 'title': AppLocalizations.of(context)!.activityCleaning, 'icon': 'assets/images/73.png'},
+      {'key': 'Medication', 'title': AppLocalizations.of(context)!.activityMedication, 'icon': 'assets/images/medi.png'},
+      {'key': 'Vaccination', 'title': AppLocalizations.of(context)!.activityVaccination, 'icon': 'assets/images/vacc.png'},
+      {'key': 'Weight', 'title': AppLocalizations.of(context)!.activityWeight, 'icon': 'assets/images/weight.png'},
+      {'key': 'Height', 'title': AppLocalizations.of(context)!.activityHeight, 'icon': 'assets/images/height.png'},
+      {'key': 'Temperature', 'title': AppLocalizations.of(context)!.activityTemperature, 'icon': 'assets/images/temp.png'},
+      {'key': 'Health Condition', 'title': AppLocalizations.of(context)!.activityHealthCondition, 'icon': 'assets/images/healt.png'},
+      {'key': 'Accident', 'title': AppLocalizations.of(context)!.activityAccident, 'icon': 'assets/images/acc.png'},
+      {'key': 'Journal', 'title': AppLocalizations.of(context)!.activityJournal, 'icon': 'assets/images/jour.png'},
     ];
 
     return SingleChildScrollView(
@@ -907,6 +957,7 @@ class _CalendarviewState extends State<Calendarview> {
               itemBuilder: (context, index) {
                 final item = progressItems[index];
                 final String title = item['title'];
+                final String key = item['key'];
                 final String iconPath = item['icon'];
 
                 final int count = dailyActivities
@@ -918,7 +969,7 @@ class _CalendarviewState extends State<Calendarview> {
                     final petProvider = Provider.of<PetProvider>(context, listen: false);
                     final effectivePetId = _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
 
-                    if (title.toLowerCase() == 'drink') {
+                    if (key.toLowerCase() == 'drink') {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -976,7 +1027,7 @@ class _CalendarviewState extends State<Calendarview> {
                               ),
                               SizedBox(height: 4.h),
                               Text(
-                                title,
+                                _getLocalizedActivityName(context, title),
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
@@ -1054,7 +1105,7 @@ class _CalendarviewState extends State<Calendarview> {
                 },
               ),
               Text(
-                DateFormat('MMMM d, y').format(_selectedDate),
+                DateFormat('MMMM d, y', Localizations.localeOf(context).toString()).format(_selectedDate),
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
@@ -1088,7 +1139,7 @@ class _CalendarviewState extends State<Calendarview> {
             child: Column(
               children: List.generate(24, (index) {
                 final time = DateTime(2024, 1, 1, index, 0);
-                final timeString = DateFormat('h a').format(time).toLowerCase();
+                final timeString = DateFormat('h a', Localizations.localeOf(context).toString()).format(time).toLowerCase();
 
                 final activitiesInHour = dailyActivities
                     .where((a) => a.dateTime.hour == index)
@@ -1160,12 +1211,12 @@ class _CalendarviewState extends State<Calendarview> {
           SizedBox(width: 8.w),
           Expanded(
             child: Text(
-              activity.name,
+              _getLocalizedActivityName(context, activity.name),
               style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
             ),
           ),
           Text(
-            DateFormat('h:mm a').format(activity.dateTime),
+            DateFormat('h:mm a', Localizations.localeOf(context).toString()).format(activity.dateTime),
             style: TextStyle(fontSize: 12.sp, color: Colors.grey),
           ),
         ],
@@ -1264,7 +1315,7 @@ class _CalendarviewState extends State<Calendarview> {
     maxY = maxYInt.toDouble();
 
     final _ =
-        "${DateFormat('MMMM d, y').format(startOfWeek)} - ${DateFormat('MMMM d, y').format(endOfWeek)}";
+        "${DateFormat('MMMM d, y', Localizations.localeOf(context).toString()).format(startOfWeek)} - ${DateFormat('MMMM d, y', Localizations.localeOf(context).toString()).format(endOfWeek)}";
 
     return Column(
       children: [
@@ -1301,25 +1352,25 @@ class _CalendarviewState extends State<Calendarview> {
                         Widget text;
                         switch (value.toInt()) {
                           case 1:
-                            text = const Text('Mon', style: style);
+                            text = Text(AppLocalizations.of(context)!.dayMon, style: style);
                             break;
                           case 2:
-                            text = const Text('Tue', style: style);
+                            text = Text(AppLocalizations.of(context)!.dayTue, style: style);
                             break;
                           case 3:
-                            text = const Text('Wed', style: style);
+                            text = Text(AppLocalizations.of(context)!.dayWed, style: style);
                             break;
                           case 4:
-                            text = const Text('Thu', style: style);
+                            text = Text(AppLocalizations.of(context)!.dayThu, style: style);
                             break;
                           case 5:
-                            text = const Text('Fri', style: style);
+                            text = Text(AppLocalizations.of(context)!.dayFri, style: style);
                             break;
                           case 6:
-                            text = const Text('Sat', style: style);
+                            text = Text(AppLocalizations.of(context)!.daySat, style: style);
                             break;
                           case 7:
-                            text = const Text('Sun', style: style);
+                            text = Text(AppLocalizations.of(context)!.daySun, style: style);
                             break;
                           default:
                             text = const Text('', style: style);
@@ -1392,7 +1443,7 @@ class _CalendarviewState extends State<Calendarview> {
     final hasPets = petProvider.hasPets;
     final pets = petProvider.pets;
 
-    String displayName = hasPets ? 'Select Pet' : 'No Pet Selected';
+    String displayName = hasPets ? AppLocalizations.of(context)!.petSelectPet : AppLocalizations.of(context)!.petNoPetSelected;
     Uint8List? displayImage;
     Color borderColor = Colors.grey;
 
@@ -1499,8 +1550,8 @@ class _CalendarviewState extends State<Calendarview> {
               ),
               SizedBox(height: 16.h),
               Text(
-                'Select Pet',
-                style: TextStyle(
+            AppLocalizations.of(context)!.petSelectPet,
+            style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
@@ -1550,7 +1601,7 @@ class _CalendarviewState extends State<Calendarview> {
                               SizedBox(width: 16.w),
                               Expanded(
                                 child: Text(
-                                  'No pet selected',
+                                  AppLocalizations.of(context)!.petNoPetSelected,
                                   style: TextStyle(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w600,
@@ -1622,239 +1673,6 @@ class _CalendarviewState extends State<Calendarview> {
     );
   }
 
-
-  // Widget _buildSelectedPetHeader() {
-  //   final petProvider = Provider.of<PetProvider>(context);
-  //   final hasPets = petProvider.hasPets;
-  //   final pets = petProvider.pets;
-  //
-  //   String displayName = hasPets ? 'Select Pet' : 'No Pet Selected';
-  //   Uint8List? displayImage;
-  //   Color borderColor = Colors.grey;
-  //
-  //   Pet? displayedPet;
-  //
-  //   if (hasPets) {
-  //     if (_selectedPetId != null) {
-  //       try {
-  //         displayedPet = pets.firstWhere((p) => p.id == _selectedPetId);
-  //       } catch (_) {
-  //         // invalid ID → fallback to first
-  //       }
-  //     }
-  //
-  //     displayedPet ??= pets.first;
-  //
-  //     displayName = displayedPet.name;
-  //     displayImage = displayedPet.imageBytes;
-  //     borderColor = const Color(0xFF820DFF);
-  //   }
-  //
-  //   return GestureDetector(
-  //     onTap: hasPets ? () => _showPetPicker(petProvider) : null,
-  //     child: Container(
-  //       height: 66.h,
-  //       margin: EdgeInsets.symmetric(horizontal: 8.w),
-  //       decoration: BoxDecoration(
-  //         color: const Color(0xFFF4F7F6),
-  //         borderRadius: BorderRadius.circular(16.r),
-  //       ),
-  //       child: Padding(
-  //         padding: EdgeInsets.symmetric(horizontal: 16.w),
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //           children: [
-  //             Row(
-  //               children: [
-  //                 Container(
-  //                   width: 40.w,
-  //                   height: 40.h,
-  //                   decoration: BoxDecoration(
-  //                     shape: BoxShape.circle,
-  //                     border: Border.all(color: borderColor, width: 3),
-  //                   ),
-  //                   child: ClipOval(
-  //                     child: displayImage != null
-  //                         ? Image.memory(displayImage, fit: BoxFit.cover)
-  //                         : Image.asset(
-  //                       'assets/images/a2.png',
-  //                       fit: BoxFit.cover,
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 SizedBox(width: 12.w),
-  //                 Text(
-  //                   displayName,
-  //                   style: TextStyle(
-  //                     fontSize: 18.sp,
-  //                     fontWeight: FontWeight.w600,
-  //                     color: const Color(0xFF301934),
-  //                   ),
-  //                 ),
-  //               ],
-  //             ),
-  //             const Icon(
-  //               Icons.keyboard_arrow_down,
-  //               size: 24,
-  //               color: Colors.black,
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-  //
-  // void _showPetPicker(PetProvider petProvider) {
-  //   if (!petProvider.hasPets) return;
-  //
-  //   showModalBottomSheet(
-  //     context: context,
-  //     backgroundColor: Colors.white,
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
-  //     ),
-  //     builder: (context) {
-  //       final currentSelectedId = _selectedPetId;
-  //
-  //       return SizedBox(
-  //         height: 360.h,
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.min,
-  //           children: [
-  //             SizedBox(height: 8.h),
-  //             Container(
-  //               width: 40.w,
-  //               height: 4.h,
-  //               decoration: BoxDecoration(
-  //                 color: Colors.grey[300],
-  //                 borderRadius: BorderRadius.circular(20.r),
-  //               ),
-  //             ),
-  //             SizedBox(height: 16.h),
-  //             Text(
-  //               'Select Pet',
-  //               style: TextStyle(
-  //                 fontSize: 20.sp,
-  //                 fontWeight: FontWeight.w700,
-  //                 color: Colors.black,
-  //               ),
-  //             ),
-  //             SizedBox(height: 16.h),
-  //             Expanded(
-  //               child: ListView.separated(
-  //                 padding: EdgeInsets.symmetric(horizontal: 16.w),
-  //                 itemCount: petProvider.pets.length + 1,
-  //                 separatorBuilder: (_, __) => SizedBox(height: 8.h),
-  //                 itemBuilder: (context, index) {
-  //                   if (index == 0) {
-  //                     final isSelected = currentSelectedId == null;
-  //                     return GestureDetector(
-  //                       onTap: () async {
-  //                         setState(() => _selectedPetId = null);
-  //                         await _saveSelectedPetId(null);
-  //                         if (mounted) Navigator.pop(context);
-  //                       },
-  //                       child: Container(
-  //                         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-  //                         decoration: BoxDecoration(
-  //                           color: isSelected ? const Color(0xFF820DFF) : const Color(0xFFF4F7F6),
-  //                           borderRadius: BorderRadius.circular(16.r),
-  //                         ),
-  //                         child: Row(
-  //                           children: [
-  //                             Container(
-  //                               width: 48.w,
-  //                               height: 48.h,
-  //                               decoration: BoxDecoration(
-  //                                 shape: BoxShape.circle,
-  //                                 border: Border.all(
-  //                                   color: isSelected ? Colors.white : const Color(0xFF820DFF),
-  //                                   width: 3,
-  //                                 ),
-  //                               ),
-  //                               child: ClipOval(
-  //                                 child: Image.asset(
-  //                                   'assets/images/a2.png',
-  //                                   fit: BoxFit.cover,
-  //                                 ),
-  //                               ),
-  //                             ),
-  //                             SizedBox(width: 16.w),
-  //                             Expanded(
-  //                               child: Text(
-  //                                 'No pet selected',
-  //                                 style: TextStyle(
-  //                                   fontSize: 16.sp,
-  //                                   fontWeight: FontWeight.w600,
-  //                                   color: isSelected ? Colors.white : Colors.black87,
-  //                                 ),
-  //                               ),
-  //                             ),
-  //                           ],
-  //                         ),
-  //                       ),
-  //                     );
-  //                   }
-  //
-  //                   final pet = petProvider.pets[index - 1];
-  //                   final isSelected = pet.id == currentSelectedId;
-  //
-  //                   return GestureDetector(
-  //                     onTap: () async {
-  //                       setState(() => _selectedPetId = pet.id);
-  //                       await _saveSelectedPetId(pet.id);
-  //                       if (mounted) Navigator.pop(context);
-  //                     },
-  //                     child: Container(
-  //                       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-  //                       decoration: BoxDecoration(
-  //                         color: isSelected ? const Color(0xFF820DFF) : const Color(0xFFF4F7F6),
-  //                         borderRadius: BorderRadius.circular(16.r),
-  //                       ),
-  //                       child: Row(
-  //                         children: [
-  //                           Container(
-  //                             width: 48.w,
-  //                             height: 48.h,
-  //                             decoration: BoxDecoration(
-  //                               shape: BoxShape.circle,
-  //                               border: Border.all(
-  //                                 color: isSelected ? Colors.white : const Color(0xFF820DFF),
-  //                                 width: 3,
-  //                               ),
-  //                             ),
-  //                             child: ClipOval(
-  //                               child: pet.imageBytes != null
-  //                                   ? Image.memory(pet.imageBytes!, fit: BoxFit.cover)
-  //                                   : Image.asset('assets/images/a2.png', fit: BoxFit.cover),
-  //                             ),
-  //                           ),
-  //                           SizedBox(width: 16.w),
-  //                           Expanded(
-  //                             child: Text(
-  //                               pet.name,
-  //                               style: TextStyle(
-  //                                 fontSize: 16.sp,
-  //                                 fontWeight: FontWeight.w600,
-  //                                 color: isSelected ? Colors.white : Colors.black87,
-  //                               ),
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   );
-  //                 },
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
   Widget _buildSettingList() {
     final activityNotifier = Provider.of<ActivityNotifier>(context);
 
@@ -1872,10 +1690,11 @@ class _CalendarviewState extends State<Calendarview> {
               separatorBuilder: (context, index) => SizedBox(height: 12.h),
               itemBuilder: (context, index) {
                 final activityType = _allActivityTypes[index];
+                final String key = activityType['key'];
                 final String name = activityType['name'];
                 final String imagePath = activityType['image'];
                 final Color color = activityType['color'];
-                final bool isVisible = activityNotifier.isActivityVisible(name);
+                final bool isVisible = activityNotifier.isActivityVisible(key);
 
                 return Container(
                   height: 64.h,
@@ -1935,7 +1754,7 @@ class _CalendarviewState extends State<Calendarview> {
                             Colors.transparent,
                           ),
                           onChanged: (value) {
-                            activityNotifier.toggleVisibility(name, value);
+                            activityNotifier.toggleVisibility(key, value);
                           },
                         ),
                       ),
@@ -1948,6 +1767,53 @@ class _CalendarviewState extends State<Calendarview> {
         ),
       ],
     );
+  }
+
+  String _getLocalizedDuration(BuildContext context, Duration duration) {
+    final loc = AppLocalizations.of(context)!;
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes.remainder(60);
+    final seconds = duration.inSeconds.remainder(60);
+
+    if (hours > 0) {
+      return '$hours ${loc.durationHr} '
+          '${minutes > 0 ? '$minutes ${loc.durationMin} ' : ''}'
+          '${seconds > 0 ? '$seconds ${loc.durationSec}' : ''}'
+          .trim();
+    }
+    if (minutes > 0) {
+      return '$minutes ${loc.durationMin} '
+          '${seconds > 0 ? '$seconds ${loc.durationSec}' : ''}'
+          .trim();
+    }
+    return '$seconds ${loc.durationSec}';
+  }
+
+  String _localizeDurationString(BuildContext context, String durationStr) {
+    final loc = AppLocalizations.of(context)!;
+    String text = durationStr;
+    text = text.replaceAll(RegExp(r'\bhr\b'), loc.durationHr);
+    text = text.replaceAll(RegExp(r'\bmin\b'), loc.durationMin);
+    text = text.replaceAll(RegExp(r'\bsec\b'), loc.durationSec);
+    return text;
+  }
+
+  String _localizeAmount(BuildContext context, String rawAmount) {
+    final loc = AppLocalizations.of(context)!;
+    String text = rawAmount;
+
+    text = text.replaceAll(RegExp(r'\bkm\b', caseSensitive: false), loc.unitKm);
+    text = text.replaceAll(RegExp(r'\bmi\b', caseSensitive: false), loc.unitMi);
+    text = text.replaceAll(RegExp(r'\boz\b', caseSensitive: false), loc.unitOz);
+    text = text.replaceAll(RegExp(r'\bml\b', caseSensitive: false), loc.unitMl);
+    text = text.replaceAll(RegExp(r'\blbs\b', caseSensitive: false), loc.unitLbs);
+    text = text.replaceAll(RegExp(r'\bkg\b', caseSensitive: false), loc.unitKg);
+    text = text.replaceAll(RegExp(r'\bInches\b'), loc.unitInches);
+    text = text.replaceAll(RegExp(r'\bcm\b', caseSensitive: false), loc.unitCm);
+    text = text.replaceAll(RegExp(r'\bF\b'), loc.unitF);
+    text = text.replaceAll(RegExp(r'\bC\b'), loc.unitC);
+
+    return text;
   }
 
   Widget _buildActivityCard(Activity activity, int index) {
@@ -1979,26 +1845,32 @@ class _CalendarviewState extends State<Calendarview> {
 
     String distanceText = '';
     String durationText = '';
-    String displayName = activity.name;
+    String displayName = _getLocalizedActivityName(context, activity.name);
 
     if (isTimerActivity) {
       if (isWalk && activity.food != null && activity.food!.isNotEmpty) {
-        distanceText = activity.food!;
+        distanceText = _localizeAmount(context, activity.food!);
       }
-      durationText = activity.displayDuration;
+      if (activity.duration != null) {
+        durationText = _getLocalizedDuration(context, activity.duration!);
+      } else {
+        durationText = _localizeDurationString(context, activity.displayDuration);
+      }
     } else if (isDrink && activity.food != null && activity.food!.isNotEmpty) {
       String food = activity.food!;
       final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?\s*[a-zA-Z]+)(.*)$');
       final match = quantityRegex.firstMatch(food);
 
       if (match != null) {
-        distanceText = match.group(1)?.trim() ?? '';
+        String rawAmount = match.group(1)?.trim() ?? '';
+        distanceText = _localizeAmount(context, rawAmount);
+
         String namePart = match.group(2)?.trim() ?? '';
         if (namePart.isNotEmpty) {
-          displayName = namePart;
+          displayName = _getLocalizedActivityName(context, namePart);
         }
       } else {
-        displayName = food;
+        displayName = _localizeAmount(context, food);
       }
     }
 
@@ -2091,7 +1963,7 @@ class _CalendarviewState extends State<Calendarview> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            activity.name,
+                                            _getLocalizedActivityName(context, activity.name),
                                             style: TextStyle(
                                               fontSize: 18.sp,
                                               fontWeight: FontWeight.bold,
@@ -2175,7 +2047,7 @@ class _CalendarviewState extends State<Calendarview> {
                                           activity.food != null &&
                                           activity.food!.isNotEmpty)
                                         Text(
-                                          activity.food!,
+                                          _localizeAmount(context, activity.food!),
                                           style: TextStyle(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.bold,
@@ -2193,7 +2065,7 @@ class _CalendarviewState extends State<Calendarview> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    DateFormat('MMM dd, yyyy')
+                                    DateFormat('MMM dd, yyyy', Localizations.localeOf(context).toString())
                                         .format(effectiveDateTime)
                                         .toLowerCase(),
                                     style: TextStyle(
@@ -2212,7 +2084,7 @@ class _CalendarviewState extends State<Calendarview> {
                                       ),
                                       SizedBox(width: 4.w),
                                       Text(
-                                        DateFormat('hh:mm a').format(effectiveDateTime),
+                                        DateFormat('hh:mm a', Localizations.localeOf(context).toString()).format(effectiveDateTime),
                                         style: TextStyle(
                                           fontSize: 17.sp,
                                           color: Colors.grey[600],
@@ -2244,8 +2116,8 @@ class _CalendarviewState extends State<Calendarview> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Note:',
-                              style: TextStyle(
+                          AppLocalizations.of(context)!.activityNote,
+                          style: TextStyle(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.grey[800],
@@ -2296,7 +2168,7 @@ class _CalendarviewState extends State<Calendarview> {
               ),
               SizedBox(width: 8.w),
               Text(
-                isLeft ? 'Edit' : 'Delete',
+                isLeft ? AppLocalizations.of(context)!.actionEdit : AppLocalizations.of(context)!.actionDelete,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16.sp,
@@ -2315,16 +2187,16 @@ class _CalendarviewState extends State<Calendarview> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white,
-        title: const Text('Delete Activity'),
-        content: Text('Are you sure you want to delete "${activity.name}"?'),
+        title: Text(AppLocalizations.of(context)!.dialogDeleteActivityTitle),
+        content: Text(AppLocalizations.of(context)!.dialogDeleteActivityContent(_getLocalizedActivityName(context, activity.name))),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context)!.dialogCancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Delete', style: TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context)!.actionDelete, style: const TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -2388,7 +2260,7 @@ class _CalendarviewState extends State<Calendarview> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Actions Required',
+              AppLocalizations.of(context)!.dialogActionsRequired,
               style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
@@ -2400,7 +2272,7 @@ class _CalendarviewState extends State<Calendarview> {
               padding: EdgeInsets.symmetric(horizontal: 50.w),
               child: Center(
                 child: Text(
-                  'Add at least one pet to start adding activities and reminders.',
+                  AppLocalizations.of(context)!.dialogAddPetMessage,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.sp,
@@ -2411,7 +2283,7 @@ class _CalendarviewState extends State<Calendarview> {
             ),
             SizedBox(height: 24.h),
             RoundButton(
-              title: 'Got it',
+              title: AppLocalizations.of(context)!.dialogGotIt,
               height: 66.h,
               borderRadius: 10.r,
               isSelected: true,

@@ -7,6 +7,7 @@ import 'package:dog_breed/Valid/AppColors.dart';
 import '../../activity_model.dart';
 import 'dart:async';
 import '../../config/components/roundButton.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class Walkview extends StatefulWidget {
   final Activity? selectedActivity;
@@ -35,18 +36,20 @@ class _WalkviewState extends State<Walkview> {
       return '';
     }
 
+    final loc = AppLocalizations.of(context)!;
+
     if (hours > 0) {
-      return '$hours hr '
-          '${minutes > 0 ? '$minutes min ' : ''}'
-          '${seconds > 0 ? '$seconds sec' : ''}'
+      return '$hours ${loc.durationHr} '
+          '${minutes > 0 ? '$minutes ${loc.durationMin} ' : ''}'
+          '${seconds > 0 ? '$seconds ${loc.durationSec}' : ''}'
           .trim();
     }
 
     if (minutes > 0) {
-      return '$minutes min ${seconds > 0 ? '$seconds sec' : ''}'.trim();
+      return '$minutes ${loc.durationMin} ${seconds > 0 ? '$seconds ${loc.durationSec}' : ''}'.trim();
     }
 
-    return '$seconds sec';
+    return '$seconds ${loc.durationSec}';
   }
 
   // Format duration for the timer display (HH:MM:SS)
@@ -95,16 +98,16 @@ class _WalkviewState extends State<Walkview> {
         ),
         elevation: 10,
         shadowColor: Colors.black.withOpacity(0.1),
-        title: const Text(
-          'Delete Walk?',
+        title: Text(
+          AppLocalizations.of(context)!.walkDeleteTitle,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
             color: Colors.black,
           ),
         ),
-        content: const Text(
-          'This will discard the current walk session.',
+        content: Text(
+          AppLocalizations.of(context)!.walkDeleteContent,
           style: TextStyle(
             fontSize: 16,
             color: Colors.grey,
@@ -115,7 +118,7 @@ class _WalkviewState extends State<Walkview> {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Cancel',
+              AppLocalizations.of(context)!.walkCancel,
               style: TextStyle(
                 color: Colors.grey[700],
                 fontSize: 16.sp,
@@ -129,7 +132,7 @@ class _WalkviewState extends State<Walkview> {
               Navigator.pop(context);
             },
             child: Text(
-              'Delete',
+              AppLocalizations.of(context)!.walkDelete,
               style: TextStyle(
                 color: AppColors.vibrantPurple,
                 fontSize: 16.sp,
@@ -146,8 +149,8 @@ class _WalkviewState extends State<Walkview> {
     if (_duration == Duration.zero) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text(
-            'Please start the timer before saving.',
+          content: Text(
+            AppLocalizations.of(context)!.walkStartTimerWarning,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
@@ -183,6 +186,56 @@ class _WalkviewState extends State<Walkview> {
     _timer?.cancel();
     _noteController.dispose();
     super.dispose();
+  }
+
+  String _getLocalizedActivityName(BuildContext context, String name) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (name) {
+      case 'Veterinary':
+        return localizations.activityVeterinary;
+      case 'Pee':
+        return localizations.activityPee;
+      case 'Eat':
+        return localizations.activityEat;
+      case 'Drink':
+        return localizations.activityDrink;
+      case 'Play':
+        return localizations.activityPlay;
+      case 'Poop':
+        return localizations.activityPoop;
+      case 'Walk':
+        return localizations.activityWalk;
+      case 'Crate':
+        return localizations.activityCrate;
+      case 'Sleep':
+        return localizations.activitySleep;
+      case 'Training':
+        return localizations.activityTraining;
+      case 'Treat':
+        return localizations.activityTreat;
+      case 'Grooming':
+        return localizations.activityGrooming;
+      case 'Cleaning':
+        return localizations.activityCleaning;
+      case 'Medication':
+        return localizations.activityMedication;
+      case 'Vaccination':
+        return localizations.activityVaccination;
+      case 'Weight':
+        return localizations.activityWeight;
+      case 'Height':
+        return localizations.activityHeight;
+      case 'Temperature':
+        return localizations.activityTemperature;
+      case 'Health Condition':
+        return localizations.activityHealthCondition;
+      case 'Accident':
+        return localizations.activityAccident;
+      case 'Journal':
+        return localizations.activityJournal;
+      default:
+        return name;
+    }
   }
 
   @override
@@ -257,7 +310,7 @@ class _WalkviewState extends State<Walkview> {
                           ),
                           SizedBox(height: 24.h),
                           Text(
-                            widget.selectedActivity?.name ?? 'Walk',
+                            _getLocalizedActivityName(context, widget.selectedActivity?.name ?? AppLocalizations.of(context)!.activityWalk),
                             style: TextStyle(
                               fontSize: 28.sp,
                               fontWeight: FontWeight.bold,
@@ -406,7 +459,7 @@ class _WalkviewState extends State<Walkview> {
                   ),
                 ),
               RoundButton(
-                title: _noteController.text.isEmpty ? 'Add a note' : 'Save',
+                title: _noteController.text.isEmpty ? AppLocalizations.of(context)!.walkAddNote : AppLocalizations.of(context)!.walkSave,
                 isSelected: true,
                 textColors: Colors.white,
                 backgroundColors: AppColors.vibrantPurple,
@@ -466,7 +519,7 @@ class _WalkviewState extends State<Walkview> {
             children: [
               Center(
                 child: Text(
-                  'Note',
+                  AppLocalizations.of(context)!.walkNote,
                   style:
                   TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
                 ),
@@ -476,7 +529,7 @@ class _WalkviewState extends State<Walkview> {
                 controller: _noteController,
                 maxLines: 5,
                 decoration: InputDecoration(
-                  hintText: 'Your notes here',
+                  hintText: AppLocalizations.of(context)!.walkNoteHint,
                   filled: true,
                   fillColor: const Color(0xFFF4F7F6),
                   border: OutlineInputBorder(
@@ -488,7 +541,7 @@ class _WalkviewState extends State<Walkview> {
               ),
               SizedBox(height: 24.h),
               RoundButton(
-                title: 'Save',
+                title: AppLocalizations.of(context)!.walkSave,
                 isSelected: true,
                 textColors: Colors.white,
                 backgroundColors: AppColors.vibrantPurple,

@@ -10,6 +10,7 @@ import 'package:dog_breed/View_model/PetProvider.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
 
 import 'package:dog_breed/View/MyPetsView/addPetView.dart';
+import '../../l10n/app_localizations.dart';
 import '../Calendar/add_activities_View.dart';
 import '../Calendar/calendarView.dart';
 import '../ProfileView/ProfileView.dart';
@@ -184,7 +185,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                   color: colors.tertiary,
                 ),
               ),
-              label: 'Home',
+              label: AppLocalizations.of(context)!.navHome,
             ),
             // Calendar
             BottomNavigationBarItem(
@@ -196,7 +197,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                     : const Color(0xFF666666),
               ),
               activeIcon: Icon(Icons.calendar_month, size: 25.sp, color: colors.tertiary),
-              label: 'Calendar',
+              label: AppLocalizations.of(context)!.navCalendar,
             ),
             // Middle placeholder for FAB
             BottomNavigationBarItem(
@@ -224,7 +225,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                   color: colors.tertiary,
                 ),
               ),
-              label: 'My Pets',
+              label: AppLocalizations.of(context)!.navMyPets,
             ),
             // Profile
             BottomNavigationBarItem(
@@ -246,7 +247,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                   color: colors.tertiary,
                 ),
               ),
-              label: 'Profile',
+              label: AppLocalizations.of(context)!.navProfile,
             ),
           ],
         ),

@@ -14,6 +14,7 @@ import '../../View_model/home/home_view_model.dart';
 import '../../activity_model.dart';
 import '../../config/components/CustomDatePicker.dart';
 import '../../utils/routes/routes_name.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class Reminderlist extends StatefulWidget {
   final Activity? selectedActivity;
@@ -131,8 +132,9 @@ class _ReminderlistState extends State<Reminderlist> {
 
 
   void _saveActivity() async {
+    final localizations = AppLocalizations.of(context)!;
     if (_currentActivity == null) {
-      _showErrorSnackBar('Please select an activity first');
+      _showErrorSnackBar(localizations.errorSelectActivity);
       return;
     }
 
@@ -147,7 +149,7 @@ class _ReminderlistState extends State<Reminderlist> {
     );
 
     if (reminderDateTime.isBefore(DateTime.now())) {
-      _showErrorSnackBar('Reminder time must be in the future');
+      _showErrorSnackBar(localizations.errorReminderFuture);
       return;
     }
 
@@ -157,39 +159,39 @@ class _ReminderlistState extends State<Reminderlist> {
     if (activityName == 'drink') {
       const double ozToMl = 29.5735;
       double amount = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
-      foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? 'oz' : 'ml'}';
+      foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? localizations.unitOz : localizations.unitMl}';
       if (_foodController.text.trim().isNotEmpty) {
         foodValue = '$foodValue ${_foodController.text.trim()}';
       }
     } else if (activityName == 'weight') {
       if (_weightValue <= 0) {
-        _showErrorSnackBar('Please enter a valid weight');
+        _showErrorSnackBar(localizations.errorValidWeight);
         return;
       }
       foodValue =
-      '${_weightValue.toStringAsFixed(1)} ${_isLbsUnit ? 'lbs' : 'kg'}';
+      '${_weightValue.toStringAsFixed(1)} ${_isLbsUnit ? localizations.unitLbs : localizations.unitKg}';
     } else if (activityName == 'height') {
       if (_heightValue <= 0) {
-        _showErrorSnackBar('Please enter a valid height');
+        _showErrorSnackBar(localizations.errorValidHeight);
         return;
       }
       foodValue =
-      '${_heightValue.toStringAsFixed(1)} ${_isInchesUnit ? 'Inches' : 'cm'}';
+      '${_heightValue.toStringAsFixed(1)} ${_isInchesUnit ? localizations.unitInches : localizations.unitCm}';
     } else if (activityName == 'temperature') {
       if (_temperatureValue <= 0) {
-        _showErrorSnackBar('Please enter a valid temperature');
+        _showErrorSnackBar(localizations.errorValidTemp);
         return;
       }
       foodValue =
-      '${_temperatureValue.toStringAsFixed(1)} ${_isFahrenheitUnit ? '°F' : '°C'}';
+      '${_temperatureValue.toStringAsFixed(1)} ${_isFahrenheitUnit ? localizations.unitF : localizations.unitC}';
     } else if (['walk', 'play', 'crate'].contains(activityName)) {
       const double kmToMi = 0.621371;
       double amount = _isKmUnit ? _walkDistanceKm : _walkDistanceKm * kmToMi;
-      foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? 'km' : 'mi'}';
+      foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? localizations.unitKm : localizations.unitMi}';
     } else {
       if (activityName == 'eat') {
         if (_foodController.text.trim().isEmpty) {
-          _showErrorSnackBar('Please enter food name or type');
+          _showErrorSnackBar(localizations.errorEnterFood);
           return;
         }
       }
@@ -271,7 +273,9 @@ class _ReminderlistState extends State<Reminderlist> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Activity ${_hasReminder ? 'with reminder ' : ''}saved successfully!',
+            _hasReminder
+                ? localizations.successActivitySavedReminder
+                : localizations.successActivitySaved,
           ),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
@@ -292,7 +296,7 @@ class _ReminderlistState extends State<Reminderlist> {
       // });
     } catch (e) {
       Navigator.pop(context);
-      _showErrorSnackBar('Failed to save: $e');
+      _showErrorSnackBar(localizations.errorSaveFailed(e.toString()));
     }
   }
 
@@ -351,10 +355,38 @@ class _ReminderlistState extends State<Reminderlist> {
     );
   }
 
+  String _getLocalizedActivityName(BuildContext context, String name) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (name) {
+      case 'Veterinary': return localizations.activityVeterinary;
+      case 'Pee': return localizations.activityPee;
+      case 'Eat': return localizations.activityEat;
+      case 'Drink': return localizations.activityDrink;
+      case 'Play': return localizations.activityPlay;
+      case 'Poop': return localizations.activityPoop;
+      case 'Walk': return localizations.activityWalk;
+      case 'Crate': return localizations.activityCrate;
+      case 'Sleep': return localizations.activitySleep;
+      case 'Training': return localizations.activityTraining;
+      case 'Treat': return localizations.activityTreat;
+      case 'Grooming': return localizations.activityGrooming;
+      case 'Cleaning': return localizations.activityCleaning;
+      case 'Medication': return localizations.activityMedication;
+      case 'Vaccination': return localizations.activityVaccination;
+      case 'Weight': return localizations.activityWeight;
+      case 'Height': return localizations.activityHeight;
+      case 'Temperature': return localizations.activityTemperature;
+      case 'Health Condition': return localizations.activityHealthCondition;
+      case 'Accident': return localizations.activityAccident;
+      case 'Journal': return localizations.activityJournal;
+      default: return name;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat('MM-dd-yyyy');
-    final timeFormat = DateFormat('HH:mm');
+    final dateFormat = DateFormat.yMd(Localizations.localeOf(context).toString());
+    final timeFormat = DateFormat.jm(Localizations.localeOf(context).toString());
     final String activityName = _currentActivity?.name.toLowerCase() ?? '';
 
     return Scaffold(
@@ -406,7 +438,10 @@ class _ReminderlistState extends State<Reminderlist> {
                     SizedBox(width: 20.w),
                     Expanded(
                       child: Text(
-                        _currentActivity?.name ?? 'No Activity Selected',
+                        _currentActivity != null
+                            ? _getLocalizedActivityName(
+                                context, _currentActivity!.name)
+                            : AppLocalizations.of(context)!.noActivitySelected,
                         style: TextStyle(
                           fontSize: 24.sp,
                           fontWeight: FontWeight.bold,
@@ -420,7 +455,7 @@ class _ReminderlistState extends State<Reminderlist> {
 
 
               Text(
-                'Date',
+                AppLocalizations.of(context)!.labelDate,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
@@ -456,7 +491,7 @@ class _ReminderlistState extends State<Reminderlist> {
               SizedBox(height: 10.h),
 
               Text(
-                'Time',
+                AppLocalizations.of(context)!.labelTime,
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
@@ -500,7 +535,7 @@ class _ReminderlistState extends State<Reminderlist> {
               SizedBox(height: 416.h),
 
               RoundButton(
-                title: 'Save',
+                title: AppLocalizations.of(context)!.actionSave,
                 isSelected: true,
                 textColors: Colors.white,
                 backgroundColors: AppColors.vibrantPurple,

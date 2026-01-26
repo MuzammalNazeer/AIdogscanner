@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/activity_provider.dart';
@@ -108,6 +109,34 @@ class _AddReminderViewState extends State<AddReminderView> {
     );
   }
 
+  String _getLocalizedActivityName(BuildContext context, String name) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (name) {
+      case 'Veterinary': return localizations.activityVeterinary;
+      case 'Pee': return localizations.activityPee;
+      case 'Eat': return localizations.activityEat;
+      case 'Drink': return localizations.activityDrink;
+      case 'Play': return localizations.activityPlay;
+      case 'Poop': return localizations.activityPoop;
+      case 'Walk': return localizations.activityWalk;
+      case 'Crate': return localizations.activityCrate;
+      case 'Sleep': return localizations.activitySleep;
+      case 'Training': return localizations.activityTraining;
+      case 'Treat': return localizations.activityTreat;
+      case 'Grooming': return localizations.activityGrooming;
+      case 'Cleaning': return localizations.activityCleaning;
+      case 'Medication': return localizations.activityMedication;
+      case 'Vaccination': return localizations.activityVaccination;
+      case 'Weight': return localizations.activityWeight;
+      case 'Height': return localizations.activityHeight;
+      case 'Temperature': return localizations.activityTemperature;
+      case 'Health Condition': return localizations.activityHealthCondition;
+      case 'Accident': return localizations.activityAccident;
+      case 'Journal': return localizations.activityJournal;
+      default: return name;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final reminderNotifier = context.watch<ReminderNotifier>();
@@ -121,8 +150,7 @@ class _AddReminderViewState extends State<AddReminderView> {
       return petMatch &&
           scheduled.year == _selectedDate.year &&
           scheduled.month == _selectedDate.month &&
-          scheduled.day == _selectedDate.day &&
-          scheduled.isAfter(now);
+          scheduled.day == _selectedDate.day;
     }).toList()
       ..sort((a, b) => DateTime.parse(b['scheduledTime'])
           .compareTo(DateTime.parse(a['scheduledTime'])));
@@ -154,18 +182,18 @@ class _AddReminderViewState extends State<AddReminderView> {
         color: const Color(0xFFF4F7F6),
         borderRadius: BorderRadius.circular(16.r),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
               _headerIcon('assets/images/61.png'),
-              SizedBox(width: 8.w),
+              SizedBox(width: 5.w),
               _headerIcon('assets/images/62.png'),
-              SizedBox(width: 8.w),
+              SizedBox(width: 5.w),
               _headerIcon('assets/images/63.png'),
-              SizedBox(width: 6.w),
+              SizedBox(width: 4.w),
               SizedBox(
                   width: 40.w,
                   height: 40.h,
@@ -173,16 +201,34 @@ class _AddReminderViewState extends State<AddReminderView> {
               ),
             ],
           ),
-          GestureDetector(
-            onTap: _showAddReminderSheet,
-            child: Text(
-              'Add Reminder',
-              style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
+          
+          Flexible(
+            child: GestureDetector(
+              onTap: _showAddReminderSheet,
+              child: Text(
+                AppLocalizations.of(context)!.reminderAddTitle,
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
-          IconButton(
-            onPressed: _showAddReminderSheet,
-            icon: SvgPicture.asset('assets/images/add.svg', width: 28.w),
+
+          Container(
+            width: 50.w,
+              height: 50.h,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+            child: IconButton(
+              onPressed: _showAddReminderSheet,
+              icon: SvgPicture.asset('assets/images/add.svg',
+                width: 28.w,
+                      height: 28.h,
+
+              ),
+            ),
           ),
         ],
       ),
@@ -209,7 +255,7 @@ class _AddReminderViewState extends State<AddReminderView> {
       ReminderNotifier reminderNotifier,
       ActivityNotifier activityNotifier,
       ) {
-    final formattedDate = DateFormat('EEEE, MMMM d').format(_selectedDate);
+    final formattedDate = DateFormat('EEEE, MMMM d', Localizations.localeOf(context).toString()).format(_selectedDate);
 
     if (reminders.isEmpty) {
       return Column(
@@ -217,7 +263,7 @@ class _AddReminderViewState extends State<AddReminderView> {
         children: [
           Image.asset('assets/images/images136.png', width: 120.w),
           SizedBox(height: 20.h),
-          Text('No Reminders', style: TextStyle(fontSize: 20.sp)),
+          Text(AppLocalizations.of(context)!.reminderNone, style: TextStyle(fontSize: 20.sp)),
           SizedBox(height: 6.h),
           Text(formattedDate, style: const TextStyle(color: Colors.grey)),
         ],
@@ -242,7 +288,8 @@ class _AddReminderViewState extends State<AddReminderView> {
       ActivityNotifier activityNotifier,
       ) {
     final scheduledTime = DateTime.parse(reminder['scheduledTime']);
-    final title = reminder['activityName'] ?? 'Reminder';
+    final rawTitle = reminder['activityName'] ?? AppLocalizations.of(context)!.reminderDefaultTitle;
+    final title = _getLocalizedActivityName(context, rawTitle);
     final imagePath = reminder['imagePath'];
     final colorValue = reminder['color'];
     final color = colorValue != null ? Color(colorValue) : Colors.orange;
@@ -315,7 +362,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      DateFormat('EEE MMM d').format(scheduledTime),
+                      DateFormat('EEE MMM d', Localizations.localeOf(context).toString()).format(scheduledTime),
                       style: TextStyle(fontSize: 13.sp, color: Colors.grey[700]),
                     ),
                     SizedBox(height: 4.h),
@@ -339,7 +386,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          DateFormat('hh:mm a').format(scheduledTime),
+                          DateFormat('hh:mm a', Localizations.localeOf(context).toString()).format(scheduledTime),
                           style: TextStyle(
                             fontSize: 16.sp,
                             color: Colors.red,
@@ -368,7 +415,8 @@ class _AddReminderViewState extends State<AddReminderView> {
     final initialScheduledTime = DateTime.parse(reminder['scheduledTime']);
     DateTime tempScheduledTime = initialScheduledTime;
 
-    final title = reminder['activityName'] ?? 'Reminder';
+    final rawTitle = reminder['activityName'] ?? AppLocalizations.of(context)!.reminderDefaultTitle;
+    final title = _getLocalizedActivityName(context, rawTitle);
     final imagePath = reminder['imagePath'];
     final colorValue = reminder['color'];
     final color = colorValue != null ? Color(colorValue) : Colors.orange;
@@ -454,7 +502,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                           const Icon(Icons.calendar_today, color: Colors.blue),
                           SizedBox(width: 8.w),
                           Text(
-                            DateFormat('EEE, MMM d, yyyy').format(tempScheduledTime),
+                            DateFormat('EEE, MMM d, yyyy', Localizations.localeOf(context).toString()).format(tempScheduledTime),
                             style: TextStyle(fontSize: 16.sp, color: Colors.black87),
                           ),
                           const Spacer(),
@@ -507,7 +555,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                           const Icon(Icons.access_time, color: AppColors.vibrantPurple),
                           SizedBox(width: 8.w),
                           Text(
-                            DateFormat('hh:mm a').format(tempScheduledTime),
+                            DateFormat('hh:mm a', Localizations.localeOf(context).toString()).format(tempScheduledTime),
                             style: TextStyle(fontSize: 16.sp, color: Colors.black87),
                           ),
                           const Spacer(),
@@ -536,12 +584,12 @@ class _AddReminderViewState extends State<AddReminderView> {
                                 );
                               } catch (e) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text('Failed to update: $e')),
+                                  SnackBar(content: Text(AppLocalizations.of(context)!.errorUpdateFailed(e.toString()))),
                                 );
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Cannot update: Activity not found')),
+                                SnackBar(content: Text(AppLocalizations.of(context)!.errorUpdateNotFound)),
                               );
                             }
                           },
@@ -550,7 +598,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r)),
                           ),
-                          child: const Text('Update', style: TextStyle(color: Colors.white)),
+                          child: Text(AppLocalizations.of(context)!.actionUpdate, style: const TextStyle(color: Colors.white)),
                         ),
                       ),
                       SizedBox(width: 16.w),
@@ -570,7 +618,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r)),
                           ),
-                          child: const Text('Remove', style: TextStyle(color: Colors.white)),
+                          child: Text(AppLocalizations.of(context)!.actionRemove, style: const TextStyle(color: Colors.white)),
                         ),
                       ),
                     ],

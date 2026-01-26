@@ -8,6 +8,7 @@ import '../../View_model/activity_provider.dart';
 import '../../activity_model.dart';
 import 'allActivityView.dart';
 import 'package:dog_breed/Valid/ActivityConstants.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class AddActivitiesView extends StatefulWidget {
   final String? initialActivityName;
@@ -54,6 +55,34 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
     }
   }
 
+  String _getLocalizedActivityName(BuildContext context, String name) {
+    final localizations = AppLocalizations.of(context)!;
+    switch (name) {
+      case 'Veterinary': return localizations.activityVeterinary;
+      case 'Pee': return localizations.activityPee;
+      case 'Eat': return localizations.activityEat;
+      case 'Drink': return localizations.activityDrink;
+      case 'Play': return localizations.activityPlay;
+      case 'Poop': return localizations.activityPoop;
+      case 'Walk': return localizations.activityWalk;
+      case 'Crate': return localizations.activityCrate;
+      case 'Sleep': return localizations.activitySleep;
+      case 'Training': return localizations.activityTraining;
+      case 'Treat': return localizations.activityTreat;
+      case 'Grooming': return localizations.activityGrooming;
+      case 'Cleaning': return localizations.activityCleaning;
+      case 'Medication': return localizations.activityMedication;
+      case 'Vaccination': return localizations.activityVaccination;
+      case 'Weight': return localizations.activityWeight;
+      case 'Height': return localizations.activityHeight;
+      case 'Temperature': return localizations.activityTemperature;
+      case 'Health Condition': return localizations.activityHealthCondition;
+      case 'Accident': return localizations.activityAccident;
+      case 'Journal': return localizations.activityJournal;
+      default: return name;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final activityNotifier = Provider.of<ActivityNotifier>(context);
@@ -70,10 +99,10 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
         child: SafeArea(
           child: Column(
             children: [
-              const Center(
+               Center(
                 child: Text(
-                  "Add Activity",
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.calendarAddActivity,
+                  style: const TextStyle(
                     color: Color(0xFF000000),
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -118,6 +147,7 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
                         child: _ActivityCard(
                           activity: activity,
                           isSelected: isSelected,
+                          activityName: _getLocalizedActivityName(context, activity.name),
                         ),
                       );
                     },
@@ -137,10 +167,12 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
 class _ActivityCard extends StatelessWidget {
   final Activity activity;
   final bool isSelected;
+  final String activityName;
 
   const _ActivityCard({
     required this.activity,
     required this.isSelected,
+    required this.activityName,
   });
 
   @override
@@ -177,7 +209,7 @@ class _ActivityCard extends StatelessWidget {
         ),
         SizedBox(height: 11.h),
         Text(
-          activity.name,
+          activityName,
           style: TextStyle(
             fontSize: 10.sp,
             fontWeight: FontWeight.bold,

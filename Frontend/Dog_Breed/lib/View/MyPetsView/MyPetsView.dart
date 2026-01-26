@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../../View_model/PetProvider.dart';
 import '../../View_model/activity_provider.dart';
 import '../../View_model/home/Pet.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/routes/routes_name.dart';
 
 class Mypetsview extends StatefulWidget {
@@ -40,6 +41,7 @@ class _MypetsviewState extends State<Mypetsview> {
   Widget build(BuildContext context) {
     final petProvider = Provider.of<PetProvider>(context);
     final activityNotifier = Provider.of<ActivityNotifier>(context);
+    final l10n = AppLocalizations.of(context)!;
     final pets = petProvider.pets;
 
     // Get activities - check the actual type from your ActivityNotifier
@@ -86,7 +88,7 @@ class _MypetsviewState extends State<Mypetsview> {
             SizedBox(height: 20.h),
             Center(
               child: Text(
-                'My Pets',
+                l10n.myPetsTitle,
                 style: TextStyle(
                   fontFamily: 'Sora',
                   fontWeight: FontWeight.w400,
@@ -98,7 +100,7 @@ class _MypetsviewState extends State<Mypetsview> {
             Padding(
               padding: EdgeInsets.all(16.w),
               child: CupertinoSearchTextField(
-                placeholder: 'Search for Dog',
+                placeholder: l10n.searchForDog,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
                   vertical: 12,
@@ -116,10 +118,10 @@ class _MypetsviewState extends State<Mypetsview> {
             ),
             Expanded(
               child: pets.isEmpty
-                  ? _buildEmptyState()
+                  ? _buildEmptyState(l10n)
                   : filteredPets.isEmpty
-                  ? _buildNoResultsState()
-                  : _buildPetsList(filteredPets, allActivities),
+                  ? _buildNoResultsState(l10n)
+                  : _buildPetsList(filteredPets, allActivities, l10n),
             ),
           ],
         ),
@@ -127,7 +129,7 @@ class _MypetsviewState extends State<Mypetsview> {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +143,7 @@ class _MypetsviewState extends State<Mypetsview> {
         ),
         SizedBox(height: 16.h),
         Text(
-          'No pets have been added yet',
+          l10n.noPetsAdded,
           style: TextStyle(
             fontSize: 18.sp,
             color: Colors.grey,
@@ -153,7 +155,7 @@ class _MypetsviewState extends State<Mypetsview> {
           height: 51.h,
           width: 150.w,
           isSelected: true,
-          title: '+ Add pet',
+          title: l10n.addPetButton,
           backgroundColors: AppColors.vibrantPurple,
           textColors: Colors.white,
           onPress: () {
@@ -168,7 +170,7 @@ class _MypetsviewState extends State<Mypetsview> {
     );
   }
 
-  Widget _buildNoResultsState() {
+  Widget _buildNoResultsState(AppLocalizations l10n) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -180,7 +182,7 @@ class _MypetsviewState extends State<Mypetsview> {
           ),
           SizedBox(height: 16.h),
           Text(
-            'No pets match your search',
+            l10n.noPetsMatch,
             style: TextStyle(
               fontSize: 16.sp,
               color: Colors.grey,
@@ -189,7 +191,7 @@ class _MypetsviewState extends State<Mypetsview> {
           ),
           SizedBox(height: 8.h),
           Text(
-            'Try a different search term',
+            l10n.tryDifferentSearch,
             style: TextStyle(
               fontSize: 14.sp,
               color: Colors.grey[400],
@@ -200,7 +202,7 @@ class _MypetsviewState extends State<Mypetsview> {
     );
   }
 
-  Widget _buildPetsList(List<Pet> pets, List<dynamic> allActivities) {
+  Widget _buildPetsList(List<Pet> pets, List<dynamic> allActivities, AppLocalizations l10n) {
     return RefreshIndicator(
       onRefresh: () async {
         final petProvider = Provider.of<PetProvider>(context, listen: false);
@@ -243,7 +245,7 @@ class _MypetsviewState extends State<Mypetsview> {
               try {
                 activityName = activity.name ?? activity.type;
               } catch (e) {
-                activityName = 'Unknown';
+                activityName = l10n.unknown;
               }
             }
 
@@ -264,7 +266,7 @@ class _MypetsviewState extends State<Mypetsview> {
               petId: pet.id,
               activityCounts: activityCounts,
               onEditPressed: () {
-                _navigateToEditPet(pet);
+                _navigateToEditPet(pet, l10n);
               },
             ),
           );
@@ -282,7 +284,7 @@ class _MypetsviewState extends State<Mypetsview> {
     return images[index % images.length];
   }
 
-  void _navigateToEditPet(Pet pet) {
+  void _navigateToEditPet(Pet pet, AppLocalizations l10n) {
     Navigator.pushNamed(
       context,
       RoutesName.edit,
@@ -299,23 +301,23 @@ class _MypetsviewState extends State<Mypetsview> {
         // Pet was updated, force refresh just in case
         setState(() {});
         if (widget.onShowSnackBar != null) {
-          widget.onShowSnackBar!('Pet updated successfully!');
+          widget.onShowSnackBar!(l10n.petUpdatedSuccess);
         }
       }
     });
   }
 
   // Optional: Add a method to handle pet deletion
-  void _showDeleteDialog(Pet pet) {
+  void _showDeleteDialog(Pet pet, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Delete Pet'),
-        content: Text('Are you sure you want to delete ${pet.name}?'),
+        title: Text(l10n.deletePetTitle),
+        content: Text(l10n.deletePetMessage(pet.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancelButton),
           ),
           TextButton(
             onPressed: () async {
@@ -323,18 +325,18 @@ class _MypetsviewState extends State<Mypetsview> {
               final success = await petProvider.deletePet(pet.id!); // Add null check
               if (success) {
                 if (widget.onShowSnackBar != null) {
-                  widget.onShowSnackBar!('${pet.name} deleted successfully');
+                  widget.onShowSnackBar!(l10n.petDeletedSuccess(pet.name));
                 }
               } else {
                 if (widget.onShowSnackBar != null) {
-                  widget.onShowSnackBar!('Failed to delete ${pet.name}');
+                  widget.onShowSnackBar!(l10n.petDeleteFailed(pet.name));
                 }
               }
               Navigator.pop(context);
             },
-            child: const Text(
-              'Delete',
-              style: TextStyle(color: Colors.red),
+            child: Text(
+              l10n.deleteButton,
+              style: const TextStyle(color: Colors.red),
             ),
           ),
         ],
@@ -342,191 +344,3 @@ class _MypetsviewState extends State<Mypetsview> {
     );
   }
 }
-
-
-// // Mypetsview.dart - Updated version
-// import 'dart:typed_data';
-// import 'package:dog_breed/Valid/AppColors.dart';
-// import 'package:dog_breed/config/components/pet_card.dart';
-// import 'package:dog_breed/config/components/roundButton.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:provider/provider.dart';
-//
-// import '../../View_model/PetProvider.dart';
-// import '../../View_model/activity_provider.dart';
-// import '../../View_model/home/Pet.dart';
-// import '../../utils/routes/routes_name.dart';
-//
-// class Mypetsview extends StatefulWidget {
-//   final void Function(String message)? onShowSnackBar;
-//
-//   const Mypetsview({super.key, this.onShowSnackBar});
-//
-//   @override
-//   State<Mypetsview> createState() => _MypetsviewState();
-// }
-//
-// class _MypetsviewState extends State<Mypetsview> {
-//   String _searchQuery = '';
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final petProvider = Provider.of<PetProvider>(context);
-//     final activityNotifier = Provider.of<ActivityNotifier>(context);
-//     final pets = petProvider.pets;
-//     final allActivities = activityNotifier.activities;
-//
-//     final filteredPets = _searchQuery.isEmpty
-//         ? pets
-//         : pets
-//         .where(
-//           (pet) =>
-//       pet.name.toLowerCase().contains(
-//         _searchQuery.toLowerCase(),
-//       ) ||
-//           pet.breed.toLowerCase().contains(
-//             _searchQuery.toLowerCase(),
-//           ),
-//     )
-//         .toList();
-//
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       floatingActionButton: FloatingActionButton(
-//         heroTag: 'add_pet_button',
-//         onPressed: () {
-//           Navigator.pushNamed(context, RoutesName.addPet);
-//         },
-//         backgroundColor: AppColors.vibrantPurple,
-//         elevation: 8,
-//         shape: const CircleBorder(),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Icon(
-//               Icons.add_rounded,
-//               color: Colors.white,
-//               size: 32.sp,
-//             ),
-//           ],
-//         ),
-//       ),
-//       body: SafeArea(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.end,
-//           mainAxisAlignment: MainAxisAlignment.end,
-//           children: [
-//             SizedBox(height: 20.h),
-//             Center(
-//               child: Text(
-//                 'My Pets',
-//                 style: TextStyle(
-//                   fontFamily: 'Sora',
-//                   fontWeight: FontWeight.w400,
-//                   fontSize: 29.75.sp,
-//                   color: const Color(0xFF272727),
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: CupertinoSearchTextField(
-//                 placeholder: 'Search for Dog',
-//                 padding: const EdgeInsets.symmetric(
-//                   horizontal: 12,
-//                   vertical: 12,
-//                 ),
-//                 onChanged: (value) {
-//                   setState(() {
-//                     _searchQuery = value;
-//                   });
-//                 },
-//               ),
-//             ),
-//             Expanded(
-//               child: pets.isEmpty
-//                   ? Column(
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 mainAxisAlignment: MainAxisAlignment.center,
-//                 children: [
-//                   Center(
-//                     child: Image.asset(
-//                       'assets/images/pet.png',
-//                       height: 85.h,
-//                       width: 85.w,
-//                     ),
-//                   ),
-//                   Center(
-//                     child: Text(
-//                       'No pets have been added yet',
-//                       style: TextStyle(fontSize: 20.sp, color: Colors.grey),
-//                     ),
-//                   ),
-//                   const SizedBox(height: 20,),
-//                   RoundButton(
-//                     height: 51.h,
-//                     width: 150.w,
-//                     isSelected: true,
-//                     title: '+  Add pet',
-//                     backgroundColors: AppColors.vibrantPurple,
-//                     textColors: Colors.white,
-//                     onPress: () {
-//                       Navigator.pushNamed(context, RoutesName.addPet);
-//                     },)
-//                 ],
-//               )
-//                   : filteredPets.isEmpty
-//                   ? const Center(
-//                 child: Text(
-//                   'No pets match your search',
-//                   style: TextStyle(fontSize: 16, color: Colors.grey),
-//                 ),
-//               )
-//                   : ListView.builder(
-//                 padding: const EdgeInsets.symmetric(horizontal: 16),
-//                 itemCount: filteredPets.length,
-//                 itemBuilder: (context, index) {
-//                   final pet = filteredPets[index];
-//                   // Filter activities for this pet
-//                   final petActivities = allActivities.where((a) => a.petId == pet.id).toList();
-//
-//                   final Map<String, int> counts = {};
-//                   for (var activity in petActivities) {
-//                     counts[activity.name] = (counts[activity.name] ?? 0) + 1;
-//                   }
-//
-//                   return Padding(
-//                     padding: const EdgeInsets.only(bottom: 16),
-//                     child: GestureDetector(
-//                       child: PetCard(
-//                         key: Key('pet_${pet.id}_$index'),
-//                         imageUrl: _getPetImage(index),
-//                         imageBytes: pet.imageBytes,
-//                         name: pet.name,
-//                         activityCounts: counts,
-//                       ),
-//                     ),
-//                   );
-//                 },
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-//
-//   String _getPetImage(int index) {
-//     final images = [
-//       'assets/images/Ellipse 77 (2).png',
-//       'assets/images/Ellipse 77 (1).png',
-//       'assets/images/Ellipse 77.png',
-//     ];
-//     return images[index % images.length];
-//   }
-// }
-//
-//
-//

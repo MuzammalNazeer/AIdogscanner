@@ -11,6 +11,7 @@ import '../../config/components/AddressView.dart';
 import '../../config/components/NameView.dart';
 import '../../config/components/emailview.dart';
 import '../../config/components/gender_view.dart';
+import '../../config/components/lastNameview.dart';
 import '../../config/components/locationView.dart';
 import '../../config/components/phoneview.dart';
 import '../../utils/routes/routes_name.dart';
@@ -335,7 +336,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                NameView(initialName: lastName),
+                                Lastnameview( initialLastName: lastName,),
                           ),
                         );
                         if (result != null && result.isNotEmpty) {

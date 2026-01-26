@@ -13,7 +13,7 @@ class Lastnameview extends StatefulWidget {
 
 class _NameViewState extends State<Lastnameview> {
   late TextEditingController _lastNameController;
-  final FocusNode _LastNameFocus = FocusNode();
+  late final FocusNode _LastNameFocus = FocusNode();
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class _NameViewState extends State<Lastnameview> {
                 focusNode: _LastNameFocus,
                 style: TextStyle(fontSize: 18.sp, color: Colors.black87),
                 decoration: InputDecoration(
-                  hintText: 'Enter the first name',
+                  hintText: 'Enter the Last Name',
                   hintStyle: TextStyle(fontSize: 18.sp, color: Colors.grey[400]),
                   filled: true,
                   fillColor: const Color(0xFFF5F5F5),
