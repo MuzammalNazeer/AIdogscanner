@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
+import '../../l10n/app_localizations.dart';
 import '../../View_model/DogValuesViewModel.dart';
 import '../../View_model/ScanProvider.dart';
 import '../MyPetsView/DogResultScreen.dart';
@@ -79,11 +80,12 @@ class _ListsaveState extends State<Listsave> {
                         ),
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Center(
                         child: Text(
-                          "Recent Scans",
-                          style: TextStyle(
+                          AppLocalizations.of(context)!.recentScansTitle,
+
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
@@ -106,7 +108,7 @@ class _ListsaveState extends State<Listsave> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Recent Scans',
+                            AppLocalizations.of(context)!.recentScansTitle,
                             style: TextStyle(
                               fontFamily: 'Sora',
                               fontWeight: FontWeight.w400,
@@ -118,7 +120,7 @@ class _ListsaveState extends State<Listsave> {
                             ),
                           ),
                           Text(
-                            '${recentScans.length} Scans',
+                            AppLocalizations.of(context)!.scansCount(recentScans.length),
                             style: TextStyle(
                               fontFamily: 'Sora',
 
@@ -208,7 +210,10 @@ class _ListsaveState extends State<Listsave> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                '✅ Re-scanned: ${scanData['formattedBreedName']} ($confidencePercent% confidence)',
+                AppLocalizations.of(context)!.rescannedSuccess(
+                  scanData['formattedBreedName'],
+                  confidencePercent,
+                ),
               ),
               duration: const Duration(seconds: 3),
               backgroundColor: Colors.green,
@@ -226,7 +231,7 @@ class _ListsaveState extends State<Listsave> {
       }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error re-scanning: $e'),
+          content: Text(AppLocalizations.of(context)!.errorRescanning(e)),
           duration: const Duration(seconds: 3),
           backgroundColor: Colors.red,
         ),
@@ -254,7 +259,7 @@ class _ListsaveState extends State<Listsave> {
           ),
           SizedBox(height: 12.h),
           Text(
-            '0 Results',
+            AppLocalizations.of(context)!.zeroResults,
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
@@ -263,7 +268,7 @@ class _ListsaveState extends State<Listsave> {
           ),
           SizedBox(height: 8.h),
           Text(
-            'As soon as you’ve made your first scan,\nyour results will be logged here.',
+            AppLocalizations.of(context)!.noScansMessage,
             style: TextStyle(fontSize: 12.sp, color: Theme.of(context).colorScheme.onSurface),
           ),
         ],
@@ -332,7 +337,7 @@ class _ListsaveState extends State<Listsave> {
     final imageBytes = _parseImageData(scan['imageBytes']);
 
     final scanId = scan['id']?.toString() ?? index.toString();
-    final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
+    final breedName = scan['breedName']?.toString() ?? AppLocalizations.of(context)!.unknownBreed;
     final _ =
         scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName);
     final confidence = scan['confidence'] is double
@@ -443,7 +448,7 @@ class _ListsaveState extends State<Listsave> {
                         SizedBox(height: 4.h),
                         if (timestamp != null)
                           Text(
-                            _formatDateTime(timestamp),
+                            _formatDateTime(timestamp, context),
                             style: TextStyle(
                               fontSize: 10.sp,
                               color: Colors.grey[500],
@@ -451,7 +456,7 @@ class _ListsaveState extends State<Listsave> {
                           ),
                         SizedBox(height: 6.h),
                         Text(
-                          "Your dog you scanned looks like this.",
+                          AppLocalizations.of(context)!.scanLooksLike,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 12.sp,
@@ -507,7 +512,7 @@ class _ListsaveState extends State<Listsave> {
                           await _handleRescanTap(scan, context);
                         },
                         child: Text(
-                          'Return',
+                          AppLocalizations.of(context)!.returnAction,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
@@ -528,7 +533,7 @@ class _ListsaveState extends State<Listsave> {
                           );
                         },
                         child: Text(
-                          'Show',
+                          AppLocalizations.of(context)!.showAction,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
@@ -566,80 +571,24 @@ class _ListsaveState extends State<Listsave> {
         .join(' ');
   }
 
-  String _formatDateTime(DateTime dateTime) {
+  String _formatDateTime(DateTime dateTime, BuildContext context) {
     final now = DateTime.now();
     final difference = now.difference(dateTime);
+    final localizations = AppLocalizations.of(context)!;
 
     if (difference.inDays > 7) {
       return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
     } else if (difference.inDays > 0) {
-      return '${difference.inDays} days ago';
+      return localizations.daysAgo(difference.inDays);
     } else if (difference.inHours > 0) {
-      return '${difference.inHours} hours ago';
+      return localizations.hoursAgo(difference.inHours);
     } else if (difference.inMinutes > 0) {
-      return '${difference.inMinutes} minutes ago';
+      return localizations.minutesAgo(difference.inMinutes);
     } else {
-      return 'Just now';
+      return localizations.justNow;
     }
   }
 
 
-  Widget _buildHeader() {
-    final colors = Theme.of(context).colorScheme;
-    return SizedBox(
-      height: 80.h,
-      child: Stack(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                "assets/images/Group2.svg",
-                width: 72.w,
-                height: 37.h,
-                fit: BoxFit.contain,
-              ),
-              const SizedBox(width: 5),
-              Text(
-                'Manager',
-                style: TextStyle(
-                  fontFamily: 'Sora',
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 30.sp,
-                  height: 1.0,
-                  letterSpacing: 0.0,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-              ),
-              const Spacer(),
-            ],
-          ),
-
-          Positioned(
-            bottom: 5,
-            right: 10,
-            child: SizedBox(
-              height: 78.h,
-              width: 80.w,
-              child: Center(
-                child: Transform.rotate(
-                  angle: -81.51,
-                  child: SvgPicture.asset(
-                    "assets/images/Group099.svg",
-                    width: 92.w,
-                    height: 92.h,
-                    // color: const Color(0xFFE9ECE9),
-                    color: colors.surfaceContainerLow,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
 }

@@ -11,6 +11,7 @@ import '../../View_model/activity_provider.dart';
 class Othercalculatorwidget extends StatefulWidget {
   final int initialTab;
   final String activityTitle;
+  final String? activityKey;
   final int activityCount;
   final String? selectedPetId;
 
@@ -18,6 +19,7 @@ class Othercalculatorwidget extends StatefulWidget {
     super.key,
     this.initialTab = 0,
     required this.activityTitle,
+    this.activityKey,
     required this.activityCount,
     this.selectedPetId,
   });
@@ -176,7 +178,11 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
 
       // Use dynamic activity title for filtering
       final filteredActivities = allActivities.where((a) {
-        final matchesName = a.name.toLowerCase().contains(widget.activityTitle.toLowerCase());
+        final bool matchesKey = widget.activityKey != null &&
+            a.name.trim().toLowerCase() == widget.activityKey!.trim().toLowerCase();
+        final bool matchesTitle = a.name.trim().toLowerCase().contains(widget.activityTitle.trim().toLowerCase());
+
+        final matchesName = matchesKey || matchesTitle;
         final matchesPet = widget.selectedPetId == null || a.petId == widget.selectedPetId;
         return matchesName && matchesPet;
       }).toList();

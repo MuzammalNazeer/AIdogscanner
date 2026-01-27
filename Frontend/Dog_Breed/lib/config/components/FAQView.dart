@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class FAQView extends StatefulWidget {
   const FAQView({super.key});
@@ -13,49 +14,47 @@ class _FAQViewState extends State<FAQView> {
   // Track which FAQ is expanded (-1 = none)
   int _expandedIndex = -1;
 
-  final List<Map<String, String>> faqs = [
-    {
-      'question': 'How can I register a pet?',
-      'answer':
-      'You can register your pet by going to the "Add Pet" section, filling in the required details (name, breed, age, etc.), and attaching a photo. Once registered, you’ll receive a unique QR pet tag ID.',
-    },
-    {
-      'question': 'Why should I register my pet?',
-      'answer':
-      'Registering your pet helps in case they get lost. Anyone who finds your pet can scan the QR tag and instantly contact you with the pet’s location.',
-    },
-    {
-      'question': 'QR pet tag activation?',
-      'answer':
-      'After registering, you’ll get a digital or physical QR tag. Scan it with any phone camera to link it to your pet’s profile. No app needed for finders!',
-    },
-    {
-      'question': 'How does QR code scanning work?',
-      'answer':
-      'Anyone can scan the QR tag using their phone’s camera. It opens a web page with your contact info and pet details so they can reach you immediately.',
-    },
-    {
-      'question': 'Who can register a pet?',
-      'answer': 'Any pet owner can register their dog, cat, or other companion animal.',
-    },
-    {
-      'question': 'How can I change my data?',
-      'answer': 'Go to Profile → tap any field (Name, Email, Phone, etc.) to edit and save.',
-    },
-    {
-      'question': 'How can I change my pet\'s data?',
-      'answer': 'Go to your pet’s profile and tap the edit button to update name, breed, photos, etc.',
-    },
-    {
-      'question': 'What is a pet ID number?',
-      'answer': 'It’s a unique identifier linked to your pet’s QR tag for quick identification.',
-    },
-    {
-      'question': 'My pet is lost what should I do?',
-      'answer':
-      'Mark your pet as "Lost" in the app. This alerts anyone who scans the tag and shows your emergency contact info.',
-    },
-  ];
+  List<Map<String, String>> get faqs {
+    final loc = AppLocalizations.of(context)!;
+    return [
+      {
+        'question': loc.faqQuestion1,
+        'answer': loc.faqAnswer1,
+      },
+      {
+        'question': loc.faqQuestion2,
+        'answer': loc.faqAnswer2,
+      },
+      {
+        'question': loc.faqQuestion3,
+        'answer': loc.faqAnswer3,
+      },
+      {
+        'question': loc.faqQuestion4,
+        'answer': loc.faqAnswer4,
+      },
+      {
+        'question': loc.faqQuestion5,
+        'answer': loc.faqAnswer5,
+      },
+      {
+        'question': loc.faqQuestion6,
+        'answer': loc.faqAnswer6,
+      },
+      {
+        'question': loc.faqQuestion7,
+        'answer': loc.faqAnswer7,
+      },
+      {
+        'question': loc.faqQuestion8,
+        'answer': loc.faqAnswer8,
+      },
+      {
+        'question': loc.faqQuestion9,
+        'answer': loc.faqAnswer9,
+      },
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +84,7 @@ class _FAQViewState extends State<FAQView> {
                   ),
                   const Spacer(),
                   Text(
-                    'FAQ',
+                    AppLocalizations.of(context)!.faq,
                     style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w700, color: Colors.black),
                   ),
                   const Spacer(),

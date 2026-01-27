@@ -163,7 +163,7 @@ class _CalendarviewState extends State<Calendarview> {
     {
       'key': 'Accident',
       'name': AppLocalizations.of(context)!.activityAccident,
-      'image': 'assets/images/healt.png',
+      'image': 'assets/images/acc.png',
       'color': const Color(0xFFFDFFD9),
     },
     {
@@ -233,43 +233,6 @@ class _CalendarviewState extends State<Calendarview> {
     }
   }
 
-
-  // Future<void> _loadSelectedPetId() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final savedPetId = prefs.getString('selectedPetId');
-  //   final petProvider = Provider.of<PetProvider>(context, listen: false);
-  //
-  //   if (petProvider.hasPets) {
-  //     // If saved ID exists and is still valid → keep it
-  //     if (savedPetId != null && petProvider.pets.any((p) => p.id == savedPetId)) {
-  //       setState(() {
-  //         _selectedPetId = savedPetId;
-  //       });
-  //     }
-  //     // If no saved ID or saved ID is invalid → auto-select first pet
-  //     else {
-  //       setState(() {
-  //         _selectedPetId = petProvider.pets.first.id;
-  //       });
-  //       await prefs.setString('selectedPetId', _selectedPetId!);
-  //     }
-  //   } else {
-  //     // No pets → clear any old saved value
-  //     setState(() {
-  //       _selectedPetId = null;
-  //     });
-  //     await prefs.remove('selectedPetId');
-  //   }
-  // }
-  //
-  // Future<void> _saveSelectedPetId(String? petId) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   if (petId != null && petId.isNotEmpty) {
-  //     await prefs.setString('selectedPetId', petId);
-  //   } else {
-  //     await prefs.remove('selectedPetId');
-  //   }
-  // }
 
   Future<void> _loadSelectedProgressTab() async {
     final prefs = await SharedPreferences.getInstance();
@@ -735,6 +698,7 @@ class _CalendarviewState extends State<Calendarview> {
     }
   }
 
+
   Widget _buildActivitiesList(List<Activity> activities, {bool shrinkWrap = false, int? limit}) {
     final displayActivities = (limit != null && activities.length > limit)
         ? activities.sublist(0, limit)
@@ -961,7 +925,12 @@ class _CalendarviewState extends State<Calendarview> {
                 final String iconPath = item['icon'];
 
                 final int count = dailyActivities
-                    .where((a) => a.name.toLowerCase() == title.toLowerCase())
+                    .where((a) {
+                      final name = a.name.trim().toLowerCase();
+                      final k = key.trim().toLowerCase();
+                      final t = title.trim().toLowerCase();
+                      return name == k || name == t || (t.isNotEmpty && name.contains(t));
+                    })
                     .length;
 
                 return GestureDetector(
@@ -984,6 +953,7 @@ class _CalendarviewState extends State<Calendarview> {
                           builder: (context) => Othercalculatorwidget(
                             initialTab: 2,
                             activityTitle: title,
+                            activityKey: key,
                             activityCount: count,
                             selectedPetId: effectivePetId,
                           ),

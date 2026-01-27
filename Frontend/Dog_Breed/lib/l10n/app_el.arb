@@ -405,17 +405,17 @@
     "navCalendar": "Calendar",
     "navMyPets": "My Pets",
     "navProfile": "Profile",
-    "aiIdentifyingYour": "AI identifying Your ",
-    "dogText": "DOG",
-    "identifyingTimeText": "This usually takes up 1 minute...",
-    "analyzingImage": "Analyzing image...",
-    "errorOccurred": "Error Occurred",
-    "goBack": "Go Back",
-    "noDogDetected": "No Dog Detected",
-    "clearerPhotoPrompt": "Please try with a clearer photo of a dog.",
-    "cancel": "Cancel",
-    "tryAgain": "Try Again",
-    "lowConfidenceWarning": "Low confidence ({confidence}%). Results may not be accurate.",
+    "aiIdentifyingYour": "Η τεχνητή νοημοσύνη αναγνωρίζει τον ",
+    "dogText": "ΣΚΥΛΟ",
+    "identifyingTimeText": "Αυτό συνήθως διαρκεί έως 1 λεπτό...",
+    "analyzingImage": "Ανάλυση εικόνας...",
+    "errorOccurred": "Παρουσιάστηκε σφάλμα",
+    "goBack": "Επιστροφή",
+    "noDogDetected": "Δεν εντοπίστηκε σκύλος",
+    "clearerPhotoPrompt": "Παρακαλώ δοκιμάστε με μια πιο καθαρή φωτογραφία ενός σκύλου.",
+    "cancel": "Ακύρωση",
+    "tryAgain": "Δοκιμάστε ξανά",
+    "lowConfidenceWarning": "Χαμηλή εμπιστοσύνη ({confidence}%). Τα αποτελέσματα μπορεί να μην είναι ακριβή.",
     "@lowConfidenceWarning": {
         "placeholders": {
             "confidence": {
@@ -423,28 +423,28 @@
             }
         }
     },
-    "savingToRecentScans": "Saving to recent scans...",
-    "dogResults": "Dog Results",
-    "size": "Size",
-    "shape": "Shape",
-    "color": "Color",
-    "coat": "Coat",
-    "headAndFace": "Head & Face",
-    "purpose": "Purpose",
-    "body": "Body",
-    "weight": "Weight",
-    "temperamentAndCharacteristics": "Temperament & Characteristics",
-    "energyLevel": "Energy Level",
-    "trainability": "Trainability",
-    "socialBehavior": "Social Behavior",
-    "familyCompatibility": "Family Compatibility",
-    "childFriendliness": "Child Friendliness",
-    "addPet": "+add Pet",
-    "cannotSave": "Cannot Save",
-    "saving": "Saving...",
-    "saved": "Saved",
-    "save": "Save",
-    "cannotSaveConfidence": "Cannot save: Confidence {confidence}% < 40%",
+    "savingToRecentScans": "Αποθήκευση σε πρόσφατες σαρώσεις...",
+    "dogResults": "Αποτελέσματα σκύλου",
+    "size": "Μέγεθος",
+    "shape": "Σχήμα",
+    "color": "Χρώμα",
+    "coat": "Τρίχωμα",
+    "headAndFace": "Κεφάλι & Πρόσωπο",
+    "purpose": "Σκοπός",
+    "body": "Σώμα",
+    "weight": "Βάρος",
+    "temperamentAndCharacteristics": "Ιδιοσυγκρασία & Χαρακτηριστικά",
+    "energyLevel": "Επίπεδο ενέργειας",
+    "trainability": "Εκπαιδευσιμότητα",
+    "socialBehavior": "Κοινωνική συμπεριφορά",
+    "familyCompatibility": "Οικογενειακή συμβατότητα",
+    "childFriendliness": "Φιλικότητα προς τα παιδιά",
+    "addPet": "+Προσθήκη κατοικιδίου",
+    "cannotSave": "Αδυναμία αποθήκευσης",
+    "saving": "Αποθήκευση...",
+    "saved": "Αποθηκεύτηκε",
+    "save": "Αποθήκευση",
+    "cannotSaveConfidence": "Αδυναμία αποθήκευσης: Εμπιστοσύνη {confidence}% < 40%",
     "@cannotSaveConfidence": {
         "placeholders": {
             "confidence": {
@@ -452,10 +452,408 @@
             }
         }
     },
-    "noPredictionResult": "No prediction result available",
-    "noImageDataToSave": "No image data to save",
-    "failedToSaveResults": "Failed to save results",
-    "moderate": "Moderate",
-    "friendly": "Friendly",
-    "good": "Good"
+    "noPredictionResult": "Δεν υπάρχει διαθέσιμο αποτέλεσμα πρόβλεψης",
+    "noImageDataToSave": "Δεν υπάρχουν δεδομένα εικόνας για αποθήκευση",
+    "failedToSaveResults": "Αποτυχία αποθήκευσης αποτελεσμάτων",
+    "moderate": "Μέτρια",
+    "friendly": "Φιλικό",
+    "good": "Καλό",
+    "sizeSmall": "Small",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Large",
+    "sizeGiant": "Giant",
+    "sizeToy": "Toy",
+    "sizeMiniature": "Miniature",
+    "sizeStandard": "Standard",
+    "sizeSmallToMedium": "Small to Medium",
+    "sizeMediumToLarge": "Medium to Large",
+    "levelLow": "Low",
+    "levelHigh": "High",
+    "levelVeryHigh": "Very High",
+    "levelLowToModerate": "Low to Moderate",
+    "levelModerateToHigh": "Moderate to High",
+    "levelHighToVeryHigh": "High to Very High",
+    "traitIntelligent": "Intelligent",
+    "traitAlert": "Alert",
+    "traitLoyal": "Loyal",
+    "traitProtective": "Protective",
+    "traitCalm": "Calm",
+    "traitGentle": "Gentle",
+    "traitActive": "Active",
+    "traitIndependent": "Independent",
+    "traitConfident": "Confident",
+    "traitBrave": "Brave",
+    "traitPlayful": "Playful",
+    "traitAffectionate": "Affectionate",
+    "traitStubborn": "Stubborn",
+    "traitEagerToPlease": "Eager to please",
+    "ratingExcellent": "Excellent",
+    "ratingAverage": "Average",
+    "ratingFair": "Fair",
+    "ratingPoor": "Poor",
+    "goodWithChildren": "Good with children",
+    "goodWithFamily": "Good with family",
+    "excellentWithChildren": "Excellent with children",
+    "excellentWithFamily": "Excellent with family",
+    "coatShort": "Short",
+    "coatLong": "Long",
+    "coatMedium": "Medium",
+    "coatDouble": "Double coat",
+    "coatWire": "Wire",
+    "coatSilky": "Silky",
+    "coatSmooth": "Smooth",
+    "coatDense": "Dense",
+    "coatFlat": "Flat",
+    "coatCurly": "Curly",
+    "coatWavy": "Wavy",
+    "colorBlack": "Black",
+    "colorWhite": "White",
+    "colorBrown": "Brown",
+    "colorRed": "Red",
+    "colorTan": "Tan",
+    "colorBlue": "Blue",
+    "colorGray": "Gray",
+    "colorFawn": "Fawn",
+    "colorBrindle": "Brindle",
+    "colorCream": "Cream",
+    "colorGold": "Gold",
+    "colorLiver": "Liver",
+    "colorTriColor": "Tri-color",
+    "colorMerle": "Merle",
+    "colorSable": "Sable",
+    "chooseProfilePhoto": "Επιλογή φωτογραφίας προφίλ",
+    "camera": "Κάμερα",
+    "gallery": "Συλλογή",
+    "ownersProfile": "Προφίλ ιδιοκτήτη",
+    "petOwner": "Ιδιοκτήτης κατοικίδιου",
+    "lastName": "Επίθετο",
+    "ownerContacts": "Επαφές ιδιοκτήτη",
+    "email": "Email",
+    "mainPhone": "Κύριο τηλέφωνο",
+    "instantGpsAlerts": "Άμεσες ειδοποιήσεις GPS κατά τη σάρωση",
+    "gpsAlertsDescription": "Λάβετε άμεσες ενημερώσεις τοποθεσίας...",
+    "emergencyContacts": "Επαφές έκτακτης ανάγκης",
+    "vetContactsDescription": "Επαφές κτηνιάτρου...",
+    "messenger": "Messenger",
+    "messengerDescription": "Ένας εναλλακτικός τρόπος επικοινωνίας...",
+    "petsResidence": "Κατοικία κατοικίδιου",
+    "country": "Χώρα",
+    "city": "Πόλη",
+    "address": "Διεύθυνση",
+    "addAddress": "Προσθήκη διεύθυνσης",
+    "labelAdd": "Προσθήκη",
+    "getPremium": "ΑΠΟΚΤΗΣΤΕ PREMIUM",
+    "recentScansTitle": "Πρόσφατες Σαρώσεις",
+    "scansCount": "{count} Σαρώσεις",
+    "@scansCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "zeroResults": "0 Αποτελέσματα",
+    "noScansMessage": "Μόλις κάνετε την πρώτη σας σάρωση,\nτα αποτελέσματά σας θα καταγραφούν εδώ.",
+    "scanLooksLike": "Ο σκύλος που σαρώσατε μοιάζει με αυτό.",
+    "returnAction": "Επιστροφή",
+    "showAction": "Εμφάνιση",
+    "daysAgo": "{count} ημέρες πριν",
+    "@daysAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "hoursAgo": "{count} ώρες πριν",
+    "@hoursAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "minutesAgo": "{count} λεπτά πριν",
+    "@minutesAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "justNow": "Μόλις τώρα",
+    "rescannedSuccess": "✅ Επανασάρωση: {breedName} ({confidence}% εμπιστοσύνη)",
+    "@rescannedSuccess": {
+        "placeholders": {
+            "breedName": {
+                "type": "String"
+            },
+            "confidence": {
+                "type": "String"
+            }
+        }
+    },
+    "errorRescanning": "Σφάλμα επανασάρωσης: {error}",
+    "@errorRescanning": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "changePasswordSubtitle": "Δημιουργήστε έναν ισχυρό, ασφαλή κωδικό πρόσβασης για να διατηρήσετε τον λογαριασμό σας προστατευμένο και προσβάσιμο.",
+    "currentPassword": "Τρέχων κωδικός πρόσβασης",
+    "newPassword": "Νέος κωδικός πρόσβασης",
+    "repeatPassword": "Επανάληψη κωδικού πρόσβασης",
+    "faqQuestion1": "Πώς μπορώ να εγγράψω ένα κατοικίδιο;",
+    "faqAnswer1": "Μπορείτε να εγγράψετε το κατοικίδιό σας μεταβαίνοντας στην ενότητα \"Προσθήκη κατοικιδίου\", συμπληρώνοντας τα απαιτούμενα στοιχεία (όνομα, ράτσα, ηλικία κ.λπ.) και επισυνάπτοντας μια φωτογραφία. Μόλις εγγραφείτε, θα λάβετε ένα μοναδικό αναγνωριστικό ετικέτας QR κατοικιδίου.",
+    "faqQuestion2": "Γιατί πρέπει να εγγράψω το κατοικίδιό μου;",
+    "faqAnswer2": "Η εγγραφή του κατοικιδίου σας βοηθά σε περίπτωση που χαθεί. Όποιος βρει το κατοικίδιό σας μπορεί να σαρώσει την ετικέτα QR και να επικοινωνήσει άμεσα μαζί σας με την τοποθεσία του κατοικιδίου.",
+    "faqQuestion3": "Ενεργοποίηση ετικέτας QR κατοικιδίου;",
+    "faqAnswer3": "Μετά την εγγραφή, θα λάβετε μια ψηφιακή ή φυσική ετικέτα QR. Σαρώστε την με οποιαδήποτε κάμερα τηλεφώνου για να τη συνδέσετε στο προφίλ του κατοικιδίου σας. Δεν απαιτείται εφαρμογή για όσους το βρουν!",
+    "faqQuestion4": "Πώς λειτουργεί η σάρωση κωδικού QR;",
+    "faqAnswer4": "Ο καθένας μπορεί να σαρώσει την ετικέτα QR χρησιμοποιώντας την κάμερα του τηλεφώνου του. Ανοίγει μια ιστοσελίδα με τα στοιχεία επικοινωνίας σας και τα στοιχεία του κατοικιδίου, ώστε να μπορούν να επικοινωνήσουν μαζί σας αμέσως.",
+    "faqQuestion5": "Ποιος μπορεί να εγγράψει ένα κατοικίδιο;",
+    "faqAnswer5": "Οποιοσδήποτε ιδιοκτήτης κατοικιδίου μπορεί να εγγράψει τον σκύλο, τη γάτα ή άλλο ζώο συντροφιάς του.",
+    "faqQuestion6": "Πώς μπορώ να αλλάξω τα δεδομένα μου;",
+    "faqAnswer6": "Μεταβείτε στο Προφίλ → πατήστε οποιοδήποτε πεδίο (Όνομα, Email, Τηλέφωνο κ.λπ.) για επεξεργασία και αποθήκευση.",
+    "faqQuestion7": "Πώς μπορώ να αλλάξω τα δεδομένα του κατοικιδίου μου;",
+    "faqAnswer7": "Μεταβείτε στο προφίλ του κατοικιδίου σας και πατήστε το κουμπί επεξεργασίας για να ενημερώσετε το όνομα, τη ράτσα, τις φωτογραφίες κ.λπ.",
+    "faqQuestion8": "Τι είναι ο αριθμός ταυτότητας κατοικιδίου;",
+    "faqAnswer8": "Είναι ένα μοναδικό αναγνωριστικό που συνδέεται με την ετικέτα QR του κατοικιδίου σας για γρήγορη αναγνώριση.",
+    "faqQuestion9": "Το κατοικίδιό μου χάθηκε, τι πρέπει να κάνω;",
+    "faqAnswer9": "Σημειώστε το κατοικίδιό σας ως \"Χαμένο\" στην εφαρμογή. Αυτό ειδοποιεί όποιον σαρώνει την ετικέτα και εμφανίζει τα στοιχεία επικοινωνίας έκτακτης ανάγκης σας.",
+    "savedActivities": "Αποθηκευμένες δραστηριότητες",
+    "deleteProfileWarning": "Προειδοποίηση! Το προφίλ και όλο το περιεχόμενό του θα διαγραφούν οριστικά και δεν μπορούν να ανακτηθούν. Εάν έχετε ενεργή συνδρομή Premium, απενεργοποιήστε την στις ρυθμίσεις συνδρομής του App Store",
+    "yes": "Ναι",
+    "no": "ΟΧΙ",
+    "enterAddress": "Εισαγωγή διεύθυνσης",
+    "errorEnterAddress": "Παρακαλώ εισάγετε τη διεύθυνσή σας",
+    "enterFirstName": "Εισάγετε το όνομα",
+    "allowNotifications": "Να επιτρέπονται οι ειδοποιήσεις",
+    "enterEmail": "Εισαγωγή email",
+    "errorEnterValidEmail": "Παρακαλώ εισάγετε ένα έγκυρο email",
+    "genderPreferNotToSay": "Δεν θέλω να αναφέρω",
+    "enterLastName": "Εισάγετε το επώνυμο",
+    "errorEnterValidPhone": "Παρακαλώ εισάγετε έναν έγκυρο αριθμό τηλεφώνου",
+    "drinkCalculator": "Υπολογιστής Ποτού",
+    "drinkFrequencyChartTitle": "Συχνότητα (φορές ανά ημέρα)",
+    "drinkCalcDescription": "Υπολογίστε την ημερήσια πρόσληψη νερού που χρειάζεται ο σκύλος σας\nσύμφωνα με το βάρος και το επίπεδο δραστηριότητας για\nυγιή ενυδάτωση κάθε μέρα",
+    "currentWeight": "Τρέχον Βάρος",
+    "hintWeight": "Βάρος",
+    "yourDogWillNeed": "Ο σκύλος σας θα χρειαστεί",
+    "perDay": "/ ημέρα",
+    "unitPounds": "Λίβρες",
+    "unitKilograms": "Χιλιόγραμμα",
+    "unitOunces": "Ουγγιές",
+    "unitGrams": "Γραμμάρια",
+    "unitMilliliters": "Χιλιοστόλιτρα",
+    "unitCentiliters": "Εκατοστόλιτρα",
+    "unitLiters": "Λίτρα",
+    "unitUSFluidOunces": "Ουγγιές υγρών ΗΠΑ",
+    "unitUKFluidOunces": "Ουγγιές υγρών ΗΒ",
+    "activityLevel": "Επίπεδο δραστηριότητας",
+    "unitSymbolMl": "mL",
+    "unitSymbolCl": "cL",
+    "unitSymbolL": "L",
+    "unitSymbolUsFlOz": "US fl oz",
+    "unitSymbolUkFlOz": "UK fl oz",
+    "breedAnalysisTitle": "Breed Analysis",
+    "viewHistoryTooltip": "View History",
+    "newScanTooltip": "New Scan",
+    "scanAnotherButton": "Scan Another",
+    "confidentLabel": "Confident",
+    "aiAnalysisComplete": "AI Analysis Complete",
+    "breedIdentified": "Breed Identified",
+    "primaryPurpose": "Primary Purpose: {purpose}",
+    "@primaryPurpose": {
+        "placeholders": {
+            "purpose": {
+                "type": "String"
+            }
+        }
+    },
+    "confidenceLevel": "Confidence Level",
+    "physicalCharacteristicsTitle": "Physical Characteristics",
+    "coatType": "Coat Type",
+    "bodyStructure": "Body Structure",
+    "temperamentAndBehaviorTitle": "Temperament & Behavior",
+    "additionalInfoTitle": "Additional Information",
+    "ageGroup": "Age Group",
+    "weightRange": "Weight Range",
+    "documentsTitle": "Documents",
+    "addDocument": "Add Document",
+    "documentCount": "{count} documents",
+    "@documentCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "noDocumentsFound": "No documents found",
+    "noMatchingDocuments": "No matching documents",
+    "uploadFirstDocument": "Tap + to upload your first document",
+    "tryDifferentSearchTerm": "Try a different search term",
+    "documentDeleted": "Document deleted",
+    "searchPlaceholder": "Search...",
+    "openDocument": "Open Document",
+    "viewDetails": "View Details",
+    "editDocument": "Edit Document",
+    "deleteDocument": "Delete Document",
+    "deleteDocumentConfirmation": "Are you sure you want to delete \"{title}\"?",
+    "@deleteDocumentConfirmation": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "documentDeletedSuccess": "Document deleted successfully",
+    "documentDetails": "Document Details",
+    "category": "Category",
+    "fileType": "File Type",
+    "fileSize": "File Size",
+    "uploadDate": "Upload Date",
+    "filePath": "File Path",
+    "notSavedLocally": "Not saved locally",
+    "close": "Close",
+    "documentTitle": "Document Title",
+    "documentUpdatedSuccess": "Document updated successfully",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgoShort": "{count}d ago",
+    "@daysAgoShort": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "weeksAgo": "{count}w ago",
+    "@weeksAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "catMedicalCare": "Medical & Care",
+    "catLegalLicensing": "Legal & Licensing",
+    "catCoverageFinance": "Coverage & Finance",
+    "catLearningBehavior": "Learning & Behavior",
+    "catTransitBoarding": "Transit & Boarding",
+    "catCriticalSupport": "Critical & Support",
+    "catBloodlineStock": "Bloodline and stock",
+    "catNutritionIntake": "Nutrition and intake",
+    "catMaintenanceLook": "Maintenance and look",
+    "catOtherDocuments": "Other Documents",
+    "catAll": "All",
+    "documentUploadedSuccess": "Document uploaded successfully!",
+    "documentUploadFailed": "Failed to upload document: {error}",
+    "addDocumentDetails": "Add Document Details",
+    "docVaccinationRecords": "Vaccination Records",
+    "docPetInsurancePolicy": "Pet Insurance Policy",
+    "docAdoptionCertificate": "Adoption Certificate",
+    "docTrainingCertificate": "Training Certificate",
+    "docMedicalCheckupReport": "Medical Checkup Report",
+    "hintEnterCity": "Enter your city",
+    "errorEnterCity": "Please enter your city",
+    "addMoreActivities": "+ Add more activities",
+    "selectDateTitle": "Select Date",
+    "enterDate": "Enter Date",
+    "dateHint": "MM/DD/YYYY",
+    "okAction": "OK",
+    "dateRangeError": "Please enter a date between 2020-2030",
+    "enjoyingApp": "Enjoying the app?",
+    "tapToRate": "Tap to rate:",
+    "rateUsAction": "Rate Us",
+    "selectStars": "Select Stars",
+    "sorryToHear": "We're sorry to hear that",
+    "feedbackImprove": "What can we do better? Your feedback helps us improve.",
+    "feedbackHint": "Tell us what we can improve...",
+    "submitFeedback": "Submit Feedback",
+    "errorAppStore": "Could not open app store. Please try again later.",
+    "errorOpenStore": "Error opening app store.",
+    "errorShare": "Unable to open share options. Error: {error}",
+    "@errorShare": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "linkCopied": "Link copied to clipboard! You can now paste and share it.",
+    "copyFailed": "Failed to copy to clipboard.",
+    "shareApp": "Share App",
+    "copyLink": "Copy Link",
+    "shareWhatsApp": "Share via WhatsApp",
+    "shareEmail": "Share via Email",
+    "shareSMS": "Share via SMS",
+    "chooseShare": "Choose how you want to share:",
+    "copy": "Copy",
+    "whatsapp": "WhatsApp",
+    "more": "More",
+    "feedbackThanks": "Thank you for your feedback!",
+    "themeTitle": "Theme",
+    "darkTheme": "Dark",
+    "lightTheme": "Light",
+    "myFavorites": "My Favorites",
+    "feedbackTitle": "Feedback",
+    "rateUsTitle": "Rate us",
+    "shareTitle": "Share",
+    "myPremiumService": "My Premium Service",
+    "dashboardHome": "Dashboard Home",
+      "navHome": "Αρχική",
+      "navCalendar": "Ημερολόγιο",
+      "navMyPets": "Τα Κατοικίδιά Μου",
+      "navProfile": "Προφίλ",
+    "saveResults": "Save Results",
+    "addAsPet": "Add as Pet",
+    "analyzingWithAI": "Analyzing with AI Model...",
+    "connectingToServer": "Connecting to Server...",
+    "offlineMode": "Offline Mode - Local AI",
+    "onlineMode": "Online Mode - Server API",
+    "totalBreeds": "Total Breeds: {count}",
+    "@totalBreeds": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "switchToOnline": "Switch to Online",
+    "switchToOffline": "Switch to Offline",
+    "dogIdentifierTitle": "Dog Identifier",
+    "selectDogImage": "Select a dog image",
+    "errorOfflineModelNotAvailable": "Offline model not available. Please check if model files are in place.",
+    "errorNoInternet": "No internet connection available.\n\nPlease switch to Offline Mode to analyze images.",
+    "errorOnlinePredictionFailed": "Online prediction failed: {error}\n\nPlease switch to Offline Mode for local analysis.",
+    "@errorOnlinePredictionFailed": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "errorOfflinePredictionFailed": "Offline prediction failed: {error}",
+    "@errorOfflinePredictionFailed": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "adult": "Adult",
+    "variesByBreed": "Varies by Breed",
+    "breedSpecific": "Breed-Specific",
+    "balanced": "Balanced",
+    "doubleCoat": "Double Coat",
+    "wellProportioned": "Well Proportioned",
+    "various": "Various",
+    "companion": "Companion",
+    "noRecentScans": "No recent scans",
+    "scanDogPrompt": "Scan a dog to see results here",
+    "notAvailable": "N/A",
+    "height": "Height"
 }

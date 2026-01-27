@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class DrinkCalculatorWidget extends StatefulWidget {
   const DrinkCalculatorWidget({super.key});
@@ -44,20 +45,21 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
     return baseML * multiplier;
   }
 
-  String _formatResult(double ml) {
-    if (ml <= 0) return '0 mL';
+  String _formatResult(double ml, AppLocalizations l10n) {
+    if (ml <= 0) return '0 ${l10n.unitSymbolMl}';
 
     final roundedML = ml.roundToDouble();
 
     return switch (_resultUnit) {
-      'Milliliters' => '${roundedML.toStringAsFixed(roundedML % 1 == 0 ? 0 : 1)} mL',
-      'Centiliters' => '${(ml / 10).toStringAsFixed(1)} cL',
-      'Liters' => '${(ml / 1000).toStringAsFixed(2)} L',
-      'US Fluid Ounces' => '${(ml / 29.5735).toStringAsFixed(1)} US fl oz',
-      'UK Fluid Ounces' => '${(ml / 28.4131).toStringAsFixed(1)} UK fl oz',
-      _ => '${roundedML.toStringAsFixed(roundedML % 1 == 0 ? 0 : 1)} mL',
+      'Milliliters' => '${roundedML.toStringAsFixed(roundedML % 1 == 0 ? 0 : 1)} ${l10n.unitSymbolMl}',
+      'Centiliters' => '${(ml / 10).toStringAsFixed(1)} ${l10n.unitSymbolCl}',
+      'Liters' => '${(ml / 1000).toStringAsFixed(2)} ${l10n.unitSymbolL}',
+      'US Fluid Ounces' => '${(ml / 29.5735).toStringAsFixed(1)} ${l10n.unitSymbolUsFlOz}',
+      'UK Fluid Ounces' => '${(ml / 28.4131).toStringAsFixed(1)} ${l10n.unitSymbolUkFlOz}',
+      _ => '${roundedML.toStringAsFixed(roundedML % 1 == 0 ? 0 : 1)} ${l10n.unitSymbolMl}',
     };
   }
+  
   @override
   void dispose() {
     _weightController.dispose();
@@ -66,8 +68,9 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final dailyML = _calculateDailyWaterML();
-    final resultValue = _formatResult(dailyML);
+    final resultValue = _formatResult(dailyML, l10n);
     final resultParts = resultValue.split(' ');
 
     return Padding(
@@ -82,7 +85,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Text(
-              'Calculate daily water intake your dog needs\naccording to weight and activity level for\nhealthy hydration every day',
+              l10n.drinkCalcDescription,
               style: TextStyle(
                 fontSize: 16.sp,
                 color: Colors.black87,
@@ -92,7 +95,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
           ),
 
           SizedBox(height: 32.h),
-          _buildActivityLevelSection(),
+          _buildActivityLevelSection(l10n),
           SizedBox(height: 24.h),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -103,7 +106,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Current Weight',
+                      l10n.currentWeight,
                       style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
                     ),
                     SizedBox(height: 8.h),
@@ -124,7 +127,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                           decoration: InputDecoration(
                             isDense: true,
                             border: InputBorder.none,
-                            hintText: 'Weight',
+                            hintText: l10n.hintWeight,
                             hintStyle: TextStyle(color: Colors.grey[400], fontSize: 18.sp),
                             contentPadding: EdgeInsets.zero,
                           ),
@@ -136,7 +139,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                 ),
               ),
               SizedBox(width: 12.w),
-              _buildWeightDropdown(),
+              _buildWeightDropdown(l10n),
             ],
           ),
           SizedBox(height: 40.h),
@@ -151,7 +154,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Your Dog will need',
+                  l10n.yourDogWillNeed,
                   style: TextStyle(color: Colors.white70, fontSize: 16.sp),
                 ),
 
@@ -172,13 +175,13 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        resultParts.length > 1 ? '${resultParts.sublist(1).join(' ')} / day' : '/ day',
+                        resultParts.length > 1 ? '${resultParts.sublist(1).join(' ')} ${l10n.perDay}' : l10n.perDay,
                         style: TextStyle(color: Colors.white70, fontSize: 16.sp),
                       ),
                       SizedBox(width: 40.w),
                       SizedBox(
                         width: 150.w,  // ← adjust this value (140–180.w usually looks good)
-                        child: _buildResultUnitDropdown(),
+                        child: _buildResultUnitDropdown(l10n),
                       ),
 
                     ],
@@ -193,7 +196,13 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
     );
   }
 
-  Widget _buildActivityLevelSection() {
+  Widget _buildActivityLevelSection(AppLocalizations l10n) {
+    final Map<String, String> activityLevels = {
+      'Low': l10n.levelLow,
+      'Moderate': l10n.moderate,
+      'High': l10n.levelHigh,
+    };
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -220,7 +229,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               children: [
                 Expanded(
                   child: Text(
-                    _activityLevel,
+                    activityLevels[_activityLevel] ?? _activityLevel,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18.sp,
@@ -268,7 +277,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                         children: [
                           Expanded(
                             child: Text(
-                              level,
+                              activityLevels[level] ?? level,
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: _activityLevel == level ? FontWeight.bold : FontWeight.normal,
@@ -290,7 +299,13 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
     );
   }
 
-  Widget _buildWeightDropdown() {
+  Widget _buildWeightDropdown(AppLocalizations l10n) {
+    final Map<String, String> weightUnits = {
+      'Ounces': l10n.unitOunces,
+      'Pounds': l10n.unitPounds,
+      'Grams': l10n.unitGrams,
+      'Kilograms': l10n.unitKilograms,
+    };
     final items = ['Ounces', 'Pounds', 'Grams', 'Kilograms'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -319,7 +334,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  _weightUnit,
+                  weightUnits[_weightUnit] ?? _weightUnit,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.sp,
@@ -362,7 +377,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                       color: isSelected ? const Color(0xFFE0E0E0) : Colors.transparent,
                     ),
                     child: Text(
-                      item,
+                      weightUnits[item] ?? item,
                       style: TextStyle(
                         fontSize: 16.sp,
                         color: Colors.black,
@@ -378,7 +393,15 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
     );
   }
 
-  Widget _buildResultUnitDropdown() {
+  Widget _buildResultUnitDropdown(AppLocalizations l10n) {
+    final Map<String, String> resultUnits = {
+      'Milliliters': l10n.unitMilliliters,
+      'Centiliters': l10n.unitCentiliters,
+      'Liters': l10n.unitLiters,
+      'US Fluid Ounces': l10n.unitUSFluidOunces,
+      'UK Fluid Ounces': l10n.unitUKFluidOunces,
+    };
+    
     return _buildPurpleDropdown(
       value: _resultUnit,
       items: const [
@@ -388,6 +411,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
         'US Fluid Ounces',
         'UK Fluid Ounces',
       ],
+      localizedItems: resultUnits,
       onChanged: (value) => setState(() => _resultUnit = value!),
     );
   }
@@ -396,6 +420,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
     required String value,
     required List<String> items,
     required void Function(String?) onChanged,
+    required Map<String, String> localizedItems,
     double width = double.infinity,
     String? label,
   }) {
@@ -423,7 +448,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               icon: Icon(Icons.keyboard_arrow_down, color: Colors.white, size: 28.w),
               style: TextStyle(color: Colors.white, fontSize: 18.sp, fontWeight: FontWeight.w600),
               dropdownColor: const Color(0xFF820DFF),
-              items: items.map((item) => DropdownMenuItem<String>(value: item, child: Text(item))).toList(),
+              items: items.map((item) => DropdownMenuItem<String>(value: item, child: Text(localizedItems[item] ?? item))).toList(),
               onChanged: onChanged,
             ),
           ),

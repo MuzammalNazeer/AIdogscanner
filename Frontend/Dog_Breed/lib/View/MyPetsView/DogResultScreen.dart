@@ -564,42 +564,42 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                   _buildCharacteristicCard(
                     iconPath: "assets/images/size.svg",
                     title: AppLocalizations.of(context)!.size,
-                    value: result.size,
+                    value: _getLocalizedSize(result.size),
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/shape.svg",
                     title: AppLocalizations.of(context)!.shape,
-                    value: result.shape,
+                    value: _getLocalizedShape(result.shape),
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/regular.svg",
                     title: AppLocalizations.of(context)!.color,
-                    value: result.color,
+                    value: _getLocalizedColor(result.color),
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/coat.svg",
                     title: AppLocalizations.of(context)!.coat,
-                    value: result.coat,
+                    value: _getLocalizedCoat(result.coat),
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/flex_dog.svg",
                     title: AppLocalizations.of(context)!.headAndFace,
-                    value: result.headFace,
+                    value: _getLocalizedHeadFace(result.headFace),
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/akar.svg",
                     title: AppLocalizations.of(context)!.purpose,
-                    value: result.purpose,
+                    value: _getLocalizedPurpose(result.purpose),
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/fluent.svg",
                     title: AppLocalizations.of(context)!.body,
-                    value: result.body,
+                    value: _getLocalizedBody(result.body),
                   ),
                   _buildCharacteristicCard(
                     iconPath: "assets/images/akar.svg",
                     title: AppLocalizations.of(context)!.weight,
-                    value: result.weight,
+                    value: _getLocalizedWeight(result.weight),
                   ),
                 ],
               ),
@@ -621,31 +621,31 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                 children: [
                   _buildTemperamentCard(
                     AppLocalizations.of(context)!.energyLevel,
-                    result.temperament["Energy Level"] ?? AppLocalizations.of(context)!.moderate,
+                    _getLocalizedTemperamentValue(result.temperament["Energy Level"] ?? "Moderate"),
                   ),
                   SizedBox(height: 12.h),
 
                   _buildTemperamentCard(
                     AppLocalizations.of(context)!.trainability,
-                    result.temperament["Trainability"] ?? AppLocalizations.of(context)!.moderate,
+                    _getLocalizedTemperamentValue(result.temperament["Trainability"] ?? "Moderate"),
                   ),
                   SizedBox(height: 12.h),
 
                   _buildTemperamentCard(
                     AppLocalizations.of(context)!.socialBehavior,
-                    result.temperament["Social Behavior"] ?? AppLocalizations.of(context)!.friendly,
+                    _getLocalizedTemperamentValue(result.temperament["Social Behavior"] ?? "Friendly"),
                   ),
                   SizedBox(height: 12.h),
 
                   _buildTemperamentCard(
                     AppLocalizations.of(context)!.familyCompatibility,
-                    result.temperament["Family Compatibility"] ?? AppLocalizations.of(context)!.good,
+                    _getLocalizedTemperamentValue(result.temperament["Family Compatibility"] ?? "Good"),
                   ),
                   SizedBox(height: 12.h),
 
                   _buildTemperamentCard(
                     AppLocalizations.of(context)!.childFriendliness,
-                    result.temperament["Child Friendliness"] ?? AppLocalizations.of(context)!.good,
+                    _getLocalizedTemperamentValue(result.temperament["Child Friendliness"] ?? "Good"),
                   ),
                 ],
               ),
@@ -791,6 +791,272 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
         ),
       ],
     );
+  }
+
+  String _getLocalizedBreedName(String breed) {
+    final normalized = breed.replaceAll(' ', '').replaceAll('-', '').toLowerCase();
+    final loc = AppLocalizations.of(context)!;
+
+    switch (normalized) {
+      case 'affenpinscher': return loc.breedAffenpinscher;
+      case 'afghanhound': return loc.breedAfghanHound;
+      case 'africanhuntingdog': return loc.breedAfricanHuntingDog;
+      case 'airedale': return loc.breedAiredale;
+      case 'americanstaffordshireterrier': return loc.breedAmericanStaffordshireTerrier;
+      case 'appenzeller': return loc.breedAppenzeller;
+      case 'australianterrier': return loc.breedAustralianTerrier;
+      case 'basenji': return loc.breedBasenji;
+      case 'basset': return loc.breedBasset;
+      case 'beagle': return loc.breedBeagle;
+      case 'bedlingtonterrier': return loc.breedBedlingtonTerrier;
+      case 'bernesemountaindog': return loc.breedBerneseMountainDog;
+      case 'blackandtancoonhound': return loc.breedBlackAndTanCoonhound;
+      case 'blenheimspaniel': return loc.breedBlenheimSpaniel;
+      case 'bloodhound': return loc.breedBloodhound;
+      case 'bluetick': return loc.breedBluetick;
+      case 'bordercollie': return loc.breedBorderCollie;
+      case 'borderterrier': return loc.breedBorderTerrier;
+      case 'borzoi': return loc.breedBorzoi;
+      case 'bostonbull': return loc.breedBostonBull;
+      case 'bouvierdesflandres': return loc.breedBouvierDesFlandres;
+      case 'boxer': return loc.breedBoxer;
+      case 'brabancongriffon': return loc.breedBrabanconGriffon;
+      case 'briard': return loc.breedBriard;
+      case 'brittanyspaniel': return loc.breedBrittanySpaniel;
+      case 'bullmastiff': return loc.breedBullMastiff;
+      case 'cairn': return loc.breedCairn;
+      case 'cardigan': return loc.breedCardigan;
+      case 'chesapeakebayretriever': return loc.breedChesapeakeBayRetriever;
+      case 'chihuahua': return loc.breedChihuahua;
+      case 'chow': return loc.breedChow;
+      case 'clumber': return loc.breedClumber;
+      case 'cockerspaniel': return loc.breedCockerSpaniel;
+      case 'collie': return loc.breedCollie;
+      case 'curlycoatedretriever': return loc.breedCurlyCoatedRetriever;
+      case 'dandiedinmont': return loc.breedDandieDinmont;
+      case 'dhole': return loc.breedDhole;
+      case 'dingo': return loc.breedDingo;
+      case 'doberman': return loc.breedDoberman;
+      case 'englishfoxhound': return loc.breedEnglishFoxhound;
+      case 'englishsetter': return loc.breedEnglishSetter;
+      case 'englishspringer': return loc.breedEnglishSpringer;
+      case 'entlebucher': return loc.breedEntleBucher;
+      case 'eskimodog': return loc.breedEskimoDog;
+      case 'flatcoatedretriever': return loc.breedFlatCoatedRetriever;
+      case 'frenchbulldog': return loc.breedFrenchBulldog;
+      case 'germanshepherd': return loc.breedGermanShepherd;
+      case 'germanshorthairedpointer': return loc.breedGermanShortHairedPointer;
+      case 'giantschnauzer': return loc.breedGiantSchnauzer;
+      case 'goldenretriever': return loc.breedGoldenRetriever;
+      case 'gordonsetter': return loc.breedGordonSetter;
+      case 'greatdane': return loc.breedGreatDane;
+      case 'greatpyrenees': return loc.breedGreatPyrenees;
+      case 'greaterswissmountaindog': return loc.breedGreaterSwissMountainDog;
+      case 'groenendael': return loc.breedGroenendael;
+      case 'ibizanhound': return loc.breedIbizanHound;
+      case 'irishsetter': return loc.breedIrishSetter;
+      case 'irishterrier': return loc.breedIrishTerrier;
+      case 'irishwaterspaniel': return loc.breedIrishWaterSpaniel;
+      case 'irishwolfhound': return loc.breedIrishWolfhound;
+      case 'italiangreyhound': return loc.breedItalianGreyhound;
+      case 'japanesespaniel': return loc.breedJapaneseSpaniel;
+      case 'keeshond': return loc.breedKeeshond;
+      case 'kelpie': return loc.breedKelpie;
+      case 'kerryblueterrier': return loc.breedKerryBlueTerrier;
+      case 'komondor': return loc.breedKomondor;
+      case 'kuvasz': return loc.breedKuvasz;
+      case 'labradorretriever': return loc.breedLabradorRetriever;
+      case 'lakelandterrier': return loc.breedLakelandTerrier;
+      case 'leonberg': return loc.breedLeonberg;
+      case 'lhasa': return loc.breedLhasa;
+      case 'malamute': return loc.breedMalamute;
+      case 'malinois': return loc.breedMalinois;
+      case 'maltesedog': return loc.breedMalteseDog;
+      case 'mexicanhairless': return loc.breedMexicanHairless;
+      case 'miniaturepinscher': return loc.breedMiniaturePinscher;
+      case 'miniaturepoodle': return loc.breedMiniaturePoodle;
+      case 'miniatureschnauzer': return loc.breedMiniatureSchnauzer;
+      case 'newfoundland': return loc.breedNewfoundland;
+      case 'norfolkterrier': return loc.breedNorfolkTerrier;
+      case 'norwegianelkhound': return loc.breedNorwegianElkhound;
+      case 'norwichterrier': return loc.breedNorwichTerrier;
+      case 'oldenglishsheepdog': return loc.breedOldEnglishSheepdog;
+      case 'otterhound': return loc.breedOtterhound;
+      case 'papillon': return loc.breedPapillon;
+      case 'pekinese': return loc.breedPekinese;
+      case 'pembroke': return loc.breedPembroke;
+      case 'pomeranian': return loc.breedPomeranian;
+      case 'pug': return loc.breedPug;
+      case 'redbone': return loc.breedRedbone;
+      case 'rhodesianridgeback': return loc.breedRhodesianRidgeback;
+      case 'rottweiler': return loc.breedRottweiler;
+      case 'saintbernard': return loc.breedSaintBernard;
+      case 'saluki': return loc.breedSaluki;
+      case 'samoyed': return loc.breedSamoyed;
+      case 'schipperke': return loc.breedSchipperke;
+      case 'scotchterrier': return loc.breedScotchTerrier;
+      case 'scottishdeerhound': return loc.breedScottishDeerhound;
+      case 'sealyhamterrier': return loc.breedSealyhamTerrier;
+      case 'shetlandsheepdog': return loc.breedShetlandSheepdog;
+      case 'shihtzu': return loc.breedShihTzu;
+      case 'siberianhusky': return loc.breedSiberianHusky;
+      case 'silkyterrier': return loc.breedSilkyTerrier;
+      case 'softcoatedwheatenterrier': return loc.breedSoftCoatedWheatenTerrier;
+      case 'staffordshirebullterrier': return loc.breedStaffordshireBullterrier;
+      case 'standardpoodle': return loc.breedStandardPoodle;
+      case 'standardschnauzer': return loc.breedStandardSchnauzer;
+      case 'sussexspaniel': return loc.breedSussexSpaniel;
+      case 'tibetanmastiff': return loc.breedTibetanMastiff;
+      case 'tibetanterrier': return loc.breedTibetanTerrier;
+      case 'toypoodle': return loc.breedToyPoodle;
+      case 'toyterrier': return loc.breedToyTerrier;
+      case 'vizsla': return loc.breedVizsla;
+      case 'walkerhound': return loc.breedWalkerHound;
+      case 'weimaraner': return loc.breedWeimaraner;
+      case 'welshspringerspaniel': return loc.breedWelshSpringerSpaniel;
+      case 'westhighlandwhiteterrier': return loc.breedWestHighlandWhiteTerrier;
+      case 'whippet': return loc.breedWhippet;
+      case 'wirehairedfoxterrier': return loc.breedWireHairedFoxTerrier;
+      case 'yorkshireterrier': return loc.breedYorkshireTerrier;
+
+      default: return _formatBreedName(breed);
+    }
+  }
+
+  String _getLocalizedSize(String size) {
+    final loc = AppLocalizations.of(context)!;
+    switch (size.toLowerCase()) {
+      case 'small': return loc.sizeSmall;
+      case 'medium': return loc.sizeMedium;
+      case 'large': return loc.sizeLarge;
+      case 'giant': return loc.sizeGiant;
+      case 'toy': return loc.sizeToy;
+      case 'miniature': return loc.sizeMiniature;
+      case 'standard': return loc.sizeStandard;
+      case 'small to medium': return loc.sizeSmallToMedium;
+      case 'medium to large': return loc.sizeMediumToLarge;
+      default: return size;
+    }
+  }
+
+  String _getLocalizedTemperamentValue(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+
+    if (lower.contains('low') && lower.contains('moderate')) return loc.levelLowToModerate;
+    if (lower.contains('moderate') && lower.contains('high')) return loc.levelModerateToHigh;
+    if (lower.contains('high') && lower.contains('very')) return loc.levelHighToVeryHigh;
+
+    if (lower == 'low') return loc.levelLow;
+    if (lower == 'high') return loc.levelHigh;
+    if (lower == 'very high') return loc.levelVeryHigh;
+    if (lower == 'moderate') return loc.moderate;
+
+    if (lower == 'good') return loc.good;
+    if (lower == 'excellent') return loc.ratingExcellent;
+    if (lower == 'average') return loc.ratingAverage;
+    if (lower == 'fair') return loc.ratingFair;
+    if (lower == 'poor') return loc.ratingPoor;
+
+    if (lower == 'friendly') return loc.friendly;
+
+    // Traits
+    if (lower.contains('intelligent')) return loc.traitIntelligent;
+    if (lower.contains('alert')) return loc.traitAlert;
+    if (lower.contains('loyal')) return loc.traitLoyal;
+    if (lower.contains('protective')) return loc.traitProtective;
+    if (lower.contains('calm')) return loc.traitCalm;
+    if (lower.contains('gentle')) return loc.traitGentle;
+    if (lower.contains('active') && !lower.contains('family')) return loc.traitActive;
+    if (lower.contains('independent')) return loc.traitIndependent;
+    if (lower.contains('confident')) return loc.traitConfident;
+    if (lower.contains('brave')) return loc.traitBrave;
+    if (lower.contains('playful')) return loc.traitPlayful;
+    if (lower.contains('affectionate')) return loc.traitAffectionate;
+    if (lower.contains('stubborn')) return loc.traitStubborn;
+    if (lower.contains('eager to please')) return loc.traitEagerToPlease;
+
+    // Compatibility
+    if (lower.contains('excellent') && lower.contains('children')) return loc.excellentWithChildren;
+    if (lower.contains('excellent') && lower.contains('family')) return loc.excellentWithFamily;
+    if (lower.contains('good') && lower.contains('children')) return loc.goodWithChildren;
+    if (lower.contains('good') && lower.contains('family')) return loc.goodWithFamily;
+
+    return value;
+  }
+
+  String _getLocalizedShape(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'well proportioned') return loc.wellProportioned;
+    return value;
+  }
+
+  String _getLocalizedColor(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'black') return loc.colorBlack;
+    if (lower == 'white') return loc.colorWhite;
+    if (lower == 'brown') return loc.colorBrown;
+    if (lower == 'red') return loc.colorRed;
+    if (lower == 'tan') return loc.colorTan;
+    if (lower == 'blue') return loc.colorBlue;
+    if (lower == 'gray') return loc.colorGray;
+    if (lower == 'fawn') return loc.colorFawn;
+    if (lower == 'brindle') return loc.colorBrindle;
+    if (lower == 'cream') return loc.colorCream;
+    if (lower == 'gold') return loc.colorGold;
+    if (lower == 'liver') return loc.colorLiver;
+    if (lower == 'tri-color') return loc.colorTriColor;
+    if (lower == 'merle') return loc.colorMerle;
+    if (lower == 'sable') return loc.colorSable;
+    if (lower == 'various') return loc.various;
+    return value;
+  }
+
+  String _getLocalizedCoat(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'double coat') return loc.doubleCoat;
+    if (lower == 'short') return loc.coatShort;
+    if (lower == 'long') return loc.coatLong;
+    if (lower == 'medium') return loc.coatMedium;
+    if (lower == 'wire') return loc.coatWire;
+    if (lower == 'silky') return loc.coatSilky;
+    if (lower == 'smooth') return loc.coatSmooth;
+    if (lower == 'dense') return loc.coatDense;
+    if (lower == 'flat') return loc.coatFlat;
+    if (lower == 'curly') return loc.coatCurly;
+    if (lower == 'wavy') return loc.coatWavy;
+    return value;
+  }
+
+  String _getLocalizedHeadFace(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'breed-specific') return loc.breedSpecific;
+    return value;
+  }
+
+  String _getLocalizedBody(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'balanced') return loc.balanced;
+    return value;
+  }
+
+  String _getLocalizedPurpose(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'companion') return loc.companion;
+    return value;
+  }
+
+  String _getLocalizedWeight(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'varies by breed') return loc.variesByBreed;
+    return value;
   }
 
   String _formatBreedName(String name) {
@@ -942,7 +1208,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
       'id': DateTime.now().millisecondsSinceEpoch.toString(),
       'imageBytes': imageBytes,
       'breedName': result.breed,
-      'formattedBreedName': _formatBreedName(result.breed),
+      'formattedBreedName': _getLocalizedBreedName(result.breed),
       'confidence': result.confidence,
       'timestamp': DateTime.now().toIso8601String(),
       'isFavorite': false,

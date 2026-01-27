@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final DateTime initialDate;
@@ -34,9 +35,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           children: [
 
             /// -------- SELECT DATE (CENTER)
-            const Text(
-              "Select Date",
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            Text(
+              AppLocalizations.of(context)!.selectDateTitle,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
 
             const SizedBox(height: 8),
@@ -95,9 +96,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
             /// -------- WEEK DAYS
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text("Mon"), Text("Tue"), Text("Wed"),
-                Text("Thu"), Text("Fri"), Text("Sat"), Text("Sun"),
+              children: [
+                Text(AppLocalizations.of(context)!.dayMon), Text(AppLocalizations.of(context)!.dayTue), Text(AppLocalizations.of(context)!.dayWed),
+                Text(AppLocalizations.of(context)!.dayThu), Text(AppLocalizations.of(context)!.dayFri), Text(AppLocalizations.of(context)!.daySat), Text(AppLocalizations.of(context)!.daySun),
               ],
             ),
 
@@ -123,9 +124,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                   ),
-                  child: const Text(
-                    "Cancel",
-                    style: TextStyle(
+                  child: Text(
+                    AppLocalizations.of(context)!.cancel,
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -144,7 +145,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                       Navigator.pop(context, selectedDate);
                     }
                   },
-                  child: const Text("OK",style: TextStyle(
+                  child: Text(AppLocalizations.of(context)!.okAction,style: const TextStyle(
                       color: Colors.white
                   ),),
                 ),
@@ -357,10 +358,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Title
-                const Center(
+                Center(
                   child: Text(
-                    "Select Date",
-                    style: TextStyle(
+                    AppLocalizations.of(context)!.selectDateTitle,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -382,9 +383,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                 const SizedBox(height: 24),
 
                 // Enter Date Label
-                const Text(
-                  "Enter Date",
-                  style: TextStyle(
+                Text(
+                  AppLocalizations.of(context)!.enterDate,
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
@@ -396,7 +397,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                 TextFormField(
                   controller: dateController,
                   decoration: InputDecoration(
-                    hintText: "MM/DD/YYYY",
+                    hintText: AppLocalizations.of(context)!.dateHint,
                     filled: true,
                     fillColor: Colors.grey[50],
                     border: OutlineInputBorder(
@@ -478,9 +479,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                         ),
                         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                       ),
-                      child: const Text(
-                        "Cancel",
-                        style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context)!.cancel,
+                        style: const TextStyle(
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -511,8 +512,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                             } else {
                               // Show error for out of range date
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Please enter a date between 2020-2030"),
+                                SnackBar(
+                                  content: Text(AppLocalizations.of(context)!.dateRangeError),
                                 ),
                               );
                             }
@@ -531,9 +532,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                           Navigator.pop(context);
                         }
                       },
-                      child: const Text(
-                        "OK",
-                        style: TextStyle(
+                      child: Text(
+                        AppLocalizations.of(context)!.okAction,
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),

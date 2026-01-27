@@ -85,7 +85,7 @@ class _NotificationViewState extends State<NotificationView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Allow Notifications",
+                      l10n.allowNotifications,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w500,

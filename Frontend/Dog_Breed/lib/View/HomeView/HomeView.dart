@@ -9,11 +9,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import ' PremiumBanner.dart';
+import '../../View_model/PetProvider.dart';
 import '../../View_model/ScanProvider.dart';
 import '../Calendar/add_activities_View.dart';
 import '../MyPetsView/DogResultScreen.dart';
+import 'PremiumBanner.dart';
 
 class Homeview extends StatefulWidget {
   final void Function(String message)? onShowSnackBar;
@@ -218,16 +220,19 @@ class _HomeviewState extends State<Homeview> {
                         fit: BoxFit.contain,
                       ),
                       SizedBox(width: 5.w), // Fixed: Added .w
-                      Text(
-                        AppLocalizations.of(context)!.manager,
-                        style: TextStyle(
-                          fontFamily: 'Sora',
-                          fontWeight: FontWeight.w200,
-                          fontStyle: FontStyle.normal,
-                          fontSize: 30.sp,
-                          height: 1.0,
-                          letterSpacing: 0.0,
-                          color: AppColors.jet,
+                      Flexible(
+                        child: Text(
+                          AppLocalizations.of(context)!.manager,
+                          style: TextStyle(
+                            fontFamily: 'Sora',
+                            fontWeight: FontWeight.w200,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 30.sp,
+                            height: 1.0,
+                            letterSpacing: 0.0,
+                            color: AppColors.jet,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
@@ -447,78 +452,38 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
-// Helper method
-  void _goToActivity(String activityName) {
+  // Helper method
+  Future<void> _goToActivity(String activityName) async {
+    final petProvider = Provider.of<PetProvider>(context, listen: false);
+    String? petId;
+
+    if (petProvider.hasPets) {
+      // Try to get saved pet ID
+      final prefs = await SharedPreferences.getInstance();
+      petId = prefs.getString('selectedPetId');
+
+      // If invalid or not found, use first pet
+      if (petId == null || !petProvider.pets.any((p) => p.id == petId)) {
+        petId = petProvider.pets.first.id;
+      }
+    }
+
+    if (!mounted) return;
+
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => AddActivitiesView(
           initialActivityName: activityName,
+          initialDate: DateTime.now(),
+          selectedPetId: petId,
         ),
       ),
     );
   }
 
 
-  // Widget _buildQuickActions() {
-  //   return Row(
-  //     mainAxisSize: MainAxisSize.min,
-  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //     children: [
-  //       quickActionButton(
-  //         image: SvgPicture.asset(
-  //           'assets/images/Group77.svg',
-  //           width: 52.w,
-  //           height: 66.h,
-  //           fit: BoxFit.contain,
-  //         ),
-  //         label: 'Hygiene',
-  //         color: const Color(0xFFEF5DA8),
-  //         onTap: () {
-  //           Navigator.pushNamed(context, RoutesName.hygiene);
-  //         },
-  //       ),
-  //       SizedBox(width: 9.w), // Fixed: Added .w
-  //       quickActionButton(
-  //         image: SvgPicture.asset(
-  //           'assets/images/Group88.svg',
-  //           width: 52.w,
-  //           height: 66.h,
-  //           fit: BoxFit.contain,
-  //         ),
-  //         label: 'Cleaning',
-  //         color: const Color(0xFFAEAFF7),
-  //         onTap: () {
-  //           Navigator.pushNamed(context, RoutesName.cleaning);
-  //         },
-  //       ),
-  //       SizedBox(width: 9.w), // Fixed: Added .w
-  //       quickActionButton(
-  //         image: SvgPicture.asset(
-  //           'assets/images/Group99.svg',
-  //           width: 52.w,
-  //           height: 66.h,
-  //           fit: BoxFit.contain,
-  //         ),
-  //         label: 'Medical',
-  //         color: const Color(0xFFECEF8B),
-  //         onTap: () {},
-  //       ),
-  //       SizedBox(width: 9.w), // Fixed: Added .w
-  //       quickActionButton(
-  //         image: SvgPicture.asset(
-  //           'assets/images/Group991.svg',
-  //           width: 52.w,
-  //           height: 66.h,
-  //           fit: BoxFit.contain,
-  //         ),
-  //         label: 'Booking',
-  //         color: const Color(0xFFA0E3E2),
-  //         onTap: () {},
-  //       ),
-  //     ],
-  //   );
-  // }
+
 
   Widget _buildIdentifyDogCard() {
     return Container(

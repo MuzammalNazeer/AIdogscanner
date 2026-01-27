@@ -7,6 +7,7 @@ import 'package:open_file/open_file.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import '../config/components/Document.dart';
+import '../l10n/app_localizations.dart';
 
 class DocumentViewModel extends ChangeNotifier {
   List<Document> _documents = [];
@@ -213,7 +214,7 @@ class DocumentViewModel extends ChangeNotifier {
           if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Document uploaded successfully!'),
+                content: Text(AppLocalizations.of(context)!.documentUploadedSuccess),
                 backgroundColor: Colors.green,
                 behavior: SnackBarBehavior.floating,
                 margin: const EdgeInsets.only(
@@ -234,7 +235,7 @@ class DocumentViewModel extends ChangeNotifier {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to upload document: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.documentUploadFailed(e.toString())),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
             margin: const EdgeInsets.only(
@@ -273,6 +274,25 @@ class DocumentViewModel extends ChangeNotifier {
     }
   }
 
+  // Get localized category name
+  String getLocalizedCategory(BuildContext context, String category) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (category) {
+      case 'Medical & Care': return l10n.catMedicalCare;
+      case 'Legal & Licensing': return l10n.catLegalLicensing;
+      case 'Coverage & Finance': return l10n.catCoverageFinance;
+      case 'Learning & Behavior': return l10n.catLearningBehavior;
+      case 'Transit & Boarding': return l10n.catTransitBoarding;
+      case 'Critical & Support': return l10n.catCriticalSupport;
+      case 'Bloodline and stock': return l10n.catBloodlineStock;
+      case 'Nutrition and intake': return l10n.catNutritionIntake;
+      case 'Maintenance and look': return l10n.catMaintenanceLook;
+      case 'Other Documents': return l10n.catOtherDocuments;
+      case 'All': return l10n.catAll;
+      default: return category;
+    }
+  }
+
   // Show dialog to add document details
   Future<Document?> _showAddDocumentDialog(
       BuildContext context,
@@ -290,7 +310,7 @@ class DocumentViewModel extends ChangeNotifier {
       builder: (context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: Text('Add Document Details'),
+          title: Text(AppLocalizations.of(context)!.addDocumentDetails),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -298,7 +318,7 @@ class DocumentViewModel extends ChangeNotifier {
                 TextField(
                   controller: titleController,
                   decoration: InputDecoration(
-                    labelText: 'Document Title',
+                    labelText: AppLocalizations.of(context)!.documentTitle,
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -307,7 +327,7 @@ class DocumentViewModel extends ChangeNotifier {
                   value: selectedCategory,
                   dropdownColor: Colors.white,
                   decoration: InputDecoration(
-                    labelText: 'Category',
+                    labelText: AppLocalizations.of(context)!.category,
                     border: OutlineInputBorder(),
                   ),
                   items: _categories
@@ -315,7 +335,7 @@ class DocumentViewModel extends ChangeNotifier {
                       .map((category) {
                     return DropdownMenuItem(
                       value: category,
-                      child: Text(category),
+                      child: Text(getLocalizedCategory(context, category)),
                     );
                   }).toList(),
                   onChanged: (value) {
@@ -326,7 +346,7 @@ class DocumentViewModel extends ChangeNotifier {
                 ListTile(
                   leading: Icon(icon),
                   title: Text(fileName),
-                  subtitle: Text('Size: $fileSize | Type: $fileType'),
+                  subtitle: Text('${AppLocalizations.of(context)!.fileSize}: $fileSize | ${AppLocalizations.of(context)!.fileType}: $fileType'),
                 ),
               ],
             ),
@@ -334,7 +354,7 @@ class DocumentViewModel extends ChangeNotifier {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: Text(AppLocalizations.of(context)!.cancel),
             ),
             ElevatedButton(
               onPressed: () {
@@ -353,7 +373,7 @@ class DocumentViewModel extends ChangeNotifier {
                   Navigator.pop(context, document);
                 }
               },
-              child: Text('Add Document'),
+              child: Text(AppLocalizations.of(context)!.addDocument),
             ),
           ],
         );

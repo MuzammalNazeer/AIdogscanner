@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 import '../../View_model/ScanProvider.dart';
 
@@ -157,7 +158,7 @@ Map<String,dynamic>? scan;
           Expanded(
             child: Center(
               child: Text(
-                'Dog Results',
+                AppLocalizations.of(context)!.dogResults,
                 style: TextStyle(
                   fontFamily: 'Sora',
                   fontWeight: FontWeight.w300,
@@ -190,12 +191,12 @@ Map<String,dynamic>? scan;
             Icon(Icons.camera_alt, size: 60.sp, color: Colors.grey[600]),
             SizedBox(height: 20.h),
             Text(
-              'No recent scans',
+              AppLocalizations.of(context)!.noRecentScans,
               style: TextStyle(fontSize: 28.sp, fontWeight: FontWeight.w600, color: Colors.grey[600]),
             ),
             SizedBox(height: 12.h),
             Text(
-              'Scan a dog to see results here',
+              AppLocalizations.of(context)!.scanDogPrompt,
               style: TextStyle(fontSize: 16.sp, color: Colors.grey[500]),
             ),
           ],
@@ -205,20 +206,21 @@ Map<String,dynamic>? scan;
   }
 
   Widget _buildDetailedScanCard(Map<String, dynamic> scan, ScanProvider scanProvider) {
+    final l10n = AppLocalizations.of(context)!;
     final imageBytes = _parseImageData(scan['imageBytes']);
     final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
     final confidence = (scan['confidence'] as num?)?.toDouble() ?? 0.0;
     Map<String, dynamic> characteristics = scan['characteristics'] is Map
         ? Map.from(scan['characteristics'])
         : {};
-    final size = characteristics['size']?.toString() ?? "N/A";
-    final color = characteristics['color']?.toString() ?? "N/A";
-    final coat = characteristics['coat']?.toString() ?? "N/A";
-    final headFace = characteristics['headFace']?.toString() ?? "N/A";
-    final purpose = characteristics['purpose']?.toString() ?? "N/A";
-    final body = characteristics['body']?.toString() ?? "N/A";
-    final weight = characteristics['weight']?.toString() ?? "N/A";
-    final height = characteristics['height']?.toString() ?? "N/A";
+    final size = characteristics['size']?.toString() ?? l10n.notAvailable;
+    final color = characteristics['color']?.toString() ?? l10n.notAvailable;
+    final coat = characteristics['coat']?.toString() ?? l10n.notAvailable;
+    final headFace = characteristics['headFace']?.toString() ?? l10n.notAvailable;
+    final purpose = characteristics['purpose']?.toString() ?? l10n.notAvailable;
+    final body = characteristics['body']?.toString() ?? l10n.notAvailable;
+    final weight = characteristics['weight']?.toString() ?? l10n.notAvailable;
+    final height = characteristics['height']?.toString() ?? l10n.notAvailable;
 
     // Extract temperament
     Map<String, dynamic> temperament = {};
@@ -312,14 +314,14 @@ Map<String,dynamic>? scan;
             mainAxisSpacing: 12.h,
             childAspectRatio: 2.6,
             children: [
-              _buildCharacteristicCard(iconPath: "assets/images/size.svg", title: "Size", value: size),
-              _buildCharacteristicCard(iconPath: "assets/images/shape.svg", title: "Height", value: height),
-              _buildCharacteristicCard(iconPath: "assets/images/regular.svg", title: "Color", value: color),
-              _buildCharacteristicCard(iconPath: "assets/images/coat.svg", title: "Coat", value: coat),
-              _buildCharacteristicCard(iconPath: "assets/images/flex_dog.svg", title: "Head & Face", value: headFace),
-              _buildCharacteristicCard(iconPath: "assets/images/akar.svg", title: "Purpose", value: purpose),
-              _buildCharacteristicCard(iconPath: "assets/images/fluent.svg", title: "Body", value: body),
-              _buildCharacteristicCard(iconPath: "assets/images/akar.svg", title: "Weight", value: weight),
+              _buildCharacteristicCard(iconPath: "assets/images/size.svg", title: l10n.size, value: _getLocalizedSize(size)),
+              _buildCharacteristicCard(iconPath: "assets/images/shape.svg", title: l10n.height, value: height),
+              _buildCharacteristicCard(iconPath: "assets/images/regular.svg", title: l10n.color, value: _getLocalizedColor(color)),
+              _buildCharacteristicCard(iconPath: "assets/images/coat.svg", title: l10n.coat, value: _getLocalizedCoat(coat)),
+              _buildCharacteristicCard(iconPath: "assets/images/flex_dog.svg", title: l10n.headAndFace, value: _getLocalizedHeadFace(headFace)),
+              _buildCharacteristicCard(iconPath: "assets/images/akar.svg", title: l10n.purpose, value: _getLocalizedPurpose(purpose)),
+              _buildCharacteristicCard(iconPath: "assets/images/fluent.svg", title: l10n.body, value: _getLocalizedBody(body)),
+              _buildCharacteristicCard(iconPath: "assets/images/akar.svg", title: l10n.weight, value: _getLocalizedWeight(weight)),
             ],
           ),
 
@@ -329,7 +331,7 @@ Map<String,dynamic>? scan;
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Temperament & Characteristics",
+                  l10n.temperamentAndCharacteristics,
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.bold,
@@ -344,7 +346,7 @@ Map<String,dynamic>? scan;
                   "Family Compatibility",
                   "Child Friendliness",
                 ].where((key) => temperament.containsKey(key)).map(
-                      (key) => _buildTemperamentRow(key, temperament[key]?.toString() ?? "N/A"),
+                      (key) => _buildTemperamentRow(_getLocalizedTemperamentKey(key), _getLocalizedTemperamentValue(temperament[key]?.toString() ?? l10n.notAvailable)),
                 ),
                 ...temperament.entries
                     .where((e) => ![
@@ -448,8 +450,156 @@ Map<String,dynamic>? scan;
     return null;
   }
 
+  String _getLocalizedSize(String size) {
+    final loc = AppLocalizations.of(context)!;
+    switch (size.toLowerCase()) {
+      case 'small': return loc.sizeSmall;
+      case 'medium': return loc.sizeMedium;
+      case 'large': return loc.sizeLarge;
+      case 'giant': return loc.sizeGiant;
+      case 'toy': return loc.sizeToy;
+      case 'miniature': return loc.sizeMiniature;
+      case 'standard': return loc.sizeStandard;
+      case 'small to medium': return loc.sizeSmallToMedium;
+      case 'medium to large': return loc.sizeMediumToLarge;
+      default: return size;
+    }
+  }
+
+  String _getLocalizedTemperamentValue(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+
+    if (lower.contains('low') && lower.contains('moderate')) return loc.levelLowToModerate;
+    if (lower.contains('moderate') && lower.contains('high')) return loc.levelModerateToHigh;
+    if (lower.contains('high') && lower.contains('very')) return loc.levelHighToVeryHigh;
+
+    if (lower == 'low') return loc.levelLow;
+    if (lower == 'high') return loc.levelHigh;
+    if (lower == 'very high') return loc.levelVeryHigh;
+    if (lower == 'moderate') return loc.moderate;
+
+    if (lower == 'good') return loc.good;
+    if (lower == 'excellent') return loc.ratingExcellent;
+    if (lower == 'average') return loc.ratingAverage;
+    if (lower == 'fair') return loc.ratingFair;
+    if (lower == 'poor') return loc.ratingPoor;
+
+    if (lower == 'friendly') return loc.friendly;
+
+    // Traits
+    if (lower.contains('intelligent')) return loc.traitIntelligent;
+    if (lower.contains('alert')) return loc.traitAlert;
+    if (lower.contains('loyal')) return loc.traitLoyal;
+    if (lower.contains('protective')) return loc.traitProtective;
+    if (lower.contains('calm')) return loc.traitCalm;
+    if (lower.contains('gentle')) return loc.traitGentle;
+    if (lower.contains('active') && !lower.contains('family')) return loc.traitActive;
+    if (lower.contains('independent')) return loc.traitIndependent;
+    if (lower.contains('confident')) return loc.traitConfident;
+    if (lower.contains('brave')) return loc.traitBrave;
+    if (lower.contains('playful')) return loc.traitPlayful;
+    if (lower.contains('affectionate')) return loc.traitAffectionate;
+    if (lower.contains('stubborn')) return loc.traitStubborn;
+    if (lower.contains('eager to please')) return loc.traitEagerToPlease;
+
+    // Compatibility
+    if (lower.contains('excellent') && lower.contains('children')) return loc.excellentWithChildren;
+    if (lower.contains('excellent') && lower.contains('family')) return loc.excellentWithFamily;
+    if (lower.contains('good') && lower.contains('children')) return loc.goodWithChildren;
+    if (lower.contains('good') && lower.contains('family')) return loc.goodWithFamily;
+
+    return value;
+  }
+
+  String _getLocalizedShape(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'well proportioned') return loc.wellProportioned;
+    return value;
+  }
+
+  String _getLocalizedColor(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'black') return loc.colorBlack;
+    if (lower == 'white') return loc.colorWhite;
+    if (lower == 'brown') return loc.colorBrown;
+    if (lower == 'red') return loc.colorRed;
+    if (lower == 'tan') return loc.colorTan;
+    if (lower == 'blue') return loc.colorBlue;
+    if (lower == 'gray') return loc.colorGray;
+    if (lower == 'fawn') return loc.colorFawn;
+    if (lower == 'brindle') return loc.colorBrindle;
+    if (lower == 'cream') return loc.colorCream;
+    if (lower == 'gold') return loc.colorGold;
+    if (lower == 'liver') return loc.colorLiver;
+    if (lower == 'tri-color') return loc.colorTriColor;
+    if (lower == 'merle') return loc.colorMerle;
+    if (lower == 'sable') return loc.colorSable;
+    if (lower == 'various') return loc.various;
+    return value;
+  }
+
+  String _getLocalizedCoat(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'double coat') return loc.doubleCoat;
+    if (lower == 'short') return loc.coatShort;
+    if (lower == 'long') return loc.coatLong;
+    if (lower == 'medium') return loc.coatMedium;
+    if (lower == 'wire') return loc.coatWire;
+    if (lower == 'silky') return loc.coatSilky;
+    if (lower == 'smooth') return loc.coatSmooth;
+    if (lower == 'dense') return loc.coatDense;
+    if (lower == 'flat') return loc.coatFlat;
+    if (lower == 'curly') return loc.coatCurly;
+    if (lower == 'wavy') return loc.coatWavy;
+    return value;
+  }
+
+  String _getLocalizedHeadFace(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'breed-specific') return loc.breedSpecific;
+    return value;
+  }
+
+  String _getLocalizedBody(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'balanced') return loc.balanced;
+    return value;
+  }
+
+  String _getLocalizedPurpose(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'companion') return loc.companion;
+    return value;
+  }
+
+  String _getLocalizedWeight(String value) {
+    final loc = AppLocalizations.of(context)!;
+    final lower = value.toLowerCase();
+    if (lower == 'varies by breed') return loc.variesByBreed;
+    return value;
+  }
+
+  String _getLocalizedTemperamentKey(String key) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (key) {
+      case "Energy Level": return l10n.energyLevel;
+      case "Trainability": return l10n.trainability;
+      case "Social Behavior": return l10n.socialBehavior;
+      case "Family Compatibility": return l10n.familyCompatibility;
+      case "Child Friendliness": return l10n.childFriendliness;
+      default: return key;
+    }
+  }
+
   String _formatBreedName(String name) {
-    if (name.isEmpty) return 'Unknown Breed';
+    if (name.isEmpty || name == 'Unknown Breed') return AppLocalizations.of(context)!.unknownBreed;
     return name
         .replaceAll('-', ' ')
         .split(' ')

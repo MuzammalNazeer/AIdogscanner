@@ -1142,135 +1142,1069 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get navHome => 'Home';
+  String get navHome => 'Start';
 
   @override
-  String get navCalendar => 'Calendar';
+  String get navCalendar => 'Kalender';
 
   @override
-  String get navMyPets => 'My Pets';
+  String get navMyPets => 'Mijn Huisdieren';
 
   @override
-  String get navProfile => 'Profile';
+  String get navProfile => 'Profiel';
 
   @override
-  String get aiIdentifyingYour => 'AI identifying Your ';
+  String get aiIdentifyingYour => 'AI identificeert uw ';
 
   @override
-  String get dogText => 'DOG';
+  String get dogText => 'HOND';
 
   @override
-  String get identifyingTimeText => 'This usually takes up 1 minute...';
+  String get identifyingTimeText => 'Dit duurt meestal tot 1 minuut...';
 
   @override
-  String get analyzingImage => 'Analyzing image...';
+  String get analyzingImage => 'Afbeelding analyseren...';
 
   @override
-  String get errorOccurred => 'Error Occurred';
+  String get errorOccurred => 'Fout opgetreden';
 
   @override
-  String get goBack => 'Go Back';
+  String get goBack => 'Ga terug';
 
   @override
-  String get noDogDetected => 'No Dog Detected';
+  String get noDogDetected => 'Geen hond gedetecteerd';
 
   @override
-  String get clearerPhotoPrompt => 'Please try with a clearer photo of a dog.';
+  String get clearerPhotoPrompt =>
+      'Probeer het opnieuw met een duidelijkere foto van een hond.';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Annuleren';
 
   @override
-  String get tryAgain => 'Try Again';
+  String get tryAgain => 'Opnieuw proberen';
 
   @override
   String lowConfidenceWarning(String confidence) {
-    return 'Low confidence ($confidence%). Results may not be accurate.';
+    return 'Lage betrouwbaarheid ($confidence%). Resultaten zijn mogelijk niet nauwkeurig.';
   }
 
   @override
-  String get savingToRecentScans => 'Saving to recent scans...';
+  String get savingToRecentScans => 'Opslaan in recente scans...';
 
   @override
-  String get dogResults => 'Dog Results';
+  String get dogResults => 'Hond resultaten';
 
   @override
-  String get size => 'Size';
+  String get size => 'Grootte';
 
   @override
-  String get shape => 'Shape';
+  String get shape => 'Vorm';
 
   @override
-  String get color => 'Color';
+  String get color => 'Kleur';
 
   @override
-  String get coat => 'Coat';
+  String get coat => 'Vacht';
 
   @override
-  String get headAndFace => 'Head & Face';
+  String get headAndFace => 'Hoofd & Gezicht';
 
   @override
-  String get purpose => 'Purpose';
+  String get purpose => 'Doel';
 
   @override
-  String get body => 'Body';
+  String get body => 'Lichaam';
 
   @override
-  String get weight => 'Weight';
+  String get weight => 'Gewicht';
 
   @override
-  String get temperamentAndCharacteristics => 'Temperament & Characteristics';
+  String get temperamentAndCharacteristics => 'Temperament & Kenmerken';
 
   @override
-  String get energyLevel => 'Energy Level';
+  String get energyLevel => 'Energieniveau';
 
   @override
-  String get trainability => 'Trainability';
+  String get trainability => 'Trainbaarheid';
 
   @override
-  String get socialBehavior => 'Social Behavior';
+  String get socialBehavior => 'Sociaal gedrag';
 
   @override
-  String get familyCompatibility => 'Family Compatibility';
+  String get familyCompatibility => 'Gezinscompatibiliteit';
 
   @override
-  String get childFriendliness => 'Child Friendliness';
+  String get childFriendliness => 'Kindvriendelijkheid';
 
   @override
-  String get addPet => '+add Pet';
+  String get addPet => '+Huisdier toevoegen';
 
   @override
-  String get cannotSave => 'Cannot Save';
+  String get cannotSave => 'Kan niet opslaan';
 
   @override
-  String get saving => 'Saving...';
+  String get saving => 'Opslaan...';
 
   @override
-  String get saved => 'Saved';
+  String get saved => 'Opgeslagen';
 
   @override
-  String get save => 'Save';
+  String get save => 'Opslaan';
 
   @override
   String cannotSaveConfidence(String confidence) {
-    return 'Cannot save: Confidence $confidence% < 40%';
+    return 'Kan niet opslaan: Betrouwbaarheid $confidence% < 40%';
   }
 
   @override
-  String get noPredictionResult => 'No prediction result available';
+  String get noPredictionResult => 'Geen voorspellingsresultaat beschikbaar';
 
   @override
-  String get noImageDataToSave => 'No image data to save';
+  String get noImageDataToSave => 'Geen afbeeldingsgegevens om op te slaan';
 
   @override
-  String get failedToSaveResults => 'Failed to save results';
+  String get failedToSaveResults => 'Opslaan van resultaten mislukt';
 
   @override
-  String get moderate => 'Moderate';
+  String get moderate => 'Matig';
 
   @override
-  String get friendly => 'Friendly';
+  String get friendly => 'Vriendelijk';
 
   @override
-  String get good => 'Good';
+  String get good => 'Goed';
+
+  @override
+  String get sizeSmall => 'Small';
+
+  @override
+  String get sizeMedium => 'Medium';
+
+  @override
+  String get sizeLarge => 'Large';
+
+  @override
+  String get sizeGiant => 'Giant';
+
+  @override
+  String get sizeToy => 'Toy';
+
+  @override
+  String get sizeMiniature => 'Miniature';
+
+  @override
+  String get sizeStandard => 'Standard';
+
+  @override
+  String get sizeSmallToMedium => 'Small to Medium';
+
+  @override
+  String get sizeMediumToLarge => 'Medium to Large';
+
+  @override
+  String get levelLow => 'Low';
+
+  @override
+  String get levelHigh => 'High';
+
+  @override
+  String get levelVeryHigh => 'Very High';
+
+  @override
+  String get levelLowToModerate => 'Low to Moderate';
+
+  @override
+  String get levelModerateToHigh => 'Moderate to High';
+
+  @override
+  String get levelHighToVeryHigh => 'High to Very High';
+
+  @override
+  String get traitIntelligent => 'Intelligent';
+
+  @override
+  String get traitAlert => 'Alert';
+
+  @override
+  String get traitLoyal => 'Loyal';
+
+  @override
+  String get traitProtective => 'Protective';
+
+  @override
+  String get traitCalm => 'Calm';
+
+  @override
+  String get traitGentle => 'Gentle';
+
+  @override
+  String get traitActive => 'Active';
+
+  @override
+  String get traitIndependent => 'Independent';
+
+  @override
+  String get traitConfident => 'Confident';
+
+  @override
+  String get traitBrave => 'Brave';
+
+  @override
+  String get traitPlayful => 'Playful';
+
+  @override
+  String get traitAffectionate => 'Affectionate';
+
+  @override
+  String get traitStubborn => 'Stubborn';
+
+  @override
+  String get traitEagerToPlease => 'Eager to please';
+
+  @override
+  String get ratingExcellent => 'Excellent';
+
+  @override
+  String get ratingAverage => 'Average';
+
+  @override
+  String get ratingFair => 'Fair';
+
+  @override
+  String get ratingPoor => 'Poor';
+
+  @override
+  String get goodWithChildren => 'Good with children';
+
+  @override
+  String get goodWithFamily => 'Good with family';
+
+  @override
+  String get excellentWithChildren => 'Excellent with children';
+
+  @override
+  String get excellentWithFamily => 'Excellent with family';
+
+  @override
+  String get coatShort => 'Short';
+
+  @override
+  String get coatLong => 'Long';
+
+  @override
+  String get coatMedium => 'Medium';
+
+  @override
+  String get coatDouble => 'Double coat';
+
+  @override
+  String get coatWire => 'Wire';
+
+  @override
+  String get coatSilky => 'Silky';
+
+  @override
+  String get coatSmooth => 'Smooth';
+
+  @override
+  String get coatDense => 'Dense';
+
+  @override
+  String get coatFlat => 'Flat';
+
+  @override
+  String get coatCurly => 'Curly';
+
+  @override
+  String get coatWavy => 'Wavy';
+
+  @override
+  String get colorBlack => 'Black';
+
+  @override
+  String get colorWhite => 'White';
+
+  @override
+  String get colorBrown => 'Brown';
+
+  @override
+  String get colorRed => 'Red';
+
+  @override
+  String get colorTan => 'Tan';
+
+  @override
+  String get colorBlue => 'Blue';
+
+  @override
+  String get colorGray => 'Gray';
+
+  @override
+  String get colorFawn => 'Fawn';
+
+  @override
+  String get colorBrindle => 'Brindle';
+
+  @override
+  String get colorCream => 'Cream';
+
+  @override
+  String get colorGold => 'Gold';
+
+  @override
+  String get colorLiver => 'Liver';
+
+  @override
+  String get colorTriColor => 'Tri-color';
+
+  @override
+  String get colorMerle => 'Merle';
+
+  @override
+  String get colorSable => 'Sable';
+
+  @override
+  String get chooseProfilePhoto => 'Kies profielfoto';
+
+  @override
+  String get camera => 'Camera';
+
+  @override
+  String get gallery => 'Galerij';
+
+  @override
+  String get ownersProfile => 'Eigenaarsprofiel';
+
+  @override
+  String get petOwner => 'Huisdiereigenaar';
+
+  @override
+  String get lastName => 'Achternaam';
+
+  @override
+  String get ownerContacts => 'Contacten eigenaar';
+
+  @override
+  String get email => 'E-mail';
+
+  @override
+  String get mainPhone => 'Hoofdtelefoon';
+
+  @override
+  String get instantGpsAlerts => 'Directe GPS-waarschuwingen bij tag-scan';
+
+  @override
+  String get gpsAlertsDescription =>
+      'Ontvang directe updates over de locatie...';
+
+  @override
+  String get emergencyContacts => 'Noodcontacten';
+
+  @override
+  String get vetContactsDescription => 'Contacten van de dierenarts...';
+
+  @override
+  String get messenger => 'Messenger';
+
+  @override
+  String get messengerDescription =>
+      'Een alternatieve manier om contact op te nemen...';
+
+  @override
+  String get petsResidence => 'Verblijfplaats van huisdier';
+
+  @override
+  String get country => 'Land';
+
+  @override
+  String get city => 'Stad';
+
+  @override
+  String get address => 'Adres';
+
+  @override
+  String get addAddress => 'Adres toevoegen';
+
+  @override
+  String get labelAdd => 'Toevoegen';
+
+  @override
+  String get getPremium => 'KRIJG PREMIUM';
+
+  @override
+  String get recentScansTitle => 'Recente Scans';
+
+  @override
+  String scansCount(int count) {
+    return '$count Scans';
+  }
+
+  @override
+  String get zeroResults => '0 Resultaten';
+
+  @override
+  String get noScansMessage =>
+      'Zodra u uw eerste scan heeft gemaakt,\nworden uw resultaten hier geregistreerd.';
+
+  @override
+  String get scanLooksLike => 'Uw gescande hond ziet er zo uit.';
+
+  @override
+  String get returnAction => 'Terug';
+
+  @override
+  String get showAction => 'Tonen';
+
+  @override
+  String daysAgo(int count) {
+    return '$count dagen geleden';
+  }
+
+  @override
+  String hoursAgo(int count) {
+    return '$count uur geleden';
+  }
+
+  @override
+  String minutesAgo(int count) {
+    return '$count minuten geleden';
+  }
+
+  @override
+  String get justNow => 'Zojuist';
+
+  @override
+  String rescannedSuccess(String breedName, String confidence) {
+    return '✅ Opnieuw gescand: $breedName ($confidence% zekerheid)';
+  }
+
+  @override
+  String errorRescanning(Object error) {
+    return 'Fout bij opnieuw scannen: $error';
+  }
+
+  @override
+  String get changePasswordSubtitle =>
+      'Maak een sterk, veilig wachtwoord om uw account beschermd en toegankelijk te houden.';
+
+  @override
+  String get currentPassword => 'Huidig wachtwoord';
+
+  @override
+  String get newPassword => 'Nieuw wachtwoord';
+
+  @override
+  String get repeatPassword => 'Herhaal wachtwoord';
+
+  @override
+  String get faqQuestion1 => 'Hoe kan ik een huisdier registreren?';
+
+  @override
+  String get faqAnswer1 =>
+      'U kunt uw huisdier registreren door naar de sectie \"Huisdier toevoegen\" te gaan, de vereiste details (naam, ras, leeftijd, enz.) in te vullen en een foto bij te voegen. Eenmaal geregistreerd, ontvangt u een unieke QR-huisdiertag-ID.';
+
+  @override
+  String get faqQuestion2 => 'Waarom zou ik mijn huisdier registreren?';
+
+  @override
+  String get faqAnswer2 =>
+      'Het registreren van uw huisdier helpt in het geval dat ze verloren gaan. Iedereen die uw huisdier vindt, kan de QR-tag scannen en direct contact met u opnemen met de locatie van het huisdier.';
+
+  @override
+  String get faqQuestion3 => 'Activering van de QR-huisdiertag?';
+
+  @override
+  String get faqAnswer3 =>
+      'Na registratie krijgt u een digitale of fysieke QR-tag. Scan deze met elke telefooncamera om deze aan het profiel van uw huisdier te koppelen. Geen app nodig voor vinders!';
+
+  @override
+  String get faqQuestion4 => 'Hoe werkt het scannen van QR-codes?';
+
+  @override
+  String get faqAnswer4 =>
+      'Iedereen kan de QR-tag scannen met de camera van zijn telefoon. Het opent een webpagina met uw contactgegevens en huisdierdetails zodat ze u onmiddellijk kunnen bereiken.';
+
+  @override
+  String get faqQuestion5 => 'Wie kan een huisdier registreren?';
+
+  @override
+  String get faqAnswer5 =>
+      'Elke huisdiereigenaar kan zijn hond, kat of ander gezelschapsdier registreren.';
+
+  @override
+  String get faqQuestion6 => 'Hoe kan ik mijn gegevens wijzigen?';
+
+  @override
+  String get faqAnswer6 =>
+      'Ga naar Profiel → tik op een veld (Naam, E-mail, Telefoon, enz.) om te bewerken en op te slaan.';
+
+  @override
+  String get faqQuestion7 =>
+      'Hoe kan ik de gegevens van mijn huisdier wijzigen?';
+
+  @override
+  String get faqAnswer7 =>
+      'Ga naar het profiel van uw huisdier en tik op de bewerkknop om naam, ras, foto\'s, enz. bij te werken.';
+
+  @override
+  String get faqQuestion8 => 'Wat is een huisdier-ID-nummer?';
+
+  @override
+  String get faqAnswer8 =>
+      'Het is een unieke identificatie die is gekoppeld aan de QR-tag van uw huisdier voor snelle identificatie.';
+
+  @override
+  String get faqQuestion9 => 'Mijn huisdier is vermist, wat moet ik doen?';
+
+  @override
+  String get faqAnswer9 =>
+      'Markeer uw huisdier als \"Vermist\" in de app. Dit waarschuwt iedereen die de tag scant en toont uw contactgegevens voor noodgevallen.';
+
+  @override
+  String get savedActivities => 'Opgeslagen activiteiten';
+
+  @override
+  String get deleteProfileWarning =>
+      'Waarschuwing! Het profiel en alle inhoud worden permanent verwijderd en kunnen niet worden hersteld. Als u een actief Premium-abonnement heeft, deactiveer dit dan in uw App Store-abonnementinstellingen';
+
+  @override
+  String get yes => 'Ja';
+
+  @override
+  String get no => 'NEE';
+
+  @override
+  String get enterAddress => 'Adres invoeren';
+
+  @override
+  String get errorEnterAddress => 'Voer uw adres in';
+
+  @override
+  String get enterFirstName => 'Voer de voornaam in';
+
+  @override
+  String get allowNotifications => 'Meldingen toestaan';
+
+  @override
+  String get enterEmail => 'E-mail invoeren';
+
+  @override
+  String get errorEnterValidEmail => 'Voer een geldig e-mailadres in';
+
+  @override
+  String get genderPreferNotToSay => 'Ik wil het niet aangeven';
+
+  @override
+  String get enterLastName => 'Voer de achternaam in';
+
+  @override
+  String get errorEnterValidPhone => 'Voer een geldig telefoonnummer in';
+
+  @override
+  String get drinkCalculator => 'Drankcalculator';
+
+  @override
+  String get drinkFrequencyChartTitle => 'Frequentie (keren per dag)';
+
+  @override
+  String get drinkCalcDescription =>
+      'Bereken de dagelijkse waterinname die uw hond nodig heeft\nop basis van gewicht en activiteitsniveau voor\ngezonde hydratatie elke dag';
+
+  @override
+  String get currentWeight => 'Huidig Gewicht';
+
+  @override
+  String get hintWeight => 'Gewicht';
+
+  @override
+  String get yourDogWillNeed => 'Uw hond heeft nodig';
+
+  @override
+  String get perDay => '/ dag';
+
+  @override
+  String get unitPounds => 'Pond';
+
+  @override
+  String get unitKilograms => 'Kilogram';
+
+  @override
+  String get unitOunces => 'Ons';
+
+  @override
+  String get unitGrams => 'Gram';
+
+  @override
+  String get unitMilliliters => 'Milliliter';
+
+  @override
+  String get unitCentiliters => 'Centiliter';
+
+  @override
+  String get unitLiters => 'Liter';
+
+  @override
+  String get unitUSFluidOunces => 'VS Vloeibare ons';
+
+  @override
+  String get unitUKFluidOunces => 'VK Vloeibare ons';
+
+  @override
+  String get activityLevel => 'Activiteitsniveau';
+
+  @override
+  String get unitSymbolMl => 'mL';
+
+  @override
+  String get unitSymbolCl => 'cL';
+
+  @override
+  String get unitSymbolL => 'L';
+
+  @override
+  String get unitSymbolUsFlOz => 'US fl oz';
+
+  @override
+  String get unitSymbolUkFlOz => 'UK fl oz';
+
+  @override
+  String get breedAnalysisTitle => 'Breed Analysis';
+
+  @override
+  String get viewHistoryTooltip => 'View History';
+
+  @override
+  String get newScanTooltip => 'New Scan';
+
+  @override
+  String get scanAnotherButton => 'Scan Another';
+
+  @override
+  String get confidentLabel => 'Confident';
+
+  @override
+  String get aiAnalysisComplete => 'AI Analysis Complete';
+
+  @override
+  String get breedIdentified => 'Breed Identified';
+
+  @override
+  String primaryPurpose(String purpose) {
+    return 'Primary Purpose: $purpose';
+  }
+
+  @override
+  String get confidenceLevel => 'Confidence Level';
+
+  @override
+  String get physicalCharacteristicsTitle => 'Physical Characteristics';
+
+  @override
+  String get coatType => 'Coat Type';
+
+  @override
+  String get bodyStructure => 'Body Structure';
+
+  @override
+  String get temperamentAndBehaviorTitle => 'Temperament & Behavior';
+
+  @override
+  String get additionalInfoTitle => 'Additional Information';
+
+  @override
+  String get ageGroup => 'Age Group';
+
+  @override
+  String get weightRange => 'Weight Range';
+
+  @override
+  String get documentsTitle => 'Documents';
+
+  @override
+  String get addDocument => 'Add Document';
+
+  @override
+  String documentCount(int count) {
+    return '$count documents';
+  }
+
+  @override
+  String get noDocumentsFound => 'No documents found';
+
+  @override
+  String get noMatchingDocuments => 'No matching documents';
+
+  @override
+  String get uploadFirstDocument => 'Tap + to upload your first document';
+
+  @override
+  String get tryDifferentSearchTerm => 'Try a different search term';
+
+  @override
+  String get documentDeleted => 'Document deleted';
+
+  @override
+  String get searchPlaceholder => 'Search...';
+
+  @override
+  String get openDocument => 'Open Document';
+
+  @override
+  String get viewDetails => 'View Details';
+
+  @override
+  String get editDocument => 'Edit Document';
+
+  @override
+  String get deleteDocument => 'Delete Document';
+
+  @override
+  String deleteDocumentConfirmation(String title) {
+    return 'Are you sure you want to delete \"$title\"?';
+  }
+
+  @override
+  String get documentDeletedSuccess => 'Document deleted successfully';
+
+  @override
+  String get documentDetails => 'Document Details';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get fileType => 'File Type';
+
+  @override
+  String get fileSize => 'File Size';
+
+  @override
+  String get uploadDate => 'Upload Date';
+
+  @override
+  String get filePath => 'File Path';
+
+  @override
+  String get notSavedLocally => 'Not saved locally';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get documentTitle => 'Document Title';
+
+  @override
+  String get documentUpdatedSuccess => 'Document updated successfully';
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String daysAgoShort(int count) {
+    return '${count}d ago';
+  }
+
+  @override
+  String weeksAgo(int count) {
+    return '${count}w ago';
+  }
+
+  @override
+  String get catMedicalCare => 'Medical & Care';
+
+  @override
+  String get catLegalLicensing => 'Legal & Licensing';
+
+  @override
+  String get catCoverageFinance => 'Coverage & Finance';
+
+  @override
+  String get catLearningBehavior => 'Learning & Behavior';
+
+  @override
+  String get catTransitBoarding => 'Transit & Boarding';
+
+  @override
+  String get catCriticalSupport => 'Critical & Support';
+
+  @override
+  String get catBloodlineStock => 'Bloodline and stock';
+
+  @override
+  String get catNutritionIntake => 'Nutrition and intake';
+
+  @override
+  String get catMaintenanceLook => 'Maintenance and look';
+
+  @override
+  String get catOtherDocuments => 'Other Documents';
+
+  @override
+  String get catAll => 'All';
+
+  @override
+  String get documentUploadedSuccess => 'Document uploaded successfully!';
+
+  @override
+  String documentUploadFailed(Object error) {
+    return 'Failed to upload document: $error';
+  }
+
+  @override
+  String get addDocumentDetails => 'Add Document Details';
+
+  @override
+  String get docVaccinationRecords => 'Vaccination Records';
+
+  @override
+  String get docPetInsurancePolicy => 'Pet Insurance Policy';
+
+  @override
+  String get docAdoptionCertificate => 'Adoption Certificate';
+
+  @override
+  String get docTrainingCertificate => 'Training Certificate';
+
+  @override
+  String get docMedicalCheckupReport => 'Medical Checkup Report';
+
+  @override
+  String get labelCountry => 'Country';
+
+  @override
+  String get labelCity => 'City';
+
+  @override
+  String get hintEnterCity => 'Enter your city';
+
+  @override
+  String get errorEnterCity => 'Please enter your city';
+
+  @override
+  String get addMoreActivities => '+ Add more activities';
+
+  @override
+  String get selectDateTitle => 'Select Date';
+
+  @override
+  String get enterDate => 'Enter Date';
+
+  @override
+  String get dateHint => 'MM/DD/YYYY';
+
+  @override
+  String get okAction => 'OK';
+
+  @override
+  String get dateRangeError => 'Please enter a date between 2020-2030';
+
+  @override
+  String get enjoyingApp => 'Enjoying the app?';
+
+  @override
+  String get tapToRate => 'Tap to rate:';
+
+  @override
+  String get rateUsAction => 'Rate Us';
+
+  @override
+  String get selectStars => 'Select Stars';
+
+  @override
+  String get sorryToHear => 'We\'re sorry to hear that';
+
+  @override
+  String get feedbackImprove =>
+      'What can we do better? Your feedback helps us improve.';
+
+  @override
+  String get feedbackHint => 'Tell us what we can improve...';
+
+  @override
+  String get submitFeedback => 'Submit Feedback';
+
+  @override
+  String get errorAppStore =>
+      'Could not open app store. Please try again later.';
+
+  @override
+  String get errorOpenStore => 'Error opening app store.';
+
+  @override
+  String errorShare(Object error) {
+    return 'Unable to open share options. Error: $error';
+  }
+
+  @override
+  String get linkCopied =>
+      'Link copied to clipboard! You can now paste and share it.';
+
+  @override
+  String get copyFailed => 'Failed to copy to clipboard.';
+
+  @override
+  String get shareApp => 'Share App';
+
+  @override
+  String get copyLink => 'Copy Link';
+
+  @override
+  String get shareWhatsApp => 'Share via WhatsApp';
+
+  @override
+  String get shareEmail => 'Share via Email';
+
+  @override
+  String get shareSMS => 'Share via SMS';
+
+  @override
+  String get chooseShare => 'Choose how you want to share:';
+
+  @override
+  String get copy => 'Copy';
+
+  @override
+  String get whatsapp => 'WhatsApp';
+
+  @override
+  String get more => 'More';
+
+  @override
+  String get feedbackThanks => 'Thank you for your feedback!';
+
+  @override
+  String get themeTitle => 'Theme';
+
+  @override
+  String get darkTheme => 'Dark';
+
+  @override
+  String get lightTheme => 'Light';
+
+  @override
+  String get myFavorites => 'My Favorites';
+
+  @override
+  String get feedbackTitle => 'Feedback';
+
+  @override
+  String get rateUsTitle => 'Rate us';
+
+  @override
+  String get shareTitle => 'Share';
+
+  @override
+  String get myPremiumService => 'My Premium Service';
+
+  @override
+  String get shareMessageBody =>
+      'Check out Dog Breed - an amazing app for dog lovers!';
+
+  @override
+  String get shareIOS => '📱 Discover Dog Breed on the App Store!';
+
+  @override
+  String get shareAndroid => '📱 Get Dog Breed on Google Play!';
+
+  @override
+  String get shareDefault => '📱 Check out Dog Breed!';
+
+  @override
+  String get shareSubject => 'Dog Breed App';
+
+  @override
+  String get dashboardHome => 'Dashboard Home';
+
+  @override
+  String get saveResults => 'Save Results';
+
+  @override
+  String get addAsPet => 'Add as Pet';
+
+  @override
+  String get analyzingWithAI => 'Analyzing with AI Model...';
+
+  @override
+  String get connectingToServer => 'Connecting to Server...';
+
+  @override
+  String get offlineMode => 'Offline Mode - Local AI';
+
+  @override
+  String get onlineMode => 'Online Mode - Server API';
+
+  @override
+  String totalBreeds(int count) {
+    return 'Total Breeds: $count';
+  }
+
+  @override
+  String get switchToOnline => 'Switch to Online';
+
+  @override
+  String get switchToOffline => 'Switch to Offline';
+
+  @override
+  String get dogIdentifierTitle => 'Dog Identifier';
+
+  @override
+  String get selectDogImage => 'Select a dog image';
+
+  @override
+  String get errorOfflineModelNotAvailable =>
+      'Offline model not available. Please check if model files are in place.';
+
+  @override
+  String get errorNoInternet =>
+      'No internet connection available.\n\nPlease switch to Offline Mode to analyze images.';
+
+  @override
+  String errorOnlinePredictionFailed(Object error) {
+    return 'Online prediction failed: $error\n\nPlease switch to Offline Mode for local analysis.';
+  }
+
+  @override
+  String errorOfflinePredictionFailed(Object error) {
+    return 'Offline prediction failed: $error';
+  }
+
+  @override
+  String get adult => 'Adult';
+
+  @override
+  String get variesByBreed => 'Varies by Breed';
+
+  @override
+  String get breedSpecific => 'Breed-Specific';
+
+  @override
+  String get balanced => 'Balanced';
+
+  @override
+  String get doubleCoat => 'Double Coat';
+
+  @override
+  String get wellProportioned => 'Well Proportioned';
+
+  @override
+  String get various => 'Various';
+
+  @override
+  String get companion => 'Companion';
+
+  @override
+  String get noRecentScans => 'No recent scans';
+
+  @override
+  String get scanDogPrompt => 'Scan a dog to see results here';
+
+  @override
+  String get notAvailable => 'N/A';
+
+  @override
+  String get height => 'Height';
 }

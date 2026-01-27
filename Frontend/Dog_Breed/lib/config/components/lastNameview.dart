@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class Lastnameview extends StatefulWidget {
   final String initialLastName; // ← Receive current name
@@ -30,6 +31,7 @@ class _NameViewState extends State<Lastnameview> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -58,7 +60,7 @@ class _NameViewState extends State<Lastnameview> {
 
               SizedBox(height: 32.h),
 
-              Text('Last Name', style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w600, color: Colors.black)),
+              Text(l10n.lastName, style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w600, color: Colors.black)),
 
               SizedBox(height: 32.h),
 
@@ -68,7 +70,7 @@ class _NameViewState extends State<Lastnameview> {
                 focusNode: _LastNameFocus,
                 style: TextStyle(fontSize: 18.sp, color: Colors.black87),
                 decoration: InputDecoration(
-                  hintText: 'Enter the Last Name',
+                  hintText: l10n.enterLastName,
                   hintStyle: TextStyle(fontSize: 18.sp, color: Colors.grey[400]),
                   filled: true,
                   fillColor: const Color(0xFFF5F5F5),
@@ -101,7 +103,7 @@ class _NameViewState extends State<Lastnameview> {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Save',
+                    l10n.save,
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                 ),

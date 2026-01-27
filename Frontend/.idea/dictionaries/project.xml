@@ -12,6 +12,7 @@
       <w>dogvaluesviewmodel</w>
       <w>editview</w>
       <w>emailjs</w>
+      <w>emailview</w>
       <w>favouritesview</w>
       <w>forgotpasswordemail</w>
       <w>forgotpasswordemailview</w>
@@ -21,9 +22,14 @@
       <w>impostazioni</w>
       <w>iplice</w>
       <w>lastnameview</w>
+      <w>listsave</w>
       <w>muzammal</w>
       <w>myfavouritesview</w>
       <w>mypetsview</w>
+      <w>nameview</w>
+      <w>notafication</w>
+      <w>ownerprofileview</w>
+      <w>phoneview</w>
       <w>proview</w>
       <w>razza</w>
       <w>reminderlist</w>

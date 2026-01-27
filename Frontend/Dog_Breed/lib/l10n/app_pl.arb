@@ -405,17 +405,17 @@
     "navCalendar": "Calendar",
     "navMyPets": "My Pets",
     "navProfile": "Profile",
-    "aiIdentifyingYour": "AI identifying Your ",
-    "dogText": "DOG",
-    "identifyingTimeText": "This usually takes up 1 minute...",
-    "analyzingImage": "Analyzing image...",
-    "errorOccurred": "Error Occurred",
-    "goBack": "Go Back",
-    "noDogDetected": "No Dog Detected",
-    "clearerPhotoPrompt": "Please try with a clearer photo of a dog.",
-    "cancel": "Cancel",
-    "tryAgain": "Try Again",
-    "lowConfidenceWarning": "Low confidence ({confidence}%). Results may not be accurate.",
+    "aiIdentifyingYour": "AI identyfikuje Twojego ",
+    "dogText": "PSA",
+    "identifyingTimeText": "Zwykle zajmuje to do 1 minuty...",
+    "analyzingImage": "Analizowanie obrazu...",
+    "errorOccurred": "Wystąpił błąd",
+    "goBack": "Wróć",
+    "noDogDetected": "Nie wykryto psa",
+    "clearerPhotoPrompt": "Spróbuj z wyraźniejszym zdjęciem psa.",
+    "cancel": "Anuluj",
+    "tryAgain": "Spróbuj ponownie",
+    "lowConfidenceWarning": "Niska pewność ({confidence}%). Wyniki mogą nie być dokładne.",
     "@lowConfidenceWarning": {
         "placeholders": {
             "confidence": {
@@ -423,28 +423,28 @@
             }
         }
     },
-    "savingToRecentScans": "Saving to recent scans...",
-    "dogResults": "Dog Results",
-    "size": "Size",
-    "shape": "Shape",
-    "color": "Color",
-    "coat": "Coat",
-    "headAndFace": "Head & Face",
-    "purpose": "Purpose",
-    "body": "Body",
-    "weight": "Weight",
-    "temperamentAndCharacteristics": "Temperament & Characteristics",
-    "energyLevel": "Energy Level",
-    "trainability": "Trainability",
-    "socialBehavior": "Social Behavior",
-    "familyCompatibility": "Family Compatibility",
-    "childFriendliness": "Child Friendliness",
-    "addPet": "+add Pet",
-    "cannotSave": "Cannot Save",
-    "saving": "Saving...",
-    "saved": "Saved",
-    "save": "Save",
-    "cannotSaveConfidence": "Cannot save: Confidence {confidence}% < 40%",
+    "savingToRecentScans": "Zapisywanie do ostatnich skanów...",
+    "dogResults": "Wyniki psa",
+    "size": "Rozmiar",
+    "shape": "Kształt",
+    "color": "Kolor",
+    "coat": "Sierść",
+    "headAndFace": "Głowa i Twarz",
+    "purpose": "Cel",
+    "body": "Ciało",
+    "weight": "Waga",
+    "temperamentAndCharacteristics": "Temperament i Cechy",
+    "energyLevel": "Poziom energii",
+    "trainability": "Podatność na szkolenie",
+    "socialBehavior": "Zachowania społeczne",
+    "familyCompatibility": "Zgodność z rodziną",
+    "childFriendliness": "Przyjazność dla dzieci",
+    "addPet": "+Dodaj zwierzaka",
+    "cannotSave": "Nie można zapisać",
+    "saving": "Zapisywanie...",
+    "saved": "Zapisano",
+    "save": "Zapisz",
+    "cannotSaveConfidence": "Nie można zapisać: Pewność {confidence}% < 40%",
     "@cannotSaveConfidence": {
         "placeholders": {
             "confidence": {
@@ -452,10 +452,408 @@
             }
         }
     },
-    "noPredictionResult": "No prediction result available",
-    "noImageDataToSave": "No image data to save",
-    "failedToSaveResults": "Failed to save results",
-    "moderate": "Moderate",
-    "friendly": "Friendly",
-    "good": "Good"
+    "noPredictionResult": "Brak dostępnych wyników przewidywania",
+    "noImageDataToSave": "Brak danych obrazu do zapisania",
+    "failedToSaveResults": "Nie udało się zapisać wyników",
+    "moderate": "Umiarkowany",
+    "friendly": "Przyjazny",
+    "good": "Dobry",
+    "sizeSmall": "Small",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Large",
+    "sizeGiant": "Giant",
+    "sizeToy": "Toy",
+    "sizeMiniature": "Miniature",
+    "sizeStandard": "Standard",
+    "sizeSmallToMedium": "Small to Medium",
+    "sizeMediumToLarge": "Medium to Large",
+    "levelLow": "Low",
+    "levelHigh": "High",
+    "levelVeryHigh": "Very High",
+    "levelLowToModerate": "Low to Moderate",
+    "levelModerateToHigh": "Moderate to High",
+    "levelHighToVeryHigh": "High to Very High",
+    "traitIntelligent": "Intelligent",
+    "traitAlert": "Alert",
+    "traitLoyal": "Loyal",
+    "traitProtective": "Protective",
+    "traitCalm": "Calm",
+    "traitGentle": "Gentle",
+    "traitActive": "Active",
+    "traitIndependent": "Independent",
+    "traitConfident": "Confident",
+    "traitBrave": "Brave",
+    "traitPlayful": "Playful",
+    "traitAffectionate": "Affectionate",
+    "traitStubborn": "Stubborn",
+    "traitEagerToPlease": "Eager to please",
+    "ratingExcellent": "Excellent",
+    "ratingAverage": "Average",
+    "ratingFair": "Fair",
+    "ratingPoor": "Poor",
+    "goodWithChildren": "Good with children",
+    "goodWithFamily": "Good with family",
+    "excellentWithChildren": "Excellent with children",
+    "excellentWithFamily": "Excellent with family",
+    "coatShort": "Short",
+    "coatLong": "Long",
+    "coatMedium": "Medium",
+    "coatDouble": "Double coat",
+    "coatWire": "Wire",
+    "coatSilky": "Silky",
+    "coatSmooth": "Smooth",
+    "coatDense": "Dense",
+    "coatFlat": "Flat",
+    "coatCurly": "Curly",
+    "coatWavy": "Wavy",
+    "colorBlack": "Black",
+    "colorWhite": "White",
+    "colorBrown": "Brown",
+    "colorRed": "Red",
+    "colorTan": "Tan",
+    "colorBlue": "Blue",
+    "colorGray": "Gray",
+    "colorFawn": "Fawn",
+    "colorBrindle": "Brindle",
+    "colorCream": "Cream",
+    "colorGold": "Gold",
+    "colorLiver": "Liver",
+    "colorTriColor": "Tri-color",
+    "colorMerle": "Merle",
+    "colorSable": "Sable",
+    "chooseProfilePhoto": "Wybierz zdjęcie profilowe",
+    "camera": "Aparat",
+    "gallery": "Galeria",
+    "ownersProfile": "Profil właściciela",
+    "petOwner": "Właściciel zwierzęcia",
+    "lastName": "Nazwisko",
+    "ownerContacts": "Kontakty właściciela",
+    "email": "E-mail",
+    "mainPhone": "Telefon główny",
+    "instantGpsAlerts": "Natychmiastowe alerty GPS przy skanowaniu",
+    "gpsAlertsDescription": "Otrzymuj natychmiastowe aktualizacje lokalizacji...",
+    "emergencyContacts": "Kontakty alarmowe",
+    "vetContactsDescription": "Kontakty do weterynarza...",
+    "messenger": "Messenger",
+    "messengerDescription": "Alternatywny sposób kontaktu...",
+    "petsResidence": "Miejsce zamieszkania zwierzęcia",
+    "country": "Kraj",
+    "city": "Miasto",
+    "address": "Adres",
+    "addAddress": "Dodaj adres",
+    "labelAdd": "Dodaj",
+    "getPremium": "UZYSKAJ PREMIUM",
+    "recentScansTitle": "Ostatnie Skany",
+    "scansCount": "{count} Skanów",
+    "@scansCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "zeroResults": "0 Wyników",
+    "noScansMessage": "Gdy tylko wykonasz pierwszy skan,\ntwoje wyniki zostaną tutaj zapisane.",
+    "scanLooksLike": "Pies, którego zeskanowałeś, wygląda tak.",
+    "returnAction": "Powrót",
+    "showAction": "Pokaż",
+    "daysAgo": "{count} dni temu",
+    "@daysAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "hoursAgo": "{count} godzin temu",
+    "@hoursAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "minutesAgo": "{count} minut temu",
+    "@minutesAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "justNow": "Właśnie teraz",
+    "rescannedSuccess": "✅ Przeskanowano ponownie: {breedName} ({confidence}% pewności)",
+    "@rescannedSuccess": {
+        "placeholders": {
+            "breedName": {
+                "type": "String"
+            },
+            "confidence": {
+                "type": "String"
+            }
+        }
+    },
+    "errorRescanning": "Błąd ponownego skanowania: {error}",
+    "@errorRescanning": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "changePasswordSubtitle": "Utwórz silne, bezpieczne hasło, aby chronić swoje konto i zachować do niego dostęp.",
+    "currentPassword": "Obecne hasło",
+    "newPassword": "Nowe hasło",
+    "repeatPassword": "Powtórz hasło",
+    "faqQuestion1": "Jak mogę zarejestrować zwierzaka?",
+    "faqAnswer1": "Możesz zarejestrować swojego zwierzaka, przechodząc do sekcji \"Dodaj zwierzaka\", wypełniając wymagane dane (imię, rasa, wiek itp.) i dołączając zdjęcie. Po zarejestrowaniu otrzymasz unikalny identyfikator znacznika QR zwierzaka.",
+    "faqQuestion2": "Dlaczego powinienem zarejestrować swojego zwierzaka?",
+    "faqAnswer2": "Rejestracja zwierzaka pomaga w przypadku jego zagubienia. Każdy, kto znajdzie Twojego zwierzaka, może zeskanować znacznik QR i natychmiast skontaktować się z Tobą, podając lokalizację zwierzaka.",
+    "faqQuestion3": "Aktywacja znacznika QR zwierzaka?",
+    "faqAnswer3": "Po rejestracji otrzymasz cyfrowy lub fizyczny znacznik QR. Zeskanuj go dowolnym aparatem w telefonie, aby połączyć go z profilem Twojego zwierzaka. Nie jest potrzebna aplikacja dla znalazców!",
+    "faqQuestion4": "Jak działa skanowanie kodu QR?",
+    "faqAnswer4": "Każdy może zeskanować znacznik QR za pomocą aparatu w telefonie. Otwiera to stronę internetową z Twoimi danymi kontaktowymi i szczegółami zwierzaka, dzięki czemu mogą się z Tobą natychmiast skontaktować.",
+    "faqQuestion5": "Kto może zarejestrować zwierzaka?",
+    "faqAnswer5": "Każdy właściciel zwierzaka może zarejestrować swojego psa, kota lub inne zwierzę towarzyszące.",
+    "faqQuestion6": "Jak mogę zmienić swoje dane?",
+    "faqAnswer6": "Przejdź do Profilu → dotknij dowolnego pola (Imię, E-mail, Telefon itp.), aby edytować i zapisać.",
+    "faqQuestion7": "Jak mogę zmienić dane mojego zwierzaka?",
+    "faqAnswer7": "Przejdź do profilu swojego zwierzaka i dotknij przycisku edycji, aby zaktualizować imię, rasę, zdjęcia itp.",
+    "faqQuestion8": "Co to jest numer identyfikacyjny zwierzaka?",
+    "faqAnswer8": "To unikalny identyfikator powiązany ze znacznikiem QR Twojego zwierzaka w celu szybkiej identyfikacji.",
+    "faqQuestion9": "Mój zwierzak zaginął, co powinienem zrobić?",
+    "faqAnswer9": "Oznacz swojego zwierzaka jako \"Zaginiony\" w aplikacji. To powiadomi każdego, kto zeskanuje znacznik, i pokaże Twoje dane kontaktowe w nagłych wypadkach.",
+    "savedActivities": "Zapisane aktywności",
+    "deleteProfileWarning": "Ostrzeżenie! Profil i cała jego zawartość zostaną trwale usunięte i nie można ich odzyskać. Jeśli masz aktywną subskrypcję Premium, wyłącz ją w ustawieniach subskrypcji App Store",
+    "yes": "Tak",
+    "no": "NIE",
+    "enterAddress": "Wprowadź adres",
+    "errorEnterAddress": "Proszę wprowadzić swój adres",
+    "enterFirstName": "Wprowadź imię",
+    "allowNotifications": "Zezwalaj na powiadomienia",
+    "enterEmail": "Wprowadź e-mail",
+    "errorEnterValidEmail": "Proszę wprowadzić prawidłowy e-mail",
+    "genderPreferNotToSay": "Nie chcę wskazywać",
+    "enterLastName": "Wprowadź nazwisko",
+    "errorEnterValidPhone": "Proszę podać poprawny numer telefonu",
+    "drinkCalculator": "Kalkulator napojów",
+    "drinkFrequencyChartTitle": "Częstotliwość (razy dziennie)",
+    "drinkCalcDescription": "Oblicz dzienne spożycie wody, którego potrzebuje Twój pies\nwedług wagi i poziomu aktywności dla\nzdrowego nawodnienia każdego dnia",
+    "currentWeight": "Obecna waga",
+    "hintWeight": "Waga",
+    "yourDogWillNeed": "Twój pies będzie potrzebował",
+    "perDay": "/ dzień",
+    "unitPounds": "Funty",
+    "unitKilograms": "Kilogramy",
+    "unitOunces": "Uncje",
+    "unitGrams": "Gramy",
+    "unitMilliliters": "Mililitry",
+    "unitCentiliters": "Centylitry",
+    "unitLiters": "Litry",
+    "unitUSFluidOunces": "US uncje płynu",
+    "unitUKFluidOunces": "UK uncje płynu",
+    "activityLevel": "Poziom aktywności",
+    "unitSymbolMl": "mL",
+    "unitSymbolCl": "cL",
+    "unitSymbolL": "L",
+    "unitSymbolUsFlOz": "US fl oz",
+    "unitSymbolUkFlOz": "UK fl oz",
+    "breedAnalysisTitle": "Breed Analysis",
+    "viewHistoryTooltip": "View History",
+    "newScanTooltip": "New Scan",
+    "scanAnotherButton": "Scan Another",
+    "confidentLabel": "Confident",
+    "aiAnalysisComplete": "AI Analysis Complete",
+    "breedIdentified": "Breed Identified",
+    "primaryPurpose": "Primary Purpose: {purpose}",
+    "@primaryPurpose": {
+        "placeholders": {
+            "purpose": {
+                "type": "String"
+            }
+        }
+    },
+    "confidenceLevel": "Confidence Level",
+    "physicalCharacteristicsTitle": "Physical Characteristics",
+    "coatType": "Coat Type",
+    "bodyStructure": "Body Structure",
+    "temperamentAndBehaviorTitle": "Temperament & Behavior",
+    "additionalInfoTitle": "Additional Information",
+    "ageGroup": "Age Group",
+    "weightRange": "Weight Range",
+    "documentsTitle": "Documents",
+    "addDocument": "Add Document",
+    "documentCount": "{count} documents",
+    "@documentCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "noDocumentsFound": "No documents found",
+    "noMatchingDocuments": "No matching documents",
+    "uploadFirstDocument": "Tap + to upload your first document",
+    "tryDifferentSearchTerm": "Try a different search term",
+    "documentDeleted": "Document deleted",
+    "searchPlaceholder": "Search...",
+    "openDocument": "Open Document",
+    "viewDetails": "View Details",
+    "editDocument": "Edit Document",
+    "deleteDocument": "Delete Document",
+    "deleteDocumentConfirmation": "Are you sure you want to delete \"{title}\"?",
+    "@deleteDocumentConfirmation": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "documentDeletedSuccess": "Document deleted successfully",
+    "documentDetails": "Document Details",
+    "category": "Category",
+    "fileType": "File Type",
+    "fileSize": "File Size",
+    "uploadDate": "Upload Date",
+    "filePath": "File Path",
+    "notSavedLocally": "Not saved locally",
+    "close": "Close",
+    "documentTitle": "Document Title",
+    "documentUpdatedSuccess": "Document updated successfully",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgoShort": "{count}d ago",
+    "@daysAgoShort": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "weeksAgo": "{count}w ago",
+    "@weeksAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "catMedicalCare": "Medical & Care",
+    "catLegalLicensing": "Legal & Licensing",
+    "catCoverageFinance": "Coverage & Finance",
+    "catLearningBehavior": "Learning & Behavior",
+    "catTransitBoarding": "Transit & Boarding",
+    "catCriticalSupport": "Critical & Support",
+    "catBloodlineStock": "Bloodline and stock",
+    "catNutritionIntake": "Nutrition and intake",
+    "catMaintenanceLook": "Maintenance and look",
+    "catOtherDocuments": "Other Documents",
+    "catAll": "All",
+    "documentUploadedSuccess": "Document uploaded successfully!",
+    "documentUploadFailed": "Failed to upload document: {error}",
+    "addDocumentDetails": "Add Document Details",
+    "docVaccinationRecords": "Vaccination Records",
+    "docPetInsurancePolicy": "Pet Insurance Policy",
+    "docAdoptionCertificate": "Adoption Certificate",
+    "docTrainingCertificate": "Training Certificate",
+    "docMedicalCheckupReport": "Medical Checkup Report",
+    "hintEnterCity": "Enter your city",
+    "errorEnterCity": "Please enter your city",
+    "addMoreActivities": "+ Add more activities",
+    "selectDateTitle": "Select Date",
+    "enterDate": "Enter Date",
+    "dateHint": "MM/DD/YYYY",
+    "okAction": "OK",
+    "dateRangeError": "Please enter a date between 2020-2030",
+    "enjoyingApp": "Enjoying the app?",
+    "tapToRate": "Tap to rate:",
+    "rateUsAction": "Rate Us",
+    "selectStars": "Select Stars",
+    "sorryToHear": "We're sorry to hear that",
+    "feedbackImprove": "What can we do better? Your feedback helps us improve.",
+    "feedbackHint": "Tell us what we can improve...",
+    "submitFeedback": "Submit Feedback",
+    "errorAppStore": "Could not open app store. Please try again later.",
+    "errorOpenStore": "Error opening app store.",
+    "errorShare": "Unable to open share options. Error: {error}",
+    "@errorShare": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "linkCopied": "Link copied to clipboard! You can now paste and share it.",
+    "copyFailed": "Failed to copy to clipboard.",
+    "shareApp": "Share App",
+    "copyLink": "Copy Link",
+    "shareWhatsApp": "Share via WhatsApp",
+    "shareEmail": "Share via Email",
+    "shareSMS": "Share via SMS",
+    "chooseShare": "Choose how you want to share:",
+    "copy": "Copy",
+    "whatsapp": "WhatsApp",
+    "more": "More",
+    "feedbackThanks": "Thank you for your feedback!",
+    "themeTitle": "Theme",
+    "darkTheme": "Dark",
+    "lightTheme": "Light",
+    "myFavorites": "My Favorites",
+    "feedbackTitle": "Feedback",
+    "rateUsTitle": "Rate us",
+    "shareTitle": "Share",
+    "myPremiumService": "My Premium Service",
+    "dashboardHome": "Dashboard Home",
+   "navHome": "Strona Główna",
+     "navCalendar": "Kalendarz",
+     "navMyPets": "Moje Zwierzęta",
+     "navProfile": "Profil",
+    "saveResults": "Save Results",
+    "addAsPet": "Add as Pet",
+    "analyzingWithAI": "Analyzing with AI Model...",
+    "connectingToServer": "Connecting to Server...",
+    "offlineMode": "Offline Mode - Local AI",
+    "onlineMode": "Online Mode - Server API",
+    "totalBreeds": "Total Breeds: {count}",
+    "@totalBreeds": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "switchToOnline": "Switch to Online",
+    "switchToOffline": "Switch to Offline",
+    "dogIdentifierTitle": "Dog Identifier",
+    "selectDogImage": "Select a dog image",
+    "errorOfflineModelNotAvailable": "Offline model not available. Please check if model files are in place.",
+    "errorNoInternet": "No internet connection available.\n\nPlease switch to Offline Mode to analyze images.",
+    "errorOnlinePredictionFailed": "Online prediction failed: {error}\n\nPlease switch to Offline Mode for local analysis.",
+    "@errorOnlinePredictionFailed": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "errorOfflinePredictionFailed": "Offline prediction failed: {error}",
+    "@errorOfflinePredictionFailed": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "adult": "Adult",
+    "variesByBreed": "Varies by Breed",
+    "breedSpecific": "Breed-Specific",
+    "balanced": "Balanced",
+    "doubleCoat": "Double Coat",
+    "wellProportioned": "Well Proportioned",
+    "various": "Various",
+    "companion": "Companion",
+    "noRecentScans": "No recent scans",
+    "scanDogPrompt": "Scan a dog to see results here",
+    "notAvailable": "N/A",
+    "height": "Height"
 }

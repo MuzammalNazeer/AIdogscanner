@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale": "en",
     "appTitle": "Dog Breed",
     "settingsTitle": "Settings",
@@ -415,7 +415,7 @@
     "navProfile": "Profile",
     "aiIdentifyingYour": "AI identifying Your ",
     "dogText": "DOG",
-    "identifyingTimeText": "This usually takes up 1 minute...",
+    "identifyingTimeText": "This usually takes up to 1 minute...",
     "analyzingImage": "Analyzing image...",
     "errorOccurred": "Error Occurred",
     "goBack": "Go Back",
@@ -465,5 +465,418 @@
     "failedToSaveResults": "Failed to save results",
     "moderate": "Moderate",
     "friendly": "Friendly",
-    "good": "Good"
+    "good": "Good",
+    "sizeSmall": "Small",
+    "sizeMedium": "Medium",
+    "sizeLarge": "Large",
+    "sizeGiant": "Giant",
+    "sizeToy": "Toy",
+    "sizeMiniature": "Miniature",
+    "sizeStandard": "Standard",
+    "sizeSmallToMedium": "Small to Medium",
+    "sizeMediumToLarge": "Medium to Large",
+    "levelLow": "Low",
+    "levelHigh": "High",
+    "levelVeryHigh": "Very High",
+    "levelLowToModerate": "Low to Moderate",
+    "levelModerateToHigh": "Moderate to High",
+    "levelHighToVeryHigh": "High to Very High",
+    "traitIntelligent": "Intelligent",
+    "traitAlert": "Alert",
+    "traitLoyal": "Loyal",
+    "traitProtective": "Protective",
+    "traitCalm": "Calm",
+    "traitGentle": "Gentle",
+    "traitActive": "Active",
+    "traitIndependent": "Independent",
+    "traitConfident": "Confident",
+    "traitBrave": "Brave",
+    "traitPlayful": "Playful",
+    "traitAffectionate": "Affectionate",
+    "traitStubborn": "Stubborn",
+    "traitEagerToPlease": "Eager to please",
+    "ratingExcellent": "Excellent",
+    "ratingAverage": "Average",
+    "ratingFair": "Fair",
+    "ratingPoor": "Poor",
+    "goodWithChildren": "Good with children",
+    "goodWithFamily": "Good with family",
+    "excellentWithChildren": "Excellent with children",
+    "excellentWithFamily": "Excellent with family",
+    "coatShort": "Short",
+    "coatLong": "Long",
+    "coatMedium": "Medium",
+    "coatDouble": "Double coat",
+    "coatWire": "Wire",
+    "coatSilky": "Silky",
+    "coatSmooth": "Smooth",
+    "coatDense": "Dense",
+    "coatFlat": "Flat",
+    "coatCurly": "Curly",
+    "coatWavy": "Wavy",
+    "colorBlack": "Black",
+    "colorWhite": "White",
+    "colorBrown": "Brown",
+    "colorRed": "Red",
+    "colorTan": "Tan",
+    "colorBlue": "Blue",
+    "colorGray": "Gray",
+    "colorFawn": "Fawn",
+    "colorBrindle": "Brindle",
+    "colorCream": "Cream",
+    "colorGold": "Gold",
+    "colorLiver": "Liver",
+    "colorTriColor": "Tri-color",
+    "colorMerle": "Merle",
+    "colorSable": "Sable",
+    "chooseProfilePhoto": "Choose Profile Photo",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "ownersProfile": "Owner's Profile",
+    "petOwner": "Pet Owner",
+    "lastName": "Last Name",
+    "ownerContacts": "Owner Contacts",
+    "email": "Email",
+    "mainPhone": "Main Phone",
+    "instantGpsAlerts": "Instant Gps Alerts Upon Tag Scan",
+    "gpsAlertsDescription": "Get instant pet location updates...",
+    "emergencyContacts": "Emergency Contacts",
+    "vetContactsDescription": "Contacts of the vet...",
+    "messenger": "Messenger",
+    "messengerDescription": "An alternative way to contact...",
+    "petsResidence": "Pets Place of Residence",
+    "country": "Country",
+    "city": "City",
+    "address": "Address",
+    "addAddress": "Add Address",
+    "labelAdd": "Add",
+    "getPremium": "GET PREMIUM",
+    "recentScansTitle": "Recent Scans",
+    "scansCount": "{count} Scans",
+    "@scansCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "zeroResults": "0 Results",
+    "noScansMessage": "As soon as you’ve made your first scan,\nyour results will be logged here.",
+    "scanLooksLike": "Your dog you scanned looks like this.",
+    "returnAction": "Return",
+    "showAction": "Show",
+    "daysAgo": "{count} days ago",
+    "@daysAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "hoursAgo": "{count} hours ago",
+    "@hoursAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "minutesAgo": "{count} minutes ago",
+    "@minutesAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "justNow": "Just now",
+    "rescannedSuccess": "✅ Re-scanned: {breedName} ({confidence}% confidence)",
+    "@rescannedSuccess": {
+        "placeholders": {
+            "breedName": {
+                "type": "String"
+            },
+            "confidence": {
+                "type": "String"
+            }
+        }
+    },
+    "errorRescanning": "Error re-scanning: {error}",
+    "@errorRescanning": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "changePasswordSubtitle": "Create a strong, secure password to keep your account protected and accessible.",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "repeatPassword": "Repeat Password",
+    "faqQuestion1": "How can I register a pet?",
+    "faqAnswer1": "You can register your pet by going to the \"Add Pet\" section, filling in the required details (name, breed, age, etc.), and attaching a photo. Once registered, you’ll receive a unique QR pet tag ID.",
+    "faqQuestion2": "Why should I register my pet?",
+    "faqAnswer2": "Registering your pet helps in case they get lost. Anyone who finds your pet can scan the QR tag and instantly contact you with the pet’s location.",
+    "faqQuestion3": "QR pet tag activation?",
+    "faqAnswer3": "After registering, you’ll get a digital or physical QR tag. Scan it with any phone camera to link it to your pet’s profile. No app needed for finders!",
+    "faqQuestion4": "How does QR code scanning work?",
+    "faqAnswer4": "Anyone can scan the QR tag using their phone’s camera. It opens a web page with your contact info and pet details so they can reach you immediately.",
+    "faqQuestion5": "Who can register a pet?",
+    "faqAnswer5": "Any pet owner can register their dog, cat, or other companion animal.",
+    "faqQuestion6": "How can I change my data?",
+    "faqAnswer6": "Go to Profile → tap any field (Name, Email, Phone, etc.) to edit and save.",
+    "faqQuestion7": "How can I change my pet's data?",
+    "faqAnswer7": "Go to your pet’s profile and tap the edit button to update name, breed, photos, etc.",
+    "faqQuestion8": "What is a pet ID number?",
+    "faqAnswer8": "It’s a unique identifier linked to your pet’s QR tag for quick identification.",
+    "faqQuestion9": "My pet is lost what should I do?",
+    "faqAnswer9": "Mark your pet as \"Lost\" in the app. This alerts anyone who scans the tag and shows your emergency contact info.",
+    "savedActivities": "Saved Activities",
+    "deleteProfileWarning": "Warning! The profile and all its content will be deleted permanently and cannot be recovered. If you have an active Premium Subscription, deactivate it in your App Store Subscription settings",
+    "yes": "Yes",
+    "no": "NO",
+    "enterAddress": "Enter Address",
+    "errorEnterAddress": "Please enter your address",
+    "enterFirstName": "Enter the first name",
+    "allowNotifications": "Allow Notifications",
+    "enterEmail": "Enter Email",
+    "errorEnterValidEmail": "Please enter a valid email",
+    "genderPreferNotToSay": "I don’t want to indicate",
+    "enterLastName": "Enter the Last Name",
+    "errorEnterValidPhone": "Please enter a valid phone number",
+    "drinkCalculator": "Drink Calculator",
+    "drinkFrequencyChartTitle": "Frequency (times per day)",
+    "drinkCalcDescription": "Calculate daily water intake your dog needs\naccording to weight and activity level for\nhealthy hydration every day",
+    "currentWeight": "Current Weight",
+    "hintWeight": "Weight",
+    "yourDogWillNeed": "Your Dog will need",
+    "perDay": "/ day",
+    "unitPounds": "Pounds",
+    "unitKilograms": "Kilograms",
+    "unitOunces": "Ounces",
+    "unitGrams": "Grams",
+    "unitMilliliters": "Milliliters",
+    "unitCentiliters": "Centiliters",
+    "unitLiters": "Liters",
+    "unitUSFluidOunces": "US Fluid Ounces",
+    "unitUKFluidOunces": "UK Fluid Ounces",
+    "activityLevel": "Activity level",
+    "unitSymbolMl": "mL",
+    "unitSymbolCl": "cL",
+    "unitSymbolL": "L",
+    "unitSymbolUsFlOz": "US fl oz",
+    "unitSymbolUkFlOz": "UK fl oz",
+    "breedAnalysisTitle": "Breed Analysis",
+    "viewHistoryTooltip": "View History",
+    "newScanTooltip": "New Scan",
+    "scanAnotherButton": "Scan Another",
+    "confidentLabel": "Confident",
+    "aiAnalysisComplete": "AI Analysis Complete",
+    "breedIdentified": "Breed Identified",
+    "primaryPurpose": "Primary Purpose: {purpose}",
+    "@primaryPurpose": {
+        "placeholders": {
+            "purpose": {
+                "type": "String"
+            }
+        }
+    },
+    "confidenceLevel": "Confidence Level",
+    "physicalCharacteristicsTitle": "Physical Characteristics",
+    "coatType": "Coat Type",
+    "bodyStructure": "Body Structure",
+    "temperamentAndBehaviorTitle": "Temperament & Behavior",
+    "additionalInfoTitle": "Additional Information",
+    "ageGroup": "Age Group",
+    "weightRange": "Weight Range",
+    "documentsTitle": "Documents",
+    "addDocument": "Add Document",
+    "documentCount": "{count} documents",
+    "@documentCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "noDocumentsFound": "No documents found",
+    "noMatchingDocuments": "No matching documents",
+    "uploadFirstDocument": "Tap + to upload your first document",
+    "tryDifferentSearchTerm": "Try a different search term",
+    "documentDeleted": "Document deleted",
+    "searchPlaceholder": "Search...",
+    "openDocument": "Open Document",
+    "viewDetails": "View Details",
+    "editDocument": "Edit Document",
+    "deleteDocument": "Delete Document",
+    "deleteDocumentConfirmation": "Are you sure you want to delete \"{title}\"?",
+    "@deleteDocumentConfirmation": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "documentDeletedSuccess": "Document deleted successfully",
+    "documentDetails": "Document Details",
+    "category": "Category",
+    "fileType": "File Type",
+    "fileSize": "File Size",
+    "uploadDate": "Upload Date",
+    "filePath": "File Path",
+    "notSavedLocally": "Not saved locally",
+    "close": "Close",
+    "documentTitle": "Document Title",
+    "documentUpdatedSuccess": "Document updated successfully",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgoShort": "{count}d ago",
+    "@daysAgoShort": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "weeksAgo": "{count}w ago",
+    "@weeksAgo": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "catMedicalCare": "Medical & Care",
+    "catLegalLicensing": "Legal & Licensing",
+    "catCoverageFinance": "Coverage & Finance",
+    "catLearningBehavior": "Learning & Behavior",
+    "catTransitBoarding": "Transit & Boarding",
+    "catCriticalSupport": "Critical & Support",
+    "catBloodlineStock": "Bloodline and stock",
+    "catNutritionIntake": "Nutrition and intake",
+    "catMaintenanceLook": "Maintenance and look",
+    "catOtherDocuments": "Other Documents",
+    "catAll": "All",
+    "documentUploadedSuccess": "Document uploaded successfully!",
+    "documentUploadFailed": "Failed to upload document: {error}",
+    "@documentUploadFailed": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "addDocumentDetails": "Add Document Details",
+    "docVaccinationRecords": "Vaccination Records",
+    "docPetInsurancePolicy": "Pet Insurance Policy",
+    "docAdoptionCertificate": "Adoption Certificate",
+    "docTrainingCertificate": "Training Certificate",
+    "docMedicalCheckupReport": "Medical Checkup Report",
+    "labelCountry": "Country",
+    "labelCity": "City",
+    "hintEnterCity": "Enter your city",
+    "errorEnterCity": "Please enter your city",
+    "addMoreActivities": "+ Add more activities",
+    "selectDateTitle": "Select Date",
+    "enterDate": "Enter Date",
+    "dateHint": "MM/DD/YYYY",
+    "okAction": "OK",
+    "dateRangeError": "Please enter a date between 2020-2030",
+    "enjoyingApp": "Enjoying the app?",
+    "tapToRate": "Tap to rate:",
+    "rateUsAction": "Rate Us",
+    "selectStars": "Select Stars",
+    "sorryToHear": "We're sorry to hear that",
+    "feedbackImprove": "What can we do better? Your feedback helps us improve.",
+    "feedbackHint": "Tell us what we can improve...",
+    "submitFeedback": "Submit Feedback",
+    "errorAppStore": "Could not open app store. Please try again later.",
+    "errorOpenStore": "Error opening app store.",
+    "errorShare": "Unable to open share options. Error: {error}",
+    "@errorShare": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "linkCopied": "Link copied to clipboard! You can now paste and share it.",
+    "copyFailed": "Failed to copy to clipboard.",
+    "shareApp": "Share App",
+    "copyLink": "Copy Link",
+    "shareWhatsApp": "Share via WhatsApp",
+    "shareEmail": "Share via Email",
+    "shareSMS": "Share via SMS",
+    "chooseShare": "Choose how you want to share:",
+    "copy": "Copy",
+    "whatsapp": "WhatsApp",
+    "more": "More",
+    "feedbackThanks": "Thank you for your feedback!",
+    "themeTitle": "Theme",
+    "darkTheme": "Dark",
+    "lightTheme": "Light",
+    "myFavorites": "My Favorites",
+    "feedbackTitle": "Feedback",
+    "rateUsTitle": "Rate us",
+    "shareTitle": "Share",
+    "myPremiumService": "My Premium Service",
+    "shareMessageBody": "Check out Dog Breed - an amazing app for dog lovers!",
+    "shareIOS": "📱 Discover Dog Breed on the App Store!",
+    "shareAndroid": "📱 Get Dog Breed on Google Play!",
+    "shareDefault": "📱 Check out Dog Breed!",
+    "shareSubject": "Dog Breed App",
+    "dashboardHome": "Dashboard Home",
+      "navHome": "Home",
+      "navCalendar": "Calendar",
+      "navMyPets": "My Pets",
+      "navProfile": "Profile",
+    "saveResults": "Save Results",
+    "addAsPet": "Add as Pet",
+    "analyzingWithAI": "Analyzing with AI Model...",
+    "connectingToServer": "Connecting to Server...",
+    "offlineMode": "Offline Mode - Local AI",
+    "onlineMode": "Online Mode - Server API",
+    "totalBreeds": "Total Breeds: {count}",
+    "@totalBreeds": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "switchToOnline": "Switch to Online",
+    "switchToOffline": "Switch to Offline",
+    "dogIdentifierTitle": "Dog Identifier",
+    "selectDogImage": "Select a dog image",
+    "errorOfflineModelNotAvailable": "Offline model not available. Please check if model files are in place.",
+    "errorNoInternet": "No internet connection available.\n\nPlease switch to Offline Mode to analyze images.",
+    "errorOnlinePredictionFailed": "Online prediction failed: {error}\n\nPlease switch to Offline Mode for local analysis.",
+    "@errorOnlinePredictionFailed": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "errorOfflinePredictionFailed": "Offline prediction failed: {error}",
+    "@errorOfflinePredictionFailed": {
+        "placeholders": {
+            "error": {
+                "type": "Object"
+            }
+        }
+    },
+    "adult": "Adult",
+    "variesByBreed": "Varies by Breed",
+    "breedSpecific": "Breed-Specific",
+    "balanced": "Balanced",
+    "doubleCoat": "Double Coat",
+    "wellProportioned": "Well Proportioned",
+    "various": "Various",
+    "companion": "Companion",
+    "noRecentScans": "No recent scans",
+    "scanDogPrompt": "Scan a dog to see results here",
+    "notAvailable": "N/A",
+    "height": "Height"
+
 }

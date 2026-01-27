@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class NameView extends StatefulWidget {
   final String initialName; // ← Receive current name
@@ -30,6 +31,7 @@ class _NameViewState extends State<NameView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -58,7 +60,7 @@ class _NameViewState extends State<NameView> {
 
               SizedBox(height: 32.h),
 
-              Text('Name', style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w600, color: Colors.black)),
+              Text(l10n.labelName, style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w600, color: Colors.black)),
 
               SizedBox(height: 32.h),
 
@@ -101,7 +103,7 @@ class _NameViewState extends State<NameView> {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Save',
+                    l10n.save,
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                 ),

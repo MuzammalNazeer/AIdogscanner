@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 import '../../activity_model.dart';
 import '../../View_model/activity_provider.dart';
 import 'DrinkCalculatorWidget.dart';
@@ -29,6 +30,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -46,7 +48,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
                   Expanded(
                     child: Center(
                       child: Text(
-                        'Drink',
+                        l10n.activityDrink,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20.sp,
@@ -91,15 +93,16 @@ class _DrinkScreenState extends State<DrinkScreen> {
 
   // ── Tab Bar ────────────────────────────────────────────────────────────────
   Widget _buildTabBar() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       height: 56.h,
       color: const Color(0xFF6A00FF),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildTabItem("Heatmap", 0),
-          _buildTabItem("Timeline", 1),
-          _buildTabItem("Drink Calculator", 2),
+          _buildTabItem(l10n.calendarHeatmapTab, 0),
+          _buildTabItem(l10n.calendarTimelineTab, 1),
+          _buildTabItem(l10n.drinkCalculator, 2),
         ],
       ),
     );
@@ -155,11 +158,13 @@ class _DrinkScreenState extends State<DrinkScreen> {
   // ── Heatmap Tab ────────────────────────────────────────────────────────────
   Widget _buildHeatmapSection() {
     try {
+      final l10n = AppLocalizations.of(context)!;
       final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
       final allActivities = activityNotifier.activities;
 
       final drinkActivities = allActivities.where((a) {
-        final matchesName = a.name.toLowerCase().contains('drink');
+        final matchesName = a.name.trim().toLowerCase().contains('drink') ||
+            a.name.trim().toLowerCase().contains(l10n.activityDrink.trim().toLowerCase());
         final matchesPet = widget.selectedPetId == null || a.petId == widget.selectedPetId;
         return matchesName && matchesPet;
       }).toList();
@@ -233,7 +238,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
       print('Heatmap error: $e');
       return Center(
         child: Text(
-          'Error loading heatmap',
+          AppLocalizations.of(context)!.calendarErrorLoadingHeatmap,
           style: TextStyle(color: Colors.red, fontSize: 14.sp),
         ),
       );
@@ -298,33 +303,36 @@ class _DrinkScreenState extends State<DrinkScreen> {
   }
 
   Widget _buildTimeLabels(double totalCellHeight) {
-    final hours = [
-      '12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
-      '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM',
-      '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'
-    ];
-
+    // Localize time labels using DateFormat if possible, or simple generation
+    // Since we need 12 AM, 1 AM etc, let's use DateFormat
     final now = DateTime.now();
     final isCurrentHour = (i) => i == now.hour;
 
     return Column(
-      children: List.generate(24, (i) => Container(
+      children: List.generate(24, (i) {
+        // Construct a time for today at hour i
+        final time = DateTime(now.year, now.month, now.day, i);
+        final label = DateFormat.j().format(time); // e.g. "12 AM", "5 PM"
+        
+        return Container(
         height: totalCellHeight,
         alignment: Alignment.center,
         child: Text(
-          hours[i],
+          label,
           style: TextStyle(
             fontSize: 12.sp,
             color: isCurrentHour(i) ? Colors.red : Colors.grey.shade600,
             fontWeight: isCurrentHour(i) ? FontWeight.bold : FontWeight.normal,
           ),
         ),
-      )),
+      );
+      }),
     );
   }
 
   Widget _buildDayLabels() {
-    final days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    final l10n = AppLocalizations.of(context)!;
+    final days = [l10n.daySun, l10n.dayMon, l10n.dayTue, l10n.dayWed, l10n.dayThu, l10n.dayFri, l10n.daySat];
     final now = DateTime.now();
     final currentDayIndex = now.weekday % 7;
 
@@ -353,6 +361,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
   }
 
   Widget _buildHeatmapLegend() {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
@@ -363,17 +372,17 @@ class _DrinkScreenState extends State<DrinkScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Activity Intensity',
+            l10n.calendarActivityIntensity,
             style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
           ),
           SizedBox(height: 8.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildLegendItem('None', Colors.grey.shade100),
-              _buildLegendItem('Low', const Color(0xFFC9B3FF)),
-              _buildLegendItem('Medium', const Color(0xFF7B4DFF)),
-              _buildLegendItem('High', const Color(0xFF4D21FF)),
+              _buildLegendItem(l10n.calendarLegendNone, Colors.grey.shade100),
+              _buildLegendItem(l10n.calendarLegendLow, const Color(0xFFC9B3FF)),
+              _buildLegendItem(l10n.calendarLegendMedium, const Color(0xFF7B4DFF)),
+              _buildLegendItem(l10n.calendarLegendHigh, const Color(0xFF4D21FF)),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                 decoration: BoxDecoration(
@@ -382,7 +391,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
                   border: Border.all(color: Colors.red, width: 2.w),
                 ),
                 child: Text(
-                  'Now',
+                  l10n.calendarLegendNow,
                   style: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.bold,
@@ -416,6 +425,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
 
 
   Widget _buildTimelineSection() {
+    final l10n = AppLocalizations.of(context)!;
     final activityNotifier = Provider.of<ActivityNotifier>(context);
     final allActivities = activityNotifier.activities;
 
@@ -449,7 +459,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
     double maxAmount = 100.0;               // fallback minimum
     double maxFrequency = 1.0;
 
-    final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    final days = [l10n.dayMon, l10n.dayTue, l10n.dayWed, l10n.dayThu, l10n.dayFri, l10n.daySat, l10n.daySun];
 
     for (int weekday = 1; weekday <= 7; weekday++) {
       final dayActs = groupedByDay[weekday] ?? [];
@@ -486,8 +496,9 @@ class _DrinkScreenState extends State<DrinkScreen> {
     maxAmount = (maxAmount * 1.2).ceilToDouble(); // add some headroom
     maxFrequency = (maxFrequency * 1.2).ceilToDouble();
 
+    // Use localized date format
     final dateRangeText =
-        "${DateFormat('MMMM d, y').format(cleanStart)} - ${DateFormat('MMMM d, y').format(endOfWeek)}";
+        "${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(cleanStart)} - ${DateFormat.yMMMd(Localizations.localeOf(context).toString()).format(endOfWeek)}";
 
     return Column(
       children: [
@@ -531,7 +542,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
 
         // Amount in mL chart (real values)
         _buildLineChartCard(
-          title: 'Amount in mL',
+          title: l10n.calendarChartAmount,
           rawData: amountData,
           maxValue: maxAmount,
           days: days,
@@ -541,7 +552,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
 
         // Frequency chart (real counts)
         _buildLineChartCard(
-          title: 'Frequency (times per day)',
+          title: l10n.drinkFrequencyChartTitle,
           rawData: frequencyData,
           maxValue: maxFrequency,
           days: days,
@@ -689,7 +700,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
                       Icon(Icons.share, color: const Color(0xFF820DFF), size: 20.w),
                       SizedBox(width: 6.w),
                       Text(
-                        'Share',
+                        AppLocalizations.of(context)!.calendarShare,
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: const Color(0xFF820DFF),
@@ -811,21 +822,22 @@ class _DrinkScreenState extends State<DrinkScreen> {
 
   // ── Additional UI Helpers ──────────────────────────────────────────────────
   Widget _buildInfoSection() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         Row(
           children: [
-            Expanded(child: _buildInfoRow('Most Active Day', '')),
+            Expanded(child: _buildInfoRow(l10n.calendarMostActiveDay, '')),
             SizedBox(width: 20.w),
-            Expanded(child: _buildInfoRow('', 'Wednesday')),
+            Expanded(child: _buildInfoRow('', l10n.dayWed)),
           ],
         ),
         SizedBox(height: 8.h),
         Row(
           children: [
-            Expanded(child: _buildInfoRow('Most Active Time', '')),
+            Expanded(child: _buildInfoRow(l10n.calendarMostActiveTime, '')),
             SizedBox(width: 20.w),
-            Expanded(child: _buildInfoRow('', '9 PM')),
+            Expanded(child: _buildInfoRow('', '9 PM')), // Time format varies, leaving as is for now or use date format
           ],
         ),
       ],

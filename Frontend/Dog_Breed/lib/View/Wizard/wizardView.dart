@@ -38,7 +38,16 @@ class _WizardviewState extends State<Wizardview> {
             // Bottom Navigation Bar
             Container(
               height: 100.h,
-              color: colors.onBackground,
+              decoration: BoxDecoration(
+                color: currentPage == 0 ? null : colors.onBackground,
+                image: currentPage == 0
+                    ? const DecorationImage(
+                        image: AssetImage('assets/images/Wizard1.png'),
+                        fit: BoxFit.cover,
+                        alignment: Alignment.bottomCenter,
+                      )
+                    : null,
+              ),
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,80 +152,91 @@ class OnboardingPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    return Padding(
-      padding: EdgeInsets.all(16.r),
-      child: Column(
-        children: [
-          SizedBox(height: 60.h),
-          Text(
-            AppLocalizations.of(context)!.onboardingTitle1,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 30.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Image.asset(
+            'assets/images/Wizard1.png',
+
+            fit: BoxFit.cover,
           ),
-          SizedBox(height: 12.h),
-          Text(
-            AppLocalizations.of(context)!.onboardingDesc1,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(height: 40.h),
-          Expanded(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // Outer glow
-                Container(
-                  width: 360.w,
-                  height: 360.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFF00D9FF).withOpacity(0.6),
-                        blurRadius: 54,
-                        spreadRadius: 0,
-                        offset: Offset.zero,
+        ),
+        Padding(
+          padding: EdgeInsets.all(16.r),
+          child: Column(
+            children: [
+              SizedBox(height: 60.h),
+              Text(
+                AppLocalizations.of(context)!.onboardingTitle1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30.sp,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 12.h),
+              Text(
+                AppLocalizations.of(context)!.onboardingDesc1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 40.h),
+              Expanded(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    // Outer glow
+                    Container(
+                      width: 360.w,
+                      height: 360.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF00D9FF).withOpacity(0.4),
+                            blurRadius: 54,
+                            spreadRadius: 0,
+                            offset: Offset.zero,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    // Middle Circle
+                    Container(
+                      width: 300.w,
+                      height: 300.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: colors.onTertiary,
+                      ),
+                    ),
+                    // Inner Circle
+                    Container(
+                      width: 240.w,
+                      height: 240.w,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xFF7B2CBF),
+                      ),
+                    ),
+                    // Dog Image
+                    Image.asset(
+                      'assets/images/ddoogg 1.png',
+                      width: 350.w,
+                      height: 400.h,
+                      fit: BoxFit.contain,
+                    ),
+                  ],
                 ),
-                // Middle Circle
-                Container(
-                  width: 300.w,
-                  height: 300.w,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: colors.onTertiary,
-                  ),
-                ),
-                // Inner Circle
-                Container(
-                  width: 240.w,
-                  height: 240.w,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFF7B2CBF),
-                  ),
-                ),
-                // Dog Image
-                Image.asset(
-                  'assets/images/ddoogg 1.png',
-                  width: 350.w,
-                  height: 400.h,
-                  fit: BoxFit.contain,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

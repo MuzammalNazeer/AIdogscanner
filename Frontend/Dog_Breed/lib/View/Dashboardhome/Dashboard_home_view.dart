@@ -6,12 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/View_model/home/home_view_model.dart';
-import 'package:dog_breed/View_model/PetProvider.dart';
-import 'package:dog_breed/config/components/roundButton.dart';
 
-import 'package:dog_breed/View/MyPetsView/addPetView.dart';
 import '../../l10n/app_localizations.dart';
-import '../Calendar/add_activities_View.dart';
 import '../Calendar/calendarView.dart';
 import '../ProfileView/ProfileView.dart';
 
@@ -69,7 +65,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 shape: BoxShape.circle,
                 color: Color(0xFF820DFF),
               ),
-              child: Padding(
+              child: const Padding(
                 padding: EdgeInsets.all(4.0),
                 child: Center(
                   child: Column(

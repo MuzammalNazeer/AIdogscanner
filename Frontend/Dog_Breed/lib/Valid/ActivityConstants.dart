@@ -111,7 +111,7 @@ class ActivityConstants {
     ),
     ActivityType(
       name: 'Accident',
-      image: 'assets/images/healt.png',
+      image: 'assets/images/acc.png',
       color: Color(0xFFFDFFD9),
     ),
     ActivityType(

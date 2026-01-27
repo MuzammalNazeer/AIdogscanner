@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../View_model/locale_notifier.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class AppLanguageView extends StatefulWidget {
   const AppLanguageView({super.key});
@@ -71,7 +72,7 @@ class _AppLanguageViewState extends State<AppLanguageView> {
                   Expanded(
                     child: Center(
                       child: Text(
-                        'App Language',
+                        AppLocalizations.of(context)!.appLanguageTitle,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 30.sp,

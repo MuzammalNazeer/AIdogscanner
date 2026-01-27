@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../config/components/FAQView.dart';
 import '../../utils/routes/routes_name.dart';
 import 'listSave.dart';
@@ -43,7 +44,7 @@ class _ProfileviewState extends State<Profileview> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               child: Container(
                 height: 610.h,
                 decoration: BoxDecoration(
@@ -55,36 +56,43 @@ class _ProfileviewState extends State<Profileview> {
                     _buildSettingsTile(
                       icon: Icons.person_outline,
                       title: l10n.editProfile,
-                      onTap: () => Navigator.pushNamed(context, RoutesName.editProfile),
+                      onTap: () =>
+                          Navigator.pushNamed(context, RoutesName.editProfile),
                     ),
                     _buildSettingsTile(
-                      icon: Icons.person_outline,
-                      title:"Saved Activities",
-                      onTap: () => Navigator.pushNamed(context, RoutesName.listsave),
+                      imagePath: "assets/images/save.png",
+                      title: l10n.savedActivities,
+                      onTap: () =>
+                          Navigator.pushNamed(context, RoutesName.listsave),
                     ),
                     _buildSettingsTile(
-                      icon: Icons.lock_outline,
+                      imagePath: "assets/images/change.png",
                       title: l10n.changePassword,
-                      onTap: () => Navigator.pushNamed(context, RoutesName.changePassword),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        RoutesName.changePassword,
+                      ),
                     ),
                     _buildSettingsTile(
-                      icon: Icons.notifications_outlined,
+                      imagePath: "assets/images/notafication.png",
                       title: l10n.notifications,
-                      onTap: () => Navigator.pushNamed(context, RoutesName.notification),
+                      onTap: () =>
+                          Navigator.pushNamed(context, RoutesName.notification),
                     ),
                     _buildSettingsTile(
-                      icon: Icons.language,
+                      imagePath: "assets/images/language.png",
                       title: l10n.appLanguageTitle,
-                      onTap: () => Navigator.pushNamed(context, RoutesName.appLanguage),
+                      onTap: () =>
+                          Navigator.pushNamed(context, RoutesName.appLanguage),
                     ),
                     _buildSettingsTile(
-                      icon: Icons.diamond_outlined,
+                      imagePath: "assets/images/premium.png",
                       title: l10n.premiumSubscription,
                       onTap: () => Navigator.pushNamed(context, RoutesName.pro),
                     ),
 
                     _buildSettingsTile(
-                      icon: Icons.help_outline,
+                      imagePath: "assets/images/faq.png",
                       title: l10n.faq,
                       onTap: () {
                         Navigator.push(
@@ -98,17 +106,21 @@ class _ProfileviewState extends State<Profileview> {
                     _buildSettingsTile(
                       icon: Icons.description_outlined,
                       title: l10n.termsOfUse,
-                      onTap: () => Navigator.pushNamed(context, RoutesName.termsOfUse),
+                      onTap: () async {
+                        final Uri url = Uri.parse('https://nabatiah.com/privacy-policy/');
+                        if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+                          throw Exception('Could not launch $url');
+                        }
+                      },
                     ),
-
                     _buildSettingsTile(
-                      icon: Icons.delete_outline,
+                      imagePath: "assets/images/delete.png",
                       title: l10n.deleteOwnerProfile,
                       isRed: true,
                       onTap: () => _showDeleteConfirmationDialog(),
                     ),
                     _buildSettingsTile(
-                      icon: Icons.logout,
+                      imagePath: "assets/images/logout.png",
                       title: l10n.logout,
                       isRed: true,
                       onTap: () => _showLogoutConfirmationDialog(),
@@ -125,7 +137,8 @@ class _ProfileviewState extends State<Profileview> {
   }
 
   Widget _buildSettingsTile({
-    required IconData icon,
+    IconData? icon,
+    String? imagePath,
     required String title,
     required VoidCallback onTap,
     bool isRed = false,
@@ -133,16 +146,22 @@ class _ProfileviewState extends State<Profileview> {
   }) {
     return Column(
       children: [
-
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: ListTile(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.w,),
-            leading: Icon(
-              icon,
-              color: isRed ? Colors.red : AppColors.vibrantPurple,
-              size: 28.sp,
-            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+            leading: imagePath != null
+                ? Image.asset(
+                    imagePath,
+                    width: 33.w,
+                    height: 33.h,
+                    color: isRed ? Colors.red : AppColors.vibrantPurple,
+                  )
+                : Icon(
+                    icon,
+                    size: 33.sp,
+                    color: isRed ? Colors.red : AppColors.vibrantPurple,
+                  ),
             title: Text(
               title,
               style: TextStyle(
@@ -166,7 +185,6 @@ class _ProfileviewState extends State<Profileview> {
       ],
     );
   }
-
 
   void _showDeleteConfirmationDialog() {
     final l10n = AppLocalizations.of(context)!;
@@ -192,9 +210,9 @@ class _ProfileviewState extends State<Profileview> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(height: 80.h,),
+                  SizedBox(height: 80.h),
                   Text(
-                    "Warning! The profile and all its content will be deleted permanently and cannot be recovered. If you have an active Premium Subscription, deactivate it in your App Store Subscription settings",
+                    l10n.deleteProfileWarning,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16.sp,
@@ -262,10 +280,7 @@ class _ProfileviewState extends State<Profileview> {
             ),
             Positioned(
               top: 0,
-              child: Image.asset(
-                'assets/images/image104.png',
-                height: 230.h,
-              ),
+              child: Image.asset('assets/images/image104.png', height: 230.h),
             ),
           ],
         ),
@@ -273,14 +288,15 @@ class _ProfileviewState extends State<Profileview> {
     );
   }
 
-
   void _showLogoutConfirmationDialog() {
     final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.r),
+        ),
         title: Center(
           child: Text(
             l10n.dialogLogoutTitle,
@@ -300,7 +316,6 @@ class _ProfileviewState extends State<Profileview> {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
-
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFFDB5959),
@@ -310,7 +325,7 @@ class _ProfileviewState extends State<Profileview> {
                         elevation: 0,
                       ),
                       child: Text(
-                        "NO",
+                        l10n.no,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
@@ -329,7 +344,6 @@ class _ProfileviewState extends State<Profileview> {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(context, RoutesName.login);
-
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color(0xFF05E584),
@@ -339,7 +353,7 @@ class _ProfileviewState extends State<Profileview> {
                         elevation: 0,
                       ),
                       child: Text(
-                        "Yes",
+                        l10n.yes,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
@@ -352,14 +366,11 @@ class _ProfileviewState extends State<Profileview> {
               ],
             ),
           ),
-
         ],
       ),
     );
   }
 }
-
-
 
 // import 'package:dog_breed/Valid/AppColors.dart';
 // import 'package:flutter/material.dart';
@@ -636,7 +647,6 @@ class _ProfileviewState extends State<Profileview> {
 //
 //
 //
-
 
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';

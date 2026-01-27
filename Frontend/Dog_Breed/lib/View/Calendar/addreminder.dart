@@ -1,13 +1,12 @@
 
 import 'package:dog_breed/View/Calendar/reminderList.dart';
-import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../View_model/activity_provider.dart';
 import '../../activity_model.dart';
-import 'allActivityView.dart';
+
 import 'package:dog_breed/Valid/ActivityConstants.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
 
@@ -364,7 +363,7 @@ class _ActivityCard extends StatelessWidget {
 //               ),
 //               SizedBox(height: 12.h),
 //               RoundButton(
-//                 title: '+ Add more activities',
+//                title: AppLocalizations.of(context)!.addMoreActivities,
 //                 isSelected: true,
 //                 textColors: const Color(0xFFFFFFFF),
 //                 backgroundColors: const Color(0xFF820DFF),

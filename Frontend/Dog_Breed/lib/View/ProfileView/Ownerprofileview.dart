@@ -1,12 +1,11 @@
 import 'dart:io';
-
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import '../../l10n/app_localizations.dart';
 import '../../config/components/AddressView.dart';
 import '../../config/components/NameView.dart';
 import '../../config/components/emailview.dart';
@@ -102,7 +101,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Choose Profile Photo',
+                AppLocalizations.of(context)!.chooseProfilePhoto,
                 style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 30.h),
@@ -111,13 +110,13 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                 children: [
                   _buildPickerOption(
                     icon: Icons.camera_alt,
-                    label: 'Camera',
+                    label: AppLocalizations.of(context)!.camera,
                     onTap: () => Navigator.pop(context, ImageSource.camera),
                   ),
                   SizedBox(width: 60.w),
                   _buildPickerOption(
                     icon: Icons.photo_library,
-                    label: 'Gallery',
+                    label: AppLocalizations.of(context)!.gallery,
                     onTap: () => Navigator.pop(context, ImageSource.gallery),
                   ),
                 ],
@@ -125,7 +124,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
               SizedBox(height: 20.h),
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Cancel', style: TextStyle(fontSize: 16.sp)),
+                child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(fontSize: 16.sp)),
               ),
             ],
           ),
@@ -222,10 +221,10 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             child: Center(
                               child: Text(
-                                "Owner's Profile",
+                                AppLocalizations.of(context)!.ownersProfile,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
@@ -290,10 +289,10 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                 ),
               ),
               SizedBox(height: 16.h),
-              const Center(
+              Center(
                 child: Text(
-                  'Pet Owner',
-                  style: TextStyle(
+                  AppLocalizations.of(context)!.petOwner,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
@@ -323,7 +322,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                       },
                       child: buildProfileInputField(
                         icon: Icons.person_outline,
-                        label: 'Name',
+                        label: AppLocalizations.of(context)!.labelName,
                         value: firstName,
                         isEmpty: firstName.isEmpty,
                       ),
@@ -346,7 +345,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                       },
                       child: buildProfileInputField(
                         icon: Icons.person_outline,
-                        label: 'Last Name',
+                        label: AppLocalizations.of(context)!.lastName,
                         value: lastName,
                         isEmpty: lastName.isEmpty,
                       ),
@@ -372,15 +371,15 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                       },
                       child: buildProfileInputField(
                         icon: Icons.wc_outlined,
-                        label: 'Gender',
+                        label: AppLocalizations.of(context)!.labelGender,
                         value: gender,
                         isEmpty: gender.isEmpty,
                       ),
                     ),
                     SizedBox(height: 32.h),
 
-                    const Text(
-                      'Owner Contacts',
+                    Text(
+                      AppLocalizations.of(context)!.ownerContacts,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -430,7 +429,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                       },
                       child: buildProfileInputField(
                         icon: Icons.phone_outlined,
-                        label: 'Main Phone',
+                        label: AppLocalizations.of(context)!.mainPhone,
                         value: phone,
                         isEmpty: phone.isEmpty,
                       ),
@@ -439,24 +438,24 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
 
                     // Premium sections (unchanged)
                     _buildPremiumSection(
-                      title: 'Instant Gps Alerts Upon Tag Scan',
-                      description: 'Get instant pet location updates...',
+                      title: AppLocalizations.of(context)!.instantGpsAlerts,
+                      description: AppLocalizations.of(context)!.gpsAlertsDescription,
                     ),
                     SizedBox(height: 22.h),
                     _buildPremiumSection(
-                      title: 'Emergency Contacts',
-                      description: 'Contacts of the vet...',
+                      title: AppLocalizations.of(context)!.emergencyContacts,
+                      description: AppLocalizations.of(context)!.vetContactsDescription,
                     ),
                     SizedBox(height: 22.h),
                     _buildPremiumSection(
-                      title: 'Messenger',
-                      description: 'An alternative way to contact...',
+                      title: AppLocalizations.of(context)!.messenger,
+                      description: AppLocalizations.of(context)!.messengerDescription,
                     ),
                     SizedBox(height: 30.h),
 
-                    const Text(
-                      'Pets Place of Residence',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.petsResidence,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
@@ -472,8 +471,8 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => LocationView(
-                                  initialCountry: country,
-                                  initialCity: city,
+                                  initialCountry: AppLocalizations.of(context)!.country,
+                                  initialCity:AppLocalizations.of(context)!.hintEnterCity,
                                 ),
                               ),
                             );
@@ -490,14 +489,14 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                         children: [
                           buildProfileInputField(
                             icon: Icons.public,
-                            label: 'Country',
+                            label: AppLocalizations.of(context)!.country,
                             value: country,
                             isEmpty: false,
                           ),
                           SizedBox(height: 12.h),
                           buildProfileInputField(
                             icon: Icons.location_city_outlined,
-                            label: 'City',
+                            label: AppLocalizations.of(context)!.city,
                             value: city,
                             isEmpty: city.isEmpty,
                           ),
@@ -507,9 +506,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     SizedBox(height: 32.h),
 
                     // Address Section
-                    const Text(
-                      'Address',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.address,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
@@ -517,7 +516,6 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     ),
                     SizedBox(height: 12.h),
 
-// Conditional: Show button if empty, otherwise show saved address card
                     if (address.isEmpty)
                       SizedBox(
                         width: double.infinity,
@@ -546,7 +544,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                             elevation: 0,
                           ),
                           child: Text(
-                            'Add Address',
+                            AppLocalizations.of(context)!.addAddress,
                             style: TextStyle(
                               fontSize: 18.sp,
                               fontWeight: FontWeight.w600,
@@ -590,16 +588,16 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                                 ),
                               ),
                               SizedBox(height: 8.h),
-                              Center(
-                                child: Text(
-                                  'Add',
-                                  style: TextStyle(
-                                    fontSize: 24.sp,
-                                    color: AppColors.vibrantPurple,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
+                              // Center(
+                              //   child: Text(
+                              //     AppLocalizations.of(context)!.labelAdd,
+                              //     style: TextStyle(
+                              //       fontSize: 24.sp,
+                              //       color: AppColors.vibrantPurple,
+                              //       fontStyle: FontStyle.italic,
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -688,7 +686,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     ),
                   ),
                   Text(
-                    isEmpty ? 'Add' : value,
+                    isEmpty ? AppLocalizations.of(context)!.labelAdd : value,
                     style: TextStyle(
                       fontSize: 16.sp,
                       color: isEmpty
@@ -724,7 +722,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
         ),
         SizedBox(height: 12.h),
         RoundButton(
-          title: "GET PREMIUM",
+          title: AppLocalizations.of(context)!.getPremium,
           isSelected: true,
           height: 50.h,
           backgroundColors: AppColors.vibrantPurple,
@@ -736,7 +734,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 22.w),
           child: Text(
             description,
-            style: TextStyle(fontSize: 16.sp, color: Color(0xFF877084)),
+            style: TextStyle(fontSize: 16.sp, color: const Color(0xFF877084)),
           ),
         ),
       ],

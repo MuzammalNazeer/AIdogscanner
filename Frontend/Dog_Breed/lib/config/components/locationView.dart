@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 
+import '../../l10n/app_localizations.dart';
+
 class LocationView extends StatefulWidget {
   final String initialCountry;
   final String initialCity;
@@ -66,7 +68,7 @@ class _LocationViewState extends State<LocationView> {
 
               // Country Field
               Text(
-                'Country',
+                AppLocalizations.of(context)!.country,
                 style: TextStyle(fontSize: 18.sp, color: Colors.black87, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 8.h),
@@ -110,7 +112,7 @@ class _LocationViewState extends State<LocationView> {
 
               // City Field
               Text(
-                'City',
+                AppLocalizations.of(context)!.city,
                 style: TextStyle(fontSize: 18.sp, color: Colors.black87, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 8.h),
@@ -118,7 +120,7 @@ class _LocationViewState extends State<LocationView> {
                 controller: _cityController,
                 style: TextStyle(fontSize: 18.sp, color: Colors.black87),
                 decoration: InputDecoration(
-                  hintText: 'Enter your city',
+                  hintText: AppLocalizations.of(context)!.hintEnterCity,
                   hintStyle: TextStyle(fontSize: 18.sp, color: Colors.grey[400]),
                   filled: true,
                   fillColor: const Color(0xFFF5F5F5),
@@ -127,7 +129,7 @@ class _LocationViewState extends State<LocationView> {
                   enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: BorderSide.none),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
-                    borderSide: BorderSide(color: AppColors.vibrantPurple, width: 2),
+                    borderSide: const BorderSide(color: AppColors.vibrantPurple, width: 2),
                   ),
                 ),
               ),
@@ -148,7 +150,7 @@ class _LocationViewState extends State<LocationView> {
                       });
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Please enter your city')),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.errorEnterCity)),
                       );
                     }
                   },
@@ -158,7 +160,7 @@ class _LocationViewState extends State<LocationView> {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Save',
+                    AppLocalizations.of(context)!.save,
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                 ),

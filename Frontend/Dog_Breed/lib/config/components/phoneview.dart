@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class PhoneView extends StatefulWidget {
   final String initialPhone;
@@ -40,6 +41,7 @@ class _PhoneViewState extends State<PhoneView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -70,7 +72,7 @@ class _PhoneViewState extends State<PhoneView> {
 
               // Title
               Text(
-                'Main Phone',
+                l10n.mainPhone,
                 style: TextStyle(
                   fontSize: 32.sp,
                   fontWeight: FontWeight.w600,
@@ -142,7 +144,7 @@ class _PhoneViewState extends State<PhoneView> {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Save',
+                    l10n.save,
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                 ),

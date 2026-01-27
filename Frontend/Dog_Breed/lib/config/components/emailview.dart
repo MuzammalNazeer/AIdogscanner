@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class EmailView extends StatefulWidget {
   final String initialEmail;
@@ -34,6 +35,7 @@ class _EmailViewState extends State<EmailView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -64,7 +66,7 @@ class _EmailViewState extends State<EmailView> {
 
               // Title
               Text(
-                'Email',
+                l10n.email,
                 style: TextStyle(
                   fontSize: 32.sp,
                   fontWeight: FontWeight.w600,
@@ -124,7 +126,7 @@ class _EmailViewState extends State<EmailView> {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Save',
+                    l10n.save,
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                 ),

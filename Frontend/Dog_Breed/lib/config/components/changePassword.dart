@@ -2,6 +2,7 @@ import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class Changepassword extends StatefulWidget {
   const Changepassword({super.key});
@@ -54,7 +55,7 @@ class _ChangepasswordState extends State<Changepassword> {
                 SizedBox(height: 30.h),
                 // Title
                 Text(
-                  "Change Password",
+                  AppLocalizations.of(context)!.changePassword,
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w600,
@@ -64,7 +65,7 @@ class _ChangepasswordState extends State<Changepassword> {
                 SizedBox(height: 10.h),
                 // Subtitle
                 Text(
-                  "Create a strong, secure password to keep your account protected and accessible.",
+                  AppLocalizations.of(context)!.changePasswordSubtitle,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: Colors.grey.shade600,
@@ -75,7 +76,7 @@ class _ChangepasswordState extends State<Changepassword> {
 
                 // Form Fields
                 _buildPasswordField(
-                  title: "Current Password",
+                  title: AppLocalizations.of(context)!.currentPassword,
                   controller: _currentPasswordController,
                   obscureText: _obscureCurrent,
                   onToggleVisibility: () {
@@ -86,7 +87,7 @@ class _ChangepasswordState extends State<Changepassword> {
                 ),
                 SizedBox(height: 20.h),
                 _buildPasswordField(
-                  title: "New Password",
+                  title: AppLocalizations.of(context)!.newPassword,
                   controller: _newPasswordController,
                   obscureText: _obscureNew,
                   onToggleVisibility: () {
@@ -97,7 +98,7 @@ class _ChangepasswordState extends State<Changepassword> {
                 ),
                 SizedBox(height: 20.h),
                 _buildPasswordField(
-                  title: "Repeat Password",
+                  title: AppLocalizations.of(context)!.repeatPassword,
                   controller: _repeatPasswordController,
                   obscureText: _obscureRepeat,
                   onToggleVisibility: () {
@@ -109,7 +110,7 @@ class _ChangepasswordState extends State<Changepassword> {
                 
                 SizedBox(height: 40.h),
                 RoundButton(
-                  title: 'Change Password',
+                  title: AppLocalizations.of(context)!.changePassword,
                   isSelected: true,
                   textColors: Colors.white,
                   backgroundColors: AppColors.vibrantPurple,

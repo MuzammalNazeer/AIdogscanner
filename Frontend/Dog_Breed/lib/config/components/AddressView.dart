@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
+import 'package:dog_breed/l10n/app_localizations.dart';
 
 class AddressView extends StatefulWidget {
   final String initialAddress;
@@ -60,7 +61,7 @@ class _AddressViewState extends State<AddressView> {
 
               // Title
               Text(
-                'Address',
+                AppLocalizations.of(context)!.address,
                 style: TextStyle(
                   fontSize: 32.sp,
                   fontWeight: FontWeight.w600,
@@ -78,7 +79,7 @@ class _AddressViewState extends State<AddressView> {
                 minLines: 3,
                 style: TextStyle(fontSize: 18.sp, color: Colors.black87),
                 decoration: InputDecoration(
-                  hintText: 'Enter Address',
+                  hintText: AppLocalizations.of(context)!.enterAddress,
                   hintStyle: TextStyle(fontSize: 18.sp, color: Colors.grey[400]),
                   filled: true,
                   fillColor: const Color(0xFFF5F5F5),
@@ -109,7 +110,7 @@ class _AddressViewState extends State<AddressView> {
                       Navigator.pop(context, address);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Please enter your address')),
+                        SnackBar(content: Text(AppLocalizations.of(context)!.errorEnterAddress)),
                       );
                     }
                   },
@@ -119,7 +120,7 @@ class _AddressViewState extends State<AddressView> {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Save',
+                    AppLocalizations.of(context)!.save,
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                 ),

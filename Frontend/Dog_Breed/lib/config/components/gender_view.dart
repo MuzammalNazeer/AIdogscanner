@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 
+import '../../l10n/app_localizations.dart';
+
 class GenderView extends StatefulWidget {
   final String currentGender;
 
@@ -15,7 +17,7 @@ class GenderView extends StatefulWidget {
 class _GenderViewState extends State<GenderView> {
   late String _selectedGender;
 
-  final List<String> options = [
+  final List<String> _genderKeys = [
     'Male',
     'Female',
     'Other',
@@ -25,11 +27,28 @@ class _GenderViewState extends State<GenderView> {
   @override
   void initState() {
     super.initState();
-    _selectedGender = widget.currentGender.isEmpty ? options[0] : widget.currentGender;
+    _selectedGender = widget.currentGender.isEmpty ? _genderKeys[0] : widget.currentGender;
+  }
+
+  String _getLocalizedGender(BuildContext context, String key) {
+    final l10n = AppLocalizations.of(context)!;
+    switch (key) {
+      case 'Male':
+        return l10n.genderMale;
+      case 'Female':
+        return l10n.genderFemale;
+      case 'Other':
+        return l10n.genderOther;
+      case 'I don’t want to indicate':
+        return l10n.genderPreferNotToSay;
+      default:
+        return key;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -55,15 +74,16 @@ class _GenderViewState extends State<GenderView> {
               SizedBox(height: 20,),
               Expanded(
                 child: ListView.builder(
-                  itemCount: options.length,
+                  itemCount: _genderKeys.length,
                   itemBuilder: (context, index) {
-                    final option = options[index];
-                    final isSelected = option == _selectedGender;
+                    final key = _genderKeys[index];
+                    final isSelected = key == _selectedGender;
+                    final label = _getLocalizedGender(context, key);
 
                     return GestureDetector(
                       onTap: () {
                         setState(() {
-                          _selectedGender = option;
+                          _selectedGender = key;
                         });
                       },
                       child: Container(
@@ -78,7 +98,7 @@ class _GenderViewState extends State<GenderView> {
                           children: [
                             Expanded(
                               child: Text(
-                                option,
+                                label,
                                 style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
@@ -114,7 +134,7 @@ class _GenderViewState extends State<GenderView> {
                     elevation: 0,
                   ),
                   child: Text(
-                    'Save',
+                    l10n.save,
                     style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                 ),

@@ -2347,7 +2347,7 @@ abstract class AppLocalizations {
   /// No description provided for @identifyingTimeText.
   ///
   /// In en, this message translates to:
-  /// **'This usually takes up 1 minute...'**
+  /// **'This usually takes up to 1 minute...'**
   String get identifyingTimeText;
 
   /// No description provided for @analyzingImage.
@@ -2565,6 +2565,1764 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Good'**
   String get good;
+
+  /// No description provided for @sizeSmall.
+  ///
+  /// In en, this message translates to:
+  /// **'Small'**
+  String get sizeSmall;
+
+  /// No description provided for @sizeMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get sizeMedium;
+
+  /// No description provided for @sizeLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Large'**
+  String get sizeLarge;
+
+  /// No description provided for @sizeGiant.
+  ///
+  /// In en, this message translates to:
+  /// **'Giant'**
+  String get sizeGiant;
+
+  /// No description provided for @sizeToy.
+  ///
+  /// In en, this message translates to:
+  /// **'Toy'**
+  String get sizeToy;
+
+  /// No description provided for @sizeMiniature.
+  ///
+  /// In en, this message translates to:
+  /// **'Miniature'**
+  String get sizeMiniature;
+
+  /// No description provided for @sizeStandard.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard'**
+  String get sizeStandard;
+
+  /// No description provided for @sizeSmallToMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Small to Medium'**
+  String get sizeSmallToMedium;
+
+  /// No description provided for @sizeMediumToLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium to Large'**
+  String get sizeMediumToLarge;
+
+  /// No description provided for @levelLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get levelLow;
+
+  /// No description provided for @levelHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get levelHigh;
+
+  /// No description provided for @levelVeryHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Very High'**
+  String get levelVeryHigh;
+
+  /// No description provided for @levelLowToModerate.
+  ///
+  /// In en, this message translates to:
+  /// **'Low to Moderate'**
+  String get levelLowToModerate;
+
+  /// No description provided for @levelModerateToHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Moderate to High'**
+  String get levelModerateToHigh;
+
+  /// No description provided for @levelHighToVeryHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High to Very High'**
+  String get levelHighToVeryHigh;
+
+  /// No description provided for @traitIntelligent.
+  ///
+  /// In en, this message translates to:
+  /// **'Intelligent'**
+  String get traitIntelligent;
+
+  /// No description provided for @traitAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Alert'**
+  String get traitAlert;
+
+  /// No description provided for @traitLoyal.
+  ///
+  /// In en, this message translates to:
+  /// **'Loyal'**
+  String get traitLoyal;
+
+  /// No description provided for @traitProtective.
+  ///
+  /// In en, this message translates to:
+  /// **'Protective'**
+  String get traitProtective;
+
+  /// No description provided for @traitCalm.
+  ///
+  /// In en, this message translates to:
+  /// **'Calm'**
+  String get traitCalm;
+
+  /// No description provided for @traitGentle.
+  ///
+  /// In en, this message translates to:
+  /// **'Gentle'**
+  String get traitGentle;
+
+  /// No description provided for @traitActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get traitActive;
+
+  /// No description provided for @traitIndependent.
+  ///
+  /// In en, this message translates to:
+  /// **'Independent'**
+  String get traitIndependent;
+
+  /// No description provided for @traitConfident.
+  ///
+  /// In en, this message translates to:
+  /// **'Confident'**
+  String get traitConfident;
+
+  /// No description provided for @traitBrave.
+  ///
+  /// In en, this message translates to:
+  /// **'Brave'**
+  String get traitBrave;
+
+  /// No description provided for @traitPlayful.
+  ///
+  /// In en, this message translates to:
+  /// **'Playful'**
+  String get traitPlayful;
+
+  /// No description provided for @traitAffectionate.
+  ///
+  /// In en, this message translates to:
+  /// **'Affectionate'**
+  String get traitAffectionate;
+
+  /// No description provided for @traitStubborn.
+  ///
+  /// In en, this message translates to:
+  /// **'Stubborn'**
+  String get traitStubborn;
+
+  /// No description provided for @traitEagerToPlease.
+  ///
+  /// In en, this message translates to:
+  /// **'Eager to please'**
+  String get traitEagerToPlease;
+
+  /// No description provided for @ratingExcellent.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent'**
+  String get ratingExcellent;
+
+  /// No description provided for @ratingAverage.
+  ///
+  /// In en, this message translates to:
+  /// **'Average'**
+  String get ratingAverage;
+
+  /// No description provided for @ratingFair.
+  ///
+  /// In en, this message translates to:
+  /// **'Fair'**
+  String get ratingFair;
+
+  /// No description provided for @ratingPoor.
+  ///
+  /// In en, this message translates to:
+  /// **'Poor'**
+  String get ratingPoor;
+
+  /// No description provided for @goodWithChildren.
+  ///
+  /// In en, this message translates to:
+  /// **'Good with children'**
+  String get goodWithChildren;
+
+  /// No description provided for @goodWithFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'Good with family'**
+  String get goodWithFamily;
+
+  /// No description provided for @excellentWithChildren.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent with children'**
+  String get excellentWithChildren;
+
+  /// No description provided for @excellentWithFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent with family'**
+  String get excellentWithFamily;
+
+  /// No description provided for @coatShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Short'**
+  String get coatShort;
+
+  /// No description provided for @coatLong.
+  ///
+  /// In en, this message translates to:
+  /// **'Long'**
+  String get coatLong;
+
+  /// No description provided for @coatMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get coatMedium;
+
+  /// No description provided for @coatDouble.
+  ///
+  /// In en, this message translates to:
+  /// **'Double coat'**
+  String get coatDouble;
+
+  /// No description provided for @coatWire.
+  ///
+  /// In en, this message translates to:
+  /// **'Wire'**
+  String get coatWire;
+
+  /// No description provided for @coatSilky.
+  ///
+  /// In en, this message translates to:
+  /// **'Silky'**
+  String get coatSilky;
+
+  /// No description provided for @coatSmooth.
+  ///
+  /// In en, this message translates to:
+  /// **'Smooth'**
+  String get coatSmooth;
+
+  /// No description provided for @coatDense.
+  ///
+  /// In en, this message translates to:
+  /// **'Dense'**
+  String get coatDense;
+
+  /// No description provided for @coatFlat.
+  ///
+  /// In en, this message translates to:
+  /// **'Flat'**
+  String get coatFlat;
+
+  /// No description provided for @coatCurly.
+  ///
+  /// In en, this message translates to:
+  /// **'Curly'**
+  String get coatCurly;
+
+  /// No description provided for @coatWavy.
+  ///
+  /// In en, this message translates to:
+  /// **'Wavy'**
+  String get coatWavy;
+
+  /// No description provided for @colorBlack.
+  ///
+  /// In en, this message translates to:
+  /// **'Black'**
+  String get colorBlack;
+
+  /// No description provided for @colorWhite.
+  ///
+  /// In en, this message translates to:
+  /// **'White'**
+  String get colorWhite;
+
+  /// No description provided for @colorBrown.
+  ///
+  /// In en, this message translates to:
+  /// **'Brown'**
+  String get colorBrown;
+
+  /// No description provided for @colorRed.
+  ///
+  /// In en, this message translates to:
+  /// **'Red'**
+  String get colorRed;
+
+  /// No description provided for @colorTan.
+  ///
+  /// In en, this message translates to:
+  /// **'Tan'**
+  String get colorTan;
+
+  /// No description provided for @colorBlue.
+  ///
+  /// In en, this message translates to:
+  /// **'Blue'**
+  String get colorBlue;
+
+  /// No description provided for @colorGray.
+  ///
+  /// In en, this message translates to:
+  /// **'Gray'**
+  String get colorGray;
+
+  /// No description provided for @colorFawn.
+  ///
+  /// In en, this message translates to:
+  /// **'Fawn'**
+  String get colorFawn;
+
+  /// No description provided for @colorBrindle.
+  ///
+  /// In en, this message translates to:
+  /// **'Brindle'**
+  String get colorBrindle;
+
+  /// No description provided for @colorCream.
+  ///
+  /// In en, this message translates to:
+  /// **'Cream'**
+  String get colorCream;
+
+  /// No description provided for @colorGold.
+  ///
+  /// In en, this message translates to:
+  /// **'Gold'**
+  String get colorGold;
+
+  /// No description provided for @colorLiver.
+  ///
+  /// In en, this message translates to:
+  /// **'Liver'**
+  String get colorLiver;
+
+  /// No description provided for @colorTriColor.
+  ///
+  /// In en, this message translates to:
+  /// **'Tri-color'**
+  String get colorTriColor;
+
+  /// No description provided for @colorMerle.
+  ///
+  /// In en, this message translates to:
+  /// **'Merle'**
+  String get colorMerle;
+
+  /// No description provided for @colorSable.
+  ///
+  /// In en, this message translates to:
+  /// **'Sable'**
+  String get colorSable;
+
+  /// No description provided for @chooseProfilePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Profile Photo'**
+  String get chooseProfilePhoto;
+
+  /// No description provided for @camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get camera;
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
+
+  /// No description provided for @ownersProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner\'s Profile'**
+  String get ownersProfile;
+
+  /// No description provided for @petOwner.
+  ///
+  /// In en, this message translates to:
+  /// **'Pet Owner'**
+  String get petOwner;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
+
+  /// No description provided for @ownerContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner Contacts'**
+  String get ownerContacts;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @mainPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Main Phone'**
+  String get mainPhone;
+
+  /// No description provided for @instantGpsAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Instant Gps Alerts Upon Tag Scan'**
+  String get instantGpsAlerts;
+
+  /// No description provided for @gpsAlertsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Get instant pet location updates...'**
+  String get gpsAlertsDescription;
+
+  /// No description provided for @emergencyContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Contacts'**
+  String get emergencyContacts;
+
+  /// No description provided for @vetContactsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Contacts of the vet...'**
+  String get vetContactsDescription;
+
+  /// No description provided for @messenger.
+  ///
+  /// In en, this message translates to:
+  /// **'Messenger'**
+  String get messenger;
+
+  /// No description provided for @messengerDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'An alternative way to contact...'**
+  String get messengerDescription;
+
+  /// No description provided for @petsResidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Pets Place of Residence'**
+  String get petsResidence;
+
+  /// No description provided for @country.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get country;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @addAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Address'**
+  String get addAddress;
+
+  /// No description provided for @labelAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get labelAdd;
+
+  /// No description provided for @getPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'GET PREMIUM'**
+  String get getPremium;
+
+  /// No description provided for @recentScansTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Scans'**
+  String get recentScansTitle;
+
+  /// No description provided for @scansCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Scans'**
+  String scansCount(int count);
+
+  /// No description provided for @zeroResults.
+  ///
+  /// In en, this message translates to:
+  /// **'0 Results'**
+  String get zeroResults;
+
+  /// No description provided for @noScansMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'As soon as you’ve made your first scan,\nyour results will be logged here.'**
+  String get noScansMessage;
+
+  /// No description provided for @scanLooksLike.
+  ///
+  /// In en, this message translates to:
+  /// **'Your dog you scanned looks like this.'**
+  String get scanLooksLike;
+
+  /// No description provided for @returnAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Return'**
+  String get returnAction;
+
+  /// No description provided for @showAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Show'**
+  String get showAction;
+
+  /// No description provided for @daysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days ago'**
+  String daysAgo(int count);
+
+  /// No description provided for @hoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} hours ago'**
+  String hoursAgo(int count);
+
+  /// No description provided for @minutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} minutes ago'**
+  String minutesAgo(int count);
+
+  /// No description provided for @justNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Just now'**
+  String get justNow;
+
+  /// No description provided for @rescannedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'✅ Re-scanned: {breedName} ({confidence}% confidence)'**
+  String rescannedSuccess(String breedName, String confidence);
+
+  /// No description provided for @errorRescanning.
+  ///
+  /// In en, this message translates to:
+  /// **'Error re-scanning: {error}'**
+  String errorRescanning(Object error);
+
+  /// No description provided for @changePasswordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a strong, secure password to keep your account protected and accessible.'**
+  String get changePasswordSubtitle;
+
+  /// No description provided for @currentPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Password'**
+  String get currentPassword;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get newPassword;
+
+  /// No description provided for @repeatPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat Password'**
+  String get repeatPassword;
+
+  /// No description provided for @faqQuestion1.
+  ///
+  /// In en, this message translates to:
+  /// **'How can I register a pet?'**
+  String get faqQuestion1;
+
+  /// No description provided for @faqAnswer1.
+  ///
+  /// In en, this message translates to:
+  /// **'You can register your pet by going to the \"Add Pet\" section, filling in the required details (name, breed, age, etc.), and attaching a photo. Once registered, you’ll receive a unique QR pet tag ID.'**
+  String get faqAnswer1;
+
+  /// No description provided for @faqQuestion2.
+  ///
+  /// In en, this message translates to:
+  /// **'Why should I register my pet?'**
+  String get faqQuestion2;
+
+  /// No description provided for @faqAnswer2.
+  ///
+  /// In en, this message translates to:
+  /// **'Registering your pet helps in case they get lost. Anyone who finds your pet can scan the QR tag and instantly contact you with the pet’s location.'**
+  String get faqAnswer2;
+
+  /// No description provided for @faqQuestion3.
+  ///
+  /// In en, this message translates to:
+  /// **'QR pet tag activation?'**
+  String get faqQuestion3;
+
+  /// No description provided for @faqAnswer3.
+  ///
+  /// In en, this message translates to:
+  /// **'After registering, you’ll get a digital or physical QR tag. Scan it with any phone camera to link it to your pet’s profile. No app needed for finders!'**
+  String get faqAnswer3;
+
+  /// No description provided for @faqQuestion4.
+  ///
+  /// In en, this message translates to:
+  /// **'How does QR code scanning work?'**
+  String get faqQuestion4;
+
+  /// No description provided for @faqAnswer4.
+  ///
+  /// In en, this message translates to:
+  /// **'Anyone can scan the QR tag using their phone’s camera. It opens a web page with your contact info and pet details so they can reach you immediately.'**
+  String get faqAnswer4;
+
+  /// No description provided for @faqQuestion5.
+  ///
+  /// In en, this message translates to:
+  /// **'Who can register a pet?'**
+  String get faqQuestion5;
+
+  /// No description provided for @faqAnswer5.
+  ///
+  /// In en, this message translates to:
+  /// **'Any pet owner can register their dog, cat, or other companion animal.'**
+  String get faqAnswer5;
+
+  /// No description provided for @faqQuestion6.
+  ///
+  /// In en, this message translates to:
+  /// **'How can I change my data?'**
+  String get faqQuestion6;
+
+  /// No description provided for @faqAnswer6.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Profile → tap any field (Name, Email, Phone, etc.) to edit and save.'**
+  String get faqAnswer6;
+
+  /// No description provided for @faqQuestion7.
+  ///
+  /// In en, this message translates to:
+  /// **'How can I change my pet\'s data?'**
+  String get faqQuestion7;
+
+  /// No description provided for @faqAnswer7.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to your pet’s profile and tap the edit button to update name, breed, photos, etc.'**
+  String get faqAnswer7;
+
+  /// No description provided for @faqQuestion8.
+  ///
+  /// In en, this message translates to:
+  /// **'What is a pet ID number?'**
+  String get faqQuestion8;
+
+  /// No description provided for @faqAnswer8.
+  ///
+  /// In en, this message translates to:
+  /// **'It’s a unique identifier linked to your pet’s QR tag for quick identification.'**
+  String get faqAnswer8;
+
+  /// No description provided for @faqQuestion9.
+  ///
+  /// In en, this message translates to:
+  /// **'My pet is lost what should I do?'**
+  String get faqQuestion9;
+
+  /// No description provided for @faqAnswer9.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark your pet as \"Lost\" in the app. This alerts anyone who scans the tag and shows your emergency contact info.'**
+  String get faqAnswer9;
+
+  /// No description provided for @savedActivities.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved Activities'**
+  String get savedActivities;
+
+  /// No description provided for @deleteProfileWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning! The profile and all its content will be deleted permanently and cannot be recovered. If you have an active Premium Subscription, deactivate it in your App Store Subscription settings'**
+  String get deleteProfileWarning;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'NO'**
+  String get no;
+
+  /// No description provided for @enterAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Address'**
+  String get enterAddress;
+
+  /// No description provided for @errorEnterAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your address'**
+  String get errorEnterAddress;
+
+  /// No description provided for @enterFirstName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the first name'**
+  String get enterFirstName;
+
+  /// No description provided for @allowNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow Notifications'**
+  String get allowNotifications;
+
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Email'**
+  String get enterEmail;
+
+  /// No description provided for @errorEnterValidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get errorEnterValidEmail;
+
+  /// No description provided for @genderPreferNotToSay.
+  ///
+  /// In en, this message translates to:
+  /// **'I don’t want to indicate'**
+  String get genderPreferNotToSay;
+
+  /// No description provided for @enterLastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the Last Name'**
+  String get enterLastName;
+
+  /// No description provided for @errorEnterValidPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid phone number'**
+  String get errorEnterValidPhone;
+
+  /// No description provided for @drinkCalculator.
+  ///
+  /// In en, this message translates to:
+  /// **'Drink Calculator'**
+  String get drinkCalculator;
+
+  /// No description provided for @drinkFrequencyChartTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequency (times per day)'**
+  String get drinkFrequencyChartTitle;
+
+  /// No description provided for @drinkCalcDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculate daily water intake your dog needs\naccording to weight and activity level for\nhealthy hydration every day'**
+  String get drinkCalcDescription;
+
+  /// No description provided for @currentWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Weight'**
+  String get currentWeight;
+
+  /// No description provided for @hintWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight'**
+  String get hintWeight;
+
+  /// No description provided for @yourDogWillNeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Dog will need'**
+  String get yourDogWillNeed;
+
+  /// No description provided for @perDay.
+  ///
+  /// In en, this message translates to:
+  /// **'/ day'**
+  String get perDay;
+
+  /// No description provided for @unitPounds.
+  ///
+  /// In en, this message translates to:
+  /// **'Pounds'**
+  String get unitPounds;
+
+  /// No description provided for @unitKilograms.
+  ///
+  /// In en, this message translates to:
+  /// **'Kilograms'**
+  String get unitKilograms;
+
+  /// No description provided for @unitOunces.
+  ///
+  /// In en, this message translates to:
+  /// **'Ounces'**
+  String get unitOunces;
+
+  /// No description provided for @unitGrams.
+  ///
+  /// In en, this message translates to:
+  /// **'Grams'**
+  String get unitGrams;
+
+  /// No description provided for @unitMilliliters.
+  ///
+  /// In en, this message translates to:
+  /// **'Milliliters'**
+  String get unitMilliliters;
+
+  /// No description provided for @unitCentiliters.
+  ///
+  /// In en, this message translates to:
+  /// **'Centiliters'**
+  String get unitCentiliters;
+
+  /// No description provided for @unitLiters.
+  ///
+  /// In en, this message translates to:
+  /// **'Liters'**
+  String get unitLiters;
+
+  /// No description provided for @unitUSFluidOunces.
+  ///
+  /// In en, this message translates to:
+  /// **'US Fluid Ounces'**
+  String get unitUSFluidOunces;
+
+  /// No description provided for @unitUKFluidOunces.
+  ///
+  /// In en, this message translates to:
+  /// **'UK Fluid Ounces'**
+  String get unitUKFluidOunces;
+
+  /// No description provided for @activityLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity level'**
+  String get activityLevel;
+
+  /// No description provided for @unitSymbolMl.
+  ///
+  /// In en, this message translates to:
+  /// **'mL'**
+  String get unitSymbolMl;
+
+  /// No description provided for @unitSymbolCl.
+  ///
+  /// In en, this message translates to:
+  /// **'cL'**
+  String get unitSymbolCl;
+
+  /// No description provided for @unitSymbolL.
+  ///
+  /// In en, this message translates to:
+  /// **'L'**
+  String get unitSymbolL;
+
+  /// No description provided for @unitSymbolUsFlOz.
+  ///
+  /// In en, this message translates to:
+  /// **'US fl oz'**
+  String get unitSymbolUsFlOz;
+
+  /// No description provided for @unitSymbolUkFlOz.
+  ///
+  /// In en, this message translates to:
+  /// **'UK fl oz'**
+  String get unitSymbolUkFlOz;
+
+  /// No description provided for @breedAnalysisTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Breed Analysis'**
+  String get breedAnalysisTitle;
+
+  /// No description provided for @viewHistoryTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'View History'**
+  String get viewHistoryTooltip;
+
+  /// No description provided for @newScanTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'New Scan'**
+  String get newScanTooltip;
+
+  /// No description provided for @scanAnotherButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Another'**
+  String get scanAnotherButton;
+
+  /// No description provided for @confidentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confident'**
+  String get confidentLabel;
+
+  /// No description provided for @aiAnalysisComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Analysis Complete'**
+  String get aiAnalysisComplete;
+
+  /// No description provided for @breedIdentified.
+  ///
+  /// In en, this message translates to:
+  /// **'Breed Identified'**
+  String get breedIdentified;
+
+  /// No description provided for @primaryPurpose.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Purpose: {purpose}'**
+  String primaryPurpose(String purpose);
+
+  /// No description provided for @confidenceLevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence Level'**
+  String get confidenceLevel;
+
+  /// No description provided for @physicalCharacteristicsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Physical Characteristics'**
+  String get physicalCharacteristicsTitle;
+
+  /// No description provided for @coatType.
+  ///
+  /// In en, this message translates to:
+  /// **'Coat Type'**
+  String get coatType;
+
+  /// No description provided for @bodyStructure.
+  ///
+  /// In en, this message translates to:
+  /// **'Body Structure'**
+  String get bodyStructure;
+
+  /// No description provided for @temperamentAndBehaviorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Temperament & Behavior'**
+  String get temperamentAndBehaviorTitle;
+
+  /// No description provided for @additionalInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Additional Information'**
+  String get additionalInfoTitle;
+
+  /// No description provided for @ageGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Age Group'**
+  String get ageGroup;
+
+  /// No description provided for @weightRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight Range'**
+  String get weightRange;
+
+  /// No description provided for @documentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents'**
+  String get documentsTitle;
+
+  /// No description provided for @addDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Document'**
+  String get addDocument;
+
+  /// No description provided for @documentCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} documents'**
+  String documentCount(int count);
+
+  /// No description provided for @noDocumentsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No documents found'**
+  String get noDocumentsFound;
+
+  /// No description provided for @noMatchingDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching documents'**
+  String get noMatchingDocuments;
+
+  /// No description provided for @uploadFirstDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap + to upload your first document'**
+  String get uploadFirstDocument;
+
+  /// No description provided for @tryDifferentSearchTerm.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a different search term'**
+  String get tryDifferentSearchTerm;
+
+  /// No description provided for @documentDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Document deleted'**
+  String get documentDeleted;
+
+  /// No description provided for @searchPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Search...'**
+  String get searchPlaceholder;
+
+  /// No description provided for @openDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Document'**
+  String get openDocument;
+
+  /// No description provided for @viewDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'View Details'**
+  String get viewDetails;
+
+  /// No description provided for @editDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Document'**
+  String get editDocument;
+
+  /// No description provided for @deleteDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Document'**
+  String get deleteDocument;
+
+  /// No description provided for @deleteDocumentConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{title}\"?'**
+  String deleteDocumentConfirmation(String title);
+
+  /// No description provided for @documentDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Document deleted successfully'**
+  String get documentDeletedSuccess;
+
+  /// No description provided for @documentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Document Details'**
+  String get documentDetails;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @fileType.
+  ///
+  /// In en, this message translates to:
+  /// **'File Type'**
+  String get fileType;
+
+  /// No description provided for @fileSize.
+  ///
+  /// In en, this message translates to:
+  /// **'File Size'**
+  String get fileSize;
+
+  /// No description provided for @uploadDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Date'**
+  String get uploadDate;
+
+  /// No description provided for @filePath.
+  ///
+  /// In en, this message translates to:
+  /// **'File Path'**
+  String get filePath;
+
+  /// No description provided for @notSavedLocally.
+  ///
+  /// In en, this message translates to:
+  /// **'Not saved locally'**
+  String get notSavedLocally;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @documentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Document Title'**
+  String get documentTitle;
+
+  /// No description provided for @documentUpdatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Document updated successfully'**
+  String get documentUpdatedSuccess;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @daysAgoShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}d ago'**
+  String daysAgoShort(int count);
+
+  /// No description provided for @weeksAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}w ago'**
+  String weeksAgo(int count);
+
+  /// No description provided for @catMedicalCare.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical & Care'**
+  String get catMedicalCare;
+
+  /// No description provided for @catLegalLicensing.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal & Licensing'**
+  String get catLegalLicensing;
+
+  /// No description provided for @catCoverageFinance.
+  ///
+  /// In en, this message translates to:
+  /// **'Coverage & Finance'**
+  String get catCoverageFinance;
+
+  /// No description provided for @catLearningBehavior.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning & Behavior'**
+  String get catLearningBehavior;
+
+  /// No description provided for @catTransitBoarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Transit & Boarding'**
+  String get catTransitBoarding;
+
+  /// No description provided for @catCriticalSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Critical & Support'**
+  String get catCriticalSupport;
+
+  /// No description provided for @catBloodlineStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloodline and stock'**
+  String get catBloodlineStock;
+
+  /// No description provided for @catNutritionIntake.
+  ///
+  /// In en, this message translates to:
+  /// **'Nutrition and intake'**
+  String get catNutritionIntake;
+
+  /// No description provided for @catMaintenanceLook.
+  ///
+  /// In en, this message translates to:
+  /// **'Maintenance and look'**
+  String get catMaintenanceLook;
+
+  /// No description provided for @catOtherDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Other Documents'**
+  String get catOtherDocuments;
+
+  /// No description provided for @catAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get catAll;
+
+  /// No description provided for @documentUploadedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Document uploaded successfully!'**
+  String get documentUploadedSuccess;
+
+  /// No description provided for @documentUploadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to upload document: {error}'**
+  String documentUploadFailed(Object error);
+
+  /// No description provided for @addDocumentDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Document Details'**
+  String get addDocumentDetails;
+
+  /// No description provided for @docVaccinationRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'Vaccination Records'**
+  String get docVaccinationRecords;
+
+  /// No description provided for @docPetInsurancePolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Pet Insurance Policy'**
+  String get docPetInsurancePolicy;
+
+  /// No description provided for @docAdoptionCertificate.
+  ///
+  /// In en, this message translates to:
+  /// **'Adoption Certificate'**
+  String get docAdoptionCertificate;
+
+  /// No description provided for @docTrainingCertificate.
+  ///
+  /// In en, this message translates to:
+  /// **'Training Certificate'**
+  String get docTrainingCertificate;
+
+  /// No description provided for @docMedicalCheckupReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical Checkup Report'**
+  String get docMedicalCheckupReport;
+
+  /// No description provided for @labelCountry.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get labelCountry;
+
+  /// No description provided for @labelCity.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get labelCity;
+
+  /// No description provided for @hintEnterCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your city'**
+  String get hintEnterCity;
+
+  /// No description provided for @errorEnterCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your city'**
+  String get errorEnterCity;
+
+  /// No description provided for @addMoreActivities.
+  ///
+  /// In en, this message translates to:
+  /// **'+ Add more activities'**
+  String get addMoreActivities;
+
+  /// No description provided for @selectDateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Date'**
+  String get selectDateTitle;
+
+  /// No description provided for @enterDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Date'**
+  String get enterDate;
+
+  /// No description provided for @dateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'MM/DD/YYYY'**
+  String get dateHint;
+
+  /// No description provided for @okAction.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get okAction;
+
+  /// No description provided for @dateRangeError.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a date between 2020-2030'**
+  String get dateRangeError;
+
+  /// No description provided for @enjoyingApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Enjoying the app?'**
+  String get enjoyingApp;
+
+  /// No description provided for @tapToRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to rate:'**
+  String get tapToRate;
+
+  /// No description provided for @rateUsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Us'**
+  String get rateUsAction;
+
+  /// No description provided for @selectStars.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Stars'**
+  String get selectStars;
+
+  /// No description provided for @sorryToHear.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'re sorry to hear that'**
+  String get sorryToHear;
+
+  /// No description provided for @feedbackImprove.
+  ///
+  /// In en, this message translates to:
+  /// **'What can we do better? Your feedback helps us improve.'**
+  String get feedbackImprove;
+
+  /// No description provided for @feedbackHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us what we can improve...'**
+  String get feedbackHint;
+
+  /// No description provided for @submitFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Feedback'**
+  String get submitFeedback;
+
+  /// No description provided for @errorAppStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open app store. Please try again later.'**
+  String get errorAppStore;
+
+  /// No description provided for @errorOpenStore.
+  ///
+  /// In en, this message translates to:
+  /// **'Error opening app store.'**
+  String get errorOpenStore;
+
+  /// No description provided for @errorShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to open share options. Error: {error}'**
+  String errorShare(Object error);
+
+  /// No description provided for @linkCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Link copied to clipboard! You can now paste and share it.'**
+  String get linkCopied;
+
+  /// No description provided for @copyFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to copy to clipboard.'**
+  String get copyFailed;
+
+  /// No description provided for @shareApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Share App'**
+  String get shareApp;
+
+  /// No description provided for @copyLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy Link'**
+  String get copyLink;
+
+  /// No description provided for @shareWhatsApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Share via WhatsApp'**
+  String get shareWhatsApp;
+
+  /// No description provided for @shareEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Share via Email'**
+  String get shareEmail;
+
+  /// No description provided for @shareSMS.
+  ///
+  /// In en, this message translates to:
+  /// **'Share via SMS'**
+  String get shareSMS;
+
+  /// No description provided for @chooseShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose how you want to share:'**
+  String get chooseShare;
+
+  /// No description provided for @copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copy;
+
+  /// No description provided for @whatsapp.
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp'**
+  String get whatsapp;
+
+  /// No description provided for @more.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get more;
+
+  /// No description provided for @feedbackThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for your feedback!'**
+  String get feedbackThanks;
+
+  /// No description provided for @themeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get themeTitle;
+
+  /// No description provided for @darkTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get darkTheme;
+
+  /// No description provided for @lightTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get lightTheme;
+
+  /// No description provided for @myFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'My Favorites'**
+  String get myFavorites;
+
+  /// No description provided for @feedbackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedbackTitle;
+
+  /// No description provided for @rateUsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate us'**
+  String get rateUsTitle;
+
+  /// No description provided for @shareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get shareTitle;
+
+  /// No description provided for @myPremiumService.
+  ///
+  /// In en, this message translates to:
+  /// **'My Premium Service'**
+  String get myPremiumService;
+
+  /// No description provided for @shareMessageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check out Dog Breed - an amazing app for dog lovers!'**
+  String get shareMessageBody;
+
+  /// No description provided for @shareIOS.
+  ///
+  /// In en, this message translates to:
+  /// **'📱 Discover Dog Breed on the App Store!'**
+  String get shareIOS;
+
+  /// No description provided for @shareAndroid.
+  ///
+  /// In en, this message translates to:
+  /// **'📱 Get Dog Breed on Google Play!'**
+  String get shareAndroid;
+
+  /// No description provided for @shareDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'📱 Check out Dog Breed!'**
+  String get shareDefault;
+
+  /// No description provided for @shareSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Dog Breed App'**
+  String get shareSubject;
+
+  /// No description provided for @dashboardHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard Home'**
+  String get dashboardHome;
+
+  /// No description provided for @saveResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Results'**
+  String get saveResults;
+
+  /// No description provided for @addAsPet.
+  ///
+  /// In en, this message translates to:
+  /// **'Add as Pet'**
+  String get addAsPet;
+
+  /// No description provided for @analyzingWithAI.
+  ///
+  /// In en, this message translates to:
+  /// **'Analyzing with AI Model...'**
+  String get analyzingWithAI;
+
+  /// No description provided for @connectingToServer.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting to Server...'**
+  String get connectingToServer;
+
+  /// No description provided for @offlineMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline Mode - Local AI'**
+  String get offlineMode;
+
+  /// No description provided for @onlineMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Online Mode - Server API'**
+  String get onlineMode;
+
+  /// No description provided for @totalBreeds.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Breeds: {count}'**
+  String totalBreeds(int count);
+
+  /// No description provided for @switchToOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to Online'**
+  String get switchToOnline;
+
+  /// No description provided for @switchToOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to Offline'**
+  String get switchToOffline;
+
+  /// No description provided for @dogIdentifierTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dog Identifier'**
+  String get dogIdentifierTitle;
+
+  /// No description provided for @selectDogImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a dog image'**
+  String get selectDogImage;
+
+  /// No description provided for @errorOfflineModelNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline model not available. Please check if model files are in place.'**
+  String get errorOfflineModelNotAvailable;
+
+  /// No description provided for @errorNoInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection available.\n\nPlease switch to Offline Mode to analyze images.'**
+  String get errorNoInternet;
+
+  /// No description provided for @errorOnlinePredictionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Online prediction failed: {error}\n\nPlease switch to Offline Mode for local analysis.'**
+  String errorOnlinePredictionFailed(Object error);
+
+  /// No description provided for @errorOfflinePredictionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline prediction failed: {error}'**
+  String errorOfflinePredictionFailed(Object error);
+
+  /// No description provided for @adult.
+  ///
+  /// In en, this message translates to:
+  /// **'Adult'**
+  String get adult;
+
+  /// No description provided for @variesByBreed.
+  ///
+  /// In en, this message translates to:
+  /// **'Varies by Breed'**
+  String get variesByBreed;
+
+  /// No description provided for @breedSpecific.
+  ///
+  /// In en, this message translates to:
+  /// **'Breed-Specific'**
+  String get breedSpecific;
+
+  /// No description provided for @balanced.
+  ///
+  /// In en, this message translates to:
+  /// **'Balanced'**
+  String get balanced;
+
+  /// No description provided for @doubleCoat.
+  ///
+  /// In en, this message translates to:
+  /// **'Double Coat'**
+  String get doubleCoat;
+
+  /// No description provided for @wellProportioned.
+  ///
+  /// In en, this message translates to:
+  /// **'Well Proportioned'**
+  String get wellProportioned;
+
+  /// No description provided for @various.
+  ///
+  /// In en, this message translates to:
+  /// **'Various'**
+  String get various;
+
+  /// No description provided for @companion.
+  ///
+  /// In en, this message translates to:
+  /// **'Companion'**
+  String get companion;
+
+  /// No description provided for @noRecentScans.
+  ///
+  /// In en, this message translates to:
+  /// **'No recent scans'**
+  String get noRecentScans;
+
+  /// No description provided for @scanDogPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan a dog to see results here'**
+  String get scanDogPrompt;
+
+  /// No description provided for @notAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'N/A'**
+  String get notAvailable;
+
+  /// No description provided for @height.
+  ///
+  /// In en, this message translates to:
+  /// **'Height'**
+  String get height;
 }
 
 class _AppLocalizationsDelegate
