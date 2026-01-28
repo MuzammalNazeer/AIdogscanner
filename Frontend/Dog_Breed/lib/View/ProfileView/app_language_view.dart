@@ -13,11 +13,6 @@ class AppLanguageView extends StatefulWidget {
 }
 
 class _AppLanguageViewState extends State<AppLanguageView> {
-  final List<String> _regions = const [
-    'English',
-    'Deutsch',
-    'Espanol',
-  ];
 
   final Map<String, Locale> _languages = const {
     'English': Locale('en'),
@@ -37,7 +32,6 @@ class _AppLanguageViewState extends State<AppLanguageView> {
     'Finnish': Locale('fi'),
   };
 
-  String _selectedRegion = 'English';
   String? _selectedLanguageCode;
 
   @override

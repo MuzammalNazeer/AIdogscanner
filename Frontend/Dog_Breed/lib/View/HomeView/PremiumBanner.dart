@@ -13,7 +13,6 @@ class PremiumBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 6.w),
 
@@ -40,16 +39,16 @@ class PremiumBanner extends StatelessWidget {
           ),
           SizedBox(width: 12.w),
           SizedBox(
-            height: 30.h, // Set a fixed height for the button area
+            height: 30.h,
             child: ElevatedButton(
               onPressed: onGetIt,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFE5A905),
+                backgroundColor: const Color(0xFFE5A905),
                 padding: EdgeInsets.symmetric(horizontal: 25 .w),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius
                     .circular(4.r)),
                 elevation: 0,
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Shrinks the tap area
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               child: Text(AppLocalizations.of(context)!.getIt, style: TextStyle(fontFamily: 'Inter',
                   fontSize: 12.sp,  color: Colors.white)),

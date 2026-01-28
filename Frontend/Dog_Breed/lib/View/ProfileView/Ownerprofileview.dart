@@ -225,7 +225,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                             child: Center(
                               child: Text(
                                 AppLocalizations.of(context)!.ownersProfile,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
@@ -380,7 +380,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
 
                     Text(
                       AppLocalizations.of(context)!.ownerContacts,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,

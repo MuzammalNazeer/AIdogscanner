@@ -123,7 +123,7 @@ class _ProviewState extends State<Proview> {
                   fontSize: 16.sp,
                   height: 45.2 / 16,
                   letterSpacing: 0,
-                  color: Color(0xFF6F7D86),
+                  color: const Color(0xFF6F7D86),
                   fontFamily: "Inter",
                 ),
               ),
@@ -136,7 +136,7 @@ class _ProviewState extends State<Proview> {
                     Text(
                       AppLocalizations.of(context)!.premium,
                       style: TextStyle(
-                        color:  Color(0xFF6F7D86),
+                        color:  const Color(0xFF6F7D86),
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                       ),
@@ -145,7 +145,7 @@ class _ProviewState extends State<Proview> {
                     Text(
                       AppLocalizations.of(context)!.free,
                       style: TextStyle(
-                        color:  Color(0xFF6F7D86),
+                        color:  const Color(0xFF6F7D86),
                         fontWeight: FontWeight.bold,
                         fontSize: 15.sp,
                       ),

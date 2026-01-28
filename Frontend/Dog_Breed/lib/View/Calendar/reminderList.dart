@@ -254,7 +254,7 @@ class _ReminderlistState extends State<Reminderlist> {
       activityNotifier.addActivity(newActivity);
 
       // Schedule reminder if set
-      if (_hasReminder && reminderDateTime != null) {
+      if (_hasReminder) {
         final reminderId = await reminderNotifier.scheduleReminder(
           activity: newActivity,
           reminderDateTime: reminderDateTime,
@@ -387,7 +387,7 @@ class _ReminderlistState extends State<Reminderlist> {
   Widget build(BuildContext context) {
     final dateFormat = DateFormat.yMd(Localizations.localeOf(context).toString());
     final timeFormat = DateFormat.jm(Localizations.localeOf(context).toString());
-    final String activityName = _currentActivity?.name.toLowerCase() ?? '';
+    final String _ = _currentActivity?.name.toLowerCase() ?? '';
 
     return Scaffold(
       backgroundColor: Colors.white,

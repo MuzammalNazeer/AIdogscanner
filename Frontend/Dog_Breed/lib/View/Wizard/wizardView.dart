@@ -247,7 +247,7 @@ class OnboardingPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final bool isDarkTheme = Theme.of(context).brightness == Brightness.dark;
+    final bool _ = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding:  EdgeInsets.all(16.r),
       child: Column(

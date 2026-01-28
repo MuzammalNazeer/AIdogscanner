@@ -100,7 +100,7 @@ class _WalkviewState extends State<Walkview> {
         shadowColor: Colors.black.withOpacity(0.1),
         title: Text(
           AppLocalizations.of(context)!.walkDeleteTitle,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
             color: Colors.black,
@@ -108,7 +108,7 @@ class _WalkviewState extends State<Walkview> {
         ),
         content: Text(
           AppLocalizations.of(context)!.walkDeleteContent,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             color: Colors.grey,
           ),
@@ -151,7 +151,7 @@ class _WalkviewState extends State<Walkview> {
         SnackBar(
           content: Text(
             AppLocalizations.of(context)!.walkStartTimerWarning,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),

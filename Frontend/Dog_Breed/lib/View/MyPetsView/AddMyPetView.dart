@@ -82,10 +82,7 @@ class _AddmypetviewState extends State<Addmypetview> {
   void initState() {
     super.initState();
 
-    // REMOVE DEFAULT VALUES - Let user input them
-    // _nameController.text = 'Super Dog';
-    // _selectedGender = 'Male';
-    // _selectedDate = DateTime(2020, 2, 2);
+
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final args =
@@ -174,23 +171,11 @@ class _AddmypetviewState extends State<Addmypetview> {
 
     Provider.of<PetProvider>(context, listen: false).addPet(newPet);
 
-    // // Show success message
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   const SnackBar(
-    //     content: Text('Pet added successfully!'),
-    //     backgroundColor: Colors.green,
-    //     duration: Duration(seconds: 1),
-    //   ),
-    // );
+
     final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
-    homeViewModel.selectedIndex = 1; // Index for MyPetsView
+    homeViewModel.selectedIndex = 1;
     Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
-    // Navigate to MyPetsView via Dashboard
-    // Future.delayed(const Duration(milliseconds: 500), () {
-    //   final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
-    //   homeViewModel.selectedIndex = 2; // Index for MyPetsView
-    //   Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
-    // });
+
   }
 
   @override

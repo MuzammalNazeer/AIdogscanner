@@ -1,4 +1,3 @@
-// Forgotpasswordemailview.dart
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import '../../Valid/AppColors.dart';
 import '../../config/components/common_input_field.dart';
 import '../../config/components/roundButton.dart';
 import '../../database/AuthService.dart';
-import '../../database/DatabaseHelper.dart';
 import '../../utils/routes/routes_name.dart';
 
 class Forgotpasswordemailview extends StatefulWidget {
@@ -190,7 +188,7 @@ class _ForgotpasswordemailviewState extends State<Forgotpasswordemailview> {
                 ),
                 SizedBox(height: 25.h),
                 if (_isLoading)
-                  Center(
+                  const Center(
                     child: CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(AppColors.vibrantPurple),
                     ),
@@ -215,34 +213,6 @@ class _ForgotpasswordemailviewState extends State<Forgotpasswordemailview> {
     );
   }
 
-  // Optional: For testing - shows registered users
-  Widget _buildTestUsersList() {
-    return FutureBuilder<List<Map<String, dynamic>>>(
-      future: DatabaseHelper().getAllUsers(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        }
-
-        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Registered emails (for testing):',
-                style: TextStyle(fontSize: 12.sp),
-              ),
-              ...snapshot.data!.map((user) => Text(
-                '${user[DatabaseHelper().colUsername]} - ${user[DatabaseHelper().colEmail]}',
-                style: TextStyle(fontSize: 10.sp, color: Colors.grey),
-              )).toList(),
-            ],
-          );
-        }
-        return const SizedBox();
-      },
-    );
-  }
 }
 
 

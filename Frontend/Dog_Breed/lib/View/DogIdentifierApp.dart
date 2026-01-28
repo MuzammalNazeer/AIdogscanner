@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +10,6 @@ import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
-// Removed: import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 class PredictionResult {
   final String breed;
@@ -272,7 +272,9 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
         _loading = false;
       });
     } catch (e, stackTrace) {
-      print('Offline prediction error: $e\n$stackTrace');
+      if (kDebugMode) {
+        print('Offline prediction error: $e\n$stackTrace');
+      }
       if (mounted) {
         final l10n = AppLocalizations.of(context)!;
         setState(() {
@@ -490,7 +492,7 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
               // Breed name on left
               Expanded(
                 child: Text(
-                  result.breed,
+                  _getLocalizedBreedName(context, result.breed),
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
@@ -871,6 +873,136 @@ class _DogIdentifierAppState extends State<DogIdentifierApp> {
   void dispose() {
     _interpreter?.close();
     super.dispose();
+  }
+
+  String _getLocalizedBreedName(BuildContext context, String breed) {
+    // Normalize: remove spaces, hyphens, and underscores to match localization keys
+    final normalized = breed.replaceAll(' ', '').replaceAll('-', '').replaceAll('_', '').toLowerCase();
+    final loc = AppLocalizations.of(context)!;
+
+    switch (normalized) {
+      case 'affenpinscher': return loc.breedAffenpinscher;
+      case 'afghanhound': return loc.breedAfghanHound;
+      case 'africanhuntingdog': return loc.breedAfricanHuntingDog;
+      case 'airedale': return loc.breedAiredale;
+      case 'americanstaffordshireterrier': return loc.breedAmericanStaffordshireTerrier;
+      case 'appenzeller': return loc.breedAppenzeller;
+      case 'australianterrier': return loc.breedAustralianTerrier;
+      case 'basenji': return loc.breedBasenji;
+      case 'basset': return loc.breedBasset;
+      case 'beagle': return loc.breedBeagle;
+      case 'bedlingtonterrier': return loc.breedBedlingtonTerrier;
+      case 'bernesemountaindog': return loc.breedBerneseMountainDog;
+      case 'blackandtancoonhound': return loc.breedBlackAndTanCoonhound;
+      case 'blenheimspaniel': return loc.breedBlenheimSpaniel;
+      case 'bloodhound': return loc.breedBloodhound;
+      case 'bluetick': return loc.breedBluetick;
+      case 'bordercollie': return loc.breedBorderCollie;
+      case 'borderterrier': return loc.breedBorderTerrier;
+      case 'borzoi': return loc.breedBorzoi;
+      case 'bostonbull': return loc.breedBostonBull;
+      case 'bouvierdesflandres': return loc.breedBouvierDesFlandres;
+      case 'boxer': return loc.breedBoxer;
+      case 'brabancongriffon': return loc.breedBrabanconGriffon;
+      case 'briard': return loc.breedBriard;
+      case 'brittanyspaniel': return loc.breedBrittanySpaniel;
+      case 'bullmastiff': return loc.breedBullMastiff;
+      case 'cairn': return loc.breedCairn;
+      case 'cardigan': return loc.breedCardigan;
+      case 'chesapeakebayretriever': return loc.breedChesapeakeBayRetriever;
+      case 'chihuahua': return loc.breedChihuahua;
+      case 'chow': return loc.breedChow;
+      case 'clumber': return loc.breedClumber;
+      case 'cockerspaniel': return loc.breedCockerSpaniel;
+      case 'collie': return loc.breedCollie;
+      case 'curlycoatedretriever': return loc.breedCurlyCoatedRetriever;
+      case 'dandiedinmont': return loc.breedDandieDinmont;
+      case 'dhole': return loc.breedDhole;
+      case 'dingo': return loc.breedDingo;
+      case 'doberman': return loc.breedDoberman;
+      case 'englishfoxhound': return loc.breedEnglishFoxhound;
+      case 'englishsetter': return loc.breedEnglishSetter;
+      case 'englishspringer': return loc.breedEnglishSpringer;
+      case 'entlebucher': return loc.breedEntleBucher;
+      case 'eskimodog': return loc.breedEskimoDog;
+      case 'flatcoatedretriever': return loc.breedFlatCoatedRetriever;
+      case 'frenchbulldog': return loc.breedFrenchBulldog;
+      case 'germanshepherd': return loc.breedGermanShepherd;
+      case 'germanshorthairedpointer': return loc.breedGermanShortHairedPointer;
+      case 'giantschnauzer': return loc.breedGiantSchnauzer;
+      case 'goldenretriever': return loc.breedGoldenRetriever;
+      case 'gordonsetter': return loc.breedGordonSetter;
+      case 'greatdane': return loc.breedGreatDane;
+      case 'greatpyrenees': return loc.breedGreatPyrenees;
+      case 'greaterswissmountaindog': return loc.breedGreaterSwissMountainDog;
+      case 'groenendael': return loc.breedGroenendael;
+      case 'ibizanhound': return loc.breedIbizanHound;
+      case 'irishsetter': return loc.breedIrishSetter;
+      case 'irishterrier': return loc.breedIrishTerrier;
+      case 'irishwaterspaniel': return loc.breedIrishWaterSpaniel;
+      case 'irishwolfhound': return loc.breedIrishWolfhound;
+      case 'italiangreyhound': return loc.breedItalianGreyhound;
+      case 'japanesespaniel': return loc.breedJapaneseSpaniel;
+      case 'keeshond': return loc.breedKeeshond;
+      case 'kelpie': return loc.breedKelpie;
+      case 'kerryblueterrier': return loc.breedKerryBlueTerrier;
+      case 'komondor': return loc.breedKomondor;
+      case 'kuvasz': return loc.breedKuvasz;
+      case 'labradorretriever': return loc.breedLabradorRetriever;
+      case 'lakelandterrier': return loc.breedLakelandTerrier;
+      case 'leonberg': return loc.breedLeonberg;
+      case 'lhasa': return loc.breedLhasa;
+      case 'malamute': return loc.breedMalamute;
+      case 'malinois': return loc.breedMalinois;
+      case 'maltesedog': return loc.breedMalteseDog;
+      case 'mexicanhairless': return loc.breedMexicanHairless;
+      case 'miniaturepinscher': return loc.breedMiniaturePinscher;
+      case 'miniaturepoodle': return loc.breedMiniaturePoodle;
+      case 'miniatureschnauzer': return loc.breedMiniatureSchnauzer;
+      case 'newfoundland': return loc.breedNewfoundland;
+      case 'norfolkterrier': return loc.breedNorfolkTerrier;
+      case 'norwegianelkhound': return loc.breedNorwegianElkhound;
+      case 'norwichterrier': return loc.breedNorwichTerrier;
+      case 'oldenglishsheepdog': return loc.breedOldEnglishSheepdog;
+      case 'otterhound': return loc.breedOtterhound;
+      case 'papillon': return loc.breedPapillon;
+      case 'pekinese': return loc.breedPekinese;
+      case 'pembroke': return loc.breedPembroke;
+      case 'pomeranian': return loc.breedPomeranian;
+      case 'pug': return loc.breedPug;
+      case 'redbone': return loc.breedRedbone;
+      case 'rhodesianridgeback': return loc.breedRhodesianRidgeback;
+      case 'rottweiler': return loc.breedRottweiler;
+      case 'saintbernard': return loc.breedSaintBernard;
+      case 'saluki': return loc.breedSaluki;
+      case 'samoyed': return loc.breedSamoyed;
+      case 'schipperke': return loc.breedSchipperke;
+      case 'scotchterrier': return loc.breedScotchTerrier;
+      case 'scottishdeerhound': return loc.breedScottishDeerhound;
+      case 'sealyhamterrier': return loc.breedSealyhamTerrier;
+      case 'shetlandsheepdog': return loc.breedShetlandSheepdog;
+      case 'shihtzu': return loc.breedShihTzu;
+      case 'siberianhusky': return loc.breedSiberianHusky;
+      case 'silkyterrier': return loc.breedSilkyTerrier;
+      case 'softcoatedwheatenterrier': return loc.breedSoftCoatedWheatenTerrier;
+      case 'staffordshirebullterrier': return loc.breedStaffordshireBullterrier;
+      case 'standardpoodle': return loc.breedStandardPoodle;
+      case 'standardschnauzer': return loc.breedStandardSchnauzer;
+      case 'sussexspaniel': return loc.breedSussexSpaniel;
+      case 'tibetanmastiff': return loc.breedTibetanMastiff;
+      case 'tibetanterrier': return loc.breedTibetanTerrier;
+      case 'toypoodle': return loc.breedToyPoodle;
+      case 'toyterrier': return loc.breedToyTerrier;
+      case 'vizsla': return loc.breedVizsla;
+      case 'walkerhound': return loc.breedWalkerHound;
+      case 'weimaraner': return loc.breedWeimaraner;
+      case 'welshspringerspaniel': return loc.breedWelshSpringerSpaniel;
+      case 'westhighlandwhiteterrier': return loc.breedWestHighlandWhiteTerrier;
+      case 'whippet': return loc.breedWhippet;
+      case 'wirehairedfoxterrier': return loc.breedWireHairedFoxTerrier;
+      case 'yorkshireterrier': return loc.breedYorkshireTerrier;
+      default: return breed.replaceAll('_', ' ').replaceAll('-', ' ');
+    }
   }
 
   String _getLocalizedSize(BuildContext context, String size) {

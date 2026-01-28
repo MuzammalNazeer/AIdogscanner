@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:math';
-
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/foundation.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../View_model/PetProvider.dart';
 import '../../View_model/ScanProvider.dart';
 import '../Calendar/add_activities_View.dart';
@@ -35,7 +33,7 @@ class _HomeviewState extends State<Homeview> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 18.h), // Fixed: Added .h and .w
+          padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 18.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -73,8 +71,8 @@ class _HomeviewState extends State<Homeview> {
         children: [
           SizedBox(width: 16.w),
           SizedBox(
-            width: 22.w, // Fixed: Added .w
-            height: 22.h, // Fixed: Added .h
+            width: 22.w,
+            height: 22.h,
             child: const Icon(Icons.search, color: Color(0x99000000)),
           ),
           SizedBox(width: 8.w),
@@ -142,63 +140,7 @@ class _HomeviewState extends State<Homeview> {
 
 
 
-  // Widget _buildHeader() {
-  //   final colors = Theme.of(context).colorScheme;
-  //   return SizedBox(
-  //     height: 80.h,
-  //     child: Stack(
-  //       children: [
-  //         Row(
-  //           crossAxisAlignment: CrossAxisAlignment.center,
-  //           children: [
-  //             SvgPicture.asset(
-  //               "assets/images/Group2.svg",
-  //               width: 72.w,
-  //               height: 37.h,
-  //               fit: BoxFit.contain,
-  //             ),
-  //             const SizedBox(width: 5),
-  //             Text(
-  //               'Manager',
-  //               style: TextStyle(
-  //                 fontFamily: 'Sora',
-  //                 fontWeight: FontWeight.w400,
-  //                 fontStyle: FontStyle.normal,
-  //                 fontSize: 30.sp,
-  //                 height: 1.0,
-  //                 letterSpacing: 0.0,
-  //                 color: Theme.of(context).colorScheme.onSurface,
-  //               ),
-  //             ),
-  //             const Spacer(),
-  //           ],
-  //         ),
-  //
-  //         Positioned(
-  //           bottom: 5,
-  //           right: 10,
-  //           child: SizedBox(
-  //             height: 78.h,
-  //             width: 80.w,
-  //             child: Center(
-  //               child: Transform.rotate(
-  //                 angle: -81.51,
-  //                 child: SvgPicture.asset(
-  //                   "assets/images/Group099.svg",
-  //                   width: 92.w,
-  //                   height: 92.h,
-  //                   // color: const Color(0xFFE9ECE9),
-  //                   color: colors.surfaceContainerLow,
-  //                   fit: BoxFit.contain,
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+
 
   Widget _buildHeader() {
     return Stack(
@@ -219,7 +161,7 @@ class _HomeviewState extends State<Homeview> {
                         height: 37.h,
                         fit: BoxFit.contain,
                       ),
-                      SizedBox(width: 5.w), // Fixed: Added .w
+                      SizedBox(width: 5.w),
                       Flexible(
                         child: Text(
                           AppLocalizations.of(context)!.manager,
@@ -288,114 +230,6 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
-  Widget _buildPremiumBanner() {
-    return Container(
-      width: 393.w,
-      height: 103.h,
-      padding: EdgeInsets.all(4.w), // Fixed: Added .w
-      decoration: BoxDecoration(
-        color: const Color(0xFF6D09E8),
-        borderRadius: BorderRadius.circular(8.r),
-      ),
-      child: Stack(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        top: 5.h,
-                        left: 5.w,
-                        right: 15.w,
-                      ), // Fixed: Added .h and .w
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.tryPremiumFeatures,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            maxLines: 1,
-                          ),
-                          SizedBox(height: 4.h), // Added spacing
-                          Text(
-                            AppLocalizations.of(context)!.premiumOfferDescription,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 14.sp,
-                              height: 1.4,
-                              letterSpacing: 0.2,
-                            ),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(width: 8.w),
-              Row(
-                children: [
-                  Transform.translate(
-                    offset: Offset(-10.w, -18.h), // Fixed: Added .w and .h
-                    child: Transform.rotate(
-                      angle: -83.51 * (pi / 180),
-                      child: SvgPicture.asset(
-                        "assets/images/Group099.svg",
-                        width: 40.w,
-                        height: 42.h,
-                        fit: BoxFit.contain,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 5.w), // Fixed: Added .w
-                    child: SizedBox(
-                      width: 84.w,
-                      height: 36.h,
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.amber,
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                            ),
-                            child: FittedBox(
-                              child: Text(
-                                AppLocalizations.of(context)!.getIt,
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12.sp,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildQuickActions() {
     return Row(

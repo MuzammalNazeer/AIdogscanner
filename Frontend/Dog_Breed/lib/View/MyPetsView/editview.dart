@@ -38,6 +38,10 @@ class _EditviewState extends State<Editview> {
   late DateTime? _selectedDate;
   late Uint8List? _selectedImage;
 
+  // Track original breed to detect changes
+  String? _originalBreed;
+  bool _isDataLoaded = false;
+
   final List<String> _genders = ['Male', 'Female', 'Other'];
   final List<String> _breeds = [
     'Affenpinscher',
@@ -401,14 +405,12 @@ class _EditviewState extends State<Editview> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (widget.isEditing && widget.petId != null) {
+    if (widget.isEditing && widget.petId != null && !_isDataLoaded) {
       final petProvider = Provider.of<PetProvider>(context, listen: false);
       try {
         final pet = petProvider.pets.firstWhere((p) => p.id == widget.petId);
 
-        if (_nameController.text.isEmpty) {
-          _nameController.text = pet.name;
-        }
+        _nameController.text = pet.name;
 
         // Handle breed selection
         if (_breeds.contains(pet.breed)) {
@@ -455,6 +457,9 @@ class _EditviewState extends State<Editview> {
         if (_selectedImage == null && pet.imageBytes != null) {
           _selectedImage = pet.imageBytes;
         }
+
+        _originalBreed = _selectedBreed;
+        _isDataLoaded = true;
 
         debugPrint("Loaded pet for editing: ${pet.name}");
       } catch (e) {
@@ -733,15 +738,15 @@ class _EditviewState extends State<Editview> {
                           : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.camera_alt,
                             color: Colors.grey,
                             size: 32,
                           ),
-                          SizedBox(height: 3),
+                          const SizedBox(height: 3),
                           Text(
                             AppLocalizations.of(context)!.labelPhoto,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.grey,
                               fontSize: 14,
                             ),
@@ -794,7 +799,38 @@ class _EditviewState extends State<Editview> {
 
                 // Breed TextField with Click-to-Select
                 GestureDetector(
-                  onTap: _showBreedBottomSheet,
+                  onTap: () async {
+                    if (widget.isEditing) {
+                      final bool? shouldChange = await showDialog<bool>(
+                        context: context,
+
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: Colors.white,
+                            title: const Text('Change Breed?'),
+                            content: const Text(
+                                'Are you sure you want to change the breed?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, false),
+                                child: Text(AppLocalizations.of(context)!.cancelButton),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, true),
+                                child: const Text('Change'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+
+                      if (shouldChange == true) {
+                        _showBreedBottomSheet();
+                      }
+                    } else {
+                      _showBreedBottomSheet();
+                    }
+                  },
                   child: Container(
                     width: double.infinity,
                     height: 58.h,
@@ -889,7 +925,7 @@ class _EditviewState extends State<Editview> {
                 SizedBox(height: 17.h),
                 Text(
                   AppLocalizations.of(context)!.labelDOB,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
                     color: Color(0xFF6F7D86),

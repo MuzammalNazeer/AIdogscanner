@@ -141,7 +141,7 @@ class _AddReminderViewState extends State<AddReminderView> {
   Widget build(BuildContext context) {
     final reminderNotifier = context.watch<ReminderNotifier>();
     final activityNotifier = context.read<ActivityNotifier>();
-    final now = DateTime.now();
+    final _ = DateTime.now();
 
     final reminders = reminderNotifier.reminders.where((r) {
       final scheduled = DateTime.parse(r['scheduledTime']);

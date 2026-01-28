@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/config/components/pet_card.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
@@ -51,7 +50,7 @@ class _MypetsviewState extends State<Mypetsview> {
         ? pets
         : pets.where((pet) =>
     pet.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-        (pet.breed?.toLowerCase() ?? '').contains(_searchQuery.toLowerCase())
+        (pet.breed.toLowerCase()).contains(_searchQuery.toLowerCase())
     ).toList();
 
     return Scaffold(
@@ -231,7 +230,6 @@ class _MypetsviewState extends State<Mypetsview> {
                 return false;
               }
             }
-            return false;
           }).toList();
 
           // Count activities by type
@@ -241,13 +239,14 @@ class _MypetsviewState extends State<Mypetsview> {
 
             if (activity is Map) {
               activityName = activity['name'] ?? activity['type'];
-            } else if (activity is dynamic) {
+            } else {
               try {
-                activityName = activity.name ?? activity.type;
-              } catch (e) {
-                activityName = l10n.unknown;
-              }
+              activityName = activity.name ?? activity.type;
+            } catch (e) {
+              activityName = l10n.unknown;
             }
+            }
+
 
             if (activityName != null) {
               activityCounts[activityName] = (activityCounts[activityName] ?? 0) + 1;

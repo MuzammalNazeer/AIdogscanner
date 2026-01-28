@@ -13,8 +13,7 @@ import 'package:provider/provider.dart';
 
 import '../../View_model/DogValuesViewModel.dart';
 import '../../View_model/ScanProvider.dart';
-import '../../View_model/PetProvider.dart';
-import '../../View_model/home/Pet.dart';
+
 import '../../utils/routes/routes_name.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
 
@@ -794,7 +793,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
   }
 
   String _getLocalizedBreedName(String breed) {
-    final normalized = breed.replaceAll(' ', '').replaceAll('-', '').toLowerCase();
+    final normalized = breed.replaceAll(' ', '').replaceAll('-', '').replaceAll('_', '').toLowerCase();
     final loc = AppLocalizations.of(context)!;
 
     switch (normalized) {

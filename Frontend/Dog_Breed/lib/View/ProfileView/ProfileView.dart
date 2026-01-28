@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../config/components/FAQView.dart';
 import '../../utils/routes/routes_name.dart';
-import 'listSave.dart';
 
 class Profileview extends StatefulWidget {
   final void Function(String message)? onShowSnackBar;
@@ -18,7 +16,6 @@ class Profileview extends StatefulWidget {
 }
 
 class _ProfileviewState extends State<Profileview> {
-  bool _isProfileDeleted = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +69,7 @@ class _ProfileviewState extends State<Profileview> {
                         context,
                         RoutesName.changePassword,
                       ),
-                    ),
+                    ),  
                     _buildSettingsTile(
                       imagePath: "assets/images/notafication.png",
                       title: l10n.notifications,
@@ -318,7 +315,7 @@ class _ProfileviewState extends State<Profileview> {
                         Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFFDB5959),
+                        backgroundColor: const Color(0xFFDB5959),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24.r),
                         ),
@@ -346,7 +343,7 @@ class _ProfileviewState extends State<Profileview> {
                         Navigator.pushNamed(context, RoutesName.login);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xFF05E584),
+                        backgroundColor: const Color(0xFF05E584),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24.r),
                         ),

@@ -1,10 +1,8 @@
 import 'dart:typed_data';
 
 import 'package:dog_breed/View_model/home/Pet.dart';
-import 'package:dog_breed/View_model/pet.dart' hide Pet;
 import 'package:dog_breed/config/components/roundButton.dart';
-import 'package:dog_breed/utils/routes/routes_name.dart';
-import 'package:dropdown_search/dropdown_search.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -805,10 +803,10 @@ class _AddPetViewState extends State<AddPetView> {
         return Theme(
           data: ThemeData.light().copyWith(
             colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF), // Your app's primary color
+              primary: Color(0xFF820DFF),
               onPrimary: Colors.white,
             ),
-            dialogBackgroundColor: Colors.white, // White background for dialog
+            dialogBackgroundColor: Colors.white,
           ),
           child: child!,
         );
@@ -1162,7 +1160,7 @@ class _AddPetViewState extends State<AddPetView> {
                       context,
                       listen: false,
                     );
-                    final success = await petProvider.addPet(newPet as Pet);
+                    final success = await petProvider.addPet(newPet);
 
                     if (success) {
                       // ScaffoldMessenger.of(context).showSnackBar(
@@ -1217,7 +1215,7 @@ class _AddPetViewState extends State<AddPetView> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
@@ -1251,7 +1249,7 @@ class _AddPetViewState extends State<AddPetView> {
                     TextField(
                       decoration: InputDecoration(
                         hintText: 'Search breed...',
-                        prefixIcon: Icon(Icons.search),
+                        prefixIcon: const Icon(Icons.search),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
@@ -1265,7 +1263,7 @@ class _AddPetViewState extends State<AddPetView> {
                         });
                       },
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Expanded(
                       child: ListView.builder(
                         itemCount: filteredBreeds.length,

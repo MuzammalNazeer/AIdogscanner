@@ -12,7 +12,7 @@ basset
 beagle
 bloodhound
 bluetick
-black-and-tan_coonhound
+black_and_tan_coonhound
 Walker_hound
 English_foxhound
 redbone
@@ -35,7 +35,7 @@ Irish_terrier
 Norfolk_terrier
 Norwich_terrier
 Yorkshire_terrier
-wire-haired_fox_terrier
+wire_haired_fox_terrier
 Lakeland_terrier
 Sealyham_terrier
 Airedale
@@ -49,15 +49,15 @@ standard_schnauzer
 Scotch_terrier
 Tibetan_terrier
 silky_terrier
-soft-coated_wheaten_terrier
+soft_coated_wheaten_terrier
 West_Highland_white_terrier
 Lhasa
-flat-coated_retriever
-curly-coated_retriever
+flat_coated_retriever
+curly_coated_retriever
 golden_retriever
 Labrador_retriever
 Chesapeake_Bay_retriever
-German_short-haired_pointer
+German_short_haired_pointer
 vizsla
 English_setter
 Irish_setter
@@ -118,4 +118,3 @@ Mexican_hairless
 dingo
 dhole
 African_hunting_dog
-
