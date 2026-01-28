@@ -114,7 +114,7 @@ class _PhoneViewState extends State<PhoneView> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
-                    borderSide: BorderSide(color: AppColors.vibrantPurple, width: 2),
+                    borderSide: const BorderSide(color: AppColors.vibrantPurple, width: 2),
                   ),
                 ),
                 initialValue: _phoneNumber,

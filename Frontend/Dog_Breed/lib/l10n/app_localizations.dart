@@ -1294,6 +1294,12 @@ abstract class AppLocalizations {
   /// **'+ Add cleaning type'**
   String get actionAddCleaning;
 
+  /// No description provided for @actionAddVeterinary.
+  ///
+  /// In en, this message translates to:
+  /// **'+ Add veterinary'**
+  String get actionAddVeterinary;
+
   /// No description provided for @actionAddFood.
   ///
   /// In en, this message translates to:

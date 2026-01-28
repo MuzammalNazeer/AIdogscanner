@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import '../activity_model.dart';
+
 import '../config/components/saveActivites.dart';
 
 class ActivityState {

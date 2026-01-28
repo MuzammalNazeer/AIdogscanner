@@ -94,7 +94,7 @@ class _AddressViewState extends State<AddressView> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
-                    borderSide: BorderSide(color: AppColors.vibrantPurple, width: 2),
+                    borderSide: const BorderSide(color: AppColors.vibrantPurple, width: 2),
                   ),
                 ),
               ),

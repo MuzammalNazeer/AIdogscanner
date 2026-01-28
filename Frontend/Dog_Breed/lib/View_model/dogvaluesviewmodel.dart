@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:image/image.dart' as img;
@@ -19966,7 +19965,7 @@ class DogValuesViewModel extends ChangeNotifier {
   Future<void> _savePredictionToHistory(PredictionResult result) async {
     try {
       if (_prefs != null) {
-        final historyKey = _predictionHistoryKey;
+        const historyKey = _predictionHistoryKey;
         final historyJson = _prefs!.getString(historyKey) ?? '[]';
         final history = json.decode(historyJson) as List;
 
@@ -20056,6 +20055,7 @@ class DogValuesViewModel extends ChangeNotifier {
       'characteristics': characteristics,
     });
   }
+  @override
   void dispose() {
     _dogDetectorInterpreter?.close();
     _breedInterpreter?.close();

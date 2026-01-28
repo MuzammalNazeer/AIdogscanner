@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:dog_breed/View/ActivitesView/ActivitesView.dart';
 import 'package:dog_breed/View/Dashboardhome/Dashboard_home_view.dart';
-import 'package:dog_breed/View/DogIdentifierApp.dart';
 import 'package:dog_breed/View/HomeView/HomeView.dart';
 import 'package:dog_breed/View/MyPetsView/DogIdentificationScreen.dart';
 import 'package:dog_breed/View/MyPetsView/DogResultScreen.dart';
@@ -87,7 +86,7 @@ class Routes {
             builder: (BuildContext context) =>  const Myfavouritesview());
       case RoutesName.dashboard:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>   DashboardHomeView());
+            builder: (BuildContext context) =>   const DashboardHomeView());
       case RoutesName.setting:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Settingview());
@@ -97,11 +96,11 @@ class Routes {
 
       case RoutesName.editProfile:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>   Ownerprofileview());
+            builder: (BuildContext context) =>   const Ownerprofileview());
 
       case RoutesName.changePassword:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>   Changepassword());
+            builder: (BuildContext context) =>   const Changepassword());
       case RoutesName.notification:
         return MaterialPageRoute(
             builder: (BuildContext context) =>   const NotificationView());
@@ -111,7 +110,7 @@ class Routes {
 
       case RoutesName.listsave:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>   Listsave());
+            builder: (BuildContext context) =>   const Listsave());
       case RoutesName.edit:
         final args = settings.arguments as Map<String, dynamic>?;
         return MaterialPageRoute(
@@ -124,10 +123,10 @@ class Routes {
 
         case RoutesName.reminder:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>   Reminderlist());
+            builder: (BuildContext context) =>   const Reminderlist());
       case RoutesName.myAdd:
         return MaterialPageRoute(
-          builder: (BuildContext context) =>    Addmypetview(),settings: settings,);
+          builder: (BuildContext context) =>    const Addmypetview(),settings: settings,);
 
 
       case RoutesName.history:
@@ -141,7 +140,7 @@ class Routes {
             builder: (BuildContext context) =>  const Mypetsview());
       case RoutesName.calendar:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  Calendarview());
+            builder: (BuildContext context) =>  const Calendarview());
 
       case RoutesName.shop:
         return MaterialPageRoute(

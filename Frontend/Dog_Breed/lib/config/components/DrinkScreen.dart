@@ -235,7 +235,9 @@ class _DrinkScreenState extends State<DrinkScreen> {
         ],
       );
     } catch (e) {
-      print('Heatmap error: $e');
+      if (kDebugMode) {
+        print('Heatmap error: $e');
+      }
       return Center(
         child: Text(
           AppLocalizations.of(context)!.calendarErrorLoadingHeatmap,
@@ -691,7 +693,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
               Container(
                 height: 35.h,
                 width: 96.w,
-                decoration: BoxDecoration(color: const Color(0xFFF4F7F6)),
+                decoration: const BoxDecoration(color: Color(0xFFF4F7F6)),
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Row(

@@ -623,6 +623,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get actionAddCleaning => '+ Adicionar tipo de limpeza';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Adicionar nome ou tipo de comida';
 
   @override

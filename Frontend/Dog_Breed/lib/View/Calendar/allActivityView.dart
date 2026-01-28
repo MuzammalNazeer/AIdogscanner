@@ -2167,6 +2167,8 @@ class _AllactivityviewState extends State<Allactivityview> {
         return AppLocalizations.of(context)!.actionAddAccident;
         case 'cleaning':
         return AppLocalizations.of(context)!.actionAddCleaning;
+      case 'Veterinary':
+        return AppLocalizations.of(context)!.actionAddVeterinary;
       default:
         return AppLocalizations.of(context)!.actionAddFood;
     }

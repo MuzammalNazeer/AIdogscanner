@@ -1,5 +1,4 @@
 // View_model/pet.dart
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 
 class Pet with ChangeNotifier {

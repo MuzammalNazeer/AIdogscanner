@@ -1,5 +1,6 @@
 // services/activity_service.dart
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'ActivityConstants.dart';
@@ -38,7 +39,9 @@ class ActivityService {
         return jsonList.map((item) => Map<String, dynamic>.from(item)).toList();
       }
     } catch (e) {
-      print('Error loading activities: $e');
+      if (kDebugMode) {
+        print('Error loading activities: $e');
+      }
     }
 
     // Return default activities if nothing is saved

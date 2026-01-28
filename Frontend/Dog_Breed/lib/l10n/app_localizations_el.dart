@@ -626,6 +626,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get actionAddCleaning => '+ Προσθήκη τύπου καθαρισμού';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Προσθήκη ονόματος ή τύπου φαγητού';
 
   @override

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +19,9 @@ class FeedbackService {
       var connectivityResult = await Connectivity().checkConnectivity();
       return connectivityResult != ConnectivityResult.none;
     } catch (e) {
-      print('❌ Connectivity check error: $e');
+      if (kDebugMode) {
+        print('❌ Connectivity check error: $e');
+      }
       return false;
     }
   }
@@ -42,9 +45,13 @@ class FeedbackService {
       feedbackList.add(json.encode(feedbackData));
       await prefs.setStringList(_pendingFeedbackKey, feedbackList);
 
-      print('✅ Feedback stored locally. Total pending: ${feedbackList.length}');
+      if (kDebugMode) {
+        print('✅ Feedback stored locally. Total pending: ${feedbackList.length}');
+      }
     } catch (e) {
-      print('❌ Error storing feedback: $e');
+      if (kDebugMode) {
+        print('❌ Error storing feedback: $e');
+      }
       rethrow;
     }
   }
@@ -56,7 +63,9 @@ class FeedbackService {
     String? timestamp,
   }) async {
     try {
-      print('🚀 Starting to send feedback...');
+      if (kDebugMode) {
+        print('🚀 Starting to send feedback...');
+      }
 
       final headers = {
         'Authorization': 'Bearer $_sendgridApiKey',
@@ -88,7 +97,9 @@ App Version: 1.0.0
         ]
       });
 
-      print('📤 Sending to SendGrid...');
+      if (kDebugMode) {
+        print('📤 Sending to SendGrid...');
+      }
 
       final response = await http.post(
         Uri.parse(_sendgridUrl),
@@ -96,20 +107,32 @@ App Version: 1.0.0
         body: body,
       ).timeout(const Duration(seconds: 30));
 
-      print('📩 SendGrid Status Code: ${response.statusCode}');
+      if (kDebugMode) {
+        print('📩 SendGrid Status Code: ${response.statusCode}');
+      }
 
       if (response.statusCode == 202) {
-        print('🎉 Feedback sent successfully! Check email at $_yourEmail');
-        print('📧 Also check SPAM folder if not in inbox');
+        if (kDebugMode) {
+          print('🎉 Feedback sent successfully! Check email at $_yourEmail');
+        }
+        if (kDebugMode) {
+          print('📧 Also check SPAM folder if not in inbox');
+        }
       } else {
-        print('❌ SendGrid Error Response: ${response.body}');
+        if (kDebugMode) {
+          print('❌ SendGrid Error Response: ${response.body}');
+        }
         throw Exception('SendGrid Error: ${response.statusCode}');
       }
     } on http.ClientException catch (e) {
-      print('❌ Network error: $e');
+      if (kDebugMode) {
+        print('❌ Network error: $e');
+      }
       throw Exception('Network error. Please check internet connection.');
     } catch (e) {
-      print('❌ Error in sendFeedback: $e');
+      if (kDebugMode) {
+        print('❌ Error in sendFeedback: $e');
+      }
       throw Exception('Failed to send feedback: $e');
     }
   }
@@ -117,10 +140,14 @@ App Version: 1.0.0
   // Process pending feedback
   static Future<void> processPendingFeedback() async {
     try {
-      print('🔍 Checking for pending feedback...');
+      if (kDebugMode) {
+        print('🔍 Checking for pending feedback...');
+      }
 
       if (!await isOnline()) {
-        print('📶 No internet connection. Skipping pending feedback.');
+        if (kDebugMode) {
+          print('📶 No internet connection. Skipping pending feedback.');
+        }
         return;
       }
 
@@ -128,11 +155,15 @@ App Version: 1.0.0
       final feedbackList = prefs.getStringList(_pendingFeedbackKey) ?? [];
 
       if (feedbackList.isEmpty) {
-        print('📭 No pending feedback found.');
+        if (kDebugMode) {
+          print('📭 No pending feedback found.');
+        }
         return;
       }
 
-      print('🔄 Processing ${feedbackList.length} pending feedback(s)...');
+      if (kDebugMode) {
+        print('🔄 Processing ${feedbackList.length} pending feedback(s)...');
+      }
 
       List<String> successful = [];
 
@@ -142,7 +173,9 @@ App Version: 1.0.0
           final attempts = (feedback['attempts'] ?? 0) + 1;
 
           if (attempts > 3) {
-            print('⚠️ Skipping feedback after 3 failed attempts');
+            if (kDebugMode) {
+              print('⚠️ Skipping feedback after 3 failed attempts');
+            }
             continue;
           }
 
@@ -153,13 +186,17 @@ App Version: 1.0.0
           );
 
           successful.add(feedbackJson);
-          print('✅ Sent one pending feedback');
+          if (kDebugMode) {
+            print('✅ Sent one pending feedback');
+          }
 
           // Small delay to avoid rate limiting
           await Future.delayed(const Duration(seconds: 1));
 
         } catch (e) {
-          print('❌ Failed to send pending feedback: $e');
+          if (kDebugMode) {
+            print('❌ Failed to send pending feedback: $e');
+          }
           // Don't update attempts for now to keep it simple
         }
       }
@@ -168,11 +205,15 @@ App Version: 1.0.0
       if (successful.isNotEmpty) {
         feedbackList.removeWhere((item) => successful.contains(item));
         await prefs.setStringList(_pendingFeedbackKey, feedbackList);
-        print('✅ Removed ${successful.length} sent feedback(s) from storage');
+        if (kDebugMode) {
+          print('✅ Removed ${successful.length} sent feedback(s) from storage');
+        }
       }
 
     } catch (e) {
-      print('❌ Error in processPendingFeedback: $e');
+      if (kDebugMode) {
+        print('❌ Error in processPendingFeedback: $e');
+      }
     }
   }
 
@@ -183,7 +224,9 @@ App Version: 1.0.0
       final feedbackList = prefs.getStringList(_pendingFeedbackKey) ?? [];
       return feedbackList.length;
     } catch (e) {
-      print('❌ Error getting pending count: $e');
+      if (kDebugMode) {
+        print('❌ Error getting pending count: $e');
+      }
       return 0;
     }
   }
@@ -191,14 +234,20 @@ App Version: 1.0.0
   // Test function - call this to verify email sending works
   static Future<void> testEmailSending() async {
     try {
-      print('🧪 TEST: Sending test email...');
+      if (kDebugMode) {
+        print('🧪 TEST: Sending test email...');
+      }
       await sendFeedback(
         issue: 'TEST - App Feedback System',
         details: 'This is a test email from the Dog Breed App feedback system. If you receive this, the system is working correctly!',
       );
-      print('✅ TEST COMPLETE: Check your email at $_yourEmail');
+      if (kDebugMode) {
+        print('✅ TEST COMPLETE: Check your email at $_yourEmail');
+      }
     } catch (e) {
-      print('❌ TEST FAILED: $e');
+      if (kDebugMode) {
+        print('❌ TEST FAILED: $e');
+      }
     }
   }
 }

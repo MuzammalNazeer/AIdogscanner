@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:sqflite/sqflite.dart' show ConflictAlgorithm, Database, openDatabase;
 
 class DatabaseHelper {
   // Singleton pattern
@@ -465,7 +466,9 @@ class DatabaseHelper {
   }
 
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    print('Upgrading database from version $oldVersion to $newVersion');
+    if (kDebugMode) {
+      print('Upgrading database from version $oldVersion to $newVersion');
+    }
 
     if (oldVersion < 2) {
       // Add cleaning_logs table
@@ -488,7 +491,9 @@ class DatabaseHelper {
       await db.execute('CREATE INDEX IF NOT EXISTS idx_cleaning_logs_pet_id ON $tableCleaningLogs($colPetId);');
       await db.execute('CREATE INDEX IF NOT EXISTS idx_cleaning_logs_item_type ON $tableCleaningLogs($colItemType);');
 
-      print('Added cleaning_logs table');
+      if (kDebugMode) {
+        print('Added cleaning_logs table');
+      }
     }
   }
 
@@ -990,7 +995,9 @@ class DatabaseHelper {
     for (var table in tables) {
       final tableName = table['name'] as String;
       final data = await db.query(tableName);
-      print('Table: $tableName, Records: ${data.length}');
+      if (kDebugMode) {
+        print('Table: $tableName, Records: ${data.length}');
+      }
     }
   }
 

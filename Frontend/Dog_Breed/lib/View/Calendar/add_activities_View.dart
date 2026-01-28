@@ -123,13 +123,11 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
                     itemBuilder: (context, index) {
                       final activity = visibleActivities[index];
                       final isSelected = _selectedActivity?.name == activity.name;
-
                       return GestureDetector(
                         onTap: () {
                           setState(() {
                             _selectedActivity = activity;
                           });
-
                           Navigator.push(
                             context,
                             MaterialPageRoute(

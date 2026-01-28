@@ -621,6 +621,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get actionAddCleaning => '+ Reinigingstype toevoegen';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Voedselnaam of type toevoegen';
 
   @override

@@ -110,7 +110,7 @@ class ReminderNotifier with ChangeNotifier {
     // Double check to be absolutely sure for the library
     if (tzTime.isBefore(tz.TZDateTime.now(tz.local))) {
       // This should be unreachable due to logic above, but safety first
-      throw Exception('Scheduled time ${tzTime} is before now ${tz.TZDateTime.now(tz.local)}');
+      throw Exception('Scheduled time $tzTime is before now ${tz.TZDateTime.now(tz.local)}');
     }
 
     if (notificationsEnabled) {

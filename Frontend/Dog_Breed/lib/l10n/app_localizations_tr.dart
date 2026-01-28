@@ -620,6 +620,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get actionAddCleaning => '+ Temizlik türü ekle';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Yiyecek adı veya türü ekle';
 
   @override

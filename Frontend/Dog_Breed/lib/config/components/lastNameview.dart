@@ -79,7 +79,7 @@ class _NameViewState extends State<Lastnameview> {
                   enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12.r), borderSide: BorderSide.none),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
-                    borderSide: BorderSide(color: AppColors.vibrantPurple, width: 2),
+                    borderSide: const BorderSide(color: AppColors.vibrantPurple, width: 2),
                   ),
                 ),
               ),

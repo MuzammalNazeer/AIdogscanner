@@ -71,7 +71,7 @@ class _GenderViewState extends State<GenderView> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Expanded(
                 child: ListView.builder(
                   itemCount: _genderKeys.length,

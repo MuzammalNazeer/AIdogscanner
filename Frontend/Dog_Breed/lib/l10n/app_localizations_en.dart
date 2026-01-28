@@ -617,6 +617,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionAddCleaning => '+ Add cleaning type';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Add food name or type';
 
   @override

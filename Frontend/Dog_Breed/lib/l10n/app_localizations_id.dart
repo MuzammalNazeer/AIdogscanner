@@ -620,6 +620,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get actionAddCleaning => '+ Tambah jenis pembersihan';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Tambah nama makanan atau jenis';
 
   @override

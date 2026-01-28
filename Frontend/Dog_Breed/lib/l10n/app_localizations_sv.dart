@@ -619,6 +619,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get actionAddCleaning => '+ Lägg till rengöringstyp';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Lägg till matnamn eller typ';
 
   @override

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,7 +52,9 @@ class DocumentViewModel extends ChangeNotifier {
       }
       _filterDocuments();
     } catch (e) {
-      print('Error initializing documents: $e');
+      if (kDebugMode) {
+        print('Error initializing documents: $e');
+      }
       await _createDefaultDocuments();
     } finally {
       _isLoading = false;
@@ -91,7 +94,7 @@ class DocumentViewModel extends ChangeNotifier {
         fileName: 'pet_insurance.pdf',
         filePath: '',
         category: 'Coverage & Finance',
-        uploadDate: DateTime.now().subtract(Duration(days: 1)),
+        uploadDate: DateTime.now().subtract(const Duration(days: 1)),
         fileSize: '1.8 MB',
         fileType: 'pdf',
         icon: Icons.health_and_safety,
@@ -102,7 +105,7 @@ class DocumentViewModel extends ChangeNotifier {
         fileName: 'adoption_certificate.pdf',
         filePath: '',
         category: 'Legal & Licensing',
-        uploadDate: DateTime.now().subtract(Duration(days: 2)),
+        uploadDate: DateTime.now().subtract(const Duration(days: 2)),
         fileSize: '3.2 MB',
         fileType: 'pdf',
         icon: Icons.assignment,
@@ -113,7 +116,7 @@ class DocumentViewModel extends ChangeNotifier {
         fileName: 'training_certificate.pdf',
         filePath: '',
         category: 'Learning & Behavior',
-        uploadDate: DateTime.now().subtract(Duration(days: 3)),
+        uploadDate: DateTime.now().subtract(const Duration(days: 3)),
         fileSize: '1.5 MB',
         fileType: 'pdf',
         icon: Icons.school,
@@ -124,7 +127,7 @@ class DocumentViewModel extends ChangeNotifier {
         fileName: 'checkup_report.docx',
         filePath: '',
         category: 'Medical & Care',
-        uploadDate: DateTime.now().subtract(Duration(days: 4)),
+        uploadDate: DateTime.now().subtract(const Duration(days: 4)),
         fileSize: '1.2 MB',
         fileType: 'docx',
         icon: Icons.medical_services,
@@ -142,7 +145,9 @@ class DocumentViewModel extends ChangeNotifier {
           .toList();
       await prefs.setStringList('documents', documentsJson);
     } catch (e) {
-      print('Error saving documents: $e');
+      if (kDebugMode) {
+        print('Error saving documents: $e');
+      }
     }
   }
 
@@ -231,7 +236,9 @@ class DocumentViewModel extends ChangeNotifier {
         }
       }
     } catch (e) {
-      print('Error picking file: $e');
+      if (kDebugMode) {
+        print('Error picking file: $e');
+      }
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -269,7 +276,9 @@ class DocumentViewModel extends ChangeNotifier {
       await file.copy(newFilePath);
       return newFilePath;
     } catch (e) {
-      print('Error saving file: $e');
+      if (kDebugMode) {
+        print('Error saving file: $e');
+      }
       return '';
     }
   }
@@ -319,16 +328,16 @@ class DocumentViewModel extends ChangeNotifier {
                   controller: titleController,
                   decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.documentTitle,
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
                   value: selectedCategory,
                   dropdownColor: Colors.white,
                   decoration: InputDecoration(
                     labelText: AppLocalizations.of(context)!.category,
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
                   ),
                   items: _categories
                       .where((cat) => cat != 'All')
@@ -342,7 +351,7 @@ class DocumentViewModel extends ChangeNotifier {
                     selectedCategory = value;
                   },
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 ListTile(
                   leading: Icon(icon),
                   title: Text(fileName),
@@ -387,10 +396,14 @@ class DocumentViewModel extends ChangeNotifier {
       if (document.filePath.isNotEmpty) {
         await OpenFile.open(document.filePath);
       } else {
-        print('Document path is empty');
+        if (kDebugMode) {
+          print('Document path is empty');
+        }
       }
     } catch (e) {
-      print('Error opening file: $e');
+      if (kDebugMode) {
+        print('Error opening file: $e');
+      }
     }
   }
 
@@ -413,7 +426,9 @@ class DocumentViewModel extends ChangeNotifier {
       _filterDocuments();
       notifyListeners();
     } catch (e) {
-      print('Error deleting document: $e');
+      if (kDebugMode) {
+        print('Error deleting document: $e');
+      }
     }
   }
 
@@ -468,7 +483,9 @@ class DocumentViewModel extends ChangeNotifier {
       _filterDocuments();
       notifyListeners();
     } catch (e) {
-      print('Error clearing documents: $e');
+      if (kDebugMode) {
+        print('Error clearing documents: $e');
+      }
     }
   }
 

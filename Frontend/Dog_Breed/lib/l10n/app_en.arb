@@ -195,6 +195,7 @@
     "actionAddHealthCondition": "+ Add health condition",
     "actionAddAccident": "+ Add accident type",
     "actionAddCleaning": "+ Add cleaning type",
+    "actionAddVeterinary": "+ Add veterinary",
     "actionAddFood": "+ Add food name or type",
     "actionStartTimer": "Or start a timer",
     "labelDate": "Date",

@@ -621,6 +621,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get actionAddCleaning => '+ Lisää siivoustyyppi';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Lisää ruoan nimi tai tyyppi';
 
   @override

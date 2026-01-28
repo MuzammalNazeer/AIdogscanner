@@ -255,10 +255,10 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               height: 100.h,
               width: 170.w,
               decoration: BoxDecoration(
-                color: Color(0xFFE6E6E6),
+                color: const Color(0xFFE6E6E6),
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.r)),
                 boxShadow: [
-                  BoxShadow(color: Colors.black12, blurRadius: 8.r, offset: Offset(0, 4)),
+                  BoxShadow(color: Colors.black12, blurRadius: 8.r, offset: const Offset(0, 4)),
                 ],
               ),
               child: Column(
@@ -357,7 +357,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               color: const Color(0xFFF2F2F2),
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.r)),
               boxShadow: [
-                BoxShadow(color: Colors.black12, blurRadius: 8.r, offset: Offset(0, 4)),
+                BoxShadow(color: Colors.black12, blurRadius: 8.r, offset: const Offset(0, 4)),
               ],
             ),
             child: Column(

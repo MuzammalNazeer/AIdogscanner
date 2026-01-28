@@ -11,6 +11,7 @@ import 'package:dog_breed/l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../View_model/PetProvider.dart';
 import '../../View_model/ScanProvider.dart';
+import '../../View_model/ProfileProvider.dart';
 import '../Calendar/add_activities_View.dart';
 import '../MyPetsView/DogResultScreen.dart';
 import 'PremiumBanner.dart';
@@ -25,8 +26,6 @@ class Homeview extends StatefulWidget {
 }
 
 class _HomeviewState extends State<Homeview> {
-  final String userName = "Sarina";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,7 +194,7 @@ class _HomeviewState extends State<Homeview> {
                           style: const TextStyle(fontWeight: FontWeight.w400),
                         ),
                         TextSpan(
-                          text: '$userName!',
+                          text: '${Provider.of<ProfileProvider>(context).firstName}!',
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ],

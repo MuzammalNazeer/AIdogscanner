@@ -620,6 +620,9 @@ class AppLocalizationsCs extends AppLocalizations {
   String get actionAddCleaning => '+ Přidat druh čištění';
 
   @override
+  String get actionAddVeterinary => '+ Add veterinary';
+
+  @override
   String get actionAddFood => '+ Přidat název nebo druh krmiva';
 
   @override
