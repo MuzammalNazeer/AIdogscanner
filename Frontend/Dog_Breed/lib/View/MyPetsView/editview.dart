@@ -978,9 +978,10 @@ class _EditviewState extends State<Editview> {
                         _selectedGender == null ||
                         _selectedDate == null) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please fill all fields'),
-                          duration: Duration(seconds: 2),
+                          const SnackBar(
+                           backgroundColor: Colors.red,
+                          content: Text('Please Fill Pet Name ',style: TextStyle(color: Colors.white),),
+                          duration: Duration(seconds: 1),
                         ),
                       );
                       return;

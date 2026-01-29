@@ -43,7 +43,7 @@ class _ProfileviewState extends State<Profileview> {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               child: Container(
-                height: 610.h,
+                height: 430.h,
                 decoration: BoxDecoration(
                   color: const Color(0xFF686868).withOpacity(0.1),
                   borderRadius: BorderRadius.circular(18.r),
@@ -62,14 +62,14 @@ class _ProfileviewState extends State<Profileview> {
                       onTap: () =>
                           Navigator.pushNamed(context, RoutesName.listsave),
                     ),
-                    _buildSettingsTile(
-                      imagePath: "assets/images/change.png",
-                      title: l10n.changePassword,
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        RoutesName.changePassword,
-                      ),
-                    ),  
+                    // _buildSettingsTile(
+                    //   imagePath: "assets/images/change.png",
+                    //   title: l10n.changePassword,
+                    //   onTap: () => Navigator.pushNamed(
+                    //     context,
+                    //     RoutesName.changePassword,
+                    //   ),
+                    // ),
                     _buildSettingsTile(
                       imagePath: "assets/images/notafication.png",
                       title: l10n.notifications,
@@ -103,6 +103,7 @@ class _ProfileviewState extends State<Profileview> {
                     _buildSettingsTile(
                       icon: Icons.description_outlined,
                       title: l10n.termsOfUse,
+                      showDivider: false,
                       onTap: () async {
                         final Uri url = Uri.parse('https://nabatiah.com/privacy-policy/');
                         if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
@@ -110,19 +111,19 @@ class _ProfileviewState extends State<Profileview> {
                         }
                       },
                     ),
-                    _buildSettingsTile(
-                      imagePath: "assets/images/delete.png",
-                      title: l10n.deleteOwnerProfile,
-                      isRed: true,
-                      onTap: () => _showDeleteConfirmationDialog(),
-                    ),
-                    _buildSettingsTile(
-                      imagePath: "assets/images/logout.png",
-                      title: l10n.logout,
-                      isRed: true,
-                      onTap: () => _showLogoutConfirmationDialog(),
-                      showDivider: false,
-                    ),
+                    // _buildSettingsTile(
+                    //   imagePath: "assets/images/delete.png",
+                    //   title: l10n.deleteOwnerProfile,
+                    //   isRed: true,
+                    //   onTap: () => _showDeleteConfirmationDialog(),
+                    // ),
+                    // _buildSettingsTile(
+                    //   imagePath: "assets/images/logout.png",
+                    //   title: l10n.logout,
+                    //   isRed: true,
+                    //   onTap: () => _showLogoutConfirmationDialog(),
+                    //   showDivider: false,
+                    // ),
                   ],
                 ),
               ),

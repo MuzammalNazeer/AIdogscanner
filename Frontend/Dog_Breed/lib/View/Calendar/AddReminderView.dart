@@ -177,12 +177,12 @@ class _AddReminderViewState extends State<AddReminderView> {
   Widget _buildHeader() {
     return Container(
       height: 70.h,
-      margin: EdgeInsets.symmetric(horizontal: 8.w),
+      margin: EdgeInsets.symmetric(horizontal: 2.w),
       decoration: BoxDecoration(
         color: const Color(0xFFF4F7F6),
         borderRadius: BorderRadius.circular(16.r),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: 6.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -207,13 +207,12 @@ class _AddReminderViewState extends State<AddReminderView> {
               onTap: _showAddReminderSheet,
               child: Text(
                 AppLocalizations.of(context)!.reminderAddTitle,
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
-
           Container(
             width: 50.w,
               height: 50.h,
@@ -225,7 +224,7 @@ class _AddReminderViewState extends State<AddReminderView> {
               onPressed: _showAddReminderSheet,
               icon: SvgPicture.asset('assets/images/add.svg',
                 width: 28.w,
-                      height: 28.h,
+                height: 28.h,
 
               ),
             ),
@@ -261,7 +260,7 @@ class _AddReminderViewState extends State<AddReminderView> {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/images136.png', width: 120.w),
+          Image.asset('assets/images/remd.png', width: 90.w),
           SizedBox(height: 20.h),
           Text(AppLocalizations.of(context)!.reminderNone, style: TextStyle(fontSize: 20.sp)),
           SizedBox(height: 6.h),

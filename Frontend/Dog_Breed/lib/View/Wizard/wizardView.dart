@@ -48,7 +48,7 @@ class _WizardviewState extends State<Wizardview> {
                       )
                     : null,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding:  EdgeInsets.symmetric(horizontal: 24.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

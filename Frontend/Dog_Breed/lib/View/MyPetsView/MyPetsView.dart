@@ -149,22 +149,22 @@ class _MypetsviewState extends State<Mypetsview> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        SizedBox(height: 20.h),
-        RoundButton(
-          height: 51.h,
-          width: 150.w,
-          isSelected: true,
-          title: l10n.addPetButton,
-          backgroundColors: AppColors.vibrantPurple,
-          textColors: Colors.white,
-          onPress: () {
-            Navigator.pushNamed(
-              context,
-              RoutesName.edit,
-              arguments: {'isEditing': false},
-            );
-          },
-        ),
+        // SizedBox(height: 20.h),
+        // RoundButton(
+        //   height: 51.h,
+        //   width: 150.w,
+        //   isSelected: true,
+        //   title: l10n.addPetButton,
+        //   backgroundColors: AppColors.vibrantPurple,
+        //   textColors: Colors.white,
+        //   onPress: () {
+        //     Navigator.pushNamed(
+        //       context,
+        //       RoutesName.edit,
+        //       arguments: {'isEditing': false},
+        //     );
+        //   },
+        // ),
       ],
     );
   }

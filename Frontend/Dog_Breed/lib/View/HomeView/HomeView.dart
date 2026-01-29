@@ -32,25 +32,30 @@ class _HomeviewState extends State<Homeview> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 18.h),
+          padding: EdgeInsets.symmetric(vertical: 12.h,horizontal: 24.w),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildHeader(),
               SizedBox(height: 12.h),
-              Transform.translate(
-                offset: Offset(0, -30.h),
-              ),
+              Transform.translate(offset: Offset(0, -30.h)),
               _buildSearchBar(),
               SizedBox(height: 6.h),
-              PremiumBanner(onGetIt: () =>{Navigator.pushNamed(context, RoutesName.pro, arguments: 'home')}),
+              PremiumBanner(
+                onGetIt: () => {
+                  Navigator.pushNamed(
+                    context,
+                    RoutesName.pro,
+                    arguments: 'home',
+                  ),
+                },
+              ),
               SizedBox(height: 14.h),
               _buildQuickActions(),
-              SizedBox(height: 6.h),
-              _buildIdentifyDogCard(),
-              SizedBox(height: 6.h),
+              SizedBox(height: 8.h),
+              _buildIdentifyDogCard1(),
+              SizedBox(height: 8.h),
               _buildFoodManagementCard(),
-              SizedBox(height: 6.h),
+              SizedBox(height: 8.h),
               _buildVisitsDogCard(),
             ],
           ),
@@ -104,7 +109,7 @@ class _HomeviewState extends State<Homeview> {
       child: Column(
         children: [
           Container(
-            width: 86.w,
+            width: double.infinity,
             height: 90.h,
             padding: EdgeInsets.all(6.w),
             decoration: BoxDecoration(
@@ -127,7 +132,7 @@ class _HomeviewState extends State<Homeview> {
           Text(
             label,
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 14.sp,
               // fontWeight: FontWeight.bold,
               color: const Color(0xFF371B34),
             ),
@@ -136,10 +141,6 @@ class _HomeviewState extends State<Homeview> {
       ),
     );
   }
-
-
-
-
 
   Widget _buildHeader() {
     return Stack(
@@ -194,7 +195,8 @@ class _HomeviewState extends State<Homeview> {
                           style: const TextStyle(fontWeight: FontWeight.w400),
                         ),
                         TextSpan(
-                          text: '${Provider.of<ProfileProvider>(context).firstName}!',
+                          text:
+                              '${Provider.of<ProfileProvider>(context).firstName}!',
                           style: const TextStyle(fontWeight: FontWeight.w700),
                         ),
                       ],
@@ -205,7 +207,7 @@ class _HomeviewState extends State<Homeview> {
             ),
             SizedBox(width: 68.w),
             Align(
-              alignment:Alignment.bottomRight,
+              alignment: Alignment.bottomRight,
               child: SizedBox(
                 height: 92.h,
                 width: 92.w,
@@ -229,59 +231,69 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
-
   Widget _buildQuickActions() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        quickActionButton(
-          image: SvgPicture.asset(
-            'assets/images/Group77.svg',
-            color: const Color(0xFF711544),
-            height: 57.h,
-            width: 57.w,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: quickActionButton(
+              image: SvgPicture.asset(
+                'assets/images/Group77.svg',
+                color: const Color(0xFF711544),
+                height: 57.h,
+                width: 57.w,
+              ),
+              label: AppLocalizations.of(context)!.hygiene,
+              color: const Color(0xFFEF5DA8),
+              onTap: () => _goToActivity('Grooming'),
+            ),
           ),
-          label: AppLocalizations.of(context)!.hygiene,
-          color: const Color(0xFFEF5DA8),
-          onTap: () => _goToActivity('Grooming'),
-        ),
-        SizedBox(width: 7.w),
-        quickActionButton(
-          image: SvgPicture.asset(
-            'assets/images/Group88.svg',
-            color: const Color(0xFF4B4B89),
-            height: 66.h,
-            width: 52.w,
+          SizedBox(width: 7.w),
+          Expanded(
+            child: quickActionButton(
+              image: SvgPicture.asset(
+                'assets/images/Group88.svg',
+                color: const Color(0xFF4B4B89),
+                height: 66.h,
+                width: 52.w,
+              ),
+              label: AppLocalizations.of(context)!.cleaning,
+              color: const Color(0xFFAEAFF7),
+              onTap: () => _goToActivity('Cleaning'),
+            ),
           ),
-          label: AppLocalizations.of(context)!.cleaning,
-          color: const Color(0xFFAEAFF7),
-          onTap: () => _goToActivity('Cleaning'),
-        ),
-        SizedBox(width: 7.w),
-        quickActionButton(
-          image: SvgPicture.asset(
-            'assets/images/medical.svg',
-            color: const Color(0xFF938200),
-            height: 44.h,
-            width: 44.w,
+          SizedBox(width: 7.w),
+          Expanded(
+            child: quickActionButton(
+              image: SvgPicture.asset(
+                'assets/images/medical.svg',
+                color: const Color(0xFF938200),
+                height: 44.h,
+                width: 44.w,
+              ),
+              label: AppLocalizations.of(context)!.medical,
+              color: const Color(0xFFECEF8B),
+              onTap: () => _goToActivity('Medication'),
+            ),
           ),
-          label: AppLocalizations.of(context)!.medical,
-          color: const Color(0xFFECEF8B),
-          onTap: () => _goToActivity('Medication'),
-        ),
-        SizedBox(width: 7.w),
-        quickActionButton(
-          image: SvgPicture.asset(
-            'assets/images/Group991.svg',
-            color: const Color(0xFF1C7372),
-            height: 40.h,
-            width: 40.w,
+          SizedBox(width: 7.w),
+          Expanded(
+            child: quickActionButton(
+              image: SvgPicture.asset(
+                'assets/images/Group991.svg',
+                color: const Color(0xFF1C7372),
+                height: 40.h,
+                width: 40.w,
+              ),
+              label: AppLocalizations.of(context)!.booking,
+              color: const Color(0xFFA0E3E2),
+              onTap: () => _goToActivity('Veterinary'),
+            ),
           ),
-          label: AppLocalizations.of(context)!.booking,
-          color: const Color(0xFFA0E3E2),
-          onTap: () => _goToActivity('Veterinary'),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -315,32 +327,302 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
+  Widget _buildIdentifyDogCard1(
 
+      ) {
+    return _buildActionCard(
+      title: AppLocalizations.of(context)!.identifyDog,
+      description: AppLocalizations.of(context)!.vetVisitsDescription,
+      actionText: AppLocalizations.of(context)!.scanNow,
+      onActionTap: () async {
+        if (kDebugMode) {
+          print('📸 Starting scan process...');
+        }
 
+        try {
+          final cameraResult = await Navigator.pushNamed(
+            context,
+            RoutesName.camera,
+          );
+          if (cameraResult != null && cameraResult is File) {
+            if (kDebugMode) {
+              print('📷 Image captured: ${cameraResult.path}');
+            }
+            final dogResult = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DogResultScreen(imageFile: cameraResult),
+              ),
+            );
+            if (dogResult != null && dogResult is Map<String, dynamic>) {
+              if (kDebugMode) {
+                print('✅ Received valid scan data!');
+              }
 
-  Widget _buildIdentifyDogCard() {
+              final scanProvider = Provider.of<ScanProvider>(
+                context,
+                listen: false,
+              );
+
+              final scanData = {
+                'id': DateTime.now().millisecondsSinceEpoch.toString(),
+                'image': dogResult['image'] ?? cameraResult,
+                'breedName':
+                    dogResult['breedName']?.toString() ??
+                    AppLocalizations.of(context)!.unknownBreed,
+                'confidence': (dogResult['confidence'] ?? 0.0) is double
+                    ? dogResult['confidence'] as double
+                    : 0.0,
+                'formattedBreedName':
+                    dogResult['formattedBreedName']?.toString() ??
+                    _formatBreedName(
+                      dogResult['breedName']?.toString() ??
+                          AppLocalizations.of(context)!.unknownBreed,
+                    ),
+                'timestamp': DateTime.now(),
+                'isFavorite': false,
+              };
+
+              if (kDebugMode) {
+                print(' Adding scan to provider: ${scanData['breedName']}');
+              }
+
+              scanProvider.addScan(scanData);
+
+              final confidencePercent = (scanData['confidence']! * 100)
+                  .toStringAsFixed(1);
+              final message = AppLocalizations.of(context)!.savedScanMessage(
+                scanData['formattedBreedName'],
+                confidencePercent,
+              );
+              if (widget.onShowSnackBar != null) {
+                widget.onShowSnackBar!(message);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(message),
+                    duration: const Duration(seconds: 3),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              }
+
+              if (kDebugMode) {
+                print('💾 Scan saved via provider!');
+              }
+            } else if (dogResult == null) {
+              if (kDebugMode) {
+                print('⚠️ User cancelled or went back without saving');
+              }
+            }
+          } else {
+            if (kDebugMode) {
+              print('❌ No image returned from camera');
+            }
+          }
+        } catch (e) {
+          if (kDebugMode) {
+            print('❌ Error in scan flow: $e');
+          }
+          final message = AppLocalizations.of(
+            context,
+          )!.errorMessage(e.toString());
+          if (widget.onShowSnackBar != null) {
+            widget.onShowSnackBar!(message);
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(message), backgroundColor: Colors.red),
+            );
+          }
+        }
+      },
+      backgroundColor: const Color(0xFFD4ACFF),
+      actionTextColor: const Color(0xFF820DFF),
+      imageWidget: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            top: -10.h,
+            left: -30.w,
+            child: Transform.rotate(
+              angle: -83.51 * (pi / 180),
+              child: SvgPicture.asset(
+                "assets/images/Group099.svg",
+                width: 92.w,
+                height: 92.h,
+                fit: BoxFit.contain,
+                color: const Color(0xFF820DFF),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 123.w,
+            height: 164.h,
+            child: Image.asset(
+              'assets/images/ddoogg21.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+        ],
+      ),
+      // Stack(
+      //   clipBehavior: Clip.none,
+      //   alignment: Alignment.center,
+      //   children: [
+      //     Positioned(
+      //       top: -10.h,
+      //       left: -30.w,
+      //       bottom: 10.h,
+      //       child: Transform.rotate(
+      //         angle: -83.51 * (pi / 180),
+      //         child: SvgPicture.asset(
+      //           "assets/images/Group099.svg",
+      //           width: 92.w,
+      //           height: 92.h,
+      //           fit: BoxFit.contain,
+      //           color: const Color(0xFF759BE3),
+      //         ),
+      //       ),
+      //     ),
+      //     SizedBox(
+      //       width: 123.w,
+      //       height: 164.h,
+      //       child: Image.asset(
+      //         'assets/images/image 46.png',
+      //         fit: BoxFit.contain,
+      //       ),
+      //     ),
+      //   ],
+      // ),
+    );
+  }
+
+  String _formatBreedName(String name) {
+    return name
+        .replaceAll('-', ' ')
+        .split(' ')
+        .map(
+          (word) => word.isNotEmpty
+              ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+              : '',
+        )
+        .join(' ');
+  }
+
+  Widget _buildVisitsDogCard() {
+    return _buildActionCard(
+      title: AppLocalizations.of(context)!.vetVisits,
+      description: AppLocalizations.of(context)!.vetVisitsDescription,
+      actionText: AppLocalizations.of(context)!.createVisit,
+      onActionTap: () => _goToActivity('Veterinary'),
+      backgroundColor: const Color(0xFFA4C4FF),
+      actionTextColor: const Color(0xFF0059FF),
+      imageWidget: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            top: -10.h,
+            left: -30.w,
+            bottom: 10.h,
+            child: Transform.rotate(
+              angle: -83.51 * (pi / 180),
+              child: SvgPicture.asset(
+                "assets/images/Group099.svg",
+                width: 92.w,
+                height: 92.h,
+                fit: BoxFit.contain,
+                color: const Color(0xFF759BE3),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 123.w,
+            height: 164.h,
+            child: Image.asset(
+              'assets/images/image 46.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFoodManagementCard() {
+    return _buildActionCard(
+      title: AppLocalizations.of(context)!.foodManagement,
+      description: AppLocalizations.of(context)!.foodManagementDescription,
+      actionText: AppLocalizations.of(context)!.checkSchedule,
+      onActionTap: () => _goToActivity('Eat'),
+      backgroundColor: const Color(0xFFFFF0E0),
+      actionTextColor: const Color(0xFF6E4B25),
+      imageWidget: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+            top: -10.h,
+            left: -20.w,
+            child: Transform.rotate(
+              angle: -83.51 * (pi / 180),
+              child: SvgPicture.asset(
+                "assets/images/Group099.svg",
+                width: 92.w,
+                height: 92.h,
+                fit: BoxFit.contain,
+                color: const Color(0xFFEFCBA6),
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(0, 25.h),
+            child: SizedBox(
+              width: 123.w,
+              height: 164.h,
+              child: Image.asset(
+                'assets/images/image 47.png',
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionCard({
+    required String title,
+    required String description,
+    required String actionText,
+    required VoidCallback onActionTap,
+    required Color backgroundColor,
+    required Color actionTextColor,
+    required Widget imageWidget,
+  }) {
     return Container(
-      height: 166.h,
       width: 384.w,
-      padding: EdgeInsets.all(10.w),
+      padding: EdgeInsets.all(6.w),
+
       decoration: BoxDecoration(
-        color: const Color(0xFFD4ACFF),
-        borderRadius: BorderRadius.circular(16.r),
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 14.h,horizontal: 12.w),
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.identifyDog,
+                    title,
                     style: TextStyle(
                       fontFamily: 'Sora',
                       fontWeight: FontWeight.w400,
-                      fontSize: 22.sp,
+                      fontSize: 24.sp,
                       height: 1.0,
                       letterSpacing: 0,
                       color: const Color(0xFF371B34),
@@ -348,7 +630,7 @@ class _HomeviewState extends State<Homeview> {
                   ),
                   SizedBox(height: 8.h),
                   Text(
-                    AppLocalizations.of(context)!.identifyDogDescription,
+                    description,
                     style: TextStyle(
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w300,
@@ -361,126 +643,16 @@ class _HomeviewState extends State<Homeview> {
                   ),
                   SizedBox(height: 16.h),
                   GestureDetector(
-                    onTap: () async {
-                      if (kDebugMode) {
-                        print('📸 Starting scan process...');
-                      }
-
-                      try {
-                        final cameraResult = await Navigator.pushNamed(
-                          context,
-                          RoutesName.camera,
-                        );
-                        if (cameraResult != null && cameraResult is File) {
-                          if (kDebugMode) {
-                            print('📷 Image captured: ${cameraResult.path}');
-                          }
-                          final dogResult = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  DogResultScreen(imageFile: cameraResult),
-                            ),
-                          );
-                          if (dogResult != null &&
-                              dogResult is Map<String, dynamic>) {
-                            if (kDebugMode) {
-                              print('✅ Received valid scan data!');
-                            }
-
-                            final scanProvider = Provider.of<ScanProvider>(
-                              context,
-                              listen: false,
-                            );
-
-                            final scanData = {
-                              'id': DateTime.now().millisecondsSinceEpoch
-                                  .toString(),
-                              'image': dogResult['image'] ?? cameraResult,
-                              'breedName':
-                              dogResult['breedName']?.toString() ??
-                                  AppLocalizations.of(context)!.unknownBreed,
-                              'confidence':
-                              (dogResult['confidence'] ?? 0.0) is double
-                                  ? dogResult['confidence'] as double
-                                  : 0.0,
-                              'formattedBreedName':
-                              dogResult['formattedBreedName']?.toString() ??
-                                  _formatBreedName(
-                                    dogResult['breedName']?.toString() ??
-                                        AppLocalizations.of(context)!.unknownBreed,
-                                  ),
-                              'timestamp': DateTime.now(),
-                              'isFavorite': false,
-                            };
-
-                            if (kDebugMode) {
-                              print(
-                                ' Adding scan to provider: ${scanData['breedName']}',
-                              );
-                            }
-
-                            scanProvider.addScan(scanData);
-
-                            final confidencePercent =
-                            (scanData['confidence']! * 100).toStringAsFixed(
-                              1,
-                            );
-                            final message =
-                                AppLocalizations.of(context)!.savedScanMessage(scanData['formattedBreedName'], confidencePercent);
-                            if (widget.onShowSnackBar != null) {
-                              widget.onShowSnackBar!(message);
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(message),
-                                  duration: const Duration(seconds: 3),
-                                  backgroundColor: Colors.green,
-                                ),
-                              );
-                            }
-
-                            if (kDebugMode) {
-                              print('💾 Scan saved via provider!');
-                            }
-                          } else if (dogResult == null) {
-                            if (kDebugMode) {
-                              print(
-                                '⚠️ User cancelled or went back without saving',
-                              );
-                            }
-                          }
-                        } else {
-                          if (kDebugMode) {
-                            print('❌ No image returned from camera');
-                          }
-                        }
-                      } catch (e) {
-                        if (kDebugMode) {
-                          print('❌ Error in scan flow: $e');
-                        }
-                        final message = AppLocalizations.of(context)!.errorMessage(e.toString());
-                        if (widget.onShowSnackBar != null) {
-                          widget.onShowSnackBar!(message);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(message),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                      }
-                    },
+                    onTap: onActionTap,
                     child: Text(
-                      AppLocalizations.of(context)!.scanNow,
+                      actionText,
                       style: TextStyle(
                         fontFamily: 'Sora',
                         fontWeight: FontWeight.w600,
                         fontSize: 20.sp,
                         height: 0.9,
                         letterSpacing: 0,
-                        color: AppColors.vibrantPurple,
+                        color: actionTextColor,
                       ),
                     ),
                   ),
@@ -489,248 +661,12 @@ class _HomeviewState extends State<Homeview> {
             ),
           ),
           SizedBox(width: 12.w),
-          Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.center,
-            children: [
-              Positioned(
-                top: -10.h,
-                left: -30.w,
-                child: Transform.rotate(
-                  angle: -83.51 * (pi / 180),
-                  child: SvgPicture.asset(
-                    "assets/images/Group099.svg",
-                    width: 92.w,
-                    height: 92.h,
-                    fit: BoxFit.contain,
-                    color: const Color(0xFF820DFF),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 123.w,
-                height: 164.h,
-                child: Image.asset(
-                  'assets/images/ddoogg21.png',
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  String _formatBreedName(String name) {
-    return name
-        .replaceAll('-', ' ')
-        .split(' ')
-        .map((word) => word.isNotEmpty
-        ? word[0].toUpperCase() + word.substring(1).toLowerCase()
-        : '')
-        .join(' ');
-  }
-
-  Widget _buildVisitsDogCard() {
-    return Container(
-      height: 163.h,
-      width: 384.w,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: const Color(0xFFA4C4FF),
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10.h),
-                Text(
-                  AppLocalizations.of(context)!.vetVisits,
-                  style: TextStyle(
-                    fontFamily: 'Sora',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 22.sp,
-                    height: 1.0,
-                    letterSpacing: 0,
-                    color: const Color(0xFF371B34),
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  AppLocalizations.of(context)!.vetVisitsDescription,
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w300,
-                    fontSize: 14.sp,
-                    height: 1.0,
-                    letterSpacing: 0,
-                    color: const Color(0xFF371B34),
-                  ),
-                  maxLines: 2,
-                ),
-                SizedBox(height: 19.h),
-                GestureDetector(
-                  onTap:() => _goToActivity('Veterinary'),
-                  child: Text(
-                    AppLocalizations.of(context)!.createVisit,
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20.sp,
-                      height: 0.9,
-                      letterSpacing: 0,
-                      color: const Color(0xFF0059FF),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 12.w),
-          Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.center,
-            children: [
-              Positioned(
-                top: -10.h,
-                left: -30.w,
-                bottom: 10.h,
-                child: Transform.rotate(
-                  angle: -83.51 * (pi / 180),
-                  child: SvgPicture.asset(
-                    "assets/images/Group099.svg",
-                    width: 92.w,
-                    height: 92.h,
-                    fit: BoxFit.contain,
-                    color: const Color(0xFF759BE3),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 123.w,
-                height: 164.h,
-                child: Image.asset(
-                  'assets/images/image 46.png',
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFoodManagementCard() {
-    return Container(
-      height: 163.h,
-      width: 384.w,
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFF0E0),
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10.h),
-                Text(
-                  AppLocalizations.of(context)!.foodManagement,
-                  style: TextStyle(
-                    fontFamily: 'Sora',
-                    fontWeight: FontWeight.w400,
-                    fontSize: 22.sp,
-                    height: 1.0,
-                    letterSpacing: 0,
-                    color: const Color(0xFF371B34),
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  AppLocalizations.of(context)!.foodManagementDescription,
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w300,
-                    fontSize: 14.sp,
-                    height: 1.0,
-                    letterSpacing: 0,
-                    color: const Color(0xFF371B34),
-                  ),
-                  maxLines: 2,
-                ),
-                SizedBox(height: 19.h),
-                GestureDetector(
-                  onTap: () => _goToActivity('Eat'),
-                  child: Text(
-                    AppLocalizations.of(context)!.checkSchedule,
-                    style: TextStyle(
-                      fontFamily: 'Sora',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20.sp,
-                      height: 0.9,
-                      letterSpacing: 0,
-                      color: const Color(0xFF6E4B25),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 12.w),
-          Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.center,
-            children: [
-              Positioned(
-                top: -10.h,
-                left: -30.w,
-                child: Transform.rotate(
-                  angle: -83.51 * (pi / 180),
-                  child: SvgPicture.asset(
-                    "assets/images/Group099.svg",
-                    width: 92.w,
-                    height: 92.h,
-                    fit: BoxFit.contain,
-                    color: const Color(0xFFEFCBA6),
-                  ),
-                ),
-              ),
-              Transform.translate(
-                offset: Offset(0, 25.h),
-                child: SizedBox(
-                  width: 123.w,
-                  height: 164.h,
-                  child: Image.asset(
-                    'assets/images/image 47.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          imageWidget,
         ],
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 // import 'dart:io';
 // import 'dart:math';

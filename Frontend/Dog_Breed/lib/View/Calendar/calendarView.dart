@@ -388,7 +388,7 @@ class _CalendarviewState extends State<Calendarview> {
                 AppLocalizations.of(context)!.calendarManage,
                 style: TextStyle(
                   fontSize: 40.sp,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w200,
                   color: Colors.black,
                 ),
               ),
@@ -556,7 +556,7 @@ class _CalendarviewState extends State<Calendarview> {
 
               // Calendar days
               SizedBox(
-                height: 100.h,
+                height: 105.h,
                 child: ListView.builder(
                   controller: _scrollController,
                   padding: EdgeInsets.zero,
@@ -583,7 +583,7 @@ class _CalendarviewState extends State<Calendarview> {
                           Container(
                             width: 70.w,
                             margin: EdgeInsets.symmetric(horizontal: 6.w),
-                            padding: EdgeInsets.symmetric(vertical: 8.h),
+                            padding: EdgeInsets.symmetric(vertical: 6.h),
                             decoration: BoxDecoration(
                               color: isSelected
                                   ? const Color(0xFF820DFF)
@@ -697,8 +697,6 @@ class _CalendarviewState extends State<Calendarview> {
         return Center(child: Text(AppLocalizations.of(context)!.calendarComingSoon));
     }
   }
-
-
   Widget _buildActivitiesList(List<Activity> activities, {bool shrinkWrap = false, int? limit}) {
     final displayActivities = (limit != null && activities.length > limit)
         ? activities.sublist(0, limit)
@@ -744,24 +742,24 @@ class _CalendarviewState extends State<Calendarview> {
       children: [
         Container(
           height: 70.h,
-          margin: EdgeInsets.symmetric(horizontal: 8.w),
+          margin: EdgeInsets.symmetric(horizontal: 2.w),
           decoration: BoxDecoration(
             color: const Color(0xFFF4F7F6),
             borderRadius: BorderRadius.circular(16.r),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: EdgeInsets.symmetric(horizontal: 6.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
                     _buildHeaderIcon('assets/images/61.png'),
-                    SizedBox(width: 5.w),
+                    SizedBox(width: 4.w),
                     _buildHeaderIcon('assets/images/62.png'),
-                    SizedBox(width: 5.w),
+                    SizedBox(width: 4.w),
                     _buildHeaderIcon('assets/images/63.png'),
-                    SizedBox(width: 5.w),
+                    SizedBox(width: 4.w),
                     SizedBox(
                         width: 40.w,
                         height: 40.h,
@@ -774,7 +772,7 @@ class _CalendarviewState extends State<Calendarview> {
                   onTap: () => _showAddActivitySheet(context),
                   child: Text(
                     AppLocalizations.of(context)!.calendarAddActivity,
-                    style:  TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                    style:  TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
@@ -804,6 +802,7 @@ class _CalendarviewState extends State<Calendarview> {
       ],
     );
   }
+
 
   Widget _buildProgressList(List<Activity> dailyActivities) {
     return Column(
@@ -984,16 +983,26 @@ class _CalendarviewState extends State<Calendarview> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                iconPath,
-                                width: 28.w,
-                                height: 28.h,
-                                errorBuilder: (context, error, stackTrace) =>
-                                    Icon(
-                                      Icons.pets,
-                                      color: Colors.grey[400],
-                                      size: 24.w,
-                                    ),
+                              Container(
+                                width: 40.w,
+                                height: 40.h,
+                                decoration:  BoxDecoration(
+                                  color: Colors.grey.shade200,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    iconPath,
+                                    width: 28.w,
+                                    height: 28.h,
+                                    errorBuilder: (context, error, stackTrace) =>
+                                        Icon(
+                                          Icons.pets,
+                                          color: Colors.grey[400],
+                                          size: 24.w,
+                                        ),
+                                  ),
+                                ),
                               ),
                               SizedBox(height: 4.h),
                               Text(
@@ -1194,6 +1203,220 @@ class _CalendarviewState extends State<Calendarview> {
     );
   }
 
+  // Widget _buildProgressCompareView(List<Activity> dailyActivities) {
+  //   final activityNotifier = Provider.of<ActivityNotifier>(context);
+  //   final allActivities = activityNotifier.activities;
+  //
+  //   DateTime startOfWeek = _selectedDate.subtract(
+  //     Duration(days: _selectedDate.weekday - 1),
+  //   );
+  //   startOfWeek = DateTime(
+  //     startOfWeek.year,
+  //     startOfWeek.month,
+  //     startOfWeek.day,
+  //   );
+  //
+  //   DateTime endOfWeek = startOfWeek.add(const Duration(days: 6));
+  //   endOfWeek = DateTime(
+  //     endOfWeek.year,
+  //     endOfWeek.month,
+  //     endOfWeek.day,
+  //     23,
+  //     59,
+  //     59,
+  //   );
+  //
+  //   final weeklyActivities = allActivities.where((activity) {
+  //     return activity.dateTime.isAfter(
+  //       startOfWeek.subtract(const Duration(seconds: 1)),
+  //     ) &&
+  //         activity.dateTime.isBefore(endOfWeek.add(const Duration(seconds: 1)));
+  //   }).toList();
+  //
+  //   Map<int, List<Activity>> groupedByDay = {};
+  //   for (int i = 1; i <= 7; i++) {
+  //     groupedByDay[i] = [];
+  //   }
+  //
+  //   for (var activity in weeklyActivities) {
+  //     groupedByDay[activity.dateTime.weekday]?.add(activity);
+  //   }
+  //
+  //   List<BarChartGroupData> barGroups = [];
+  //   double maxY = 0;
+  //
+  //   for (int i = 1; i <= 7; i++) {
+  //     final dayActivities = groupedByDay[i]!;
+  //
+  //     Map<String, List<Activity>> groupedByType = {};
+  //     for (var activity in dayActivities) {
+  //       if (!groupedByType.containsKey(activity.name)) {
+  //         groupedByType[activity.name] = [];
+  //       }
+  //       groupedByType[activity.name]!.add(activity);
+  //     }
+  //
+  //     List<BarChartRodStackItem> rodStackItems = [];
+  //     double currentY = 0;
+  //
+  //     groupedByType.forEach((name, activities) {
+  //       final count = activities.length.toDouble();
+  //       final color = activities.first.color;
+  //
+  //       if (count > 0) {
+  //         rodStackItems.add(
+  //           BarChartRodStackItem(currentY, currentY + count, color),
+  //         );
+  //         currentY += count;
+  //       }
+  //     });
+  //
+  //     if (currentY > maxY) maxY = currentY;
+  //
+  //     barGroups.add(
+  //       BarChartGroupData(
+  //         x: i,
+  //         barRods: [
+  //           BarChartRodData(
+  //             toY: currentY,
+  //             width: 16.w,
+  //             borderRadius: BorderRadius.circular(4.r),
+  //             rodStackItems: rodStackItems,
+  //             color: Colors.transparent,
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   }
+  //
+  //   if (maxY < 6) maxY = 6;
+  //   final int maxYInt = maxY.ceil().toInt();
+  //   maxY = maxYInt.toDouble();
+  //
+  //   final _ =
+  //       "${DateFormat('MMMM d, y', Localizations.localeOf(context).toString()).format(startOfWeek)} - ${DateFormat('MMMM d, y', Localizations.localeOf(context).toString()).format(endOfWeek)}";
+  //
+  //   return Column(
+  //     children: [
+  //       Expanded(
+  //         child: Padding(
+  //           padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 8.h),
+  //           child: BarChart(
+  //             BarChartData(
+  //               alignment: BarChartAlignment.spaceAround,
+  //               maxY: maxY,
+  //               barTouchData: BarTouchData(
+  //                 enabled: true,
+  //                 touchTooltipData: BarTouchTooltipData(
+  //                   getTooltipColor: (group) => Colors.blueGrey,
+  //                   getTooltipItem: (group, groupIndex, rod, rodIndex) {
+  //                     return BarTooltipItem(
+  //                       rod.toY.toInt().toString(),
+  //                       const TextStyle(color: Colors.white),
+  //                     );
+  //                   },
+  //                 ),
+  //               ),
+  //               titlesData: FlTitlesData(
+  //                 show: true,
+  //                 bottomTitles: AxisTitles(
+  //                   sideTitles: SideTitles(
+  //                     showTitles: true,
+  //                     reservedSize: 100.h,
+  //                     getTitlesWidget: (double value, TitleMeta meta) {
+  //                       const style = TextStyle(
+  //                         color: Colors.grey,
+  //                         fontSize: 12,
+  //                       );
+  //                       Widget text;
+  //                       switch (value.toInt()) {
+  //                         case 1:
+  //                           text = Text(AppLocalizations.of(context)!.dayMon, style: style);
+  //                           break;
+  //                         case 2:
+  //                           text = Text(AppLocalizations.of(context)!.dayTue, style: style);
+  //                           break;
+  //                         case 3:
+  //                           text = Text(AppLocalizations.of(context)!.dayWed, style: style);
+  //                           break;
+  //                         case 4:
+  //                           text = Text(AppLocalizations.of(context)!.dayThu, style: style);
+  //                           break;
+  //                         case 5:
+  //                           text = Text(AppLocalizations.of(context)!.dayFri, style: style);
+  //                           break;
+  //                         case 6:
+  //                           text = Text(AppLocalizations.of(context)!.daySat, style: style);
+  //                           break;
+  //                         case 7:
+  //                           text = Text(AppLocalizations.of(context)!.daySun, style: style);
+  //                           break;
+  //                         default:
+  //                           text = const Text('', style: style);
+  //                       }
+  //                       return SideTitleWidget(
+  //                         axisSide: meta.axisSide,
+  //                         child: text,
+  //                       );
+  //                     },
+  //                   ),
+  //                 ),
+  //                 leftTitles: AxisTitles(
+  //                   sideTitles: SideTitles(
+  //                     showTitles: true,
+  //                     reservedSize: 30.w,
+  //                     interval: 1,
+  //                     getTitlesWidget: (value, meta) {
+  //                       if (value % 1 == 0 && value <= maxY) {
+  //                         return Text(
+  //                           value.toInt().toString(),
+  //                           style: const TextStyle(
+  //                             color: Colors.grey,
+  //                             fontSize: 12,
+  //                           ),
+  //                         );
+  //                       }
+  //                       return Container();
+  //                     },
+  //                   ),
+  //                 ),
+  //                 topTitles: const AxisTitles(
+  //                   sideTitles: SideTitles(showTitles: false),
+  //                 ),
+  //                 rightTitles: const AxisTitles(
+  //                   sideTitles: SideTitles(showTitles: false),
+  //                 ),
+  //               ),
+  //               gridData: FlGridData(
+  //                 show: true,
+  //                 drawVerticalLine: true,
+  //                 horizontalInterval: 1,
+  //                 getDrawingHorizontalLine: (value) => FlLine(
+  //                   color: Colors.grey[300],
+  //                   strokeWidth: 1,
+  //                   dashArray: [5, 5],
+  //                 ),
+  //                 getDrawingVerticalLine: (value) => FlLine(
+  //                   color: Colors.grey[300],
+  //                   strokeWidth: 1,
+  //                   dashArray: [5, 5],
+  //                 ),
+  //               ),
+  //               borderData: FlBorderData(
+  //                 show: true,
+  //                 border: const Border(
+  //                   bottom: BorderSide(color: Colors.black, width: 1),
+  //                 ),
+  //               ),
+  //               barGroups: barGroups,
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
+
   Widget _buildProgressCompareView(List<Activity> dailyActivities) {
     final activityNotifier = Provider.of<ActivityNotifier>(context);
     final allActivities = activityNotifier.activities;
@@ -1233,6 +1456,19 @@ class _CalendarviewState extends State<Calendarview> {
       groupedByDay[activity.dateTime.weekday]?.add(activity);
     }
 
+    // Define your color palette
+    List<Color> colorPalette = [
+      const Color(0xFF990098),
+      const Color(0xFF3266CC),
+      const Color(0xFF109619),
+      const Color(0xFFDC3912), // Added complete color for the incomplete one
+      const Color(0xFF994499),
+      const Color(0xFF21AA98),
+    ];
+
+    // Map to track which activity types get which colors
+    Map<String, Color> activityTypeColorMap = {};
+
     List<BarChartGroupData> barGroups = [];
     double maxY = 0;
 
@@ -1252,7 +1488,15 @@ class _CalendarviewState extends State<Calendarview> {
 
       groupedByType.forEach((name, activities) {
         final count = activities.length.toDouble();
-        final color = activities.first.color;
+
+        // Assign colors to activity types (only if not already assigned)
+        if (!activityTypeColorMap.containsKey(name)) {
+          // Cycle through the color palette
+          int colorIndex = activityTypeColorMap.length % colorPalette.length;
+          activityTypeColorMap[name] = colorPalette[colorIndex];
+        }
+
+        final color = activityTypeColorMap[name]!;
 
         if (count > 0) {
           rodStackItems.add(
@@ -1270,7 +1514,7 @@ class _CalendarviewState extends State<Calendarview> {
           barRods: [
             BarChartRodData(
               toY: currentY,
-              width: 16.w,
+              width: 32.w,
               borderRadius: BorderRadius.circular(4.r),
               rodStackItems: rodStackItems,
               color: Colors.transparent,
@@ -1407,7 +1651,6 @@ class _CalendarviewState extends State<Calendarview> {
       ],
     );
   }
-
   Widget _buildSelectedPetHeader() {
     final petProvider = Provider.of<PetProvider>(context);
     final hasPets = petProvider.hasPets;
@@ -1936,7 +2179,7 @@ class _CalendarviewState extends State<Calendarview> {
                                             _getLocalizedActivityName(context, activity.name),
                                             style: TextStyle(
                                               fontSize: 18.sp,
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.w400,
                                             ),
                                           ),
                                           SizedBox(height: 4.h),
@@ -1964,7 +2207,7 @@ class _CalendarviewState extends State<Calendarview> {
                                         displayName,
                                         style: TextStyle(
                                           fontSize: 18.sp,
-                                          fontWeight: FontWeight.bold,
+                                          fontWeight: FontWeight.w400,
                                         ),
                                       ),
                                       SizedBox(height: 6.h),
@@ -4222,7 +4465,7 @@ class _CalendarviewState extends State<Calendarview> {
 //         //                 ),
 //         //                 SizedBox(height: 3.h),
 //         //                 Text(
-//         //                   'Open Meow automatically when you \nlaunch the app',
+//         //                   'Open Meow automatically when you \n launch the app',
 //         //                   style: TextStyle(
 //         //                     fontSize: 14.sp,
 //         //                     color: const Color(0xFF000000),

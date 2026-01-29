@@ -140,7 +140,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                 height: 82.h,
                 child: BottomNavigationBar(
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: Colors.grey.shade200,
+                  backgroundColor: Colors.grey.shade100,
                   currentIndex: homeProvider.selectedIndex >= 2
                       ? homeProvider.selectedIndex + 1
                       : homeProvider.selectedIndex,

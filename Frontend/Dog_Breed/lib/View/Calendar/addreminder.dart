@@ -73,11 +73,11 @@ class _AddreminderState extends State<Addreminder> {
             children: [
               Center(
                 child: Text(
-                  AppLocalizations.of(context)!.calendarAddActivity,
+                  AppLocalizations.of(context)!.reminderAddTitle,
                   style: const TextStyle(
                     color: Color(0xFF000000),
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ),

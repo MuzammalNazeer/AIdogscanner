@@ -79,13 +79,15 @@ class _SplashviewState extends State<Splashview> {
                       fit: BoxFit.contain,
                     ),
                     const SizedBox(width: 5),
-                    Text(
-                      AppLocalizations.of(context)!.manager,
-                      style: TextStyle(
-                        fontFamily: 'Sora',
-                        fontWeight: FontWeight.w200, // ExtraLight
-                        fontSize: 40,
-                        color: Colors.white,
+                    Flexible(
+                      child: Text(
+                        AppLocalizations.of(context)!.manager,
+                        style: const TextStyle(
+                          fontFamily: 'Sora',
+                          fontWeight: FontWeight.w200, // ExtraLight
+                          fontSize: 40,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ],

@@ -841,7 +841,7 @@ class _AddPetViewState extends State<AddPetView> {
   @override
   void initState() {
     super.initState();
-    _nameController.text = 'Super Dog';
+    _nameController.text = '';
     _selectedBreed = 'Affenpinscher';
     _selectedGender = 'Male';
     _selectedDate = DateTime(2020, 2, 2);
@@ -1143,7 +1143,11 @@ class _AddPetViewState extends State<AddPetView> {
                         _selectedGender == null ||
                         _selectedDate == null) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Please fill all fields')),
+                        const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text('Please Fill Pet Name ',style: TextStyle(color: Colors.white),),
+                          duration: Duration(seconds: 1),
+                        ),
                       );
                       return;
                     }

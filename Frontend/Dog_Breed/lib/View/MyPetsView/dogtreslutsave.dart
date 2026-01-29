@@ -512,12 +512,6 @@ Map<String,dynamic>? scan;
     return value;
   }
 
-  String _getLocalizedShape(String value) {
-    final loc = AppLocalizations.of(context)!;
-    final lower = value.toLowerCase();
-    if (lower == 'well proportioned') return loc.wellProportioned;
-    return value;
-  }
 
   String _getLocalizedColor(String value) {
     final loc = AppLocalizations.of(context)!;

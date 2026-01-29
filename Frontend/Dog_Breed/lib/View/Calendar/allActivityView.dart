@@ -513,6 +513,9 @@ class _AllactivityviewState extends State<Allactivityview> {
       );
 
       // Save activity
+      if (_currentActivity != null) {
+        activityNotifier.deleteActivity(_currentActivity!);
+      }
       activityNotifier.addActivity(newActivity);
 
       // Schedule reminder if set

@@ -104,7 +104,7 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
                   style: const TextStyle(
                     color: Color(0xFF000000),
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w300,
                   ),
                 ),
               ),
