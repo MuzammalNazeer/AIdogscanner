@@ -1498,19 +1498,21 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get gpsAlertsDescription =>
-      'Dapatkan pembaruan lokasi hewan peliharaan instan...';
+      'Dapatkan pembaruan lokasi hewan peliharaan secara instan, hindari kerumitan email tradisional';
 
   @override
   String get emergencyContacts => 'Kontak Darurat';
 
   @override
-  String get vetContactsDescription => 'Kontak dokter hewan...';
+  String get vetContactsDescription =>
+      'Kontak dokter hewan, pemilik bersama, dan pengasuh jika telepon utama tidak tersedia';
 
   @override
   String get messenger => 'Messenger';
 
   @override
-  String get messengerDescription => 'Cara alternatif untuk menghubungi...';
+  String get messengerDescription =>
+      'Cara alternatif untuk menghubungi pemilik jika tidak memungkinkan untuk menelepon mereka';
 
   @override
   String get petsResidence => 'Tempat Tinggal Hewan Peliharaan';
@@ -2210,4 +2212,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Hapus Semua';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Apakah Anda yakin ingin menghapus semua hewan peliharaan? Tindakan ini tidak dapat dibatalkan.';
 }

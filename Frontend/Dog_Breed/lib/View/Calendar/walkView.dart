@@ -2,12 +2,16 @@ import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
+import '../../View_model/home/home_view_model.dart';
 import '../../activity_model.dart';
 import 'dart:async';
 import '../../config/components/roundButton.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
+
+import '../../utils/routes/routes_name.dart';
 
 class Walkview extends StatefulWidget {
   final Activity? selectedActivity;
@@ -191,8 +195,7 @@ class _WalkviewState extends State<Walkview> {
   String _getLocalizedActivityName(BuildContext context, String name) {
     final localizations = AppLocalizations.of(context)!;
     switch (name) {
-      case 'Veterinary':
-        return localizations.activityVeterinary;
+
       case 'Pee':
         return localizations.activityPee;
       case 'Eat':

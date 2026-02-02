@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "tr",
     "appTitle":  "Köpek Irkı",
     "settingsTitle":  "Ayarlar",
@@ -531,11 +531,11 @@
     "email":  "E-posta",
     "mainPhone":  "Ana Telefon",
     "instantGpsAlerts":  "Etiket Taramasında Anında GPS Uyarıları",
-    "gpsAlertsDescription":  "Anında evcil hayvan konum güncellemeleri alın...",
+    "gpsAlertsDescription":  "Geleneksel e-postaların zahmetinden kurtularak evcil hayvanınızın konumuyla ilgili anlık güncellemeler alın",
     "emergencyContacts":  "Acil Durum Kişileri",
-    "vetContactsDescription":  "Veteriner kişileri...",
+    "vetContactsDescription":  "Ana telefonun ulaşılamaz olması durumunda veteriner, ortak sahip ve bakıcının iletişim bilgileri",
     "messenger":  "Messenger",
-    "messengerDescription":  "İletişime geçmenin alternatif bir yolu...",
+    "messengerDescription":  "Aramanın imkansız olduğu durumlarda sahibiyle iletişime geçmenin alternatif bir yolu",
     "petsResidence":  "Evcil Hayvanın İkametgahı",
     "country":  "Ülke",
     "city":  "Şehir",
@@ -832,5 +832,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Tümünü Sil",
+    "deleteAllPetsConfirmation":  "Tüm evcil hayvanları silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
 }

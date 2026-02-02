@@ -31,8 +31,9 @@ class ActivityNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> toggleVisibility(String activityName, bool isVisible) async {
-    _visibilitySettings[activityName] = isVisible;
+  Future<void> toggleVisibility(String? petId, String activityName, bool isVisible) async {
+    final key = "${petId ?? 'global'}_$activityName";
+    _visibilitySettings[key] = isVisible;
     notifyListeners();
     await _saveVisibilitySettings();
   }
@@ -46,8 +47,9 @@ class ActivityNotifier extends ChangeNotifier {
     }
   }
 
-  bool isActivityVisible(String name) {
-    return _visibilitySettings[name] ?? true;
+  bool isActivityVisible(String? petId, String name) {
+    final key = "${petId ?? 'global'}_$name";
+    return _visibilitySettings[key] ?? true;
   }
 
   /// Load activities from SharedPreferences
@@ -96,6 +98,12 @@ class ActivityNotifier extends ChangeNotifier {
 
   void deleteActivitiesByName(String name) {
     _activities.removeWhere((activity) => activity.name == name);
+    _saveActivities();
+    notifyListeners();
+  }
+
+  void deleteActivitiesForPet(String petId) {
+    _activities.removeWhere((activity) => activity.petId == petId);
     _saveActivities();
     notifyListeners();
   }

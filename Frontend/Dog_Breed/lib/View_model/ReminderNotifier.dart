@@ -145,6 +145,22 @@ class ReminderNotifier with ChangeNotifier {
     }
   }
 
+  Future<void> cancelRemindersForPet(String petId) async {
+    final ids = _reminders
+        .where((reminder) => reminder['petId'] == petId)
+        .map((reminder) => reminder['id'].toString())
+        .toList();
+
+    for (final reminderId in ids) {
+      final notifId = reminderId.hashCode & 0x7fffffff;
+      await flutterLocalNotificationsPlugin.cancel(notifId);
+    }
+
+    _reminders.removeWhere((reminder) => reminder['petId'] == petId);
+    await _saveReminders();
+    notifyListeners();
+  }
+
   // Get reminders for an activity
   List<Map<String, dynamic>> getRemindersForActivity(String activityName) {
     return _reminders

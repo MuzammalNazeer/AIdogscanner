@@ -733,22 +733,84 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
 
   // ── Additional UI Helpers ──────────────────────────────────────────────────
   Widget _buildInfoSection() {
-    // You might want to calculate these based on the filtered activities
+    final l10n = AppLocalizations.of(context)!;
+    final activityNotifier = Provider.of<ActivityNotifier>(context);
+    final allActivities = activityNotifier.activities;
+
+    // Use dynamic activity title for filtering
+    final filteredActivities = allActivities.where((a) {
+      final bool matchesKey = widget.activityKey != null &&
+          a.name.trim().toLowerCase() == widget.activityKey!.trim().toLowerCase();
+      final bool matchesTitle = a.name.trim().toLowerCase().contains(widget.activityTitle.trim().toLowerCase());
+
+      final matchesName = matchesKey || matchesTitle;
+      final matchesPet = widget.selectedPetId == null || a.petId == widget.selectedPetId;
+      return matchesName && matchesPet;
+    }).toList();
+
+    String activeDay = '-';
+    String activeTime = '-';
+
+    if (filteredActivities.isNotEmpty) {
+      final Map<int, int> dayCounts = {};
+      final Map<int, int> hourCounts = {};
+
+      for (var activity in filteredActivities) {
+        final weekday = activity.dateTime.weekday;
+        final hour = activity.dateTime.hour;
+
+        dayCounts[weekday] = (dayCounts[weekday] ?? 0) + 1;
+        hourCounts[hour] = (hourCounts[hour] ?? 0) + 1;
+      }
+
+      int maxDay = 1;
+      int maxDayCount = -1;
+      dayCounts.forEach((day, count) {
+        if (count > maxDayCount) {
+          maxDayCount = count;
+          maxDay = day;
+        }
+      });
+
+      int maxHour = 0;
+      int maxHourCount = -1;
+      hourCounts.forEach((hour, count) {
+        if (count > maxHourCount) {
+          maxHourCount = count;
+          maxHour = hour;
+        }
+      });
+
+      switch (maxDay) {
+        case 1: activeDay = l10n.dayMon; break;
+        case 2: activeDay = l10n.dayTue; break;
+        case 3: activeDay = l10n.dayWed; break;
+        case 4: activeDay = l10n.dayThu; break;
+        case 5: activeDay = l10n.dayFri; break;
+        case 6: activeDay = l10n.daySat; break;
+        case 7: activeDay = l10n.daySun; break;
+      }
+
+      final now = DateTime.now();
+      final time = DateTime(now.year, now.month, now.day, maxHour);
+      activeTime = DateFormat.j(Localizations.localeOf(context).toString()).format(time);
+    }
+
     return Column(
       children: [
         Row(
           children: [
-            Expanded(child: _buildInfoRow(AppLocalizations.of(context)!.calendarMostActiveDay, '')),
+            Expanded(child: _buildInfoRow(l10n.calendarMostActiveDay, '')),
             SizedBox(width: 20.w),
-            Expanded(child: _buildInfoRow('', AppLocalizations.of(context)!.dayWed)),
+            Expanded(child: _buildInfoRow('', activeDay)),
           ],
         ),
         SizedBox(height: 8.h),
         Row(
           children: [
-            Expanded(child: _buildInfoRow(AppLocalizations.of(context)!.calendarMostActiveTime, '')),
+            Expanded(child: _buildInfoRow(l10n.calendarMostActiveTime, '')),
             SizedBox(width: 20.w),
-            Expanded(child: _buildInfoRow('', DateFormat('h a', Localizations.localeOf(context).toString()).format(DateTime(2024, 1, 1, 21)))),
+            Expanded(child: _buildInfoRow('', activeTime)),
           ],
         ),
       ],

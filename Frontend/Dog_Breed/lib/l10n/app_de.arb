@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "de",
     "appTitle":  "Hunderasse",
     "settingsTitle":  "Einstellungen",
@@ -531,11 +531,11 @@
     "email":  "E-Mail",
     "mainPhone":  "Haupttelefon",
     "instantGpsAlerts":  "Sofortige GPS-Warnungen bei Tag-Scan",
-    "gpsAlertsDescription":  "Erhalten Sie sofortige Standortaktualisierungen...",
+    "gpsAlertsDescription":  "Erhalten Sie sofortige Standortaktualisierungen für Ihr Haustier und vermeiden Sie den Ärger mit herkömmlichen E-Mails",
     "emergencyContacts":  "Notfallkontakte",
-    "vetContactsDescription":  "Kontakte des Tierarztes...",
+    "vetContactsDescription":  "Kontakte des Tierarztes, Miteigentümers und Betreuers, falls das Haupttelefon nicht verfügbar ist",
     "messenger":  "Messenger",
-    "messengerDescription":  "Eine alternative Kontaktmöglichkeit...",
+    "messengerDescription":  "Eine alternative Möglichkeit, den Eigentümer zu kontaktieren, wenn ein Anruf unmöglich ist",
     "petsResidence":  "Wohnort des Haustieres",
     "country":  "Land",
     "city":  "Stadt",
@@ -832,5 +832,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Alles löschen",
+    "deleteAllPetsConfirmation":  "Sind Sie sicher, dass Sie alle Haustiere löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
 }

@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "fi",
     "appTitle":  "Koirarotu",
     "settingsTitle":  "Asetukset",
@@ -531,11 +531,11 @@
     "email":  "Sähköposti",
     "mainPhone":  "Pääpuhelin",
     "instantGpsAlerts":  "Välittömät GPS-hälytykset skannauksesta",
-    "gpsAlertsDescription":  "Saa välittömiä sijaintipäivityksiä...",
+    "gpsAlertsDescription":  "Saat välittömiä päivityksiä lemmikkisi sijainnista ja vältät perinteisten sähköpostien vaivan",
     "emergencyContacts":  "Hätäyhteystiedot",
-    "vetContactsDescription":  "Eläinlääkärin yhteystiedot...",
+    "vetContactsDescription":  "Eläinlääkärin, osaomistajan ja talonmiehen yhteystiedot siltä varalta, että pääpuhelin ei ole tavoitettavissa",
     "messenger":  "Messenger",
-    "messengerDescription":  "Vaihtoehtoinen tapa ottaa yhteyttä...",
+    "messengerDescription":  "Vaihtoehtoinen tapa ottaa yhteyttä omistajaan, jos hänelle on mahdotonta soittaa",
     "petsResidence":  "Lemmikin asuinpaikka",
     "country":  "Maa",
     "city":  "Kaupunki",
@@ -860,5 +860,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Poista kaikki",
+    "deleteAllPetsConfirmation":  "Oletko varma, että haluat poistaa kaikki lemmikit? Tätä toimintoa ei voi kumota."
 }

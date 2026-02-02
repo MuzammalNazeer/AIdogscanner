@@ -3013,7 +3013,7 @@ abstract class AppLocalizations {
   /// No description provided for @gpsAlertsDescription.
   ///
   /// In en, this message translates to:
-  /// **'Get instant pet location updates...'**
+  /// **'Get instant pet location updates, avoiding the hassle of traditional emails'**
   String get gpsAlertsDescription;
 
   /// No description provided for @emergencyContacts.
@@ -3025,7 +3025,7 @@ abstract class AppLocalizations {
   /// No description provided for @vetContactsDescription.
   ///
   /// In en, this message translates to:
-  /// **'Contacts of the vet...'**
+  /// **'Contacts of the vet, co-owner, and caretaker in \n case the main phone isn\'t available'**
   String get vetContactsDescription;
 
   /// No description provided for @messenger.
@@ -3037,7 +3037,7 @@ abstract class AppLocalizations {
   /// No description provided for @messengerDescription.
   ///
   /// In en, this message translates to:
-  /// **'An alternative way to contact...'**
+  /// **'An alternative way to contact the owner if it is impossible to call them'**
   String get messengerDescription;
 
   /// No description provided for @petsResidence.
@@ -4329,6 +4329,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Height'**
   String get height;
+
+  /// No description provided for @deleteAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete All'**
+  String get deleteAll;
+
+  /// No description provided for @deleteAllPetsConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete all pets? This action cannot be undone.'**
+  String get deleteAllPetsConfirmation;
 }
 
 class _AppLocalizationsDelegate

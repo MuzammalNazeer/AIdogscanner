@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "cs",
     "appTitle":  "Psí plemeno",
     "settingsTitle":  "Nastavení",
@@ -531,11 +531,11 @@
     "email":  "E-mail",
     "mainPhone":  "Hlavní telefon",
     "instantGpsAlerts":  "Okamžitá GPS upozornění při naskenování",
-    "gpsAlertsDescription":  "Získejte okamžité aktualizace polohy...",
+    "gpsAlertsDescription":  "Získejte okamžité aktualizace polohy vašeho domácího mazlíčka a vyhněte se potížím s tradičními e-maily",
     "emergencyContacts":  "Nouzové kontakty",
-    "vetContactsDescription":  "Kontakty na veterináře...",
+    "vetContactsDescription":  "Kontakty na veterináře, spolumajitele a správce pro případ, že hlavní telefon není dostupný",
     "messenger":  "Messenger",
-    "messengerDescription":  "Alternativní způsob kontaktu...",
+    "messengerDescription":  "Alternativní způsob kontaktování majitele, pokud mu není možné zavolat",
     "petsResidence":  "Bydliště mazlíčka",
     "country":  "Země",
     "city":  "Město",
@@ -860,5 +860,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Smazat vše",
+    "deleteAllPetsConfirmation":  "Opravdu chcete smazat všechna zvířata? Tuto akci nelze vzít zpět."
 }

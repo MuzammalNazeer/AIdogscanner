@@ -71,7 +71,6 @@ class _AllactivityviewState extends State<Allactivityview> {
   String _getLocalizedActivityName(BuildContext context, String name) {
     final localizations = AppLocalizations.of(context)!;
     switch (name) {
-      case 'Veterinary': return localizations.activityVeterinary;
       case 'Pee': return localizations.activityPee;
       case 'Eat': return localizations.activityEat;
       case 'Drink': return localizations.activityDrink;
@@ -413,6 +412,11 @@ class _AllactivityviewState extends State<Allactivityview> {
     final String activityName = _currentActivity!.name.toLowerCase();
 
     if (activityName == 'drink') {
+      if (_foodController.text.trim().isEmpty) {
+        String localizedName = _getLocalizedActivityName(context, _currentActivity!.name);
+        _showErrorSnackBar('$localizedName ${AppLocalizations.of(context)!.errorRequired}');
+        return;
+      }
       const double ozToMl = 29.5735;
       double amount = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
       foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? AppLocalizations.of(context)!.unitOz : AppLocalizations.of(context)!.unitMl}';
@@ -445,12 +449,30 @@ class _AllactivityviewState extends State<Allactivityview> {
       double amount = _isKmUnit ? _walkDistanceKm : _walkDistanceKm * kmToMi;
       foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? AppLocalizations.of(context)!.unitKm : AppLocalizations.of(context)!.unitMi}';
     } else {
-      if (activityName == 'eat') {
+      final requiredNameActivities = [
+        'eat',
+        'treat',
+        'medication',
+        'vaccination',
+        'health condition',
+        'accident',
+        'cleaning',
+        'veterinary',
+        'grooming'
+      ];
+
+      if (requiredNameActivities.contains(activityName)) {
         if (_foodController.text.trim().isEmpty) {
-          _showErrorSnackBar(AppLocalizations.of(context)!.errorEnterFood);
+          String errorMessage = '${_getLocalizedActivityName(context, _currentActivity!.name)} ${AppLocalizations.of(context)!.errorRequired}';
+          if (activityName == 'eat') {
+            errorMessage = AppLocalizations.of(context)!.errorEnterFood;
+          }
+          _showErrorSnackBar(errorMessage);
+          // _showFoodNameBottomSheet();
           return;
         }
       }
+
       if (_foodController.text.trim().isNotEmpty) {
         foodValue = _foodController.text.trim();
       }
@@ -721,66 +743,6 @@ class _AllactivityviewState extends State<Allactivityview> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // // Reminder Header
-        // Row(
-        //   children: [
-        //     Expanded(
-        //       child: Text(
-        //         'Set Reminder',
-        //         style: TextStyle(
-        //           fontSize: 16.sp,
-        //           fontWeight: FontWeight.w600,
-        //         ),
-        //       ),
-        //     ),
-        //     // Switch(
-        //     //   value: _hasReminder,
-        //     //   activeThumbColor: Colors.black,
-        //     //   activeColor: const Color(0xFF820DFF),
-        //     //   inactiveThumbColor: Colors.white,
-        //     //   inactiveTrackColor: Colors.red,
-        //     //
-        //     //   onChanged: (value) {
-        //     //     setState(() {
-        //     //       _hasReminder = value;
-        //     //       if (!value) {
-        //     //         _reminderDate = null;
-        //     //         _reminderTime = null;
-        //     //       }
-        //     //     });
-        //     //   },
-        //     // ),
-        //
-        //     Switch(
-        //       value: _hasReminder,
-        //       activeColor: const Color(0xFF820DFF), // Purple track when ON
-        //       activeTrackColor: const Color(0xFF820DFF), // Purple track
-        //       inactiveThumbColor: Colors.white,
-        //       inactiveTrackColor: Colors.red, // Red track when OFF
-        //       thumbColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-        //         if (states.contains(MaterialState.selected)) {
-        //           return Colors.white; // White thumb when ON
-        //         }
-        //         return Colors.white; // White thumb when OFF
-        //       }),
-        //       trackOutlineColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-        //         if (states.contains(MaterialState.selected)) {
-        //           return const Color(0xFF820DFF);
-        //         }
-        //         return Colors.red;
-        //       }),
-        //       onChanged: (value) {
-        //         setState(() {
-        //           _hasReminder = value;
-        //           if (!value) {
-        //             _reminderDate = null;
-        //             _reminderTime = null;
-        //           }
-        //         });
-        //       },
-        //     ),
-        //   ],
-        // ),
         SizedBox(height: 8.h),
 
         if (_hasReminder) ...[
@@ -1867,7 +1829,10 @@ class _AllactivityviewState extends State<Allactivityview> {
               );
               activityNotifier.addActivity(walkActivity);
 
-              Navigator.pop(context);
+              final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+              homeViewModel.selectedIndex = 1; // Index for Calendar
+              homeViewModel.calendarTabIndex = 0; // Index for Calendar
+              Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
             }
           },
         ),
@@ -2170,8 +2135,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         return AppLocalizations.of(context)!.actionAddAccident;
         case 'cleaning':
         return AppLocalizations.of(context)!.actionAddCleaning;
-      case 'Veterinary':
-        return AppLocalizations.of(context)!.actionAddVeterinary;
+
       default:
         return AppLocalizations.of(context)!.actionAddFood;
     }

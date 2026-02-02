@@ -87,9 +87,7 @@ class Routes {
       case RoutesName.dashboard:
         return MaterialPageRoute(
             builder: (BuildContext context) =>   const DashboardHomeView());
-      case RoutesName.setting:
-        return MaterialPageRoute(
-            builder: (BuildContext context) =>  const Settingview());
+
       case RoutesName.favourites:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const Favouritesview());

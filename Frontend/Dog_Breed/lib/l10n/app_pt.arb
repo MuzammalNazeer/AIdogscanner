@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "pt",
     "appTitle":  "Raça de Cão",
     "settingsTitle":  "Configurações",
@@ -531,11 +531,11 @@
     "email":  "E-mail",
     "mainPhone":  "Telefone principal",
     "instantGpsAlerts":  "Alertas GPS instantâneos ao escanear",
-    "gpsAlertsDescription":  "Obtenha atualizações de localização...",
+    "gpsAlertsDescription":  "Obtenha atualizações instantâneas da localização do seu animal de estimação, evitando o incômodo dos e-mails tradicionais",
     "emergencyContacts":  "Contatos de emergência",
-    "vetContactsDescription":  "Contatos do veterinário...",
+    "vetContactsDescription":  "Contatos do veterinário, coproprietário e cuidador caso o telefone principal não esteja disponível",
     "messenger":  "Mensageiro",
-    "messengerDescription":  "Uma forma alternativa de contato...",
+    "messengerDescription":  "Uma forma alternativa de contactar o proprietário se for impossível ligar para ele",
     "petsResidence":  "Residência do animal",
     "country":  "País",
     "city":  "Cidade",
@@ -832,5 +832,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Excluir tudo",
+    "deleteAllPetsConfirmation":  "Tem certeza de que deseja excluir todos os animais de estimação? Esta ação não pode ser desfeita."
 }

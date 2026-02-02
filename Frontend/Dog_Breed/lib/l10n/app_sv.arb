@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "sv",
     "appTitle":  "Hundras",
     "settingsTitle":  "Inställningar",
@@ -531,11 +531,11 @@
     "email":  "E-post",
     "mainPhone":  "Huvudtelefon",
     "instantGpsAlerts":  "Omedelbara GPS-varningar vid taggskanning",
-    "gpsAlertsDescription":  "Få omedelbara platsuppdateringar...",
+    "gpsAlertsDescription":  "Få omedelbara uppdateringar om ditt husdjurs plats och slipp krånglet med traditionella e-postmeddelanden",
     "emergencyContacts":  "Nödkontakter",
-    "vetContactsDescription":  "Veterinärens kontakter...",
+    "vetContactsDescription":  "Kontakter till veterinären, delägaren och vaktmästaren om huvudtelefonen inte är tillgänglig",
     "messenger":  "Messenger",
-    "messengerDescription":  "Ett alternativt sätt att kontakta...",
+    "messengerDescription":  "Ett alternativt sätt att kontakta ägaren om det är omöjligt att ringa dem",
     "petsResidence":  "Husdjurets bostad",
     "country":  "Land",
     "city":  "Stad",
@@ -860,5 +860,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Radera allt",
+    "deleteAllPetsConfirmation":  "Är du säker på att du vill radera alla husdjur? Denna åtgärd kan inte ångras."
 }

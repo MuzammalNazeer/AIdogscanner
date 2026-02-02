@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "id",
     "appTitle":  "Ras Anjing",
     "settingsTitle":  "Pengaturan",
@@ -531,11 +531,11 @@
     "email":  "Email",
     "mainPhone":  "Telepon Utama",
     "instantGpsAlerts":  "Peringatan GPS Instan Saat Pemindaian Tag",
-    "gpsAlertsDescription":  "Dapatkan pembaruan lokasi hewan peliharaan instan...",
+    "gpsAlertsDescription":  "Dapatkan pembaruan lokasi hewan peliharaan secara instan, hindari kerumitan email tradisional",
     "emergencyContacts":  "Kontak Darurat",
-    "vetContactsDescription":  "Kontak dokter hewan...",
+    "vetContactsDescription":  "Kontak dokter hewan, pemilik bersama, dan pengasuh jika telepon utama tidak tersedia",
     "messenger":  "Messenger",
-    "messengerDescription":  "Cara alternatif untuk menghubungi...",
+    "messengerDescription":  "Cara alternatif untuk menghubungi pemilik jika tidak memungkinkan untuk menelepon mereka",
     "petsResidence":  "Tempat Tinggal Hewan Peliharaan",
     "country":  "Negara",
     "city":  "Kota",
@@ -832,5 +832,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Hapus Semua",
+    "deleteAllPetsConfirmation":  "Apakah Anda yakin ingin menghapus semua hewan peliharaan? Tindakan ini tidak dapat dibatalkan."
 }

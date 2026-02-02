@@ -1499,19 +1499,22 @@ class AppLocalizationsPt extends AppLocalizations {
   String get instantGpsAlerts => 'Alertas GPS instantâneos ao escanear';
 
   @override
-  String get gpsAlertsDescription => 'Obtenha atualizações de localização...';
+  String get gpsAlertsDescription =>
+      'Obtenha atualizações instantâneas da localização do seu animal de estimação, evitando o incômodo dos e-mails tradicionais';
 
   @override
   String get emergencyContacts => 'Contatos de emergência';
 
   @override
-  String get vetContactsDescription => 'Contatos do veterinário...';
+  String get vetContactsDescription =>
+      'Contatos do veterinário, coproprietário e cuidador caso o telefone principal não esteja disponível';
 
   @override
   String get messenger => 'Mensageiro';
 
   @override
-  String get messengerDescription => 'Uma forma alternativa de contato...';
+  String get messengerDescription =>
+      'Uma forma alternativa de contactar o proprietário se for impossível ligar para ele';
 
   @override
   String get petsResidence => 'Residência do animal';
@@ -2213,4 +2216,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Excluir tudo';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Tem certeza de que deseja excluir todos os animais de estimação? Esta ação não pode ser desfeita.';
 }

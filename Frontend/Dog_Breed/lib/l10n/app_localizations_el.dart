@@ -1504,19 +1504,22 @@ class AppLocalizationsEl extends AppLocalizations {
   String get instantGpsAlerts => 'Άμεσες ειδοποιήσεις GPS κατά τη σάρωση';
 
   @override
-  String get gpsAlertsDescription => 'Λάβετε άμεσες ενημερώσεις τοποθεσίας...';
+  String get gpsAlertsDescription =>
+      'Λάβετε άμεσες ενημερώσεις τοποθεσίας κατοικίδιων, αποφεύγοντας την ταλαιπωρία των παραδοσιακών email';
 
   @override
   String get emergencyContacts => 'Επαφές έκτακτης ανάγκης';
 
   @override
-  String get vetContactsDescription => 'Επαφές κτηνιάτρου...';
+  String get vetContactsDescription =>
+      'Επαφές του κτηνιάτρου, του συνιδιοκτήτη και του επιστάτη σε περίπτωση που το κύριο τηλέφωνο δεν είναι διαθέσιμο';
 
   @override
   String get messenger => 'Messenger';
 
   @override
-  String get messengerDescription => 'Ένας εναλλακτικός τρόπος επικοινωνίας...';
+  String get messengerDescription =>
+      'Ένας εναλλακτικός τρόπος επικοινωνίας με τον ιδιοκτήτη εάν είναι αδύνατο να τον καλέσετε';
 
   @override
   String get petsResidence => 'Κατοικία κατοικίδιου';
@@ -2215,4 +2218,11 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Διαγραφή όλων';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Είστε σίγουροι ότι θέλετε να διαγράψετε όλα τα κατοικίδια; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.';
 }

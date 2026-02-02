@@ -1496,19 +1496,21 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get gpsAlertsDescription =>
-      'Få øjeblikkelige placeringsopdateringer...';
+      'Få øjeblikkelige opdateringer om dit kæledyrs placering, og undgå besværet med traditionelle e-mails';
 
   @override
   String get emergencyContacts => 'Nødkontakter';
 
   @override
-  String get vetContactsDescription => 'Dyrlægens kontakter...';
+  String get vetContactsDescription =>
+      'Kontakter til dyrlægen, medejeren og viceværten, hvis hovedtelefonen ikke er tilgængelig';
 
   @override
   String get messenger => 'Messenger';
 
   @override
-  String get messengerDescription => 'En alternativ måde at kontakte...';
+  String get messengerDescription =>
+      'En alternativ måde at kontakte ejeren på, hvis det er umuligt at ringe til dem';
 
   @override
   String get petsResidence => 'Kæledyrs bopæl';
@@ -2206,4 +2208,11 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Slet alt';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Er du sikker på, at du vil slette alle kæledyr? Denne handling kan ikke fortrydes.';
 }

@@ -432,6 +432,33 @@ class DocumentViewModel extends ChangeNotifier {
     }
   }
 
+  // Delete documents for a specific pet
+  Future<void> deleteDocumentsForPet(String petId) async {
+    try {
+      final documentsToDelete = _documents.where((doc) => doc.petId == petId).toList();
+
+      for (final document in documentsToDelete) {
+        // Delete file from storage
+        if (document.filePath.isNotEmpty) {
+          final file = File(document.filePath);
+          if (await file.exists()) {
+            await file.delete();
+          }
+        }
+      }
+
+      // Remove from list
+      _documents.removeWhere((doc) => doc.petId == petId);
+      await _saveDocuments();
+      _filterDocuments();
+      notifyListeners();
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error deleting documents for pet $petId: $e');
+      }
+    }
+  }
+
   // Get icon for file type
   IconData _getIconForFileType(String extension) {
     switch (extension.toLowerCase()) {

@@ -1492,19 +1492,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get instantGpsAlerts => 'Instant Gps Alerts Upon Tag Scan';
 
   @override
-  String get gpsAlertsDescription => 'Get instant pet location updates...';
+  String get gpsAlertsDescription =>
+      'Get instant pet location updates, avoiding the hassle of traditional emails';
 
   @override
   String get emergencyContacts => 'Emergency Contacts';
 
   @override
-  String get vetContactsDescription => 'Contacts of the vet...';
+  String get vetContactsDescription =>
+      'Contacts of the vet, co-owner, and caretaker in \n case the main phone isn\'t available';
 
   @override
   String get messenger => 'Messenger';
 
   @override
-  String get messengerDescription => 'An alternative way to contact...';
+  String get messengerDescription =>
+      'An alternative way to contact the owner if it is impossible to call them';
 
   @override
   String get petsResidence => 'Pets Place of Residence';
@@ -2201,4 +2204,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Delete All';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Are you sure you want to delete all pets? This action cannot be undone.';
 }

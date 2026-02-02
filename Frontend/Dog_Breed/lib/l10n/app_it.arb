@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "it",
     "appTitle":  "Razza del cane",
     "settingsTitle":  "Impostazioni",
@@ -531,11 +531,11 @@
     "email":  "Email",
     "mainPhone":  "Telefono principale",
     "instantGpsAlerts":  "Avvisi GPS istantanei alla scansione del tag",
-    "gpsAlertsDescription":  "Ricevi aggiornamenti istantanei sulla posizione...",
+    "gpsAlertsDescription":  "Ottieni aggiornamenti istantanei sulla posizione del tuo animale domestico, evitando il fastidio delle email tradizionali",
     "emergencyContacts":  "Contatti di emergenza",
-    "vetContactsDescription":  "Contatti del veterinario...",
+    "vetContactsDescription":  "Contatti del veterinario, comproprietario e custode nel caso in cui il telefono principale non sia disponibile",
     "messenger":  "Messenger",
-    "messengerDescription":  "Un modo alternativo per contattare...",
+    "messengerDescription":  "Un modo alternativo per contattare il proprietario se è impossibile chiamarlo",
     "petsResidence":  "Residenza dell\u0027animale",
     "country":  "Paese",
     "city":  "Città",
@@ -832,5 +832,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Elimina tutto",
+    "deleteAllPetsConfirmation":  "Sei sicuro di voler eliminare tutti gli animali domestici? Questa azione non può essere annullata."
 }

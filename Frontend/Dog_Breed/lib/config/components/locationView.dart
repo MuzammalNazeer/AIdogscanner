@@ -22,6 +22,7 @@ class LocationView extends StatefulWidget {
 class _LocationViewState extends State<LocationView> {
   late String _selectedCountry;
   late TextEditingController _cityController;
+  late final FocusNode _cityFocus = FocusNode();
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class _LocationViewState extends State<LocationView> {
   @override
   void dispose() {
     _cityController.dispose();
+    _cityFocus.dispose();
     super.dispose();
   }
 
@@ -116,8 +118,10 @@ class _LocationViewState extends State<LocationView> {
                 style: TextStyle(fontSize: 18.sp, color: Colors.black87, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 8.h),
+
               TextField(
                 controller: _cityController,
+                focusNode: _cityFocus,
                 style: TextStyle(fontSize: 18.sp, color: Colors.black87),
                 decoration: InputDecoration(
                   hintText: AppLocalizations.of(context)!.hintEnterCity,

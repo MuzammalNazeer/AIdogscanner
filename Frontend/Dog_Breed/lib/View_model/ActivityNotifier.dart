@@ -64,6 +64,12 @@ class ActivityNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteActivitiesForPet(String petId) {
+    _activities.removeWhere((activity) => activity.petId == petId);
+    _saveActivities();
+    notifyListeners();
+  }
+
   void deleteActivity(Activity activityToDelete) {
     _activities.removeWhere((activity) =>
     activity.dateTime == activityToDelete.dateTime &&

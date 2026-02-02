@@ -187,9 +187,11 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(
-                    color: const Color(0xFFB9B9B9),
-                    width: 1.0,
+                  border: const Border(
+                    bottom: BorderSide(
+                      color: Color(0xFFB9B9B9),
+                      width: 1.0,
+                    ),
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -321,7 +323,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                         }
                       },
                       child: buildProfileInputField(
-                        icon: Icons.person_outline,
+                        imagePath: 'assets/images/name.png',
                         label: AppLocalizations.of(context)!.labelName,
                         value: firstName,
                         isEmpty: firstName.isEmpty,
@@ -344,7 +346,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                         }
                       },
                       child: buildProfileInputField(
-                        icon: Icons.person_outline,
+                        imagePath: 'assets/images/name.png',
                         label: AppLocalizations.of(context)!.lastName,
                         value: lastName,
                         isEmpty: lastName.isEmpty,
@@ -370,7 +372,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                         }
                       },
                       child: buildProfileInputField(
-                        icon: Icons.wc_outlined,
+                        imagePath: 'assets/images/gender.png',
                         label: AppLocalizations.of(context)!.labelGender,
                         value: gender,
                         isEmpty: gender.isEmpty,
@@ -404,7 +406,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                         }
                       },
                       child: buildProfileInputField(
-                        icon: Icons.email_outlined,
+                        imagePath: 'assets/images/email.png',
                         label: 'Email',
                         value: email,
                         isEmpty: email.isEmpty,
@@ -471,8 +473,8 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => LocationView(
-                                  initialCountry: AppLocalizations.of(context)!.country,
-                                  initialCity:AppLocalizations.of(context)!.hintEnterCity,
+                                  initialCountry: country,
+                                  initialCity: city,
                                 ),
                               ),
                             );
@@ -488,14 +490,14 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                       child: Column(
                         children: [
                           buildProfileInputField(
-                            icon: Icons.public,
+                            imagePath: 'assets/images/country.png',
                             label: AppLocalizations.of(context)!.country,
                             value: country,
                             isEmpty: false,
                           ),
                           SizedBox(height: 12.h),
                           buildProfileInputField(
-                            icon: Icons.location_city_outlined,
+                            imagePath: 'assets/images/city.png',
                             label: AppLocalizations.of(context)!.city,
                             value: city,
                             isEmpty: city.isEmpty,
@@ -653,7 +655,8 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
   }
 
   Widget buildProfileInputField({
-    required IconData icon,
+    IconData? icon,
+    String? imagePath,
     required String label,
     required String value,
     required bool isEmpty,
@@ -669,11 +672,18 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
         children: [
           Padding(
             padding: EdgeInsets.all(12.w),
-            child: Icon(icon, color: const Color(0xFF7C3AED), size: 24.sp),
+            child: imagePath != null
+                ? Image.asset(
+                    imagePath,
+                    width: 24.sp,
+                    height: 24.sp,
+                    color: const Color(0xFF7C3AED),
+                  )
+                : Icon(icon, color: const Color(0xFF7C3AED), size: 24.sp),
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(horizontal: 9.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

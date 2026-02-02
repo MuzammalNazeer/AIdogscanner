@@ -46,12 +46,7 @@ class _CalendarviewState extends State<Calendarview> {
   ];
 
   List<Map<String, dynamic>> get _allActivityTypes => [
-    {
-      'key': 'Veterinary',
-      'name': AppLocalizations.of(context)!.activityVeterinary,
-      'image': 'assets/images/Veterinary.png',
-      'color': const Color(0xFFB9E6FF),
-    },
+
     {
       'key': 'Pee',
       'name': AppLocalizations.of(context)!.activityPee,
@@ -1907,7 +1902,7 @@ class _CalendarviewState extends State<Calendarview> {
                 final String name = activityType['name'];
                 final String imagePath = activityType['image'];
                 final Color color = activityType['color'];
-                final bool isVisible = activityNotifier.isActivityVisible(key);
+                final bool isVisible = activityNotifier.isActivityVisible(_selectedPetId, key);
 
                 return Container(
                   height: 64.h,
@@ -1967,7 +1962,7 @@ class _CalendarviewState extends State<Calendarview> {
                             Colors.transparent,
                           ),
                           onChanged: (value) {
-                            activityNotifier.toggleVisibility(key, value);
+                            activityNotifier.toggleVisibility(_selectedPetId, key, value);
                           },
                         ),
                       ),

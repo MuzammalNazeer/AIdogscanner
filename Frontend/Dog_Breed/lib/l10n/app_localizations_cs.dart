@@ -1496,19 +1496,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get instantGpsAlerts => 'Okamžitá GPS upozornění při naskenování';
 
   @override
-  String get gpsAlertsDescription => 'Získejte okamžité aktualizace polohy...';
+  String get gpsAlertsDescription =>
+      'Získejte okamžité aktualizace polohy vašeho domácího mazlíčka a vyhněte se potížím s tradičními e-maily';
 
   @override
   String get emergencyContacts => 'Nouzové kontakty';
 
   @override
-  String get vetContactsDescription => 'Kontakty na veterináře...';
+  String get vetContactsDescription =>
+      'Kontakty na veterináře, spolumajitele a správce pro případ, že hlavní telefon není dostupný';
 
   @override
   String get messenger => 'Messenger';
 
   @override
-  String get messengerDescription => 'Alternativní způsob kontaktu...';
+  String get messengerDescription =>
+      'Alternativní způsob kontaktování majitele, pokud mu není možné zavolat';
 
   @override
   String get petsResidence => 'Bydliště mazlíčka';
@@ -2205,4 +2208,11 @@ class AppLocalizationsCs extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Smazat vše';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Opravdu chcete smazat všechna zvířata? Tuto akci nelze vzít zpět.';
 }

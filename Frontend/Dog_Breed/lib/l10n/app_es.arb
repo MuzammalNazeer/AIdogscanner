@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "es",
     "appTitle":  "Raza de perro",
     "settingsTitle":  "Ajustes",
@@ -531,11 +531,11 @@
     "email":  "Correo electrónico",
     "mainPhone":  "Teléfono principal",
     "instantGpsAlerts":  "Alertas GPS instantáneas al escanear",
-    "gpsAlertsDescription":  "Obtenga actualizaciones de ubicación...",
+    "gpsAlertsDescription":  "Obtenga actualizaciones instantáneas de la ubicación de su mascota, evitando las molestias de los correos electrónicos tradicionales",
     "emergencyContacts":  "Contactos de emergencia",
-    "vetContactsDescription":  "Contactos del veterinario...",
+    "vetContactsDescription":  "Contactos del veterinario, copropietario y cuidador en caso de que el teléfono principal no esté disponible",
     "messenger":  "Mensajero",
-    "messengerDescription":  "Una forma alternativa de contactar...",
+    "messengerDescription":  "Una forma alternativa de contactar al propietario si es imposible llamarlo",
     "petsResidence":  "Residencia de la mascota",
     "country":  "País",
     "city":  "Ciudad",
@@ -832,5 +832,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Eliminar todo",
+    "deleteAllPetsConfirmation":  "¿Está seguro de que desea eliminar todas las mascotas? Esta acción no se puede deshacer."
 }

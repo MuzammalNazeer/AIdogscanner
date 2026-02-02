@@ -1498,19 +1498,22 @@ class AppLocalizationsFi extends AppLocalizations {
   String get instantGpsAlerts => 'Välittömät GPS-hälytykset skannauksesta';
 
   @override
-  String get gpsAlertsDescription => 'Saa välittömiä sijaintipäivityksiä...';
+  String get gpsAlertsDescription =>
+      'Saat välittömiä päivityksiä lemmikkisi sijainnista ja vältät perinteisten sähköpostien vaivan';
 
   @override
   String get emergencyContacts => 'Hätäyhteystiedot';
 
   @override
-  String get vetContactsDescription => 'Eläinlääkärin yhteystiedot...';
+  String get vetContactsDescription =>
+      'Eläinlääkärin, osaomistajan ja talonmiehen yhteystiedot siltä varalta, että pääpuhelin ei ole tavoitettavissa';
 
   @override
   String get messenger => 'Messenger';
 
   @override
-  String get messengerDescription => 'Vaihtoehtoinen tapa ottaa yhteyttä...';
+  String get messengerDescription =>
+      'Vaihtoehtoinen tapa ottaa yhteyttä omistajaan, jos hänelle on mahdotonta soittaa';
 
   @override
   String get petsResidence => 'Lemmikin asuinpaikka';
@@ -2208,4 +2211,11 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Poista kaikki';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Oletko varma, että haluat poistaa kaikki lemmikit? Tätä toimintoa ei voi kumota.';
 }

@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "nl",
     "appTitle":  "Hondenras",
     "settingsTitle":  "Instellingen",
@@ -531,11 +531,11 @@
     "email":  "E-mail",
     "mainPhone":  "Hoofdtelefoon",
     "instantGpsAlerts":  "Directe GPS-waarschuwingen bij tag-scan",
-    "gpsAlertsDescription":  "Ontvang directe updates over de locatie...",
+    "gpsAlertsDescription":  "Krijg direct updates over de locatie van uw huisdier, zonder het gedoe van traditionele e-mails",
     "emergencyContacts":  "Noodcontacten",
-    "vetContactsDescription":  "Contacten van de dierenarts...",
+    "vetContactsDescription":  "Contacten van de dierenarts, mede-eigenaar en verzorger voor het geval de hoofdtelefoon niet beschikbaar is",
     "messenger":  "Messenger",
-    "messengerDescription":  "Een alternatieve manier om contact op te nemen...",
+    "messengerDescription":  "Een alternatieve manier om contact op te nemen met de eigenaar als bellen onmogelijk is",
     "petsResidence":  "Verblijfplaats van huisdier",
     "country":  "Land",
     "city":  "Stad",
@@ -832,5 +832,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Alles verwijderen",
+    "deleteAllPetsConfirmation":  "Weet je zeker dat je alle huisdieren wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
 }

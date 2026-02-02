@@ -563,106 +563,6 @@ class _DrinkScreenState extends State<DrinkScreen> {
     );
   }
 
-  // ── Timeline Tab ───────────────────────────────────────────────────────────
-  // Widget _buildTimelineSection() {
-  //   final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
-  //   final allActivities = activityNotifier.activities;
-  //
-  //   final now = DateTime.now();
-  //   final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
-  //   final cleanStart = DateTime(startOfWeek.year, startOfWeek.month, startOfWeek.day);
-  //   final endOfWeek = cleanStart.add(const Duration(days: 6));
-  //
-  //   final drinkActivities = allActivities.where((a) {
-  //     return a.name.toLowerCase().contains('drink') &&
-  //         a.dateTime.isAfter(cleanStart.subtract(const Duration(seconds: 1))) &&
-  //         a.dateTime.isBefore(endOfWeek.add(const Duration(days: 1)));
-  //   }).toList();
-  //
-  //   final Map<int, List<Activity>> grouped = {1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: []};
-  //   for (var act in drinkActivities) {
-  //     grouped[act.dateTime.weekday]?.add(act);
-  //   }
-  //
-  //   final List<double> amountData = [];
-  //   final List<double> frequencyData = [];
-  //   double maxAmount = 1;
-  //   double maxFrequency = 0;
-  //
-  //   final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  //
-  //   for (int i = 1; i <= 7; i++) {
-  //     final dayActs = grouped[i]!;
-  //     frequencyData.add(dayActs.length.toDouble());
-  //     if (dayActs.length > maxFrequency) maxFrequency = dayActs.length.toDouble();
-  //
-  //     double totalML = 0;
-  //     for (var act in dayActs) {
-  //       if (act.food != null && act.food!.isNotEmpty) {
-  //         final numStr = act.food!.replaceAll(RegExp(r'[^0-9.]'), '');
-  //         final num = double.tryParse(numStr) ?? 0;
-  //         totalML += act.food!.toLowerCase().contains('l') ? num * 1000 : num;
-  //       }
-  //     }
-  //     amountData.add(totalML);
-  //     if (totalML > maxAmount) maxAmount = totalML;
-  //   }
-  //
-  //   final dateRangeText =
-  //       "${DateFormat('MMMM d, y').format(cleanStart)} - ${DateFormat('MMMM d, y').format(endOfWeek)}";
-  //
-  //   return Column(
-  //     children: [
-  //       // GestureDetector(
-  //       //   onTap: () {
-  //       //     if (kDebugMode) print('Edit date range tapped');
-  //       //   },
-  //       //   child: Container(
-  //       //     margin: EdgeInsets.symmetric(horizontal: 16.w),
-  //       //     padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-  //       //     decoration: BoxDecoration(
-  //       //       color: const Color(0xFF820DFF),
-  //       //       borderRadius: BorderRadius.circular(12.r),
-  //       //     ),
-  //       //     child: Row(
-  //       //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //       //       children: [
-  //       //         Row(
-  //       //           children: [
-  //       //             const Icon(Icons.calendar_today, color: Colors.white, size: 22),
-  //       //             SizedBox(width: 12.w),
-  //       //             Text(
-  //       //               dateRangeText,
-  //       //               style: TextStyle(
-  //       //                 color: Colors.white,
-  //       //                 fontSize: 16.sp,
-  //       //                 fontWeight: FontWeight.w600,
-  //       //               ),
-  //       //             ),
-  //       //           ],
-  //       //         ),
-  //       //         const Icon(Icons.edit, color: Colors.white, size: 22),
-  //       //       ],
-  //       //     ),
-  //       //   ),
-  //       // ),
-  //       SizedBox(height: 32.h),
-  //       _buildLineChartCard(
-  //         title: 'Amount in mL',
-  //         rawData: amountData,
-  //         maxValue: maxAmount,
-  //         days: days,
-  //       ),
-  //       SizedBox(height: 32.h),
-  //       _buildLineChartCard(
-  //         title: 'Frequency',
-  //         rawData: frequencyData,
-  //         maxValue: maxFrequency,
-  //         days: days,
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget _buildLineChartCard({
     required String title,
@@ -825,13 +725,71 @@ class _DrinkScreenState extends State<DrinkScreen> {
   // ── Additional UI Helpers ──────────────────────────────────────────────────
   Widget _buildInfoSection() {
     final l10n = AppLocalizations.of(context)!;
+    final activityNotifier = Provider.of<ActivityNotifier>(context);
+    final allActivities = activityNotifier.activities;
+
+    final drinkActivities = allActivities.where((a) {
+      final matchesName = a.name.trim().toLowerCase().contains('drink') ||
+          a.name.trim().toLowerCase().contains(l10n.activityDrink.trim().toLowerCase());
+      final matchesPet = widget.selectedPetId == null || a.petId == widget.selectedPetId;
+      return matchesName && matchesPet;
+    }).toList();
+
+    String activeDay = '-';
+    String activeTime = '-';
+
+    if (drinkActivities.isNotEmpty) {
+      final Map<int, int> dayCounts = {};
+      final Map<int, int> hourCounts = {};
+
+      for (var activity in drinkActivities) {
+        final weekday = activity.dateTime.weekday;
+        final hour = activity.dateTime.hour;
+
+        dayCounts[weekday] = (dayCounts[weekday] ?? 0) + 1;
+        hourCounts[hour] = (hourCounts[hour] ?? 0) + 1;
+      }
+
+      int maxDay = 1;
+      int maxDayCount = -1;
+      dayCounts.forEach((day, count) {
+        if (count > maxDayCount) {
+          maxDayCount = count;
+          maxDay = day;
+        }
+      });
+
+      int maxHour = 0;
+      int maxHourCount = -1;
+      hourCounts.forEach((hour, count) {
+        if (count > maxHourCount) {
+          maxHourCount = count;
+          maxHour = hour;
+        }
+      });
+
+      switch (maxDay) {
+        case 1: activeDay = l10n.dayMon; break;
+        case 2: activeDay = l10n.dayTue; break;
+        case 3: activeDay = l10n.dayWed; break;
+        case 4: activeDay = l10n.dayThu; break;
+        case 5: activeDay = l10n.dayFri; break;
+        case 6: activeDay = l10n.daySat; break;
+        case 7: activeDay = l10n.daySun; break;
+      }
+
+      final now = DateTime.now();
+      final time = DateTime(now.year, now.month, now.day, maxHour);
+      activeTime = DateFormat.j(Localizations.localeOf(context).toString()).format(time);
+    }
+
     return Column(
       children: [
         Row(
           children: [
             Expanded(child: _buildInfoRow(l10n.calendarMostActiveDay, '')),
             SizedBox(width: 20.w),
-            Expanded(child: _buildInfoRow('', l10n.dayWed)),
+            Expanded(child: _buildInfoRow('', activeDay)),
           ],
         ),
         SizedBox(height: 8.h),
@@ -839,7 +797,7 @@ class _DrinkScreenState extends State<DrinkScreen> {
           children: [
             Expanded(child: _buildInfoRow(l10n.calendarMostActiveTime, '')),
             SizedBox(width: 20.w),
-            Expanded(child: _buildInfoRow('', '9 PM')), // Time format varies, leaving as is for now or use date format
+            Expanded(child: _buildInfoRow('', activeTime)),
           ],
         ),
       ],

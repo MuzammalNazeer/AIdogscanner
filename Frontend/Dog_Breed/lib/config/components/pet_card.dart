@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../l10n/app_localizations.dart';
+
 class PetCard extends StatelessWidget {
   final String? imageUrl;
   final String name;
@@ -14,6 +16,7 @@ class PetCard extends StatelessWidget {
   final Uint8List? imageBytes;
   final Map<String, int> activityCounts;
   final VoidCallback? onEditPressed;
+  final VoidCallback? onDeletePressed;
   final bool showEditButton;
 
   const PetCard({
@@ -24,11 +27,13 @@ class PetCard extends StatelessWidget {
     this.petId,
     required this.activityCounts,
     this.onEditPressed,
+    this.onDeletePressed,
     this.showEditButton = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(bottom: 20.h),
@@ -84,20 +89,64 @@ class PetCard extends StatelessWidget {
                       Positioned(
                         right: 0,
                         top: 0,
-                        child: GestureDetector(
-                          onTap: onEditPressed ?? () {
-                            // Default edit action - navigate to edit screen
-                            Navigator.pushNamed(
-                              context,
-                              RoutesName.edit,
-                              arguments: {
-                                'isEditing': true,
-                                'petName': name,
-                                'petId': petId,
-                                'imageBytes': imageBytes,
-                              },
-                            );
+                        child: PopupMenuButton<String>(
+                          padding: EdgeInsets.zero,
+                          color: Colors.white,
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          onSelected: (value) {
+                            if (value == 'edit') {
+                              if (onEditPressed != null) {
+                                onEditPressed!();
+                              } else {
+                                // Default edit action - navigate to edit screen
+                                Navigator.pushNamed(
+                                  context,
+                                  RoutesName.edit,
+                                  arguments: {
+                                    'isEditing': true,
+                                    'petName': name,
+                                    'petId': petId,
+                                    'imageBytes': imageBytes,
+                                  },
+                                );
+                              }
+                            } else if (value == 'delete') {
+                              onDeletePressed?.call();
+                            }
                           },
+                          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                            PopupMenuItem<String>(
+                              value: 'edit',
+                              child: Text(
+                                l10n?.actionEdit ?? 'Edit',
+                                style: TextStyle(
+                                  fontFamily: 'Sora',
+                                  fontSize: 16.sp,
+                                  color: const Color(0xFF371B34),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                             PopupMenuDivider(
+                              color: Colors.grey.shade200,
+                               thickness: 1,
+                            ),
+                            PopupMenuItem<String>(
+                              value: 'delete',
+                              child: Text(
+                                l10n?.actionDelete ?? 'Delete',
+                                style: TextStyle(
+                                  fontFamily: 'Sora',
+                                  fontSize: 16.sp,
+                                  color: const Color(0xFF371B34),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
                           child: Container(
                             padding: const EdgeInsets.all(4),
                             decoration: const BoxDecoration(
@@ -112,7 +161,7 @@ class PetCard extends StatelessWidget {
                               ],
                             ),
                             child: const Icon(
-                              CupertinoIcons.pencil,
+                              Icons.more_vert,
                               size: 16,
                               color: AppColors.vibrantPurple,
                             ),

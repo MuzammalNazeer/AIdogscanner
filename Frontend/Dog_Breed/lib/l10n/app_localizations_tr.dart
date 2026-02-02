@@ -1497,20 +1497,21 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get gpsAlertsDescription =>
-      'Anında evcil hayvan konum güncellemeleri alın...';
+      'Geleneksel e-postaların zahmetinden kurtularak evcil hayvanınızın konumuyla ilgili anlık güncellemeler alın';
 
   @override
   String get emergencyContacts => 'Acil Durum Kişileri';
 
   @override
-  String get vetContactsDescription => 'Veteriner kişileri...';
+  String get vetContactsDescription =>
+      'Ana telefonun ulaşılamaz olması durumunda veteriner, ortak sahip ve bakıcının iletişim bilgileri';
 
   @override
   String get messenger => 'Messenger';
 
   @override
   String get messengerDescription =>
-      'İletişime geçmenin alternatif bir yolu...';
+      'Aramanın imkansız olduğu durumlarda sahibiyle iletişime geçmenin alternatif bir yolu';
 
   @override
   String get petsResidence => 'Evcil Hayvanın İkametgahı';
@@ -2209,4 +2210,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Tümünü Sil';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Tüm evcil hayvanları silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.';
 }

@@ -1,6 +1,5 @@
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/config/components/pet_card.dart';
-import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +7,8 @@ import 'package:provider/provider.dart';
 
 import '../../View_model/PetProvider.dart';
 import '../../View_model/activity_provider.dart';
+import '../../View_model/ReminderNotifier.dart';
+import '../../View_model/DocumentViewModel.dart';
 import '../../View_model/home/Pet.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/routes/routes_name.dart';
@@ -85,24 +86,84 @@ class _MypetsviewState extends State<Mypetsview> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
-            Center(
-              child: Text(
-                l10n.myPetsTitle,
-                style: TextStyle(
-                  fontFamily: 'Sora',
-                  fontWeight: FontWeight.w400,
-                  fontSize: 29.75.sp,
-                  color: const Color(0xFF272727),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      l10n.myPetsTitle,
+                      style: TextStyle(
+                        fontFamily: 'Sora',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 29.75.sp,
+                        color: const Color(0xFF272727),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                if (pets.isNotEmpty)
+                  Padding(
+                    padding: EdgeInsets.only(right: 16.w),
+                    child: PopupMenuButton<String>(
+                      icon: Container(
+                        height: 41.h,
+                        width: 41.w,
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF3F6F3),
+                          borderRadius: BorderRadius.circular(8.r),
+                        ),
+                        child: const Center(
+                          child: Icon(
+                            Icons.more_vert,
+                            color: Color(0xFF272727),
+                          ),
+                        ),
+                      ),
+                      color: Colors.white,
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      onSelected: (value) {
+                        if (value == 'deleteAll') {
+                          _showDeleteAllDialog(l10n);
+                        }
+                      },
+                      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                        PopupMenuItem<String>(
+                          value: 'deleteAll',
+                          child: Text(
+                            l10n.deleteAll,
+                            style: TextStyle(
+                              fontFamily: 'Sora',
+                              fontSize: 16.sp,
+                              color: const Color(0xFF371B34),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
             ),
             Padding(
               padding: EdgeInsets.all(16.w),
               child: CupertinoSearchTextField(
                 placeholder: l10n.searchForDog,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 12,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Icon(
+                    CupertinoIcons.search,
+                    color: Colors.black,
+                    size: 32.h,
+                  ),
+                ),
+                padding:  EdgeInsets.symmetric(
+                  horizontal: 12.w,
+                  vertical: 22.h,
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -220,16 +281,17 @@ class _MypetsviewState extends State<Mypetsview> {
             if (activity is Map) {
               return activity['petId'] == pet.id ||
                   activity['pet_id'] == pet.id;
-            } else if (activity is dynamic) {
+            } else {
               // Try to access petId property dynamically
-              try {
-                return activity.petId == pet.id ||
-                    activity.pet_id == pet.id ||
-                    activity.pet?.id == pet.id;
-              } catch (e) {
-                return false;
-              }
+            try {
+              return activity.petId == pet.id ||
+                  activity.pet_id == pet.id ||
+                  activity.pet?.id == pet.id;
+            } catch (e) {
+              return false;
             }
+            }
+
           }).toList();
 
           // Count activities by type
@@ -266,6 +328,9 @@ class _MypetsviewState extends State<Mypetsview> {
               activityCounts: activityCounts,
               onEditPressed: () {
                 _navigateToEditPet(pet, l10n);
+              },
+              onDeletePressed: () {
+                _showDeleteDialog(pet, l10n);
               },
             ),
           );
@@ -306,12 +371,55 @@ class _MypetsviewState extends State<Mypetsview> {
     });
   }
 
+  void _showDeleteAllDialog(AppLocalizations l10n) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.deleteAll),
+        backgroundColor: Colors.white,
+        content: Text(l10n.deleteAllPetsConfirmation),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.cancelButton),
+          ),
+          TextButton(
+            onPressed: () async {
+              final petProvider = Provider.of<PetProvider>(context, listen: false);
+              final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
+              final reminderNotifier = Provider.of<ReminderNotifier>(context, listen: false);
+              final documentViewModel = Provider.of<DocumentViewModel>(context, listen: false);
+
+              // Clear all related data
+              activityNotifier.clear();
+              await reminderNotifier.cancelAllReminders();
+              await documentViewModel.clearAllDocuments();
+
+              final success = await petProvider.clearPets();
+              if (success) {
+                if (widget.onShowSnackBar != null) {
+                  widget.onShowSnackBar!(l10n.petDeletedSuccess("All pets"));
+                }
+              }
+              Navigator.pop(context);
+            },
+            child: Text(
+              l10n.deleteButton,
+              style: const TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   // Optional: Add a method to handle pet deletion
   void _showDeleteDialog(Pet pet, AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(l10n.deletePetTitle),
+        backgroundColor: Colors.white,
         content: Text(l10n.deletePetMessage(pet.name)),
         actions: [
           TextButton(
@@ -321,6 +429,17 @@ class _MypetsviewState extends State<Mypetsview> {
           TextButton(
             onPressed: () async {
               final petProvider = Provider.of<PetProvider>(context, listen: false);
+              final activityNotifier = Provider.of<ActivityNotifier>(context, listen: false);
+              final reminderNotifier = Provider.of<ReminderNotifier>(context, listen: false);
+              final documentViewModel = Provider.of<DocumentViewModel>(context, listen: false);
+
+              // Delete related data first
+              if (pet.id != null) {
+                activityNotifier.deleteActivitiesForPet(pet.id!);
+                await reminderNotifier.cancelRemindersForPet(pet.id!);
+                await documentViewModel.deleteDocumentsForPet(pet.id!);
+              }
+
               final success = await petProvider.deletePet(pet.id!); // Add null check
               if (success) {
                 if (widget.onShowSnackBar != null) {

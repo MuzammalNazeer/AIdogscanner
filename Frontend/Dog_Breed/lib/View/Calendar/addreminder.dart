@@ -61,7 +61,7 @@ class _AddreminderState extends State<Addreminder> {
 
     // Filter activities based on visibility settings
     final visibleActivities = _activities.where((activity) {
-      return activityNotifier.isActivityVisible(activity.name);
+      return activityNotifier.isActivityVisible(widget.selectedPetId, activity.name);
     }).toList();
 
     return Scaffold(

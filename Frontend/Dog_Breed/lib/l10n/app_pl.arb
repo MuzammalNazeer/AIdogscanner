@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "pl",
     "appTitle":  "Rasa psa",
     "settingsTitle":  "Ustawienia",
@@ -531,11 +531,11 @@
     "email":  "E-mail",
     "mainPhone":  "Telefon główny",
     "instantGpsAlerts":  "Natychmiastowe alerty GPS przy skanowaniu",
-    "gpsAlertsDescription":  "Otrzymuj natychmiastowe aktualizacje lokalizacji...",
+    "gpsAlertsDescription":  "Otrzymuj natychmiastowe aktualizacje lokalizacji swojego zwierzaka, unikając kłopotów z tradycyjnymi e-mailami",
     "emergencyContacts":  "Kontakty alarmowe",
-    "vetContactsDescription":  "Kontakty do weterynarza...",
+    "vetContactsDescription":  "Kontakty do weterynarza, współwłaściciela i opiekuna w przypadku, gdy główny telefon jest niedostępny",
     "messenger":  "Messenger",
-    "messengerDescription":  "Alternatywny sposób kontaktu...",
+    "messengerDescription":  "Alternatywny sposób kontaktu z właścicielem, jeśli dodzwonienie się do niego jest niemożliwe",
     "petsResidence":  "Miejsce zamieszkania zwierzęcia",
     "country":  "Kraj",
     "city":  "Miasto",
@@ -860,5 +860,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Usuń wszystko",
+    "deleteAllPetsConfirmation":  "Czy na pewno chcesz usunąć wszystkie zwierzęta? Tej czynności nie można cofnąć."
 }

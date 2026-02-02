@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "el",
     "appTitle":  "Ράτσα σκύλου",
     "settingsTitle":  "Ρυθμίσεις",
@@ -531,11 +531,11 @@
     "email":  "Email",
     "mainPhone":  "Κύριο τηλέφωνο",
     "instantGpsAlerts":  "Άμεσες ειδοποιήσεις GPS κατά τη σάρωση",
-    "gpsAlertsDescription":  "Λάβετε άμεσες ενημερώσεις τοποθεσίας...",
+    "gpsAlertsDescription":  "Λάβετε άμεσες ενημερώσεις τοποθεσίας κατοικίδιων, αποφεύγοντας την ταλαιπωρία των παραδοσιακών email",
     "emergencyContacts":  "Επαφές έκτακτης ανάγκης",
-    "vetContactsDescription":  "Επαφές κτηνιάτρου...",
+    "vetContactsDescription":  "Επαφές του κτηνιάτρου, του συνιδιοκτήτη και του επιστάτη σε περίπτωση που το κύριο τηλέφωνο δεν είναι διαθέσιμο",
     "messenger":  "Messenger",
-    "messengerDescription":  "Ένας εναλλακτικός τρόπος επικοινωνίας...",
+    "messengerDescription":  "Ένας εναλλακτικός τρόπος επικοινωνίας με τον ιδιοκτήτη εάν είναι αδύνατο να τον καλέσετε",
     "petsResidence":  "Κατοικία κατοικίδιου",
     "country":  "Χώρα",
     "city":  "Πόλη",
@@ -860,5 +860,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Διαγραφή όλων",
+    "deleteAllPetsConfirmation":  "Είστε σίγουροι ότι θέλετε να διαγράψετε όλα τα κατοικίδια; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί."
 }

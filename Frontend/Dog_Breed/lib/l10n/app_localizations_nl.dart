@@ -1499,20 +1499,21 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get gpsAlertsDescription =>
-      'Ontvang directe updates over de locatie...';
+      'Krijg direct updates over de locatie van uw huisdier, zonder het gedoe van traditionele e-mails';
 
   @override
   String get emergencyContacts => 'Noodcontacten';
 
   @override
-  String get vetContactsDescription => 'Contacten van de dierenarts...';
+  String get vetContactsDescription =>
+      'Contacten van de dierenarts, mede-eigenaar en verzorger voor het geval de hoofdtelefoon niet beschikbaar is';
 
   @override
   String get messenger => 'Messenger';
 
   @override
   String get messengerDescription =>
-      'Een alternatieve manier om contact op te nemen...';
+      'Een alternatieve manier om contact op te nemen met de eigenaar als bellen onmogelijk is';
 
   @override
   String get petsResidence => 'Verblijfplaats van huisdier';
@@ -2210,4 +2211,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get height => 'Height';
+
+  @override
+  String get deleteAll => 'Alles verwijderen';
+
+  @override
+  String get deleteAllPetsConfirmation =>
+      'Weet je zeker dat je alle huisdieren wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.';
 }

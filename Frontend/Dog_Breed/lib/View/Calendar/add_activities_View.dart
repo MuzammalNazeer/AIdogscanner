@@ -88,7 +88,7 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
 
     // Filter activities based on visibility settings
     final visibleActivities = _activities.where((activity) {
-      return activityNotifier.isActivityVisible(activity.name);
+      return activityNotifier.isActivityVisible(widget.selectedPetId, activity.name);
     }).toList();
 
     return Scaffold(

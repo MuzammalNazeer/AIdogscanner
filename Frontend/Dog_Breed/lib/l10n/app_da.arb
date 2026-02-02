@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "da",
     "appTitle":  "Hunderace",
     "settingsTitle":  "Indstillinger",
@@ -556,11 +556,11 @@
     "email":  "E-mail",
     "mainPhone":  "Hovedtelefon",
     "instantGpsAlerts":  "Øjeblikkelige GPS-advarsler ved tag-scanning",
-    "gpsAlertsDescription":  "Få øjeblikkelige placeringsopdateringer...",
+    "gpsAlertsDescription":  "Få øjeblikkelige opdateringer om dit kæledyrs placering, og undgå besværet med traditionelle e-mails",
     "emergencyContacts":  "Nødkontakter",
-    "vetContactsDescription":  "Dyrlægens kontakter...",
+    "vetContactsDescription":  "Kontakter til dyrlægen, medejeren og viceværten, hvis hovedtelefonen ikke er tilgængelig",
     "messenger":  "Messenger",
-    "messengerDescription":  "En alternativ måde at kontakte...",
+    "messengerDescription":  "En alternativ måde at kontakte ejeren på, hvis det er umuligt at ringe til dem",
     "petsResidence":  "Kæledyrs bopæl",
     "country":  "Land",
     "city":  "By",
@@ -885,5 +885,7 @@
     "shareIOS":  "📱 Discover Dog Breed on the App Store!",
     "shareAndroid":  "📱 Get Dog Breed on Google Play!",
     "shareDefault":  "📱 Check out Dog Breed!",
-    "shareSubject":  "Dog Breed App"
+    "shareSubject":  "Dog Breed App",
+    "deleteAll":  "Slet alt",
+    "deleteAllPetsConfirmation":  "Er du sikker på, at du vil slette alle kæledyr? Denne handling kan ikke fortrydes."
 }
