@@ -2218,4 +2218,26 @@ class AppLocalizationsFi extends AppLocalizations {
   @override
   String get deleteAllPetsConfirmation =>
       'Oletko varma, että haluat poistaa kaikki lemmikit? Tätä toimintoa ei voi kumota.';
+
+  @override
+  String get dialogUploadPhoto => 'Upload Photo';
+
+  @override
+  String get dialogUploadVideo => 'Upload Video';
+
+  @override
+  String get pickerOpenCamera => 'Open Camera';
+
+  @override
+  String get pickerUploadGallery => 'Upload from Gallery';
+
+  @override
+  String errorPleaseEnterAmountFor(String activityName) {
+    return 'Please enter amount for $activityName';
+  }
+
+  @override
+  String errorNameOrTypeRequiredFor(String activityName) {
+    return 'Name or Type required for $activityName';
+  }
 }

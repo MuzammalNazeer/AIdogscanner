@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:dog_breed/Valid/AppColors.dart';
 import '../config/components/Document.dart';
 import '../l10n/app_localizations.dart';
 
@@ -317,74 +318,117 @@ class DocumentViewModel extends ChangeNotifier {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          title: Text(AppLocalizations.of(context)!.addDocumentDetails),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: titleController,
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.documentTitle,
-                    border: const OutlineInputBorder(),
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              backgroundColor: Theme.of(context).cardColor,
+              title: Text(
+                AppLocalizations.of(context)!.addDocumentDetails,
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+              ),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextField(
+                      controller: titleController,
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.documentTitle,
+                        labelStyle: TextStyle(color: Theme.of(context).hintColor),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Theme.of(context).dividerColor),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.vibrantPurple),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      value: selectedCategory,
+                      dropdownColor: Theme.of(context).cardColor,
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                      decoration: InputDecoration(
+                        labelText: AppLocalizations.of(context)!.category,
+                        labelStyle: TextStyle(color: Theme.of(context).hintColor),
+                        border: const OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Theme.of(context).dividerColor),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderSide: BorderSide(color: AppColors.vibrantPurple),
+                        ),
+                      ),
+                      items: _categories
+                          .where((cat) => cat != 'All')
+                          .map((category) {
+                        return DropdownMenuItem(
+                          value: category,
+                          child: Text(
+                            getLocalizedCategory(context, category),
+                            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedCategory = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    ListTile(
+                      leading: Icon(icon, color: AppColors.vibrantPurple),
+                      title: Text(
+                        fileName,
+                        style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                      subtitle: Text(
+                        '${AppLocalizations.of(context)!.fileSize}: $fileSize | ${AppLocalizations.of(context)!.fileType}: $fileType',
+                        style: TextStyle(color: Theme.of(context).hintColor),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    AppLocalizations.of(context)!.cancel,
+                    style: TextStyle(color: Theme.of(context).hintColor),
                   ),
                 ),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<String>(
-                  value: selectedCategory,
-                  dropdownColor: Colors.white,
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.category,
-                    border: const OutlineInputBorder(),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.vibrantPurple,
                   ),
-                  items: _categories
-                      .where((cat) => cat != 'All')
-                      .map((category) {
-                    return DropdownMenuItem(
-                      value: category,
-                      child: Text(getLocalizedCategory(context, category)),
-                    );
-                  }).toList(),
-                  onChanged: (value) {
-                    selectedCategory = value;
+                  onPressed: () {
+                    if (titleController.text.isNotEmpty && selectedCategory != null) {
+                      final document = Document(
+                        id: '', // Will be set later
+                        title: titleController.text,
+                        fileName: fileName,
+                        filePath: '', // Will be set later
+                        category: selectedCategory!,
+                        uploadDate: DateTime.now(),
+                        fileSize: fileSize,
+                        fileType: fileType,
+                        icon: icon,
+                      );
+                      Navigator.pop(context, document);
+                    }
                   },
-                ),
-                const SizedBox(height: 12),
-                ListTile(
-                  leading: Icon(icon),
-                  title: Text(fileName),
-                  subtitle: Text('${AppLocalizations.of(context)!.fileSize}: $fileSize | ${AppLocalizations.of(context)!.fileType}: $fileType'),
+                  child: Text(
+                    AppLocalizations.of(context)!.addDocument,
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(AppLocalizations.of(context)!.cancel),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (titleController.text.isNotEmpty && selectedCategory != null) {
-                  final document = Document(
-                    id: '', // Will be set later
-                    title: titleController.text,
-                    fileName: fileName,
-                    filePath: '', // Will be set later
-                    category: selectedCategory!,
-                    uploadDate: DateTime.now(),
-                    fileSize: fileSize,
-                    fileType: fileType,
-                    icon: icon,
-                  );
-                  Navigator.pop(context, document);
-                }
-              },
-              child: Text(AppLocalizations.of(context)!.addDocument),
-            ),
-          ],
+            );
+          },
         );
       },
     );

@@ -76,6 +76,7 @@ dependencies:
   dropdown_search: ^5.0.6
   dropdown_button2: ^2.3.9
   in_app_purchase: ^3.2.3
+  flutter_switch: ^0.3.2
 
 dependency_overrides:
   tflite_flutter: ^0.9.5
@@ -117,4 +118,18 @@ flutter:
     - assets/images/
     - assets/fonts/
     - assets/animations/
-
+  fonts:
+    - family: Sora
+      fonts:
+        - asset: assets/fonts/Sora/Sora-Regular.ttf
+        - asset: assets/fonts/Sora/Sora-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Sora/Sora-SemiBold.ttf
+          weight: 600
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter-Regular.otf
+        - asset: assets/fonts/Inter/Inter-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Inter/Inter-SemiBold.otf
+          weight: 600

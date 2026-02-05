@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../Valid/AppColors.dart';
+import '../../View_model/home/home_view_model.dart';
 import '../../config/components/roundButton.dart';
 import '../../utils/routes/routes_name.dart';
 import '../../l10n/app_localizations.dart';
@@ -20,7 +22,7 @@ class _ProviewState extends State<Proview> {
     final colors = Theme.of(context).colorScheme;
 
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: colors.background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -30,16 +32,24 @@ class _ProviewState extends State<Proview> {
                 child: Container(
                   width: double.infinity,
                   height: 165.h,
-                  color: colors.onBackground, // APPLY COLOR HERE
+                  color: AppColors.vibrantPurple, // APPLY COLOR HERE
                   child: Stack(
                     children: [
-
                       Positioned(
                         left: 20.w,
                         top: 50.h,
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, RoutesName.profile);
+                            final args = ModalRoute.of(context)?.settings.arguments as Map?;
+                            final bool fromProfile = args?['fromProfile'] ?? false;
+
+                            if (fromProfile) {
+                              Navigator.pop(context);
+                            } else {
+                              final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+                              homeViewModel.selectedIndex = 0; 
+                              Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
+                            }
                           },
                           child: Icon(
                             Icons.close,
@@ -48,7 +58,6 @@ class _ProviewState extends State<Proview> {
                           ),
                         ),
                       ),
-
                       Positioned(
                         top: 85.h,
                         left: 184.w,
@@ -64,46 +73,6 @@ class _ProviewState extends State<Proview> {
                   ),
                 ),
               ),
-              // ClipPath(
-              //   clipper: _CustomShapeClipper(),
-              //   child: Container(
-              //     height: 165.h,
-              //     width: double.infinity,
-              //     color: colors.onBackground,
-              //     child: Stack(
-              //       children: [
-              //         Padding(
-              //           padding:  EdgeInsets.only(left: 20.w,top: 50.h),
-              //           child: GestureDetector(
-              //             onTap:(){
-              //               Navigator.pushNamed(context, RoutesName.splash);
-              //             },
-              //             child: Positioned(
-              //               left: 20.w,
-              //               top: 50.h,
-              //               child: Icon(
-              //                 Icons.close,
-              //                 color: Colors.white,
-              //                 size: 36.sp,
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //         Positioned(
-              //           top: 85.h,
-              //           left: 184.w,
-              //           child: Center(
-              //             child: Image.asset(
-              //               'assets/images/Group888.png',
-              //               height: 80.h,
-              //               width: 80.w,
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               SizedBox(height: 10.h),
               Text(
                 AppLocalizations.of(context)!.startLikeAPro,
@@ -123,7 +92,7 @@ class _ProviewState extends State<Proview> {
                   fontSize: 16.sp,
                   height: 45.2 / 16,
                   letterSpacing: 0,
-                  color: const Color(0xFF6F7D86),
+                  color: colors.primary,
                   fontFamily: "Inter",
                 ),
               ),
@@ -136,7 +105,7 @@ class _ProviewState extends State<Proview> {
                     Text(
                       AppLocalizations.of(context)!.premium,
                       style: TextStyle(
-                        color:  const Color(0xFF6F7D86),
+                        color:  colors.primary,
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
                       ),
@@ -145,7 +114,7 @@ class _ProviewState extends State<Proview> {
                     Text(
                       AppLocalizations.of(context)!.free,
                       style: TextStyle(
-                        color:  const Color(0xFF6F7D86),
+                        color:  colors.primary,
                         fontWeight: FontWeight.bold,
                         fontSize: 15.sp,
                       ),
@@ -187,7 +156,7 @@ class _ProviewState extends State<Proview> {
                   height: 24 / 14,
                   letterSpacing: 0,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF000000),
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontFamily: "Inter",
                 ),
                 textAlign: TextAlign.center,
@@ -198,7 +167,7 @@ class _ProviewState extends State<Proview> {
                 height: 62.h,
                 width: 379.w,
                 borderRadius: 41.r,
-                backgroundColors: colors.onBackground,
+                backgroundColors:AppColors.vibrantPurple,
                 isSelected: true,
                 onPress: () {
                   Navigator.pushNamed(context, RoutesName.wizard);
@@ -214,7 +183,7 @@ class _ProviewState extends State<Proview> {
                     height: 18 / 10,
                     letterSpacing: 0,
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xFF000000),
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontFamily: "Inter",
                   ),
                   textAlign: TextAlign.center,
@@ -277,7 +246,7 @@ class _FeatureRow extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: 16.sp,
-                color: const Color(0xFF0A0A0A),
+                color: Theme.of(context).colorScheme.onSurface,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -286,8 +255,8 @@ class _FeatureRow extends StatelessWidget {
           Icon(
             premium ? Icons.check : Icons.lock_outline,
             color: premium
-                ? (isDarkTheme ? colors.surface : AppColors.vibrantPurple)
-                : (isDarkTheme ? colors.surface.withOpacity(0.9) : AppColors.vibrantPurple.withOpacity(0.9)),
+                ? (isDarkTheme ? Color(0xFFFFFFFF): AppColors.vibrantPurple)
+                : (isDarkTheme ? Color(0xFFFFFFFF) : AppColors.vibrantPurple),
             size: 20,
           ),
           const SizedBox(width: 40),
@@ -295,8 +264,8 @@ class _FeatureRow extends StatelessWidget {
           Icon(
             free ? Icons.check : Icons.lock_outline,
             color: free
-                ? (isDarkTheme ? colors.surface : AppColors.vibrantPurple)
-                : (isDarkTheme ? colors.surface.withOpacity(0.9) : AppColors.vibrantPurple.withOpacity(0.9)),
+                ? (isDarkTheme ?Color(0xFFFFFFFF): AppColors.vibrantPurple)
+                : (isDarkTheme ? Color(0xFFFFFFFF) : AppColors.vibrantPurple),
             size: 20,
           ),
         ],

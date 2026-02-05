@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale":  "el",
     "appTitle":  "Ράτσα σκύλου",
     "settingsTitle":  "Ρυθμίσεις",
@@ -862,5 +862,21 @@
     "shareDefault":  "📱 Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Διαγραφή όλων",
-    "deleteAllPetsConfirmation":  "Είστε σίγουροι ότι θέλετε να διαγράψετε όλα τα κατοικίδια; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί."
+    "deleteAllPetsConfirmation":  "Είστε σίγουροι ότι θέλετε να διαγράψετε όλα τα κατοικίδια; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+    "errorPleaseEnterAmountFor":  "Please enter amount for {activityName}",
+    "@errorPleaseEnterAmountFor":  {
+                                       "placeholders":  {
+                                                            "activityName":  {
+                                                                                 "type":  "String"
+                                                                             }
+                                                        }
+                                   },
+    "errorNameOrTypeRequiredFor":  "Name or Type required for {activityName}",
+    "@errorNameOrTypeRequiredFor":  {
+                                        "placeholders":  {
+                                                             "activityName":  {
+                                                                                  "type":  "String"
+                                                                              }
+                                                         }
+                                    }
 }

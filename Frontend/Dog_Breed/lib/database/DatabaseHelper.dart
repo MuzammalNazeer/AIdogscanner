@@ -652,7 +652,7 @@ class DatabaseHelper {
     );
   }
 
-  Future<List<Map<String, dynamic>>> getUpcomingReminders() async {
+  Future<List<Map<String, dynamic>>> getUpcomingReminders(int userId) async {
     Database db = await database;
     return await db.rawQuery('''
       SELECT r.*, p.$colPetName as pet_name, rc.category_name, rc.color as category_color
@@ -661,8 +661,9 @@ class DatabaseHelper {
       JOIN $tableReminderCategories rc ON r.$colCategoryId = rc.$colId
       WHERE r.$colIsCompleted = 0 
       AND r.$colDueDatetime > datetime('now')
+      AND p.$colUserId = ?
       ORDER BY r.$colDueDatetime
-    ''');
+    ''', [userId]);
   }
 
   Future<int> updateReminder(int id, Map<String, dynamic> reminder) async {
@@ -898,39 +899,50 @@ class DatabaseHelper {
     ''');
   }
 
-  Future<Map<String, dynamic>> getDashboardStats() async {
+  Future<Map<String, dynamic>> getDashboardStats(int userId) async {
     Database db = await database;
 
     Map<String, dynamic> stats = {};
 
-    // Total users
-    var usersResult = await db.rawQuery('SELECT COUNT(*) as count FROM $tableUsers');
-    stats['totalUsers'] = usersResult.first['count'];
-
     // Total pets
-    var petsResult = await db.rawQuery('SELECT COUNT(*) as count FROM $tablePets');
+    var petsResult = await db.rawQuery(
+        'SELECT COUNT(*) as count FROM $tablePets WHERE $colUserId = ?', [userId]);
     stats['totalPets'] = petsResult.first['count'];
 
-    // Total reminders
-    var remindersResult = await db.rawQuery('SELECT COUNT(*) as count FROM $tableReminders');
+    // Total reminders (linked to user's pets)
+    var remindersResult = await db.rawQuery('''
+      SELECT COUNT(r.$colId) as count 
+      FROM $tableReminders r
+      JOIN $tablePets p ON r.$colPetId = p.$colId
+      WHERE p.$colUserId = ?
+    ''', [userId]);
     stats['totalReminders'] = remindersResult.first['count'];
 
     // Pending reminders
-    var pendingResult = await db.rawQuery(
-        'SELECT COUNT(*) as count FROM $tableReminders WHERE $colIsCompleted = 0'
-    );
+    var pendingResult = await db.rawQuery('''
+        SELECT COUNT(r.$colId) as count 
+        FROM $tableReminders r 
+        JOIN $tablePets p ON r.$colPetId = p.$colId
+        WHERE r.$colIsCompleted = 0 AND p.$colUserId = ?
+    ''', [userId]);
     stats['pendingReminders'] = pendingResult.first['count'];
 
     // Pets by species
     var speciesResult = await db.rawQuery('''
       SELECT $colSpecies, COUNT(*) as count 
       FROM $tablePets 
+      WHERE $colUserId = ?
       GROUP BY $colSpecies
-    ''');
+    ''', [userId]);
     stats['petsBySpecies'] = speciesResult;
 
     // Cleaning logs count
-    var cleaningResult = await db.rawQuery('SELECT COUNT(*) as count FROM $tableCleaningLogs');
+    var cleaningResult = await db.rawQuery('''
+      SELECT COUNT(cl.$colId) as count 
+      FROM $tableCleaningLogs cl
+      JOIN $tablePets p ON cl.$colPetId = p.$colId
+      WHERE p.$colUserId = ?
+    ''', [userId]);
     stats['totalCleaningLogs'] = cleaningResult.first['count'];
 
     return stats;

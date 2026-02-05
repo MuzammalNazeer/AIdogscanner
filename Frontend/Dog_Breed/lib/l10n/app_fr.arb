@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale":  "fr",
     "appTitle":  "Race de chien",
     "settingsTitle":  "Paramètres",
@@ -834,5 +834,21 @@
     "shareDefault":  "📱 Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Tout supprimer",
-    "deleteAllPetsConfirmation":  "Êtes-vous sûr de vouloir supprimer tous les animaux ? Cette action est irréversible."
+    "deleteAllPetsConfirmation":  "Êtes-vous sûr de vouloir supprimer tous les animaux ? Cette action est irréversible.",
+    "errorPleaseEnterAmountFor":  "Please enter amount for {activityName}",
+    "@errorPleaseEnterAmountFor":  {
+                                       "placeholders":  {
+                                                            "activityName":  {
+                                                                                 "type":  "String"
+                                                                             }
+                                                        }
+                                   },
+    "errorNameOrTypeRequiredFor":  "Name or Type required for {activityName}",
+    "@errorNameOrTypeRequiredFor":  {
+                                        "placeholders":  {
+                                                             "activityName":  {
+                                                                                  "type":  "String"
+                                                                              }
+                                                         }
+                                    }
 }

@@ -101,7 +101,7 @@ class _SignupviewState extends State<Signupview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 30.h),
@@ -121,7 +121,7 @@ class _SignupviewState extends State<Signupview> {
                     SizedBox(width: 3.w),
                     Text(
                       'Manager',
-                      style: TextStyle(fontSize: 39.sp, color: AppColors.jet),
+                      style: TextStyle(fontSize: 39.sp, color: Theme.of(context).colorScheme.onSurface),
                     ),
                   ],
                 ),
@@ -137,7 +137,7 @@ class _SignupviewState extends State<Signupview> {
                 ),
                 SizedBox(height: 23.h),
 
-                Text('Username', style: TextStyle(fontSize: 14.sp)),
+                Text('Username', style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface)),
                 SizedBox(height: 9.h),
                 CommonInputField(
                   controller: _usernameController,
@@ -147,7 +147,7 @@ class _SignupviewState extends State<Signupview> {
                 ),
 
                 SizedBox(height: 9.h),
-                Text('Email', style: TextStyle(fontSize: 14.sp)),
+                Text('Email', style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface)),
                 SizedBox(height: 9.h),
                 CommonInputField(
                   controller: _emailController,
@@ -163,7 +163,7 @@ class _SignupviewState extends State<Signupview> {
                 ),
 
                 SizedBox(height: 9.h),
-                Text('Password', style: TextStyle(fontSize: 14.sp)),
+                Text('Password', style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface)),
                 SizedBox(height: 9.h),
                 CommonInputField(
                   controller: _passwordController,
@@ -174,7 +174,7 @@ class _SignupviewState extends State<Signupview> {
                 ),
 
                 SizedBox(height: 9.h),
-                Text('Confirm Password', style: TextStyle(fontSize: 14.sp)),
+                Text('Confirm Password', style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface)),
                 SizedBox(height: 9.h),
                 CommonInputField(
                   controller: _confirmPasswordController,
@@ -185,7 +185,7 @@ class _SignupviewState extends State<Signupview> {
                 ),
 
                 SizedBox(height: 9.h),
-                Text('Full Name', style: TextStyle(fontSize: 14.sp)),
+                Text('Full Name', style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface)),
                 SizedBox(height: 9.h),
                 CommonInputField(
                   controller: _fullNameController,

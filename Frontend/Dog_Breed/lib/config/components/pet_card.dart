@@ -38,11 +38,11 @@ class PetCard extends StatelessWidget {
       width: double.infinity,
       padding: EdgeInsets.only(bottom: 20.h),
       decoration: BoxDecoration(
-        color: const Color(0xFFF4F7F6),
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: CupertinoColors.systemGrey.withOpacity(0.10),
+            color: Theme.of(context).shadowColor.withOpacity(0.10),
             blurRadius: 10,
             offset: const Offset(0, 2),
           ),
@@ -65,23 +65,23 @@ class PetCard extends StatelessWidget {
                       height: 68.h,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF9C27B0), Color(0xFFE91E63)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
+                        // gradient: LinearGradient(
+                        //   colors: [Color(0xFF9C27B0), Color(0xFFE91E63)],
+                        //   begin: Alignment.topLeft,
+                        //   end: Alignment.bottomRight,
+                        // ),
                       ),
                     ),
                     // White circle background for image
                     Container(
                       width: 60.w,
                       height: 60.h,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: CupertinoColors.white,
+                        color: Theme.of(context).cardColor,
                       ),
                       child: ClipOval(
-                        child: _buildImage(),
+                        child: _buildImage(context),
                       ),
                     ),
                     // Edit button (replaces camera button)
@@ -91,7 +91,7 @@ class PetCard extends StatelessWidget {
                         top: 0,
                         child: PopupMenuButton<String>(
                           padding: EdgeInsets.zero,
-                          color: Colors.white,
+                          color: Theme.of(context).cardColor,
                           elevation: 4,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12.r),
@@ -125,13 +125,13 @@ class PetCard extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'Sora',
                                   fontSize: 16.sp,
-                                  color: const Color(0xFF371B34),
+                                  color: Theme.of(context).colorScheme.onSurface,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
                              PopupMenuDivider(
-                              color: Colors.grey.shade200,
+                              color: Theme.of(context).colorScheme.onPrimaryContainer,
                                thickness: 1,
                             ),
                             PopupMenuItem<String>(
@@ -141,7 +141,7 @@ class PetCard extends StatelessWidget {
                                 style: TextStyle(
                                   fontFamily: 'Sora',
                                   fontSize: 16.sp,
-                                  color: const Color(0xFF371B34),
+                                  color: Theme.of(context).colorScheme.onSurface,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -149,14 +149,14 @@ class PetCard extends StatelessWidget {
                           ],
                           child: Container(
                             padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black12,
+                                  color: Theme.of(context).shadowColor.withOpacity(0.12),
                                   blurRadius: 4,
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                 ),
                               ],
                             ),
@@ -178,7 +178,7 @@ class PetCard extends StatelessWidget {
                       fontFamily: "Sora",
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
-                      color: CupertinoColors.black,
+                      color: Theme.of(context).colorScheme.onSurface,
                       overflow: TextOverflow.ellipsis,
                     ),
                     maxLines: 1,
@@ -193,8 +193,8 @@ class PetCard extends StatelessWidget {
               ],
             ),
           ),
-          const Divider(
-            color: Color(0xFFCBE4DC),
+           Divider(
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
             thickness: 1,
           ),
           SizedBox(height: 5.h),
@@ -207,6 +207,7 @@ class PetCard extends StatelessWidget {
               children: ActivityConstants.allActivities
                   .where((type) => (activityCounts[type.name] ?? 0) > 0)
                   .map((type) => _buildGridItem(
+                context,
                 imageAsset: type.image,
                 count: activityCounts[type.name]!,
                 backgroundColor: type.color,
@@ -218,7 +219,7 @@ class PetCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImage() {
+  Widget _buildImage(BuildContext context) {
     // Priority 1: Use imageBytes if available
     if (imageBytes != null && imageBytes!.isNotEmpty) {
       return Image.memory(
@@ -226,7 +227,7 @@ class PetCard extends StatelessWidget {
         fit: BoxFit.cover,
         width: 60,
         height: 60,
-        errorBuilder: (_, __, ___) => _errorImage(),
+        errorBuilder: (_, __, ___) => _errorImage(context),
       );
     }
 
@@ -238,7 +239,7 @@ class PetCard extends StatelessWidget {
           fit: BoxFit.cover,
           width: 60,
           height: 60,
-          errorBuilder: (_, __, ___) => _errorImage(),
+          errorBuilder: (_, __, ___) => _errorImage(context),
         );
       } else if (File(imageUrl!).existsSync()) {
         return Image.file(
@@ -246,7 +247,7 @@ class PetCard extends StatelessWidget {
           fit: BoxFit.cover,
           width: 60,
           height: 60,
-          errorBuilder: (_, __, ___) => _errorImage(),
+          errorBuilder: (_, __, ___) => _errorImage(context),
         );
       } else {
         return Image.asset(
@@ -254,26 +255,26 @@ class PetCard extends StatelessWidget {
           fit: BoxFit.cover,
           width: 60,
           height: 60,
-          errorBuilder: (_, __, ___) => _errorImage(),
+          errorBuilder: (_, __, ___) => _errorImage(context),
         );
       }
     }
 
     // Fallback
-    return _errorImage();
+    return _errorImage(context);
   }
 
-  Widget _errorImage() {
+  Widget _errorImage(BuildContext context) {
     return Container(
-      color: CupertinoColors.systemGrey4,
-      child: const Icon(
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      child: Icon(
         CupertinoIcons.photo,
-        color: CupertinoColors.systemGrey,
+        color: Theme.of(context).hintColor,
       ),
     );
   }
 
-  Widget _buildGridItem({
+  Widget _buildGridItem(BuildContext context, {
     required int count,
     required Color backgroundColor,
     String? imageAsset,
@@ -299,13 +300,13 @@ class PetCard extends StatelessWidget {
               errorBuilder: (context, _, __) => Icon(
                 icon ?? Icons.error,
                 size: 24.sp,
-                color: Colors.black54,
+                color: Theme.of(context).hintColor,
               ),
             )
                 : Icon(
               icon ?? Icons.image,
               size: 24.sp,
-              color: Colors.black54,
+              color: Theme.of(context).hintColor,
             ),
           ),
         ),
@@ -316,7 +317,7 @@ class PetCard extends StatelessWidget {
             fontFamily: 'Sora',
             fontWeight: FontWeight.w600,
             fontSize: 16.sp,
-            color: const Color(0xFF272727),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ],

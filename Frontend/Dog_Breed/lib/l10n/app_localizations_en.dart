@@ -1500,7 +1500,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vetContactsDescription =>
-      'Contacts of the vet, co-owner, and caretaker in \n case the main phone isn\'t available';
+      'Contacts of the vet, co-owner, and caretaker  \n case the main phone isn\'t available';
 
   @override
   String get messenger => 'Messenger';
@@ -2211,4 +2211,26 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get deleteAllPetsConfirmation =>
       'Are you sure you want to delete all pets? This action cannot be undone.';
+
+  @override
+  String get dialogUploadPhoto => 'Upload Photo';
+
+  @override
+  String get dialogUploadVideo => 'Upload Video';
+
+  @override
+  String get pickerOpenCamera => 'Open Camera';
+
+  @override
+  String get pickerUploadGallery => 'Upload from Gallery';
+
+  @override
+  String errorPleaseEnterAmountFor(String activityName) {
+    return 'Please enter amount for $activityName';
+  }
+
+  @override
+  String errorNameOrTypeRequiredFor(String activityName) {
+    return 'Name or Type required for $activityName';
+  }
 }

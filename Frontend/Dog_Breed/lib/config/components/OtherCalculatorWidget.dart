@@ -40,46 +40,91 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       body: SafeArea(
         child: Column(
           children: [
-            // Header with dynamic title
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.h),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
-                    onPressed: () => Navigator.pop(context),
+        Padding(
+        padding: EdgeInsets.symmetric(vertical: 12.h),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Left + Right actions
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        widget.activityTitle,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                  onPressed: () => Navigator.pop(context),
+                ),
+                const Spacer(),
+                Padding(
+                  padding: EdgeInsets.only(right: 16.w),
+                  child: Text(
+                    '${widget.activityCount}',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // Optional: Show count in header
-                  Padding(
-                    padding: EdgeInsets.only(right: 16.w),
-                    child: Text(
-                      '${widget.activityCount}',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
+              ],
+            ),
+
+            // Center title (ALWAYS centered)
+            Text(
+              widget.activityTitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: 30.sp,
+                fontWeight: FontWeight.bold,
               ),
             ),
+          ],
+        ),
+      ),
+
+        // // Header with dynamic title
+            // Padding(
+            //   padding: EdgeInsets.symmetric(vertical: 12.h),
+            //   child: Row(
+            //     children: [
+            //       IconButton(
+            //         icon: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface),
+            //         onPressed: () => Navigator.pop(context),
+            //       ),
+            //       Expanded(
+            //         child: Center(
+            //           child: Text(
+            //             widget.activityTitle,
+            //             style: TextStyle(
+            //               color: Theme.of(context).colorScheme.onSurface,
+            //               fontSize: 30.sp,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       // Optional: Show count in header
+            //       Padding(
+            //         padding: EdgeInsets.only(right: 16.w),
+            //         child: Text(
+            //           '${widget.activityCount}',
+            //           style: TextStyle(
+            //             color: Theme.of(context).colorScheme.onSurface,
+            //             fontSize: 18.sp,
+            //             fontWeight: FontWeight.bold,
+            //           ),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
 
             // Tabs
             _buildTabBar(),
@@ -276,7 +321,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
             children: List.generate(24, (hourIndex) {
               final intensity = heatmapData[dayIndex]![hourIndex]!;
               Color cellColor = intensity == 0
-                  ? Colors.grey.shade100
+                  ? (Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade100)
                   : intensity == 1
                   ? const Color(0xFFC9B3FF)
                   : intensity == 2
@@ -305,7 +350,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                   child: Text(
                     intensity > 0 ? intensity.toString() : '',
                     style: TextStyle(
-                      color: intensity > 2 ? Colors.white : Colors.black,
+                      color: intensity > 2 ? Colors.white : (Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black),
                       fontSize: 10.sp,
                       fontWeight: FontWeight.bold,
                     ),
@@ -335,7 +380,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
             DateFormat.j(Localizations.localeOf(context).toString()).format(time),
             style: TextStyle(
               fontSize: 12.sp,
-              color: isCurrentHour(i) ? Colors.red : Colors.grey.shade600,
+              color: isCurrentHour(i) ? Colors.red : Theme.of(context).hintColor,
               fontWeight: isCurrentHour(i) ? FontWeight.bold : FontWeight.normal,
             ),
           ),
@@ -365,14 +410,14 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
         final label = Container(
           padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
           decoration: BoxDecoration(
-            color: isToday ? Colors.red.withOpacity(0.1) : Colors.grey.shade100,
+            color: isToday ? Colors.red.withOpacity(0.1) : (Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade100),
             borderRadius: BorderRadius.circular(8.r),
             border: isToday ? Border.all(color: Colors.red, width: 1.w) : null,
           ),
           child: Text(
             days[i],
             style: TextStyle(
-              color: isToday ? Colors.red : Colors.black54,
+              color: isToday ? Colors.red : Theme.of(context).hintColor,
               fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
               fontSize: 12.sp,
             ),
@@ -398,7 +443,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
     return Container(
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.grey.shade50,
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(
@@ -406,20 +451,20 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
         children: [
           Text(
             AppLocalizations.of(context)!.calendarActivityIntensity,
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSurface),
           ),
           SizedBox(height: 8.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildLegendItem(AppLocalizations.of(context)!.calendarLegendNone, Colors.grey.shade100),
+              _buildLegendItem(AppLocalizations.of(context)!.calendarLegendNone, Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade100),
               _buildLegendItem(AppLocalizations.of(context)!.calendarLegendLow, const Color(0xFFC9B3FF)),
               _buildLegendItem(AppLocalizations.of(context)!.calendarLegendMedium, const Color(0xFF7B4DFF)),
               _buildLegendItem(AppLocalizations.of(context)!.calendarLegendHigh, const Color(0xFF4D21FF)),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(4.r),
                   border: Border.all(color: Colors.red, width: 2.w),
                 ),
@@ -451,7 +496,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
           ),
         ),
         SizedBox(width: 4.w),
-        Text(label, style: TextStyle(fontSize: 10.sp, color: Colors.black54)),
+        Text(label, style: TextStyle(fontSize: 10.sp, color: Theme.of(context).hintColor)),
       ],
     );
   }
@@ -596,13 +641,13 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               Container(
                 height: 35.h,
                 width: 96.w,
-                decoration: const BoxDecoration(color: Color(0xFFF4F7F6)),
+                decoration: BoxDecoration(color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF4F7F6)),
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Row(
@@ -628,7 +673,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
             height: 240.h,
             padding: EdgeInsets.all(16.w),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(16.r),
               boxShadow: [
                 BoxShadow(
@@ -646,8 +691,8 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                   drawHorizontalLine: true,
                   horizontalInterval: interval,
                   verticalInterval: 1,
-                  getDrawingHorizontalLine: (_) => FlLine(color: Colors.grey[300], strokeWidth: 1),
-                  getDrawingVerticalLine: (_) => FlLine(color: Colors.grey[300], strokeWidth: 1),
+                  getDrawingHorizontalLine: (_) => FlLine(color: Theme.of(context).dividerColor, strokeWidth: 1),
+                  getDrawingVerticalLine: (_) => FlLine(color: Theme.of(context).dividerColor, strokeWidth: 1),
                 ),
                 titlesData: FlTitlesData(
                   show: true,
@@ -664,7 +709,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                           child: Text(
                             days[index],
                             style: TextStyle(
-                              color: Colors.grey[700],
+                              color: Theme.of(context).hintColor,
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w500,
                             ),
@@ -690,7 +735,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                           padding: EdgeInsets.only(right: 8.w),
                           child: Text(
                             text,
-                            style: TextStyle(color: Colors.grey[600], fontSize: 12.sp),
+                            style: TextStyle(color: Theme.of(context).hintColor, fontSize: 12.sp),
                           ),
                         );
                       },
@@ -715,7 +760,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
                       show: true,
                       getDotPainter: (_, __, ___, ____) => FlDotCirclePainter(
                         radius: 6.r,
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                         strokeWidth: 3,
                         strokeColor: const Color(0xFF820DFF),
                       ),
@@ -822,7 +867,7 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
       height: 35.h,
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 3.h),
       decoration: BoxDecoration(
-        color: Colors.grey.shade100,
+        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.grey.shade100,
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Row(
@@ -831,14 +876,14 @@ class _OthercalculatorwidgetState extends State<Othercalculatorwidget> {
           Text(
             label,
             style: TextStyle(
-              color: Colors.black54,
+              color: Theme.of(context).hintColor,
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
             ),
           ),
           Text(
             value,
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
           ),
         ],
       ),

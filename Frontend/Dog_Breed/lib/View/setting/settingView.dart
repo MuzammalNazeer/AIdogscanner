@@ -1,4 +1,4 @@
-// import 'dart:io';
+  // import 'dart:io';
 //
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
@@ -184,7 +184,7 @@
 //         _buildSettingOptionTile(
 //           iconPath: 'assets/images/mp.svg',
 //           title: 'My Premium Service',
-//           onTap: () => Navigator.pushNamed(context, RoutesName.pro),
+//           onTap: () => Navigator.pushNamed(context, RoutesName.premium),
 //           iconBackgroundColor: const Color(0xFFFAF5FF),
 //           iconColor: const Color(0xFFF69104),
 //         ),

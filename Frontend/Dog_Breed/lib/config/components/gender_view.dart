@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 
 import '../../l10n/app_localizations.dart';
+import 'CommonApp.dart';
 
 class GenderView extends StatefulWidget {
   final String currentGender;
@@ -50,7 +51,7 @@ class _GenderViewState extends State<GenderView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
@@ -63,11 +64,11 @@ class _GenderViewState extends State<GenderView> {
                   width: 40.w,
                   height: 40.h,
                   decoration:  BoxDecoration(
-                    color: Colors.grey.shade200,
-                    shape: BoxShape.circle,
+                    color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(9)
                   ),
                   child: Center(
-                    child: Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20.sp),
+                    child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),
                   ),
                 ),
               ),
@@ -90,7 +91,7 @@ class _GenderViewState extends State<GenderView> {
                         margin: EdgeInsets.only(bottom: 16.h),
                         padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
                         decoration: BoxDecoration(
-                          color:  Colors.grey[50],
+                          color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.grey[50],
                           borderRadius: BorderRadius.circular(16.r),
 
                         ),
@@ -102,13 +103,13 @@ class _GenderViewState extends State<GenderView> {
                                 style: TextStyle(
                                   fontSize: 18.sp,
                                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                                  color: Colors.black87,
+                                  color: Theme.of(context).colorScheme.onSurface,
                                 ),
                               ),
                             ),
                             Icon(
                               isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-                              color: isSelected ? AppColors.vibrantPurple : Colors.grey,
+                              color: isSelected ? AppColors.vibrantPurple : Theme.of(context).hintColor,
                               size: 28.sp,
                             ),
                           ],

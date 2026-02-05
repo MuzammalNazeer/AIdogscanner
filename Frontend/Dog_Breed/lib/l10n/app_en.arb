@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale":  "en",
     "appTitle":  "Dog Breed",
     "settingsTitle":  "Settings",
@@ -542,7 +542,7 @@
     "instantGpsAlerts":  "Instant Gps Alerts Upon Tag Scan",
     "gpsAlertsDescription":  "Get instant pet location updates, avoiding the hassle of traditional emails",
     "emergencyContacts":  "Emergency Contacts",
-    "vetContactsDescription":  "Contacts of the vet, co-owner, and caretaker in \n case the main phone isn\u0027t available",
+    "vetContactsDescription":  "Contacts of the vet, co-owner, and caretaker  \n case the main phone isn\u0027t available",
     "messenger":  "Messenger",
     "messengerDescription":  "An alternative way to contact the owner if it is impossible to call them",
     "petsResidence":  "Pets Place of Residence",
@@ -876,5 +876,25 @@
     "notAvailable":  "N/A",
     "height":  "Height",
     "deleteAll":  "Delete All",
-    "deleteAllPetsConfirmation":  "Are you sure you want to delete all pets? This action cannot be undone."
+    "deleteAllPetsConfirmation":  "Are you sure you want to delete all pets? This action cannot be undone.",
+    "dialogUploadPhoto":  "Upload Photo",
+    "dialogUploadVideo":  "Upload Video",
+    "pickerOpenCamera":  "Open Camera",
+    "pickerUploadGallery":  "Upload from Gallery",
+    "errorPleaseEnterAmountFor":  "Please enter amount for {activityName}",
+    "@errorPleaseEnterAmountFor":  {
+                                       "placeholders":  {
+                                                            "activityName":  {
+                                                                                 "type":  "String"
+                                                                             }
+                                                        }
+                                   },
+    "errorNameOrTypeRequiredFor":  "Name or Type required for {activityName}",
+    "@errorNameOrTypeRequiredFor":  {
+                                        "placeholders":  {
+                                                             "activityName":  {
+                                                                                  "type":  "String"
+                                                                              }
+                                                         }
+                                    }
 }

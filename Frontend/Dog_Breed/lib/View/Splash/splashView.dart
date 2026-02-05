@@ -82,10 +82,10 @@ class _SplashviewState extends State<Splashview> {
                     Flexible(
                       child: Text(
                         AppLocalizations.of(context)!.manager,
-                        style: const TextStyle(
+                        style:  TextStyle(
                           fontFamily: 'Sora',
                           fontWeight: FontWeight.w200, // ExtraLight
-                          fontSize: 40,
+                          fontSize: 40.sp,
                           color: Colors.white,
                         ),
                       ),

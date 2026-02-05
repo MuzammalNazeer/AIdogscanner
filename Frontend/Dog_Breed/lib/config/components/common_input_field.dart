@@ -62,7 +62,7 @@ class _CommonInputFieldState extends State<CommonInputField> {
             enabled: widget.isEnabled,
             decoration: InputDecoration(
                 errorStyle: const TextStyle(height: 0, fontSize: 0),
-                fillColor: const Color(0xFFF5F5F5),
+                fillColor: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF5F5F5),
                 filled: true,
                 prefixIcon: widget.prefixIcon,
                 suffixIcon: widget.obscureText
@@ -84,13 +84,13 @@ class _CommonInputFieldState extends State<CommonInputField> {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(
-                    color: _hasError ? Colors.red : AppColors.whiteSmoke,
+                    color: _hasError ? Colors.red : (Theme.of(context).brightness == Brightness.dark ? Theme.of(context).dividerColor : AppColors.whiteSmoke),
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(9),
-                    borderSide: const BorderSide(
-                        color: AppColors.whiteSmoke
+                    borderSide: BorderSide(
+                        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).dividerColor : AppColors.whiteSmoke
                     )
                 )
             ),

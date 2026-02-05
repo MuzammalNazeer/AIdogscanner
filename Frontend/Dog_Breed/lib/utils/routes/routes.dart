@@ -56,7 +56,7 @@ class Routes {
             builder: (BuildContext context) => const Splashview());
       case RoutesName.pro:
         return MaterialPageRoute(
-            builder: (BuildContext context) =>  const Proview());
+            builder: (BuildContext context) =>  const Proview(), settings: settings);
       case RoutesName.login:
         return MaterialPageRoute(
             builder: (BuildContext context) =>  const LoginView());

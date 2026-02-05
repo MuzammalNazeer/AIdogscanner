@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../config/components/CommonApp.dart';
 
 class FeedbackView extends StatefulWidget {
   const FeedbackView({Key? key}) : super(key: key);
@@ -237,7 +238,8 @@ class _FeedbackViewState extends State<FeedbackView> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: const CommonApp(title: 'Feedback'),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -245,27 +247,6 @@ class _FeedbackViewState extends State<FeedbackView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.arrow_back, color: colors.onSurface),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    SizedBox(width: 65.w),
-                    Text(
-                      'Feedback',
-                      style: TextStyle(
-                        fontFamily: 'Sora',
-                        fontWeight: FontWeight.bold,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 30.sp,
-                        height: 1.0,
-                        letterSpacing: 0.0,
-                        color: colors.onSurface,
-                      ),
-                    ),
-                  ],
-                ),
                 SizedBox(height: 30.h),
                 Center(
                   child: Column(

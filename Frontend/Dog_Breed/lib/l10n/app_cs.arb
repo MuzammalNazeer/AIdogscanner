@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale":  "cs",
     "appTitle":  "Psí plemeno",
     "settingsTitle":  "Nastavení",
@@ -862,5 +862,21 @@
     "shareDefault":  "📱 Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Smazat vše",
-    "deleteAllPetsConfirmation":  "Opravdu chcete smazat všechna zvířata? Tuto akci nelze vzít zpět."
+    "deleteAllPetsConfirmation":  "Opravdu chcete smazat všechna zvířata? Tuto akci nelze vzít zpět.",
+    "errorPleaseEnterAmountFor":  "Please enter amount for {activityName}",
+    "@errorPleaseEnterAmountFor":  {
+                                       "placeholders":  {
+                                                            "activityName":  {
+                                                                                 "type":  "String"
+                                                                             }
+                                                        }
+                                   },
+    "errorNameOrTypeRequiredFor":  "Name or Type required for {activityName}",
+    "@errorNameOrTypeRequiredFor":  {
+                                        "placeholders":  {
+                                                             "activityName":  {
+                                                                                  "type":  "String"
+                                                                              }
+                                                         }
+                                    }
 }

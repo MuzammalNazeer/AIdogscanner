@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
+import '../../Valid/AppColors.dart';
 import '../../l10n/app_localizations.dart';
 import '../../View_model/DogValuesViewModel.dart';
 import '../../View_model/ScanProvider.dart';
@@ -52,51 +53,6 @@ class _ListsaveState extends State<Listsave> {
       body: SafeArea(
           child: Column(
             children: [
-              // Padding(
-              //   padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 19.w),
-              //   child: Column(
-              //     children: [
-              //       _buildHeader(),
-              //     ],
-              //   ),
-              // ),
-
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                height: 60.h,
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Container(
-                        width: 40.w,
-                        height: 40.h,
-                        decoration:  BoxDecoration(
-                          color: Colors.grey.shade200,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20.sp),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          AppLocalizations.of(context)!.recentScansTitle,
-
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 48.w),
-                  ],
-                ),
-              ),
               Expanded(
                 child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(horizontal: 19.w),
@@ -107,8 +63,22 @@ class _ListsaveState extends State<Listsave> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              width: 40.w,
+                              height: 40.h,
+                              decoration:  BoxDecoration(
+                                color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFF686868).withOpacity(0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),
+                              ),
+                            ),
+                          ),
                           Text(
-                            AppLocalizations.of(context)!.recentScansTitle,
+                            'Recent Scans',
                             style: TextStyle(
                               fontFamily: 'Sora',
                               fontWeight: FontWeight.w400,
@@ -120,7 +90,7 @@ class _ListsaveState extends State<Listsave> {
                             ),
                           ),
                           Text(
-                            AppLocalizations.of(context)!.scansCount(recentScans.length),
+                            '${recentScans.length} Scans',
                             style: TextStyle(
                               fontFamily: 'Sora',
 
@@ -136,6 +106,38 @@ class _ListsaveState extends State<Listsave> {
                         _buildRecentScansList(recentScans, scanProvider,context)
                       else
                         _buildEmptyState(),
+
+                      SizedBox(height: 20.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Supported Breeds',
+                            style: TextStyle(
+                              fontFamily: 'Sora',
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 16.sp,
+                              height: 1.0,
+                              letterSpacing: 0.0,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                          ),
+                          if (favoriteBreeds.isNotEmpty)
+                            Text(
+                              '${favoriteBreeds.length} Favorite',
+                              style: TextStyle(
+                                fontFamily: 'Sora',
+
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                            ),
+                        ],
+                      ),
+                      SizedBox(height: 12.h),
+                      _buildSupportedBreedsVerticalFormatted(scanProvider),
                     ],
                   ),
                 ),
@@ -146,6 +148,276 @@ class _ListsaveState extends State<Listsave> {
       ),
     );
 
+  }
+
+  Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
+    final colors = Theme.of(context).colorScheme;
+    final List<Map<String, String>> topBreeds = [
+      {
+        'name': 'Bulldog',
+        'description':
+        'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.',
+        'image': 'assets/images/Ellipse 139.png',
+      },
+      {
+        'name': 'Beagle',
+        'description':
+        'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.',
+        'image': 'assets/images/Ellipse 139 (1).png',
+      },
+      {
+        'name': 'Yorkshire Terrier',
+        'description':
+        'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.',
+        'image': 'assets/images/Ellipse 139 (2).png',
+      },
+      {
+        'name': 'Cavalier King Charles Spaniel',
+        'description':
+        'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.',
+        'image': 'assets/images/Ellipse 139 (3).png',
+      },
+      {
+        'name': 'English Springer Spaniel',
+        'description':
+        'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.',
+        'image': 'assets/images/Ellipse 139 (4).png',
+      },
+      {
+        'name': 'Bullmastiff',
+        'description':
+        'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.',
+        'image': 'assets/images/Ellipse 139 (5).png',
+      },
+      {
+        'name': 'English Cocker Spaniel',
+        'description':
+        'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.',
+        'image': 'assets/images/Ellipse 139 (6).png',
+      },
+      {
+        'name': 'Airedale Terrier',
+        'description':
+        'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.',
+        'image': 'assets/images/Ellipse 139 (7).png',
+      },
+      {
+        'name': 'Terrier',
+        'description':
+        'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.',
+        'image': 'assets/images/Ellipse 139 (8).png',
+      },
+      {
+        'name': 'Whippet',
+        'description':
+        'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.',
+        'image': 'assets/images/Ellipse 1399.png',
+      },
+      {
+        'name': 'Bull Terrier',
+        'description':
+        'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.',
+        'image': 'assets/images/Ellipse 139 (9).png',
+      },
+      {
+        'name': 'Golden Retriever',
+        'description':
+        'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.',
+        'image': 'assets/images/Ellipse 139 (10).png',
+      },
+      {
+        'name': 'Old English Sheepdog',
+        'description':
+        'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.',
+        'image': 'assets/images/Ellipse 1391.png',
+      },
+      {
+        'name': 'Border Collie',
+        'description':
+        'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.',
+        'image': 'assets/images/Ellipse 1392.png',
+      },
+      {
+        'name': 'Greyhound',
+        'description':
+        'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.',
+        'image': 'assets/images/Ellipse 139 (12).png',
+      },
+      {
+        'name': 'Jack Russell Terrier',
+        'description':
+        'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.',
+        'image': 'assets/images/Ellipse 139 (13).png',
+      },
+      {
+        'name': 'Bloodhound',
+        'description':
+        'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.',
+        'image': 'assets/images/Ellipse 139 (14).png',
+      },
+      {
+        'name': 'English Pointer',
+        'description':
+        'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.',
+        'image': 'assets/images/Ellipse 139 (15).png',
+      },
+      {
+        'name': 'Staffordshire Bull Terrier',
+        'description':
+        'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.',
+        'image': 'assets/images/Ellipse 139 (16).png',
+      },
+      {
+        'name': 'English Foxhound',
+        'description':
+        'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.',
+        'image': 'assets/images/Ellipse 139 (17).png',
+      },
+      {
+        'name': 'Wire Fox Terrier',
+        'description':
+        'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.',
+        'image': 'assets/images/Ellipse 139 (18).png',
+      },
+      {
+        'name': 'Manchester Terrier',
+        'description':
+        'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.',
+        'image': 'assets/images/Ellipse 1393.png',
+      },
+      {
+        'name': 'Bedlington Terrier',
+        'description':
+        'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.',
+        'image': 'assets/images/Ellipse 139 (20).png',
+      },
+      {
+        'name': 'Boston Terrier',
+        'description':
+        'Life expectancy: 11-13 years.\nFriendly "American Gentleman"\nwith tuxedo-like markings.',
+        'image': 'assets/images/Ellipse 1394.png',
+      },
+      {
+        'name': 'English Setter',
+        'description':
+        'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.',
+        'image': 'assets/images/Ellipse 139 (21).png',
+      },
+      {
+        'name': 'Border Terrier',
+        'description':
+        'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.',
+        'image': 'assets/images/Ellipse 139 (22).png',
+      },
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 6.h),
+        Column(
+          children: topBreeds.asMap().entries.map((entry) {
+            final _ = entry.key;
+            final breed = entry.value;
+            final isFavorite = scanProvider.isBreedFavorite(breed['name']!);
+
+            return Container(
+              margin: EdgeInsets.only(bottom: 16.h),
+              width: 413.w,
+              height: 140.h,
+              decoration: BoxDecoration(
+                color: colors.tertiaryContainer,
+                borderRadius: BorderRadius.circular(20.r),
+                border: Border.all(color: colors.background.withOpacity(0.2)),
+              ),
+              child: Stack(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center, // Vertically center the avatar
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Container(
+                          width: 100.w,
+                          height: 100.w, // Ensure width and height are equal for a circle
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.transparent,
+                          ),
+                          child: ClipOval(
+                            child: breed['image'] != null
+                                ? Image.asset(
+                              breed['image']!,
+                              fit: BoxFit.cover,
+                            )
+                                : Icon(
+                              Icons.pets,
+                              size: 40.sp,
+                              color: AppColors.vibrantPurple,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      /// --- Text Content Section ---
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 40.w, top: 12.h, bottom: 12.h),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                breed['name']!,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontSize: 18.sp, // Slightly larger for the title
+                                  fontWeight: FontWeight.w400,
+                                  color: Theme.of(context).colorScheme.onSurface,
+                                ),
+                              ),
+                              SizedBox(height: 8.h),
+                              Expanded(
+                                child: Text(
+                                  breed['description']!,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                                    height: 1.3,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  /// --- Heart Favorite Icon (Positioned Top Right) ---
+                  Positioned(
+                    top: 12.h,
+                    right: 12.w,
+                    child: GestureDetector(
+                      onTap: () {
+                        scanProvider.toggleBreedFavorite(breed['name']!);
+                      },
+                      child: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: isFavorite ? Colors.redAccent : Colors.grey,
+                        size: 26.sp,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    );
   }
 
   Future<void> _handleRescanTap(

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
+import 'CommonApp.dart';
 
 class PhoneView extends StatefulWidget {
   final String initialPhone;
@@ -43,44 +44,30 @@ class _PhoneViewState extends State<PhoneView> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20.h),
-
-              // Back Button
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
                   width: 40.w,
                   height: 40.h,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    shape: BoxShape.circle,
+                  decoration:  BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(9)
                   ),
                   child: Center(
-                    child: Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20.sp),
+                    child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),
                   ),
                 ),
               ),
-
               SizedBox(height: 32.h),
 
-              // Title
-              Text(
-                l10n.mainPhone,
-                style: TextStyle(
-                  fontSize: 32.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
-              ),
-
-              SizedBox(height: 32.h),
+              Text(l10n.mainPhone, style: TextStyle(fontSize: 32.sp, fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSurface)),
 
               // Phone Input with Country Picker
               InternationalPhoneNumberInput(
@@ -94,15 +81,16 @@ class _PhoneViewState extends State<PhoneView> {
                 ),
                 ignoreBlank: false,
                 autoValidateMode: AutovalidateMode.disabled,
-                selectorTextStyle: TextStyle(color: Colors.black, fontSize: 18.sp),
+                selectorTextStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 18.sp),
+                textStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 18.sp),
                 textFieldController: _phoneController,
                 formatInput: true,
                 keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
                 inputDecoration: InputDecoration(
                   hintText: 'Main Phone',
-                  hintStyle: TextStyle(fontSize: 18.sp, color: Colors.grey[400]),
+                  hintStyle: TextStyle(fontSize: 18.sp, color: Theme.of(context).hintColor),
                   filled: true,
-                  fillColor: const Color(0xFFF5F5F5),
+                  fillColor: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF5F5F5),
                   contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),

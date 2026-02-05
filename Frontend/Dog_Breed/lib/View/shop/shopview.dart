@@ -63,14 +63,14 @@ class _ShopviewState extends State<Shopview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor ?? Theme.of(context).colorScheme.background,
         elevation: 0,
         title: Text(
           "Shop",
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.onSurface,
             fontSize: 28.sp,
             fontWeight: FontWeight.w400,
           ),
@@ -78,7 +78,7 @@ class _ShopviewState extends State<Shopview> {
         actions: [
           IconButton(
             icon: Icon(Icons.shopping_cart_outlined,
-                color: Colors.black, size: 28.sp),
+                color: Theme.of(context).colorScheme.onSurface, size: 28.sp),
             onPressed: () {},
           ),
           SizedBox(width: 10.w),
@@ -94,15 +94,16 @@ class _ShopviewState extends State<Shopview> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12.w),
               decoration: BoxDecoration(
-                color: const Color(0xFFF5F5F5),
+                color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF5F5F5),
                 borderRadius: BorderRadius.circular(30.r),
               ),
               child: TextField(
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Search for Dog",
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 16.sp),
-                  prefixIcon: const Icon(Icons.search, color: Colors.black),
+                  hintStyle: TextStyle(color: Theme.of(context).hintColor, fontSize: 16.sp),
+                  prefixIcon: Icon(Icons.search, color: Theme.of(context).colorScheme.onSurface),
                   contentPadding: EdgeInsets.symmetric(vertical: 14.h),
                 ),
               ),
@@ -114,7 +115,7 @@ class _ShopviewState extends State<Shopview> {
               height: 200.h,
               padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
-                color: const Color(0xFFF5F5F5),
+                color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF5F5F5),
                 borderRadius: BorderRadius.circular(16.r),
               ),
               child: Stack(
@@ -128,7 +129,7 @@ class _ShopviewState extends State<Shopview> {
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF272727),
+                          color: Theme.of(context).colorScheme.onSurface,
                           height: 1.2,
                         ),
                       ),
@@ -137,7 +138,7 @@ class _ShopviewState extends State<Shopview> {
                         "Lorem ipsum dolor site smith",
                         style: TextStyle(
                           fontSize: 12.sp,
-                          color: Colors.grey[600],
+                          color: Theme.of(context).hintColor,
                         ),
                       ),
                       SizedBox(height: 12.h),
@@ -187,7 +188,7 @@ class _ShopviewState extends State<Shopview> {
                           shape: BoxShape.circle,
                           color: index == 0
                               ? AppColors.vibrantPurple
-                              : Colors.grey.shade300,
+                              : (Theme.of(context).brightness == Brightness.dark ? Theme.of(context).dividerColor : Colors.grey.shade300),
                         ),
                       )),
             ),
@@ -213,19 +214,19 @@ class _ShopviewState extends State<Shopview> {
                             horizontal: 24.w, vertical: 10.h),
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? const Color(0xFFF5F5F5)
-                              : Colors.white,
+                              ? (Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF5F5F5))
+                              : Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(30.r),
                           border: Border.all(
                             color: isSelected
                                 ? Colors.transparent
-                                : Colors.grey.shade200,
+                                : (Theme.of(context).brightness == Brightness.dark ? Theme.of(context).dividerColor : Colors.grey.shade200),
                           ),
                         ),
                         child: Text(
                           cat,
                           style: TextStyle(
-                            color: isSelected ? Colors.black : Colors.grey,
+                            color: isSelected ? Theme.of(context).colorScheme.onSurface : Theme.of(context).hintColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 14.sp,
                           ),
@@ -242,7 +243,7 @@ class _ShopviewState extends State<Shopview> {
               "Featured Products",
               style: TextStyle(
                 fontSize: 18.sp,
-                color: const Color(0xFF484D54),
+                color: Theme.of(context).colorScheme.onSurface,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -279,7 +280,7 @@ class _ShopviewState extends State<Shopview> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFFF5F5F5),
+          color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF5F5F5),
           borderRadius: BorderRadius.circular(16.r),
         ),
         child: Column(
@@ -379,12 +380,12 @@ class _ShopviewState extends State<Shopview> {
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 14.sp,
-                              color: const Color(0xFF272727)),
+                              color: Theme.of(context).colorScheme.onSurface),
                         ),
                         SizedBox(height: 4.h),
                         Text(
                           product['subtitle'],
-                          style: TextStyle(color: Colors.grey, fontSize: 10.sp),
+                          style: TextStyle(color: Theme.of(context).hintColor, fontSize: 10.sp),
                         ),
                       ],
                     ),
@@ -395,13 +396,13 @@ class _ShopviewState extends State<Shopview> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16.sp,
-                              color: const Color(0xFF272727)),
+                              color: Theme.of(context).colorScheme.onSurface),
                         ),
                         SizedBox(width: 8.w),
                         Text(
                           product['oldPrice'],
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Theme.of(context).hintColor,
                             fontSize: 12.sp,
                             decoration: TextDecoration.lineThrough,
                           ),

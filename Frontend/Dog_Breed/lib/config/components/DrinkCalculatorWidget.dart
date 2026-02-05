@@ -81,14 +81,14 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
           Container(
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
+              color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.grey.shade200,
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Text(
               l10n.drinkCalcDescription,
               style: TextStyle(
                 fontSize: 16.sp,
-                color: Colors.black87,
+                color: Theme.of(context).colorScheme.onSurface,
                 height: 1.5,
               ),
             ),
@@ -107,14 +107,14 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                   children: [
                     Text(
                       l10n.currentWeight,
-                      style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
+                      style: TextStyle(fontSize: 14.sp, color: Theme.of(context).hintColor),
                     ),
                     SizedBox(height: 8.h),
                     Container(
                       height: 56.h,
                       padding: EdgeInsets.symmetric(horizontal: 16.w),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.white,
                         borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(color: const Color(0xFFECEEED), width: 2),
                       ),
@@ -122,13 +122,13 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                         child: TextField(
                           controller: _weightController,
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+                          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSurface),
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
                             isDense: true,
                             border: InputBorder.none,
                             hintText: l10n.hintWeight,
-                            hintStyle: TextStyle(color: Colors.grey[400], fontSize: 18.sp),
+                            hintStyle: TextStyle(color: Theme.of(context).hintColor, fontSize: 18.sp),
                             contentPadding: EdgeInsets.zero,
                           ),
                           onChanged: (_) => setState(() {}),
@@ -147,7 +147,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 32.h),
             decoration: BoxDecoration(
-              color: Colors.grey.shade300,
+              color: Theme.of(context).brightness == Brightness.dark ? Colors.grey.shade800 : Colors.grey.shade300,
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Column(
@@ -155,7 +155,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               children: [
                 Text(
                   l10n.yourDogWillNeed,
-                  style: TextStyle(color: Colors.white70, fontSize: 16.sp),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7), fontSize: 16.sp),
                 ),
 
                 SizedBox(height: 16.h),
@@ -168,7 +168,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                       Text(
                         resultParts.isEmpty ? '0' : resultParts.first,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontSize: 48.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -176,7 +176,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                       SizedBox(width: 8.w),
                       Text(
                         resultParts.length > 1 ? '${resultParts.sublist(1).join(' ')} ${l10n.perDay}' : l10n.perDay,
-                        style: TextStyle(color: Colors.white70, fontSize: 16.sp),
+                        style: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7), fontSize: 16.sp),
                       ),
                       SizedBox(width: 40.w),
                       SizedBox(
@@ -255,7 +255,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
               height: 100.h,
               width: 170.w,
               decoration: BoxDecoration(
-                color: const Color(0xFFE6E6E6),
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.r)),
                 boxShadow: [
                   BoxShadow(color: Colors.black12, blurRadius: 8.r, offset: const Offset(0, 4)),
@@ -281,7 +281,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: _activityLevel == level ? FontWeight.bold : FontWeight.normal,
-                                color: _activityLevel == level ? const Color(0xFF000000) : Colors.black87,
+                                color: _activityLevel == level ? const Color(0xFF820DFF) : Theme.of(context).colorScheme.onSurface,
                               ),
                             ),
                           ),
@@ -354,7 +354,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
           Container(
             width: 230.w,
             decoration: BoxDecoration(
-              color: const Color(0xFFF2F2F2),
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.r)),
               boxShadow: [
                 BoxShadow(color: Colors.black12, blurRadius: 8.r, offset: const Offset(0, 4)),
@@ -374,13 +374,13 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                     decoration: BoxDecoration(
-                      color: isSelected ? const Color(0xFFE0E0E0) : Colors.transparent,
+                      color: isSelected ? Theme.of(context).highlightColor : Colors.transparent,
                     ),
                     child: Text(
                       weightUnits[item] ?? item,
                       style: TextStyle(
                         fontSize: 16.sp,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -430,7 +430,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
         if (label != null)
           Text(
             label,
-            style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
+            style: TextStyle(fontSize: 14.sp, color: Theme.of(context).hintColor),
           ),
         if (label != null) SizedBox(height: 8.h),
         Container(

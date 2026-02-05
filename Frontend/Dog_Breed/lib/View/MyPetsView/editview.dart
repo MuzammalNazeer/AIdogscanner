@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import '../../Valid/AppColors.dart';
 import '../../View_model/PetProvider.dart';
 import '../../View_model/home/Pet.dart';
 import '../../View_model/home/home_view_model.dart';
+import '../../config/components/CommonApp.dart';
 import '../../config/components/roundButton.dart';
 import '../../utils/routes/routes_name.dart';
 import '../../l10n/app_localizations.dart';
@@ -195,7 +197,7 @@ class _EditviewState extends State<Editview> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -232,14 +234,14 @@ class _EditviewState extends State<Editview> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).cardColor,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
+                          color: Theme.of(context).shadowColor.withOpacity(0.1),
                           blurRadius: 5,
                           offset: const Offset(0, 2),
                         ),
@@ -255,27 +257,29 @@ class _EditviewState extends State<Editview> {
                               style: TextStyle(
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                             ),
                             IconButton(
                               onPressed: () => Navigator.pop(context),
-                              icon: const Icon(Icons.close, color: Colors.grey),
+                              icon: Icon(Icons.close, color: Theme.of(context).hintColor),
                             ),
                           ],
                         ),
                         const SizedBox(height: 12),
                         Container(
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF5F5F5),
+                            color: Theme.of(context).scaffoldBackgroundColor,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: TextField(
                             controller: searchController,
                             autofocus: true,
+                            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                             decoration: InputDecoration(
                               hintText: AppLocalizations.of(context)!.hintSearchBreed,
-                              prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                              hintStyle: TextStyle(color: Theme.of(context).hintColor),
+                              prefixIcon: Icon(Icons.search, color: Theme.of(context).hintColor),
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
@@ -306,13 +310,13 @@ class _EditviewState extends State<Editview> {
                           Icon(
                             Icons.search_off,
                             size: 60.sp,
-                            color: Colors.grey[400],
+                            color: Theme.of(context).hintColor,
                           ),
                           const SizedBox(height: 16),
                           Text(
                             AppLocalizations.of(context)!.noBreedsFound,
                             style: TextStyle(
-                              color: Colors.grey[600],
+                              color: Theme.of(context).hintColor,
                               fontSize: 16.sp,
                             ),
                           ),
@@ -320,7 +324,7 @@ class _EditviewState extends State<Editview> {
                           Text(
                             AppLocalizations.of(context)!.tryDifferentSearch,
                             style: TextStyle(
-                              color: Colors.grey[500],
+                              color: Theme.of(context).hintColor,
                               fontSize: 14.sp,
                             ),
                           ),
@@ -336,18 +340,18 @@ class _EditviewState extends State<Editview> {
                             breed,
                             style: TextStyle(
                               fontSize: 16.sp,
-                              color: Colors.black87,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                           trailing: _selectedBreed == breed
                               ? Icon(
                             Icons.check_circle,
-                            color: const Color(0xFF820DFF),
+                            color: AppColors.vibrantPurple,
                             size: 24.sp,
                           )
                               : null,
                           tileColor: _selectedBreed == breed
-                              ? const Color(0xFFF0E6FF)
+                              ? AppColors.vibrantPurple.withOpacity(0.1)
                               : Colors.transparent,
                           onTap: () {
                             // Save breed to TextField and update state
@@ -366,16 +370,16 @@ class _EditviewState extends State<Editview> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(top: BorderSide(color: Colors.grey[200]!, width: 1)),
+                      color: Theme.of(context).cardColor,
+                      border: Border(top: BorderSide(color: Theme.of(context).dividerColor, width: 1)),
                     ),
                     child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () => Navigator.pop(context),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF5F5F5),
-                          foregroundColor: Colors.black,
+                          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                          foregroundColor: Theme.of(context).colorScheme.onSurface,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
@@ -483,12 +487,14 @@ class _EditviewState extends State<Editview> {
       lastDate: DateTime.now(),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: ThemeData.light().copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF),
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.vibrantPurple,
               onPrimary: Colors.white,
+              surface: Theme.of(context).cardColor,
+              onSurface: Theme.of(context).colorScheme.onSurface,
             ),
-            dialogBackgroundColor: Colors.white,
+            dialogBackgroundColor: Theme.of(context).cardColor,
           ),
           child: child!,
         );
@@ -497,27 +503,27 @@ class _EditviewState extends State<Editview> {
     if (picked != null) setState(() => _selectedDate = picked);
   }
 
-  Future<void> _pickImage() async {
-    try {
-      final XFile? image = await _picker.pickImage(
-        source: ImageSource.gallery,
-        maxWidth: 500,
-        maxHeight: 500,
-        imageQuality: 80,
-      );
-
-      if (image != null) {
-        final bytes = await image.readAsBytes();
-        setState(() {
-          _selectedImage = bytes;
-        });
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context)!.msgImagePickFailed(e))),
-      );
-    }
-  }
+  // Future<void> _pickImage() async {
+  //   try {
+  //     final XFile? image = await _picker.pickImage(
+  //       source: ImageSource.gallery,
+  //       maxWidth: 500,
+  //       maxHeight: 500,
+  //       imageQuality: 80,
+  //     );
+  //
+  //     if (image != null) {
+  //       final bytes = await image.readAsBytes();
+  //       setState(() {
+  //         _selectedImage = bytes;
+  //       });
+  //     }
+  //   } catch (e) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text(AppLocalizations.of(context)!.msgImagePickFailed(e))),
+  //     );
+  //   }
+  // }
 
   String _getLocalizedGender(BuildContext context, String gender) {
     final l10n = AppLocalizations.of(context)!;
@@ -658,11 +664,107 @@ class _EditviewState extends State<Editview> {
       l10n.breedYorkshireTerrier,
     ];
   }
+  Future<void> _pickImage(ImageSource source) async {
+    try {
+      final XFile? image = await _picker.pickImage(
+        source: source,
+        maxWidth: 500,
+        maxHeight: 500,
+        imageQuality: 80,
+      );
+
+      if (image != null) {
+        final bytes = await image.readAsBytes();
+        setState(() {
+          _selectedImage = bytes;
+        });
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to pick image: $e')));
+    }
+  }
+
+
+  void _showImageSourceDialog() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 24.h),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Add pet",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.gallery);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        "Upload from Gallery",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF007AFF),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.camera);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        "Open Camera",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF007AFF),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8.h),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -671,6 +773,7 @@ class _EditviewState extends State<Editview> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
@@ -679,40 +782,44 @@ class _EditviewState extends State<Editview> {
                         height: 40.305.h,
                         padding: const EdgeInsets.all(8.96),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF3F6F3),
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(8.96),
                         ),
                         child: Icon(
                           CupertinoIcons.chevron_left,
                           size: 20.sp,
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          widget.isEditing ? AppLocalizations.of(context)!.editPetTitle : AppLocalizations.of(context)!.addPetTitle,
-                          style: TextStyle(
-                            fontFamily: 'Sora',
-                            fontWeight: FontWeight.w300,
-                            fontSize: 29.75.sp,
-                            color: Colors.black,
-                          ),
-                        ),
+
+                    // Center text
+                    Text(
+                      widget.isEditing ? AppLocalizations.of(context)!.editPetTitle : AppLocalizations.of(context)!.addPetTitle,
+                      style: TextStyle(
+                        fontFamily: 'Sora',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 29.75.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
+                    ),
+
+                    // Invisible placeholder to balance
+                    SizedBox(
+                      width: 40.305.w,
+                      height: 40.305.h,
                     ),
                   ],
                 ),
                 SizedBox(height: 23.h),
                 Center(
                   child: GestureDetector(
-                    onTap: _pickImage,
+                    onTap: _showImageSourceDialog,
                     child: Container(
                       width: 159.w,
                       height: 159.h,
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3F6F3),
+                        color: Theme.of(context).cardColor,
                         borderRadius: BorderRadius.circular(27.83),
                       ),
                       child: _selectedImage != null
@@ -738,16 +845,16 @@ class _EditviewState extends State<Editview> {
                           : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
+                           Icon(
                             Icons.camera_alt,
-                            color: Colors.grey,
+                            color: Theme.of(context).hintColor,
                             size: 32,
                           ),
                           const SizedBox(height: 3),
                           Text(
                             AppLocalizations.of(context)!.labelPhoto,
-                            style: const TextStyle(
-                              color: Colors.grey,
+                            style:  TextStyle(
+                              color: Theme.of(context).hintColor,
                               fontSize: 14,
                             ),
                           ),
@@ -759,10 +866,10 @@ class _EditviewState extends State<Editview> {
                 SizedBox(height: 23.h),
                 Text(
                   AppLocalizations.of(context)!.labelPetName,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
-                    color: Color(0xFF6F7D86),
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -771,9 +878,10 @@ class _EditviewState extends State<Editview> {
                   child: Center(
                     child: TextField(
                       controller: _nameController,
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: const Color(0xFFF5F5F5),
+                        fillColor: Theme.of(context).cardColor,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -792,7 +900,7 @@ class _EditviewState extends State<Editview> {
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12.sp,
-                    color: const Color(0xFF6F7D86),
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -806,7 +914,7 @@ class _EditviewState extends State<Editview> {
 
                         builder: (context) {
                           return AlertDialog(
-                            backgroundColor: Colors.white,
+                            backgroundColor: Theme.of(context).cardColor,
                             title: const Text('Change Breed?'),
                             content: const Text(
                                 'Are you sure you want to change the breed?'),
@@ -835,7 +943,7 @@ class _EditviewState extends State<Editview> {
                     width: double.infinity,
                     height: 58.h,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F5F5),
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -852,13 +960,13 @@ class _EditviewState extends State<Editview> {
                               ),
                               hintText: 'Select Breed',
                               hintStyle: TextStyle(
-                                color: Colors.grey[600],
+                                color: Theme.of(context).hintColor,
                                 fontSize: 14.sp,
                               ),
                             ),
                             style: TextStyle(
                               fontSize: 14.sp,
-                              color: Colors.black,
+                              color: Theme.of(context).colorScheme.onSurface,
                               fontWeight: FontWeight.bold
                             ),
                           ),
@@ -867,7 +975,7 @@ class _EditviewState extends State<Editview> {
                           padding: const EdgeInsets.only(right: 12),
                           child: Icon(
                             Icons.keyboard_arrow_down,
-                            color: Colors.grey,
+                            color: Theme.of(context).hintColor,
                             size: 32.sp,
                           ),
                         ),
@@ -882,7 +990,7 @@ class _EditviewState extends State<Editview> {
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12.sp,
-                    color: const Color(0xFF6F7D86),
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -893,7 +1001,7 @@ class _EditviewState extends State<Editview> {
                       value: _selectedGender,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: const Color(0xFFF5F5F5),
+                        fillColor: Theme.of(context).cardColor,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -902,6 +1010,10 @@ class _EditviewState extends State<Editview> {
                           horizontal: 16.w,
                           vertical: 0,
                         ),
+                      ),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontSize: 16.sp,
                       ),
                       items: _genders
                           .map(
@@ -914,10 +1026,10 @@ class _EditviewState extends State<Editview> {
                       onChanged: (v) => setState(() => _selectedGender = v),
                       icon:  Icon(
                         Icons.keyboard_arrow_down,
-                        color: Colors.grey,
+                        color: Theme.of(context).hintColor,
                         size: 32.sp,
                       ),
-                      dropdownColor: Colors.white,
+                      dropdownColor: Theme.of(context).cardColor,
                       isExpanded: true,
                     ),
                   ),
@@ -925,10 +1037,10 @@ class _EditviewState extends State<Editview> {
                 SizedBox(height: 17.h),
                 Text(
                   AppLocalizations.of(context)!.labelDOB,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
-                    color: Color(0xFF6F7D86),
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -939,7 +1051,7 @@ class _EditviewState extends State<Editview> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F5F5),
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -951,14 +1063,14 @@ class _EditviewState extends State<Editview> {
                               : 'DD-MM-YYYY',
                           style: TextStyle(
                             color: _selectedDate != null
-                                ? Colors.black87
-                                : Colors.grey,
+                                ? Theme.of(context).colorScheme.onSurface
+                                : Theme.of(context).hintColor,
                             fontSize: 16,
                           ),
                         ),
-                        const Icon(
+                         Icon(
                           Icons.calendar_today,
-                          color: Colors.grey,
+                          color: Theme.of(context).hintColor,
                           size: 20,
                         ),
                       ],
@@ -970,7 +1082,7 @@ class _EditviewState extends State<Editview> {
                   title: widget.isEditing ? AppLocalizations.of(context)!.actionUpdate : AppLocalizations.of(context)!.actionSave,
                   height: 50,
                   width: 379,
-                  backgroundColors: const Color(0xFF820DFF),
+                  backgroundColors: AppColors.vibrantPurple,
                   isSelected: true,
                   onPress: () async {
                     if (_nameController.text.isEmpty ||

@@ -2217,4 +2217,26 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get deleteAllPetsConfirmation =>
       'Tüm evcil hayvanları silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.';
+
+  @override
+  String get dialogUploadPhoto => 'Upload Photo';
+
+  @override
+  String get dialogUploadVideo => 'Upload Video';
+
+  @override
+  String get pickerOpenCamera => 'Open Camera';
+
+  @override
+  String get pickerUploadGallery => 'Upload from Gallery';
+
+  @override
+  String errorPleaseEnterAmountFor(String activityName) {
+    return 'Please enter amount for $activityName';
+  }
+
+  @override
+  String errorNameOrTypeRequiredFor(String activityName) {
+    return 'Name or Type required for $activityName';
+  }
 }

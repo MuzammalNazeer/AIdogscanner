@@ -3,12 +3,10 @@
     <!-- LaunchTheme 应该使用 Theme.SplashScreen -->
     <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:windowBackground">@drawable/launch_background</item>
-        <item name="android:windowFullscreen">true</item>
     </style>
 
     <!-- NormalTheme 应该使用 Flutter 的主题 -->
     <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:windowBackground">@drawable/launch_background</item>
-        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

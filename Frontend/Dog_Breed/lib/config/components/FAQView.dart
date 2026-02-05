@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
+import 'CommonApp.dart';
 
 class FAQView extends StatefulWidget {
   const FAQView({super.key});
@@ -59,41 +60,16 @@ class _FAQViewState extends State<FAQView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: CommonApp(
+        title: AppLocalizations.of(context)!.faq,
+      ),
       body: SafeArea(
         child: Column(
           children: [
             // Header
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      width: 40.w,
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20.sp),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    AppLocalizations.of(context)!.faq,
-                    style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w700, color: Colors.black),
-                  ),
-                  const Spacer(),
-                  SizedBox(width: 40.w),
-                ],
-              ),
-            ),
-
             SizedBox(height: 20.h),
+
 
             // Dog Illustration
             Image.asset(
@@ -124,7 +100,7 @@ class _FAQViewState extends State<FAQView> {
                       curve: Curves.easeInOut,
                       margin: EdgeInsets.only(bottom: 6.h),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
+                        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(16.r),
 
                       ),
@@ -141,7 +117,7 @@ class _FAQViewState extends State<FAQView> {
                                     style: TextStyle(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.black87,
+                                      color: Theme.of(context).colorScheme.onSurface,
                                     ),
                                   ),
                                 ),
@@ -160,14 +136,14 @@ class _FAQViewState extends State<FAQView> {
                               width: double.infinity,
                               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
                               decoration: BoxDecoration(
-                                color: AppColors.white,
+                                color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(16.r)),
                               ),
                               child: Text(
                                 faq['answer']!,
                                 style: TextStyle(
                                   fontSize: 15.sp,
-                                  color: Colors.black87,
+                                  color: Theme.of(context).colorScheme.onSurface,
                                   height: 1.5,
                                 ),
                               ),

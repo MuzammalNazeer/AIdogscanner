@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale":  "de",
     "appTitle":  "Hunderasse",
     "settingsTitle":  "Einstellungen",
@@ -834,5 +834,21 @@
     "shareDefault":  "📱 Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Alles löschen",
-    "deleteAllPetsConfirmation":  "Sind Sie sicher, dass Sie alle Haustiere löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+    "deleteAllPetsConfirmation":  "Sind Sie sicher, dass Sie alle Haustiere löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "errorPleaseEnterAmountFor":  "Please enter amount for {activityName}",
+    "@errorPleaseEnterAmountFor":  {
+                                       "placeholders":  {
+                                                            "activityName":  {
+                                                                                 "type":  "String"
+                                                                             }
+                                                        }
+                                   },
+    "errorNameOrTypeRequiredFor":  "Name or Type required for {activityName}",
+    "@errorNameOrTypeRequiredFor":  {
+                                        "placeholders":  {
+                                                             "activityName":  {
+                                                                                  "type":  "String"
+                                                                              }
+                                                         }
+                                    }
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../l10n/app_localizations.dart';
+import '../../config/components/CommonApp.dart';
 import '../../config/components/AddressView.dart';
 import '../../config/components/NameView.dart';
 import '../../config/components/emailview.dart';
@@ -91,9 +93,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        decoration:  BoxDecoration(
+          color:  Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
         ),
         child: Padding(
           padding: EdgeInsets.all(24.w),
@@ -157,7 +159,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
           Container(
             padding: EdgeInsets.all(20.w),
             decoration: BoxDecoration(
-              color: const Color(0xFF7C3AED).withOpacity(0.1),
+              color: Colors.grey.shade400,
               shape: BoxShape.circle,
             ),
             child: Icon(icon, size: 40.sp, color: const Color(0xFF7C3AED)),
@@ -174,130 +176,116 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 5.h),
-              Container(
-                height: 223.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: const Border(
-                    bottom: BorderSide(
-                      color: Color(0xFFB9B9B9),
-                      width: 1.0,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        padding: EdgeInsets.all(10.w),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.circular(12.r),
+                          border: isDark ? Border.all(color: Colors.white24) : null,
+                          boxShadow: isDark ? null : [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 10,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Icon(
+                          Icons.arrow_back_ios_new,
+                          size: 20.sp,
+                          color: Theme.of(context).iconTheme.color,
+                        ),
+                      ),
                     ),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 4.0,
-                      spreadRadius: 1.0,
-                      offset: const Offset(0, 2),
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context)!.ownersProfile,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
                     ),
+                    SizedBox(width: 44.w), // To balance the header
                   ],
                 ),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      height: 60.h,
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () => Navigator.pop(context),
-                            child: Container(
-                              width: 40.w,
-                              height: 40.h,
-                              decoration:  BoxDecoration(
-                                color: Colors.grey.shade200,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20.sp),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                AppLocalizations.of(context)!.ownersProfile,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 48.w),
-                        ],
+              ),
+              SizedBox(height: 20.h),
+              Center(
+                child: SizedBox(
+                  width: 110.w,
+                  height: 110.w,
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 110.w,
+                        height: 110.w,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey.shade300,
+                          image: _profileImageFile != null
+                              ? DecorationImage(
+                                  image: FileImage(_profileImageFile!),
+                                  fit: BoxFit.cover,
+                                )
+                              : null,
+                        ),
+                        child: _profileImageFile == null
+                            ? Icon(
+                                Icons.person,
+                                size: 60.sp,
+                                color: Colors.grey.shade600,
+                              )
+                            : null,
                       ),
-                    ),
-                    SizedBox(height: 20.h),
-                    Center(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          CircleAvatar(
-                            radius: 50.r,
-                            backgroundColor: Colors.grey.shade200,
-                            backgroundImage: _profileImageFile != null
-                                ? FileImage(_profileImageFile!)
-                                : null,
-                            child: _profileImageFile == null
-                                ? Icon(
-                                    Icons.person,
-                                    size: 60.r,
-                                    color: Colors.grey[400],
-                                  )
-                                : null,
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 100.w - 50.r,
-                            child: GestureDetector(
-                              onTap: _pickProfileImage,
-                              child: Container(
-                                padding: EdgeInsets.all(8.w),
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF7C3AED),
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      blurRadius: 6,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Icon(
-                                  Icons.camera_alt,
-                                  color: Colors.white,
-                                  size: 20.sp,
-                                ),
-                              ),
+                      Positioned(
+                        bottom: 50,
+                        right: 0,
+                        child: GestureDetector(
+                          onTap: _pickProfileImage,
+                          child: Container(
+                            padding: EdgeInsets.all(8.w),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF8B5CF6), // Purple color from screenshot
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.camera_alt_outlined,
+                              color: Colors.white,
+                              size: 20.sp,
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 16.h),
               Center(
                 child: Text(
                   AppLocalizations.of(context)!.petOwner,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
@@ -382,10 +370,10 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
 
                     Text(
                       AppLocalizations.of(context)!.ownerContacts,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     SizedBox(height: 16.h),
@@ -457,10 +445,10 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
 
                     Text(
                       AppLocalizations.of(context)!.petsResidence,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     SizedBox(height: 16.h),
@@ -510,10 +498,10 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     // Address Section
                     Text(
                       AppLocalizations.of(context)!.address,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     SizedBox(height: 12.h),
@@ -521,36 +509,49 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     if (address.isEmpty)
                       SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            final updatedAddress = await Navigator.push<String>(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AddressView(initialAddress: address),
-                              ),
-                            );
-
-                            if (updatedAddress != null && updatedAddress.isNotEmpty) {
-                              setState(() {
-                                address = updatedAddress;
-                              });
-                              await _saveString(_keyAddress, updatedAddress);
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.vibrantPurple,
-                            padding: EdgeInsets.symmetric(vertical: 18.h),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.r),
-                            ),
-                            elevation: 0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.vibrantPurple,
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
-                          child: Text(
-                            AppLocalizations.of(context)!.addAddress,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                          child: CustomPaint(
+                            painter: DashedBorderPainter(
+                              color: Colors.white.withOpacity(0.5),
+                              strokeWidth: 1.5,
+                              dashWidth: 6,
+                              dashSpace: 4,
+                              radius: 12.r,
+                            ),
+                            child: TextButton(
+                              onPressed: () async {
+                                final updatedAddress = await Navigator.push<String>(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddressView(initialAddress: address),
+                                  ),
+                                );
+
+                                if (updatedAddress != null && updatedAddress.isNotEmpty) {
+                                  setState(() {
+                                    address = updatedAddress;
+                                  });
+                                  await _saveString(_keyAddress, updatedAddress);
+                                }
+                              },
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.symmetric(vertical: 18.h),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                              ),
+                              child: Text(
+                                AppLocalizations.of(context)!.addAddress,
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -576,72 +577,40 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                           width: double.infinity,
                           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF5F5F5),
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Theme.of(context).colorScheme.surfaceContainerHighest
+                                : const Color(0xFFF5F5F5),
                             borderRadius: BorderRadius.circular(12.r),
                           ),
-                          child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                address,
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  color: Colors.black87,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      address,
+                                      style: TextStyle(
+                                        fontSize: 18.sp,
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              SizedBox(height: 8.h),
-                              // Center(
-                              //   child: Text(
-                              //     AppLocalizations.of(context)!.labelAdd,
-                              //     style: TextStyle(
-                              //       fontSize: 24.sp,
-                              //       color: AppColors.vibrantPurple,
-                              //       fontStyle: FontStyle.italic,
-                              //     ),
-                              //   ),
-                              // ),
+                              SizedBox(width: 12.w),
+                              Icon(
+                                Icons.edit_outlined, // or Icons.edit, Icons.mode_edit_outline
+                                color: Theme.of(context).colorScheme.onSurface,
+                                size: 22.sp,
+                              ),
                             ],
                           ),
                         ),
                       ),
 
-                    // const Text(
-                    //   'Address',
-                    //   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),
-                    // ),
-                    // SizedBox(height: 12.h),
-                    //
-                    // GestureDetector(
-                    //   onTap: () async {
-                    //     final updatedAddress = await Navigator.push<String>(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (context) => AddressView(initialAddress: address),
-                    //       ),
-                    //     );
-                    //     if (updatedAddress != null && updatedAddress.isNotEmpty) {
-                    //       setState(() {
-                    //         address = updatedAddress;
-                    //       });
-                    //       await _saveString(_keyAddress, updatedAddress);
-                    //     }
-                    //   },
-                    //   child: Container(
-                    //     width: double.infinity,
-                    //     padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
-                    //     decoration: BoxDecoration(
-                    //       color: const Color(0xFFF5F5F5),
-                    //       borderRadius: BorderRadius.circular(12.r),
-                    //     ),
-                    //     child: Text(
-                    //       address.isEmpty ? 'Enter Address' : address,
-                    //       style: TextStyle(
-                    //         fontSize: 18.sp,
-                    //         color: address.isEmpty ? Colors.grey[400] : Colors.black87,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
 
 
                   ],
@@ -665,7 +634,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
       height: 64.h,
       margin: EdgeInsets.symmetric(vertical: 4.h),
       decoration: BoxDecoration(
-        color: const Color(0xFFF4F7F6),
+        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF4F7F6),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
@@ -677,9 +646,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     imagePath,
                     width: 24.sp,
                     height: 24.sp,
-                    color: const Color(0xFF7C3AED),
+                    color: AppColors.vibrantPurple,
                   )
-                : Icon(icon, color: const Color(0xFF7C3AED), size: 24.sp),
+                : Icon(icon, color: AppColors.vibrantPurple, size: 24.sp),
           ),
           Expanded(
             child: Padding(
@@ -692,7 +661,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
-                      color: isEmpty ? Colors.red : Colors.black,
+                      color: isEmpty ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                   Text(
@@ -701,7 +670,7 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                       fontSize: 16.sp,
                       color: isEmpty
                           ? AppColors.vibrantPurple
-                          : const Color(0xFF676767),
+                          : Theme.of(context).colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ],
@@ -723,10 +692,10 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
         Center(
           child: Text(
             title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF371B34),
+            style: TextStyle(
+              fontSize: 22.sp,
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ),
@@ -744,11 +713,68 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 22.w),
           child: Text(
             description,
-            style: TextStyle(fontSize: 16.sp, color: const Color(0xFF877084)),
+            style: TextStyle(fontSize: 15.sp,fontWeight: FontWeight.w600, color: Theme.of(context).colorScheme.onSurfaceVariant),
           ),
         ),
       ],
     );
+  }
+}
+
+class DashedBorderPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+  final double dashWidth;
+  final double dashSpace;
+  final double radius;
+
+  DashedBorderPainter({
+    required this.color,
+    this.strokeWidth = 1.0,
+    this.dashWidth = 5.0,
+    this.dashSpace = 3.0,
+    this.radius = 0.0,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke;
+
+    final Path path = Path()
+      ..addRRect(RRect.fromRectAndRadius(
+        Rect.fromLTWH(strokeWidth / 2, strokeWidth / 2, size.width - strokeWidth, size.height - strokeWidth),
+        Radius.circular(radius),
+      ));
+
+    final Path dashedPath = _createDashedPath(path, dashWidth, dashSpace);
+    canvas.drawPath(dashedPath, paint);
+  }
+
+  Path _createDashedPath(Path source, double dashWidth, double dashSpace) {
+    final Path path = Path();
+    for (final PathMetric metric in source.computeMetrics()) {
+      double distance = 0.0;
+      while (distance < metric.length) {
+        path.addPath(
+          metric.extractPath(distance, distance + dashWidth),
+          Offset.zero,
+        );
+        distance += dashWidth + dashSpace;
+      }
+    }
+    return path;
+  }
+
+  @override
+  bool shouldRepaint(DashedBorderPainter oldDelegate) {
+    return oldDelegate.color != color ||
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.dashWidth != dashWidth ||
+        oldDelegate.dashSpace != dashSpace ||
+        oldDelegate.radius != radius;
   }
 }
 

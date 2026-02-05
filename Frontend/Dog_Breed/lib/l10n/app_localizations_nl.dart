@@ -2218,4 +2218,26 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get deleteAllPetsConfirmation =>
       'Weet je zeker dat je alle huisdieren wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.';
+
+  @override
+  String get dialogUploadPhoto => 'Upload Photo';
+
+  @override
+  String get dialogUploadVideo => 'Upload Video';
+
+  @override
+  String get pickerOpenCamera => 'Open Camera';
+
+  @override
+  String get pickerUploadGallery => 'Upload from Gallery';
+
+  @override
+  String errorPleaseEnterAmountFor(String activityName) {
+    return 'Please enter amount for $activityName';
+  }
+
+  @override
+  String errorNameOrTypeRequiredFor(String activityName) {
+    return 'Name or Type required for $activityName';
+  }
 }

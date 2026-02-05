@@ -43,7 +43,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(6.w),
@@ -104,7 +104,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
           height: 46.h,
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           decoration: BoxDecoration(
-            color: const Color(0xFFF3F6F3),
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.circular(16.r),
           ),
           child: InkWell(
@@ -119,14 +119,14 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                 Container(
                   width: 32.w,
                   height: 32.h,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   child: Icon(
                     _getCategoryIcon(viewModel.selectedCategory),
                     size: 18.sp,
-                    color: Colors.black87,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 SizedBox(width: 12.w),
@@ -138,7 +138,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
-                      color: Colors.black,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -147,7 +147,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                 Icon(
                   Icons.keyboard_arrow_down,
                   size: 20.sp,
-                  color: Colors.black54,
+                  color: Theme.of(context).hintColor,
                 ),
               ],
             ),
@@ -165,12 +165,12 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
                 Text(
                   AppLocalizations.of(context)!.documentCount(filteredDocs.length),
-                  style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                  style: TextStyle(fontSize: 14.sp, color: Theme.of(context).hintColor),
                 ),
               ],
             ),
@@ -180,7 +180,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
           child: Container(
             padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
-              color: const Color(0xFF686868).withOpacity(0.08),
+              color: Theme.of(context).cardColor.withOpacity(0.5),
               borderRadius: BorderRadius.circular(16.r),
             ),
             child: filteredDocs.isNotEmpty
@@ -191,7 +191,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: filteredDocs.length,
                       separatorBuilder: (_, __) => Divider(
-                        color: const Color(0xFFE4E4E4),
+                        color: Theme.of(context).dividerColor,
                         height: 0,
                         thickness: 1,
                         indent: 0.w,
@@ -209,7 +209,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                   Icon(
                     Icons.folder_open,
                     size: 64.sp,
-                    color: Colors.grey.shade200,
+                    color: Theme.of(context).disabledColor,
                   ),
                   SizedBox(height: 16.h),
                   Text(
@@ -218,7 +218,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                         : AppLocalizations.of(context)!.noMatchingDocuments,
                     style: TextStyle(
                       fontSize: 16.sp,
-                      color: Colors.grey.shade600,
+                      color: Theme.of(context).hintColor,
                     ),
                   ),
                   SizedBox(height: 8.h),
@@ -228,7 +228,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                         : AppLocalizations.of(context)!.tryDifferentSearchTerm,
                     style: TextStyle(
                       fontSize: 14.sp,
-                      color: Colors.grey.shade200,
+                      color: Theme.of(context).disabledColor,
                     ),
                   ),
                 ],
@@ -250,7 +250,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
       direction: DismissDirection.endToStart,
       background: Container(
         decoration: BoxDecoration(
-          color: Colors.red,
+          color: Theme.of(context).colorScheme.error,
           borderRadius: BorderRadius.circular(12.r),
         ),
         alignment: Alignment.centerRight,
@@ -265,7 +265,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(AppLocalizations.of(context)!.documentDeleted),
-            backgroundColor: Colors.red,
+            backgroundColor: Theme.of(context).colorScheme.error,
           ),
         );
       },
@@ -278,7 +278,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
           child: Container(
             padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
-              color: const Color(0xFFF4F7F6),
+              color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(16.r),
             ),
             child: Row(
@@ -287,7 +287,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                   width: 48.w,
                   height: 48.h,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).scaffoldBackgroundColor,
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: _getIconColor(doc.fileType),
@@ -312,7 +312,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
-                          color: Colors.black87,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -322,7 +322,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                         doc.fileName,
                         style: TextStyle(
                           fontSize: 14.sp,
-                          color: Colors.grey.shade600,
+                          color: Theme.of(context).hintColor,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -333,7 +333,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                 Icon(
                   Icons.arrow_forward_ios,
                   size: 18.sp,
-                  color: Colors.black45,
+                  color: Theme.of(context).hintColor,
                 ),
               ],
             ),
@@ -476,7 +476,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
@@ -506,7 +506,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                       height: 4.h,
                       margin: EdgeInsets.only(bottom: 12.h),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
+                        color: Theme.of(context).dividerColor,
                         borderRadius: BorderRadius.circular(2.r),
                       ),
                     ),
@@ -514,7 +514,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                       height: 44.h,
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF3F6F3),
+                        color: Theme.of(context).scaffoldBackgroundColor,
                         borderRadius: BorderRadius.circular(16.r),
                       ),
                       child: Row(
@@ -522,7 +522,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                           Icon(
                             Icons.search,
                             size: 20.sp,
-                            color: Colors.grey.shade500,
+                            color: Theme.of(context).hintColor,
                           ),
                           SizedBox(width: 8.w),
                           Expanded(
@@ -539,12 +539,12 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                                 hintText: AppLocalizations.of(context)!.searchPlaceholder,
                                 hintStyle: TextStyle(
                                   fontSize: 14.sp,
-                                  color: Colors.grey.shade500,
+                                  color: Theme.of(context).hintColor,
                                 ),
                               ),
                               style: TextStyle(
                                 fontSize: 14.sp,
-                                color: Colors.black,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                               textInputAction: TextInputAction.search,
                             ),
@@ -556,14 +556,14 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF3F6F3),
+                          color: Theme.of(context).scaffoldBackgroundColor,
                           borderRadius: BorderRadius.circular(18.r),
                         ),
                         child: ListView.separated(
                           padding: EdgeInsets.symmetric(vertical: 4.h),
                           itemCount: filteredCategories.length,
                           separatorBuilder: (context, index) => Divider(
-                            color: const Color(0xFFE4E4E4),
+                            color: Theme.of(context).dividerColor,
                             height: 0,
                             thickness: 1,
                             indent: 0.w,
@@ -587,14 +587,14 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                                       Container(
                                         width: 32.w,
                                         height: 32.h,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: Colors.white,
+                                          color: Theme.of(context).cardColor,
                                         ),
                                         child: Icon(
                                           _getCategoryIcon(category),
                                           size: 18.sp,
-                                          color: Colors.black87,
+                                          color: Theme.of(context).colorScheme.onSurface,
                                         ),
                                       ),
                                       SizedBox(width: 12.w),
@@ -604,7 +604,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.black,
+                                            color: Theme.of(context).colorScheme.onSurface,
                                           ),
                                         ),
                                       ),
@@ -642,8 +642,8 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: const Icon(Icons.open_in_new, color: Color(0xFF820DFF)),
-                title: Text(AppLocalizations.of(context)!.openDocument),
+                leading: const Icon(Icons.open_in_new, color: AppColors.vibrantPurple),
+                title: Text(AppLocalizations.of(context)!.openDocument, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
                 onTap: () {
                   Navigator.pop(context);
                   viewModel.openDocument(doc);
@@ -651,7 +651,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.info, color: Colors.blue),
-                title: Text(AppLocalizations.of(context)!.viewDetails),
+                title: Text(AppLocalizations.of(context)!.viewDetails, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
                 onTap: () {
                   Navigator.pop(context);
                   _showDocumentDetails(context, doc);
@@ -659,15 +659,15 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.edit, color: Colors.orange),
-                title: Text(AppLocalizations.of(context)!.editDocument),
+                title: Text(AppLocalizations.of(context)!.editDocument, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
                 onTap: () {
                   Navigator.pop(context);
                   _showEditDialog(context, viewModel, doc);
                 },
               ),
               ListTile(
-                leading: const Icon(Icons.delete, color: Colors.red),
-                title: Text(AppLocalizations.of(context)!.deleteDocument),
+                leading: Icon(Icons.delete, color: Theme.of(context).colorScheme.error),
+                title: Text(AppLocalizations.of(context)!.deleteDocument, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmDeleteDocument(context, viewModel, doc);
@@ -687,16 +687,17 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
     return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.deleteDocument),
-        content: Text(AppLocalizations.of(context)!.deleteDocumentConfirmation(title)),
+        backgroundColor: Theme.of(context).cardColor,
+        title: Text(AppLocalizations.of(context)!.deleteDocument, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+        content: Text(AppLocalizations.of(context)!.deleteDocumentConfirmation(title), style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(AppLocalizations.of(context)!.dialogCancel),
+            child: Text(AppLocalizations.of(context)!.dialogCancel, style: TextStyle(color: Theme.of(context).hintColor)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text(AppLocalizations.of(context)!.dialogDelete, style: const TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context)!.dialogDelete, style: TextStyle(color: Theme.of(context).colorScheme.error)),
           ),
         ],
       ),
@@ -712,12 +713,13 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.deleteDocument),
-        content: Text(AppLocalizations.of(context)!.deleteDocumentConfirmation(doc.title)),
+        backgroundColor: Theme.of(context).cardColor,
+        title: Text(AppLocalizations.of(context)!.deleteDocument, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+        content: Text(AppLocalizations.of(context)!.deleteDocumentConfirmation(doc.title), style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)!.dialogCancel),
+            child: Text(AppLocalizations.of(context)!.dialogCancel, style: TextStyle(color: Theme.of(context).hintColor)),
           ),
           TextButton(
             onPressed: () {
@@ -726,11 +728,11 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(AppLocalizations.of(context)!.documentDeletedSuccess),
-                  backgroundColor: Colors.red,
+                  backgroundColor: Theme.of(context).colorScheme.error,
                 ),
               );
             },
-            child: Text(AppLocalizations.of(context)!.dialogDelete, style: const TextStyle(color: Colors.red)),
+            child: Text(AppLocalizations.of(context)!.dialogDelete, style: TextStyle(color: Theme.of(context).colorScheme.error)),
           ),
         ],
       ),
@@ -741,16 +743,17 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.documentDetails),
+        backgroundColor: Theme.of(context).cardColor,
+        title: Text(AppLocalizations.of(context)!.documentDetails, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: Icon(doc.icon),
-                title: Text(doc.title),
-                subtitle: Text(doc.fileName),
+                leading: Icon(doc.icon, color: _getIconColor(doc.fileType)),
+                title: Text(doc.title, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+                subtitle: Text(doc.fileName, style: TextStyle(color: Theme.of(context).hintColor)),
               ),
               const Divider(),
               _buildDetailItem(AppLocalizations.of(context)!.category, _getLocalizedCategory(context, doc.category)),
@@ -767,7 +770,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(AppLocalizations.of(context)!.close),
+            child: Text(AppLocalizations.of(context)!.close, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
           ),
         ],
       ),
@@ -782,10 +785,10 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
         children: [
           Text(
             '$label: ',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.sp),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface),
           ),
           Expanded(
-            child: Text(value, style: TextStyle(fontSize: 14.sp)),
+            child: Text(value, style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onSurface)),
           ),
         ],
       ),
@@ -809,7 +812,8 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
       builder: (context) => StatefulBuilder(
         builder: (context, setState) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context)!.editDocument),
+            backgroundColor: Theme.of(context).cardColor,
+            title: Text(AppLocalizations.of(context)!.editDocument, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
             content: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -818,22 +822,31 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                     controller: titleController,
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.documentTitle,
+                      labelStyle: TextStyle(color: Theme.of(context).hintColor),
                       border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).dividerColor)),
+                      focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: AppColors.vibrantPurple)),
                     ),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   ),
                   SizedBox(height: 16.h),
                   DropdownButtonFormField<String>(
                     value: selectedCategory,
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.category,
+                      labelStyle: TextStyle(color: Theme.of(context).hintColor),
                       border: const OutlineInputBorder(),
+                      enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Theme.of(context).dividerColor)),
+                      focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: AppColors.vibrantPurple)),
                     ),
+                    dropdownColor: Theme.of(context).cardColor,
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                     items: viewModel.categories
                         .where((cat) => cat != 'All')
                         .map((category) {
                       return DropdownMenuItem(
                         value: category,
-                        child: Text(_getLocalizedCategory(context, category)),
+                        child: Text(_getLocalizedCategory(context, category), style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
                       );
                     })
                         .toList(),
@@ -849,9 +862,10 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(AppLocalizations.of(context)!.dialogCancel),
+                child: Text(AppLocalizations.of(context)!.dialogCancel, style: TextStyle(color: Theme.of(context).hintColor)),
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: AppColors.vibrantPurple),
                 onPressed: () {
                   if (titleController.text.isNotEmpty &&
                       selectedCategory != null) {
@@ -864,12 +878,12 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(AppLocalizations.of(context)!.documentUpdatedSuccess),
-                        backgroundColor: Colors.green,
+                        backgroundColor: AppColors.vibrantPurple,
                       ),
                     );
                   }
                 },
-                child: Text(AppLocalizations.of(context)!.save),
+                child: Text(AppLocalizations.of(context)!.save, style: const TextStyle(color: Colors.white)),
               ),
             ],
           );

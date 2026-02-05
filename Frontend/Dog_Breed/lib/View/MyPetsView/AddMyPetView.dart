@@ -43,12 +43,12 @@ class _AddmypetviewState extends State<Addmypetview> {
       lastDate: DateTime.now(),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: ThemeData.light().copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF),
-              onPrimary: Colors.white,
+          data: Theme.of(context).copyWith(
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: const Color(0xFF820DFF),
+              onPrimary: Theme.of(context).colorScheme.surface,
             ),
-            dialogBackgroundColor: Colors.white,
+            dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
           ),
           child: child!,
         );
@@ -154,7 +154,7 @@ class _AddmypetviewState extends State<Addmypetview> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(AppLocalizations.of(context)!.errorFillRequired),
-          backgroundColor: Colors.red,
+          backgroundColor: Theme.of(context).colorScheme.error,
           duration: const Duration(seconds: 2),
         ),
       );
@@ -181,7 +181,7 @@ class _AddmypetviewState extends State<Addmypetview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -198,11 +198,11 @@ class _AddmypetviewState extends State<Addmypetview> {
                         height: 40.305.h,
                         padding: const EdgeInsets.all(8.96),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF3F6F3),
+                          color: Theme.of(context).colorScheme.surface,
                           borderRadius: BorderRadius.circular(8.96),
                         ),
                         child: Icon(CupertinoIcons.chevron_left,
-                            size: 20.sp, color: Colors.black),
+                            size: 20.sp, color: Theme.of(context).colorScheme.onSurface),
                       ),
                     ),
                     Expanded(
@@ -213,7 +213,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                             fontFamily: 'Sora',
                             fontWeight: FontWeight.w300,
                             fontSize: 29.75.sp,
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                         ),
                       ),
@@ -226,10 +226,10 @@ class _AddmypetviewState extends State<Addmypetview> {
                     width: 159.w,
                     height: 159.h,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF3F6F3),
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(27.83),
                       border: Border.all(
-                        color: _imageBytes == null ? Colors.grey.shade300 : Colors.transparent,
+                        color: _imageBytes == null ? Theme.of(context).colorScheme.outlineVariant : Colors.transparent,
                         width: 1,
                       ),
                     ),
@@ -243,7 +243,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                     )
                         : Icon(
                       Icons.pets,
-                      color: Colors.grey.withOpacity(0.5),
+                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
                       size: 28.r,
                     ),
                   ),
@@ -258,7 +258,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 12.sp,
-                        color: const Color(0xFF6F7D86),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     if (!_isNameValid)
@@ -267,7 +267,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 12.sp,
-                          color: Colors.red,
+                          color: Theme.of(context).colorScheme.error,
                         ),
                       ),
                   ],
@@ -279,18 +279,18 @@ class _AddmypetviewState extends State<Addmypetview> {
                     controller: _nameController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: _isNameValid ? const Color(0xFFF5F5F5) : const Color(0xFFFFF0F0),
+                      fillColor: _isNameValid ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.errorContainer,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
                         borderSide: BorderSide.none,
                       ),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                       hintText: AppLocalizations.of(context)!.hintEnterPetName,
-                      hintStyle: const TextStyle(color: Colors.grey),
+                      hintStyle: TextStyle(color: Theme.of(context).hintColor),
                       errorBorder: !_isNameValid
                           ? OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12.r),
-                        borderSide: const BorderSide(color: Colors.red, width: 1),
+                        borderSide: BorderSide(color: Theme.of(context).colorScheme.error, width: 1),
                       )
                           : null,
                     ),
@@ -312,7 +312,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 12.sp,
-                        color: const Color(0xFF6F7D86),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     if (!_isBreedValid)
@@ -321,7 +321,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 12.sp,
-                          color: Colors.red,
+                          color: Theme.of(context).colorScheme.error,
                         ),
                       ),
                   ],
@@ -342,10 +342,10 @@ class _AddmypetviewState extends State<Addmypetview> {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     alignment: Alignment.centerLeft,
                     decoration: BoxDecoration(
-                      color: _isBreedValid ? const Color(0xFFF5F5F5) : const Color(0xFFFFF0F0),
+                      color: _isBreedValid ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.errorContainer,
                       borderRadius: BorderRadius.circular(12.r),
                       border: !_isBreedValid
-                          ? Border.all(color: Colors.red, width: 1)
+                          ? Border.all(color: Theme.of(context).colorScheme.error, width: 1)
                           : null,
                     ),
                     child: Text(
@@ -354,8 +354,8 @@ class _AddmypetviewState extends State<Addmypetview> {
                         fontSize: 16.sp,
                         fontFamily: 'Inter',
                         color: _breedName != null && _breedName != AppLocalizations.of(context)!.unknownBreed
-                            ? const Color(0xFF000000)
-                            : Colors.grey,
+                            ? Theme.of(context).colorScheme.onSurface
+                            : Theme.of(context).hintColor,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -372,7 +372,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 12.sp,
-                        color: const Color(0xFF6F7D86),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     if (!_isGenderValid)
@@ -381,7 +381,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 12.sp,
-                          color: Colors.red,
+                          color: Theme.of(context).colorScheme.error,
                         ),
                       ),
                   ],
@@ -394,7 +394,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                       value: _selectedGender,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: _isGenderValid ? const Color(0xFFF5F5F5) : const Color(0xFFFFF0F0),
+                        fillColor: _isGenderValid ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.errorContainer,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -404,7 +404,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                         errorBorder: !_isGenderValid
                             ? OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
-                          borderSide: const BorderSide(color: Colors.red, width: 1),
+                          borderSide: BorderSide(color: Theme.of(context).colorScheme.error, width: 1),
                         )
                             : null,
                       ),
@@ -413,7 +413,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                           value: null,
                           child: Text(
                             AppLocalizations.of(context)!.hintSelectGender,
-                            style: const TextStyle(color: Colors.grey),
+                            style:  TextStyle(color:Theme.of(context).colorScheme.onSurface),
                           ),
                         ),
                         ..._genders.map((g) => DropdownMenuItem(
@@ -427,8 +427,8 @@ class _AddmypetviewState extends State<Addmypetview> {
                           if (v != null) _isGenderValid = true;
                         });
                       },
-                      icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-                      dropdownColor: Colors.white,
+                      icon:  Icon(Icons.keyboard_arrow_down, color: Theme.of(context).colorScheme.onSurface),
+                      dropdownColor: Theme.of(context).cardColor,
                       isExpanded: true,
                       validator: (value) {
                         return value == null ? AppLocalizations.of(context)!.errorSelectGender : null;
@@ -446,7 +446,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 12.sp,
-                        color: const Color(0xFF6F7D86),
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
                     if (!_isDateValid)
@@ -455,7 +455,7 @@ class _AddmypetviewState extends State<Addmypetview> {
                         style: TextStyle(
                           fontFamily: 'Inter',
                           fontSize: 12.sp,
-                          color: Colors.red,
+                          color: Theme.of(context).colorScheme.error,
                         ),
                       ),
                   ],
@@ -467,10 +467,10 @@ class _AddmypetviewState extends State<Addmypetview> {
                     height: 58.h,
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     decoration: BoxDecoration(
-                      color: _isDateValid ? const Color(0xFFF5F5F5) : const Color(0xFFFFF0F0),
+                      color: _isDateValid ? Theme.of(context).colorScheme.surface : Theme.of(context).colorScheme.errorContainer,
                       borderRadius: BorderRadius.circular(12.r),
                       border: !_isDateValid
-                          ? Border.all(color: Colors.red, width: 1)
+                          ? Border.all(color: Theme.of(context).colorScheme.error, width: 1)
                           : null,
                     ),
                     child: Row(
@@ -481,13 +481,13 @@ class _AddmypetviewState extends State<Addmypetview> {
                               ? "${_selectedDate!.day.toString().padLeft(2, '0')}/${_selectedDate!.month.toString().padLeft(2, '0')}/${_selectedDate!.year}"
                               : "DD/MM/YYYY",
                           style: TextStyle(
-                            color: _selectedDate != null ? Colors.black87 : Colors.grey,
+                            color: _selectedDate != null ? Theme.of(context).colorScheme.onSurface : Theme.of(context).colorScheme.onSurface,
                             fontSize: 16.sp,
                           ),
                         ),
                         Icon(
                           Icons.calendar_today,
-                          color: _selectedDate != null ? const Color(0xFF820DFF) : Colors.grey,
+                          color: _selectedDate != null ? const Color(0xFF820DFF) : Theme.of(context).hintColor,
                           size: 20,
                         ),
                       ],
@@ -502,19 +502,19 @@ class _AddmypetviewState extends State<Addmypetview> {
                   Container(
                     padding: EdgeInsets.all(12.w),
                     decoration: BoxDecoration(
-                      color: Colors.red.shade50,
+                      color: Theme.of(context).colorScheme.errorContainer,
                       borderRadius: BorderRadius.circular(12.r),
-                      border: Border.all(color: Colors.red.shade100, width: 1),
+                      border: Border.all(color: Theme.of(context).colorScheme.error, width: 1),
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.error_outline, color: Colors.red, size: 16.sp),
+                        Icon(Icons.error_outline, color: Theme.of(context).colorScheme.error, size: 16.sp),
                         SizedBox(width: 8.w),
                         Expanded(
                           child: Text(
                             AppLocalizations.of(context)!.errorFillRequired,
                             style: TextStyle(
-                              color: Colors.red,
+                              color: Theme.of(context).colorScheme.error,
                               fontSize: 12.sp,
                             ),
                           ),

@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale":  "pl",
     "appTitle":  "Rasa psa",
     "settingsTitle":  "Ustawienia",
@@ -862,5 +862,21 @@
     "shareDefault":  "📱 Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Usuń wszystko",
-    "deleteAllPetsConfirmation":  "Czy na pewno chcesz usunąć wszystkie zwierzęta? Tej czynności nie można cofnąć."
+    "deleteAllPetsConfirmation":  "Czy na pewno chcesz usunąć wszystkie zwierzęta? Tej czynności nie można cofnąć.",
+    "errorPleaseEnterAmountFor":  "Please enter amount for {activityName}",
+    "@errorPleaseEnterAmountFor":  {
+                                       "placeholders":  {
+                                                            "activityName":  {
+                                                                                 "type":  "String"
+                                                                             }
+                                                        }
+                                   },
+    "errorNameOrTypeRequiredFor":  "Name or Type required for {activityName}",
+    "@errorNameOrTypeRequiredFor":  {
+                                        "placeholders":  {
+                                                             "activityName":  {
+                                                                                  "type":  "String"
+                                                                              }
+                                                         }
+                                    }
 }

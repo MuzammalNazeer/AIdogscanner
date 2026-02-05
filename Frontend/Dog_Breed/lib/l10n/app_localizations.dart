@@ -3025,7 +3025,7 @@ abstract class AppLocalizations {
   /// No description provided for @vetContactsDescription.
   ///
   /// In en, this message translates to:
-  /// **'Contacts of the vet, co-owner, and caretaker in \n case the main phone isn\'t available'**
+  /// **'Contacts of the vet, co-owner, and caretaker  \n case the main phone isn\'t available'**
   String get vetContactsDescription;
 
   /// No description provided for @messenger.
@@ -4341,6 +4341,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete all pets? This action cannot be undone.'**
   String get deleteAllPetsConfirmation;
+
+  /// No description provided for @dialogUploadPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Photo'**
+  String get dialogUploadPhoto;
+
+  /// No description provided for @dialogUploadVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Video'**
+  String get dialogUploadVideo;
+
+  /// No description provided for @pickerOpenCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Camera'**
+  String get pickerOpenCamera;
+
+  /// No description provided for @pickerUploadGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload from Gallery'**
+  String get pickerUploadGallery;
+
+  /// No description provided for @errorPleaseEnterAmountFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter amount for {activityName}'**
+  String errorPleaseEnterAmountFor(String activityName);
+
+  /// No description provided for @errorNameOrTypeRequiredFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Name or Type required for {activityName}'**
+  String errorNameOrTypeRequiredFor(String activityName);
 }
 
 class _AppLocalizationsDelegate

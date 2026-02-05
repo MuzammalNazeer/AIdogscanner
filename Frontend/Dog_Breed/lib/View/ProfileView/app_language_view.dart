@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:dog_breed/Valid/AppColors.dart';
 
 import '../../View_model/locale_notifier.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
+import '../../config/components/CommonApp.dart';
 
 class AppLanguageView extends StatefulWidget {
   const AppLanguageView({super.key});
@@ -40,44 +42,16 @@ class _AppLanguageViewState extends State<AppLanguageView> {
     final currentCode = _selectedLanguageCode ?? localeNotifier.locale.languageCode;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: CommonApp(
+        title: AppLocalizations.of(context)!.appLanguageTitle,
+      ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Container(
-                    width: 41.w,
-                    height: 41.h,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF686868).withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios_new, size: 20, color: Colors.black),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text(
-                        AppLocalizations.of(context)!.appLanguageTitle,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 41.w),
-                ],
-              ),
               // SizedBox(height: 20.h),
               // Container(
               //   width: double.infinity,
@@ -117,12 +91,12 @@ class _AppLanguageViewState extends State<AppLanguageView> {
               Expanded(
                 child: ListView.separated(
                   itemCount: _languages.length,
-                  separatorBuilder: (_, __) => const Divider(
+                  separatorBuilder: (_, __) => Divider(
                     height: 1,
                     thickness: 0.4,
                     indent: 0,
                     endIndent: 0,
-                    color: Color(0xFFD5D5D5),
+                    color: Theme.of(context).dividerColor,
                   ),
                   itemBuilder: (context, index) {
                     final entry = _languages.entries.elementAt(index);
@@ -147,7 +121,7 @@ class _AppLanguageViewState extends State<AppLanguageView> {
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black,
+                                  color: Theme.of(context).colorScheme.onSurface,
                                 ),
                               ),
                             ),
@@ -157,7 +131,7 @@ class _AppLanguageViewState extends State<AppLanguageView> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: const Color(0xFF8A2BE2),
+                                  color: AppColors.vibrantPurple,
                                   width: 2,
                                 ),
                               ),
@@ -168,7 +142,7 @@ class _AppLanguageViewState extends State<AppLanguageView> {
                                         height: 10.w,
                                         decoration: const BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: Color(0xFF8A2BE2),
+                                          color: AppColors.vibrantPurple,
                                         ),
                                       ),
                                     )

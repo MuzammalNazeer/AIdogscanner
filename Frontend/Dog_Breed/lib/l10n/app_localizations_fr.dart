@@ -2227,4 +2227,26 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get deleteAllPetsConfirmation =>
       'Êtes-vous sûr de vouloir supprimer tous les animaux ? Cette action est irréversible.';
+
+  @override
+  String get dialogUploadPhoto => 'Upload Photo';
+
+  @override
+  String get dialogUploadVideo => 'Upload Video';
+
+  @override
+  String get pickerOpenCamera => 'Open Camera';
+
+  @override
+  String get pickerUploadGallery => 'Upload from Gallery';
+
+  @override
+  String errorPleaseEnterAmountFor(String activityName) {
+    return 'Please enter amount for $activityName';
+  }
+
+  @override
+  String errorNameOrTypeRequiredFor(String activityName) {
+    return 'Name or Type required for $activityName';
+  }
 }

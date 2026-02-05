@@ -164,24 +164,32 @@ class OnboardingPage1 extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(16.r),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: 60.h),
-              Text(
-                AppLocalizations.of(context)!.onboardingTitle1,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Center(
+                child: Text(
+                  AppLocalizations.of(context)!.onboardingTitle1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 26.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                    fontFamily: "Sora"
+                  ),
                 ),
               ),
               SizedBox(height: 12.h),
-              Text(
-                AppLocalizations.of(context)!.onboardingDesc1,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.white,
+              Center(
+                child: Text(
+                  AppLocalizations.of(context)!.onboardingDesc1,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                      fontFamily: "Inter"
+                  ),
                 ),
               ),
               SizedBox(height: 40.h),
@@ -471,7 +479,7 @@ class OnboardingPage4 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 213.h,
+                  height: 220.h,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

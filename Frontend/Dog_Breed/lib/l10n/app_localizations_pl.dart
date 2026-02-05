@@ -2217,4 +2217,26 @@ class AppLocalizationsPl extends AppLocalizations {
   @override
   String get deleteAllPetsConfirmation =>
       'Czy na pewno chcesz usunąć wszystkie zwierzęta? Tej czynności nie można cofnąć.';
+
+  @override
+  String get dialogUploadPhoto => 'Upload Photo';
+
+  @override
+  String get dialogUploadVideo => 'Upload Video';
+
+  @override
+  String get pickerOpenCamera => 'Open Camera';
+
+  @override
+  String get pickerUploadGallery => 'Upload from Gallery';
+
+  @override
+  String errorPleaseEnterAmountFor(String activityName) {
+    return 'Please enter amount for $activityName';
+  }
+
+  @override
+  String errorNameOrTypeRequiredFor(String activityName) {
+    return 'Name or Type required for $activityName';
+  }
 }

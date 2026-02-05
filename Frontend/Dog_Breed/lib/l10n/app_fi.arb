@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale":  "fi",
     "appTitle":  "Koirarotu",
     "settingsTitle":  "Asetukset",
@@ -862,5 +862,21 @@
     "shareDefault":  "📱 Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Poista kaikki",
-    "deleteAllPetsConfirmation":  "Oletko varma, että haluat poistaa kaikki lemmikit? Tätä toimintoa ei voi kumota."
+    "deleteAllPetsConfirmation":  "Oletko varma, että haluat poistaa kaikki lemmikit? Tätä toimintoa ei voi kumota.",
+    "errorPleaseEnterAmountFor":  "Please enter amount for {activityName}",
+    "@errorPleaseEnterAmountFor":  {
+                                       "placeholders":  {
+                                                            "activityName":  {
+                                                                                 "type":  "String"
+                                                                             }
+                                                        }
+                                   },
+    "errorNameOrTypeRequiredFor":  "Name or Type required for {activityName}",
+    "@errorNameOrTypeRequiredFor":  {
+                                        "placeholders":  {
+                                                             "activityName":  {
+                                                                                  "type":  "String"
+                                                                              }
+                                                         }
+                                    }
 }

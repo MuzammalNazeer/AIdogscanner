@@ -1,4 +1,4 @@
-{
+﻿{
     "@@locale":  "nl",
     "appTitle":  "Hondenras",
     "settingsTitle":  "Instellingen",
@@ -834,5 +834,21 @@
     "shareDefault":  "📱 Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Alles verwijderen",
-    "deleteAllPetsConfirmation":  "Weet je zeker dat je alle huisdieren wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
+    "deleteAllPetsConfirmation":  "Weet je zeker dat je alle huisdieren wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
+    "errorPleaseEnterAmountFor":  "Please enter amount for {activityName}",
+    "@errorPleaseEnterAmountFor":  {
+                                       "placeholders":  {
+                                                            "activityName":  {
+                                                                                 "type":  "String"
+                                                                             }
+                                                        }
+                                   },
+    "errorNameOrTypeRequiredFor":  "Name or Type required for {activityName}",
+    "@errorNameOrTypeRequiredFor":  {
+                                        "placeholders":  {
+                                                             "activityName":  {
+                                                                                  "type":  "String"
+                                                                              }
+                                                         }
+                                    }
 }

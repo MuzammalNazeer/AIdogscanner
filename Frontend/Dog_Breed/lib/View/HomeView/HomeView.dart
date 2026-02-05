@@ -29,7 +29,8 @@ class _HomeviewState extends State<Homeview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(vertical: 12.h,horizontal: 24.w),
@@ -68,7 +69,7 @@ class _HomeviewState extends State<Homeview> {
     return Container(
       height: 52.h,
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: Theme.of(context).colorScheme.background,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
@@ -77,14 +78,14 @@ class _HomeviewState extends State<Homeview> {
           SizedBox(
             width: 22.w,
             height: 22.h,
-            child: const Icon(Icons.search, color: Color(0x99000000)),
+            child:  Icon(Icons.search, color: Theme.of(context).colorScheme.onSurface),
           ),
           SizedBox(width: 8.w),
           Expanded(
             child: Text(
               AppLocalizations.of(context)!.searchForDog,
               style: TextStyle(
-                color: const Color(0x99000000),
+                color: Theme.of(context).colorScheme.onSurface,
                 fontFamily: 'Sora',
                 fontWeight: FontWeight.w200,
                 fontSize: 14.sp,
@@ -132,9 +133,9 @@ class _HomeviewState extends State<Homeview> {
           Text(
             label,
             style: TextStyle(
-              fontSize: 14.sp,
+              fontSize: 13.sp,
               // fontWeight: FontWeight.bold,
-              color: const Color(0xFF371B34),
+              color: Theme.of(context).colorScheme.onSurface,
             ),
           ),
         ],
@@ -172,7 +173,7 @@ class _HomeviewState extends State<Homeview> {
                             fontSize: 30.sp,
                             height: 1.0,
                             letterSpacing: 0.0,
-                            color: AppColors.jet,
+                            color:Theme.of(context).colorScheme.onSurface,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -187,7 +188,7 @@ class _HomeviewState extends State<Homeview> {
                         fontSize: 22.sp,
                         height: 1.0,
                         letterSpacing: 0.0,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       children: [
                         TextSpan(
@@ -218,7 +219,7 @@ class _HomeviewState extends State<Homeview> {
                       'assets/images/Group88.png',
                       width: 92.w,
                       height: 92.h,
-                      color: const Color(0xFFF3F6F3),
+                      color: Theme.of(context).colorScheme.surfaceContainerLow,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -297,17 +298,14 @@ class _HomeviewState extends State<Homeview> {
     );
   }
 
-  // Helper method
   Future<void> _goToActivity(String activityName) async {
     final petProvider = Provider.of<PetProvider>(context, listen: false);
     String? petId;
 
     if (petProvider.hasPets) {
-      // Try to get saved pet ID
       final prefs = await SharedPreferences.getInstance();
       petId = prefs.getString('selectedPetId');
 
-      // If invalid or not found, use first pet
       if (petId == null || !petProvider.pets.any((p) => p.id == petId)) {
         petId = petProvider.pets.first.id;
       }
@@ -315,17 +313,72 @@ class _HomeviewState extends State<Homeview> {
 
     if (!mounted) return;
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddActivitiesView(
-          initialActivityName: activityName,
-          initialDate: DateTime.now(),
-          selectedPetId: petId,
-        ),
-      ),
+    final bottomSheetController = showBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.8,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: AddActivitiesView(
+                  initialActivityName: activityName,
+                  initialDate: DateTime.now(),
+                  selectedPetId: petId,
+                ),
+              ),
+              Positioned(
+                top: 4,
+                right: 16,
+                child: IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
+
+  // Helper method
+  // Future<void> _goToActivity(String activityName) async {
+  //   final petProvider = Provider.of<PetProvider>(context, listen: false);
+  //   String? petId;
+  //
+  //   if (petProvider.hasPets) {
+  //     // Try to get saved pet ID
+  //     final prefs = await SharedPreferences.getInstance();
+  //     petId = prefs.getString('selectedPetId');
+  //
+  //     // If invalid or not found, use first pet
+  //     if (petId == null || !petProvider.pets.any((p) => p.id == petId)) {
+  //       petId = petProvider.pets.first.id;
+  //     }
+  //   }
+  //
+  //   if (!mounted) return;
+  //
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => AddActivitiesView(
+  //         initialActivityName: activityName,
+  //         initialDate: DateTime.now(),
+  //         selectedPetId: petId,
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget _buildIdentifyDogCard1(
 

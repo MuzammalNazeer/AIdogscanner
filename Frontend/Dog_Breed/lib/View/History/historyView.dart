@@ -54,8 +54,23 @@ class _HistoryviewState extends State<Historyview> {
       child: Stack(
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  width: 40.w,
+                  height: 40.h,
+                  decoration:  BoxDecoration(
+                    color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFF686868).withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 60,),
               Text(
                 'History',
                 style: TextStyle(

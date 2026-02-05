@@ -65,7 +65,7 @@ class _AddreminderState extends State<Addreminder> {
     }).toList();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SafeArea(
@@ -74,8 +74,8 @@ class _AddreminderState extends State<Addreminder> {
               Center(
                 child: Text(
                   AppLocalizations.of(context)!.reminderAddTitle,
-                  style: const TextStyle(
-                    color: Color(0xFF000000),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontSize: 20,
                     fontWeight: FontWeight.w300,
                   ),
@@ -185,7 +185,7 @@ class _ActivityCard extends StatelessWidget {
             color: activity.color,
             borderRadius: BorderRadius.circular(10.r),
             border: isSelected
-                ? Border.all(color: Colors.red, width: 3.w)
+                ? Border.all(color: Theme.of(context).colorScheme.primary, width: 3.w)
                 : null,
           ),
           child: Center(
@@ -210,7 +210,7 @@ class _ActivityCard extends StatelessWidget {
           style: TextStyle(
             fontSize: 10.sp,
             fontWeight: FontWeight.bold,
-            color: isSelected ? const Color(0xFF820DFF) : Colors.black87,
+            color: isSelected ? const Color(0xFF820DFF) : Theme.of(context).colorScheme.onSurface,
           ),
           textAlign: TextAlign.center,
           maxLines: 1,

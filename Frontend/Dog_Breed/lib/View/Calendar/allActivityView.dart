@@ -47,7 +47,7 @@ class _AllactivityviewState extends State<Allactivityview> {
 
   Activity? _currentActivity;
   DateTime _walkStartDate = DateTime.now();
-  TimeOfDay _walkStartTime = TimeOfDay.now();
+  final TimeOfDay _walkStartTime = TimeOfDay.now();
   DateTime _walkEndDate = DateTime.now();
   TimeOfDay _walkEndTime = TimeOfDay.now();
 
@@ -147,15 +147,25 @@ class _AllactivityviewState extends State<Allactivityview> {
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF),
-              onPrimary: Colors.white,
-              onSurface: Colors.black,
+            timePickerTheme: TimePickerThemeData(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              dialHandColor: AppColors.vibrantPurple,
+              dialBackgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey[800]
+                  : Colors.grey[200],
+              hourMinuteTextColor: Theme.of(context).colorScheme.onSurface,
+              dayPeriodTextColor: Theme.of(context).colorScheme.onSurface,
+              entryModeIconColor: Theme.of(context).colorScheme.onSurface,
             ),
-            dialogBackgroundColor: Colors.white,
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: AppColors.vibrantPurple,
+              onPrimary: Colors.white,
+              surface: Theme.of(context).scaffoldBackgroundColor,
+              onSurface: Theme.of(context).colorScheme.onSurface,
+            ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: const Color(0xFF820DFF),
+                foregroundColor: AppColors.vibrantPurple,
               ),
             ),
           ),
@@ -181,27 +191,72 @@ class _AllactivityviewState extends State<Allactivityview> {
       setState(() => _selectedDate = picked);
     }
   }
-
-  // Activity time selection
   Future<void> _selectTime() async {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: _selectedTime,
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
+            timePickerTheme: TimePickerThemeData(
+              backgroundColor:
+              isDark ? const Color(0xFF1E1E1E) : Colors.white,
+
+              // Dial
+              dialBackgroundColor:
+              isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF2F2F2),
+              dialHandColor: AppColors.vibrantPurple,
+              dialTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? Colors.white
+                    : (isDark ? Colors.white70 : Colors.black87),
+              ),
+
+              // Hour / Minute
+              hourMinuteTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple
+                    : (isDark ? Colors.white : Colors.black),
+              ),
+              hourMinuteColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple.withOpacity(0.15)
+                    : Colors.transparent,
+              ),
+
+              // AM / PM
+              dayPeriodTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? Colors.white
+                    : (isDark ? Colors.white70 : Colors.black87),
+              ),
+              dayPeriodColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple
+                    : (isDark ? Colors.grey.shade800 : Colors.grey.shade200),
+              ),
+
+              entryModeIconColor:
+              isDark ? Colors.white70 : Colors.black87,
+            ),
+
+            colorScheme: Theme.of(context).colorScheme.copyWith(
               primary: AppColors.vibrantPurple,
               onPrimary: Colors.white,
-              surface: Colors.white,
-              onSurface: Colors.black,
-              secondary: AppColors.vibrantPurple,
-              onSecondary: Colors.white,
+              surface:
+              isDark ? const Color(0xFF1E1E1E) : Colors.white,
+              onSurface:
+              isDark ? Colors.white : Colors.black,
             ),
-            dialogBackgroundColor: Colors.white,
+
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: const Color(0xFF820DFF),
+                foregroundColor: AppColors.vibrantPurple,
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
@@ -209,13 +264,80 @@ class _AllactivityviewState extends State<Allactivityview> {
         );
       },
     );
+
     if (picked != null && picked != _selectedTime) {
       setState(() => _selectedTime = picked);
     }
   }
 
+  // // Activity time selection
+  // Future<void> _selectTime() async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: _selectedTime,
+  //     builder: (context, child) {
+  //       return Theme(
+  //         data: Theme.of(context).copyWith(
+  //           timePickerTheme: TimePickerThemeData(
+  //             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+  //             dialHandColor: AppColors.vibrantPurple,
+  //             dialBackgroundColor: Theme.of(context).brightness == Brightness.dark
+  //                 ? Colors.grey[800]
+  //                 : Colors.grey[200],
+  //             hourMinuteTextColor: Theme.of(context).colorScheme.onSurface,
+  //             dayPeriodTextColor: Theme.of(context).colorScheme.onSurface,
+  //             entryModeIconColor: Theme.of(context).colorScheme.onSurface,
+  //           ),
+  //           colorScheme: Theme.of(context).colorScheme.copyWith(
+  //             primary: AppColors.vibrantPurple,
+  //             onPrimary: Colors.white,
+  //             surface: Theme.of(context).scaffoldBackgroundColor,
+  //             onSurface: Theme.of(context).colorScheme.onSurface,
+  //             secondary: AppColors.vibrantPurple,
+  //             onSecondary: Colors.white,
+  //           ),
+  //           textButtonTheme: TextButtonThemeData(
+  //             style: TextButton.styleFrom(
+  //               foregroundColor: AppColors.vibrantPurple,
+  //             ),
+  //           ),
+  //         ),
+  //         child: child!,
+  //       );
+  //     },
+  //   );
+  //   if (picked != null && picked != _selectedTime) {
+  //     setState(() => _selectedTime = picked);
+  //   }
+  // }
+
   // Walk specific date/time methods
+  // Future<void> _selectWalkStartDate() async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: _walkStartDate,
+  //     firstDate: DateTime(2020),
+  //     lastDate: DateTime(2030),
+  //     builder: (context, child) => Theme(
+  //       data: Theme.of(context).copyWith(
+  //         colorScheme: Theme.of(context).colorScheme.copyWith(
+  //             primary: const Color(0xFF820DFF),
+  //             onPrimary: Colors.white,
+  //             surface: Theme.of(context).scaffoldBackgroundColor,
+  //             onSurface: Theme.of(context).colorScheme.onSurface,
+  //         ),
+  //         dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+  //       ),
+  //       child: child!,
+  //     ),
+  //   );
+  //   if (picked != null) setState(() => _walkStartDate = picked);
+  // }
   Future<void> _selectWalkStartDate() async {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color surfaceColor = isDark ? Colors.grey.shade900 : Colors.white;
+    final Color onSurfaceColor = isDark ? Colors.white : Colors.black;
+
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _walkStartDate,
@@ -223,41 +345,202 @@ class _AllactivityviewState extends State<Allactivityview> {
       lastDate: DateTime(2030),
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF)
-
+          colorScheme: ColorScheme.light(
+            primary: const Color(0xFF820DFF),
+            onPrimary: Colors.white,
+            surface: surfaceColor,
+            onSurface: onSurfaceColor,
+            background: surfaceColor,
           ),
+          dialogBackgroundColor: surfaceColor,
         ),
         child: child!,
       ),
     );
     if (picked != null) setState(() => _walkStartDate = picked);
   }
-
   Future<void> _selectWalkStartTime() async {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     final TimeOfDay? picked = await showTimePicker(
       context: context,
-      initialTime: _walkStartTime,
-      builder: (context, child) => Theme(
-        data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(
+      initialTime: _walkEndTime,
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            timePickerTheme: TimePickerThemeData(
+              backgroundColor:
+              isDark ? const Color(0xFF1E1E1E) : Colors.white,
 
-            primary: AppColors.vibrantPurple,
-            onPrimary: Colors.white,
-            surface: Colors.white,
-            onSurface: Colors.black,
-            secondary: AppColors.vibrantPurple,
-            onSecondary: Colors.white,
+              dialBackgroundColor:
+              isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF2F2F2),
 
+              dialHandColor: AppColors.vibrantPurple,
+
+              dialTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? Colors.white
+                    : (isDark ? Colors.white70 : Colors.black87),
+              ),
+
+              hourMinuteTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple
+                    : (isDark ? Colors.white : Colors.black),
+              ),
+
+              hourMinuteColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple.withOpacity(0.15)
+                    : Colors.transparent,
+              ),
+
+              dayPeriodColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple
+                    : (isDark
+                    ? Colors.grey.shade800
+                    : Colors.grey.shade200),
+              ),
+
+              dayPeriodTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? Colors.white
+                    : (isDark ? Colors.white70 : Colors.black),
+              ),
+
+              entryModeIconColor:
+              isDark ? Colors.white70 : Colors.black87,
+            ),
+
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: AppColors.vibrantPurple,
+              onPrimary: Colors.white,
+              surface:
+              isDark ? const Color(0xFF1E1E1E) : Colors.white,
+              onSurface:
+              isDark ? Colors.white : Colors.black,
+            ),
+
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.vibrantPurple,
+                textStyle: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
           ),
-        ),
-        child: child!,
-      ),
+          child: child!,
+        );
+      },
     );
-    if (picked != null) setState(() => _walkStartTime = picked);
+
+    if (picked != null) {
+      setState(() => _walkEndTime = picked);
+    }
   }
 
+  // Future<void> _selectWalkStartTime() async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: _walkStartTime,
+  //     builder: (context, child) => Theme(
+  //       data: Theme.of(context).copyWith(
+  //         timePickerTheme: TimePickerThemeData(
+  //           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+  //           dialHandColor: AppColors.vibrantPurple,
+  //           dialBackgroundColor: Theme.of(context).brightness == Brightness.dark
+  //               ? Colors.grey[800]
+  //               : Colors.grey[200],
+  //           hourMinuteTextColor: Theme.of(context).colorScheme.onSurface,
+  //           dayPeriodTextColor: Theme.of(context).colorScheme.onSurface,
+  //           entryModeIconColor: Theme.of(context).colorScheme.onSurface,
+  //         ),
+  //         colorScheme: Theme.of(context).colorScheme.copyWith(
+  //           primary: AppColors.vibrantPurple,
+  //           onPrimary: Colors.white,
+  //           surface: Theme.of(context).scaffoldBackgroundColor,
+  //           onSurface: Theme.of(context).colorScheme.onSurface,
+  //           secondary: AppColors.vibrantPurple,
+  //           onSecondary: Colors.white,
+  //         ),
+  //         textButtonTheme: TextButtonThemeData(
+  //           style: TextButton.styleFrom(
+  //             foregroundColor: AppColors.vibrantPurple,
+  //           ),
+  //         ),
+  //       ),
+  //       child: child!,
+  //     ),
+  //   );
+  //   if (picked != null) setState(() => _walkStartTime = picked);
+  // }
+
+
+
+
+  // Future<void> _selectWalkEndDate() async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: _walkEndDate,
+  //     firstDate: DateTime(2020),
+  //     lastDate: DateTime(2030),
+  //     builder: (context, child) => Theme(
+  //       data: Theme.of(context).copyWith(
+  //         colorScheme: Theme.of(context).colorScheme.copyWith(
+  //             primary: const Color(0xFF820DFF),
+  //             onPrimary: Colors.white,
+  //             surface: Theme.of(context).scaffoldBackgroundColor,
+  //             onSurface: Theme.of(context).colorScheme.onSurface,
+  //         ),
+  //         dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+  //       ),
+  //       child: child!,
+  //     ),
+  //   );
+  //   if (picked != null) setState(() => _walkEndDate = picked);
+  // }
+
+
+
+  // Future<void> _selectWalkEndTime() async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: _walkEndTime,
+  //     builder: (context, child) => Theme(
+  //       data: Theme.of(context).copyWith(
+  //         timePickerTheme: TimePickerThemeData(
+  //           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+  //           dialHandColor: AppColors.vibrantPurple,
+  //           dialBackgroundColor: Theme.of(context).brightness == Brightness.dark
+  //               ? Colors.grey[800]
+  //               : Colors.grey[200],
+  //           hourMinuteTextColor: Theme.of(context).colorScheme.onSurface,
+  //           dayPeriodTextColor: Theme.of(context).colorScheme.onSurface,
+  //           entryModeIconColor: Theme.of(context).colorScheme.onSurface,
+  //         ),
+  //         colorScheme: Theme.of(context).colorScheme.copyWith(
+  //           primary: AppColors.vibrantPurple,
+  //           onPrimary: Colors.white,
+  //           surface: Theme.of(context).scaffoldBackgroundColor,
+  //           onSurface: Theme.of(context).colorScheme.onSurface,
+  //           secondary: AppColors.vibrantPurple,
+  //           onSecondary: Colors.white,
+  //         ),
+  //         textButtonTheme: TextButtonThemeData(
+  //           style: TextButton.styleFrom(
+  //             foregroundColor: AppColors.vibrantPurple,
+  //           ),
+  //         ),
+  //       ),
+  //       child: child!,
+  //     ),
+  //   );
+  //   if (picked != null) setState(() => _walkEndTime = picked);
+  // }
+
   Future<void> _selectWalkEndDate() async {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _walkEndDate,
@@ -265,7 +548,14 @@ class _AllactivityviewState extends State<Allactivityview> {
       lastDate: DateTime(2030),
       builder: (context, child) => Theme(
         data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(primary: Color(0xFF820DFF)),
+          colorScheme: ColorScheme.light(
+            primary: const Color(0xFF820DFF),
+            onPrimary: Colors.white,
+            surface: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+            onSurface: isDark ? Colors.white : Colors.black,
+            background: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+          ),
+          dialogBackgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
         ),
         child: child!,
       ),
@@ -274,26 +564,85 @@ class _AllactivityviewState extends State<Allactivityview> {
   }
 
   Future<void> _selectWalkEndTime() async {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: _walkEndTime,
-      builder: (context, child) => Theme(
-        data: Theme.of(context).copyWith(
-          colorScheme: const ColorScheme.light(
-            primary: AppColors.vibrantPurple,
-            onPrimary: Colors.white,
-            surface: Colors.white,
-            onSurface: Colors.black,
-            secondary: AppColors.vibrantPurple,
-            onSecondary: Colors.white,
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            timePickerTheme: TimePickerThemeData(
+              backgroundColor:
+              isDark ? const Color(0xFF1E1E1E) : Colors.white,
 
+              dialBackgroundColor:
+              isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF2F2F2),
+
+              dialHandColor: AppColors.vibrantPurple,
+
+              dialTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? Colors.white
+                    : (isDark ? Colors.white70 : Colors.black87),
+              ),
+
+              hourMinuteTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple
+                    : (isDark ? Colors.white : Colors.black),
+              ),
+
+              hourMinuteColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple.withOpacity(0.15)
+                    : Colors.transparent,
+              ),
+
+              dayPeriodColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? AppColors.vibrantPurple
+                    : (isDark
+                    ? Colors.grey.shade800
+                    : Colors.grey.shade200),
+              ),
+
+              dayPeriodTextColor: MaterialStateColor.resolveWith(
+                    (states) => states.contains(MaterialState.selected)
+                    ? Colors.white
+                    : (isDark ? Colors.white70 : Colors.black),
+              ),
+
+              entryModeIconColor:
+              isDark ? Colors.white70 : Colors.black87,
+            ),
+
+            colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: AppColors.vibrantPurple,
+              onPrimary: Colors.white,
+              surface:
+              isDark ? const Color(0xFF1E1E1E) : Colors.white,
+              onSurface:
+              isDark ? Colors.white : Colors.black,
+            ),
+
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.vibrantPurple,
+                textStyle: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
           ),
-        ),
-        child: child!,
-      ),
+          child: child!,
+        );
+      },
     );
-    if (picked != null) setState(() => _walkEndTime = picked);
+
+    if (picked != null) {
+      setState(() => _walkEndTime = picked);
+    }
   }
+
 
   Future<void> _pickImage(ImageSource source) async {
     try {
@@ -320,31 +669,70 @@ class _AllactivityviewState extends State<Allactivityview> {
   void _showImageSourceDialog() {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
       builder: (context) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.camera_alt, color: Color(0xFF820DFF)),
-                title: Text(AppLocalizations.of(context)!.pickerTakePhoto),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickImage(ImageSource.camera);
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.photo_library,
-                  color: Color(0xFF820DFF),
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 24.h),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.dialogUploadPhoto,
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
-                title: Text(AppLocalizations.of(context)!.pickerGallery),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickImage(ImageSource.gallery);
-                },
-              ),
-            ],
+                SizedBox(height: 24.h),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.gallery);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.pickerUploadGallery,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF007AFF),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.camera);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.pickerOpenCamera,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF007AFF),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8.h),
+              ],
+            ),
           ),
         );
       },
@@ -354,31 +742,70 @@ class _AllactivityviewState extends State<Allactivityview> {
   void _showVideoSourceDialog() {
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
       builder: (context) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.videocam, color: Color(0xFF820DFF)),
-                title: Text(AppLocalizations.of(context)!.pickerRecordVideo),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickVideo(ImageSource.camera);
-                },
-              ),
-              ListTile(
-                leading: const Icon(
-                  Icons.video_library,
-                  color: Color(0xFF820DFF),
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 24.h),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.dialogUploadVideo,
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
                 ),
-                title: Text(AppLocalizations.of(context)!.pickerGallery),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickVideo(ImageSource.gallery);
-                },
-              ),
-            ],
+                SizedBox(height: 24.h),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickVideo(ImageSource.gallery);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.pickerUploadGallery,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF007AFF),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickVideo(ImageSource.camera);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.pickerOpenCamera,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF007AFF),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8.h),
+              ],
+            ),
           ),
         );
       },
@@ -402,7 +829,8 @@ class _AllactivityviewState extends State<Allactivityview> {
         _reminderTime!.minute,
       );
 
-      if (reminderDateTime.isBefore(DateTime.now())) {
+      // Allow reminders within the last 5 minutes to match ReminderNotifier's grace period
+      if (reminderDateTime.isBefore(DateTime.now().subtract(const Duration(minutes: 5)))) {
         _showErrorSnackBar(AppLocalizations.of(context)!.errorReminderFuture);
         return;
       }
@@ -412,9 +840,14 @@ class _AllactivityviewState extends State<Allactivityview> {
     final String activityName = _currentActivity!.name.toLowerCase();
 
     if (activityName == 'drink') {
+      if (_drinkQuantityOz <= 0) {
+        String localizedName = _getLocalizedActivityName(context, _currentActivity!.name);
+        _showErrorSnackBar('Please enter amount for $localizedName');
+        return;
+      }
       if (_foodController.text.trim().isEmpty) {
         String localizedName = _getLocalizedActivityName(context, _currentActivity!.name);
-        _showErrorSnackBar('$localizedName ${AppLocalizations.of(context)!.errorRequired}');
+        _showErrorSnackBar('Name or Type required for $localizedName');
         return;
       }
       const double ozToMl = 29.5735;
@@ -463,10 +896,7 @@ class _AllactivityviewState extends State<Allactivityview> {
 
       if (requiredNameActivities.contains(activityName)) {
         if (_foodController.text.trim().isEmpty) {
-          String errorMessage = '${_getLocalizedActivityName(context, _currentActivity!.name)} ${AppLocalizations.of(context)!.errorRequired}';
-          if (activityName == 'eat') {
-            errorMessage = AppLocalizations.of(context)!.errorEnterFood;
-          }
+          String errorMessage = 'Name or Type required for ${_getLocalizedActivityName(context, _currentActivity!.name)}';
           _showErrorSnackBar(errorMessage);
           // _showFoodNameBottomSheet();
           return;
@@ -559,15 +989,15 @@ class _AllactivityviewState extends State<Allactivityview> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-            _hasReminder 
-              ? AppLocalizations.of(context)!.successActivitySavedReminder
-              : AppLocalizations.of(context)!.successActivitySaved,
-          ),
-          backgroundColor: Colors.green,
-          behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        content: Text(
+          _hasReminder 
+            ? AppLocalizations.of(context)!.successActivitySavedReminder
+            : AppLocalizations.of(context)!.successActivitySaved,
         ),
+        backgroundColor: AppColors.grayColor,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
       );
       final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
       homeViewModel.selectedIndex = 1; // Index for Calendar
@@ -584,7 +1014,7 @@ class _AllactivityviewState extends State<Allactivityview> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.red,
+        backgroundColor: Theme.of(context).colorScheme.error,
         behavior: SnackBarBehavior.floating,
       ),
     );
@@ -600,7 +1030,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Theme.of(context).shadowColor.withOpacity(0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -623,14 +1053,14 @@ class _AllactivityviewState extends State<Allactivityview> {
     return Container(
       width: 70.w,
       height: 70.h,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: CupertinoColors.systemGrey4,
+        color: Theme.of(context).scaffoldBackgroundColor,
       ),
-      child: const Icon(
+      child: Icon(
         CupertinoIcons.photo,
         size: 32,
-        color: CupertinoColors.systemGrey,
+        color: Theme.of(context).hintColor,
       ),
     );
   }
@@ -638,36 +1068,43 @@ class _AllactivityviewState extends State<Allactivityview> {
   Widget _buildSelectedImage() {
     if (_selectedImage == null) return const SizedBox.shrink();
     return Padding(
-      padding: EdgeInsets.only(top: 8.h),
+      padding: EdgeInsets.only(top: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             AppLocalizations.of(context)!.labelSelectedImage,
-            style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.onSurface),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 12.h),
           Stack(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12.r),
-                child: Image.file(
-                  _selectedImage!,
-                  width: 100.w,
-                  height: 100.h,
-                  fit: BoxFit.cover,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.r),
+                  border: Border.all(color: Theme.of(context).dividerColor),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: Image.file(
+                    _selectedImage!,
+                    width: 120.w,
+                    height: 120.h,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Positioned(
-                top: 4,
-                right: 4,
+                top: 6,
+                right: 6,
                 child: GestureDetector(
                   onTap: () => setState(() => _selectedImage = null),
                   child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.black54,
+                      color: Colors.black.withOpacity(0.6),
+                      border: Border.all(color: Colors.white, width: 1.5),
                     ),
                     child: const Icon(
                       Icons.close,
@@ -687,23 +1124,24 @@ class _AllactivityviewState extends State<Allactivityview> {
   Widget _buildSelectedVideo() {
     if (_selectedVideo == null) return const SizedBox.shrink();
     return Padding(
-      padding: EdgeInsets.only(top: 8.h),
+      padding: EdgeInsets.only(top: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             AppLocalizations.of(context)!.labelSelectedVideo,
-            style: TextStyle(fontSize: 14.sp, color: Colors.grey[700]),
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.onSurface),
           ),
-          SizedBox(height: 8.h),
+          SizedBox(height: 12.h),
           Stack(
             children: [
               Container(
-                width: 100.w,
-                height: 100.h,
+                width: 120.w,
+                height: 120.h,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: BorderRadius.circular(16.r),
                   color: const Color(0xFF820DFF).withOpacity(0.1),
+                  border: Border.all(color: const Color(0xFF820DFF).withOpacity(0.3)),
                 ),
                 child: const Center(
                   child: Icon(
@@ -714,15 +1152,16 @@ class _AllactivityviewState extends State<Allactivityview> {
                 ),
               ),
               Positioned(
-                top: 4,
-                right: 4,
+                top: 6,
+                right: 6,
                 child: GestureDetector(
                   onTap: () => setState(() => _selectedVideo = null),
                   child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.black54,
+                      color: Colors.black.withOpacity(0.6),
+                      border: Border.all(color: Colors.white, width: 1.5),
                     ),
                     child: const Icon(
                       Icons.close,
@@ -752,7 +1191,7 @@ class _AllactivityviewState extends State<Allactivityview> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
               decoration: BoxDecoration(
-                color: Colors.grey[50],
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Row(
@@ -765,10 +1204,10 @@ class _AllactivityviewState extends State<Allactivityview> {
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
-                      color: _reminderDate != null ? Colors.black : Colors.grey,
+                      color: _reminderDate != null ? Theme.of(context).colorScheme.onSurface : Theme.of(context).hintColor,
                     ),
                   ),
-                  const Icon(Icons.calendar_today, color: Colors.grey),
+                  Icon(Icons.calendar_today, color: Theme.of(context).hintColor),
                 ],
               ),
             ),
@@ -781,7 +1220,7 @@ class _AllactivityviewState extends State<Allactivityview> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
               decoration: BoxDecoration(
-                color: Colors.grey[50],
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Row(
@@ -794,10 +1233,10 @@ class _AllactivityviewState extends State<Allactivityview> {
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
-                      color: _reminderTime != null ? Colors.black : Colors.grey,
+                      color: _reminderTime != null ? Theme.of(context).colorScheme.onSurface : Theme.of(context).hintColor,
                     ),
                   ),
-                  const Icon(Icons.access_time, color: Colors.grey),
+                  Icon(Icons.access_time, color: Theme.of(context).hintColor),
                 ],
               ),
             ),
@@ -852,8 +1291,8 @@ class _AllactivityviewState extends State<Allactivityview> {
       builder: (context) => Container(
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        decoration: const BoxDecoration(
-          color:  Color(0xFFF4F7F6),
+        decoration: BoxDecoration(
+          color:  Theme.of(context).cardColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: Padding(
@@ -867,7 +1306,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   width: 32.w,
                   height: 4.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Theme.of(context).dividerColor,
                     borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
@@ -879,23 +1318,23 @@ class _AllactivityviewState extends State<Allactivityview> {
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SizedBox(height: 8.h),
 
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: Colors.grey.shade200),
+                  border: Border.all(color: Theme.of(context).dividerColor),
                 ),
                 child: TextField(
                   controller: _foodController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.hintEnterName,
                     hintStyle: TextStyle(
-                      color: Colors.grey[400],
+                      color: Theme.of(context).hintColor,
                       fontSize: 14.sp,
                     ),
                     border: InputBorder.none,
@@ -914,7 +1353,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       height: 53.h,
                       isSelected: true,
                       textColors: Colors.white,
-                      backgroundColors: const Color(0xFF820DFF),
+                      backgroundColors: AppColors.vibrantPurple,
                       onPress: () {
                         setState(() {});
                         Navigator.pop(context);
@@ -928,8 +1367,8 @@ class _AllactivityviewState extends State<Allactivityview> {
                       height: 53.h,
                       isSelected: true,
                       isOutline: true,
-                      borderColors: Colors.red,
-                      textColors: Colors.red,
+                      borderColors: Theme.of(context).colorScheme.error,
+                      textColors: Theme.of(context).colorScheme.error,
                       onPress: () {
                         setState(() {
                           _foodController.clear();
@@ -957,8 +1396,8 @@ class _AllactivityviewState extends State<Allactivityview> {
       builder: (context) => Container(
         padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom),
-        decoration: const BoxDecoration(
-          color:  Color(0xFFF4F7F6),
+        decoration: BoxDecoration(
+          color:  Theme.of(context).cardColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: Padding(
@@ -973,7 +1412,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   width: 32.w,
                   height: 4.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Theme.of(context).dividerColor,
                     borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
@@ -985,23 +1424,23 @@ class _AllactivityviewState extends State<Allactivityview> {
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SizedBox(height: 8.h),
 
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: Colors.grey.shade200),
+                  border: Border.all(color: Theme.of(context).dividerColor),
                 ),
                 child: TextField(
                   controller: _foodController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.hintEnterName,
                     hintStyle: TextStyle(
-                      color: Colors.grey[400],
+                      color: Theme.of(context).hintColor,
                       fontSize: 14.sp,
                     ),
                     border: InputBorder.none,
@@ -1017,7 +1456,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 height: 53.h,
                 isSelected: true,
                 textColors: Colors.white,
-                backgroundColors: const Color(0xFF820DFF),
+                backgroundColors: AppColors.vibrantPurple,
                 onPress: () {
                   setState(() {});
                   Navigator.pop(context);
@@ -1039,8 +1478,8 @@ class _AllactivityviewState extends State<Allactivityview> {
       builder: (context) => Container(
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        decoration: const BoxDecoration(
-          color:  Color(0xFFF4F7F6),
+        decoration: BoxDecoration(
+          color:  Theme.of(context).cardColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: Padding(
@@ -1054,7 +1493,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   width: 32.w,
                   height: 4.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Theme.of(context).dividerColor,
                     borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
@@ -1066,23 +1505,23 @@ class _AllactivityviewState extends State<Allactivityview> {
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SizedBox(height: 8.h),
 
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: Colors.grey.shade200),
+                  border: Border.all(color: Theme.of(context).dividerColor),
                 ),
                 child: TextField(
                   controller: _foodController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.hintEnterName,
                     hintStyle: TextStyle(
-                      color: Colors.grey[400],
+                      color: Theme.of(context).hintColor,
                       fontSize: 14.sp,
                     ),
                     border: InputBorder.none,
@@ -1101,7 +1540,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       height: 53.h,
                       isSelected: true,
                       textColors: Colors.white,
-                      backgroundColors: const Color(0xFF820DFF),
+                      backgroundColors: AppColors.vibrantPurple,
                       onPress: () {
                         setState(() {});
                         Navigator.pop(context);
@@ -1115,8 +1554,8 @@ class _AllactivityviewState extends State<Allactivityview> {
                       height: 53.h,
                       isSelected: true,
                       isOutline: true,
-                      borderColors: Colors.red,
-                      textColors: Colors.red,
+                      borderColors: Theme.of(context).colorScheme.error,
+                      textColors: Theme.of(context).colorScheme.error,
                       onPress: () {
                         setState(() {
                           _foodController.clear();
@@ -1144,8 +1583,8 @@ class _AllactivityviewState extends State<Allactivityview> {
       builder: (context) => Container(
         padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom),
-        decoration: const BoxDecoration(
-          color: Color(0xFFF4F7F6),
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: Padding(
@@ -1160,7 +1599,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   width: 32.w,
                   height: 4.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: Theme.of(context).dividerColor,
                     borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
@@ -1172,23 +1611,23 @@ class _AllactivityviewState extends State<Allactivityview> {
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SizedBox(height: 8.h),
 
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(color: Colors.grey.shade200),
+                  border: Border.all(color: Theme.of(context).dividerColor),
                 ),
                 child: TextField(
                   controller: _foodController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.hintEnterName,
                     hintStyle: TextStyle(
-                      color: Colors.grey[400],
+                      color: Theme.of(context).hintColor,
                       fontSize: 14.sp,
                     ),
                     border: InputBorder.none,
@@ -1204,7 +1643,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 height: 53.h,
                 isSelected: true,
                 textColors: Colors.white,
-                backgroundColors: const Color(0xFF820DFF),
+                backgroundColors: AppColors.vibrantPurple,
                 onPress: () {
                   setState(() {});
                   Navigator.pop(context);
@@ -1286,7 +1725,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           RoundButton(
             title: AppLocalizations.of(context)!.actionAdd,
             isSelected: true,
-            backgroundColors: const Color(0xFFF4F7F6),
+            backgroundColors: Theme.of(context).colorScheme.surface,
             textColors: const Color(0xFF820DFF),
             onPress: _showDrinkNameBottomSheet,
           ),
@@ -1294,15 +1733,24 @@ class _AllactivityviewState extends State<Allactivityview> {
         Container(
           padding: EdgeInsets.all(6.w),
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
-                onPressed: decrement,
+              Container(
+                height: 42.h,
+                width: 85.w,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLow
+                ),
+                child: Center(
+                  child: IconButton(
+                    icon:  Icon(Icons.remove, color: Theme.of(context).colorScheme.onSurface),
+                    onPressed: decrement,
+                  ),
+                ),
               ),
               Text(
                 _isOzUnit
@@ -1310,9 +1758,18 @@ class _AllactivityviewState extends State<Allactivityview> {
                     : displayValue.toStringAsFixed(0),
                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
               ),
-              IconButton(
-                icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
-                onPressed: increment,
+              Container(
+                height: 42.h,
+                width: 85.w,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surfaceContainerLow
+                ),
+                child: Center(
+                  child: IconButton(
+                    icon:  Icon(Icons.add, color: Theme.of(context).colorScheme.onSurface),
+                    onPressed: increment,
+                  ),
+                ),
               ),
             ],
           ),
@@ -1320,7 +1777,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         SizedBox(height: 12.h),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
@@ -1342,7 +1799,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       AppLocalizations.of(context)!.unitOz,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: _isOzUnit ? Colors.white : Colors.black,
+                        color: _isOzUnit ? Colors.white : Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.bold,
                         fontSize: 16.sp,
                       ),
@@ -1367,7 +1824,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       AppLocalizations.of(context)!.unitMl,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: !_isOzUnit ? Colors.white : Colors.black,
+                        color: !_isOzUnit ? Colors.white : Theme.of(context).colorScheme.onSurface,
                         fontWeight: FontWeight.bold,
                         fontSize: 16.sp,
                       ),
@@ -1785,7 +2242,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           textColors: AppColors.vibrantPurple,
           hasIcons: true,
           icon: const Icon(Icons.update, color: AppColors.vibrantPurple),
-          backgroundColors: const Color(0xFFF4F7F6),
+          backgroundColors: Theme.of(context).colorScheme.surface,
           onPress: () async {
             final result = await Navigator.push(
               context,
@@ -1843,7 +2300,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           Container(
             padding: EdgeInsets.all(6.w),
             decoration: BoxDecoration(
-              color: const Color(0xFFF4F7F6),
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Row(
@@ -1853,25 +2310,27 @@ class _AllactivityviewState extends State<Allactivityview> {
                   width: 85.w,
                   height: 45.h,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surfaceContainerLow,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.remove, color: Colors.black, size: 28),
-                    onPressed: () {
-                      setState(() {
-                        if (_isKmUnit) {
-                          if (_walkDistanceKm >= step) {
-                            _walkDistanceKm -= step;
+                  child: Center(
+                    child: IconButton(
+                      icon: const Icon(Icons.remove, color: Colors.black, size: 28),
+                      onPressed: () {
+                        setState(() {
+                          if (_isKmUnit) {
+                            if (_walkDistanceKm >= step) {
+                              _walkDistanceKm -= step;
+                            }
+                          } else {
+                            double currentMi = _walkDistanceKm * kmToMi;
+                            if (currentMi >= step) {
+                              _walkDistanceKm = (currentMi - step) / kmToMi;
+                            }
                           }
-                        } else {
-                          double currentMi = _walkDistanceKm * kmToMi;
-                          if (currentMi >= step) {
-                            _walkDistanceKm = (currentMi - step) / kmToMi;
-                          }
-                        }
-                      });
-                    },
+                        });
+                      },
+                    ),
                   ),
                 ),
                 Text(
@@ -1882,25 +2341,27 @@ class _AllactivityviewState extends State<Allactivityview> {
                   width: 85.w,
                   height: 45.h,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.surfaceContainerLow,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.add, color: Colors.black, size: 28),
-                    onPressed: () {
-                      setState(() {
-                        if (_isKmUnit) {
-                          if (_walkDistanceKm <= 99) {
-                            _walkDistanceKm += step;
+                  child: Center(
+                    child: IconButton(
+                      icon: const Icon(Icons.add, color: Colors.black, size: 28),
+                      onPressed: () {
+                        setState(() {
+                          if (_isKmUnit) {
+                            if (_walkDistanceKm <= 99) {
+                              _walkDistanceKm += step;
+                            }
+                          } else {
+                            double currentMi = _walkDistanceKm * kmToMi;
+                            if (currentMi <= 62) {
+                              _walkDistanceKm = (currentMi + step) / kmToMi;
+                            }
                           }
-                        } else {
-                          double currentMi = _walkDistanceKm * kmToMi;
-                          if (currentMi <= 62) {
-                            _walkDistanceKm = (currentMi + step) / kmToMi;
-                          }
-                        }
-                      });
-                    },
+                        });
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -1909,7 +2370,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           SizedBox(height: 12.h),
           Container(
             decoration: BoxDecoration(
-              color: const Color(0xFFF4F7F6),
+              color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Row(
@@ -1931,7 +2392,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         'km',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: _isKmUnit ? Colors.white : Colors.black,
+                          color: _isKmUnit ? Colors.white :Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                           fontSize: 16.sp,
                         ),
@@ -1956,7 +2417,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         'ml',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: !_isKmUnit ? Colors.white : Colors.black,
+                          color: !_isKmUnit ? Colors.white : Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.bold,
                           fontSize: 16.sp,
                         ),
@@ -1986,7 +2447,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2015,7 +2476,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2053,7 +2514,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2082,7 +2543,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2147,7 +2608,7 @@ class _AllactivityviewState extends State<Allactivityview> {
     final String activityName = _currentActivity?.name.toLowerCase() ?? '';
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: SafeArea(
@@ -2162,7 +2623,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(CupertinoIcons.chevron_left),
@@ -2173,7 +2634,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(CupertinoIcons.check_mark),
@@ -2186,7 +2647,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               Container(
                 padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF4F7F6),
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Row(
@@ -2226,7 +2687,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   RoundButton(
                     title: _foodController.text,
                     isSelected: true,
-                    backgroundColors: const Color(0xFFF4F7F6),
+                    backgroundColors: Theme.of(context).colorScheme.surface,
                     textColors: Colors.black,
                     borderColors: const Color(0xFF820DFF),
                     hasIcons: true,
@@ -2239,7 +2700,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   RoundButton(
                     title: _getButtonTitle(context, activityName),
                     isSelected: true,
-                    backgroundColors: const Color(0xFFF4F7F6),
+                    backgroundColors: Theme.of(context).colorScheme.surface,
                     textColors: const Color(0xFF820DFF),
                     onPress: _showFoodNameBottomSheet,
                   ),
@@ -2268,7 +2729,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                   vertical: 14.h,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[50],
+                                  color: Theme.of(context).colorScheme.surface,
                                   borderRadius: BorderRadius.circular(12.r),
                                 ),
                                 child: Row(
@@ -2414,7 +2875,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       vertical: 14.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey[50],
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -2450,7 +2911,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       vertical: 14.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey[50],
+                      color: Theme.of(context).colorScheme.surface,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -2483,7 +2944,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 decoration: InputDecoration(
                   hintText: AppLocalizations.of(context)!.hintAddNote,
                   filled: true,
-                  fillColor: const Color(0xFFF3F6F3),
+                  fillColor: Theme.of(context).colorScheme.surface,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide.none,
@@ -2502,7 +2963,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF3F6F3),
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2532,7 +2993,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF3F6F3),
+                    color:Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(

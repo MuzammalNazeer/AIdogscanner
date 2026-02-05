@@ -3,6 +3,7 @@ import 'package:dog_breed/View/MyPetsView/MyPetsView.dart';
 import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/View_model/home/home_view_model.dart';
@@ -49,7 +50,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
           height: 87.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white,
+            color:Theme.of(context).colorScheme.background,
             boxShadow: [
               BoxShadow(
                 color: const Color(0x1919190D).withOpacity(0.15),
@@ -97,7 +98,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: AppColors.appColorWhite,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Consumer<HomeViewModel>(
         builder: (context, homeProvider, child) {
           return IndexedStack(
@@ -120,7 +121,7 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
 
         return Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.tertiaryContainer,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
@@ -132,15 +133,15 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Divider(
-                height: 1,
-                color: Colors.grey[200],
-              ),
+              // Divider(
+              //   height: 1,
+              //   color: Colors.grey[200],
+              // ),
               SizedBox(
                 height: 82.h,
                 child: BottomNavigationBar(
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: Colors.grey.shade100,
+                  backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
                   currentIndex: homeProvider.selectedIndex >= 2
                       ? homeProvider.selectedIndex + 1
                       : homeProvider.selectedIndex,
@@ -183,36 +184,39 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                       icon: SizedBox(
                         width: 25.w,
                         height: 25.h,
-                        child: Image.asset(
-                          'assets/images/home.png',
+                        child: SvgPicture.asset(
+                          'assets/images/home1.svg',
                           color: homeProvider.selectedIndex == 0
-                              ? colors.tertiary
+                              ? AppColors.vibrantPurple
                               : const Color(0xFF7E808F),
                         ),
                       ),
                       activeIcon: SizedBox(
                         width: 25.w,
                         height: 25.h,
-                        child: Image.asset(
-                          'assets/images/home.png',
-                          color: colors.tertiary,
+                        child: SvgPicture.asset(
+                          'assets/images/home1.svg',
+                          color: AppColors.vibrantPurple,
                         ),
                       ),
                       label: AppLocalizations.of(context)!.navHome,
                     ),
+
                     // Calendar
                     BottomNavigationBarItem(
-                      icon: Icon(
-                        size: 25,
-                        Icons.calendar_month,
-                        color: homeProvider.selectedIndex == 1
-                            ? colors.tertiary
-                            : const Color(0xFF666666),
+                      icon: SizedBox(
+                        width: 25.w,
+                        height: 25.h,
+                        child: SvgPicture.asset(
+                          'assets/images/ic_calendar_1.svg',
+                        ),
                       ),
-                      activeIcon: Icon(
-                        Icons.calendar_month,
-                        size: 25.sp,
-                        color: colors.tertiary,
+                      activeIcon: SizedBox(
+                        width: 25.w,
+                        height: 25.h,
+                        child: SvgPicture.asset(
+                          'assets/images/calendar.svg',
+                        ),
                       ),
                       label: AppLocalizations.of(context)!.navCalendar,
                     ),
@@ -229,19 +233,19 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                       icon: SizedBox(
                         width: 25.w,
                         height: 25.h,
-                        child: Image.asset(
-                          'assets/images/s12.png',
+                        child: SvgPicture.asset(
+                          'assets/images/pets.svg',
                           color: homeProvider.selectedIndex == 2
-                              ? colors.tertiary
+                              ? AppColors.vibrantPurple
                               : const Color(0xFF7E808F),
                         ),
                       ),
                       activeIcon: SizedBox(
                         width: 25.w,
                         height: 25.h,
-                        child: Image.asset(
-                          'assets/images/s12.png',
-                          color: colors.tertiary,
+                        child: SvgPicture.asset(
+                          'assets/images/pets.svg',
+                          color: AppColors.vibrantPurple,
                         ),
                       ),
                       label: AppLocalizations.of(context)!.navMyPets,
@@ -251,19 +255,19 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
                       icon: SizedBox(
                         width: 25.w,
                         height: 25.h,
-                        child: Image.asset(
-                          'assets/images/s15.png',
+                        child: SvgPicture.asset(
+                          'assets/images/profile.svg',
                           color: homeProvider.selectedIndex == 3
-                              ? colors.tertiary
+                              ? AppColors.vibrantPurple
                               : const Color(0xFF7E808F),
                         ),
                       ),
                       activeIcon: SizedBox(
                         width: 25.w,
                         height: 25.h,
-                        child: Image.asset(
-                          'assets/images/s15.png',
-                          color: colors.tertiary,
+                        child: SvgPicture.asset(
+                          'assets/images/profile.svg',
+                          color: AppColors.vibrantPurple,
                         ),
                       ),
                       label: AppLocalizations.of(context)!.navProfile,

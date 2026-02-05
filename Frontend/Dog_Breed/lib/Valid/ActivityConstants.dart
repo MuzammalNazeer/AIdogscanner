@@ -14,6 +14,7 @@ class ActivityType {
 
 class ActivityConstants {
   static const List<ActivityType> allActivities = [
+    
     ActivityType(
       name: 'Pee',
       image: 'assets/images/62.png',

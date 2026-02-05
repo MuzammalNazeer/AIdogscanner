@@ -10,6 +10,7 @@ import '../../View_model/activity_provider.dart';
 import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/DocumentViewModel.dart';
 import '../../View_model/home/Pet.dart';
+import '../../config/components/CommonApp.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/routes/routes_name.dart';
 
@@ -55,7 +56,8 @@ class _MypetsviewState extends State<Mypetsview> {
     ).toList();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       floatingActionButton: FloatingActionButton(
         heroTag: 'add_pet_button',
         onPressed: () {
@@ -85,67 +87,86 @@ class _MypetsviewState extends State<Mypetsview> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      l10n.myPetsTitle,
-                      style: TextStyle(
-                        fontFamily: 'Sora',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 29.75.sp,
-                        color: const Color(0xFF272727),
-                      ),
+                // Back Button
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    width: 40.305.w,
+                    height: 40.305.h,
+                    padding: const EdgeInsets.all(8.96),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(8.96),
+                    ),
+                    child: Icon(
+                      CupertinoIcons.chevron_left,
+                      size: 20.sp,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
                 ),
+
+                // Centered Title
+                Text(
+                  AppLocalizations.of(context)!.myPetsTitle,
+                  style: TextStyle(
+                    fontFamily: 'Sora',
+                    fontWeight: FontWeight.w300,
+                    fontSize: 29.75.sp,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+
+                // More Options Button (with PopupMenuButton)
                 if (pets.isNotEmpty)
-                  Padding(
-                    padding: EdgeInsets.only(right: 16.w),
-                    child: PopupMenuButton<String>(
-                      icon: Container(
-                        height: 41.h,
-                        width: 41.w,
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF3F6F3),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: const Center(
-                          child: Icon(
-                            Icons.more_vert,
-                            color: Color(0xFF272727),
-                          ),
-                        ),
+                  PopupMenuButton<String>(
+                    icon: Container(
+                      width: 40.305.w,
+                      height: 40.305.h,
+                      padding: const EdgeInsets.all(8.96),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(8.96),
                       ),
-                      color: Colors.white,
-                      elevation: 4,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
+                      child: Icon(
+                        Icons.more_vert,
+                        size: 20.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
-                      onSelected: (value) {
-                        if (value == 'deleteAll') {
-                          _showDeleteAllDialog(l10n);
-                        }
-                      },
-                      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                        PopupMenuItem<String>(
-                          value: 'deleteAll',
-                          child: Text(
-                            l10n.deleteAll,
-                            style: TextStyle(
-                              fontFamily: 'Sora',
-                              fontSize: 16.sp,
-                              color: const Color(0xFF371B34),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
+                    color: Theme.of(context).cardColor,
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    onSelected: (value) {
+                      if (value == 'deleteAll') {
+                        _showDeleteAllDialog(AppLocalizations.of(context)!);
+                      }
+                    },
+                    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                      PopupMenuItem<String>(
+                        value: 'deleteAll',
+                        child: Text(
+                          AppLocalizations.of(context)!.deleteAll,
+                          style: TextStyle(
+                            fontFamily: 'Sora',
+                            fontSize: 16.sp,
+                            color: Theme.of(context).colorScheme.onSurface,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                // Invisible placeholder when no pets
+                  SizedBox(
+                    width: 40.305.w,
+                    height: 40.305.h,
                   ),
               ],
             ),
@@ -153,11 +174,13 @@ class _MypetsviewState extends State<Mypetsview> {
               padding: EdgeInsets.all(16.w),
               child: CupertinoSearchTextField(
                 placeholder: l10n.searchForDog,
+                style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                placeholderStyle: TextStyle(color: Theme.of(context).hintColor),
                 prefixIcon: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Icon(
                     CupertinoIcons.search,
-                    color: Colors.black,
+                    color: Theme.of(context).iconTheme.color,
                     size: 32.h,
                   ),
                 ),
@@ -171,7 +194,7 @@ class _MypetsviewState extends State<Mypetsview> {
                   });
                 },
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5F5F5),
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -196,7 +219,9 @@ class _MypetsviewState extends State<Mypetsview> {
       children: [
         Center(
           child: Image.asset(
-            'assets/images/pet.png',
+            Theme.of(context).brightness == Brightness.dark
+                ? 'assets/images/tet.png'
+                : 'assets/images/pet.png',
             height: 85.h,
             width: 85.w,
           ),
@@ -206,7 +231,7 @@ class _MypetsviewState extends State<Mypetsview> {
           l10n.noPetsAdded,
           style: TextStyle(
             fontSize: 18.sp,
-            color: Colors.grey,
+            color: Theme.of(context).hintColor,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -238,14 +263,14 @@ class _MypetsviewState extends State<Mypetsview> {
           Icon(
             Icons.search_off,
             size: 60.sp,
-            color: Colors.grey[400],
+            color: Theme.of(context).hintColor,
           ),
           SizedBox(height: 16.h),
           Text(
             l10n.noPetsMatch,
             style: TextStyle(
               fontSize: 16.sp,
-              color: Colors.grey,
+              color: Theme.of(context).hintColor,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -254,7 +279,7 @@ class _MypetsviewState extends State<Mypetsview> {
             l10n.tryDifferentSearch,
             style: TextStyle(
               fontSize: 14.sp,
-              color: Colors.grey[400],
+              color: Theme.of(context).hintColor,
             ),
           ),
         ],
@@ -376,7 +401,7 @@ class _MypetsviewState extends State<Mypetsview> {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(l10n.deleteAll),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         content: Text(l10n.deleteAllPetsConfirmation),
         actions: [
           TextButton(
@@ -418,13 +443,13 @@ class _MypetsviewState extends State<Mypetsview> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.deletePetTitle),
-        backgroundColor: Colors.white,
-        content: Text(l10n.deletePetMessage(pet.name)),
+        title: Text(l10n.deletePetTitle, style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
+        backgroundColor: Theme.of(context).cardColor,
+        content: Text(l10n.deletePetMessage(pet.name), style: TextStyle(color: Theme.of(context).colorScheme.onSurface)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text(l10n.cancelButton),
+            child: Text(l10n.cancelButton, style: TextStyle(color: Theme.of(context).hintColor)),
           ),
           TextButton(
             onPressed: () async {

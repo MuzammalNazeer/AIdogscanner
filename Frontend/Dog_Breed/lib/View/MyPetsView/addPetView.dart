@@ -9,7 +9,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../Valid/AppColors.dart';
 import '../../View_model/PetProvider.dart';
+import '../../config/components/CommonApp.dart';
+import '../../l10n/app_localizations.dart';
 
 class AddPetView extends StatefulWidget {
   const AddPetView({super.key});
@@ -801,12 +804,14 @@ class _AddPetViewState extends State<AddPetView> {
       lastDate: DateTime.now(),
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: ThemeData.light().copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: Color(0xFF820DFF),
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.vibrantPurple,
               onPrimary: Colors.white,
+              surface: Theme.of(context).cardColor,
+              onSurface: Theme.of(context).colorScheme.onSurface,
             ),
-            dialogBackgroundColor: Colors.white,
+            dialogBackgroundColor: Theme.of(context).cardColor,
           ),
           child: child!,
         );
@@ -816,10 +821,10 @@ class _AddPetViewState extends State<AddPetView> {
   }
 
   // Image selection method
-  Future<void> _pickImage() async {
+  Future<void> _pickImage(ImageSource source) async {
     try {
       final XFile? image = await _picker.pickImage(
-        source: ImageSource.gallery,
+        source: source,
         maxWidth: 500,
         maxHeight: 500,
         imageQuality: 80,
@@ -838,6 +843,79 @@ class _AddPetViewState extends State<AddPetView> {
     }
   }
 
+  void _showImageSourceDialog() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 24.h),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Add pet",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.gallery);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        "Upload from Gallery",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF007AFF),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                    _pickImage(ImageSource.camera);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        "Open Camera",
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: const Color(0xFF007AFF),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8.h),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -850,7 +928,8 @@ class _AddPetViewState extends State<AddPetView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -859,6 +938,7 @@ class _AddPetViewState extends State<AddPetView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
@@ -867,39 +947,78 @@ class _AddPetViewState extends State<AddPetView> {
                         height: 40.305.h,
                         padding: const EdgeInsets.all(8.96),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF3F6F3),
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(8.96),
                         ),
                         child: Icon(
                           CupertinoIcons.chevron_left,
                           size: 20.sp,
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          'Add Pet',
-                          style: TextStyle(
-                            fontFamily: 'Sora',
-                            fontWeight: FontWeight.w300,
-                            fontSize: 29.75.sp,
-                            color: Colors.black,
-                          ),
-                        ),
+
+                    // Center text
+                    Text(
+                      AppLocalizations.of(context)!.addPetTitle,
+                      style: TextStyle(
+                        fontFamily: 'Sora',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 29.75.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
+                    ),
+
+                    // Invisible placeholder to balance
+                    SizedBox(
+                      width: 40.305.w,
+                      height: 40.305.h,
                     ),
                   ],
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     GestureDetector(
+                //       onTap: () => Navigator.pop(context),
+                //       child: Container(
+                //         width: 40.305.w,
+                //         height: 40.305.h,
+                //         padding: const EdgeInsets.all(8.96),
+                //         decoration: BoxDecoration(
+                //           color: Theme.of(context).cardColor,
+                //           borderRadius: BorderRadius.circular(8.96),
+                //         ),
+                //         child: Icon(
+                //           CupertinoIcons.chevron_left,
+                //           size: 20.sp,
+                //           color: Theme.of(context).colorScheme.onSurface,
+                //         ),
+                //       ),
+                //     ),
+                //     Expanded(
+                //       child: Center(
+                //         child: Text(
+                //           AppLocalizations.of(context)!.addPetTitle,
+                //           style: TextStyle(
+                //             fontFamily: 'Sora',
+                //             fontWeight: FontWeight.w300,
+                //             fontSize: 29.75.sp,
+                //             color: Theme.of(context).colorScheme.onSurface,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 SizedBox(height: 23.h),
                 GestureDetector(
-                  onTap: _pickImage,
+                  onTap: _showImageSourceDialog,
                   child: Container(
                     width: 159.w,
                     height: 159.h,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF3F6F3),
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(27.83),
                       //   border: _selectedImage != null
                       //       ? Border.all(color: const Color(0xFF820DFF), width: 2)
@@ -915,19 +1034,19 @@ class _AddPetViewState extends State<AddPetView> {
                         fit: BoxFit.cover,
                       ),
                     )
-                        : const Column(
+                        : Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
+                         Icon(
                           Icons.camera_alt,
-                          color: Colors.grey,
+                          color: Theme.of(context).hintColor,
                           size: 32,
                         ),
-                        SizedBox(height: 3),
+                        const SizedBox(height: 3),
                         Text(
                           'Photo',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Theme.of(context).hintColor,
                             fontSize: 14,
                           ),
                         ),
@@ -936,12 +1055,12 @@ class _AddPetViewState extends State<AddPetView> {
                   ),
                 ),
                 SizedBox(height: 23.h),
-                const Text(
+                Text(
                   'Pet Name',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
-                    color: Color(0xFF6F7D86),
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -950,9 +1069,10 @@ class _AddPetViewState extends State<AddPetView> {
                   child: Center(
                     child: TextField(
                       controller: _nameController,
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: const Color(0xFFF5F5F5),
+                        fillColor: Theme.of(context).cardColor,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -971,7 +1091,7 @@ class _AddPetViewState extends State<AddPetView> {
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12.sp,
-                    color: const Color(0xFF6F7D86),
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -981,7 +1101,7 @@ class _AddPetViewState extends State<AddPetView> {
                     height: 58.h,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF5F5F5),
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -990,66 +1110,22 @@ class _AddPetViewState extends State<AddPetView> {
                         Text(
                           _selectedBreed ?? "Select Breed",
                           style: TextStyle(
-                            color: _selectedBreed != null ? Colors.black : Colors.grey,
+                            color: _selectedBreed != null ? Theme.of(context).colorScheme.onSurface : Theme.of(context).hintColor,
                             fontSize: 16,
                           ),
                         ),
-                        const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                         Icon(Icons.keyboard_arrow_down, color: Theme.of(context).hintColor),
                       ],
                     ),
                   ),
                 ),
-
-                // Center(
-                //   child: SizedBox(
-                //     width: double.infinity,
-                //     height: 58.h,
-                //     child: DropdownSearch<String>(
-                //       popupProps: PopupProps.menu(
-                //         showSelectedItems: true,
-                //         showSearchBox: true,
-                //         searchFieldProps: TextFieldProps(
-                //           decoration: InputDecoration(
-                //             hintText: "Search breed...",
-                //             border: OutlineInputBorder(
-                //               borderRadius: BorderRadius.circular(12),
-                //             ),
-                //             contentPadding: const EdgeInsets.symmetric(
-                //               horizontal: 12,
-                //             ),
-                //           ),
-                //         ),
-                //         menuProps: MenuProps(
-                //           borderRadius: BorderRadius.circular(12),
-                //         ),
-                //       ),
-                //       items: _breeds,
-                //       dropdownDecoratorProps: DropDownDecoratorProps(
-                //         dropdownSearchDecoration: InputDecoration(
-                //           filled: true,
-                //           fillColor: const Color(0xFFF5F5F5),
-                //           border: OutlineInputBorder(
-                //             borderRadius: BorderRadius.circular(12),
-                //             borderSide: BorderSide.none,
-                //           ),
-                //           contentPadding: const EdgeInsets.symmetric(
-                //             horizontal: 12,
-                //           ),
-                //           hintText: "Select Breed",
-                //         ),
-                //       ),
-                //       onChanged: (v) => setState(() => _selectedBreed = v),
-                //       selectedItem: _selectedBreed,
-                //     ),
-                //   ),
-                // ),
                 SizedBox(height: 17.h),
                 Text(
                   'Gender',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12.sp,
-                    color: const Color(0xFF6F7D86),
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -1058,9 +1134,13 @@ class _AddPetViewState extends State<AddPetView> {
                     height: 58.h,
                     child: DropdownButtonFormField<String>(
                       value: _selectedGender,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontSize: 16.sp,
+                      ),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: const Color(0xFFF5F5F5),
+                        fillColor: Theme.of(context).cardColor,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -1076,22 +1156,22 @@ class _AddPetViewState extends State<AddPetView> {
                       )
                           .toList(),
                       onChanged: (v) => setState(() => _selectedGender = v),
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.keyboard_arrow_down,
-                        color: Colors.grey,
+                        color: Theme.of(context).hintColor,
                       ),
-                      dropdownColor: Colors.white,
+                      dropdownColor: Theme.of(context).cardColor,
                       isExpanded: true,
                     ),
                   ),
                 ),
                 SizedBox(height: 17.h),
-                const Text(
+                Text(
                   'Birthday',
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
-                    color: Color(0xFF6F7D86),
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 SizedBox(height: 4.h),
@@ -1102,7 +1182,7 @@ class _AddPetViewState extends State<AddPetView> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -1114,14 +1194,14 @@ class _AddPetViewState extends State<AddPetView> {
                               : 'DD-MM-YYYY',
                           style: TextStyle(
                             color: _selectedDate != null
-                                ? Colors.black87
-                                : Colors.grey,
+                                ? Theme.of(context).colorScheme.onSurface
+                                : Theme.of(context).hintColor,
                             fontSize: 16,
                           ),
                         ),
-                        const Icon(
+                         Icon(
                           Icons.calendar_today,
-                          color: Colors.grey,
+                          color: Theme.of(context).hintColor,
                           size: 20,
                         ),
                       ],
@@ -1135,7 +1215,7 @@ class _AddPetViewState extends State<AddPetView> {
                   title: "Save",
                   height: 50,
                   width: 379,
-                  backgroundColors: const Color(0xFF820DFF),
+                  backgroundColors: AppColors.vibrantPurple,
                   isSelected: true,
                   onPress: () async {
                     if (_nameController.text.isEmpty ||
@@ -1219,6 +1299,7 @@ class _AddPetViewState extends State<AddPetView> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -1246,20 +1327,22 @@ class _AddPetViewState extends State<AddPetView> {
                       height: 5,
                       margin: const EdgeInsets.only(bottom: 12),
                       decoration: BoxDecoration(
-                        color: Colors.grey[300],
+                        color: Theme.of(context).dividerColor,
                         borderRadius: BorderRadius.circular(2.5),
                       ),
                     ),
                     TextField(
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
                         hintText: 'Search breed...',
-                        prefixIcon: const Icon(Icons.search),
+                        hintStyle: TextStyle(color: Theme.of(context).hintColor),
+                        prefixIcon: Icon(Icons.search, color: Theme.of(context).hintColor),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide.none,
                         ),
                         filled: true,
-                        fillColor: Colors.grey[200],
+                        fillColor: Theme.of(context).cardColor,
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -1274,7 +1357,10 @@ class _AddPetViewState extends State<AddPetView> {
                         itemBuilder: (context, index) {
                           final breed = filteredBreeds[index];
                           return ListTile(
-                            title: Text(breed),
+                            title: Text(
+                              breed,
+                              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                            ),
                             onTap: () {
                               setState(() => _selectedBreed = breed);
                               Navigator.pop(context);

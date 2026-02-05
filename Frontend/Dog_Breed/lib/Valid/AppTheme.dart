@@ -6,12 +6,12 @@ class AppTheme {
     brightness: Brightness.light,
     scaffoldBackgroundColor: const Color(0xFFF7F9FB),
     colorScheme:  ColorScheme.light(
-      primary: const Color(0xFF820DFF),
+      primary: const Color(0xFF6F7D86),
       secondary: const Color(0xFF00D9FF).withOpacity(0.1),
       background: const Color(0xFFF7F9FB),
       onBackground: const Color(0xFF7B2CBF),
-      surface: const Color(0xFF323332),
-      onPrimary: const Color(0xFF371B34),
+      surface:  const Color(0xFFF4F7F6),
+      onPrimary: const Color(0xFFCBE4DC),
       onSurface: const Color(0xFF0A0A0A),
       onSecondary: const Color(0xFF000000),
         tertiary:const Color(0xFF7B2CBF),
@@ -19,15 +19,14 @@ class AppTheme {
         tertiaryContainer: const Color(0xFFF2F5F4),
         surfaceBright:const Color(0xFFCBE4DC),
         secondaryContainer: const Color(0xFFF4F7F6),
-        surfaceContainerLow:const Color(0xFFE9ECE9),
+        surfaceContainerLow:const Color(0xFFFFFFFF),
         surfaceContainerHigh:const Color(0xFFD4ACFF),
         surfaceContainerHighest: const Color(0xFF7B2CBF),
        surfaceContainerLowest: const Color(0xFF512717),
         surfaceContainer: const Color(0xFF7B2CBF),
         outlineVariant: const Color(0xFFCBE4DC),
-      onPrimaryContainer: const Color(0xFF7DFAC4).withOpacity(0.24)
-
-
+      onErrorContainer:const Color(0xFF371B34) ,
+      onPrimaryContainer: const Color(0xFFCBE4DC)
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
@@ -41,12 +40,12 @@ class AppTheme {
     brightness: Brightness.dark,
     scaffoldBackgroundColor: const Color(0xFF101418),
     colorScheme:  ColorScheme.dark(
-      primary: const Color(0xFF820DFF),
+      primary: const Color(0xFFFFFFFF),
       secondary: const Color(0xFF21241F).withOpacity(0.1),
       background: const Color(0xFF21241F),
       onBackground: const Color(0xFF21241F),
       surface: const Color(0xFF323332),
-      onPrimary: const Color(0xFF371B34),
+      onPrimary: const Color(0xFF21241F),
         onSecondary: const Color(0xFFFFFFFF),
       onSurface: const Color(0xFFFFFFFF),
       tertiary:const Color(0xFFFFFFFF),
@@ -54,13 +53,14 @@ class AppTheme {
       tertiaryContainer: const Color(0xFF323332),
       surfaceBright:const Color(0xFF323332),
       secondaryContainer: const Color(0xFF323332),
-      surfaceContainerLow:const Color(0xFF353635),
+      surfaceContainerLow:const Color(0xFF999999),
       surfaceContainerHigh:const Color(0xFF353635),
       surfaceContainerHighest: const Color(0xFF21241F),
       surfaceContainerLowest: const Color(0xFFFFFFFF),
       surfaceContainer: const Color(0xFFFFFFFF),
+        onErrorContainer:const Color(0xFFFFFFFF) ,
       outlineVariant: const Color(0xFF21241F),
-        onPrimaryContainer: const Color(0xFF323332)
+        onPrimaryContainer: const Color(0xFF21241F)
 
 
     ),

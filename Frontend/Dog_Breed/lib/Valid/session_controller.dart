@@ -4,7 +4,49 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionController {
   static const String _userTokenKey = "USER_TOKEN";
-  static const String _languageCodeKey = "LANGUAGE_CODE"; // Added constant
+  static const String _userIdKey = "USER_ID";
+  static const String _userEmailKey = "USER_EMAIL";
+  static const String _languageCodeKey = "LANGUAGE_CODE";
+
+  // ... (existing methods)
+
+  Future<void> saveUserSession(String token, int userId, String email) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_userTokenKey, token);
+      await prefs.setInt(_userIdKey, userId);
+      await prefs.setString(_userEmailKey, email);
+      if (kDebugMode) {
+        print("User session saved: $userId, $email");
+      }
+    } catch (e) {
+      if (kDebugMode) print("Failed to save user session: $e");
+      rethrow;
+    }
+  }
+
+  Future<int?> getUserId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_userIdKey);
+  }
+
+  Future<String?> getUserEmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_userEmailKey);
+  }
+
+  Future<void> clearUserSession() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_userTokenKey);
+      await prefs.remove(_userIdKey);
+      await prefs.remove(_userEmailKey);
+      if (kDebugMode) print("User session cleared.");
+    } catch (e) {
+      if (kDebugMode) print("Failed to clear user session: $e");
+    }
+  }
+
 
   Future<void> saveUserTokenToPreference(String token) async {
     try {
