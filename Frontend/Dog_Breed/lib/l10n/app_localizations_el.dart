@@ -9,549 +9,516 @@ class AppLocalizationsEl extends AppLocalizations {
   AppLocalizationsEl([String locale = 'el']) : super(locale);
 
   @override
-  String get appTitle => 'Ράτσα σκύλου';
+  String get appTitle => 'Dog Breed';
 
   @override
-  String get settingsTitle => 'Ρυθμίσεις';
+  String get settingsTitle => 'Settings';
 
   @override
-  String get appLanguageTitle => 'Γλώσσα εφαρμογής';
+  String get notificationLanguageTitle => 'Notification Language';
 
   @override
-  String get notificationLanguageTitle => 'Γλώσσα ειδοποιήσεων';
+  String get changePassword => 'Change Password';
 
   @override
-  String get editProfile => 'Επεξεργασία προφίλ';
+  String get aboutUs => 'About Us';
 
   @override
-  String get changePassword => 'Αλλαγή κωδικού';
+  String get customerCare => 'Customer Care';
 
   @override
-  String get notifications => 'Ειδοποιήσεις';
+  String get measurementUnits => 'Measurement Units';
 
   @override
-  String get premiumSubscription => 'Συνδρομή Premium';
+  String get supportAnimalIdProject => 'Support Animal ID project';
 
   @override
-  String get aboutUs => 'Σχετικά με εμάς';
+  String get dialogCancel => 'Cancel';
 
   @override
-  String get faq => 'Συχνές ερωτήσεις';
+  String get dialogDelete => 'Delete';
 
   @override
-  String get termsOfUse => 'Όροι χρήσης';
-
-  @override
-  String get customerCare => 'Εξυπηρέτηση πελατών';
-
-  @override
-  String get measurementUnits => 'Μονάδες μέτρησης';
-
-  @override
-  String get supportAnimalIdProject => 'Υποστηρίξτε το έργο Animal ID';
-
-  @override
-  String get deleteOwnerProfile => 'Διαγραφή προφίλ ιδιοκτήτη';
-
-  @override
-  String get logout => 'Αποσύνδεση';
-
-  @override
-  String get dialogCancel => 'Άκυρο';
-
-  @override
-  String get dialogDelete => 'Διαγραφή';
-
-  @override
-  String get dialogDeleteProfileTitle => 'Διαγραφή προφίλ';
+  String get dialogDeleteProfileTitle => 'Delete profile';
 
   @override
   String get dialogDeleteProfileMessage =>
-      'Είστε βέβαιοι ότι θέλετε να διαγράψετε οριστικά το προφίλ σας; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.';
+      'Are you sure you want to permanently delete your profile? This action cannot be undone.';
 
   @override
-  String get dialogLogoutTitle => 'Αποσύνδεση';
+  String get dialogLogoutTitle => 'Logout';
 
   @override
-  String get dialogLogoutMessage =>
-      'Είστε βέβαιοι ότι θέλετε να αποσυνδεθείτε;';
+  String get dialogLogoutMessage => 'Are you sure you want to logout?';
 
   @override
-  String get manager => 'Διευθυντής';
+  String get manager => 'Manager';
 
   @override
-  String get splashSubtitle =>
-      'Διαχειριστείτε την καθημερινή δραστηριότητα και την υγεία του σκύλου σας';
+  String get splashSubtitle => 'Manage your Dog Daily Activity and Health';
 
   @override
-  String get startLikeAPro => 'Ξεκινήστε σαν επαγγελματίας';
+  String get startLikeAPro => 'Start Like a Pro';
 
   @override
-  String get unlockAllFeatures => 'Ξεκλειδώστε όλες τις δυνατότητες';
+  String get unlockAllFeatures => 'Unlock All Features';
 
   @override
   String get premium => 'Premium';
 
   @override
-  String get free => 'Δωρεάν';
+  String get free => 'Free';
 
   @override
-  String get unlimitedDogScans => 'Απεριόριστες σαρώσεις σκύλων';
+  String get unlimitedDogScans => 'Unlimited Dog Scans';
 
   @override
-  String get supportedBreedDetection => 'Υποστηριζόμενη ανίχνευση φυλής';
+  String get supportedBreedDetection => 'Supported Breed Detection';
 
   @override
-  String get multiplePetProfiles => 'Πολλαπλά προφίλ κατοικίδιων';
+  String get multiplePetProfiles => 'Multiple Pet Profiles';
 
   @override
-  String get removeAds => 'Κατάργηση διαφημίσεων';
+  String get removeAds => 'Remove Ads';
 
   @override
-  String get vipCustomerSupport => 'Εξυπηρέτηση πελατών VIP';
+  String get vipCustomerSupport => 'VIP Customer Support';
 
   @override
-  String get trialOffer => '3 ημέρες ΔΩΡΕΑΝ δοκιμή, μετά Rs 2550/εβδομάδα';
+  String get trialOffer => '3 Days FREE Trial, after that Rs 2550/Week';
 
   @override
-  String get startFreeTrial => 'ΕΝΑΡΞΗ ΔΩΡΕΑΝ ΔΟΚΙΜΗΣ';
+  String get startFreeTrial => 'START FREE TRIAL';
 
   @override
   String get subscriptionDisclaimer =>
-      'Συνεχίζοντας συμφωνείτε με τους Όρους και την Πολιτική Απορρήτου μας, η συνδρομή χρεώνεται μετά τη λήξη της δοκιμής και θα ανανεώνεται αυτόματα. Ακυρώστε τη συνδρομή ανά πάσα στιγμή πριν λήξει η δοκιμή για να αποφύγετε χρεώσεις.';
+      'By continuing you agree to our Terms and Privacy Policy, subscription billed after trial ends and will renew automatically. Cancel subscription anytime before trial ends to avoid charges.';
 
   @override
-  String get welcomeBack => 'Καλώς ήρθατε πίσω, ';
+  String get welcomeBack => 'Welcome back, ';
 
   @override
-  String get searchForDog => 'Αναζήτηση για σκύλο';
+  String get searchForDog => 'Search for Dog';
 
   @override
-  String get tryPremiumFeatures => 'Δοκιμάστε Premium Λειτουργίες 🌵';
+  String get tryPremiumFeatures => 'Try Premium Features 🌵';
 
   @override
   String get premiumOfferDescription =>
-      'Διεκδικήστε την προσφορά σας τώρα και λάβετε απεριόριστη αναγνώριση, έλεγχο υγείας και πολλά άλλα';
+      'Claim your offer now and get unlimited recognition, health check and more';
 
   @override
-  String get getIt => 'ΠΑΡΤΕ ΤΟ';
+  String get getIt => 'GET IT';
 
   @override
-  String get hygiene => 'Υγιεινή';
+  String get hygiene => 'Hygiene';
 
   @override
-  String get cleaning => 'Καθαρισμός';
+  String get cleaning => 'Cleaning';
 
   @override
-  String get medical => 'Ιατρικά';
+  String get medical => 'Medical';
 
   @override
-  String get booking => 'Κράτηση';
+  String get booking => 'Booking';
 
   @override
-  String get identifyDog => 'Ταυτοποίηση Σκύλου';
+  String get identifyDog => 'Identify Dog';
 
   @override
   String get identifyDogDescription =>
-      'Σαρώστε και ταυτοποιήστε άμεσα τον σκύλο σας χρησιμοποιώντας AI';
+      'Scan and identify your dog instantly using AI';
 
   @override
-  String get scanNow => 'Σάρωση τώρα';
+  String get scanNow => 'Scan Now';
 
   @override
-  String get vetVisits => 'Επισκέψεις Κτηνιάτρου';
+  String get vetVisits => 'Vet Visits';
 
   @override
   String get vetVisitsDescription =>
-      'Προγραμματίστε ελέγχους και παρακολουθήστε \n τις επισκέψεις στον κτηνιάτρο';
+      'Schedule check-ups and keep \n track of vet visits';
 
   @override
-  String get createVisit => 'Δημιουργία επίσκεψης';
+  String get createVisit => 'Create Visit';
 
   @override
-  String get foodManagement => 'Διαχείριση Φαγητού';
+  String get foodManagement => 'Food Management';
 
   @override
   String get foodManagementDescription =>
-      'Παρακολουθήστε τα γεύματα και διαχειριστείτε την \n καθημερινή διατροφή του κατοικιδίου σας';
+      'Track meals and manage your \n pet\'s daily nutrition';
 
   @override
-  String get checkSchedule => 'Έλεγχος προγράμματος';
+  String get checkSchedule => 'Check Schedule';
 
   @override
-  String get unknownBreed => 'Άγνωστη ράτσα';
+  String get unknownBreed => 'Unknown Breed';
 
   @override
   String savedScanMessage(Object breedName, Object confidence) {
-    return '✅ Αποθηκεύτηκε: $breedName ($confidence% εμπιστοσύνη)';
+    return '✅ Saved: $breedName ($confidence% confidence)';
   }
 
   @override
   String errorMessage(Object error) {
-    return 'Σφάλμα: $error';
+    return 'Error: $error';
   }
 
   @override
-  String get skip => 'Παράλειψη';
+  String get skip => 'Skip';
 
   @override
-  String get next => 'Επόμενο';
+  String get next => 'Next';
 
   @override
-  String get getStarted => 'Ξεκινήστε';
+  String get getStarted => 'Get Started';
 
   @override
-  String get onboardingTitle1 => 'Διευθυντής Δορυφόρου';
+  String get onboardingTitle1 => 'Satellite Director';
 
   @override
   String get onboardingDesc1 =>
-      'Εξερευνήστε κοντινά μέρη με δορυφορική χαρτογράφηση GPS\nκαι βρείτε δορυφόρους';
+      'Explore Nearby Place with GPS Satellite\nMapping & Find Satellites';
 
   @override
-  String get onboardingTitle2 => 'Χρειαζόμαστε την\n άδειά σας';
+  String get onboardingTitle2 => 'We Need Your\n Permission';
 
   @override
   String get onboardingDesc2 =>
-      'Χρειαζόμαστε άδεια κάμερας για να μπορείτε να κάνετε \nζωντανές σαρώσεις του κατοικίδιου ζώου σας.';
+      'We need camera permission so that you can take \nlive scans of your pet.';
 
   @override
-  String get onboardingTitle3 => 'Διατήρηση ποιότητας εικόνας';
+  String get onboardingTitle3 => 'Maintain Image Quality';
 
   @override
   String get onboardingDesc3 =>
-      'Αποτυπώστε ολόκληρο το σώμα αν είναι δυνατόν. Το κεφάλι πρέπει να είναι \nορατό.';
+      'Capture the whole body if possible. Head should be \nvisible.';
 
   @override
-  String get onboardingTitle4 =>
-      'Βεβαιωθείτε ότι ο σκύλος σας παραμένει \n υγιής και δραστήριος.';
+  String get onboardingTitle4 => 'Ensure Your Dog Stays \n Healthy and Active.';
 
   @override
   String get onboardingDesc4 =>
-      'Διαχειριστείτε κάθε λεπτομέρεια του σκύλου σας—υγεία, φωτογραφίες,\n δραστηριότητες και πολλά άλλα σε ένα απλό μέρος.';
+      'Manage every detail of your dog—health, photos,\n activities and more in one simple place.';
 
   @override
-  String get calendarTabActivities => 'Δραστηριότητες';
+  String get calendarTabActivities => 'Activities';
 
   @override
-  String get calendarTabReminders => 'Υπενθυμίσεις';
+  String get calendarTabReminders => 'Reminders';
 
   @override
-  String get calendarTabProgress => 'Πρόοδος';
+  String get calendarTabProgress => 'Progress';
 
   @override
-  String get calendarTabDocuments => 'Έγγραφα';
+  String get calendarTabDocuments => 'Documents';
 
   @override
-  String get calendarTabSettings => 'Ρυθμίσεις';
+  String get calendarTabSettings => 'Settings';
 
   @override
-  String get activityVeterinary => 'Κτηνίατρος';
+  String get activityVeterinary => 'Veterinary';
 
   @override
-  String get activityPee => 'Ούρηση';
+  String get activityPee => 'Pee';
 
   @override
-  String get activityEat => 'Φαγητό';
+  String get activityEat => 'Eat';
 
   @override
-  String get activityDrink => 'Νερό';
+  String get activityDrink => 'Drink';
 
   @override
-  String get activityPlay => 'Παιχνίδι';
+  String get activityPlay => 'Play';
 
   @override
-  String get activityPoop => 'Κένωση';
+  String get activityPoop => 'Poop';
 
   @override
-  String get activityWalk => 'Βόλτα';
+  String get activityWalk => 'Walk';
 
   @override
-  String get activityCrate => 'Κλουβί';
+  String get activityCrate => 'Crate';
 
   @override
-  String get activitySleep => 'Ύπνος';
+  String get activitySleep => 'Sleep';
 
   @override
-  String get activityTraining => 'Εκπαίδευση';
+  String get activityTraining => 'Training';
 
   @override
-  String get activityTreat => 'Λιχουδιά';
+  String get activityTreat => 'Treat';
 
   @override
-  String get activityGrooming => 'Καλλωπισμός';
+  String get activityGrooming => 'Grooming';
 
   @override
-  String get activityCleaning => 'Καθαρισμός';
+  String get activityCleaning => 'Cleaning';
 
   @override
-  String get activityMedication => 'Φάρμακο';
+  String get activityMedication => 'Medication';
 
   @override
-  String get activityVaccination => 'Εμβολιασμός';
+  String get activityVaccination => 'Vaccination';
 
   @override
-  String get activityWeight => 'Βάρος';
+  String get activityWeight => 'Weight';
 
   @override
-  String get activityHeight => 'Ύψος';
+  String get activityHeight => 'Height';
 
   @override
-  String get activityTemperature => 'Θερμοκρασία';
+  String get activityTemperature => 'Temperature';
 
   @override
-  String get activityHealthCondition => 'Κατάσταση υγείας';
+  String get activityHealthCondition => 'Health Condition';
 
   @override
-  String get activityAccident => 'Ατύχημα';
+  String get activityAccident => 'Accident';
 
   @override
-  String get activityJournal => 'Ημερολόγιο';
+  String get activityJournal => 'Journal';
 
   @override
-  String get calendarManage => 'Διαχείριση';
+  String get calendarManage => 'Manage';
 
   @override
-  String get calendarMonth => 'Μήνας';
+  String get calendarMonth => 'Month';
 
   @override
-  String get calendarComingSoon => 'Έρχεται σύντομα...';
+  String get calendarComingSoon => 'Coming soon...';
 
   @override
-  String get calendarNoActivityLogged => 'Καμία καταγεγραμμένη δραστηριότητα';
+  String get calendarNoActivityLogged => 'No Activity Logged';
 
   @override
-  String get calendarAddActivity => 'Προσθήκη δραστηριότητας';
+  String get calendarAddActivity => 'Add Activity';
 
   @override
-  String get progressTabCalendar => 'Ημερολόγιο';
+  String get progressTabCalendar => 'Calendar';
 
   @override
-  String get progressTabChart => 'Γράφημα';
+  String get progressTabChart => 'Chart';
 
   @override
-  String get progressTabCompare => 'Σύγκριση';
+  String get progressTabCompare => 'Compare';
 
   @override
-  String get petSelectPet => 'Επιλογή κατοικιδίου';
+  String get petSelectPet => 'Select Pet';
 
   @override
-  String get petNoPetSelected => 'Κανένα κατοικίδιο';
+  String get petNoPetSelected => 'No Pet Selected';
 
   @override
-  String get petNoPetSelectedOption => 'Κανένα κατοικίδιο';
+  String get petNoPetSelectedOption => 'No pet selected';
 
   @override
-  String get activityNote => 'Σημείωση:';
+  String get activityNote => 'Note:';
 
   @override
-  String get actionEdit => 'Επεξεργασία';
+  String get actionEdit => 'Edit';
 
   @override
-  String get actionDelete => 'Διαγραφή';
+  String get actionDelete => 'Delete';
 
   @override
-  String get dialogDeleteActivityTitle => 'Διαγραφή δραστηριότητας';
+  String get dialogDeleteActivityTitle => 'Delete Activity';
 
   @override
-  String get calendarHeatmapTab => 'Θερμικός χάρτης';
+  String get calendarHeatmapTab => 'Heatmap';
 
   @override
-  String get calendarTimelineTab => 'Χρονολόγιο';
+  String get calendarTimelineTab => 'Timeline';
 
   @override
-  String get calendarActivityIntensity => 'Ένταση δραστηριότητας';
+  String get calendarActivityIntensity => 'Activity Intensity';
 
   @override
-  String get calendarErrorLoadingHeatmap => 'Σφάλμα φόρτωσης θερμικού χάρτη';
+  String get calendarErrorLoadingHeatmap => 'Error loading heatmap';
 
   @override
-  String get calendarLegendNone => 'Κανένα';
+  String get calendarLegendNone => 'None';
 
   @override
-  String get calendarLegendLow => 'Χαμηλή';
+  String get calendarLegendLow => 'Low';
 
   @override
-  String get calendarLegendMedium => 'Μεσαία';
+  String get calendarLegendMedium => 'Medium';
 
   @override
-  String get calendarLegendHigh => 'Υψηλή';
+  String get calendarLegendHigh => 'High';
 
   @override
-  String get calendarLegendNow => 'Τώρα';
+  String get calendarLegendNow => 'Now';
 
   @override
-  String get calendarChartAmount => 'Ποσότητα σε mL';
+  String get calendarChartAmount => 'Amount in ml';
 
   @override
-  String get calendarChartFrequency => 'Συχνότητα';
+  String get calendarChartFrequency => 'Frequency';
 
   @override
-  String get calendarShare => 'Κοινοποίηση';
+  String get calendarShare => 'Share';
 
   @override
-  String get calendarMostActiveDay => 'Πιο ενεργή ημέρα';
+  String get calendarMostActiveDay => 'Most Active Day';
 
   @override
-  String get calendarMostActiveTime => 'Πιο ενεργή ώρα';
+  String get calendarMostActiveTime => 'Most Active Time';
 
   @override
   String dialogDeleteActivityContent(Object activityName) {
-    return 'Είστε βέβαιοι ότι θέλετε να διαγράψετε το \"$activityName\";';
+    return 'Are you sure you want to delete \"$activityName\"?';
   }
 
   @override
-  String get dialogActionsRequired => 'Απαιτούνται ενέργειες';
+  String get dialogActionsRequired => 'Actions Required';
 
   @override
   String get dialogAddPetMessage =>
-      'Προσθέστε τουλάχιστον ένα κατοικίδιο για να ξεκινήσετε.';
+      'Add at least one pet to start adding activities and reminders.';
 
   @override
   String get dialogGot_it => 'Got it';
 
   @override
-  String get dialogGotIt => 'Κατάλαβα';
+  String get dialogGotIt => 'Got it';
 
   @override
-  String get dayMon => 'Δευ';
+  String get dayMon => 'Mon';
 
   @override
-  String get dayTue => 'Τρι';
+  String get dayTue => 'Tue';
 
   @override
-  String get dayWed => 'Τετ';
+  String get dayWed => 'Wed';
 
   @override
-  String get dayThu => 'Πεμ';
+  String get dayThu => 'Thu';
 
   @override
-  String get dayFri => 'Παρ';
+  String get dayFri => 'Fri';
 
   @override
-  String get daySat => 'Σαβ';
+  String get daySat => 'Sat';
 
   @override
-  String get daySun => 'Κυρ';
+  String get daySun => 'Sun';
 
   @override
-  String get walkDeleteTitle => 'Διαγραφή βόλτας;';
+  String get walkDeleteTitle => 'Delete Walk?';
 
   @override
-  String get walkDeleteContent =>
-      'Αυτό θα απορρίψει την τρέχουσα συνεδρία βόλτας.';
+  String get walkDeleteContent => 'This will discard the current walk session.';
 
   @override
-  String get walkCancel => 'Ακύρωση';
+  String get walkCancel => 'Cancel';
 
   @override
-  String get walkDelete => 'Διαγραφή';
+  String get walkDelete => 'Delete';
 
   @override
-  String get walkStartTimerWarning =>
-      'Παρακαλώ ξεκινήστε το χρονόμετρο πριν την αποθήκευση.';
+  String get walkStartTimerWarning => 'Please start timer before saving.';
 
   @override
-  String get walkNote => 'Σημείωση';
+  String get walkNote => 'Note';
 
   @override
-  String get walkNoteHint => 'Οι σημειώσεις σας εδώ';
+  String get walkNoteHint => 'Your notes here';
 
   @override
-  String get walkSave => 'Αποθήκευση';
+  String get walkSave => 'Save';
 
   @override
-  String get walkAddNote => 'Προσθήκη σημειώσης';
+  String get walkAddNote => 'Add a note';
 
   @override
-  String get walkDefaultName => 'Βόλτα';
+  String get walkDefaultName => 'Walk';
 
   @override
   String get walkLocationPermission =>
-      'Απαιτείται άδεια τοποθεσίας για την καταγραφή των περιπάτων.';
+      'Location permission is required to track walks.';
 
   @override
-  String get walkLocationService =>
-      'Οι υπηρεσίες τοποθεσίας είναι απενεργοποιημένες.';
+  String get walkLocationService => 'Location services are disabled.';
 
   @override
-  String get reminderAddTitle => 'Προσθήκη υπενθύμισης';
+  String get reminderAddTitle => 'Add Reminder';
 
   @override
-  String get reminderNone => 'Καμία υπενθύμιση';
+  String get reminderNone => 'No Reminders';
 
   @override
-  String get reminderDefaultTitle => 'Υπενθύμιση';
+  String get reminderDefaultTitle => 'Reminder';
 
   @override
-  String get actionUpdate => 'Ενημέρωση';
+  String get actionUpdate => 'Update';
 
   @override
-  String get actionRemove => 'Αφαίρεση';
+  String get actionRemove => 'Remove';
 
   @override
   String errorUpdateFailed(Object error) {
-    return 'Η ενημέρωση απέτυχε: $error';
+    return 'Update failed: $error';
   }
 
   @override
-  String get errorUpdateNotFound =>
-      'Αδυναμία ενημέρωσης: Η δραστηριότητα δεν βρέθηκε';
+  String get errorUpdateNotFound => 'Unable to update: Activity not found';
 
   @override
-  String get durationHr => 'ώρες';
+  String get durationHr => 'hr';
 
   @override
-  String get durationMin => 'λεπτά';
+  String get durationMin => 'min';
 
   @override
-  String get durationSec => 'δευτ';
+  String get durationSec => 'sec';
 
   @override
-  String get pickerTakePhoto => 'Λήψη φωτογραφίας';
+  String get pickerTakePhoto => 'Take Photo';
 
   @override
-  String get pickerGallery => 'Επιλογή από τη συλλογή';
+  String get pickerGallery => 'Choose from Gallery';
 
   @override
-  String get pickerRecordVideo => 'Εγγραφή βίντεο';
+  String get pickerRecordVideo => 'Record Video';
 
   @override
-  String get errorSelectActivity => 'Παρακαλώ επιλέξτε πρώτα μια δραστηριότητα';
+  String get errorSelectActivity => 'Please select an activity first';
 
   @override
-  String get errorReminderFuture =>
-      'Η ώρα υπενθύμισης πρέπει να είναι στο μέλλον';
+  String get errorReminderFuture => 'Reminder time must be in the future';
 
   @override
-  String get errorValidWeight => 'Παρακαλώ εισάγετε έγκυρο βάρος';
+  String get errorValidWeight => 'Please enter a valid weight';
 
   @override
-  String get errorValidHeight => 'Παρακαλώ εισάγετε έγκυρο ύψος';
+  String get errorValidHeight => 'Please enter a valid height';
 
   @override
-  String get errorValidTemp => 'Παρακαλώ εισάγετε έγκυρη θερμοκρασία';
+  String get errorValidTemp => 'Please enter a valid temperature';
 
   @override
-  String get errorEnterFood => 'Παρακαλώ εισάγετε όνομα ή τύπο φαγητού';
+  String get errorEnterFood => 'Please enter food name or type';
 
   @override
-  String get successActivitySaved =>
-      'Η δραστηριότητα αποθηκεύτηκε με επιτυχία!';
+  String get successActivitySaved => 'Activity saved successfully!';
 
   @override
   String get successActivitySavedReminder =>
-      'Η δραστηριότητα με υπενθύμιση αποθηκεύτηκε με επιτυχία!';
+      'Activity with reminder saved successfully!';
 
   @override
   String errorSaveFailed(Object error) {
-    return 'Αποτυχία αποθήκευσης: $error';
+    return 'Save failed: $error';
   }
 
   @override
-  String get labelSelectedImage => 'Επιλεγμένη εικόνα:';
+  String get labelSelectedImage => 'Selected Image:';
 
   @override
-  String get labelSelectedVideo => 'Επιλεγμένο βίντεο:';
+  String get labelSelectedVideo => 'Selected Video:';
 
   @override
   String get unitOz => 'oz';
@@ -566,7 +533,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get unitKg => 'kg';
 
   @override
-  String get unitInches => 'ίντσες';
+  String get unitInches => 'inches';
 
   @override
   String get unitCm => 'cm';
@@ -584,204 +551,203 @@ class AppLocalizationsEl extends AppLocalizations {
   String get unitMi => 'mi';
 
   @override
-  String get actionAdd => 'Προσθήκη ονόματος ή τύπου ποτού';
+  String get actionAdd => 'Add drink name or type';
 
   @override
-  String get actionAddImage => '+ Προσθήκη Εικόνας';
+  String get actionAddImage => '+ Add Image';
 
   @override
-  String get actionAddVideo => '+ Προσθήκη Βίντεο';
+  String get actionAddVideo => '+ Add Video';
 
   @override
-  String get hintAddNote => 'Προσθέστε σημείωση...';
+  String get hintAddNote => 'Add note...';
 
   @override
-  String get startedAt => 'Ξεκίνησε στις';
+  String get startedAt => 'Started at';
 
   @override
-  String get endedAt => 'Τελείωσε στις';
+  String get endedAt => 'Ended at';
 
   @override
-  String get noActivitySelected => 'Δεν επιλέχθηκε δραστηριότητα';
+  String get noActivitySelected => 'No activity selected';
 
   @override
-  String get actionAddTreat => '+ Προσθήκη λιχουδιάς';
+  String get actionAddTreat => '+ Add treat';
 
   @override
-  String get actionAddGrooming => '+ Προσθήκη τύπου περιποίησης';
+  String get actionAddGrooming => '+ Add grooming type';
 
   @override
-  String get actionAddMedication => '+ Προσθήκη φαρμάκου';
+  String get actionAddMedication => '+ Add medication';
 
   @override
-  String get actionAddVaccination => '+ Προσθήκη εμβολιασμού';
+  String get actionAddVaccination => '+ Add vaccination';
 
   @override
-  String get actionAddHealthCondition => '+ Προσθήκη κατάστασης υγείας';
+  String get actionAddHealthCondition => '+ Add health condition';
 
   @override
-  String get actionAddAccident => '+ Προσθήκη τύπου ατυχήματος';
+  String get actionAddAccident => '+ Add accident type';
 
   @override
-  String get actionAddCleaning => '+ Προσθήκη τύπου καθαρισμού';
+  String get actionAddCleaning => '+ Add cleaning type';
 
   @override
   String get actionAddVeterinary => '+ Add veterinary';
 
   @override
-  String get actionAddFood => '+ Προσθήκη ονόματος ή τύπου φαγητού';
+  String get actionAddFood => '+ Add food name or type';
 
   @override
-  String get actionStartTimer => 'Ή ξεκινήστε ένα χρονόμετρο';
+  String get actionStartTimer => 'Or start a timer';
 
   @override
-  String get labelDate => 'Ημερομηνία';
+  String get labelDate => 'Date';
 
   @override
-  String get labelTime => 'Ώρα';
+  String get labelTime => 'Time';
 
   @override
-  String get labelName => 'Όνομα';
+  String get labelName => 'Name';
 
   @override
-  String get hintEnterName => 'Εισάγετε όνομα';
+  String get hintEnterName => 'Enter name';
 
   @override
-  String get actionSave => 'Αποθήκευση';
+  String get actionSave => 'Save';
 
   @override
-  String get pickerSelectDate => 'Επιλογή ημερομηνίας';
+  String get pickerSelectDate => 'Select date';
 
   @override
-  String get pickerSelectTime => 'Επιλογή ώρας';
+  String get pickerSelectTime => 'Select time';
 
   @override
   String reminderSetFor(String date, String time) {
-    return 'Υπενθύμιση για $date στις $time';
+    return 'Reminder set for $date at $time';
   }
 
   @override
-  String get myPetsTitle => 'Τα Κατοικίδιά μου';
+  String get myPetsTitle => 'My Pets';
 
   @override
-  String get noPetsAdded => 'Δεν έχουν προστεθεί κατοικίδια ακόμα';
+  String get noPetsAdded => 'No pets added yet';
 
   @override
-  String get addPetButton => '+ Προσθήκη κατοικιδίου';
+  String get addPetButton => '+ Add pet';
 
   @override
-  String get noPetsMatch =>
-      'Δεν βρέθηκαν κατοικίδια που να ταιριάζουν με την αναζήτησή σας';
+  String get noPetsMatch => 'No pets match your search';
 
   @override
-  String get tryDifferentSearch => 'Δοκιμάστε έναν διαφορετικό όρο αναζήτησης';
+  String get tryDifferentSearch => 'Try a different search term';
 
   @override
-  String get petUpdatedSuccess => 'Το κατοικίδιο ενημερώθηκε με επιτυχία!';
+  String get petUpdatedSuccess => 'Pet updated successfully!';
 
   @override
-  String get deletePetTitle => 'Διαγραφή Κατοικιδίου';
+  String get deletePetTitle => 'Delete pet';
 
   @override
   String deletePetMessage(String petName) {
-    return 'Είστε σίγουροι ότι θέλετε να διαγράψετε το $petName;';
+    return 'Are you sure you want to delete $petName?';
   }
 
   @override
-  String get cancelButton => 'Ακύρωση';
+  String get cancelButton => 'Cancel';
 
   @override
-  String get deleteButton => 'Διαγραφή';
+  String get deleteButton => 'Delete';
 
   @override
   String petDeletedSuccess(String petName) {
-    return 'Το $petName διαγράφηκε με επιτυχία';
+    return '$petName deleted successfully';
   }
 
   @override
   String petDeleteFailed(String petName) {
-    return 'Αποτυχία διαγραφής του $petName';
+    return 'Failed to delete $petName';
   }
 
   @override
-  String get unknown => 'Άγνωστο';
+  String get unknown => 'Unknown';
 
   @override
-  String get genderOther => 'Άλλο';
+  String get genderOther => 'Other';
 
   @override
-  String get editPetTitle => 'Επεξεργασία κατοικιδίου';
+  String get editPetTitle => 'Edit Pet';
 
   @override
-  String get labelPhoto => 'Φωτογραφία';
+  String get labelPhoto => 'Photo';
 
   @override
-  String get hintSelectBreed => 'Επιλογή ράτσας';
+  String get hintSelectBreed => 'Select Breed';
 
   @override
-  String get hintSearchBreed => 'Αναζήτηση ράτσας...';
+  String get hintSearchBreed => 'Search breed...';
 
   @override
-  String get noBreedsFound => 'Δεν βρέθηκαν ράτσες';
+  String get noBreedsFound => 'No breeds found';
 
   @override
-  String get msgFillAllFields => 'Παρακαλώ συμπληρώστε όλα τα πεδία';
+  String get msgFillAllFields => 'Please fill all fields';
 
   @override
-  String get msgUpdateFailed => 'Η ενημέρωση απέτυχε';
+  String get msgUpdateFailed => 'Failed to update pet';
 
   @override
-  String get msgAddFailed => 'Η προσθήκη απέτυχε';
+  String get msgAddFailed => 'Failed to add pet';
 
   @override
   String msgImagePickFailed(Object error) {
-    return 'Αποτυχία επιλογής εικόνας: $error';
+    return 'Failed to pick image: $error';
   }
 
   @override
-  String get labelBreed => 'Ράτσα';
+  String get labelBreed => 'Breed';
 
   @override
-  String get labelGender => 'Φύλο';
+  String get labelGender => 'Gender';
 
   @override
-  String get labelDOB => 'Ημερομηνία γέννησης';
+  String get labelDOB => 'Date of Birth';
 
   @override
-  String get genderMale => 'Αρσενικό';
+  String get genderMale => 'Male';
 
   @override
-  String get genderFemale => 'Θηλυκό';
+  String get genderFemale => 'Female';
 
   @override
-  String get labelPetName => 'Όνομα κατοικιδίου';
+  String get labelPetName => 'Pet Name';
 
   @override
-  String get addPetTitle => 'Προσθήκη κατοικιδίου';
+  String get addPetTitle => 'Add Pet';
 
   @override
-  String get labelRequired => '(Απαιτείται)';
+  String get labelRequired => '(Required)';
 
   @override
-  String get hintEnterPetName => 'Εισάγετε όνομα';
+  String get hintEnterPetName => 'Enter pet name';
 
   @override
-  String get hintSelectGender => 'Επιλογή φύλου';
+  String get hintSelectGender => 'Select gender';
 
   @override
-  String get errorSelectGender => 'Παρακαλώ επιλέξτε φύλο';
+  String get errorSelectGender => 'Please select gender';
 
   @override
-  String get errorFillRequired => 'Παρακαλώ συμπληρώστε τα υποχρεωτικά πεδία';
+  String get errorFillRequired => 'Please fill all required fields';
 
   @override
-  String get errorRequired => '(Απαιτείται)';
+  String get errorRequired => '(Required)';
 
   @override
-  String get hintTapToScan => 'Πατήστε για σάρωση';
+  String get hintTapToScan => 'Tap to scan or select';
 
   @override
-  String get msgBreedDetected => 'Η φυλή εντοπίστηκε!';
+  String get msgBreedDetected => 'Breed detected!';
 
   @override
   String get breedAffenpinscher => 'Affenpinscher';
@@ -1150,139 +1116,137 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get navHome => 'Αρχική';
+  String get navHome => 'Home';
 
   @override
-  String get navCalendar => 'Ημερολόγιο';
+  String get navCalendar => 'Calendar';
 
   @override
-  String get navMyPets => 'Τα Κατοικίδιά Μου';
+  String get navMyPets => 'My Pets';
 
   @override
-  String get navProfile => 'Προφίλ';
+  String get navProfile => 'Profile';
 
   @override
-  String get aiIdentifyingYour => 'Η τεχνητή νοημοσύνη αναγνωρίζει τον ';
+  String get aiIdentifyingYour => 'AI identifying Your ';
 
   @override
-  String get dogText => 'ΣΚΥΛΟ';
+  String get dogText => 'DOG';
 
   @override
-  String get identifyingTimeText => 'Αυτό συνήθως διαρκεί έως 1 λεπτό...';
+  String get identifyingTimeText => 'This usually takes up to 1 minute...';
 
   @override
-  String get analyzingImage => 'Ανάλυση εικόνας...';
+  String get analyzingImage => 'Analyzing image...';
 
   @override
-  String get errorOccurred => 'Παρουσιάστηκε σφάλμα';
+  String get errorOccurred => 'Error Occurred';
 
   @override
-  String get goBack => 'Επιστροφή';
+  String get goBack => 'Go Back';
 
   @override
-  String get noDogDetected => 'Δεν εντοπίστηκε σκύλος';
+  String get noDogDetected => 'No Dog Detected';
 
   @override
-  String get clearerPhotoPrompt =>
-      'Παρακαλώ δοκιμάστε με μια πιο καθαρή φωτογραφία ενός σκύλου.';
+  String get clearerPhotoPrompt => 'Please try with a clearer photo of a dog.';
 
   @override
-  String get cancel => 'Ακύρωση';
+  String get cancel => 'Cancel';
 
   @override
-  String get tryAgain => 'Δοκιμάστε ξανά';
+  String get tryAgain => 'Try Again';
 
   @override
   String lowConfidenceWarning(String confidence) {
-    return 'Χαμηλή εμπιστοσύνη ($confidence%). Τα αποτελέσματα μπορεί να μην είναι ακριβή.';
+    return 'Low confidence ($confidence%). Results may not be accurate.';
   }
 
   @override
-  String get savingToRecentScans => 'Αποθήκευση σε πρόσφατες σαρώσεις...';
+  String get savingToRecentScans => 'Saving to recent scans...';
 
   @override
-  String get dogResults => 'Αποτελέσματα σκύλου';
+  String get dogResults => 'Dog Results';
 
   @override
-  String get size => 'Μέγεθος';
+  String get size => 'Size';
 
   @override
-  String get shape => 'Σχήμα';
+  String get shape => 'Shape';
 
   @override
-  String get color => 'Χρώμα';
+  String get color => 'Color';
 
   @override
-  String get coat => 'Τρίχωμα';
+  String get coat => 'Coat';
 
   @override
-  String get headAndFace => 'Κεφάλι & Πρόσωπο';
+  String get headAndFace => 'Head & Face';
 
   @override
-  String get purpose => 'Σκοπός';
+  String get purpose => 'Purpose';
 
   @override
-  String get body => 'Σώμα';
+  String get body => 'Body';
 
   @override
-  String get weight => 'Βάρος';
+  String get weight => 'Weight';
 
   @override
-  String get temperamentAndCharacteristics => 'Ιδιοσυγκρασία & Χαρακτηριστικά';
+  String get temperamentAndCharacteristics => 'Temperament & Characteristics';
 
   @override
-  String get energyLevel => 'Επίπεδο ενέργειας';
+  String get energyLevel => 'Energy Level';
 
   @override
-  String get trainability => 'Εκπαιδευσιμότητα';
+  String get trainability => 'Trainability';
 
   @override
-  String get socialBehavior => 'Κοινωνική συμπεριφορά';
+  String get socialBehavior => 'Social Behavior';
 
   @override
-  String get familyCompatibility => 'Οικογενειακή συμβατότητα';
+  String get familyCompatibility => 'Family Compatibility';
 
   @override
-  String get childFriendliness => 'Φιλικότητα προς τα παιδιά';
+  String get childFriendliness => 'Child Friendliness';
 
   @override
-  String get addPet => '+Προσθήκη κατοικιδίου';
+  String get addPet => '+add Pet';
 
   @override
-  String get cannotSave => 'Αδυναμία αποθήκευσης';
+  String get cannotSave => 'Cannot Save';
 
   @override
-  String get saving => 'Αποθήκευση...';
+  String get saving => 'Saving...';
 
   @override
-  String get saved => 'Αποθηκεύτηκε';
+  String get saved => 'Saved';
 
   @override
-  String get save => 'Αποθήκευση';
+  String get save => 'Save';
 
   @override
   String cannotSaveConfidence(String confidence) {
-    return 'Αδυναμία αποθήκευσης: Εμπιστοσύνη $confidence% < 40%';
+    return 'Cannot save: Confidence $confidence% < 40%';
   }
 
   @override
-  String get noPredictionResult => 'Δεν υπάρχει διαθέσιμο αποτέλεσμα πρόβλεψης';
+  String get noPredictionResult => 'No prediction result available';
 
   @override
-  String get noImageDataToSave =>
-      'Δεν υπάρχουν δεδομένα εικόνας για αποθήκευση';
+  String get noImageDataToSave => 'No image data to save';
 
   @override
-  String get failedToSaveResults => 'Αποτυχία αποθήκευσης αποτελεσμάτων';
+  String get failedToSaveResults => 'Failed to save results';
 
   @override
-  String get moderate => 'Μέτρια';
+  String get moderate => 'Moderate';
 
   @override
-  String get friendly => 'Φιλικό';
+  String get friendly => 'Friendly';
 
   @override
-  String get good => 'Καλό';
+  String get good => 'Good';
 
   @override
   String get sizeSmall => 'Small';
@@ -1474,295 +1438,293 @@ class AppLocalizationsEl extends AppLocalizations {
   String get colorSable => 'Sable';
 
   @override
-  String get chooseProfilePhoto => 'Επιλογή φωτογραφίας προφίλ';
+  String get chooseProfilePhoto => 'Choose Profile Photo';
 
   @override
-  String get camera => 'Κάμερα';
+  String get camera => 'Camera';
 
   @override
-  String get gallery => 'Συλλογή';
+  String get gallery => 'Gallery';
 
   @override
-  String get ownersProfile => 'Προφίλ ιδιοκτήτη';
+  String get ownersProfile => 'Owner\'s Profile';
 
   @override
-  String get petOwner => 'Ιδιοκτήτης κατοικίδιου';
+  String get petOwner => 'Pet Owner';
 
   @override
-  String get lastName => 'Επίθετο';
+  String get lastName => 'Last Name';
 
   @override
-  String get ownerContacts => 'Επαφές ιδιοκτήτη';
+  String get ownerContacts => 'Owner Contacts';
 
   @override
   String get email => 'Email';
 
   @override
-  String get mainPhone => 'Κύριο τηλέφωνο';
+  String get mainPhone => 'Main Phone';
 
   @override
-  String get instantGpsAlerts => 'Άμεσες ειδοποιήσεις GPS κατά τη σάρωση';
+  String get instantGpsAlerts => 'Instant Gps Alerts Upon Tag Scan';
 
   @override
   String get gpsAlertsDescription =>
-      'Λάβετε άμεσες ενημερώσεις τοποθεσίας κατοικίδιων, αποφεύγοντας την ταλαιπωρία των παραδοσιακών email';
+      'Get instant pet location updates, avoiding the hassle of traditional emails';
 
   @override
-  String get emergencyContacts => 'Επαφές έκτακτης ανάγκης';
+  String get emergencyContacts => 'Emergency Contacts';
 
   @override
   String get vetContactsDescription =>
-      'Επαφές του κτηνιάτρου, του συνιδιοκτήτη και του επιστάτη σε περίπτωση που το κύριο τηλέφωνο δεν είναι διαθέσιμο';
+      'Contacts of the vet, co-owner, and caretaker  \n case the main phone isn\'t available';
 
   @override
   String get messenger => 'Messenger';
 
   @override
   String get messengerDescription =>
-      'Ένας εναλλακτικός τρόπος επικοινωνίας με τον ιδιοκτήτη εάν είναι αδύνατο να τον καλέσετε';
+      'An alternative way to contact the owner if it is impossible to call them';
 
   @override
-  String get petsResidence => 'Κατοικία κατοικίδιου';
+  String get petsResidence => 'Pets Place of Residence';
 
   @override
-  String get country => 'Χώρα';
+  String get country => 'Country';
 
   @override
-  String get city => 'Πόλη';
+  String get city => 'City';
 
   @override
-  String get address => 'Διεύθυνση';
+  String get address => 'Address';
 
   @override
-  String get addAddress => 'Προσθήκη διεύθυνσης';
+  String get addAddress => 'Add Address';
 
   @override
-  String get labelAdd => 'Προσθήκη';
+  String get labelAdd => 'Add';
 
   @override
-  String get getPremium => 'ΑΠΟΚΤΗΣΤΕ PREMIUM';
+  String get getPremium => 'GET PREMIUM';
 
   @override
-  String get recentScansTitle => 'Πρόσφατες Σαρώσεις';
+  String get recentScansTitle => 'Recent Scans';
 
   @override
   String scansCount(int count) {
-    return '$count Σαρώσεις';
+    return '$count Scans';
   }
 
   @override
-  String get zeroResults => '0 Αποτελέσματα';
+  String get zeroResults => '0 Results';
 
   @override
   String get noScansMessage =>
-      'Μόλις κάνετε την πρώτη σας σάρωση,\nτα αποτελέσματά σας θα καταγραφούν εδώ.';
+      'As soon as you’ve made your first scan,\nyour results will be logged here.';
 
   @override
-  String get scanLooksLike => 'Ο σκύλος που σαρώσατε μοιάζει με αυτό.';
+  String get scanLooksLike => 'Your dog you scanned looks like this.';
 
   @override
-  String get returnAction => 'Επιστροφή';
+  String get returnAction => 'Return';
 
   @override
-  String get showAction => 'Εμφάνιση';
+  String get showAction => 'Show';
 
   @override
   String daysAgo(int count) {
-    return '$count ημέρες πριν';
+    return '$count days ago';
   }
 
   @override
   String hoursAgo(int count) {
-    return '$count ώρες πριν';
+    return '$count hours ago';
   }
 
   @override
   String minutesAgo(int count) {
-    return '$count λεπτά πριν';
+    return '$count minutes ago';
   }
 
   @override
-  String get justNow => 'Μόλις τώρα';
+  String get justNow => 'Just now';
 
   @override
   String rescannedSuccess(String breedName, String confidence) {
-    return '✅ Επανασάρωση: $breedName ($confidence% εμπιστοσύνη)';
+    return '✅ Re-scanned: $breedName ($confidence% confidence)';
   }
 
   @override
   String errorRescanning(Object error) {
-    return 'Σφάλμα επανασάρωσης: $error';
+    return 'Error re-scanning: $error';
   }
 
   @override
   String get changePasswordSubtitle =>
-      'Δημιουργήστε έναν ισχυρό, ασφαλή κωδικό πρόσβασης για να διατηρήσετε τον λογαριασμό σας προστατευμένο και προσβάσιμο.';
+      'Create a strong, secure password to keep your account protected and accessible.';
 
   @override
-  String get currentPassword => 'Τρέχων κωδικός πρόσβασης';
+  String get currentPassword => 'Current Password';
 
   @override
-  String get newPassword => 'Νέος κωδικός πρόσβασης';
+  String get newPassword => 'New Password';
 
   @override
-  String get repeatPassword => 'Επανάληψη κωδικού πρόσβασης';
+  String get repeatPassword => 'Repeat Password';
 
   @override
-  String get faqQuestion1 => 'Πώς μπορώ να εγγράψω ένα κατοικίδιο;';
+  String get faqQuestion1 => 'How can I register a pet?';
 
   @override
   String get faqAnswer1 =>
-      'Μπορείτε να εγγράψετε το κατοικίδιό σας μεταβαίνοντας στην ενότητα \"Προσθήκη κατοικιδίου\", συμπληρώνοντας τα απαιτούμενα στοιχεία (όνομα, ράτσα, ηλικία κ.λπ.) και επισυνάπτοντας μια φωτογραφία. Μόλις εγγραφείτε, θα λάβετε ένα μοναδικό αναγνωριστικό ετικέτας QR κατοικιδίου.';
+      'You can register your pet by going to the \"Add Pet\" section, filling in the required details (name, breed, age, etc.), and attaching a photo. Once registered, you’ll receive a unique QR pet tag ID.';
 
   @override
-  String get faqQuestion2 => 'Γιατί πρέπει να εγγράψω το κατοικίδιό μου;';
+  String get faqQuestion2 => 'Why should I register my pet?';
 
   @override
   String get faqAnswer2 =>
-      'Η εγγραφή του κατοικιδίου σας βοηθά σε περίπτωση που χαθεί. Όποιος βρει το κατοικίδιό σας μπορεί να σαρώσει την ετικέτα QR και να επικοινωνήσει άμεσα μαζί σας με την τοποθεσία του κατοικιδίου.';
+      'Registering your pet helps in case they get lost. Anyone who finds your pet can scan the QR tag and instantly contact you with the pet’s location.';
 
   @override
-  String get faqQuestion3 => 'Ενεργοποίηση ετικέτας QR κατοικιδίου;';
+  String get faqQuestion3 => 'QR pet tag activation?';
 
   @override
   String get faqAnswer3 =>
-      'Μετά την εγγραφή, θα λάβετε μια ψηφιακή ή φυσική ετικέτα QR. Σαρώστε την με οποιαδήποτε κάμερα τηλεφώνου για να τη συνδέσετε στο προφίλ του κατοικιδίου σας. Δεν απαιτείται εφαρμογή για όσους το βρουν!';
+      'After registering, you’ll get a digital or physical QR tag. Scan it with any phone camera to link it to your pet’s profile. No app needed for finders!';
 
   @override
-  String get faqQuestion4 => 'Πώς λειτουργεί η σάρωση κωδικού QR;';
+  String get faqQuestion4 => 'How does QR code scanning work?';
 
   @override
   String get faqAnswer4 =>
-      'Ο καθένας μπορεί να σαρώσει την ετικέτα QR χρησιμοποιώντας την κάμερα του τηλεφώνου του. Ανοίγει μια ιστοσελίδα με τα στοιχεία επικοινωνίας σας και τα στοιχεία του κατοικιδίου, ώστε να μπορούν να επικοινωνήσουν μαζί σας αμέσως.';
+      'Anyone can scan the QR tag using their phone’s camera. It opens a web page with your contact info and pet details so they can reach you immediately.';
 
   @override
-  String get faqQuestion5 => 'Ποιος μπορεί να εγγράψει ένα κατοικίδιο;';
+  String get faqQuestion5 => 'Who can register a pet?';
 
   @override
   String get faqAnswer5 =>
-      'Οποιοσδήποτε ιδιοκτήτης κατοικιδίου μπορεί να εγγράψει τον σκύλο, τη γάτα ή άλλο ζώο συντροφιάς του.';
+      'Any pet owner can register their dog, cat, or other companion animal.';
 
   @override
-  String get faqQuestion6 => 'Πώς μπορώ να αλλάξω τα δεδομένα μου;';
+  String get faqQuestion6 => 'How can I change my data?';
 
   @override
   String get faqAnswer6 =>
-      'Μεταβείτε στο Προφίλ → πατήστε οποιοδήποτε πεδίο (Όνομα, Email, Τηλέφωνο κ.λπ.) για επεξεργασία και αποθήκευση.';
+      'Go to Profile → tap any field (Name, Email, Phone, etc.) to edit and save.';
 
   @override
-  String get faqQuestion7 =>
-      'Πώς μπορώ να αλλάξω τα δεδομένα του κατοικιδίου μου;';
+  String get faqQuestion7 => 'How can I change my pet\'s data?';
 
   @override
   String get faqAnswer7 =>
-      'Μεταβείτε στο προφίλ του κατοικιδίου σας και πατήστε το κουμπί επεξεργασίας για να ενημερώσετε το όνομα, τη ράτσα, τις φωτογραφίες κ.λπ.';
+      'Go to your pet’s profile and tap the edit button to update name, breed, photos, etc.';
 
   @override
-  String get faqQuestion8 => 'Τι είναι ο αριθμός ταυτότητας κατοικιδίου;';
+  String get faqQuestion8 => 'What is a pet ID number?';
 
   @override
   String get faqAnswer8 =>
-      'Είναι ένα μοναδικό αναγνωριστικό που συνδέεται με την ετικέτα QR του κατοικιδίου σας για γρήγορη αναγνώριση.';
+      'It’s a unique identifier linked to your pet’s QR tag for quick identification.';
 
   @override
-  String get faqQuestion9 => 'Το κατοικίδιό μου χάθηκε, τι πρέπει να κάνω;';
+  String get faqQuestion9 => 'My pet is lost what should I do?';
 
   @override
   String get faqAnswer9 =>
-      'Σημειώστε το κατοικίδιό σας ως \"Χαμένο\" στην εφαρμογή. Αυτό ειδοποιεί όποιον σαρώνει την ετικέτα και εμφανίζει τα στοιχεία επικοινωνίας έκτακτης ανάγκης σας.';
+      'Mark your pet as \"Lost\" in the app. This alerts anyone who scans the tag and shows your emergency contact info.';
 
   @override
-  String get savedActivities => 'Αποθηκευμένες δραστηριότητες';
+  String get savedActivities => 'Saved Activities';
 
   @override
   String get deleteProfileWarning =>
-      'Προειδοποίηση! Το προφίλ και όλο το περιεχόμενό του θα διαγραφούν οριστικά και δεν μπορούν να ανακτηθούν. Εάν έχετε ενεργή συνδρομή Premium, απενεργοποιήστε την στις ρυθμίσεις συνδρομής του App Store';
+      'Are you sure you want to delete your profile? This action cannot be undone and all your data will be permanently removed.';
 
   @override
-  String get yes => 'Ναι';
+  String get yes => 'Yes';
 
   @override
-  String get no => 'ΟΧΙ';
+  String get no => 'No';
 
   @override
-  String get enterAddress => 'Εισαγωγή διεύθυνσης';
+  String get enterAddress => 'Enter Address';
 
   @override
-  String get errorEnterAddress => 'Παρακαλώ εισάγετε τη διεύθυνσή σας';
+  String get errorEnterAddress => 'Please enter your address';
 
   @override
-  String get enterFirstName => 'Εισάγετε το όνομα';
+  String get enterFirstName => 'Enter the first name';
 
   @override
-  String get allowNotifications => 'Να επιτρέπονται οι ειδοποιήσεις';
+  String get allowNotifications => 'Allow Notifications';
 
   @override
-  String get enterEmail => 'Εισαγωγή email';
+  String get enterEmail => 'Enter Email';
 
   @override
-  String get errorEnterValidEmail => 'Παρακαλώ εισάγετε ένα έγκυρο email';
+  String get errorEnterValidEmail => 'Please enter a valid email';
 
   @override
-  String get genderPreferNotToSay => 'Δεν θέλω να αναφέρω';
+  String get genderPreferNotToSay => 'I don’t want to indicate';
 
   @override
-  String get enterLastName => 'Εισάγετε το επώνυμο';
+  String get enterLastName => 'Enter the Last Name';
 
   @override
-  String get errorEnterValidPhone =>
-      'Παρακαλώ εισάγετε έναν έγκυρο αριθμό τηλεφώνου';
+  String get errorEnterValidPhone => 'Please enter a valid phone number';
 
   @override
-  String get drinkCalculator => 'Υπολογιστής Ποτού';
+  String get drinkCalculator => 'Drink Calculator';
 
   @override
-  String get drinkFrequencyChartTitle => 'Συχνότητα (φορές ανά ημέρα)';
+  String get drinkFrequencyChartTitle => 'Frequency (times per day)';
 
   @override
   String get drinkCalcDescription =>
-      'Υπολογίστε την ημερήσια πρόσληψη νερού που χρειάζεται ο σκύλος σας\nσύμφωνα με το βάρος και το επίπεδο δραστηριότητας για\nυγιή ενυδάτωση κάθε μέρα';
+      'Calculate daily water intake your dog needs\naccording to weight and activity level for\nhealthy hydration every day';
 
   @override
-  String get currentWeight => 'Τρέχον Βάρος';
+  String get currentWeight => 'Current Weight';
 
   @override
-  String get hintWeight => 'Βάρος';
+  String get hintWeight => 'Weight';
 
   @override
-  String get yourDogWillNeed => 'Ο σκύλος σας θα χρειαστεί';
+  String get yourDogWillNeed => 'Your Dog will need';
 
   @override
-  String get perDay => '/ ημέρα';
+  String get perDay => '/ day';
 
   @override
-  String get unitPounds => 'Λίβρες';
+  String get unitPounds => 'Pounds';
 
   @override
-  String get unitKilograms => 'Χιλιόγραμμα';
+  String get unitKilograms => 'Kilograms';
 
   @override
-  String get unitOunces => 'Ουγγιές';
+  String get unitOunces => 'Ounces';
 
   @override
-  String get unitGrams => 'Γραμμάρια';
+  String get unitGrams => 'Grams';
 
   @override
-  String get unitMilliliters => 'Χιλιοστόλιτρα';
+  String get unitMilliliters => 'Milliliters';
 
   @override
-  String get unitCentiliters => 'Εκατοστόλιτρα';
+  String get unitCentiliters => 'Centiliters';
 
   @override
-  String get unitLiters => 'Λίτρα';
+  String get unitLiters => 'Liters';
 
   @override
-  String get unitUSFluidOunces => 'Ουγγιές υγρών ΗΠΑ';
+  String get unitUSFluidOunces => 'US Fluid Ounces';
 
   @override
-  String get unitUKFluidOunces => 'Ουγγιές υγρών ΗΒ';
+  String get unitUKFluidOunces => 'UK Fluid Ounces';
 
   @override
-  String get activityLevel => 'Επίπεδο δραστηριότητας';
+  String get activityLevel => 'Activity level';
 
   @override
   String get unitSymbolMl => 'mL';
@@ -2088,44 +2050,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get feedbackThanks => 'Thank you for your feedback!';
 
   @override
-  String get themeTitle => 'Theme';
-
-  @override
-  String get darkTheme => 'Dark';
-
-  @override
-  String get lightTheme => 'Light';
-
-  @override
   String get myFavorites => 'My Favorites';
 
   @override
-  String get feedbackTitle => 'Feedback';
-
-  @override
-  String get rateUsTitle => 'Rate us';
-
-  @override
-  String get shareTitle => 'Share';
-
-  @override
   String get myPremiumService => 'My Premium Service';
-
-  @override
-  String get shareMessageBody =>
-      'Check out Dog Breed - an amazing app for dog lovers!';
-
-  @override
-  String get shareIOS => '📱 Discover Dog Breed on the App Store!';
-
-  @override
-  String get shareAndroid => '📱 Get Dog Breed on Google Play!';
-
-  @override
-  String get shareDefault => '📱 Check out Dog Breed!';
-
-  @override
-  String get shareSubject => 'Dog Breed App';
 
   @override
   String get dashboardHome => 'Dashboard Home';
@@ -2220,11 +2148,11 @@ class AppLocalizationsEl extends AppLocalizations {
   String get height => 'Height';
 
   @override
-  String get deleteAll => 'Διαγραφή όλων';
+  String get deleteAll => 'Delete All';
 
   @override
   String get deleteAllPetsConfirmation =>
-      'Είστε σίγουροι ότι θέλετε να διαγράψετε όλα τα κατοικίδια; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.';
+      'Are you sure you want to delete all pets? This action cannot be undone.';
 
   @override
   String get dialogUploadPhoto => 'Upload Photo';
@@ -2247,4 +2175,365 @@ class AppLocalizationsEl extends AppLocalizations {
   String errorNameOrTypeRequiredFor(String activityName) {
     return 'Name or Type required for $activityName';
   }
+
+  @override
+  String get labelBirthday => 'Birthday';
+
+  @override
+  String get errorFillPetName => 'Please Fill Pet Name';
+
+  @override
+  String get supportedBreeds => 'Supported Breeds';
+
+  @override
+  String favoriteCount(int count) {
+    return '$count Favorite';
+  }
+
+  @override
+  String get breedNameBulldog => 'Bulldog';
+
+  @override
+  String get breedDescBulldog =>
+      'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.';
+
+  @override
+  String get breedNameBeagle => 'Beagle';
+
+  @override
+  String get breedDescBeagle =>
+      'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.';
+
+  @override
+  String get breedNameYorkshireTerrier => 'Yorkshire Terrier';
+
+  @override
+  String get breedDescYorkshireTerrier =>
+      'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.';
+
+  @override
+  String get breedNameCavalierKingCharlesSpaniel =>
+      'Cavalier King Charles Spaniel';
+
+  @override
+  String get breedDescCavalierKingCharlesSpaniel =>
+      'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.';
+
+  @override
+  String get breedNameEnglishSpringerSpaniel => 'English Springer Spaniel';
+
+  @override
+  String get breedDescEnglishSpringerSpaniel =>
+      'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.';
+
+  @override
+  String get breedNameBullmastiff => 'Bullmastiff';
+
+  @override
+  String get breedDescBullmastiff =>
+      'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.';
+
+  @override
+  String get breedNameEnglishCockerSpaniel => 'English Cocker Spaniel';
+
+  @override
+  String get breedDescEnglishCockerSpaniel =>
+      'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.';
+
+  @override
+  String get breedNameAiredaleTerrier => 'Airedale Terrier';
+
+  @override
+  String get breedDescAiredaleTerrier =>
+      'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.';
+
+  @override
+  String get breedNameTerrier => 'Terrier';
+
+  @override
+  String get breedDescTerrier =>
+      'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.';
+
+  @override
+  String get breedNameWhippet => 'Whippet';
+
+  @override
+  String get breedDescWhippet =>
+      'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.';
+
+  @override
+  String get breedNameBullTerrier => 'Bull Terrier';
+
+  @override
+  String get breedDescBullTerrier =>
+      'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.';
+
+  @override
+  String get breedNameGoldenRetriever => 'Golden Retriever';
+
+  @override
+  String get breedDescGoldenRetriever =>
+      'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.';
+
+  @override
+  String get breedNameOldEnglishSheepdog => 'Old English Sheepdog';
+
+  @override
+  String get breedDescOldEnglishSheepdog =>
+      'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.';
+
+  @override
+  String get breedNameBorderCollie => 'Border Collie';
+
+  @override
+  String get breedDescBorderCollie =>
+      'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.';
+
+  @override
+  String get breedNameGreyhound => 'Greyhound';
+
+  @override
+  String get breedDescGreyhound =>
+      'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.';
+
+  @override
+  String get breedNameJackRussellTerrier => 'Jack Russell Terrier';
+
+  @override
+  String get breedDescJackRussellTerrier =>
+      'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.';
+
+  @override
+  String get breedNameBloodhound => 'Bloodhound';
+
+  @override
+  String get breedDescBloodhound =>
+      'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.';
+
+  @override
+  String get breedNameEnglishPointer => 'English Pointer';
+
+  @override
+  String get breedDescEnglishPointer =>
+      'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.';
+
+  @override
+  String get breedNameStaffordshireBullTerrier => 'Staffordshire Bull Terrier';
+
+  @override
+  String get breedDescStaffordshireBullTerrier =>
+      'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.';
+
+  @override
+  String get breedNameEnglishFoxhound => 'English Foxhound';
+
+  @override
+  String get breedDescEnglishFoxhound =>
+      'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.';
+
+  @override
+  String get breedNameWireFoxTerrier => 'Wire Fox Terrier';
+
+  @override
+  String get breedDescWireFoxTerrier =>
+      'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.';
+
+  @override
+  String get breedNameManchesterTerrier => 'Manchester Terrier';
+
+  @override
+  String get breedDescManchesterTerrier =>
+      'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.';
+
+  @override
+  String get breedNameBedlingtonTerrier => 'Bedlington Terrier';
+
+  @override
+  String get breedDescBedlingtonTerrier =>
+      'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.';
+
+  @override
+  String get breedNameBostonTerrier => 'Boston Terrier';
+
+  @override
+  String get breedDescBostonTerrier =>
+      'Life expectancy: 11-13 years.\nFriendly \"American Gentleman\"\nwith tuxedo-like markings.';
+
+  @override
+  String get breedNameEnglishSetter => 'English Setter';
+
+  @override
+  String get breedDescEnglishSetter =>
+      'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.';
+
+  @override
+  String get breedNameBorderTerrier => 'Border Terrier';
+
+  @override
+  String get breedDescBorderTerrier =>
+      'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.';
+
+  @override
+  String get favoritesTitle => 'Favorites';
+
+  @override
+  String get scanTabTitle => 'Scan';
+
+  @override
+  String get noFavoriteBreedsMessage => 'No favourite breeds yet';
+
+  @override
+  String dialogShareTitle(String appName) {
+    return 'Share $appName';
+  }
+
+  @override
+  String get shareTags => '#DogBreed #Dogs #Pets';
+
+  @override
+  String errorLaunchUrl(String url) {
+    return 'Could not launch $url';
+  }
+
+  @override
+  String get feedbackTitle => 'Feedback';
+
+  @override
+  String get feedbackDescribeIssue =>
+      'Help us improve your experience\nDescribe the issue you\'re having';
+
+  @override
+  String get feedbackTellUsMore => 'Tell us more (optional)';
+
+  @override
+  String get submitButton => 'Submit';
+
+  @override
+  String get feedbackIssueLagging => 'Lagging';
+
+  @override
+  String get feedbackIssueCrashes => 'Crashes';
+
+  @override
+  String get feedbackIssueAds => 'Annoying ads';
+
+  @override
+  String get feedbackIssueOther => 'Other';
+
+  @override
+  String get feedbackIssueNotWorking => 'Not working';
+
+  @override
+  String get feedbackChooseEmailApp =>
+      'Choose your email app to send feedback:';
+
+  @override
+  String get feedbackSendEmail => 'Send Email';
+
+  @override
+  String get feedbackEmailSubject => 'DogBreed: Feedback';
+
+  @override
+  String get feedbackIssueType => 'Issue Type:';
+
+  @override
+  String get feedbackDetails => 'Details:';
+
+  @override
+  String get feedbackGeneral => 'General feedback about the app';
+
+  @override
+  String get feedbackManualEmailTitle => 'Email App Not Found';
+
+  @override
+  String get feedbackManualEmailBody =>
+      'Please copy the information below and send it to:';
+
+  @override
+  String get feedbackSubject => 'Subject:';
+
+  @override
+  String get feedbackMessage => 'Message:';
+
+  @override
+  String get feedbackManualEmailSuccess => 'Feedback submitted successfully!';
+
+  @override
+  String get feedbackSelectIssue => 'Please select an issue type';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get profileRecentScan => 'Recent Scans';
+
+  @override
+  String get profileHistory => 'Scan History';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get appLanguageTitle => 'App Language';
+
+  @override
+  String get premiumSubscription => 'Premium Subscription';
+
+  @override
+  String get profileMyFavorites => 'My Favorites';
+
+  @override
+  String get rateUsTitle => 'Rate Us';
+
+  @override
+  String get shareTitle => 'Share App';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get termsOfUse => 'Terms of Use';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get deleteOwnerProfile => 'Delete Profile';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get themeTitle => 'Theme';
+
+  @override
+  String get darkTheme => 'Dark';
+
+  @override
+  String get lightTheme => 'Light';
+
+  @override
+  String get aiAppName => 'Dog Breed Scanner';
+
+  @override
+  String get shareMessageBody =>
+      'Check out Dog Breed Scanner - AI-powered dog breed identification app! 🐕';
+
+  @override
+  String get shareIOS => 'Check out Dog Breed Scanner on the App Store!';
+
+  @override
+  String get shareAndroid => 'Check out Dog Breed Scanner on Google Play!';
+
+  @override
+  String get shareDefault => 'Check out Dog Breed Scanner!';
+
+  @override
+  String get shareDownloadNow => 'Download now: ';
+
+  @override
+  String get shareSubject => 'Dog Breed Scanner App';
 }

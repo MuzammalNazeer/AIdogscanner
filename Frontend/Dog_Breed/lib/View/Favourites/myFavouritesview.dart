@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../../View_model/ScanProvider.dart';
 import '../../utils/routes/routes_name.dart';
 import '../MyPetsView/DogResultScreen.dart';
+import '../../l10n/app_localizations.dart';
 
 class Myfavouritesview extends StatefulWidget {
   const Myfavouritesview({super.key});
@@ -70,7 +71,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
             Expanded(
               child: Center(
                 child: Text(
-                  'Favourites',
+                  AppLocalizations.of(context)!.favoritesTitle,
                   style: TextStyle(
                     fontFamily: 'Sora',
                     fontWeight: FontWeight.w400,
@@ -153,7 +154,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
     final scanId = scan['id']?.toString() ?? index.toString();
     final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
     final formattedBreedName =
-        scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName);
+        scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName, context);
     final confidence = scan['confidence'] is double
         ? scan['confidence'] as double
         : 0.0;
@@ -263,7 +264,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
                         SizedBox(height: 4.h),
                         if (timestamp != null)
                           Text(
-                            _formatDateTime(timestamp),
+                            _formatDateTime(timestamp, context),
                             style: TextStyle(
                               fontSize: 10.sp,
                               color: Colors.grey[500],
@@ -271,7 +272,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
                           ),
                         SizedBox(height: 6.h),
                         Text(
-                          "Your dog you scanned looks like this.",
+                          AppLocalizations.of(context)!.scanLooksLike,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 12.sp,
@@ -325,7 +326,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
                           await _handleRescanTap(scan, context);
                         },
                         child: Text(
-                          'Return',
+                          AppLocalizations.of(context)!.returnAction,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
@@ -345,7 +346,7 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
                           );
                         },
                         child: Text(
-                          'Show',
+                          AppLocalizations.of(context)!.showAction,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
@@ -375,8 +376,8 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
   }
 
 
-  String _formatBreedName(String name) {
-    if (name.isEmpty) return 'Unknown Breed';
+  String _formatBreedName(String name, BuildContext context) {
+    if (name.isEmpty) return AppLocalizations.of(context)!.unknownBreed;
     return name
         .replaceAll('-', ' ')
         .split(' ')
@@ -387,20 +388,33 @@ class _MyfavouritesviewState extends State<Myfavouritesview> {
   }
 
 }
-String _formatDateTime(DateTime dateTime) {
+
+String _formatBreedName(String name, BuildContext context) {
+  if (name.isEmpty) return AppLocalizations.of(context)!.unknownBreed;
+  return name
+      .replaceAll('-', ' ')
+      .split(' ')
+      .map((word) => word.isNotEmpty
+      ? word[0].toUpperCase() + word.substring(1).toLowerCase()
+      : '')
+      .join(' ');
+}
+
+String _formatDateTime(DateTime dateTime, BuildContext context) {
   final now = DateTime.now();
   final difference = now.difference(dateTime);
+  final localizations = AppLocalizations.of(context)!;
 
   if (difference.inDays > 7) {
     return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
   } else if (difference.inDays > 0) {
-    return '${difference.inDays} days ago';
+    return localizations.daysAgo(difference.inDays);
   } else if (difference.inHours > 0) {
-    return '${difference.inHours} hours ago';
+    return localizations.hoursAgo(difference.inHours);
   } else if (difference.inMinutes > 0) {
-    return '${difference.inMinutes} minutes ago';
+    return localizations.minutesAgo(difference.inMinutes);
   } else {
-    return 'Just now';
+    return localizations.justNow;
   }
 }
 Future<void> _handleRescanTap(
@@ -440,15 +454,16 @@ Future<void> _handleRescanTap(
         final scanData = {
           'id': DateTime.now().millisecondsSinceEpoch.toString(),
           'image': dogResult['image'] ?? cameraResult,
-          'breedName': dogResult['breedName']?.toString() ?? 'Unknown Breed',
+          'breedName': dogResult['breedName']?.toString() ?? AppLocalizations.of(context)!.unknownBreed,
           'confidence': (dogResult['confidence'] ?? 0.0) is double
               ? dogResult['confidence'] as double
               : 0.0,
-          // 'formattedBreedName':
-          // dogResult['formattedBreedName']?.toString() ??
-          //     _formatBreedName(
-          //       dogResult['breedName']?.toString() ?? 'Unknown Breed',
-          //     ),
+          'formattedBreedName':
+          dogResult['formattedBreedName']?.toString() ??
+              _formatBreedName(
+                dogResult['breedName']?.toString() ?? AppLocalizations.of(context)!.unknownBreed,
+                context
+              ),
           'timestamp': DateTime.now(),
           'isFavorite': false,
         };
@@ -465,7 +480,7 @@ Future<void> _handleRescanTap(
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              '✅ Re-scanned: ${scanData['formattedBreedName']} ($confidencePercent% confidence)',
+              AppLocalizations.of(context)!.rescannedSuccess(scanData['formattedBreedName'].toString(), confidencePercent),
             ),
             duration: const Duration(seconds: 3),
             backgroundColor: Colors.green,
@@ -483,7 +498,7 @@ Future<void> _handleRescanTap(
     }
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Error re-scanning: $e'),
+        content: Text(AppLocalizations.of(context)!.errorRescanning(e)),
         duration: const Duration(seconds: 3),
         backgroundColor: Colors.red,
       ),

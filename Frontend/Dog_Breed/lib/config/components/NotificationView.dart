@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
@@ -37,14 +38,57 @@ class _NotificationViewState extends State<NotificationView> {
     
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: CommonApp(
-        title: l10n.notifications,
-      ),
+
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          padding: EdgeInsets.symmetric(horizontal: 24.w,vertical:12 ),
           child: Column(
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: 40.305.w,
+                      height: 40.305.h,
+                      padding: const EdgeInsets.all(8.96),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(8.96),
+                      ),
+                      child: Icon(
+                        CupertinoIcons.chevron_left,
+                        size: 20.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                  ),
+
+                  // Center text
+                  Expanded(
+                    child: Text(
+                      l10n.notifications,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Sora',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 27.75.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
+
+                  // Invisible placeholder to balance
+                  SizedBox(
+                    width: 40.305.w,
+                    height: 40.305.h,
+                  ),
+                ],
+              ),
+
               SizedBox(height: 30.h),
               
               // Notification Toggle Tile
@@ -57,12 +101,16 @@ class _NotificationViewState extends State<NotificationView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      l10n.allowNotifications,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context).colorScheme.onSurface,
+                    Expanded(
+                      child: Text(
+                        l10n.allowNotifications,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
                     ),
                     Switch(

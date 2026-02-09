@@ -794,13 +794,17 @@ class _EditviewState extends State<Editview> {
                     ),
 
                     // Center text
-                    Text(
-                      widget.isEditing ? AppLocalizations.of(context)!.editPetTitle : AppLocalizations.of(context)!.addPetTitle,
-                      style: TextStyle(
-                        fontFamily: 'Sora',
-                        fontWeight: FontWeight.w300,
-                        fontSize: 29.75.sp,
-                        color: Theme.of(context).colorScheme.onSurface,
+                    Expanded(
+                      child: Text(
+                        widget.isEditing ? AppLocalizations.of(context)!.editPetTitle : AppLocalizations.of(context)!.addPetTitle,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'Sora',
+                          fontWeight: FontWeight.w300,
+                          fontSize: 29.75.sp,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
 

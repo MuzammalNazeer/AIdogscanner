@@ -61,12 +61,17 @@ class _WizardviewState extends State<Wizardview> {
                               (route) => false,
                         );
                       },
-                      child:  Text(
-                        AppLocalizations.of(context)!.skip,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17.sp,
-                          fontWeight: FontWeight.w500,
+                      child:  Expanded(
+                        child: Text(
+                          AppLocalizations.of(context)!.skip,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                       ),
                     )
@@ -109,9 +114,9 @@ class _WizardviewState extends State<Wizardview> {
                       }
                     },
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 36,
-                        vertical: 14,
+                      padding:  EdgeInsets.symmetric(
+                        horizontal: 36.w,
+                        vertical: 14.h,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -217,9 +222,10 @@ class OnboardingPage1 extends StatelessWidget {
                     Container(
                       width: 300.w,
                       height: 300.w,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: colors.onTertiary,
+                        color: Color(0xFF820DFF),
+                        // color: colors.onTertiary,
                       ),
                     ),
                     // Inner Circle
@@ -256,80 +262,82 @@ class OnboardingPage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final bool _ = Theme.of(context).brightness == Brightness.dark;
-    return Padding(
-      padding:  EdgeInsets.all(16.r),
-      child: Column(
-        children: [
-          SizedBox(height: 60.h,),
-          SizedBox(
-            width: 380.w,
-            height: 420.h,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                // Outer glow
-                Container(
-                  width: 400.w,
-                  height: 380.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color:  const Color(0xFF00D9FF).withOpacity(0.6),
-                        blurRadius: 54,
-                        spreadRadius: 0,
-                        offset: Offset.zero,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  width: 320.w,
-                  height: 320.h,
-                  decoration: BoxDecoration(
+    return SingleChildScrollView(
+      child: Padding(
+        padding:  EdgeInsets.all(16.r),
+        child: Column(
+          children: [
+            SizedBox(height: 30.h,),
+            SizedBox(
+              width: 380.w,
+              height: 420.h,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // Outer glow
+                  Container(
+                    width: 400.w,
+                    height: 380.h,
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: colors.onTertiary
+                      boxShadow: [
+                        BoxShadow(
+                          color:  const Color(0xFF00D9FF).withOpacity(0.6),
+                          blurRadius: 54,
+                          spreadRadius: 0,
+                          offset: Offset.zero,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  width: 260.w,
-                  height: 260.h,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color:Color(0xFF7B2CBF),
+                  Container(
+                    width: 320.w,
+                    height: 320.h,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: colors.onTertiary
+                    ),
                   ),
-                ),
-                ClipOval(
-                  child: Image.asset(
-                    'assets/images/Ellipse 77.png',
-                    width: 258.w,
+                  Container(
+                    width: 260.w,
                     height: 260.h,
-                    fit: BoxFit.cover,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color:Color(0xFF7B2CBF),
+                    ),
                   ),
-                ),
-                Positioned(top: 50.h,  left: 45.w,   child: _buildSmallDogCircle('assets/images/Ellipse 789.png', context)),
-                Positioned(top: 160.h,  right: 10.w,  child: _buildSmallDogCircle('assets/images/Ellipse 788.png',context)),
-                Positioned(bottom: 38.h, left: 68.w, child: _buildSmallDogCircle('assets/images/Ellipse 808.png',context)),
-              ],
+                  ClipOval(
+                    child: Image.asset(
+                      'assets/images/Ellipse 77.png',
+                      width: 258.w,
+                      height: 260.h,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(top: 50.h,  left: 45.w,   child: _buildSmallDogCircle('assets/images/Ellipse 789.png', context)),
+                  Positioned(top: 160.h,  right: 10.w,  child: _buildSmallDogCircle('assets/images/Ellipse 788.png',context)),
+                  Positioned(bottom: 38.h, left: 68.w, child: _buildSmallDogCircle('assets/images/Ellipse 808.png',context)),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 140.h),
-          Text(
-            AppLocalizations.of(context)!.onboardingTitle2,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 26.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+            SizedBox(height: 40.h),
+            Text(
+              AppLocalizations.of(context)!.onboardingTitle2,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 26.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-          ),
-          SizedBox(height: 16.h),
-          Text(
-            AppLocalizations.of(context)!.onboardingDesc2,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14.sp, color: Colors.white,),
-          ),
-        ],
+            SizedBox(height: 16.h),
+            Text(
+              AppLocalizations.of(context)!.onboardingDesc2,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14.sp, color: Colors.white,),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -479,7 +487,7 @@ class OnboardingPage4 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 220.h,
+                  height: 225.h,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

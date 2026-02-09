@@ -84,46 +84,18 @@ class _MypetsviewState extends State<Mypetsview> {
         ),
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Back Button
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Container(
-                    width: 40.305.w,
-                    height: 40.305.h,
-                    padding: const EdgeInsets.all(8.96),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      borderRadius: BorderRadius.circular(8.96),
-                    ),
-                    child: Icon(
-                      CupertinoIcons.chevron_left,
-                      size: 20.sp,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                  ),
-                ),
-
-                // Centered Title
-                Text(
-                  AppLocalizations.of(context)!.myPetsTitle,
-                  style: TextStyle(
-                    fontFamily: 'Sora',
-                    fontWeight: FontWeight.w300,
-                    fontSize: 29.75.sp,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-                ),
-
-                // More Options Button (with PopupMenuButton)
-                if (pets.isNotEmpty)
-                  PopupMenuButton<String>(
-                    icon: Container(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Back Button
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
                       width: 40.305.w,
                       height: 40.305.h,
                       padding: const EdgeInsets.all(8.96),
@@ -132,81 +104,116 @@ class _MypetsviewState extends State<Mypetsview> {
                         borderRadius: BorderRadius.circular(8.96),
                       ),
                       child: Icon(
-                        Icons.more_vert,
+                        CupertinoIcons.chevron_left,
                         size: 20.sp,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
-                    color: Theme.of(context).cardColor,
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
+                  ),
+
+                  // Centered Title
+                  Expanded(
+                    child: Text(
+                      AppLocalizations.of(context)!.myPetsTitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Sora',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 26.75.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    onSelected: (value) {
-                      if (value == 'deleteAll') {
-                        _showDeleteAllDialog(AppLocalizations.of(context)!);
-                      }
-                    },
-                    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                      PopupMenuItem<String>(
-                        value: 'deleteAll',
-                        child: Text(
-                          AppLocalizations.of(context)!.deleteAll,
-                          style: TextStyle(
-                            fontFamily: 'Sora',
-                            fontSize: 16.sp,
-                            color: Theme.of(context).colorScheme.onSurface,
-                            fontWeight: FontWeight.w500,
-                          ),
+                  ),
+
+                  // More Options Button (with PopupMenuButton)
+                  if (pets.isNotEmpty)
+                    PopupMenuButton<String>(
+                      icon: Container(
+                        width: 40.305.w,
+                        height: 40.305.h,
+                        padding: const EdgeInsets.all(8.96),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).cardColor,
+                          borderRadius: BorderRadius.circular(8.96),
+                        ),
+                        child: Icon(
+                          Icons.more_vert,
+                          size: 20.sp,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
-                    ],
-                  )
-                else
-                // Invisible placeholder when no pets
-                  SizedBox(
-                    width: 40.305.w,
-                    height: 40.305.h,
+                      color: Theme.of(context).cardColor,
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      onSelected: (value) {
+                        if (value == 'deleteAll') {
+                          _showDeleteAllDialog(AppLocalizations.of(context)!);
+                        }
+                      },
+                      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                        PopupMenuItem<String>(
+                          value: 'deleteAll',
+                          child: Text(
+                            AppLocalizations.of(context)!.deleteAll,
+                            style: TextStyle(
+                              fontFamily: 'Sora',
+                              fontSize: 16.sp,
+                              color: Theme.of(context).colorScheme.onSurface,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                  // Invisible placeholder when no pets
+                    SizedBox(
+                      width: 40.305.w,
+                      height: 40.305.h,
+                    ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(16.w),
+                child: CupertinoSearchTextField(
+                  placeholder: l10n.searchForDog,
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  placeholderStyle: TextStyle(color: Theme.of(context).hintColor),
+                  prefixIcon: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Icon(
+                      CupertinoIcons.search,
+                      color: Theme.of(context).iconTheme.color,
+                      size: 32.h,
+                    ),
                   ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.all(16.w),
-              child: CupertinoSearchTextField(
-                placeholder: l10n.searchForDog,
-                style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-                placeholderStyle: TextStyle(color: Theme.of(context).hintColor),
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Icon(
-                    CupertinoIcons.search,
-                    color: Theme.of(context).iconTheme.color,
-                    size: 32.h,
+                  padding:  EdgeInsets.symmetric(
+                    horizontal: 12.w,
+                    vertical: 22.h,
                   ),
-                ),
-                padding:  EdgeInsets.symmetric(
-                  horizontal: 12.w,
-                  vertical: 22.h,
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    _searchQuery = value;
-                  });
-                },
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  borderRadius: BorderRadius.circular(10),
+                  onChanged: (value) {
+                    setState(() {
+                      _searchQuery = value;
+                    });
+                  },
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: pets.isEmpty
-                  ? _buildEmptyState(l10n)
-                  : filteredPets.isEmpty
-                  ? _buildNoResultsState(l10n)
-                  : _buildPetsList(filteredPets, allActivities, l10n),
-            ),
-          ],
+              Expanded(
+                child: pets.isEmpty
+                    ? _buildEmptyState(l10n)
+                    : filteredPets.isEmpty
+                    ? _buildNoResultsState(l10n)
+                    : _buildPetsList(filteredPets, allActivities, l10n),
+              ),
+            ],
+          ),
         ),
       ),
     );

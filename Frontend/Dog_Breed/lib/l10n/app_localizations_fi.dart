@@ -15,31 +15,13 @@ class AppLocalizationsFi extends AppLocalizations {
   String get settingsTitle => 'Asetukset';
 
   @override
-  String get appLanguageTitle => 'Sovelluksen kieli';
-
-  @override
   String get notificationLanguageTitle => 'Ilmoituskieli';
-
-  @override
-  String get editProfile => 'Muokkaa profiilia';
 
   @override
   String get changePassword => 'Vaihda salasana';
 
   @override
-  String get notifications => 'Ilmoitukset';
-
-  @override
-  String get premiumSubscription => 'Premium-tilaus';
-
-  @override
   String get aboutUs => 'Tietoa meistä';
-
-  @override
-  String get faq => 'UKK';
-
-  @override
-  String get termsOfUse => 'Käyttöehdot';
 
   @override
   String get customerCare => 'Asiakaspalvelu';
@@ -49,12 +31,6 @@ class AppLocalizationsFi extends AppLocalizations {
 
   @override
   String get supportAnimalIdProject => 'Tue Animal ID -projektia';
-
-  @override
-  String get deleteOwnerProfile => 'Poista omistajan profiili';
-
-  @override
-  String get logout => 'Kirjaudu ulos';
 
   @override
   String get dialogCancel => 'Peruuta';
@@ -2081,44 +2057,10 @@ class AppLocalizationsFi extends AppLocalizations {
   String get feedbackThanks => 'Thank you for your feedback!';
 
   @override
-  String get themeTitle => 'Theme';
-
-  @override
-  String get darkTheme => 'Dark';
-
-  @override
-  String get lightTheme => 'Light';
-
-  @override
   String get myFavorites => 'My Favorites';
 
   @override
-  String get feedbackTitle => 'Feedback';
-
-  @override
-  String get rateUsTitle => 'Rate us';
-
-  @override
-  String get shareTitle => 'Share';
-
-  @override
   String get myPremiumService => 'My Premium Service';
-
-  @override
-  String get shareMessageBody =>
-      'Check out Dog Breed - an amazing app for dog lovers!';
-
-  @override
-  String get shareIOS => '📱 Discover Dog Breed on the App Store!';
-
-  @override
-  String get shareAndroid => '📱 Get Dog Breed on Google Play!';
-
-  @override
-  String get shareDefault => '📱 Check out Dog Breed!';
-
-  @override
-  String get shareSubject => 'Dog Breed App';
 
   @override
   String get dashboardHome => 'Dashboard Home';
@@ -2240,4 +2182,365 @@ class AppLocalizationsFi extends AppLocalizations {
   String errorNameOrTypeRequiredFor(String activityName) {
     return 'Name or Type required for $activityName';
   }
+
+  @override
+  String get labelBirthday => 'Birthday';
+
+  @override
+  String get errorFillPetName => 'Please Fill Pet Name';
+
+  @override
+  String get supportedBreeds => 'Supported Breeds';
+
+  @override
+  String favoriteCount(int count) {
+    return '$count Favorite';
+  }
+
+  @override
+  String get breedNameBulldog => 'Bulldog';
+
+  @override
+  String get breedDescBulldog =>
+      'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.';
+
+  @override
+  String get breedNameBeagle => 'Beagle';
+
+  @override
+  String get breedDescBeagle =>
+      'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.';
+
+  @override
+  String get breedNameYorkshireTerrier => 'Yorkshire Terrier';
+
+  @override
+  String get breedDescYorkshireTerrier =>
+      'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.';
+
+  @override
+  String get breedNameCavalierKingCharlesSpaniel =>
+      'Cavalier King Charles Spaniel';
+
+  @override
+  String get breedDescCavalierKingCharlesSpaniel =>
+      'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.';
+
+  @override
+  String get breedNameEnglishSpringerSpaniel => 'English Springer Spaniel';
+
+  @override
+  String get breedDescEnglishSpringerSpaniel =>
+      'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.';
+
+  @override
+  String get breedNameBullmastiff => 'Bullmastiff';
+
+  @override
+  String get breedDescBullmastiff =>
+      'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.';
+
+  @override
+  String get breedNameEnglishCockerSpaniel => 'English Cocker Spaniel';
+
+  @override
+  String get breedDescEnglishCockerSpaniel =>
+      'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.';
+
+  @override
+  String get breedNameAiredaleTerrier => 'Airedale Terrier';
+
+  @override
+  String get breedDescAiredaleTerrier =>
+      'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.';
+
+  @override
+  String get breedNameTerrier => 'Terrier';
+
+  @override
+  String get breedDescTerrier =>
+      'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.';
+
+  @override
+  String get breedNameWhippet => 'Whippet';
+
+  @override
+  String get breedDescWhippet =>
+      'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.';
+
+  @override
+  String get breedNameBullTerrier => 'Bull Terrier';
+
+  @override
+  String get breedDescBullTerrier =>
+      'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.';
+
+  @override
+  String get breedNameGoldenRetriever => 'Golden Retriever';
+
+  @override
+  String get breedDescGoldenRetriever =>
+      'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.';
+
+  @override
+  String get breedNameOldEnglishSheepdog => 'Old English Sheepdog';
+
+  @override
+  String get breedDescOldEnglishSheepdog =>
+      'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.';
+
+  @override
+  String get breedNameBorderCollie => 'Border Collie';
+
+  @override
+  String get breedDescBorderCollie =>
+      'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.';
+
+  @override
+  String get breedNameGreyhound => 'Greyhound';
+
+  @override
+  String get breedDescGreyhound =>
+      'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.';
+
+  @override
+  String get breedNameJackRussellTerrier => 'Jack Russell Terrier';
+
+  @override
+  String get breedDescJackRussellTerrier =>
+      'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.';
+
+  @override
+  String get breedNameBloodhound => 'Bloodhound';
+
+  @override
+  String get breedDescBloodhound =>
+      'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.';
+
+  @override
+  String get breedNameEnglishPointer => 'English Pointer';
+
+  @override
+  String get breedDescEnglishPointer =>
+      'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.';
+
+  @override
+  String get breedNameStaffordshireBullTerrier => 'Staffordshire Bull Terrier';
+
+  @override
+  String get breedDescStaffordshireBullTerrier =>
+      'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.';
+
+  @override
+  String get breedNameEnglishFoxhound => 'English Foxhound';
+
+  @override
+  String get breedDescEnglishFoxhound =>
+      'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.';
+
+  @override
+  String get breedNameWireFoxTerrier => 'Wire Fox Terrier';
+
+  @override
+  String get breedDescWireFoxTerrier =>
+      'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.';
+
+  @override
+  String get breedNameManchesterTerrier => 'Manchester Terrier';
+
+  @override
+  String get breedDescManchesterTerrier =>
+      'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.';
+
+  @override
+  String get breedNameBedlingtonTerrier => 'Bedlington Terrier';
+
+  @override
+  String get breedDescBedlingtonTerrier =>
+      'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.';
+
+  @override
+  String get breedNameBostonTerrier => 'Boston Terrier';
+
+  @override
+  String get breedDescBostonTerrier =>
+      'Life expectancy: 11-13 years.\nFriendly \"American Gentleman\"\nwith tuxedo-like markings.';
+
+  @override
+  String get breedNameEnglishSetter => 'English Setter';
+
+  @override
+  String get breedDescEnglishSetter =>
+      'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.';
+
+  @override
+  String get breedNameBorderTerrier => 'Border Terrier';
+
+  @override
+  String get breedDescBorderTerrier =>
+      'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.';
+
+  @override
+  String get favoritesTitle => 'Favorites';
+
+  @override
+  String get scanTabTitle => 'Scan';
+
+  @override
+  String get noFavoriteBreedsMessage => 'No favourite breeds yet';
+
+  @override
+  String dialogShareTitle(String appName) {
+    return 'Share $appName';
+  }
+
+  @override
+  String get shareTags => '#DogBreed #Dogs #Pets';
+
+  @override
+  String errorLaunchUrl(String url) {
+    return 'Could not launch $url';
+  }
+
+  @override
+  String get feedbackTitle => 'Feedback';
+
+  @override
+  String get feedbackDescribeIssue =>
+      'Could You Describe The Issue\nYou\'re Experiencing';
+
+  @override
+  String get feedbackTellUsMore => 'Please Tell Us More Details...';
+
+  @override
+  String get submitButton => 'Submit';
+
+  @override
+  String get feedbackIssueLagging => 'Lagging Issue';
+
+  @override
+  String get feedbackIssueCrashes => 'App Crashes';
+
+  @override
+  String get feedbackIssueAds => 'Too Many Ads';
+
+  @override
+  String get feedbackIssueOther => 'Other Problem';
+
+  @override
+  String get feedbackIssueNotWorking => 'Doesn\'t Work';
+
+  @override
+  String get feedbackChooseEmailApp =>
+      'Please choose an email app to send your feedback to:';
+
+  @override
+  String get feedbackSendEmail => 'Send Email';
+
+  @override
+  String get feedbackEmailSubject => 'DogBreed: Feedback';
+
+  @override
+  String get feedbackIssueType => 'Issue Type:';
+
+  @override
+  String get feedbackDetails => 'Feedback Details:';
+
+  @override
+  String get feedbackGeneral => 'General Feedback';
+
+  @override
+  String get feedbackManualEmailTitle => 'Send Email Manually';
+
+  @override
+  String get feedbackManualEmailBody => 'Please send an email to:';
+
+  @override
+  String get feedbackSubject => 'Subject:';
+
+  @override
+  String get feedbackMessage => 'Message:';
+
+  @override
+  String get feedbackManualEmailSuccess =>
+      'Thank you! Please send the email manually.';
+
+  @override
+  String get feedbackSelectIssue => 'Please select an issue';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get editProfile => 'Muokkaa profiilia';
+
+  @override
+  String get profileRecentScan => 'Recent Scan';
+
+  @override
+  String get profileHistory => 'History';
+
+  @override
+  String get notifications => 'Ilmoitukset';
+
+  @override
+  String get appLanguageTitle => 'Sovelluksen kieli';
+
+  @override
+  String get premiumSubscription => 'Premium-tilaus';
+
+  @override
+  String get profileMyFavorites => 'My Favourites';
+
+  @override
+  String get rateUsTitle => 'Rate us';
+
+  @override
+  String get shareTitle => 'Share';
+
+  @override
+  String get faq => 'UKK';
+
+  @override
+  String get termsOfUse => 'Käyttöehdot';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get deleteOwnerProfile => 'Poista omistajan profiili';
+
+  @override
+  String get logout => 'Kirjaudu ulos';
+
+  @override
+  String get themeTitle => 'Theme';
+
+  @override
+  String get darkTheme => 'Dark';
+
+  @override
+  String get lightTheme => 'Light';
+
+  @override
+  String get aiAppName => 'AI Dog Breed';
+
+  @override
+  String get shareMessageBody =>
+      'Check out Dog Breed - an amazing app for dog lovers!';
+
+  @override
+  String get shareIOS => '📱 Discover Dog Breed on the App Store!';
+
+  @override
+  String get shareAndroid => '📱 Get Dog Breed on Google Play!';
+
+  @override
+  String get shareDefault => '📱 Check out Dog Breed!';
+
+  @override
+  String get shareDownloadNow => 'Download now: ';
+
+  @override
+  String get shareSubject => 'Dog Breed App';
 }

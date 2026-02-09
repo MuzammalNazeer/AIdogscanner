@@ -136,23 +136,11 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settingsTitle;
 
-  /// No description provided for @appLanguageTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'App Language'**
-  String get appLanguageTitle;
-
   /// No description provided for @notificationLanguageTitle.
   ///
   /// In en, this message translates to:
   /// **'Notification Language'**
   String get notificationLanguageTitle;
-
-  /// No description provided for @editProfile.
-  ///
-  /// In en, this message translates to:
-  /// **'Edit Profile'**
-  String get editProfile;
 
   /// No description provided for @changePassword.
   ///
@@ -160,35 +148,11 @@ abstract class AppLocalizations {
   /// **'Change Password'**
   String get changePassword;
 
-  /// No description provided for @notifications.
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications'**
-  String get notifications;
-
-  /// No description provided for @premiumSubscription.
-  ///
-  /// In en, this message translates to:
-  /// **'Premium Subscription'**
-  String get premiumSubscription;
-
   /// No description provided for @aboutUs.
   ///
   /// In en, this message translates to:
   /// **'About Us'**
   String get aboutUs;
-
-  /// No description provided for @faq.
-  ///
-  /// In en, this message translates to:
-  /// **'FAQ'**
-  String get faq;
-
-  /// No description provided for @termsOfUse.
-  ///
-  /// In en, this message translates to:
-  /// **'Terms of Use'**
-  String get termsOfUse;
 
   /// No description provided for @customerCare.
   ///
@@ -207,18 +171,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Support Animal ID project'**
   String get supportAnimalIdProject;
-
-  /// No description provided for @deleteOwnerProfile.
-  ///
-  /// In en, this message translates to:
-  /// **'Delete owner profile'**
-  String get deleteOwnerProfile;
-
-  /// No description provided for @logout.
-  ///
-  /// In en, this message translates to:
-  /// **'Logout'**
-  String get logout;
 
   /// No description provided for @dialogCancel.
   ///
@@ -3301,7 +3253,7 @@ abstract class AppLocalizations {
   /// No description provided for @deleteProfileWarning.
   ///
   /// In en, this message translates to:
-  /// **'Warning! The profile and all its content will be deleted permanently and cannot be recovered. If you have an active Premium Subscription, deactivate it in your App Store Subscription settings'**
+  /// **'Are you sure you want to delete your profile? This action cannot be undone and all your data will be permanently removed.'**
   String get deleteProfileWarning;
 
   /// No description provided for @yes.
@@ -3313,7 +3265,7 @@ abstract class AppLocalizations {
   /// No description provided for @no.
   ///
   /// In en, this message translates to:
-  /// **'NO'**
+  /// **'No'**
   String get no;
 
   /// No description provided for @enterAddress.
@@ -4084,83 +4036,17 @@ abstract class AppLocalizations {
   /// **'Thank you for your feedback!'**
   String get feedbackThanks;
 
-  /// No description provided for @themeTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme'**
-  String get themeTitle;
-
-  /// No description provided for @darkTheme.
-  ///
-  /// In en, this message translates to:
-  /// **'Dark'**
-  String get darkTheme;
-
-  /// No description provided for @lightTheme.
-  ///
-  /// In en, this message translates to:
-  /// **'Light'**
-  String get lightTheme;
-
   /// No description provided for @myFavorites.
   ///
   /// In en, this message translates to:
   /// **'My Favorites'**
   String get myFavorites;
 
-  /// No description provided for @feedbackTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Feedback'**
-  String get feedbackTitle;
-
-  /// No description provided for @rateUsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Rate us'**
-  String get rateUsTitle;
-
-  /// No description provided for @shareTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Share'**
-  String get shareTitle;
-
   /// No description provided for @myPremiumService.
   ///
   /// In en, this message translates to:
   /// **'My Premium Service'**
   String get myPremiumService;
-
-  /// No description provided for @shareMessageBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Check out Dog Breed - an amazing app for dog lovers!'**
-  String get shareMessageBody;
-
-  /// No description provided for @shareIOS.
-  ///
-  /// In en, this message translates to:
-  /// **'📱 Discover Dog Breed on the App Store!'**
-  String get shareIOS;
-
-  /// No description provided for @shareAndroid.
-  ///
-  /// In en, this message translates to:
-  /// **'📱 Get Dog Breed on Google Play!'**
-  String get shareAndroid;
-
-  /// No description provided for @shareDefault.
-  ///
-  /// In en, this message translates to:
-  /// **'📱 Check out Dog Breed!'**
-  String get shareDefault;
-
-  /// No description provided for @shareSubject.
-  ///
-  /// In en, this message translates to:
-  /// **'Dog Breed App'**
-  String get shareSubject;
 
   /// No description provided for @dashboardHome.
   ///
@@ -4377,6 +4263,654 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Name or Type required for {activityName}'**
   String errorNameOrTypeRequiredFor(String activityName);
+
+  /// No description provided for @labelBirthday.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthday'**
+  String get labelBirthday;
+
+  /// No description provided for @errorFillPetName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Fill Pet Name'**
+  String get errorFillPetName;
+
+  /// No description provided for @supportedBreeds.
+  ///
+  /// In en, this message translates to:
+  /// **'Supported Breeds'**
+  String get supportedBreeds;
+
+  /// No description provided for @favoriteCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} Favorite'**
+  String favoriteCount(int count);
+
+  /// No description provided for @breedNameBulldog.
+  ///
+  /// In en, this message translates to:
+  /// **'Bulldog'**
+  String get breedNameBulldog;
+
+  /// No description provided for @breedDescBulldog.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.'**
+  String get breedDescBulldog;
+
+  /// No description provided for @breedNameBeagle.
+  ///
+  /// In en, this message translates to:
+  /// **'Beagle'**
+  String get breedNameBeagle;
+
+  /// No description provided for @breedDescBeagle.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.'**
+  String get breedDescBeagle;
+
+  /// No description provided for @breedNameYorkshireTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Yorkshire Terrier'**
+  String get breedNameYorkshireTerrier;
+
+  /// No description provided for @breedDescYorkshireTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.'**
+  String get breedDescYorkshireTerrier;
+
+  /// No description provided for @breedNameCavalierKingCharlesSpaniel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cavalier King Charles Spaniel'**
+  String get breedNameCavalierKingCharlesSpaniel;
+
+  /// No description provided for @breedDescCavalierKingCharlesSpaniel.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.'**
+  String get breedDescCavalierKingCharlesSpaniel;
+
+  /// No description provided for @breedNameEnglishSpringerSpaniel.
+  ///
+  /// In en, this message translates to:
+  /// **'English Springer Spaniel'**
+  String get breedNameEnglishSpringerSpaniel;
+
+  /// No description provided for @breedDescEnglishSpringerSpaniel.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.'**
+  String get breedDescEnglishSpringerSpaniel;
+
+  /// No description provided for @breedNameBullmastiff.
+  ///
+  /// In en, this message translates to:
+  /// **'Bullmastiff'**
+  String get breedNameBullmastiff;
+
+  /// No description provided for @breedDescBullmastiff.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.'**
+  String get breedDescBullmastiff;
+
+  /// No description provided for @breedNameEnglishCockerSpaniel.
+  ///
+  /// In en, this message translates to:
+  /// **'English Cocker Spaniel'**
+  String get breedNameEnglishCockerSpaniel;
+
+  /// No description provided for @breedDescEnglishCockerSpaniel.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.'**
+  String get breedDescEnglishCockerSpaniel;
+
+  /// No description provided for @breedNameAiredaleTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Airedale Terrier'**
+  String get breedNameAiredaleTerrier;
+
+  /// No description provided for @breedDescAiredaleTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.'**
+  String get breedDescAiredaleTerrier;
+
+  /// No description provided for @breedNameTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Terrier'**
+  String get breedNameTerrier;
+
+  /// No description provided for @breedDescTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.'**
+  String get breedDescTerrier;
+
+  /// No description provided for @breedNameWhippet.
+  ///
+  /// In en, this message translates to:
+  /// **'Whippet'**
+  String get breedNameWhippet;
+
+  /// No description provided for @breedDescWhippet.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.'**
+  String get breedDescWhippet;
+
+  /// No description provided for @breedNameBullTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Bull Terrier'**
+  String get breedNameBullTerrier;
+
+  /// No description provided for @breedDescBullTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.'**
+  String get breedDescBullTerrier;
+
+  /// No description provided for @breedNameGoldenRetriever.
+  ///
+  /// In en, this message translates to:
+  /// **'Golden Retriever'**
+  String get breedNameGoldenRetriever;
+
+  /// No description provided for @breedDescGoldenRetriever.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.'**
+  String get breedDescGoldenRetriever;
+
+  /// No description provided for @breedNameOldEnglishSheepdog.
+  ///
+  /// In en, this message translates to:
+  /// **'Old English Sheepdog'**
+  String get breedNameOldEnglishSheepdog;
+
+  /// No description provided for @breedDescOldEnglishSheepdog.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.'**
+  String get breedDescOldEnglishSheepdog;
+
+  /// No description provided for @breedNameBorderCollie.
+  ///
+  /// In en, this message translates to:
+  /// **'Border Collie'**
+  String get breedNameBorderCollie;
+
+  /// No description provided for @breedDescBorderCollie.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.'**
+  String get breedDescBorderCollie;
+
+  /// No description provided for @breedNameGreyhound.
+  ///
+  /// In en, this message translates to:
+  /// **'Greyhound'**
+  String get breedNameGreyhound;
+
+  /// No description provided for @breedDescGreyhound.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.'**
+  String get breedDescGreyhound;
+
+  /// No description provided for @breedNameJackRussellTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Jack Russell Terrier'**
+  String get breedNameJackRussellTerrier;
+
+  /// No description provided for @breedDescJackRussellTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.'**
+  String get breedDescJackRussellTerrier;
+
+  /// No description provided for @breedNameBloodhound.
+  ///
+  /// In en, this message translates to:
+  /// **'Bloodhound'**
+  String get breedNameBloodhound;
+
+  /// No description provided for @breedDescBloodhound.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.'**
+  String get breedDescBloodhound;
+
+  /// No description provided for @breedNameEnglishPointer.
+  ///
+  /// In en, this message translates to:
+  /// **'English Pointer'**
+  String get breedNameEnglishPointer;
+
+  /// No description provided for @breedDescEnglishPointer.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.'**
+  String get breedDescEnglishPointer;
+
+  /// No description provided for @breedNameStaffordshireBullTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Staffordshire Bull Terrier'**
+  String get breedNameStaffordshireBullTerrier;
+
+  /// No description provided for @breedDescStaffordshireBullTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.'**
+  String get breedDescStaffordshireBullTerrier;
+
+  /// No description provided for @breedNameEnglishFoxhound.
+  ///
+  /// In en, this message translates to:
+  /// **'English Foxhound'**
+  String get breedNameEnglishFoxhound;
+
+  /// No description provided for @breedDescEnglishFoxhound.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.'**
+  String get breedDescEnglishFoxhound;
+
+  /// No description provided for @breedNameWireFoxTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Wire Fox Terrier'**
+  String get breedNameWireFoxTerrier;
+
+  /// No description provided for @breedDescWireFoxTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.'**
+  String get breedDescWireFoxTerrier;
+
+  /// No description provided for @breedNameManchesterTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Manchester Terrier'**
+  String get breedNameManchesterTerrier;
+
+  /// No description provided for @breedDescManchesterTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.'**
+  String get breedDescManchesterTerrier;
+
+  /// No description provided for @breedNameBedlingtonTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Bedlington Terrier'**
+  String get breedNameBedlingtonTerrier;
+
+  /// No description provided for @breedDescBedlingtonTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.'**
+  String get breedDescBedlingtonTerrier;
+
+  /// No description provided for @breedNameBostonTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Boston Terrier'**
+  String get breedNameBostonTerrier;
+
+  /// No description provided for @breedDescBostonTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 11-13 years.\nFriendly \"American Gentleman\"\nwith tuxedo-like markings.'**
+  String get breedDescBostonTerrier;
+
+  /// No description provided for @breedNameEnglishSetter.
+  ///
+  /// In en, this message translates to:
+  /// **'English Setter'**
+  String get breedNameEnglishSetter;
+
+  /// No description provided for @breedDescEnglishSetter.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.'**
+  String get breedDescEnglishSetter;
+
+  /// No description provided for @breedNameBorderTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Border Terrier'**
+  String get breedNameBorderTerrier;
+
+  /// No description provided for @breedDescBorderTerrier.
+  ///
+  /// In en, this message translates to:
+  /// **'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.'**
+  String get breedDescBorderTerrier;
+
+  /// No description provided for @favoritesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get favoritesTitle;
+
+  /// No description provided for @scanTabTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan'**
+  String get scanTabTitle;
+
+  /// No description provided for @noFavoriteBreedsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No favourite breeds yet'**
+  String get noFavoriteBreedsMessage;
+
+  /// No description provided for @dialogShareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share {appName}'**
+  String dialogShareTitle(String appName);
+
+  /// No description provided for @shareTags.
+  ///
+  /// In en, this message translates to:
+  /// **'#DogBreed #Dogs #Pets'**
+  String get shareTags;
+
+  /// No description provided for @errorLaunchUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not launch {url}'**
+  String errorLaunchUrl(String url);
+
+  /// No description provided for @feedbackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedbackTitle;
+
+  /// No description provided for @feedbackDescribeIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Help us improve your experience\nDescribe the issue you\'re having'**
+  String get feedbackDescribeIssue;
+
+  /// No description provided for @feedbackTellUsMore.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us more (optional)'**
+  String get feedbackTellUsMore;
+
+  /// No description provided for @submitButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submitButton;
+
+  /// No description provided for @feedbackIssueLagging.
+  ///
+  /// In en, this message translates to:
+  /// **'Lagging'**
+  String get feedbackIssueLagging;
+
+  /// No description provided for @feedbackIssueCrashes.
+  ///
+  /// In en, this message translates to:
+  /// **'Crashes'**
+  String get feedbackIssueCrashes;
+
+  /// No description provided for @feedbackIssueAds.
+  ///
+  /// In en, this message translates to:
+  /// **'Annoying ads'**
+  String get feedbackIssueAds;
+
+  /// No description provided for @feedbackIssueOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get feedbackIssueOther;
+
+  /// No description provided for @feedbackIssueNotWorking.
+  ///
+  /// In en, this message translates to:
+  /// **'Not working'**
+  String get feedbackIssueNotWorking;
+
+  /// No description provided for @feedbackChooseEmailApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your email app to send feedback:'**
+  String get feedbackChooseEmailApp;
+
+  /// No description provided for @feedbackSendEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Email'**
+  String get feedbackSendEmail;
+
+  /// No description provided for @feedbackEmailSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'DogBreed: Feedback'**
+  String get feedbackEmailSubject;
+
+  /// No description provided for @feedbackIssueType.
+  ///
+  /// In en, this message translates to:
+  /// **'Issue Type:'**
+  String get feedbackIssueType;
+
+  /// No description provided for @feedbackDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details:'**
+  String get feedbackDetails;
+
+  /// No description provided for @feedbackGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General feedback about the app'**
+  String get feedbackGeneral;
+
+  /// No description provided for @feedbackManualEmailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Email App Not Found'**
+  String get feedbackManualEmailTitle;
+
+  /// No description provided for @feedbackManualEmailBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Please copy the information below and send it to:'**
+  String get feedbackManualEmailBody;
+
+  /// No description provided for @feedbackSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject:'**
+  String get feedbackSubject;
+
+  /// No description provided for @feedbackMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Message:'**
+  String get feedbackMessage;
+
+  /// No description provided for @feedbackManualEmailSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback submitted successfully!'**
+  String get feedbackManualEmailSuccess;
+
+  /// No description provided for @feedbackSelectIssue.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select an issue type'**
+  String get feedbackSelectIssue;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @profileRecentScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Scans'**
+  String get profileRecentScan;
+
+  /// No description provided for @profileHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan History'**
+  String get profileHistory;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @appLanguageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'App Language'**
+  String get appLanguageTitle;
+
+  /// No description provided for @premiumSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium Subscription'**
+  String get premiumSubscription;
+
+  /// No description provided for @profileMyFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'My Favorites'**
+  String get profileMyFavorites;
+
+  /// No description provided for @rateUsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Us'**
+  String get rateUsTitle;
+
+  /// No description provided for @shareTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Share App'**
+  String get shareTitle;
+
+  /// No description provided for @faq.
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get faq;
+
+  /// No description provided for @termsOfUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get termsOfUse;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @deleteOwnerProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Profile'**
+  String get deleteOwnerProfile;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @themeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get themeTitle;
+
+  /// No description provided for @darkTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get darkTheme;
+
+  /// No description provided for @lightTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get lightTheme;
+
+  /// No description provided for @aiAppName.
+  ///
+  /// In en, this message translates to:
+  /// **'Dog Breed Scanner'**
+  String get aiAppName;
+
+  /// No description provided for @shareMessageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check out Dog Breed Scanner - AI-powered dog breed identification app! 🐕'**
+  String get shareMessageBody;
+
+  /// No description provided for @shareIOS.
+  ///
+  /// In en, this message translates to:
+  /// **'Check out Dog Breed Scanner on the App Store!'**
+  String get shareIOS;
+
+  /// No description provided for @shareAndroid.
+  ///
+  /// In en, this message translates to:
+  /// **'Check out Dog Breed Scanner on Google Play!'**
+  String get shareAndroid;
+
+  /// No description provided for @shareDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Check out Dog Breed Scanner!'**
+  String get shareDefault;
+
+  /// No description provided for @shareDownloadNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Download now: '**
+  String get shareDownloadNow;
+
+  /// No description provided for @shareSubject.
+  ///
+  /// In en, this message translates to:
+  /// **'Dog Breed Scanner App'**
+  String get shareSubject;
 }
 
 class _AppLocalizationsDelegate

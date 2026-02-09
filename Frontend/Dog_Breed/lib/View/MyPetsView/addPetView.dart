@@ -11,8 +11,10 @@ import 'package:provider/provider.dart';
 
 import '../../Valid/AppColors.dart';
 import '../../View_model/PetProvider.dart';
+import '../../View_model/home/home_view_model.dart';
 import '../../config/components/CommonApp.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/routes/routes_name.dart';
 
 class AddPetView extends StatefulWidget {
   const AddPetView({super.key});
@@ -839,7 +841,7 @@ class _AddPetViewState extends State<AddPetView> {
     } catch (e) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Failed to pick image: $e')));
+      ).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.msgImagePickFailed(e.toString()))));
     }
   }
 
@@ -859,7 +861,7 @@ class _AddPetViewState extends State<AddPetView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Add pet",
+                  AppLocalizations.of(context)!.addPetTitle,
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
@@ -877,7 +879,7 @@ class _AddPetViewState extends State<AddPetView> {
                     padding: EdgeInsets.symmetric(vertical: 12.h),
                     child: Center(
                       child: Text(
-                        "Upload from Gallery",
+                        AppLocalizations.of(context)!.pickerUploadGallery,
                         style: TextStyle(
                           fontSize: 16.sp,
                           color: const Color(0xFF007AFF),
@@ -897,7 +899,7 @@ class _AddPetViewState extends State<AddPetView> {
                     padding: EdgeInsets.symmetric(vertical: 12.h),
                     child: Center(
                       child: Text(
-                        "Open Camera",
+                        AppLocalizations.of(context)!.pickerOpenCamera,
                         style: TextStyle(
                           fontSize: 16.sp,
                           color: const Color(0xFF007AFF),
@@ -964,7 +966,7 @@ class _AddPetViewState extends State<AddPetView> {
                       style: TextStyle(
                         fontFamily: 'Sora',
                         fontWeight: FontWeight.w300,
-                        fontSize: 29.75.sp,
+                        fontSize: 26.75.sp,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
@@ -1044,7 +1046,7 @@ class _AddPetViewState extends State<AddPetView> {
                         ),
                         const SizedBox(height: 3),
                         Text(
-                          'Photo',
+                          AppLocalizations.of(context)!.labelPhoto,
                           style: TextStyle(
                             color: Theme.of(context).hintColor,
                             fontSize: 14,
@@ -1056,7 +1058,7 @@ class _AddPetViewState extends State<AddPetView> {
                 ),
                 SizedBox(height: 23.h),
                 Text(
-                  'Pet Name',
+                  AppLocalizations.of(context)!.labelPetName,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
@@ -1087,7 +1089,7 @@ class _AddPetViewState extends State<AddPetView> {
                 ),
                 SizedBox(height: 17.h),
                 Text(
-                  'Breed',
+                  AppLocalizations.of(context)!.labelBreed,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12.sp,
@@ -1108,7 +1110,7 @@ class _AddPetViewState extends State<AddPetView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          _selectedBreed ?? "Select Breed",
+                          _selectedBreed ?? AppLocalizations.of(context)!.hintSelectBreed,
                           style: TextStyle(
                             color: _selectedBreed != null ? Theme.of(context).colorScheme.onSurface : Theme.of(context).hintColor,
                             fontSize: 16,
@@ -1121,7 +1123,7 @@ class _AddPetViewState extends State<AddPetView> {
                 ),
                 SizedBox(height: 17.h),
                 Text(
-                  'Gender',
+                  AppLocalizations.of(context)!.labelGender,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12.sp,
@@ -1152,7 +1154,17 @@ class _AddPetViewState extends State<AddPetView> {
                       ),
                       items: _genders
                           .map(
-                            (g) => DropdownMenuItem(value: g, child: Text(g)),
+                            (g) {
+                              String label;
+                              if (g == 'Male') {
+                                label = AppLocalizations.of(context)!.genderMale;
+                              } else if (g == 'Female') {
+                                label = AppLocalizations.of(context)!.genderFemale;
+                              } else {
+                                label = AppLocalizations.of(context)!.genderOther;
+                              }
+                              return DropdownMenuItem(value: g, child: Text(label));
+                            },
                       )
                           .toList(),
                       onChanged: (v) => setState(() => _selectedGender = v),
@@ -1167,7 +1179,7 @@ class _AddPetViewState extends State<AddPetView> {
                 ),
                 SizedBox(height: 17.h),
                 Text(
-                  'Birthday',
+                  AppLocalizations.of(context)!.labelBirthday,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     fontSize: 12,
@@ -1212,7 +1224,7 @@ class _AddPetViewState extends State<AddPetView> {
 
                 // AddPetView - Update the onPress method in the RoundButton:
                 RoundButton(
-                  title: "Save",
+                  title: AppLocalizations.of(context)!.actionSave,
                   height: 50,
                   width: 379,
                   backgroundColors: AppColors.vibrantPurple,
@@ -1223,10 +1235,10 @@ class _AddPetViewState extends State<AddPetView> {
                         _selectedGender == null ||
                         _selectedDate == null) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
+                         SnackBar(
                           backgroundColor: Colors.red,
-                          content: Text('Please Fill Pet Name ',style: TextStyle(color: Colors.white),),
-                          duration: Duration(seconds: 1),
+                          content: Text(AppLocalizations.of(context)!.errorFillPetName, style: const TextStyle(color: Colors.white),),
+                          duration: const Duration(seconds: 1),
                         ),
                       );
                       return;
@@ -1247,14 +1259,14 @@ class _AddPetViewState extends State<AddPetView> {
                     final success = await petProvider.addPet(newPet);
 
                     if (success) {
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //     const SnackBar(content: Text('Pet saved successfully!')),
-                      // );
-                      Navigator.pop(context);
+                      final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+                      homeViewModel.selectedIndex = 1; // Index for Calendar
+                      homeViewModel.calendarTabIndex = 0; // Index for Calendar
+                      Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
                     } else {
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //     const SnackBar(content: Text('Failed to save pet. Please try again.')),
-                      // );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(AppLocalizations.of(context)!.msgAddFailed)),
+                      );
                     }
                   },
                 ),
@@ -1334,7 +1346,7 @@ class _AddPetViewState extends State<AddPetView> {
                     TextField(
                       style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
-                        hintText: 'Search breed...',
+                        hintText: AppLocalizations.of(context)!.hintSearchBreed,
                         hintStyle: TextStyle(color: Theme.of(context).hintColor),
                         prefixIcon: Icon(Icons.search, color: Theme.of(context).hintColor),
                         border: OutlineInputBorder(

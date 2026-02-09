@@ -9,9 +9,9 @@ import 'package:dog_breed/l10n/app_localizations.dart';
 
 import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/activity_provider.dart';
+import '../../View_model/home/home_view_model.dart';
 import '../../activity_model.dart';
 import 'addreminder.dart';
-import 'allActivityView.dart';
 
 class AddReminderView extends StatefulWidget {
   final String? selectedPetId;
@@ -194,7 +194,7 @@ class _AddReminderViewState extends State<AddReminderView> {
         //     spreadRadius: 0,
         //   ),
         // ],
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.secondaryContainer,
         borderRadius: BorderRadius.circular(16.r),
       ),
       padding: EdgeInsets.symmetric(horizontal: 6.w),
@@ -253,7 +253,7 @@ class _AddReminderViewState extends State<AddReminderView> {
       width: 40.w,
       height: 40.h,
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
       ),
       padding: EdgeInsets.all(8.w),
@@ -310,7 +310,10 @@ class _AddReminderViewState extends State<AddReminderView> {
     final colorValue = reminder['color'];
     final color = colorValue != null ? Color(colorValue) : Colors.orange;
     final reminderId = reminder['id'];
-
+    // 🔥 Detect expired reminder
+    final bool isExpired = DateTime.now().isAfter(scheduledTime);
+    final Color reminderColor =
+    isExpired ? Colors.orange : Theme.of(context).colorScheme.error;
     Activity? activity;
     try {
       activity = activityNotifier.activities.firstWhere(
@@ -344,9 +347,9 @@ class _AddReminderViewState extends State<AddReminderView> {
                 Container(
                   width: 50.w,
                   height: 50.h,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Colors.white,
                   ),
                   child: Center(
                     child: ClipOval(
@@ -378,7 +381,29 @@ class _AddReminderViewState extends State<AddReminderView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(Icons.add),
+                    GestureDetector(
+                      onTap: () async {
+                        if (activity != null) {
+                          if (reminderId != null) {
+                            await reminderNotifier.cancelReminder(reminderId);
+                          }
+                          
+                          activityNotifier.updateActivity(
+                            activity.copyWith(
+                              hasReminder: false,
+                              reminderDateTime: null,
+                              reminderId: null,
+                              dateTime: scheduledTime,
+                            ),
+                          );
+                          
+                          if (context.mounted) {
+                            Provider.of<HomeViewModel>(context, listen: false).calendarTabIndex = 0;
+                          }
+                        }
+                      },
+                      child: const Icon(Icons.add),
+                    ),
                     Text(
                       DateFormat('EEE MMM d', Localizations.localeOf(context).toString()).format(scheduledTime),
                       style: TextStyle(fontSize: 13.sp, color: Theme.of(context).hintColor),
@@ -399,7 +424,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                           child:  Icon(
                             Icons.notifications,
                             size: 22.sp,
-                            color: Theme.of(context).colorScheme.error,
+                            color: reminderColor,
                           ),
                         ),
                         SizedBox(width: 4.w),
@@ -407,7 +432,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                           DateFormat('hh:mm a', Localizations.localeOf(context).toString()).format(scheduledTime),
                           style: TextStyle(
                             fontSize: 16.sp,
-                            color: Theme.of(context).colorScheme.error,
+                            color:reminderColor,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

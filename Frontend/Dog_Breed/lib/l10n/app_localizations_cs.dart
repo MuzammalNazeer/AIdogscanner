@@ -9,492 +9,471 @@ class AppLocalizationsCs extends AppLocalizations {
   AppLocalizationsCs([String locale = 'cs']) : super(locale);
 
   @override
-  String get appTitle => 'Psí plemeno';
+  String get appTitle => 'Hunderace';
 
   @override
-  String get settingsTitle => 'Nastavení';
+  String get settingsTitle => 'Indstillinger';
 
   @override
-  String get appLanguageTitle => 'Jazyk aplikace';
+  String get notificationLanguageTitle => 'Notifikationssprog';
 
   @override
-  String get notificationLanguageTitle => 'Jazyk oznámení';
+  String get changePassword => 'Skift adgangskode';
 
   @override
-  String get editProfile => 'Upravit profil';
+  String get aboutUs => 'Om os';
 
   @override
-  String get changePassword => 'Změnit heslo';
+  String get customerCare => 'Kundeservice';
 
   @override
-  String get notifications => 'Oznámení';
+  String get measurementUnits => 'MÃƒÂ¥leenheder';
 
   @override
-  String get premiumSubscription => 'Prémiové předplatné';
+  String get supportAnimalIdProject => 'StÃƒÂ¸t Animal ID-projektet';
 
   @override
-  String get aboutUs => 'O nás';
+  String get dialogCancel => 'Annuller';
 
   @override
-  String get faq => 'Časté dotazy';
+  String get dialogDelete => 'Slet';
 
   @override
-  String get termsOfUse => 'Podmínky použití';
-
-  @override
-  String get customerCare => 'Zákaznická podpora';
-
-  @override
-  String get measurementUnits => 'Měrné jednotky';
-
-  @override
-  String get supportAnimalIdProject => 'Podpořit projekt Animal ID';
-
-  @override
-  String get deleteOwnerProfile => 'Smazat profil majitele';
-
-  @override
-  String get logout => 'Odhlásit se';
-
-  @override
-  String get dialogCancel => 'Zrušit';
-
-  @override
-  String get dialogDelete => 'Smazat';
-
-  @override
-  String get dialogDeleteProfileTitle => 'Smazat profil';
+  String get dialogDeleteProfileTitle => 'Slet profil';
 
   @override
   String get dialogDeleteProfileMessage =>
-      'Opravdu chcete trvale smazat svůj profil? Tuto akci nelze vzít zpět.';
+      'Er du sikker pÃƒÂ¥, at du vil slette din profil permanent? Dette kan ikke fortrydes.';
 
   @override
-  String get dialogLogoutTitle => 'Odhlásit se';
+  String get dialogLogoutTitle => 'Er du sikker på, at du vil logge ud?';
 
   @override
-  String get dialogLogoutMessage => 'Opravdu se chcete odhlásit?';
+  String get dialogLogoutMessage => 'Er du sikker pÃƒÂ¥, at du vil logge ud?';
 
   @override
-  String get manager => 'Manažer';
+  String get manager => 'Leder';
 
   @override
   String get splashSubtitle =>
-      'Spravujte každodenní aktivitu a zdraví svého psa';
+      'Administrer din hunds daglige aktivitet og sundhed';
 
   @override
-  String get startLikeAPro => 'Začněte jako profesionál';
+  String get startLikeAPro => 'Start som en professionel';
 
   @override
-  String get unlockAllFeatures => 'Odemknout všechny funkce';
+  String get unlockAllFeatures => 'LÃƒÂ¥s op for alle funktioner';
 
   @override
   String get premium => 'Premium';
 
   @override
-  String get free => 'Zdarma';
+  String get free => 'Gratis';
 
   @override
-  String get unlimitedDogScans => 'Neomezené skenování psů';
+  String get unlimitedDogScans => 'UbegrÃƒÂ¦nsede hundescanninger';
 
   @override
-  String get supportedBreedDetection => 'Podporovaná detekce plemen';
+  String get supportedBreedDetection => 'UnderstÃƒÂ¸ttet racedetektion';
 
   @override
-  String get multiplePetProfiles => 'Více profilů mazlíčků';
+  String get multiplePetProfiles => 'Flere kÃƒÂ¦ledyrsprofiler';
 
   @override
-  String get removeAds => 'Odstranit reklamy';
+  String get removeAds => 'Fjern annoncer';
 
   @override
-  String get vipCustomerSupport => 'VIP zákaznická podpora';
+  String get vipCustomerSupport => 'VIP kundesupport';
 
   @override
-  String get trialOffer => '3 dny ZDARMA zkušební verze, poté Rs 2550/týden';
+  String get trialOffer =>
+      '3 dages GRATIS prÃƒÂ¸veperiode, derefter Rs 2550/uge';
 
   @override
-  String get startFreeTrial => 'ZAHÁJIT ZKUŠEBNÍ VERZI';
+  String get startFreeTrial => 'START GRATIS PRÃƒËœVEPERIODE';
 
   @override
   String get subscriptionDisclaimer =>
-      'Pokračováním souhlasíte s našimi Podmínkami a Zásadami ochrany osobních údajů. Předplatné je účtováno po skončení zkušební doby a bude se automaticky obnovovat. Předplatné zrušte kdykoli před koncem zkušební doby, abyste se vyhnuli poplatkům.';
+      'Ved at fortsÃƒÂ¦tte accepterer du vores vilkÃƒÂ¥r og privatlivspolitik. Abonnementet faktureres efter prÃƒÂ¸veperiodens udlÃƒÂ¸b og fornyes automatisk. Annuller abonnementet nÃƒÂ¥r som helst inden prÃƒÂ¸veperiodens udlÃƒÂ¸b for at undgÃƒÂ¥ gebyrer.';
 
   @override
-  String get welcomeBack => 'Vítejte zpět, ';
+  String get welcomeBack => 'Velkommen tilbage, ';
 
   @override
-  String get searchForDog => 'Hledat psa';
+  String get searchForDog => 'SÃƒÂ¸g efter hund';
 
   @override
-  String get tryPremiumFeatures => 'Vyzkoušejte prémiové funkce 🌵';
+  String get tryPremiumFeatures => 'PrÃƒÂ¸v Premium Funktioner Ã°Å¸Å’Âµ';
 
   @override
   String get premiumOfferDescription =>
-      'Vyzvedněte si nabídku hned teď a získejte neomezené rozpoznávání, kontrolu zdraví a další';
+      'FÃƒÂ¥ dit tilbud nu og fÃƒÂ¥ ubegrÃƒÂ¦nset genkendelse, sundhedstjek og mere';
 
   @override
-  String get getIt => 'ZÍSKAT';
+  String get getIt => 'FÃƒâ€¦ DET';
 
   @override
-  String get hygiene => 'Hygiena';
+  String get hygiene => 'Hygiejne';
 
   @override
-  String get cleaning => 'Úklid';
+  String get cleaning => 'RengÃƒÂ¸ring';
 
   @override
-  String get medical => 'Lékařské';
+  String get medical => 'Medicinsk';
 
   @override
-  String get booking => 'Rezervace';
+  String get booking => 'Booking';
 
   @override
-  String get identifyDog => 'Identifikovat psa';
+  String get identifyDog => 'Identificer Hund';
 
   @override
   String get identifyDogDescription =>
-      'Okamžitě naskenujte a identifikujte svého psa pomocí AI';
+      'Scan og identificer din hund ÃƒÂ¸jeblikkeligt ved hjÃƒÂ¦lp af AI';
 
   @override
-  String get scanNow => 'Skenovat nyní';
+  String get scanNow => 'Scan nu';
 
   @override
-  String get vetVisits => 'Návštěvy veterináře';
+  String get vetVisits => 'DyrlÃƒÂ¦gebesÃƒÂ¸g';
 
   @override
   String get vetVisitsDescription =>
-      'Plánujte prohlídky a sledujte \n návštěvy veterináře';
+      'PlanlÃƒÂ¦g tjek og hold \n styr pÃƒÂ¥ dyrlÃƒÂ¦gebesÃƒÂ¸g';
 
   @override
-  String get createVisit => 'Vytvořit návštěvu';
+  String get createVisit => 'Opret besÃƒÂ¸g';
 
   @override
-  String get foodManagement => 'Správa krmiva';
+  String get foodManagement => 'Foderstyring';
 
   @override
   String get foodManagementDescription =>
-      'Sledujte jídla a spravujte \n denní výživu svého mazlíčka';
+      'Spor mÃƒÂ¥ltider og administrer dit \n kÃƒÂ¦ledyrs daglige ernÃƒÂ¦ring';
 
   @override
-  String get checkSchedule => 'Zkontrolovat plán';
+  String get checkSchedule => 'Tjek tidsplan';
 
   @override
-  String get unknownBreed => 'Neznámé plemeno';
+  String get unknownBreed => 'Ukendt race';
 
   @override
   String savedScanMessage(Object breedName, Object confidence) {
-    return '✅ Uloženo: $breedName (spolehlivost $confidence%)';
+    return 'Ã¢Å“â€¦ Gemt: $breedName ($confidence% sikkerhed)';
   }
 
   @override
   String errorMessage(Object error) {
-    return 'Chyba: $error';
+    return 'Fejl: $error';
   }
 
   @override
-  String get skip => 'Přeskočit';
+  String get skip => 'Spring over';
 
   @override
-  String get next => 'Další';
+  String get next => 'NÃƒÂ¦ste';
 
   @override
-  String get getStarted => 'Začít';
+  String get getStarted => 'Kom i gang';
 
   @override
-  String get onboardingTitle1 => 'Satelitní ředitel';
+  String get onboardingTitle1 => 'SatellitdirektÃƒÂ¸r';
 
   @override
   String get onboardingDesc1 =>
-      'Prozkoumejte blízká místa pomocí GPS satelitního\nmapování a najděte satelity';
+      'Udforsk nÃƒÂ¦rliggende steder med GPS-satellitkortlÃƒÂ¦gning\nog find satellitter';
 
   @override
-  String get onboardingTitle2 => 'Potřebujeme váš\n souhlas';
+  String get onboardingTitle2 => 'Vi har brug for din\n tilladelse';
 
   @override
   String get onboardingDesc2 =>
-      'Potřebujeme povolení k fotoaparátu, abyste mohli \nprovádět živé skenování svého mazlíčka.';
+      'Vi har brug for kameratilladelse, sÃƒÂ¥ du kan lave live\nscanninger af dit kÃƒÂ¦ledyr.';
 
   @override
-  String get onboardingTitle3 => 'Udržujte kvalitu obrazu';
+  String get onboardingTitle3 => 'Oprethold billedkvalitet';
 
   @override
   String get onboardingDesc3 =>
-      'Pokud je to možné, zachyťte celé tělo. Hlava by měla být \nviditelná.';
+      'Fang hele kroppen, hvis det er muligt. Hovedet skal vÃƒÂ¦re \nsynligt.';
 
   @override
   String get onboardingTitle4 =>
-      'Zajistěte, aby váš pes zůstal \n zdravý a aktivní.';
+      'SÃƒÂ¸rg for, at din hund forbliver \n sund og aktiv.';
 
   @override
   String get onboardingDesc4 =>
-      'Spravujte každý detail o svém psovi—zdraví, fotky,\n aktivity a další na jednom jednoduchém místě.';
+      'Administrer hver eneste detalje om din hundÃ¢â‚¬â€sundhed, billeder,\n aktiviteter og mere pÃƒÂ¥ ÃƒÂ©t enkelt sted.';
 
   @override
-  String get calendarTabActivities => 'Aktivity';
+  String get calendarTabActivities => 'Aktiviteter';
 
   @override
-  String get calendarTabReminders => 'Připomínky';
+  String get calendarTabReminders => 'PÃƒÂ¥mindelser';
 
   @override
-  String get calendarTabProgress => 'Pokrok';
+  String get calendarTabProgress => 'Fremskridt';
 
   @override
-  String get calendarTabDocuments => 'Dokumenty';
+  String get calendarTabDocuments => 'Dokumenter';
 
   @override
-  String get calendarTabSettings => 'Nastavení';
+  String get calendarTabSettings => 'Indstillinger';
 
   @override
-  String get activityVeterinary => 'Veterinář';
+  String get activityVeterinary => 'DyrlÃƒÂ¦ge';
 
   @override
-  String get activityPee => 'Čůrání';
+  String get activityPee => 'Tisse';
 
   @override
-  String get activityEat => 'Jídlo';
+  String get activityEat => 'Spise';
 
   @override
-  String get activityDrink => 'Pití';
+  String get activityDrink => 'Drikke';
 
   @override
-  String get activityPlay => 'Hraní';
+  String get activityPlay => 'Lege';
 
   @override
-  String get activityPoop => 'Kakání';
+  String get activityPoop => 'PÃƒÂ¸lle';
 
   @override
-  String get activityWalk => 'Procházka';
+  String get activityWalk => 'GÃƒÂ¥tur';
 
   @override
-  String get activityCrate => 'Přepravka';
+  String get activityCrate => 'Bur';
 
   @override
-  String get activitySleep => 'Spánek';
+  String get activitySleep => 'Sove';
 
   @override
-  String get activityTraining => 'Trénink';
+  String get activityTraining => 'TrÃƒÂ¦ning';
 
   @override
-  String get activityTreat => 'Pamlsek';
+  String get activityTreat => 'Godbid';
 
   @override
-  String get activityGrooming => 'Péče';
+  String get activityGrooming => 'Pleje';
 
   @override
-  String get activityCleaning => 'Čištění';
+  String get activityCleaning => 'RengÃƒÂ¸ring';
 
   @override
-  String get activityMedication => 'Léky';
+  String get activityMedication => 'Medicin';
 
   @override
-  String get activityVaccination => 'Očkování';
+  String get activityVaccination => 'Vaccination';
 
   @override
-  String get activityWeight => 'Váha';
+  String get activityWeight => 'VÃƒÂ¦gt';
 
   @override
-  String get activityHeight => 'Výška';
+  String get activityHeight => 'HÃƒÂ¸jde';
 
   @override
-  String get activityTemperature => 'Teplota';
+  String get activityTemperature => 'Temperatur';
 
   @override
-  String get activityHealthCondition => 'Zdravotní stav';
+  String get activityHealthCondition => 'Helbredstilstand';
 
   @override
-  String get activityAccident => 'Nehoda';
+  String get activityAccident => 'Uheld';
 
   @override
-  String get activityJournal => 'Deník';
+  String get activityJournal => 'Dagbog';
 
   @override
-  String get calendarManage => 'Spravovat';
+  String get calendarManage => 'Administrer';
 
   @override
-  String get calendarMonth => 'Měsíc';
+  String get calendarMonth => 'MÃƒÂ¥ned';
 
   @override
-  String get calendarComingSoon => 'Již brzy...';
+  String get calendarComingSoon => 'Kommer snart...';
 
   @override
-  String get calendarNoActivityLogged => 'Žádná zaznamenaná aktivita';
+  String get calendarNoActivityLogged => 'Ingen aktivitet logget';
 
   @override
-  String get calendarAddActivity => 'Přidat aktivitu';
+  String get calendarAddActivity => 'TilfÃƒÂ¸j aktivitet';
 
   @override
-  String get progressTabCalendar => 'Kalendář';
+  String get progressTabCalendar => 'Kalender';
 
   @override
-  String get progressTabChart => 'Graf';
+  String get progressTabChart => 'Diagram';
 
   @override
-  String get progressTabCompare => 'Porovnat';
+  String get progressTabCompare => 'Sammenlign';
 
   @override
-  String get petSelectPet => 'Vybrat mazlíčka';
+  String get petSelectPet => 'VÃƒÂ¦lg kÃƒÂ¦ledyr';
 
   @override
-  String get petNoPetSelected => 'Není vybrán žádný mazlíček';
+  String get petNoPetSelected => 'Intet kÃƒÂ¦ledyr valgt';
 
   @override
-  String get petNoPetSelectedOption => 'Žádný mazlíček není vybrán';
+  String get petNoPetSelectedOption => 'Intet kÃƒÂ¦ledyr valgt';
 
   @override
-  String get activityNote => 'Poznámka:';
+  String get activityNote => 'Note:';
 
   @override
-  String get actionEdit => 'Upravit';
+  String get actionEdit => 'Rediger';
 
   @override
-  String get actionDelete => 'Smazat';
+  String get actionDelete => 'Slet';
 
   @override
-  String get dialogDeleteActivityTitle => 'Smazat aktivitu';
+  String get dialogDeleteActivityTitle => 'Slet aktivitet';
 
   @override
-  String get calendarHeatmapTab => 'Teplotní mapa';
+  String get calendarHeatmapTab => 'Varmekort';
 
   @override
-  String get calendarTimelineTab => 'Časová osa';
+  String get calendarTimelineTab => 'Tidslinje';
 
   @override
-  String get calendarActivityIntensity => 'Intenzita aktivity';
+  String get calendarActivityIntensity => 'Aktivitetsintensitet';
 
   @override
-  String get calendarErrorLoadingHeatmap => 'Chyba při načítání mapy';
+  String get calendarErrorLoadingHeatmap =>
+      'Fejl ved indlÃƒÂ¦sning af varmekort';
 
   @override
-  String get calendarLegendNone => 'Nic';
+  String get calendarLegendNone => 'Ingen';
 
   @override
-  String get calendarLegendLow => 'Nízká';
+  String get calendarLegendLow => 'Lav';
 
   @override
-  String get calendarLegendMedium => 'Střední';
+  String get calendarLegendMedium => 'Mellem';
 
   @override
-  String get calendarLegendHigh => 'Vysoká';
+  String get calendarLegendHigh => 'HÃƒÂ¸j';
 
   @override
-  String get calendarLegendNow => 'Teď';
+  String get calendarLegendNow => 'Nu';
 
   @override
-  String get calendarChartAmount => 'Množství v ml';
+  String get calendarChartAmount => 'MÃƒÂ¦ngde i ml';
 
   @override
-  String get calendarChartFrequency => 'Frekvence';
+  String get calendarChartFrequency => 'Hyppighed';
 
   @override
-  String get calendarShare => 'Sdílet';
+  String get calendarShare => 'Del';
 
   @override
-  String get calendarMostActiveDay => 'Nejaktivnější den';
+  String get calendarMostActiveDay => 'Mest aktive dag';
 
   @override
-  String get calendarMostActiveTime => 'Nejaktivnější čas';
+  String get calendarMostActiveTime => 'Mest aktive tid';
 
   @override
   String dialogDeleteActivityContent(Object activityName) {
-    return 'Opravdu chcete smazat \"$activityName\"?';
+    return 'Er du sikker pÃƒÂ¥, at du vil slette \"$activityName\"?';
   }
 
   @override
-  String get dialogActionsRequired => 'Vyžadované akce';
+  String get dialogActionsRequired => 'Handlinger pÃƒÂ¥krÃƒÂ¦vet';
 
   @override
   String get dialogAddPetMessage =>
-      'Přidejte alespoň jednoho mazlíčka, abyste mohli začít přidávat aktivity a připomínky.';
+      'TilfÃƒÂ¸j mindst ÃƒÂ©t kÃƒÂ¦ledyr for at begynde at tilfÃƒÂ¸je aktiviteter og pÃƒÂ¥mindelser.';
 
   @override
   String get dialogGot_it => 'Got it';
 
   @override
-  String get dialogGotIt => 'Rozumím';
+  String get dialogGotIt => 'ForstÃƒÂ¥et';
 
   @override
-  String get dayMon => 'Po';
+  String get dayMon => 'Man';
 
   @override
-  String get dayTue => 'Út';
+  String get dayTue => 'Tir';
 
   @override
-  String get dayWed => 'St';
+  String get dayWed => 'Ons';
 
   @override
-  String get dayThu => 'Čt';
+  String get dayThu => 'Tor';
 
   @override
-  String get dayFri => 'Pá';
+  String get dayFri => 'Fre';
 
   @override
-  String get daySat => 'So';
+  String get daySat => 'LÃƒÂ¸r';
 
   @override
-  String get daySun => 'Ne';
+  String get daySun => 'SÃƒÂ¸n';
 
   @override
-  String get walkDeleteTitle => 'Smazat procházku?';
+  String get walkDeleteTitle => 'Slet gÃƒÂ¥tur?';
 
   @override
-  String get walkDeleteContent => 'Tímto odstraníte aktuální záznam procházky.';
+  String get walkDeleteContent =>
+      'Dette vil kassere den nuvÃƒÂ¦rende gÃƒÂ¥tur.';
 
   @override
-  String get walkCancel => 'Zrušit';
+  String get walkCancel => 'Annuller';
 
   @override
-  String get walkDelete => 'Smazat';
+  String get walkDelete => 'Slet';
 
   @override
-  String get walkStartTimerWarning => 'Před uložením prosím spusťte stopky.';
+  String get walkStartTimerWarning =>
+      'Start venligst timeren fÃƒÂ¸r du gemmer.';
 
   @override
-  String get walkNote => 'Poznámka';
+  String get walkNote => 'Note';
 
   @override
-  String get walkNoteHint => 'Vaše poznámky zde';
+  String get walkNoteHint => 'Dine noter her';
 
   @override
-  String get walkSave => 'Uložit';
+  String get walkSave => 'Gem';
 
   @override
-  String get walkAddNote => 'Přidat poznámku';
+  String get walkAddNote => 'TilfÃƒÂ¸j en note';
 
   @override
-  String get walkDefaultName => 'Procházka';
+  String get walkDefaultName => 'GÃƒÂ¥tur';
 
   @override
   String get walkLocationPermission =>
-      'Ke sledování procházek je vyžadováno povolení k polohovým službám.';
+      'Placeringstilladelse er pÃƒÂ¥krÃƒÂ¦vet for at spore gÃƒÂ¥ture.';
 
   @override
-  String get walkLocationService => 'Polohové služby jsou vypnuty.';
+  String get walkLocationService => 'Placeringstjenester er deaktiveret.';
 
   @override
-  String get reminderAddTitle => 'Přidat připomínku';
+  String get reminderAddTitle => 'TilfÃƒÂ¸j pÃƒÂ¥mindelse';
 
   @override
-  String get reminderNone => 'Žádné připomínky';
+  String get reminderNone => 'Ingen pÃƒÂ¥mindelser';
 
   @override
-  String get reminderDefaultTitle => 'Připomínka';
+  String get reminderDefaultTitle => 'PÃƒÂ¥mindelse';
 
   @override
-  String get actionUpdate => 'Aktualizovat';
+  String get actionUpdate => 'Opdater';
 
   @override
-  String get actionRemove => 'Odstranit';
+  String get actionRemove => 'Fjern';
 
   @override
   String errorUpdateFailed(Object error) {
-    return 'Aktualizace se nezdařila: $error';
+    return 'Opdatering mislykkedes: $error';
   }
 
   @override
-  String get errorUpdateNotFound =>
-      'Nelze aktualizovat: Aktivita nebyla nalezena';
+  String get errorUpdateNotFound => 'Kan ikke opdatere: Aktivitet ikke fundet';
 
   @override
-  String get durationHr => 'hod';
+  String get durationHr => 't';
 
   @override
   String get durationMin => 'min';
@@ -503,49 +482,50 @@ class AppLocalizationsCs extends AppLocalizations {
   String get durationSec => 'sek';
 
   @override
-  String get pickerTakePhoto => 'Pořídit fotku';
+  String get pickerTakePhoto => 'Tag billede';
 
   @override
-  String get pickerGallery => 'Vybrat z galerie';
+  String get pickerGallery => 'VÃƒÂ¦lg fra galleri';
 
   @override
-  String get pickerRecordVideo => 'Natočit video';
+  String get pickerRecordVideo => 'Optag video';
 
   @override
-  String get errorSelectActivity => 'Nejprve prosím vyberte aktivitu';
+  String get errorSelectActivity => 'VÃƒÂ¦lg venligst en aktivitet fÃƒÂ¸rst';
 
   @override
-  String get errorReminderFuture => 'Čas připomínky musí být v budoucnosti';
+  String get errorReminderFuture =>
+      'PÃƒÂ¥mindelsestidspunkt skal vÃƒÂ¦re i fremtiden';
 
   @override
-  String get errorValidWeight => 'Zadejte prosím platnou váhu';
+  String get errorValidWeight => 'Indtast venligst en gyldig vÃƒÂ¦gt';
 
   @override
-  String get errorValidHeight => 'Zadejte prosím platnou výšku';
+  String get errorValidHeight => 'Indtast venligst en gyldig hÃƒÂ¸jde';
 
   @override
-  String get errorValidTemp => 'Zadejte prosím platnou teplotu';
+  String get errorValidTemp => 'Indtast venligst en gyldig temperatur';
 
   @override
-  String get errorEnterFood => 'Zadejte prosím název nebo druh krmiva';
+  String get errorEnterFood => 'Indtast venligst madnavn eller type';
 
   @override
-  String get successActivitySaved => 'Aktivita byla úspěšně uložena!';
+  String get successActivitySaved => 'Aktivitet gemt!';
 
   @override
   String get successActivitySavedReminder =>
-      'Aktivita s připomínkou byla úspěšně uložena!';
+      'Aktivitet med pÃƒÂ¥mindelse gemt!';
 
   @override
   String errorSaveFailed(Object error) {
-    return 'Uložení se nezdařilo: $error';
+    return 'Kunne ikke gemme: $error';
   }
 
   @override
-  String get labelSelectedImage => 'Vybraný obrázek:';
+  String get labelSelectedImage => 'Valgt billede:';
 
   @override
-  String get labelSelectedVideo => 'Vybrané video:';
+  String get labelSelectedVideo => 'Valgt video:';
 
   @override
   String get unitOz => 'oz';
@@ -554,22 +534,22 @@ class AppLocalizationsCs extends AppLocalizations {
   String get unitMl => 'ml';
 
   @override
-  String get unitLbs => 'libry';
+  String get unitLbs => 'pund';
 
   @override
   String get unitKg => 'kg';
 
   @override
-  String get unitInches => 'palce';
+  String get unitInches => 'tommer';
 
   @override
   String get unitCm => 'cm';
 
   @override
-  String get unitF => '°F';
+  String get unitF => 'Ã‚Â°F';
 
   @override
-  String get unitC => '°C';
+  String get unitC => 'Ã‚Â°C';
 
   @override
   String get unitKm => 'km';
@@ -578,203 +558,203 @@ class AppLocalizationsCs extends AppLocalizations {
   String get unitMi => 'mi';
 
   @override
-  String get actionAdd => 'Přidat název nebo druh nápoje';
+  String get actionAdd => 'TilfÃƒÂ¸j drikkevarenavn eller type';
 
   @override
-  String get actionAddImage => '+ Přidat obrázek';
+  String get actionAddImage => '+ TilfÃƒÂ¸j billede';
 
   @override
-  String get actionAddVideo => '+ Přidat video';
+  String get actionAddVideo => '+ TilfÃƒÂ¸j video';
 
   @override
-  String get hintAddNote => 'Přidat poznámku...';
+  String get hintAddNote => 'TilfÃƒÂ¸j note...';
 
   @override
-  String get startedAt => 'Začalo v';
+  String get startedAt => 'Startet kl';
 
   @override
-  String get endedAt => 'Skončilo v';
+  String get endedAt => 'Sluttede kl';
 
   @override
-  String get noActivitySelected => 'Není vybrána žádná aktivita';
+  String get noActivitySelected => 'Ingen aktivitet valgt';
 
   @override
-  String get actionAddTreat => '+ Přidat pamlsek';
+  String get actionAddTreat => '+ TilfÃƒÂ¸j godbid';
 
   @override
-  String get actionAddGrooming => '+ Přidat druh péče';
+  String get actionAddGrooming => '+ TilfÃƒÂ¸j plejetype';
 
   @override
-  String get actionAddMedication => '+ Přidat lék';
+  String get actionAddMedication => '+ TilfÃƒÂ¸j medicin';
 
   @override
-  String get actionAddVaccination => '+ Přidat očkování';
+  String get actionAddVaccination => '+ TilfÃƒÂ¸j vaccination';
 
   @override
-  String get actionAddHealthCondition => '+ Přidat zdravotní stav';
+  String get actionAddHealthCondition => '+ TilfÃƒÂ¸j helbredstilstand';
 
   @override
-  String get actionAddAccident => '+ Přidat druh nehody';
+  String get actionAddAccident => '+ TilfÃƒÂ¸j uhelduheld';
 
   @override
-  String get actionAddCleaning => '+ Přidat druh čištění';
+  String get actionAddCleaning => '+ TilfÃƒÂ¸j rengÃƒÂ¸ringstype';
 
   @override
   String get actionAddVeterinary => '+ Add veterinary';
 
   @override
-  String get actionAddFood => '+ Přidat název nebo druh krmiva';
+  String get actionAddFood => '+ TilfÃƒÂ¸j madnavn eller type';
 
   @override
-  String get actionStartTimer => 'Nebo spustit stopky';
+  String get actionStartTimer => 'Eller start en timer';
 
   @override
-  String get labelDate => 'Datum';
+  String get labelDate => 'Dato';
 
   @override
-  String get labelTime => 'Čas';
+  String get labelTime => 'Tid';
 
   @override
-  String get labelName => 'Jméno';
+  String get labelName => 'Navn';
 
   @override
-  String get hintEnterName => 'Zadejte jméno';
+  String get hintEnterName => 'Indtast navn';
 
   @override
-  String get actionSave => 'Uložit';
+  String get actionSave => 'Gem';
 
   @override
-  String get pickerSelectDate => 'Vybrat datum';
+  String get pickerSelectDate => 'VÃƒÂ¦lg dato';
 
   @override
-  String get pickerSelectTime => 'Vybrat čas';
+  String get pickerSelectTime => 'VÃƒÂ¦lg tid';
 
   @override
   String reminderSetFor(String date, String time) {
-    return 'Připomínka nastavena na $date v $time';
+    return 'PÃƒÂ¥mindelse indstillet til $date kl. $time';
   }
 
   @override
-  String get myPetsTitle => 'Moji mazlíčci';
+  String get myPetsTitle => 'Mine KÃƒÂ¦ledyr';
 
   @override
-  String get noPetsAdded => 'Zatím nebyla přidána žádná zvířata';
+  String get noPetsAdded => 'Ingen kÃƒÂ¦ledyr er tilfÃƒÂ¸jet endnu';
 
   @override
-  String get addPetButton => '+ Přidat mazlíčka';
+  String get addPetButton => '+ TilfÃƒÂ¸j kÃƒÂ¦ledyr';
 
   @override
-  String get noPetsMatch => 'Hledání neodpovídají žádná zvířata';
+  String get noPetsMatch => 'Ingen kÃƒÂ¦ledyr matcher din sÃƒÂ¸gning';
 
   @override
-  String get tryDifferentSearch => 'Zkuste jiný vyhledávací termín';
+  String get tryDifferentSearch => 'PrÃƒÂ¸v et andet sÃƒÂ¸geord';
 
   @override
-  String get petUpdatedSuccess => 'Zvíře úspěšně aktualizováno!';
+  String get petUpdatedSuccess => 'KÃƒÂ¦ledyr opdateret med succes!';
 
   @override
-  String get deletePetTitle => 'Smazat zvíře';
+  String get deletePetTitle => 'Slet kÃƒÂ¦ledyr';
 
   @override
   String deletePetMessage(String petName) {
-    return 'Opravdu chcete smazat $petName?';
+    return 'Er du sikker pÃƒÂ¥, at du vil slette $petName?';
   }
 
   @override
-  String get cancelButton => 'Zrušit';
+  String get cancelButton => 'Annuller';
 
   @override
-  String get deleteButton => 'Smazat';
+  String get deleteButton => 'Slet';
 
   @override
   String petDeletedSuccess(String petName) {
-    return '$petName úspěšně smazán';
+    return '$petName slettet med succes';
   }
 
   @override
   String petDeleteFailed(String petName) {
-    return 'Nepodařilo se smazat $petName';
+    return 'Kunne ikke slette $petName';
   }
 
   @override
-  String get unknown => 'Neznámý';
+  String get unknown => 'Ukendt';
 
   @override
-  String get genderOther => 'Jiné';
+  String get genderOther => 'Andet';
 
   @override
-  String get editPetTitle => 'Upravit zvíře';
+  String get editPetTitle => 'Rediger kÃƒÂ¦ledyr';
 
   @override
-  String get labelPhoto => 'Fotka';
+  String get labelPhoto => 'Foto';
 
   @override
-  String get hintSelectBreed => 'Vybrat plemeno';
+  String get hintSelectBreed => 'VÃƒÂ¦lg race';
 
   @override
-  String get hintSearchBreed => 'Hledat plemeno...';
+  String get hintSearchBreed => 'SÃƒÂ¸g race...';
 
   @override
-  String get noBreedsFound => 'Žádná plemena nenalezena';
+  String get noBreedsFound => 'Ingen racer fundet';
 
   @override
-  String get msgFillAllFields => 'Vyplňte prosím všechna pole';
+  String get msgFillAllFields => 'Udfyld venligst alle felter';
 
   @override
-  String get msgUpdateFailed => 'Aktualizace se nezdařila';
+  String get msgUpdateFailed => 'Opdatering mislykkedes';
 
   @override
-  String get msgAddFailed => 'Přidání se nezdařilo';
+  String get msgAddFailed => 'TilfÃƒÂ¸jelse mislykkedes';
 
   @override
   String msgImagePickFailed(Object error) {
-    return 'Nepodařilo se vybrat obrázek: $error';
+    return 'Kunne ikke vÃƒÂ¦lge billede: $error';
   }
 
   @override
-  String get labelBreed => 'Plemeno';
+  String get labelBreed => 'Race';
 
   @override
-  String get labelGender => 'Pohlaví';
+  String get labelGender => 'KÃƒÂ¸n';
 
   @override
-  String get labelDOB => 'Datum narození';
+  String get labelDOB => 'FÃƒÂ¸dselsdato';
 
   @override
-  String get genderMale => 'Samec';
+  String get genderMale => 'Han';
 
   @override
-  String get genderFemale => 'Samice';
+  String get genderFemale => 'Hun';
 
   @override
-  String get labelPetName => 'Jméno mazlíčka';
+  String get labelPetName => 'KÃƒÂ¦ledyrsnavn';
 
   @override
-  String get addPetTitle => 'Přidat mazlíčka';
+  String get addPetTitle => 'TilfÃƒÂ¸j kÃƒÂ¦ledyr';
 
   @override
-  String get labelRequired => '(Povinné)';
+  String get labelRequired => '(PÃƒÂ¥krÃƒÂ¦vet)';
 
   @override
-  String get hintEnterPetName => 'Zadejte jméno';
+  String get hintEnterPetName => 'Indtast navn';
 
   @override
-  String get hintSelectGender => 'Vybrat pohlaví';
+  String get hintSelectGender => 'VÃƒÂ¦lg kÃƒÂ¸n';
 
   @override
-  String get errorSelectGender => 'Vyberte prosím pohlaví';
+  String get errorSelectGender => 'VÃƒÂ¦lg venligst kÃƒÂ¸n';
 
   @override
-  String get errorFillRequired => 'Vyplňte prosím všechna povinná pole';
+  String get errorFillRequired => 'Udfyld venligst alle pÃƒÂ¥krÃƒÂ¦vede felter';
 
   @override
-  String get errorRequired => '(Povinné)';
+  String get errorRequired => '(PÃƒÂ¥krÃƒÂ¦vet)';
 
   @override
-  String get hintTapToScan => 'Klepnutím naskenujte';
+  String get hintTapToScan => 'Tryk for at scanne';
 
   @override
-  String get msgBreedDetected => 'Plemeno detekováno!';
+  String get msgBreedDetected => 'Race fundet!';
 
   @override
   String get breedAffenpinscher => 'Affenpinscher';
@@ -1143,138 +1123,139 @@ class AppLocalizationsCs extends AppLocalizations {
   }
 
   @override
-  String get navHome => 'Domů';
+  String get navHome => 'Hjem';
 
   @override
-  String get navCalendar => 'Kalendář';
+  String get navCalendar => 'Kalender';
 
   @override
-  String get navMyPets => 'Moji Mazlíčci';
+  String get navMyPets => 'Mine KÃƒÂ¦ledyr';
 
   @override
   String get navProfile => 'Profil';
 
   @override
-  String get aiIdentifyingYour => 'AI identifikuje vašeho ';
+  String get aiIdentifyingYour => 'AI identificerer din ';
 
   @override
-  String get dogText => 'PSA';
+  String get dogText => 'HUND';
 
   @override
-  String get identifyingTimeText => 'To obvykle trvá až 1 minutu...';
+  String get identifyingTimeText => 'Dette tager normalt op til 1 minut...';
 
   @override
-  String get analyzingImage => 'Analyzuji obrázek...';
+  String get analyzingImage => 'Analyserer billede...';
 
   @override
-  String get errorOccurred => 'Došlo k chybě';
+  String get errorOccurred => 'Der opstod en fejl';
 
   @override
-  String get goBack => 'Zpět';
+  String get goBack => 'GÃƒÂ¥ tilbage';
 
   @override
-  String get noDogDetected => 'Nebyl detekován žádný pes';
+  String get noDogDetected => 'Ingen hund fundet';
 
   @override
   String get clearerPhotoPrompt =>
-      'Zkuste to prosím s jasnější fotografií psa.';
+      'PrÃƒÂ¸v venligst med et tydeligere billede af en hund.';
 
   @override
-  String get cancel => 'Zrušit';
+  String get cancel => 'Annuller';
 
   @override
-  String get tryAgain => 'Zkusit znovu';
+  String get tryAgain => 'PrÃƒÂ¸v igen';
 
   @override
   String lowConfidenceWarning(String confidence) {
-    return 'Nízká jistota ($confidence%). Výsledky nemusí být přesné.';
+    return 'Lav sikkerhed ($confidence%). Resultaterne er muligvis ikke nÃƒÂ¸jagtige.';
   }
 
   @override
-  String get savingToRecentScans => 'Ukládání do nedávných skenů...';
+  String get savingToRecentScans => 'Gemmer i seneste scanninger...';
 
   @override
-  String get dogResults => 'Výsledky psa';
+  String get dogResults => 'Hunderesultater';
 
   @override
-  String get size => 'Velikost';
+  String get size => 'StÃƒÂ¸rrelse';
 
   @override
-  String get shape => 'Tvar';
+  String get shape => 'Form';
 
   @override
-  String get color => 'Barva';
+  String get color => 'Farve';
 
   @override
-  String get coat => 'Srst';
+  String get coat => 'Pels';
 
   @override
-  String get headAndFace => 'Hlava a Tvář';
+  String get headAndFace => 'Hoved & Ansigt';
 
   @override
-  String get purpose => 'Účel';
+  String get purpose => 'FormÃƒÂ¥l';
 
   @override
-  String get body => 'Tělo';
+  String get body => 'Krop';
 
   @override
-  String get weight => 'Váha';
+  String get weight => 'VÃƒÂ¦gt';
 
   @override
-  String get temperamentAndCharacteristics => 'Temperament a Vlastnosti';
+  String get temperamentAndCharacteristics => 'Temperament & Egenskaber';
 
   @override
-  String get energyLevel => 'Úroveň energie';
+  String get energyLevel => 'Energiniveau';
 
   @override
-  String get trainability => 'Cvičitelnost';
+  String get trainability => 'TrÃƒÂ¦ningsevne';
 
   @override
-  String get socialBehavior => 'Sociální chování';
+  String get socialBehavior => 'Social adfÃƒÂ¦rd';
 
   @override
-  String get familyCompatibility => 'Rodinná kompatibilita';
+  String get familyCompatibility => 'familieegnethed';
 
   @override
-  String get childFriendliness => 'Přátelskost k dětem';
+  String get childFriendliness => 'BÃƒÂ¸rnevenlighed';
 
   @override
-  String get addPet => '+Přidat mazlíčka';
+  String get addPet => '+TilfÃƒÂ¸j kÃƒÂ¦ledyr';
 
   @override
-  String get cannotSave => 'Nelze uložit';
+  String get cannotSave => 'Kan ikke gemme';
 
   @override
-  String get saving => 'Ukládání...';
+  String get saving => 'Gemmer...';
 
   @override
-  String get saved => 'Uloženo';
+  String get saved => 'Gemt';
 
   @override
-  String get save => 'Uložit';
+  String get save => 'Gem';
 
   @override
   String cannotSaveConfidence(String confidence) {
-    return 'Nelze uložit: Jistota $confidence% < 40%';
+    return 'Kan ikke gemme: Sikkerhed $confidence% < 40%';
   }
 
   @override
-  String get noPredictionResult => 'Žádný výsledek předpovědi není k dispozici';
+  String get noPredictionResult =>
+      'Intet forudsigelsesresultat tilgÃƒÂ¦ngeligt';
 
   @override
-  String get noImageDataToSave => 'Žádná obrazová data k uložení';
+  String get noImageDataToSave => 'Ingen billeddata at gemme';
 
   @override
-  String get failedToSaveResults => 'Nepodařilo se uložit výsledky';
+  String get failedToSaveResults => 'Kunne ikke gemme resultater';
 
   @override
-  String get moderate => 'Mírný';
+  String get moderate => 'Moderat';
 
   @override
-  String get friendly => 'Přátelský';
+  String get friendly => 'Venlig';
 
   @override
-  String get good => 'Dobrý';
+  String get good => 'God';
 
   @override
   String get sizeSmall => 'Small';
@@ -1466,293 +1447,295 @@ class AppLocalizationsCs extends AppLocalizations {
   String get colorSable => 'Sable';
 
   @override
-  String get chooseProfilePhoto => 'Vybrat profilovou fotku';
+  String get chooseProfilePhoto => 'VÃƒÂ¦lg profilbillede';
 
   @override
-  String get camera => 'Fotoaparát';
+  String get camera => 'Kamera';
 
   @override
-  String get gallery => 'Galerie';
+  String get gallery => 'Galleri';
 
   @override
-  String get ownersProfile => 'Profil majitele';
+  String get ownersProfile => 'Ejers profil';
 
   @override
-  String get petOwner => 'Majitel zvířete';
+  String get petOwner => 'KÃƒÂ¦ledyrsejer';
 
   @override
-  String get lastName => 'Příjmení';
+  String get lastName => 'Efternavn';
 
   @override
-  String get ownerContacts => 'Kontakty majitele';
+  String get ownerContacts => 'Ejers kontakter';
 
   @override
   String get email => 'E-mail';
 
   @override
-  String get mainPhone => 'Hlavní telefon';
+  String get mainPhone => 'Hovedtelefon';
 
   @override
-  String get instantGpsAlerts => 'Okamžitá GPS upozornění při naskenování';
+  String get instantGpsAlerts =>
+      'ÃƒËœjeblikkelige GPS-advarsler ved tag-scanning';
 
   @override
   String get gpsAlertsDescription =>
-      'Získejte okamžité aktualizace polohy vašeho domácího mazlíčka a vyhněte se potížím s tradičními e-maily';
+      'FÃƒÂ¥ ÃƒÂ¸jeblikkelige opdateringer om dit kÃƒÂ¦ledyrs placering, og undgÃƒÂ¥ besvÃƒÂ¦ret med traditionelle e-mails';
 
   @override
-  String get emergencyContacts => 'Nouzové kontakty';
+  String get emergencyContacts => 'NÃƒÂ¸dkontakter';
 
   @override
   String get vetContactsDescription =>
-      'Kontakty na veterináře, spolumajitele a správce pro případ, že hlavní telefon není dostupný';
+      'Kontakter til dyrlÃƒÂ¦gen, medejeren og vicevÃƒÂ¦rten, hvis hovedtelefonen ikke er tilgÃƒÂ¦ngelig';
 
   @override
   String get messenger => 'Messenger';
 
   @override
   String get messengerDescription =>
-      'Alternativní způsob kontaktování majitele, pokud mu není možné zavolat';
+      'En alternativ mÃƒÂ¥de at kontakte ejeren pÃƒÂ¥, hvis det er umuligt at ringe til dem';
 
   @override
-  String get petsResidence => 'Bydliště mazlíčka';
+  String get petsResidence => 'KÃƒÂ¦ledyrs bopÃƒÂ¦l';
 
   @override
-  String get country => 'Země';
+  String get country => 'Land';
 
   @override
-  String get city => 'Město';
+  String get city => 'By';
 
   @override
-  String get address => 'Adresa';
+  String get address => 'Adresse';
 
   @override
-  String get addAddress => 'Přidat adresu';
+  String get addAddress => 'TilfÃƒÂ¸j adresse';
 
   @override
-  String get labelAdd => 'Přidat';
+  String get labelAdd => 'TilfÃƒÂ¸j';
 
   @override
-  String get getPremium => 'ZÍSKAT PREMIUM';
+  String get getPremium => 'FÃƒâ€¦ PREMIUM';
 
   @override
-  String get recentScansTitle => 'Nedávné Skeny';
+  String get recentScansTitle => 'Seneste Scanninger';
 
   @override
   String scansCount(int count) {
-    return '$count Skeny';
+    return '$count Scanninger';
   }
 
   @override
-  String get zeroResults => '0 Výsledků';
+  String get zeroResults => '0 Resultater';
 
   @override
   String get noScansMessage =>
-      'Jakmile provedete svůj první sken,\nvaše výsledky zde budou zaznamenány.';
+      'SÃƒÂ¥ snart du har foretaget din fÃƒÂ¸rste scanning,\nvil dine resultater blive logget her.';
 
   @override
-  String get scanLooksLike => 'Pes, kterého jste naskenovali, vypadá takto.';
+  String get scanLooksLike => 'Hunden du scannede ser sÃƒÂ¥dan ud.';
 
   @override
-  String get returnAction => 'Zpět';
+  String get returnAction => 'Tilbage';
 
   @override
-  String get showAction => 'Zobrazit';
+  String get showAction => 'Vis';
 
   @override
   String daysAgo(int count) {
-    return 'Před $count dny';
+    return '$count dage siden';
   }
 
   @override
   String hoursAgo(int count) {
-    return 'Před $count hodinami';
+    return '$count timer siden';
   }
 
   @override
   String minutesAgo(int count) {
-    return 'Před $count minutami';
+    return '$count minutter siden';
   }
 
   @override
-  String get justNow => 'Právě teď';
+  String get justNow => 'Lige nu';
 
   @override
   String rescannedSuccess(String breedName, String confidence) {
-    return '✅ Znovu naskenováno: $breedName ($confidence% jistota)';
+    return 'Ã¢Å“â€¦ Genscannet: $breedName ($confidence% sikkerhed)';
   }
 
   @override
   String errorRescanning(Object error) {
-    return 'Chyba při opětovném skenování: $error';
+    return 'Fejl ved genscanning: $error';
   }
 
   @override
   String get changePasswordSubtitle =>
-      'Vytvořte silné a bezpečné heslo, aby byl váš účet chráněn a přístupný.';
+      'Opret en stÃƒÂ¦rk, sikker adgangskode for at holde din konto beskyttet og tilgÃƒÂ¦ngelig.';
 
   @override
-  String get currentPassword => 'Aktuální heslo';
+  String get currentPassword => 'NuvÃƒÂ¦rende adgangskode';
 
   @override
-  String get newPassword => 'Nové heslo';
+  String get newPassword => 'Ny adgangskode';
 
   @override
-  String get repeatPassword => 'Zopakujte heslo';
+  String get repeatPassword => 'Gentag adgangskode';
 
   @override
-  String get faqQuestion1 => 'Jak mohu zaregistrovat mazlíčka?';
+  String get faqQuestion1 => 'Hvordan kan jeg registrere et kÃƒÂ¦ledyr?';
 
   @override
   String get faqAnswer1 =>
-      'Mazlíčka můžete zaregistrovat v sekci \"Přidat mazlíčka\", vyplněním požadovaných údajů (jméno, plemeno, věk atd.) a přiložením fotografie. Po registraci obdržíte jedinečné ID QR štítku mazlíčka.';
+      'Du kan registrere dit kÃƒÂ¦ledyr ved at gÃƒÂ¥ til sektionen \"TilfÃƒÂ¸j kÃƒÂ¦ledyr\", udfylde de nÃƒÂ¸dvendige oplysninger (navn, race, alder osv.) og vedhÃƒÂ¦fte et billede. NÃƒÂ¥r du er registreret, modtager du et unikt QR-kÃƒÂ¦ledyrsmÃƒÂ¦rke-ID.';
 
   @override
-  String get faqQuestion2 => 'Proč bych měl zaregistrovat svého mazlíčka?';
+  String get faqQuestion2 => 'Hvorfor skal jeg registrere mit kÃƒÂ¦ledyr?';
 
   @override
   String get faqAnswer2 =>
-      'Registrace vašeho mazlíčka pomáhá v případě, že se ztratí. Kdokoli, kdo najde vašeho mazlíčka, může naskenovat QR štítek a okamžitě vás kontaktovat s polohou mazlíčka.';
+      'Registrering af dit kÃƒÂ¦ledyr hjÃƒÂ¦lper, hvis de farer vild. Enhver, der finder dit kÃƒÂ¦ledyr, kan scanne QR-mÃƒÂ¦rket og straks kontakte dig med kÃƒÂ¦ledyrets placering.';
 
   @override
-  String get faqQuestion3 => 'Aktivace QR štítku mazlíčka?';
+  String get faqQuestion3 => 'Aktivering af QR-kÃƒÂ¦ledyrsmÃƒÂ¦rke?';
 
   @override
   String get faqAnswer3 =>
-      'Po registraci získáte digitální nebo fyzický QR štítek. Naskenujte jej jakýmkoli fotoaparátem telefonu, abyste jej propojili s profilem vašeho mazlíčka. Nálezci nepotřebují žádnou aplikaci!';
+      'Efter registrering fÃƒÂ¥r du et digitalt eller fysisk QR-mÃƒÂ¦rke. Scan det med et hvilket som helst telefonkamera for at linke det til dit kÃƒÂ¦ledyrs profil. Ingen app nÃƒÂ¸dvendig for findere!';
 
   @override
-  String get faqQuestion4 => 'Jak funguje skenování QR kódu?';
+  String get faqQuestion4 => 'Hvordan fungerer QR-kodescanning?';
 
   @override
   String get faqAnswer4 =>
-      'Kdokoli může naskenovat QR štítek pomocí fotoaparátu svého telefonu. Otevře se webová stránka s vašimi kontaktními údaji a podrobnostmi o mazlíčkovi, takže vás mohou okamžitě kontaktovat.';
+      'Enhver kan scanne QR-mÃƒÂ¦rket ved hjÃƒÂ¦lp af deres telefons kamera. Det ÃƒÂ¥bner en webside med dine kontaktoplysninger og kÃƒÂ¦ledyrsoplysninger, sÃƒÂ¥ de kan kontakte dig med det samme.';
 
   @override
-  String get faqQuestion5 => 'Kdo může zaregistrovat mazlíčka?';
+  String get faqQuestion5 => 'Hvem kan registrere et kÃƒÂ¦ledyr?';
 
   @override
   String get faqAnswer5 =>
-      'Každý majitel mazlíčka může zaregistrovat svého psa, kočku nebo jiné společenské zvíře.';
+      'Enhver kÃƒÂ¦ledyrsejer kan registrere deres hund, kat eller andet selskabsdyr.';
 
   @override
-  String get faqQuestion6 => 'Jak mohu změnit své údaje?';
+  String get faqQuestion6 => 'Hvordan kan jeg ÃƒÂ¦ndre mine data?';
 
   @override
   String get faqAnswer6 =>
-      'Přejděte na Profil → klepněte na libovolné pole (Jméno, E-mail, Telefon atd.) pro úpravu a uložení.';
+      'GÃƒÂ¥ til Profil Ã¢â€ â€™ tryk pÃƒÂ¥ et hvilket som helst felt (Navn, E-mail, Telefon osv.) for at redigere og gemme.';
 
   @override
-  String get faqQuestion7 => 'Jak mohu změnit údaje o svém mazlíčkovi?';
+  String get faqQuestion7 => 'Hvordan kan jeg ÃƒÂ¦ndre mit kÃƒÂ¦ledyrs data?';
 
   @override
   String get faqAnswer7 =>
-      'Přejděte na profil svého mazlíčka a klepněte na tlačítko úprav pro aktualizaci jména, plemene, fotografií atd.';
+      'GÃƒÂ¥ til dit kÃƒÂ¦ledyrs profil og tryk pÃƒÂ¥ redigeringsknappen for at opdatere navn, race, fotos osv.';
 
   @override
-  String get faqQuestion8 => 'Co je to ID číslo mazlíčka?';
+  String get faqQuestion8 => 'Hvad er et kÃƒÂ¦ledyrs-ID-nummer?';
 
   @override
   String get faqAnswer8 =>
-      'Je to jedinečný identifikátor spojený s QR štítkem vašeho mazlíčka pro rychlou identifikaci.';
+      'Det er en unik identifikator knyttet til dit kÃƒÂ¦ledyrs QR-mÃƒÂ¦rke for hurtig identifikation.';
 
   @override
-  String get faqQuestion9 => 'Můj mazlíček se ztratil, co mám dělat?';
+  String get faqQuestion9 => 'Mit kÃƒÂ¦ledyr er vÃƒÂ¦k, hvad skal jeg gÃƒÂ¸re?';
 
   @override
   String get faqAnswer9 =>
-      'Označte svého mazlíčka v aplikaci jako \"Ztracený\". To upozorní každého, kdo naskenuje štítek, a zobrazí vaše nouzové kontaktní údaje.';
+      'Marker dit kÃƒÂ¦ledyr som \"Tabt\" i appen. Dette advarer enhver, der scanner mÃƒÂ¦rket, og viser dine nÃƒÂ¸d kontaktoplysninger.';
 
   @override
-  String get savedActivities => 'Uložené aktivity';
+  String get savedActivities => 'Gemte aktiviteter';
 
   @override
   String get deleteProfileWarning =>
-      'Varování! Profil a veškerý jeho obsah budou trvale smazány a nelze je obnovit. Pokud máte aktivní předplatné Premium, deaktivujte jej v nastavení předplatného App Store';
+      'Er du sikker på, at du vil slette din profil? Denne handling kan ikke fortrydes, og alle dine data vil blive fjernet permanent.';
 
   @override
-  String get yes => 'Ano';
+  String get yes => 'Ja';
 
   @override
-  String get no => 'NE';
+  String get no => 'Nej';
 
   @override
-  String get enterAddress => 'Zadat adresu';
+  String get enterAddress => 'Indtast adresse';
 
   @override
-  String get errorEnterAddress => 'Zadejte prosím svou adresu';
+  String get errorEnterAddress => 'Indtast venligst din adresse';
 
   @override
-  String get enterFirstName => 'Zadejte křestní jméno';
+  String get enterFirstName => 'Indtast fornavn';
 
   @override
-  String get allowNotifications => 'Povolit oznámení';
+  String get allowNotifications => 'Tillad meddelelser';
 
   @override
-  String get enterEmail => 'Zadat e-mail';
+  String get enterEmail => 'Indtast e-mail';
 
   @override
-  String get errorEnterValidEmail => 'Zadejte prosím platný e-mail';
+  String get errorEnterValidEmail => 'Indtast venligst en gyldig e-mail';
 
   @override
-  String get genderPreferNotToSay => 'Nechci uvádět';
+  String get genderPreferNotToSay => 'Jeg ÃƒÂ¸nsker ikke at angive';
 
   @override
-  String get enterLastName => 'Zadejte příjmení';
+  String get enterLastName => 'Indtast efternavn';
 
   @override
-  String get errorEnterValidPhone => 'Zadejte prosím platné telefonní číslo';
+  String get errorEnterValidPhone =>
+      'Indtast venligst et gyldigt telefonnummer';
 
   @override
-  String get drinkCalculator => 'Kalkulačka pití';
+  String get drinkCalculator => 'Drikkekalkulator';
 
   @override
-  String get drinkFrequencyChartTitle => 'Frekvence (krát denně)';
+  String get drinkFrequencyChartTitle => 'Hyppighed (gange om dagen)';
 
   @override
   String get drinkCalcDescription =>
-      'Vypočítejte denní příjem vody, který váš pes potřebuje\ndle hmotnosti a úrovně aktivity pro\nzdravou hydrataci každý den';
+      'Beregn det daglige vandindtag din hund har brug for\nifÃƒÂ¸lge vÃƒÂ¦gt og aktivitetsniveau for\nsund hydrering hver dag';
 
   @override
-  String get currentWeight => 'Aktuální hmotnost';
+  String get currentWeight => 'NuvÃƒÂ¦rende VÃƒÂ¦gt';
 
   @override
-  String get hintWeight => 'Hmotnost';
+  String get hintWeight => 'VÃƒÂ¦gt';
 
   @override
-  String get yourDogWillNeed => 'Váš pes bude potřebovat';
+  String get yourDogWillNeed => 'Din hund vil have brug for';
 
   @override
-  String get perDay => '/ den';
+  String get perDay => '/ dag';
 
   @override
-  String get unitPounds => 'Libry';
+  String get unitPounds => 'Pund';
 
   @override
-  String get unitKilograms => 'Kilogramy';
+  String get unitKilograms => 'Kilogram';
 
   @override
-  String get unitOunces => 'Unce';
+  String get unitOunces => 'Ounces';
 
   @override
-  String get unitGrams => 'Gramy';
+  String get unitGrams => 'Gram';
 
   @override
-  String get unitMilliliters => 'Mililitry';
+  String get unitMilliliters => 'Milliliter';
 
   @override
-  String get unitCentiliters => 'Centilitry';
+  String get unitCentiliters => 'Centiliter';
 
   @override
-  String get unitLiters => 'Litry';
+  String get unitLiters => 'Liter';
 
   @override
-  String get unitUSFluidOunces => 'US tekuté unce';
+  String get unitUSFluidOunces => 'US flydende ounces';
 
   @override
-  String get unitUKFluidOunces => 'UK tekuté unce';
+  String get unitUKFluidOunces => 'UK flydende ounces';
 
   @override
-  String get activityLevel => 'Úroveň aktivity';
+  String get activityLevel => 'Aktivitetsniveau';
 
   @override
   String get unitSymbolMl => 'mL';
@@ -2004,16 +1987,16 @@ class AppLocalizationsCs extends AppLocalizations {
   String get dateRangeError => 'Please enter a date between 2020-2030';
 
   @override
-  String get enjoyingApp => 'Enjoying the app?';
+  String get enjoyingApp => 'Nydt du Dog Breed Scanner?';
 
   @override
-  String get tapToRate => 'Tap to rate:';
+  String get tapToRate => 'Tryk på en stjerne for at bedømme din oplevelse';
 
   @override
-  String get rateUsAction => 'Rate Us';
+  String get rateUsAction => 'Indsend Bedømmelse';
 
   @override
-  String get selectStars => 'Select Stars';
+  String get selectStars => 'Vælg Stjerner Først';
 
   @override
   String get sorryToHear => 'We\'re sorry to hear that';
@@ -2026,96 +2009,60 @@ class AppLocalizationsCs extends AppLocalizations {
   String get feedbackHint => 'Tell us what we can improve...';
 
   @override
-  String get submitFeedback => 'Submit Feedback';
+  String get submitFeedback => 'Indsend Feedback';
 
   @override
-  String get errorAppStore =>
-      'Could not open app store. Please try again later.';
+  String get errorAppStore => 'Kunne ikke åbne App Store';
 
   @override
-  String get errorOpenStore => 'Error opening app store.';
+  String get errorOpenStore => 'Kunne ikke åbne butikken';
 
   @override
   String errorShare(Object error) {
-    return 'Unable to open share options. Error: $error';
+    return 'Fejl ved deling: $error';
   }
 
   @override
-  String get linkCopied =>
-      'Link copied to clipboard! You can now paste and share it.';
+  String get linkCopied => 'Link kopieret til udklipsholder';
 
   @override
-  String get copyFailed => 'Failed to copy to clipboard.';
+  String get copyFailed => 'Kunne ikke kopiere link';
 
   @override
-  String get shareApp => 'Share App';
+  String get shareApp => 'Del App';
 
   @override
-  String get copyLink => 'Copy Link';
+  String get copyLink => 'Kopier Link';
 
   @override
-  String get shareWhatsApp => 'Share via WhatsApp';
+  String get shareWhatsApp => 'Del via WhatsApp';
 
   @override
-  String get shareEmail => 'Share via Email';
+  String get shareEmail => 'Del via E-mail';
 
   @override
-  String get shareSMS => 'Share via SMS';
+  String get shareSMS => 'Del via SMS';
 
   @override
-  String get chooseShare => 'Choose how you want to share:';
+  String get chooseShare => 'Vælg hvordan du vil dele:';
 
   @override
-  String get copy => 'Copy';
+  String get copy => 'Kopier';
 
   @override
   String get whatsapp => 'WhatsApp';
 
   @override
-  String get more => 'More';
+  String get more => 'Mere';
 
   @override
   String get feedbackThanks => 'Thank you for your feedback!';
 
   @override
-  String get themeTitle => 'Theme';
-
-  @override
-  String get darkTheme => 'Dark';
-
-  @override
-  String get lightTheme => 'Light';
-
-  @override
   String get myFavorites => 'My Favorites';
 
   @override
-  String get feedbackTitle => 'Feedback';
-
-  @override
-  String get rateUsTitle => 'Rate us';
-
-  @override
-  String get shareTitle => 'Share';
-
-  @override
   String get myPremiumService => 'My Premium Service';
-
-  @override
-  String get shareMessageBody =>
-      'Check out Dog Breed - an amazing app for dog lovers!';
-
-  @override
-  String get shareIOS => '📱 Discover Dog Breed on the App Store!';
-
-  @override
-  String get shareAndroid => '📱 Get Dog Breed on Google Play!';
-
-  @override
-  String get shareDefault => '📱 Check out Dog Breed!';
-
-  @override
-  String get shareSubject => 'Dog Breed App';
 
   @override
   String get dashboardHome => 'Dashboard Home';
@@ -2210,23 +2157,23 @@ class AppLocalizationsCs extends AppLocalizations {
   String get height => 'Height';
 
   @override
-  String get deleteAll => 'Smazat vše';
+  String get deleteAll => 'Slet alt';
 
   @override
   String get deleteAllPetsConfirmation =>
-      'Opravdu chcete smazat všechna zvířata? Tuto akci nelze vzít zpět.';
+      'Er du sikker pÃƒÂ¥, at du vil slette alle kÃƒÂ¦ledyr? Denne handling kan ikke fortrydes.';
 
   @override
-  String get dialogUploadPhoto => 'Upload Photo';
+  String get dialogUploadPhoto => 'Upload foto';
 
   @override
-  String get dialogUploadVideo => 'Upload Video';
+  String get dialogUploadVideo => 'Upload video';
 
   @override
-  String get pickerOpenCamera => 'Open Camera';
+  String get pickerOpenCamera => 'Ã…bn kamera';
 
   @override
-  String get pickerUploadGallery => 'Upload from Gallery';
+  String get pickerUploadGallery => 'Upload fra galleri';
 
   @override
   String errorPleaseEnterAmountFor(String activityName) {
@@ -2237,4 +2184,365 @@ class AppLocalizationsCs extends AppLocalizations {
   String errorNameOrTypeRequiredFor(String activityName) {
     return 'Name or Type required for $activityName';
   }
+
+  @override
+  String get labelBirthday => 'Birthday';
+
+  @override
+  String get errorFillPetName => 'Please Fill Pet Name';
+
+  @override
+  String get supportedBreeds => 'UnderstÃƒÂ¸ttede racer';
+
+  @override
+  String favoriteCount(int count) {
+    return '$count Favorit';
+  }
+
+  @override
+  String get breedNameBulldog => 'Bulldog';
+
+  @override
+  String get breedDescBulldog =>
+      'Forventet levetid: 8-10 ÃƒÂ¥r.\nKortsnudet race, der krÃƒÂ¦ver\nsÃƒÂ¦rlig pleje i varmt vejr.';
+
+  @override
+  String get breedNameBeagle => 'Beagle';
+
+  @override
+  String get breedDescBeagle =>
+      'Forventet levetid: 12-15 ÃƒÂ¥r.\nVenlige, nysgerrige hunde med\nstÃƒÂ¦rke jagtinstinkter.';
+
+  @override
+  String get breedNameYorkshireTerrier => 'Yorkshire Terrier';
+
+  @override
+  String get breedDescYorkshireTerrier =>
+      'Forventet levetid: 13-16 ÃƒÂ¥r.\nSmÃƒÂ¥, men energiske selskabshunde\nkrÃƒÂ¦ver regelmÃƒÂ¦ssig pleje.';
+
+  @override
+  String get breedNameCavalierKingCharlesSpaniel =>
+      'Cavalier King Charles Spaniel';
+
+  @override
+  String get breedDescCavalierKingCharlesSpaniel =>
+      'Forventet levetid: 9-14 ÃƒÂ¥r.\nKÃƒÂ¦rlige, blide selskabshunde\ntilbÃƒÂ¸jelige til hjerteproblemer.';
+
+  @override
+  String get breedNameEnglishSpringerSpaniel => 'Engelsk Springer Spaniel';
+
+  @override
+  String get breedDescEnglishSpringerSpaniel =>
+      'Forventet levetid: 12-14 ÃƒÂ¥r.\nEnergiske jagthunde, der behÃƒÂ¸ver\nmasser af motion.';
+
+  @override
+  String get breedNameBullmastiff => 'Bullmastiff';
+
+  @override
+  String get breedDescBullmastiff =>
+      'Forventet levetid: 8-10 ÃƒÂ¥r.\nStor, kraftfuld vagthund\nkrÃƒÂ¦ver tidlig socialisering.';
+
+  @override
+  String get breedNameEnglishCockerSpaniel => 'Engelsk Cocker Spaniel';
+
+  @override
+  String get breedDescEnglishCockerSpaniel =>
+      'Forventet levetid: 12-14 ÃƒÂ¥r.\nGlade, aktive sportshunde\nbehÃƒÂ¸ver regelmÃƒÂ¦ssig ÃƒÂ¸rerensning.';
+
+  @override
+  String get breedNameAiredaleTerrier => 'Airedale Terrier';
+
+  @override
+  String get breedDescAiredaleTerrier =>
+      'Forventet levetid: 10-13 ÃƒÂ¥r.\nStÃƒÂ¸rste terrierrace -\nintelligent, energisk, alsidig.';
+
+  @override
+  String get breedNameTerrier => 'Terrier';
+
+  @override
+  String get breedDescTerrier =>
+      'Forventet levetid: Varierer.\nEnergiske, livlige hunde avlet\ntil at jage skadedyr.';
+
+  @override
+  String get breedNameWhippet => 'Whippet';
+
+  @override
+  String get breedDescWhippet =>
+      'Forventet levetid: 12-15 ÃƒÂ¥r.\nBlid, kÃƒÂ¦rlig mynde\nbehÃƒÂ¸ver regelmÃƒÂ¦ssigt lÃƒÂ¸b.';
+
+  @override
+  String get breedNameBullTerrier => 'Bull Terrier';
+
+  @override
+  String get breedDescBullTerrier =>
+      'Forventet levetid: 10-14 ÃƒÂ¥r.\nMuskulÃƒÂ¸se hunde med karakteristisk\nÃƒÂ¦gformet hoved.';
+
+  @override
+  String get breedNameGoldenRetriever => 'Golden Retriever';
+
+  @override
+  String get breedDescGoldenRetriever =>
+      'Forventet levetid: 10-12 ÃƒÂ¥r.\nVenlige, intelligente familiehunde\ntilbÃƒÂ¸jelige til hofteledsdysplasi.';
+
+  @override
+  String get breedNameOldEnglishSheepdog => 'Old English Sheepdog';
+
+  @override
+  String get breedDescOldEnglishSheepdog =>
+      'Forventet levetid: 10-12 ÃƒÂ¥r.\nStore, pjuskede hyrdehunde\nkrÃƒÂ¦ver omfattende pelspleje.';
+
+  @override
+  String get breedNameBorderCollie => 'Border Collie';
+
+  @override
+  String get breedDescBorderCollie =>
+      'Forventet levetid: 12-15 ÃƒÂ¥r.\nMeget intelligente hunde, der behÃƒÂ¸ver\nomfattende mental trÃƒÂ¦ning.';
+
+  @override
+  String get breedNameGreyhound => 'Greyhound';
+
+  @override
+  String get breedDescGreyhound =>
+      'Forventet levetid: 10-14 ÃƒÂ¥r.\nHurtigste hunderace - lav energi\nindendÃƒÂ¸rs, blid og rolig.';
+
+  @override
+  String get breedNameJackRussellTerrier => 'Jack Russell Terrier';
+
+  @override
+  String get breedDescJackRussellTerrier =>
+      'Forventet levetid: 13-16 ÃƒÂ¥r.\nSmÃƒÂ¥, men frygtlÃƒÂ¸se terriere\nmed hÃƒÂ¸jt energiniveau.';
+
+  @override
+  String get breedNameBloodhound => 'Blodhund';
+
+  @override
+  String get breedDescBloodhound =>
+      'Forventet levetid: 10-12 ÃƒÂ¥r.\nFremragende sporhunde\nkrÃƒÂ¦ver tÃƒÂ¥lmodighed i trÃƒÂ¦ningen.';
+
+  @override
+  String get breedNameEnglishPointer => 'Engelsk Pointer';
+
+  @override
+  String get breedDescEnglishPointer =>
+      'Forventet levetid: 12-15 ÃƒÂ¥r.\nElegante fuglehunde med hÃƒÂ¸j energi\nog stÃƒÂ¦rkt standinstinkt.';
+
+  @override
+  String get breedNameStaffordshireBullTerrier => 'Staffordshire Bull Terrier';
+
+  @override
+  String get breedDescStaffordshireBullTerrier =>
+      'Forventet levetid: 12-14 ÃƒÂ¥r.\nMuskulÃƒÂ¸se, kÃƒÂ¦rlige hunde\nbehÃƒÂ¸ver ordentlig socialisering.';
+
+  @override
+  String get breedNameEnglishFoxhound => 'Engelsk Foxhound';
+
+  @override
+  String get breedDescEnglishFoxhound =>
+      'Forventet levetid: 10-13 ÃƒÂ¥r.\nKobbeljagthunde avlet til\nudholdenhed, behÃƒÂ¸ver rigelig motion.';
+
+  @override
+  String get breedNameWireFoxTerrier => 'RuhÃƒÂ¥ret Foxterrier';
+
+  @override
+  String get breedDescWireFoxTerrier =>
+      'Forventet levetid: 12-15 ÃƒÂ¥r.\nOpmÃƒÂ¦rksomme, hurtige hunde med\nkarakteristisk ruhÃƒÂ¥ret pels.';
+
+  @override
+  String get breedNameManchesterTerrier => 'Manchester Terrier';
+
+  @override
+  String get breedDescManchesterTerrier =>
+      'Forventet levetid: 14-16 ÃƒÂ¥r.\nSlanke, elegante terriere\nkendt for deres evne til at fange rotter.';
+
+  @override
+  String get breedNameBedlingtonTerrier => 'Bedlington Terrier';
+
+  @override
+  String get breedDescBedlingtonTerrier =>
+      'Forventet levetid: 12-14 ÃƒÂ¥r.\nKarakteristisk lamme-lignende udseende,\nenergisk, men alligevel blid.';
+
+  @override
+  String get breedNameBostonTerrier => 'Boston Terrier';
+
+  @override
+  String get breedDescBostonTerrier =>
+      'Forventet levetid: 11-13 ÃƒÂ¥r.\nVenlig \"Amerikansk Gentleman\"\nmed smoking-lignende aftegninger.';
+
+  @override
+  String get breedNameEnglishSetter => 'Engelsk Setter';
+
+  @override
+  String get breedDescEnglishSetter =>
+      'Forventet levetid: 10-12 ÃƒÂ¥r.\nElegante fuglehunde med\nplettet pels, blide ledsagere.';
+
+  @override
+  String get breedNameBorderTerrier => 'Border Terrier';
+
+  @override
+  String get breedDescBorderTerrier =>
+      'Forventet levetid: 12-15 ÃƒÂ¥r.\nHÃƒÂ¥rdfÃƒÂ¸re smÃƒÂ¥ terriere avlet\ntil rÃƒÂ¦vejagt.';
+
+  @override
+  String get favoritesTitle => 'Favoritter';
+
+  @override
+  String get scanTabTitle => 'Scan';
+
+  @override
+  String get noFavoriteBreedsMessage => 'Ingen favoritracer endnu';
+
+  @override
+  String dialogShareTitle(String appName) {
+    return 'Del $appName';
+  }
+
+  @override
+  String get shareTags => '#DogBreed #Dogs #Pets';
+
+  @override
+  String errorLaunchUrl(String url) {
+    return 'Kunne ikke åbne $url';
+  }
+
+  @override
+  String get feedbackTitle => 'Feedback';
+
+  @override
+  String get feedbackDescribeIssue =>
+      'Hjælp os med at forbedre din oplevelse\nBeskriv det problem, du oplever';
+
+  @override
+  String get feedbackTellUsMore => 'Fortæl os mere (valgfrit)';
+
+  @override
+  String get submitButton => 'Indsend';
+
+  @override
+  String get feedbackIssueLagging => 'Forsinkelse';
+
+  @override
+  String get feedbackIssueCrashes => 'Nedbrud';
+
+  @override
+  String get feedbackIssueAds => 'Irriterende annoncer';
+
+  @override
+  String get feedbackIssueOther => 'Andet';
+
+  @override
+  String get feedbackIssueNotWorking => 'Virker ikke';
+
+  @override
+  String get feedbackChooseEmailApp =>
+      'Vælg din e-mail-app til at sende feedback:';
+
+  @override
+  String get feedbackSendEmail => 'Send E-mail';
+
+  @override
+  String get feedbackEmailSubject => 'DogBreed: Feedback';
+
+  @override
+  String get feedbackIssueType => 'Problemtype:';
+
+  @override
+  String get feedbackDetails => 'Detaljer:';
+
+  @override
+  String get feedbackGeneral => 'Generel feedback om appen';
+
+  @override
+  String get feedbackManualEmailTitle => 'E-mail-app Ikke Fundet';
+
+  @override
+  String get feedbackManualEmailBody =>
+      'Kopiér venligst oplysningerne nedenfor og send dem til:';
+
+  @override
+  String get feedbackSubject => 'Emne:';
+
+  @override
+  String get feedbackMessage => 'Besked:';
+
+  @override
+  String get feedbackManualEmailSuccess => 'Feedback indsendt succesfuldt!';
+
+  @override
+  String get feedbackSelectIssue => 'Vælg venligst en problemtype';
+
+  @override
+  String get loading => 'Indlæser...';
+
+  @override
+  String get editProfile => 'Rediger Profil';
+
+  @override
+  String get profileRecentScan => 'Seneste Scanninger';
+
+  @override
+  String get profileHistory => 'Scanning Historik';
+
+  @override
+  String get notifications => 'Notifikationer';
+
+  @override
+  String get appLanguageTitle => 'App Sprog';
+
+  @override
+  String get premiumSubscription => 'Premium Abonnement';
+
+  @override
+  String get profileMyFavorites => 'Mine Favoritter';
+
+  @override
+  String get rateUsTitle => 'Bedøm os';
+
+  @override
+  String get shareTitle => 'Del App';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get termsOfUse => 'Brugsbetingelser';
+
+  @override
+  String get privacyPolicy => 'Fortrolighedspolitik';
+
+  @override
+  String get deleteOwnerProfile => 'Slet Profil';
+
+  @override
+  String get logout => 'Log ud';
+
+  @override
+  String get themeTitle => 'Tema';
+
+  @override
+  String get darkTheme => 'Mørk';
+
+  @override
+  String get lightTheme => 'Lys';
+
+  @override
+  String get aiAppName => 'Hunderace Scanner';
+
+  @override
+  String get shareMessageBody =>
+      'Tjek Dog Breed Scanner - AI-drevet hunderaceidentifikationsapp! 🐕';
+
+  @override
+  String get shareIOS => 'Tjek Dog Breed Scanner på App Store!';
+
+  @override
+  String get shareAndroid => 'Tjek Dog Breed Scanner på Google Play!';
+
+  @override
+  String get shareDefault => 'Tjek Dog Breed Scanner!';
+
+  @override
+  String get shareDownloadNow => 'Download nu: ';
+
+  @override
+  String get shareSubject => 'Dog Breed Scanner App';
 }

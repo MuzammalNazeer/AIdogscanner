@@ -15,31 +15,13 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsTitle => 'Pengaturan';
 
   @override
-  String get appLanguageTitle => 'Bahasa Aplikasi';
-
-  @override
   String get notificationLanguageTitle => 'Bahasa Notifikasi';
-
-  @override
-  String get editProfile => 'Edit Profil';
 
   @override
   String get changePassword => 'Ubah Kata Sandi';
 
   @override
-  String get notifications => 'Notifikasi';
-
-  @override
-  String get premiumSubscription => 'Langganan Premium';
-
-  @override
   String get aboutUs => 'Tentang Kami';
-
-  @override
-  String get faq => 'FAQ';
-
-  @override
-  String get termsOfUse => 'Syarat Penggunaan';
 
   @override
   String get customerCare => 'Layanan Pelanggan';
@@ -49,12 +31,6 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get supportAnimalIdProject => 'Dukung proyek Animal ID';
-
-  @override
-  String get deleteOwnerProfile => 'Hapus profil pemilik';
-
-  @override
-  String get logout => 'Keluar';
 
   @override
   String get dialogCancel => 'Batal';
@@ -70,7 +46,7 @@ class AppLocalizationsId extends AppLocalizations {
       'Apakah Anda yakin ingin menghapus profil Anda secara permanen? Tindakan ini tidak dapat dibatalkan.';
 
   @override
-  String get dialogLogoutTitle => 'Keluar';
+  String get dialogLogoutTitle => 'Apakah Anda yakin ingin keluar?';
 
   @override
   String get dialogLogoutMessage => 'Apakah Anda yakin ingin keluar?';
@@ -125,7 +101,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get searchForDog => 'Cari Anjing';
 
   @override
-  String get tryPremiumFeatures => 'Coba Fitur Premium 🌵';
+  String get tryPremiumFeatures => 'Coba Fitur Premium Ã°Å¸Å’Âµ';
 
   @override
   String get premiumOfferDescription =>
@@ -181,7 +157,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String savedScanMessage(Object breedName, Object confidence) {
-    return '✅ Tersimpan: $breedName (keyakinan $confidence%)';
+    return 'Ã¢Å“â€¦ Tersimpan: $breedName (keyakinan $confidence%)';
   }
 
   @override
@@ -225,7 +201,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get onboardingDesc4 =>
-      'Kelola setiap detail anjing Anda—kesehatan, foto,\naktivitas dan banyak lagi di satu tempat sederhana.';
+      'Kelola setiap detail anjing AndaÃ¢â‚¬â€kesehatan, foto,\naktivitas dan banyak lagi di satu tempat sederhana.';
 
   @override
   String get calendarTabActivities => 'Aktivitas';
@@ -566,10 +542,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get unitCm => 'cm';
 
   @override
-  String get unitF => '°F';
+  String get unitF => 'Ã‚Â°F';
 
   @override
-  String get unitC => '°C';
+  String get unitC => 'Ã‚Â°C';
 
   @override
   String get unitKm => 'km';
@@ -1579,7 +1555,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String rescannedSuccess(String breedName, String confidence) {
-    return '✅ Dipindai ulang: $breedName (keyakinan $confidence%)';
+    return 'Ã¢Å“â€¦ Dipindai ulang: $breedName (keyakinan $confidence%)';
   }
 
   @override
@@ -1641,7 +1617,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get faqAnswer6 =>
-      'Buka Profil → ketuk bidang apa pun (Nama, Email, Telepon, dll.) untuk mengedit dan menyimpan.';
+      'Buka Profil Ã¢â€ â€™ ketuk bidang apa pun (Nama, Email, Telepon, dll.) untuk mengedit dan menyimpan.';
 
   @override
   String get faqQuestion7 =>
@@ -1671,13 +1647,13 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get deleteProfileWarning =>
-      'Peringatan! Profil dan semua kontennya akan dihapus secara permanen dan tidak dapat dipulihkan. Jika Anda memiliki Langganan Premium aktif, nonaktifkan di pengaturan Langganan App Store Anda';
+      'Apakah Anda yakin ingin menghapus profil Anda? Tindakan ini tidak dapat dibatalkan dan semua data Anda akan dihapus secara permanen.';
 
   @override
   String get yes => 'Ya';
 
   @override
-  String get no => 'TIDAK';
+  String get no => 'Tidak';
 
   @override
   String get enterAddress => 'Masukkan Alamat';
@@ -2008,16 +1984,16 @@ class AppLocalizationsId extends AppLocalizations {
   String get dateRangeError => 'Please enter a date between 2020-2030';
 
   @override
-  String get enjoyingApp => 'Enjoying the app?';
+  String get enjoyingApp => 'Apakah Anda menikmati Dog Breed Scanner?';
 
   @override
-  String get tapToRate => 'Tap to rate:';
+  String get tapToRate => 'Ketuk bintang untuk menilai pengalaman Anda';
 
   @override
-  String get rateUsAction => 'Rate Us';
+  String get rateUsAction => 'Kirim Penilaian';
 
   @override
-  String get selectStars => 'Select Stars';
+  String get selectStars => 'Pilih Bintang Dulu';
 
   @override
   String get sorryToHear => 'We\'re sorry to hear that';
@@ -2030,96 +2006,60 @@ class AppLocalizationsId extends AppLocalizations {
   String get feedbackHint => 'Tell us what we can improve...';
 
   @override
-  String get submitFeedback => 'Submit Feedback';
+  String get submitFeedback => 'Kirim Umpan Balik';
 
   @override
-  String get errorAppStore =>
-      'Could not open app store. Please try again later.';
+  String get errorAppStore => 'Tidak dapat membuka toko aplikasi';
 
   @override
-  String get errorOpenStore => 'Error opening app store.';
+  String get errorOpenStore => 'Tidak dapat membuka toko';
 
   @override
   String errorShare(Object error) {
-    return 'Unable to open share options. Error: $error';
+    return 'Gagal berbagi: $error';
   }
 
   @override
-  String get linkCopied =>
-      'Link copied to clipboard! You can now paste and share it.';
+  String get linkCopied => 'Tautan disalin ke papan klip';
 
   @override
-  String get copyFailed => 'Failed to copy to clipboard.';
+  String get copyFailed => 'Gagal menyalin tautan';
 
   @override
-  String get shareApp => 'Share App';
+  String get shareApp => 'Bagikan Aplikasi';
 
   @override
-  String get copyLink => 'Copy Link';
+  String get copyLink => 'Salin Tautan';
 
   @override
-  String get shareWhatsApp => 'Share via WhatsApp';
+  String get shareWhatsApp => 'Bagikan via WhatsApp';
 
   @override
-  String get shareEmail => 'Share via Email';
+  String get shareEmail => 'Bagikan via Email';
 
   @override
-  String get shareSMS => 'Share via SMS';
+  String get shareSMS => 'Bagikan via SMS';
 
   @override
-  String get chooseShare => 'Choose how you want to share:';
+  String get chooseShare => 'Pilih cara berbagi:';
 
   @override
-  String get copy => 'Copy';
+  String get copy => 'Salin';
 
   @override
   String get whatsapp => 'WhatsApp';
 
   @override
-  String get more => 'More';
+  String get more => 'Lainnya';
 
   @override
   String get feedbackThanks => 'Thank you for your feedback!';
 
   @override
-  String get themeTitle => 'Theme';
-
-  @override
-  String get darkTheme => 'Dark';
-
-  @override
-  String get lightTheme => 'Light';
-
-  @override
   String get myFavorites => 'My Favorites';
 
   @override
-  String get feedbackTitle => 'Feedback';
-
-  @override
-  String get rateUsTitle => 'Rate us';
-
-  @override
-  String get shareTitle => 'Share';
-
-  @override
   String get myPremiumService => 'My Premium Service';
-
-  @override
-  String get shareMessageBody =>
-      'Check out Dog Breed - an amazing app for dog lovers!';
-
-  @override
-  String get shareIOS => '📱 Discover Dog Breed on the App Store!';
-
-  @override
-  String get shareAndroid => '📱 Get Dog Breed on Google Play!';
-
-  @override
-  String get shareDefault => '📱 Check out Dog Breed!';
-
-  @override
-  String get shareSubject => 'Dog Breed App';
 
   @override
   String get dashboardHome => 'Dashboard Home';
@@ -2221,16 +2161,16 @@ class AppLocalizationsId extends AppLocalizations {
       'Apakah Anda yakin ingin menghapus semua hewan peliharaan? Tindakan ini tidak dapat dibatalkan.';
 
   @override
-  String get dialogUploadPhoto => 'Upload Photo';
+  String get dialogUploadPhoto => 'Unggah Foto';
 
   @override
-  String get dialogUploadVideo => 'Upload Video';
+  String get dialogUploadVideo => 'Unggah Video';
 
   @override
-  String get pickerOpenCamera => 'Open Camera';
+  String get pickerOpenCamera => 'Buka Kamera';
 
   @override
-  String get pickerUploadGallery => 'Upload from Gallery';
+  String get pickerUploadGallery => 'Unggah dari Galeri';
 
   @override
   String errorPleaseEnterAmountFor(String activityName) {
@@ -2241,4 +2181,365 @@ class AppLocalizationsId extends AppLocalizations {
   String errorNameOrTypeRequiredFor(String activityName) {
     return 'Name or Type required for $activityName';
   }
+
+  @override
+  String get labelBirthday => 'Birthday';
+
+  @override
+  String get errorFillPetName => 'Please Fill Pet Name';
+
+  @override
+  String get supportedBreeds => 'Ras yang Didukung';
+
+  @override
+  String favoriteCount(int count) {
+    return '$count Favorit';
+  }
+
+  @override
+  String get breedNameBulldog => 'Bulldog';
+
+  @override
+  String get breedDescBulldog =>
+      'Harapan hidup: 8-10 tahun.\nRas brachycephalic yang membutuhkan\nperawatan khusus saat cuaca panas.';
+
+  @override
+  String get breedNameBeagle => 'Beagle';
+
+  @override
+  String get breedDescBeagle =>
+      'Harapan hidup: 12-15 tahun.\nAnjing ramah dan penuh rasa ingin tahu dengan\ninsting berburu yang kuat.';
+
+  @override
+  String get breedNameYorkshireTerrier => 'Yorkshire Terrier';
+
+  @override
+  String get breedDescYorkshireTerrier =>
+      'Harapan hidup: 13-16 tahun.\nAnjing pendamping kecil namun energik\nyang membutuhkan perawatan rutin.';
+
+  @override
+  String get breedNameCavalierKingCharlesSpaniel =>
+      'Cavalier King Charles Spaniel';
+
+  @override
+  String get breedDescCavalierKingCharlesSpaniel =>
+      'Harapan hidup: 9-14 tahun.\nAnjing pendamping yang penyayang dan lembut\nrentan terhadap masalah jantung.';
+
+  @override
+  String get breedNameEnglishSpringerSpaniel => 'Springer Spaniel Inggris';
+
+  @override
+  String get breedDescEnglishSpringerSpaniel =>
+      'Harapan hidup: 12-14 tahun.\nAnjing pemburu yang energik dan membutuhkan\nbanyak latihan.';
+
+  @override
+  String get breedNameBullmastiff => 'Bullmastiff';
+
+  @override
+  String get breedDescBullmastiff =>
+      'Harapan hidup: 8-10 tahun.\nRas penjaga besar dan kuat\nyang membutuhkan sosialisasi sejak dini.';
+
+  @override
+  String get breedNameEnglishCockerSpaniel => 'Cocker Spaniel Inggris';
+
+  @override
+  String get breedDescEnglishCockerSpaniel =>
+      'Harapan hidup: 12-14 tahun.\nAnjing olahraga yang ceria dan aktif\nmembutuhkan pembersihan telinga secara rutin.';
+
+  @override
+  String get breedNameAiredaleTerrier => 'Airedale Terrier';
+
+  @override
+  String get breedDescAiredaleTerrier =>
+      'Harapan hidup: 10-13 tahun.\nRas terrier terbesar -\ncerdas, energik, serbaguna.';
+
+  @override
+  String get breedNameTerrier => 'Terrier';
+
+  @override
+  String get breedDescTerrier =>
+      'Harapan hidup: Bervariasi.\nAnjing energik dan berani yang dibiakkan\nuntuk memburu hama.';
+
+  @override
+  String get breedNameWhippet => 'Whippet';
+
+  @override
+  String get breedDescWhippet =>
+      'Harapan hidup: 12-15 tahun.\nAnjing pemburu yang lembut dan penyayang\nmembutuhkan lari rutin.';
+
+  @override
+  String get breedNameBullTerrier => 'Bull Terrier';
+
+  @override
+  String get breedDescBullTerrier =>
+      'Harapan hidup: 10-14 tahun.\nAnjing berotot dengan kepala berbentuk\ntelur yang khas.';
+
+  @override
+  String get breedNameGoldenRetriever => 'Golden Retriever';
+
+  @override
+  String get breedDescGoldenRetriever =>
+      'Harapan hidup: 10-12 tahun.\nAnjing keluarga yang ramah dan cerdas\nrentan terhadap displasia pinggul.';
+
+  @override
+  String get breedNameOldEnglishSheepdog => 'Old English Sheepdog';
+
+  @override
+  String get breedDescOldEnglishSheepdog =>
+      'Harapan hidup: 10-12 tahun.\nAnjing penggembala besar dan berbulu lebat\nyang membutuhkan perawatan ekstensif.';
+
+  @override
+  String get breedNameBorderCollie => 'Border Collie';
+
+  @override
+  String get breedDescBorderCollie =>
+      'Harapan hidup: 12-15 tahun.\nAnjing yang sangat cerdas dan membutuhkan\nlatihan mental yang ekstensif.';
+
+  @override
+  String get breedNameGreyhound => 'Greyhound';
+
+  @override
+  String get breedDescGreyhound =>
+      'Harapan hidup: 10-14 tahun.\nRas anjing tercepat - energi rendah\ndi dalam ruangan, lembut dan tenang.';
+
+  @override
+  String get breedNameJackRussellTerrier => 'Jack Russell Terrier';
+
+  @override
+  String get breedDescJackRussellTerrier =>
+      'Harapan hidup: 13-16 tahun.\nTerrier kecil namun tak kenal takut\ndengan tingkat energi tinggi.';
+
+  @override
+  String get breedNameBloodhound => 'Bloodhound';
+
+  @override
+  String get breedDescBloodhound =>
+      'Harapan hidup: 10-12 tahun.\nAnjing pelacak aroma yang luar biasa\nmembutuhkan kesabaran dalam pelatihan.';
+
+  @override
+  String get breedNameEnglishPointer => 'English Pointer';
+
+  @override
+  String get breedDescEnglishPointer =>
+      'Harapan hidup: 12-15 tahun.\nAnjing burung elegan dengan energi tinggi\ndan insting menunjuk yang kuat.';
+
+  @override
+  String get breedNameStaffordshireBullTerrier => 'Staffordshire Bull Terrier';
+
+  @override
+  String get breedDescStaffordshireBullTerrier =>
+      'Harapan hidup: 12-14 tahun.\nAnjing berotot dan penyayang\nyang membutuhkan sosialisasi yang tepat.';
+
+  @override
+  String get breedNameEnglishFoxhound => 'Foxhound Inggris';
+
+  @override
+  String get breedDescEnglishFoxhound =>
+      'Harapan hidup: 10-13 tahun.\nAnjing pemburu kawanan yang dibiakkan untuk\nketahanan, butuh banyak latihan.';
+
+  @override
+  String get breedNameWireFoxTerrier => 'Wire Fox Terrier';
+
+  @override
+  String get breedDescWireFoxTerrier =>
+      'Harapan hidup: 12-15 tahun.\nAnjing waspada dan cepat dengan\nbulu wiry yang khas.';
+
+  @override
+  String get breedNameManchesterTerrier => 'Manchester Terrier';
+
+  @override
+  String get breedDescManchesterTerrier =>
+      'Harapan hidup: 14-16 tahun.\nTerrier ramping dan elegan\ndikenal karena kemampuan menangkap tikus.';
+
+  @override
+  String get breedNameBedlingtonTerrier => 'Bedlington Terrier';
+
+  @override
+  String get breedDescBedlingtonTerrier =>
+      'Harapan hidup: 12-14 tahun.\nPenampilan khas seperti domba,\nenergik namun lembut.';
+
+  @override
+  String get breedNameBostonTerrier => 'Boston Terrier';
+
+  @override
+  String get breedDescBostonTerrier =>
+      'Harapan hidup: 11-13 tahun.\n\"Gentleman Amerika\" yang ramah\ndengan tanda seperti tuksedo.';
+
+  @override
+  String get breedNameEnglishSetter => 'Setter Inggris';
+
+  @override
+  String get breedDescEnglishSetter =>
+      'Harapan hidup: 10-12 tahun.\nAnjing burung elegan dengan\nbulu berbintik, pendamping yang lembut.';
+
+  @override
+  String get breedNameBorderTerrier => 'Border Terrier';
+
+  @override
+  String get breedDescBorderTerrier =>
+      'Harapan hidup: 12-15 tahun.\nTerrier kecil yang tangguh dibiakkan\nuntuk berburu rubah.';
+
+  @override
+  String get favoritesTitle => 'Favorit';
+
+  @override
+  String get scanTabTitle => 'Pindai';
+
+  @override
+  String get noFavoriteBreedsMessage => 'Belum ada ras favorit';
+
+  @override
+  String dialogShareTitle(String appName) {
+    return 'Bagikan $appName';
+  }
+
+  @override
+  String get shareTags => '#DogBreed #Dogs #Pets';
+
+  @override
+  String errorLaunchUrl(String url) {
+    return 'Tidak dapat membuka $url';
+  }
+
+  @override
+  String get feedbackTitle => 'Umpan Balik';
+
+  @override
+  String get feedbackDescribeIssue =>
+      'Bantu kami meningkatkan pengalaman Anda\nJelaskan masalah yang Anda alami';
+
+  @override
+  String get feedbackTellUsMore => 'Ceritakan lebih banyak (opsional)';
+
+  @override
+  String get submitButton => 'Kirim';
+
+  @override
+  String get feedbackIssueLagging => 'Lambat';
+
+  @override
+  String get feedbackIssueCrashes => 'Tiba-tiba keluar';
+
+  @override
+  String get feedbackIssueAds => 'Iklan mengganggu';
+
+  @override
+  String get feedbackIssueOther => 'Lainnya';
+
+  @override
+  String get feedbackIssueNotWorking => 'Tidak berfungsi';
+
+  @override
+  String get feedbackChooseEmailApp =>
+      'Pilih aplikasi email Anda untuk mengirim umpan balik:';
+
+  @override
+  String get feedbackSendEmail => 'Kirim Email';
+
+  @override
+  String get feedbackEmailSubject => 'DogBreed: Umpan Balik';
+
+  @override
+  String get feedbackIssueType => 'Jenis Masalah:';
+
+  @override
+  String get feedbackDetails => 'Detail:';
+
+  @override
+  String get feedbackGeneral => 'Umpan balik umum tentang aplikasi';
+
+  @override
+  String get feedbackManualEmailTitle => 'Aplikasi Email Tidak Ditemukan';
+
+  @override
+  String get feedbackManualEmailBody =>
+      'Silakan salin informasi di bawah ini dan kirimkan ke:';
+
+  @override
+  String get feedbackSubject => 'Subjek:';
+
+  @override
+  String get feedbackMessage => 'Pesan:';
+
+  @override
+  String get feedbackManualEmailSuccess => 'Umpan balik berhasil dikirim!';
+
+  @override
+  String get feedbackSelectIssue => 'Silakan pilih jenis masalah';
+
+  @override
+  String get loading => 'Memuat...';
+
+  @override
+  String get editProfile => 'Edit Profil';
+
+  @override
+  String get profileRecentScan => 'Pemindaian Terbaru';
+
+  @override
+  String get profileHistory => 'Riwayat Pemindaian';
+
+  @override
+  String get notifications => 'Notifikasi';
+
+  @override
+  String get appLanguageTitle => 'Bahasa Aplikasi';
+
+  @override
+  String get premiumSubscription => 'Langganan Premium';
+
+  @override
+  String get profileMyFavorites => 'Favorit Saya';
+
+  @override
+  String get rateUsTitle => 'Beri Nilai Kami';
+
+  @override
+  String get shareTitle => 'Bagikan Aplikasi';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get termsOfUse => 'Syarat Penggunaan';
+
+  @override
+  String get privacyPolicy => 'Kebijakan Privasi';
+
+  @override
+  String get deleteOwnerProfile => 'Hapus Profil';
+
+  @override
+  String get logout => 'Keluar';
+
+  @override
+  String get themeTitle => 'Tema';
+
+  @override
+  String get darkTheme => 'Gelap';
+
+  @override
+  String get lightTheme => 'Terang';
+
+  @override
+  String get aiAppName => 'Pemindai Ras Anjing';
+
+  @override
+  String get shareMessageBody =>
+      'Coba Dog Breed Scanner - aplikasi identifikasi ras anjing bertenaga AI! 🐕';
+
+  @override
+  String get shareIOS => 'Lihat Dog Breed Scanner di App Store!';
+
+  @override
+  String get shareAndroid => 'Lihat Dog Breed Scanner di Google Play!';
+
+  @override
+  String get shareDefault => 'Lihat Dog Breed Scanner!';
+
+  @override
+  String get shareDownloadNow => 'Unduh sekarang: ';
+
+  @override
+  String get shareSubject => 'Aplikasi Dog Breed Scanner';
 }

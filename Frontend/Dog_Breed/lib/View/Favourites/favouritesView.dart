@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../Valid/AppColors.dart';
 import '../../View_model/ScanProvider.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/routes/routes_name.dart';
 import '../MyPetsView/DogResultScreen.dart';
 
@@ -76,7 +77,7 @@ class _FavouritesviewState extends State<Favouritesview> {
               ),
                const SizedBox(width: 60,),
               Text(
-                'Favorites',
+                AppLocalizations.of(context)!.favoritesTitle,
                 style: TextStyle(
                   fontFamily: 'Sora',
                   fontWeight: FontWeight.w400,
@@ -132,7 +133,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                 },
                 child: Center(
                   child: Text(
-                    ' Scan',
+                    AppLocalizations.of(context)!.scanTabTitle,
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
@@ -154,7 +155,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                 },
                 child: Center(
                   child: Text(
-                    'Supported Breeds',
+                    AppLocalizations.of(context)!.supportedBreeds,
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
@@ -270,7 +271,7 @@ class _FavouritesviewState extends State<Favouritesview> {
     final imageBytes = _parseImageData(scan['imageBytes']);
 
     final scanId = scan['id']?.toString() ?? index.toString();
-    final breedName = scan['breedName']?.toString() ?? 'Unknown Breed';
+    final breedName = scan['breedName']?.toString() ?? AppLocalizations.of(context)!.unknownBreed;
     final formattedBreedName =
         scan['formattedBreedName']?.toString() ?? _formatBreedName(breedName);
     final confidence = scan['confidence'] is double
@@ -385,7 +386,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                         SizedBox(height: 4.h),
                         if (timestamp != null)
                           Text(
-                            _formatDateTime(timestamp),
+                            _formatDateTime(timestamp, context),
                             style: TextStyle(
                               fontSize: 10.sp,
                               color: Colors.grey[500],
@@ -393,7 +394,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                           ),
                         SizedBox(height: 6.h),
                         Text(
-                          "Your dog you scanned looks like this.",
+                          AppLocalizations.of(context)!.scanLooksLike,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 12.sp,
@@ -449,7 +450,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                           await _handleRescanTap(scan, context);
                         },
                         child: Text(
-                          'Return',
+                          AppLocalizations.of(context)!.returnAction,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
@@ -470,7 +471,7 @@ class _FavouritesviewState extends State<Favouritesview> {
                           );
                         },
                         child: Text(
-                          'Show',
+                          AppLocalizations.of(context)!.showAction,
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
@@ -499,183 +500,163 @@ class _FavouritesviewState extends State<Favouritesview> {
     );
   }
 
-  String _formatDateTime(DateTime dateTime) {
+  String _formatDateTime(DateTime dateTime, BuildContext context) {
     final now = DateTime.now();
     final difference = now.difference(dateTime);
+    final localizations = AppLocalizations.of(context)!;
 
     if (difference.inDays > 7) {
       return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
     } else if (difference.inDays > 0) {
-      return '${difference.inDays} days ago';
+      return localizations.daysAgo(difference.inDays);
     } else if (difference.inHours > 0) {
-      return '${difference.inHours} hours ago';
+      return localizations.hoursAgo(difference.inHours);
     } else if (difference.inMinutes > 0) {
-      return '${difference.inMinutes} minutes ago';
+      return localizations.minutesAgo(difference.inMinutes);
     } else {
-      return 'Just now';
+      return localizations.justNow;
     }
+  }
+
+  List<Map<String, String>> _getLocalizedBreeds(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return [
+      {
+        'name': localizations.breedNameBulldog,
+        'description': localizations.breedDescBulldog,
+        'image': 'assets/images/Ellipse 139.png',
+      },
+      {
+        'name': localizations.breedNameBeagle,
+        'description': localizations.breedDescBeagle,
+        'image': 'assets/images/Ellipse 139 (1).png',
+      },
+      {
+        'name': localizations.breedNameYorkshireTerrier,
+        'description': localizations.breedDescYorkshireTerrier,
+        'image': 'assets/images/Ellipse 139 (2).png',
+      },
+      {
+        'name': localizations.breedNameCavalierKingCharlesSpaniel,
+        'description': localizations.breedDescCavalierKingCharlesSpaniel,
+        'image': 'assets/images/Ellipse 139 (3).png',
+      },
+      {
+        'name': localizations.breedNameEnglishSpringerSpaniel,
+        'description': localizations.breedDescEnglishSpringerSpaniel,
+        'image': 'assets/images/Ellipse 139 (4).png',
+      },
+      {
+        'name': localizations.breedNameBullmastiff,
+        'description': localizations.breedDescBullmastiff,
+        'image': 'assets/images/Ellipse 139 (5).png',
+      },
+      {
+        'name': localizations.breedNameEnglishCockerSpaniel,
+        'description': localizations.breedDescEnglishCockerSpaniel,
+        'image': 'assets/images/Ellipse 139 (6).png',
+      },
+      {
+        'name': localizations.breedNameAiredaleTerrier,
+        'description': localizations.breedDescAiredaleTerrier,
+        'image': 'assets/images/Ellipse 139 (7).png',
+      },
+      {
+        'name': localizations.breedNameTerrier,
+        'description': localizations.breedDescTerrier,
+        'image': 'assets/images/Ellipse 139 (8).png',
+      },
+      {
+        'name': localizations.breedNameWhippet,
+        'description': localizations.breedDescWhippet,
+        'image': 'assets/images/Ellipse 1399.png',
+      },
+      {
+        'name': localizations.breedNameBullTerrier,
+        'description': localizations.breedDescBullTerrier,
+        'image': 'assets/images/Ellipse 139 (9).png',
+      },
+      {
+        'name': localizations.breedNameGoldenRetriever,
+        'description': localizations.breedDescGoldenRetriever,
+        'image': 'assets/images/Ellipse 139 (10).png',
+      },
+      {
+        'name': localizations.breedNameOldEnglishSheepdog,
+        'description': localizations.breedDescOldEnglishSheepdog,
+        'image': 'assets/images/Ellipse 1391.png',
+      },
+      {
+        'name': localizations.breedNameBorderCollie,
+        'description': localizations.breedDescBorderCollie,
+        'image': 'assets/images/Ellipse 1392.png',
+      },
+      {
+        'name': localizations.breedNameGreyhound,
+        'description': localizations.breedDescGreyhound,
+        'image': 'assets/images/Ellipse 139 (12).png',
+      },
+      {
+        'name': localizations.breedNameJackRussellTerrier,
+        'description': localizations.breedDescJackRussellTerrier,
+        'image': 'assets/images/Ellipse 139 (13).png',
+      },
+      {
+        'name': localizations.breedNameBloodhound,
+        'description': localizations.breedDescBloodhound,
+        'image': 'assets/images/Ellipse 139 (14).png',
+      },
+      {
+        'name': localizations.breedNameEnglishPointer,
+        'description': localizations.breedDescEnglishPointer,
+        'image': 'assets/images/Ellipse 139 (15).png',
+      },
+      {
+        'name': localizations.breedNameStaffordshireBullTerrier,
+        'description': localizations.breedDescStaffordshireBullTerrier,
+        'image': 'assets/images/Ellipse 139 (16).png',
+      },
+      {
+        'name': localizations.breedNameEnglishFoxhound,
+        'description': localizations.breedDescEnglishFoxhound,
+        'image': 'assets/images/Ellipse 139 (17).png',
+      },
+      {
+        'name': localizations.breedNameWireFoxTerrier,
+        'description': localizations.breedDescWireFoxTerrier,
+        'image': 'assets/images/Ellipse 139 (18).png',
+      },
+      {
+        'name': localizations.breedNameManchesterTerrier,
+        'description': localizations.breedDescManchesterTerrier,
+        'image': 'assets/images/Ellipse 1393.png',
+      },
+      {
+        'name': localizations.breedNameBedlingtonTerrier,
+        'description': localizations.breedDescBedlingtonTerrier,
+        'image': 'assets/images/Ellipse 139 (20).png',
+      },
+      {
+        'name': localizations.breedNameBostonTerrier,
+        'description': localizations.breedDescBostonTerrier,
+        'image': 'assets/images/Ellipse 1394.png',
+      },
+      {
+        'name': localizations.breedNameEnglishSetter,
+        'description': localizations.breedDescEnglishSetter,
+        'image': 'assets/images/Ellipse 139 (21).png',
+      },
+      {
+        'name': localizations.breedNameBorderTerrier,
+        'description': localizations.breedDescBorderTerrier,
+        'image': 'assets/images/Ellipse 139 (22).png',
+      },
+    ];
   }
 
   Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
     final colors = Theme.of(context).colorScheme;
-    final List<Map<String, String>> topBreeds = [
-      {
-        'name': 'Bulldog',
-        'description':
-            'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.',
-        'image': 'assets/images/Ellipse 139.png',
-      },
-      {
-        'name': 'Beagle',
-        'description':
-            'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.',
-        'image': 'assets/images/Ellipse 139 (1).png',
-      },
-      {
-        'name': 'Yorkshire Terrier',
-        'description':
-            'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.',
-        'image': 'assets/images/Ellipse 139 (2).png',
-      },
-      {
-        'name': 'Cavalier King Charles Spaniel',
-        'description':
-            'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.',
-        'image': 'assets/images/Ellipse 139 (3).png',
-      },
-      {
-        'name': 'English Springer Spaniel',
-        'description':
-            'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.',
-        'image': 'assets/images/Ellipse 139 (4).png',
-      },
-      {
-        'name': 'Bullmastiff',
-        'description':
-            'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.',
-        'image': 'assets/images/Ellipse 139 (5).png',
-      },
-      {
-        'name': 'English Cocker Spaniel',
-        'description':
-            'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.',
-        'image': 'assets/images/Ellipse 139 (6).png',
-      },
-      {
-        'name': 'Airedale Terrier',
-        'description':
-            'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.',
-        'image': 'assets/images/Ellipse 139 (7).png',
-      },
-      {
-        'name': 'Terrier',
-        'description':
-            'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.',
-        'image': 'assets/images/Ellipse 139 (8).png',
-      },
-      {
-        'name': 'Whippet',
-        'description':
-            'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.',
-        'image': 'assets/images/Ellipse 1399.png',
-      },
-      {
-        'name': 'Bull Terrier',
-        'description':
-            'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.',
-        'image': 'assets/images/Ellipse 139 (9).png',
-      },
-      {
-        'name': 'Golden Retriever',
-        'description':
-            'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.',
-        'image': 'assets/images/Ellipse 139 (10).png',
-      },
-      {
-        'name': 'Old English Sheepdog',
-        'description':
-            'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.',
-        'image': 'assets/images/Ellipse 1391.png',
-      },
-      {
-        'name': 'Border Collie',
-        'description':
-            'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.',
-        'image': 'assets/images/Ellipse 1392.png',
-      },
-      {
-        'name': 'Greyhound',
-        'description':
-            'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.',
-        'image': 'assets/images/Ellipse 139 (12).png',
-      },
-      {
-        'name': 'Jack Russell Terrier',
-        'description':
-            'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.',
-        'image': 'assets/images/Ellipse 139 (13).png',
-      },
-      {
-        'name': 'Bloodhound',
-        'description':
-            'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.',
-        'image': 'assets/images/Ellipse 139 (14).png',
-      },
-      {
-        'name': 'English Pointer',
-        'description':
-            'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.',
-        'image': 'assets/images/Ellipse 139 (15).png',
-      },
-      {
-        'name': 'Staffordshire Bull Terrier',
-        'description':
-            'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.',
-        'image': 'assets/images/Ellipse 139 (16).png',
-      },
-      {
-        'name': 'English Foxhound',
-        'description':
-            'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.',
-        'image': 'assets/images/Ellipse 139 (17).png',
-      },
-      {
-        'name': 'Wire Fox Terrier',
-        'description':
-            'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.',
-        'image': 'assets/images/Ellipse 139 (18).png',
-      },
-      {
-        'name': 'Manchester Terrier',
-        'description':
-            'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.',
-        'image': 'assets/images/Ellipse 1393.png',
-      },
-      {
-        'name': 'Bedlington Terrier',
-        'description':
-            'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.',
-        'image': 'assets/images/Ellipse 139 (20).png',
-      },
-      {
-        'name': 'Boston Terrier',
-        'description':
-            'Life expectancy: 11-13 years.\nFriendly "American Gentleman"\nwith tuxedo-like markings.',
-        'image': 'assets/images/Ellipse 1394.png',
-      },
-      {
-        'name': 'English Setter',
-        'description':
-            'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.',
-        'image': 'assets/images/Ellipse 139 (21).png',
-      },
-      {
-        'name': 'Border Terrier',
-        'description':
-            'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.',
-        'image': 'assets/images/Ellipse 139 (22).png',
-      },
-    ];
+    final List<Map<String, String>> topBreeds = _getLocalizedBreeds(context);
     final favouriteBreeds = topBreeds
         .where((breed) => scanProvider.isBreedFavorite(breed['name']!))
         .toList();
@@ -685,7 +666,7 @@ class _FavouritesviewState extends State<Favouritesview> {
         child: Padding(
           padding: EdgeInsets.only(top: 40.h),
           child: Text(
-            'No favourite breeds yet',
+            AppLocalizations.of(context)!.noFavoriteBreedsMessage,
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w600,
@@ -798,6 +779,14 @@ class _FavouritesviewState extends State<Favouritesview> {
   }
 }
 
+String _formatBreedNameHelper(String name) {
+  return name
+      .replaceAll('-', ' ')
+      .split(' ')
+      .map((word) => word[0].toUpperCase() + word.substring(1))
+      .join(' ');
+}
+
 Future<void> _handleRescanTap(
   Map<String, dynamic> scan,
   BuildContext context,
@@ -829,14 +818,14 @@ Future<void> _handleRescanTap(
         final scanData = {
           'id': DateTime.now().millisecondsSinceEpoch.toString(),
           'image': dogResult['image'] ?? cameraResult,
-          'breedName': dogResult['breedName']?.toString() ?? 'Unknown Breed',
+          'breedName': dogResult['breedName']?.toString() ?? AppLocalizations.of(context)!.unknownBreed,
           'confidence': (dogResult['confidence'] ?? 0.0) is double
               ? dogResult['confidence'] as double
               : 0.0,
           // 'formattedBreedName':
           // dogResult['formattedBreedName']?.toString() ??
           //     _formatBreedName(
-          //       dogResult['breedName']?.toString() ?? 'Unknown Breed',
+          //       dogResult['breedName']?.toString() ?? AppLocalizations.of(context)!.unknownBreed,
           //     ),
           'timestamp': DateTime.now(),
           'isFavorite': false,
@@ -854,7 +843,10 @@ Future<void> _handleRescanTap(
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              '✅ Re-scanned: ${scanData['formattedBreedName']} ($confidencePercent% confidence)',
+              AppLocalizations.of(context)!.rescannedSuccess(
+                scanData['formattedBreedName'],
+                confidencePercent,
+              ),
             ),
             duration: const Duration(seconds: 3),
             backgroundColor: Colors.green,
@@ -872,7 +864,7 @@ Future<void> _handleRescanTap(
     }
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Error re-scanning: $e'),
+        content: Text(AppLocalizations.of(context)!.errorRescanning(e)),
         duration: const Duration(seconds: 3),
         backgroundColor: Colors.red,
       ),

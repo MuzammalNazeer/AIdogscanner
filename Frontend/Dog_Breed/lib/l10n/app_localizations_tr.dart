@@ -15,46 +15,22 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsTitle => 'Ayarlar';
 
   @override
-  String get appLanguageTitle => 'Uygulama dili';
-
-  @override
   String get notificationLanguageTitle => 'Bildirim dili';
 
   @override
-  String get editProfile => 'Profili düzenle';
+  String get changePassword => 'ParolayÃ„Â± deÃ„Å¸iÃ…Å¸tir';
 
   @override
-  String get changePassword => 'Parolayı değiştir';
+  String get aboutUs => 'HakkÃ„Â±mÃ„Â±zda';
 
   @override
-  String get notifications => 'Bildirimler';
+  String get customerCare => 'MÃƒÂ¼Ã…Å¸teri hizmetleri';
 
   @override
-  String get premiumSubscription => 'Premium abonelik';
-
-  @override
-  String get aboutUs => 'Hakkımızda';
-
-  @override
-  String get faq => 'SSS';
-
-  @override
-  String get termsOfUse => 'Kullanım şartları';
-
-  @override
-  String get customerCare => 'Müşteri hizmetleri';
-
-  @override
-  String get measurementUnits => 'Ölçü birimleri';
+  String get measurementUnits => 'Ãƒâ€“lÃƒÂ§ÃƒÂ¼ birimleri';
 
   @override
   String get supportAnimalIdProject => 'Animal ID projesini destekle';
-
-  @override
-  String get deleteOwnerProfile => 'Sahip profilini sil';
-
-  @override
-  String get logout => 'Çıkış yap';
 
   @override
   String get dialogCancel => 'İptal';
@@ -67,35 +43,36 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get dialogDeleteProfileMessage =>
-      'Profilinizi kalıcı olarak silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.';
+      'Profilinizi kalÃ„Â±cÃ„Â± olarak silmek istediÃ„Å¸inizden emin misiniz? Bu iÃ…Å¸lem geri alÃ„Â±namaz.';
 
   @override
-  String get dialogLogoutTitle => 'Çıkış yap';
+  String get dialogLogoutTitle => 'Çıkış yapmak istediğinizden emin misiniz?';
 
   @override
-  String get dialogLogoutMessage => 'Çıkış yapmak istediğinizden emin misiniz?';
+  String get dialogLogoutMessage =>
+      'Ãƒâ€¡Ã„Â±kÃ„Â±Ã…Å¸ yapmak istediÃ„Å¸inizden emin misiniz?';
 
   @override
-  String get manager => 'Yönetici';
+  String get manager => 'YÃƒÂ¶netici';
 
   @override
   String get splashSubtitle =>
-      'Köpeğinizin Günlük Aktivitesini ve Sağlığını Yönetin';
+      'KÃƒÂ¶peÃ„Å¸inizin GÃƒÂ¼nlÃƒÂ¼k Aktivitesini ve SaÃ„Å¸lÃ„Â±Ã„Å¸Ã„Â±nÃ„Â± YÃƒÂ¶netin';
 
   @override
-  String get startLikeAPro => 'Bir Profesyonel Gibi Başlayın';
+  String get startLikeAPro => 'Bir Profesyonel Gibi BaÃ…Å¸layÃ„Â±n';
 
   @override
-  String get unlockAllFeatures => 'Tüm Özelliklerin Kilidini Açın';
+  String get unlockAllFeatures => 'TÃƒÂ¼m Ãƒâ€“zelliklerin Kilidini AÃƒÂ§Ã„Â±n';
 
   @override
   String get premium => 'Premium';
 
   @override
-  String get free => 'Ücretsiz';
+  String get free => 'ÃƒÅ“cretsiz';
 
   @override
-  String get unlimitedDogScans => 'Sınırsız Köpek Taraması';
+  String get unlimitedDogScans => 'SÃ„Â±nÃ„Â±rsÃ„Â±z KÃƒÂ¶pek TaramasÃ„Â±';
 
   @override
   String get supportedBreedDetection => 'Desteklenen Cins Tespiti';
@@ -104,33 +81,34 @@ class AppLocalizationsTr extends AppLocalizations {
   String get multiplePetProfiles => 'Birden Fazla Evcil Hayvan Profili';
 
   @override
-  String get removeAds => 'Reklamları Kaldır';
+  String get removeAds => 'ReklamlarÃ„Â± KaldÃ„Â±r';
 
   @override
-  String get vipCustomerSupport => 'VIP Müşteri Desteği';
+  String get vipCustomerSupport => 'VIP MÃƒÂ¼Ã…Å¸teri DesteÃ„Å¸i';
 
   @override
-  String get trialOffer => '3 Gün ÜCRETSİZ Deneme, Sonrasında Rs 2550/Hafta';
+  String get trialOffer =>
+      '3 GÃƒÂ¼n ÃƒÅ“CRETSÃ„Â°Z Deneme, SonrasÃ„Â±nda Rs 2550/Hafta';
 
   @override
-  String get startFreeTrial => 'ÜCRETSİZ DENEMEYİ BAŞLAT';
+  String get startFreeTrial => 'ÃƒÅ“CRETSÃ„Â°Z DENEMEYÃ„Â° BAÃ…Å¾LAT';
 
   @override
   String get subscriptionDisclaimer =>
-      'Devam ederek Şartlarımızı ve Gizlilik Politikamızı kabul edersiniz, abonelik deneme süresi bittikten sonra faturalandırılır ve otomatik olarak yenilenir. Ücretlerden kaçınmak için deneme süresi bitmeden önce aboneliği istediğiniz zaman iptal edin.';
+      'Devam ederek Ã…Å¾artlarÃ„Â±mÃ„Â±zÃ„Â± ve Gizlilik PolitikamÃ„Â±zÃ„Â± kabul edersiniz, abonelik deneme sÃƒÂ¼resi bittikten sonra faturalandÃ„Â±rÃ„Â±lÃ„Â±r ve otomatik olarak yenilenir. ÃƒÅ“cretlerden kaÃƒÂ§Ã„Â±nmak iÃƒÂ§in deneme sÃƒÂ¼resi bitmeden ÃƒÂ¶nce aboneliÃ„Å¸i istediÃ„Å¸iniz zaman iptal edin.';
 
   @override
-  String get welcomeBack => 'Tekrar hoş geldiniz, ';
+  String get welcomeBack => 'Tekrar hoÃ…Å¸ geldiniz, ';
 
   @override
-  String get searchForDog => 'Köpek Ara';
+  String get searchForDog => 'KÃƒÂ¶pek Ara';
 
   @override
-  String get tryPremiumFeatures => 'Premium Özellikleri Dene 🌵';
+  String get tryPremiumFeatures => 'Premium Ãƒâ€“zellikleri Dene Ã°Å¸Å’Âµ';
 
   @override
   String get premiumOfferDescription =>
-      'Teklifinizi şimdi alın ve sınırsız tanıma, sağlık kontrolü ve daha fazlasını elde edin';
+      'Teklifinizi Ã…Å¸imdi alÃ„Â±n ve sÃ„Â±nÃ„Â±rsÃ„Â±z tanÃ„Â±ma, saÃ„Å¸lÃ„Â±k kontrolÃƒÂ¼ ve daha fazlasÃ„Â±nÃ„Â± elde edin';
 
   @override
   String get getIt => 'AL';
@@ -148,41 +126,41 @@ class AppLocalizationsTr extends AppLocalizations {
   String get booking => 'Rezervasyon';
 
   @override
-  String get identifyDog => 'Köpeği Tanımla';
+  String get identifyDog => 'KÃƒÂ¶peÃ„Å¸i TanÃ„Â±mla';
 
   @override
   String get identifyDogDescription =>
-      'Yapay zeka kullanarak köpeğinizi anında tarayın ve tanımlayın';
+      'Yapay zeka kullanarak kÃƒÂ¶peÃ„Å¸inizi anÃ„Â±nda tarayÃ„Â±n ve tanÃ„Â±mlayÃ„Â±n';
 
   @override
-  String get scanNow => 'Şimdi Tara';
+  String get scanNow => 'Ã…Å¾imdi Tara';
 
   @override
   String get vetVisits => 'Veteriner Ziyaretleri';
 
   @override
   String get vetVisitsDescription =>
-      'Kontrolleri planlayın ve \n veteriner ziyaretlerini takip edin';
+      'Kontrolleri planlayÃ„Â±n ve \n veteriner ziyaretlerini takip edin';
 
   @override
-  String get createVisit => 'Ziyaret Oluştur';
+  String get createVisit => 'Ziyaret OluÃ…Å¸tur';
 
   @override
-  String get foodManagement => 'Mama Yönetimi';
+  String get foodManagement => 'Mama YÃƒÂ¶netimi';
 
   @override
   String get foodManagementDescription =>
-      'Öğünleri takip edin ve \n evcil hayvanınızın günlük beslenmesini yönetin';
+      'Ãƒâ€“Ã„Å¸ÃƒÂ¼nleri takip edin ve \n evcil hayvanÃ„Â±nÃ„Â±zÃ„Â±n gÃƒÂ¼nlÃƒÂ¼k beslenmesini yÃƒÂ¶netin';
 
   @override
-  String get checkSchedule => 'Programı Kontrol Et';
+  String get checkSchedule => 'ProgramÃ„Â± Kontrol Et';
 
   @override
   String get unknownBreed => 'Bilinmeyen Irk';
 
   @override
   String savedScanMessage(Object breedName, Object confidence) {
-    return '✅ Kaydedildi: $breedName (%$confidence güven)';
+    return 'Ã¢Å“â€¦ Kaydedildi: $breedName (%$confidence gÃƒÂ¼ven)';
   }
 
   @override
@@ -194,48 +172,48 @@ class AppLocalizationsTr extends AppLocalizations {
   String get skip => 'Atla';
 
   @override
-  String get next => 'İleri';
+  String get next => 'Ã„Â°leri';
 
   @override
-  String get getStarted => 'Başla';
+  String get getStarted => 'BaÃ…Å¸la';
 
   @override
-  String get onboardingTitle1 => 'Uydu Direktörü';
+  String get onboardingTitle1 => 'Uydu DirektÃƒÂ¶rÃƒÂ¼';
 
   @override
   String get onboardingDesc1 =>
-      'GPS Uydu Haritalama ile Yakındaki Yerleri Keşfedin\nve Uydu Bulun';
+      'GPS Uydu Haritalama ile YakÃ„Â±ndaki Yerleri KeÃ…Å¸fedin\nve Uydu Bulun';
 
   @override
-  String get onboardingTitle2 => 'İzninize ihtiyacımız\n var';
+  String get onboardingTitle2 => 'Ã„Â°zninize ihtiyacÃ„Â±mÃ„Â±z\n var';
 
   @override
   String get onboardingDesc2 =>
-      'Evcil hayvanınızın canlı taramalarını yapabilmeniz için \nkamera iznine ihtiyacımız var.';
+      'Evcil hayvanÃ„Â±nÃ„Â±zÃ„Â±n canlÃ„Â± taramalarÃ„Â±nÃ„Â± yapabilmeniz iÃƒÂ§in \nkamera iznine ihtiyacÃ„Â±mÃ„Â±z var.';
 
   @override
-  String get onboardingTitle3 => 'Görüntü kalitesini koruyun';
+  String get onboardingTitle3 => 'GÃƒÂ¶rÃƒÂ¼ntÃƒÂ¼ kalitesini koruyun';
 
   @override
   String get onboardingDesc3 =>
-      'Mümkünse tüm vücudu yakalayın. Kafa \ngörünür olmalıdır.';
+      'MÃƒÂ¼mkÃƒÂ¼nse tÃƒÂ¼m vÃƒÂ¼cudu yakalayÃ„Â±n. Kafa \ngÃƒÂ¶rÃƒÂ¼nÃƒÂ¼r olmalÃ„Â±dÃ„Â±r.';
 
   @override
   String get onboardingTitle4 =>
-      'Köpeğinizin \n sağlıklı ve aktif kalmasını sağlayın.';
+      'KÃƒÂ¶peÃ„Å¸inizin \n saÃ„Å¸lÃ„Â±klÃ„Â± ve aktif kalmasÃ„Â±nÃ„Â± saÃ„Å¸layÃ„Â±n.';
 
   @override
   String get onboardingDesc4 =>
-      'Köpeğinizin her detayını—sağlık, fotoğraflar,\n aktiviteler ve daha fazlasını tek bir basit yerde yönetin.';
+      'KÃƒÂ¶peÃ„Å¸inizin her detayÃ„Â±nÃ„Â±Ã¢â‚¬â€saÃ„Å¸lÃ„Â±k, fotoÃ„Å¸raflar,\n aktiviteler ve daha fazlasÃ„Â±nÃ„Â± tek bir basit yerde yÃƒÂ¶netin.';
 
   @override
   String get calendarTabActivities => 'Aktiviteler';
 
   @override
-  String get calendarTabReminders => 'Hatırlatıcılar';
+  String get calendarTabReminders => 'HatÃ„Â±rlatÃ„Â±cÃ„Â±lar';
 
   @override
-  String get calendarTabProgress => 'İlerleme';
+  String get calendarTabProgress => 'Ã„Â°lerleme';
 
   @override
   String get calendarTabDocuments => 'Belgeler';
@@ -247,13 +225,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get activityVeterinary => 'Veteriner';
 
   @override
-  String get activityPee => 'Çiş';
+  String get activityPee => 'Ãƒâ€¡iÃ…Å¸';
 
   @override
   String get activityEat => 'Yemek';
 
   @override
-  String get activityDrink => 'İçmek';
+  String get activityDrink => 'Ã„Â°ÃƒÂ§mek';
 
   @override
   String get activityPlay => 'Oyun';
@@ -262,7 +240,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get activityPoop => 'Kaka';
 
   @override
-  String get activityWalk => 'Yürüyüş';
+  String get activityWalk => 'YÃƒÂ¼rÃƒÂ¼yÃƒÂ¼Ã…Å¸';
 
   @override
   String get activityCrate => 'Kafes';
@@ -271,49 +249,49 @@ class AppLocalizationsTr extends AppLocalizations {
   String get activitySleep => 'Uyku';
 
   @override
-  String get activityTraining => 'Eğitim';
+  String get activityTraining => 'EÃ„Å¸itim';
 
   @override
-  String get activityTreat => 'Ödül Maması';
+  String get activityTreat => 'Ãƒâ€“dÃƒÂ¼l MamasÃ„Â±';
 
   @override
-  String get activityGrooming => 'Bakım';
+  String get activityGrooming => 'BakÃ„Â±m';
 
   @override
   String get activityCleaning => 'Temizlik';
 
   @override
-  String get activityMedication => 'İlaç';
+  String get activityMedication => 'Ã„Â°laÃƒÂ§';
 
   @override
-  String get activityVaccination => 'Aşı';
+  String get activityVaccination => 'AÃ…Å¸Ã„Â±';
 
   @override
-  String get activityWeight => 'Ağırlık';
+  String get activityWeight => 'AÃ„Å¸Ã„Â±rlÃ„Â±k';
 
   @override
   String get activityHeight => 'Boy';
 
   @override
-  String get activityTemperature => 'Sıcaklık';
+  String get activityTemperature => 'SÃ„Â±caklÃ„Â±k';
 
   @override
-  String get activityHealthCondition => 'Sağlık Durumu';
+  String get activityHealthCondition => 'SaÃ„Å¸lÃ„Â±k Durumu';
 
   @override
   String get activityAccident => 'Kaza';
 
   @override
-  String get activityJournal => 'Günlük';
+  String get activityJournal => 'GÃƒÂ¼nlÃƒÂ¼k';
 
   @override
-  String get calendarManage => 'Yönet';
+  String get calendarManage => 'YÃƒÂ¶net';
 
   @override
   String get calendarMonth => 'Ay';
 
   @override
-  String get calendarComingSoon => 'Yakında...';
+  String get calendarComingSoon => 'YakÃ„Â±nda...';
 
   @override
   String get calendarNoActivityLogged => 'Aktivite kaydedilmedi';
@@ -328,22 +306,22 @@ class AppLocalizationsTr extends AppLocalizations {
   String get progressTabChart => 'Grafik';
 
   @override
-  String get progressTabCompare => 'Karşılaştır';
+  String get progressTabCompare => 'KarÃ…Å¸Ã„Â±laÃ…Å¸tÃ„Â±r';
 
   @override
-  String get petSelectPet => 'Evcil hayvan seç';
+  String get petSelectPet => 'Evcil hayvan seÃƒÂ§';
 
   @override
-  String get petNoPetSelected => 'Evcil hayvan seçilmedi';
+  String get petNoPetSelected => 'Evcil hayvan seÃƒÂ§ilmedi';
 
   @override
-  String get petNoPetSelectedOption => 'Evcil hayvan seçilmedi';
+  String get petNoPetSelectedOption => 'Evcil hayvan seÃƒÂ§ilmedi';
 
   @override
   String get activityNote => 'Not:';
 
   @override
-  String get actionEdit => 'Düzenle';
+  String get actionEdit => 'DÃƒÂ¼zenle';
 
   @override
   String get actionDelete => 'Sil';
@@ -352,50 +330,51 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dialogDeleteActivityTitle => 'Aktiviteyi sil';
 
   @override
-  String get calendarHeatmapTab => 'Isı haritası';
+  String get calendarHeatmapTab => 'IsÃ„Â± haritasÃ„Â±';
 
   @override
-  String get calendarTimelineTab => 'Zaman çizelgesi';
+  String get calendarTimelineTab => 'Zaman ÃƒÂ§izelgesi';
 
   @override
-  String get calendarActivityIntensity => 'Aktivite Yoğunluğu';
+  String get calendarActivityIntensity => 'Aktivite YoÃ„Å¸unluÃ„Å¸u';
 
   @override
-  String get calendarErrorLoadingHeatmap => 'Isı haritası yüklenirken hata';
+  String get calendarErrorLoadingHeatmap =>
+      'IsÃ„Â± haritasÃ„Â± yÃƒÂ¼klenirken hata';
 
   @override
   String get calendarLegendNone => 'Yok';
 
   @override
-  String get calendarLegendLow => 'Düşük';
+  String get calendarLegendLow => 'DÃƒÂ¼Ã…Å¸ÃƒÂ¼k';
 
   @override
   String get calendarLegendMedium => 'Orta';
 
   @override
-  String get calendarLegendHigh => 'Yüksek';
+  String get calendarLegendHigh => 'YÃƒÂ¼ksek';
 
   @override
-  String get calendarLegendNow => 'Şimdi';
+  String get calendarLegendNow => 'Ã…Å¾imdi';
 
   @override
   String get calendarChartAmount => 'ml cinsinden miktar';
 
   @override
-  String get calendarChartFrequency => 'Sıklık';
+  String get calendarChartFrequency => 'SÃ„Â±klÃ„Â±k';
 
   @override
-  String get calendarShare => 'Paylaş';
+  String get calendarShare => 'PaylaÃ…Å¸';
 
   @override
-  String get calendarMostActiveDay => 'En Aktif Gün';
+  String get calendarMostActiveDay => 'En Aktif GÃƒÂ¼n';
 
   @override
   String get calendarMostActiveTime => 'En Aktif Saat';
 
   @override
   String dialogDeleteActivityContent(Object activityName) {
-    return '\"$activityName\" aktivitesini silmek istediğinizden emin misiniz?';
+    return '\"$activityName\" aktivitesini silmek istediÃ„Å¸inizden emin misiniz?';
   }
 
   @override
@@ -403,13 +382,13 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get dialogAddPetMessage =>
-      'Aktivite ve hatırlatıcı eklemeye başlamak için en az bir evcil hayvan ekleyin.';
+      'Aktivite ve hatÃ„Â±rlatÃ„Â±cÃ„Â± eklemeye baÃ…Å¸lamak iÃƒÂ§in en az bir evcil hayvan ekleyin.';
 
   @override
   String get dialogGot_it => 'Got it';
 
   @override
-  String get dialogGotIt => 'Anladım';
+  String get dialogGotIt => 'AnladÃ„Â±m';
 
   @override
   String get dayMon => 'Pzt';
@@ -418,7 +397,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dayTue => 'Sal';
 
   @override
-  String get dayWed => 'Çar';
+  String get dayWed => 'Ãƒâ€¡ar';
 
   @override
   String get dayThu => 'Per';
@@ -433,26 +412,27 @@ class AppLocalizationsTr extends AppLocalizations {
   String get daySun => 'Paz';
 
   @override
-  String get walkDeleteTitle => 'Yürüyüş Silinsin mi?';
+  String get walkDeleteTitle => 'YÃƒÂ¼rÃƒÂ¼yÃƒÂ¼Ã…Å¸ Silinsin mi?';
 
   @override
-  String get walkDeleteContent => 'Bu işlem mevcut yürüyüş oturumunu silecek.';
+  String get walkDeleteContent =>
+      'Bu iÃ…Å¸lem mevcut yÃƒÂ¼rÃƒÂ¼yÃƒÂ¼Ã…Å¸ oturumunu silecek.';
 
   @override
-  String get walkCancel => 'İptal';
+  String get walkCancel => 'Ã„Â°ptal';
 
   @override
   String get walkDelete => 'Sil';
 
   @override
   String get walkStartTimerWarning =>
-      'Lütfen kaydetmeden önce zamanlayıcıyı başlatın.';
+      'LÃƒÂ¼tfen kaydetmeden ÃƒÂ¶nce zamanlayÃ„Â±cÃ„Â±yÃ„Â± baÃ…Å¸latÃ„Â±n.';
 
   @override
   String get walkNote => 'Not';
 
   @override
-  String get walkNoteHint => 'Notlarınız burada';
+  String get walkNoteHint => 'NotlarÃ„Â±nÃ„Â±z burada';
 
   @override
   String get walkSave => 'Kaydet';
@@ -461,37 +441,38 @@ class AppLocalizationsTr extends AppLocalizations {
   String get walkAddNote => 'Not ekle';
 
   @override
-  String get walkDefaultName => 'Yürüyüş';
+  String get walkDefaultName => 'YÃƒÂ¼rÃƒÂ¼yÃƒÂ¼Ã…Å¸';
 
   @override
   String get walkLocationPermission =>
-      'Yürüyüşleri izlemek için konum izni gereklidir.';
+      'YÃƒÂ¼rÃƒÂ¼yÃƒÂ¼Ã…Å¸leri izlemek iÃƒÂ§in konum izni gereklidir.';
 
   @override
-  String get walkLocationService => 'Konum servisleri devre dışı.';
+  String get walkLocationService => 'Konum servisleri devre dÃ„Â±Ã…Å¸Ã„Â±.';
 
   @override
-  String get reminderAddTitle => 'Hatırlatıcı Ekle';
+  String get reminderAddTitle => 'HatÃ„Â±rlatÃ„Â±cÃ„Â± Ekle';
 
   @override
-  String get reminderNone => 'Hatırlatıcı Yok';
+  String get reminderNone => 'HatÃ„Â±rlatÃ„Â±cÃ„Â± Yok';
 
   @override
-  String get reminderDefaultTitle => 'Hatırlatıcı';
+  String get reminderDefaultTitle => 'HatÃ„Â±rlatÃ„Â±cÃ„Â±';
 
   @override
-  String get actionUpdate => 'Güncelle';
+  String get actionUpdate => 'GÃƒÂ¼ncelle';
 
   @override
-  String get actionRemove => 'Kaldır';
+  String get actionRemove => 'KaldÃ„Â±r';
 
   @override
   String errorUpdateFailed(Object error) {
-    return 'Güncelleme başarısız: $error';
+    return 'GÃƒÂ¼ncelleme baÃ…Å¸arÃ„Â±sÃ„Â±z: $error';
   }
 
   @override
-  String get errorUpdateNotFound => 'Güncellenemiyor: Etkinlik bulunamadı';
+  String get errorUpdateNotFound =>
+      'GÃƒÂ¼ncellenemiyor: Etkinlik bulunamadÃ„Â±';
 
   @override
   String get durationHr => 'sa';
@@ -503,49 +484,51 @@ class AppLocalizationsTr extends AppLocalizations {
   String get durationSec => 'sn';
 
   @override
-  String get pickerTakePhoto => 'Fotoğraf Çek';
+  String get pickerTakePhoto => 'FotoÃ„Å¸raf Ãƒâ€¡ek';
 
   @override
-  String get pickerGallery => 'Galeriden Seç';
+  String get pickerGallery => 'Galeriden SeÃƒÂ§';
 
   @override
   String get pickerRecordVideo => 'Video Kaydet';
 
   @override
-  String get errorSelectActivity => 'Lütfen önce bir aktivite seçin';
+  String get errorSelectActivity => 'LÃƒÂ¼tfen ÃƒÂ¶nce bir aktivite seÃƒÂ§in';
 
   @override
-  String get errorReminderFuture => 'Hatırlatma zamanı gelecekte olmalıdır';
+  String get errorReminderFuture =>
+      'HatÃ„Â±rlatma zamanÃ„Â± gelecekte olmalÃ„Â±dÃ„Â±r';
 
   @override
-  String get errorValidWeight => 'Lütfen geçerli bir ağırlık girin';
+  String get errorValidWeight =>
+      'LÃƒÂ¼tfen geÃƒÂ§erli bir aÃ„Å¸Ã„Â±rlÃ„Â±k girin';
 
   @override
-  String get errorValidHeight => 'Lütfen geçerli bir boy girin';
+  String get errorValidHeight => 'LÃƒÂ¼tfen geÃƒÂ§erli bir boy girin';
 
   @override
-  String get errorValidTemp => 'Lütfen geçerli bir sıcaklık girin';
+  String get errorValidTemp => 'LÃƒÂ¼tfen geÃƒÂ§erli bir sÃ„Â±caklÃ„Â±k girin';
 
   @override
-  String get errorEnterFood => 'Lütfen yiyecek adı veya türü girin';
+  String get errorEnterFood => 'LÃƒÂ¼tfen yiyecek adÃ„Â± veya tÃƒÂ¼rÃƒÂ¼ girin';
 
   @override
-  String get successActivitySaved => 'Aktivite başarıyla kaydedildi!';
+  String get successActivitySaved => 'Aktivite baÃ…Å¸arÃ„Â±yla kaydedildi!';
 
   @override
   String get successActivitySavedReminder =>
-      'Hatırlatmalı aktivite başarıyla kaydedildi!';
+      'HatÃ„Â±rlatmalÃ„Â± aktivite baÃ…Å¸arÃ„Â±yla kaydedildi!';
 
   @override
   String errorSaveFailed(Object error) {
-    return 'Kaydetme başarısız: $error';
+    return 'Kaydetme baÃ…Å¸arÃ„Â±sÃ„Â±z: $error';
   }
 
   @override
-  String get labelSelectedImage => 'Seçilen Resim:';
+  String get labelSelectedImage => 'SeÃƒÂ§ilen Resim:';
 
   @override
-  String get labelSelectedVideo => 'Seçilen Video:';
+  String get labelSelectedVideo => 'SeÃƒÂ§ilen Video:';
 
   @override
   String get unitOz => 'oz';
@@ -560,16 +543,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get unitKg => 'kg';
 
   @override
-  String get unitInches => 'inç';
+  String get unitInches => 'inÃƒÂ§';
 
   @override
   String get unitCm => 'cm';
 
   @override
-  String get unitF => '°F';
+  String get unitF => 'Ã‚Â°F';
 
   @override
-  String get unitC => '°C';
+  String get unitC => 'Ã‚Â°C';
 
   @override
   String get unitKm => 'km';
@@ -578,7 +561,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get unitMi => 'mi';
 
   @override
-  String get actionAdd => 'İçecek adı veya türü ekle';
+  String get actionAdd => 'Ã„Â°ÃƒÂ§ecek adÃ„Â± veya tÃƒÂ¼rÃƒÂ¼ ekle';
 
   @override
   String get actionAddImage => '+ Resim Ekle';
@@ -590,43 +573,43 @@ class AppLocalizationsTr extends AppLocalizations {
   String get hintAddNote => 'Not ekle';
 
   @override
-  String get startedAt => 'Başlangıç';
+  String get startedAt => 'BaÃ…Å¸langÃ„Â±ÃƒÂ§';
 
   @override
-  String get endedAt => 'Bitiş';
+  String get endedAt => 'BitiÃ…Å¸';
 
   @override
-  String get noActivitySelected => 'Etkinlik seçilmedi';
+  String get noActivitySelected => 'Etkinlik seÃƒÂ§ilmedi';
 
   @override
-  String get actionAddTreat => '+ Ödül maması ekle';
+  String get actionAddTreat => '+ Ãƒâ€“dÃƒÂ¼l mamasÃ„Â± ekle';
 
   @override
-  String get actionAddGrooming => '+ Bakım türü ekle';
+  String get actionAddGrooming => '+ BakÃ„Â±m tÃƒÂ¼rÃƒÂ¼ ekle';
 
   @override
-  String get actionAddMedication => '+ İlaç ekle';
+  String get actionAddMedication => '+ Ã„Â°laÃƒÂ§ ekle';
 
   @override
-  String get actionAddVaccination => '+ Aşı ekle';
+  String get actionAddVaccination => '+ AÃ…Å¸Ã„Â± ekle';
 
   @override
-  String get actionAddHealthCondition => '+ Sağlık durumu ekle';
+  String get actionAddHealthCondition => '+ SaÃ„Å¸lÃ„Â±k durumu ekle';
 
   @override
-  String get actionAddAccident => '+ Kaza türü ekle';
+  String get actionAddAccident => '+ Kaza tÃƒÂ¼rÃƒÂ¼ ekle';
 
   @override
-  String get actionAddCleaning => '+ Temizlik türü ekle';
+  String get actionAddCleaning => '+ Temizlik tÃƒÂ¼rÃƒÂ¼ ekle';
 
   @override
   String get actionAddVeterinary => '+ Add veterinary';
 
   @override
-  String get actionAddFood => '+ Yiyecek adı veya türü ekle';
+  String get actionAddFood => '+ Yiyecek adÃ„Â± veya tÃƒÂ¼rÃƒÂ¼ ekle';
 
   @override
-  String get actionStartTimer => 'Veya bir zamanlayıcı başlatın';
+  String get actionStartTimer => 'Veya bir zamanlayÃ„Â±cÃ„Â± baÃ…Å¸latÃ„Â±n';
 
   @override
   String get labelDate => 'Tarih';
@@ -635,60 +618,61 @@ class AppLocalizationsTr extends AppLocalizations {
   String get labelTime => 'Zaman';
 
   @override
-  String get labelName => 'İsim';
+  String get labelName => 'Ã„Â°sim';
 
   @override
-  String get hintEnterName => 'İsim girin';
+  String get hintEnterName => 'Ã„Â°sim girin';
 
   @override
   String get actionSave => 'Kaydet';
 
   @override
-  String get pickerSelectDate => 'Tarih seç';
+  String get pickerSelectDate => 'Tarih seÃƒÂ§';
 
   @override
-  String get pickerSelectTime => 'Zaman seç';
+  String get pickerSelectTime => 'Zaman seÃƒÂ§';
 
   @override
   String reminderSetFor(String date, String time) {
-    return '$date saat $time için hatırlatıcı ayarlandı';
+    return '$date saat $time iÃƒÂ§in hatÃ„Â±rlatÃ„Â±cÃ„Â± ayarlandÃ„Â±';
   }
 
   @override
-  String get myPetsTitle => 'Evcil Hayvanlarım';
+  String get myPetsTitle => 'Evcil HayvanlarÃ„Â±m';
 
   @override
-  String get noPetsAdded => 'Henüz evcil hayvan eklenmedi';
+  String get noPetsAdded => 'HenÃƒÂ¼z evcil hayvan eklenmedi';
 
   @override
   String get addPetButton => '+ Evcil hayvan ekle';
 
   @override
-  String get noPetsMatch => 'Aramanızla eşleşen evcil hayvan yok';
+  String get noPetsMatch => 'AramanÃ„Â±zla eÃ…Å¸leÃ…Å¸en evcil hayvan yok';
 
   @override
-  String get tryDifferentSearch => 'Farklı bir arama terimi deneyin';
+  String get tryDifferentSearch => 'FarklÃ„Â± bir arama terimi deneyin';
 
   @override
-  String get petUpdatedSuccess => 'Evcil hayvan başarıyla güncellendi!';
+  String get petUpdatedSuccess =>
+      'Evcil hayvan baÃ…Å¸arÃ„Â±yla gÃƒÂ¼ncellendi!';
 
   @override
-  String get deletePetTitle => 'Evcil Hayvanı Sil';
+  String get deletePetTitle => 'Evcil HayvanÃ„Â± Sil';
 
   @override
   String deletePetMessage(String petName) {
-    return '$petName adlı evcil hayvanı silmek istediğinizden emin misiniz?';
+    return '$petName adlÃ„Â± evcil hayvanÃ„Â± silmek istediÃ„Å¸inizden emin misiniz?';
   }
 
   @override
-  String get cancelButton => 'İptal';
+  String get cancelButton => 'Ã„Â°ptal';
 
   @override
   String get deleteButton => 'Sil';
 
   @override
   String petDeletedSuccess(String petName) {
-    return '$petName başarıyla silindi';
+    return '$petName baÃ…Å¸arÃ„Â±yla silindi';
   }
 
   @override
@@ -700,35 +684,35 @@ class AppLocalizationsTr extends AppLocalizations {
   String get unknown => 'Bilinmiyor';
 
   @override
-  String get genderOther => 'Diğer';
+  String get genderOther => 'DiÃ„Å¸er';
 
   @override
-  String get editPetTitle => 'Evcil Hayvanı Düzenle';
+  String get editPetTitle => 'Evcil HayvanÃ„Â± DÃƒÂ¼zenle';
 
   @override
-  String get labelPhoto => 'Fotoğraf';
+  String get labelPhoto => 'FotoÃ„Å¸raf';
 
   @override
-  String get hintSelectBreed => 'Irk Seç';
+  String get hintSelectBreed => 'Irk SeÃƒÂ§';
 
   @override
   String get hintSearchBreed => 'Irk ara...';
 
   @override
-  String get noBreedsFound => 'Irk bulunamadı';
+  String get noBreedsFound => 'Irk bulunamadÃ„Â±';
 
   @override
-  String get msgFillAllFields => 'Lütfen tüm alanları doldurun';
+  String get msgFillAllFields => 'LÃƒÂ¼tfen tÃƒÂ¼m alanlarÃ„Â± doldurun';
 
   @override
-  String get msgUpdateFailed => 'Güncelleme başarısız';
+  String get msgUpdateFailed => 'GÃƒÂ¼ncelleme baÃ…Å¸arÃ„Â±sÃ„Â±z';
 
   @override
-  String get msgAddFailed => 'Ekleme başarısız';
+  String get msgAddFailed => 'Ekleme baÃ…Å¸arÃ„Â±sÃ„Â±z';
 
   @override
   String msgImagePickFailed(Object error) {
-    return 'Resim seçme başarısız: $error';
+    return 'Resim seÃƒÂ§me baÃ…Å¸arÃ„Â±sÃ„Â±z: $error';
   }
 
   @override
@@ -738,16 +722,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get labelGender => 'Cinsiyet';
 
   @override
-  String get labelDOB => 'Doğum Tarihi';
+  String get labelDOB => 'DoÃ„Å¸um Tarihi';
 
   @override
   String get genderMale => 'Erkek';
 
   @override
-  String get genderFemale => 'Dişi';
+  String get genderFemale => 'DiÃ…Å¸i';
 
   @override
-  String get labelPetName => 'Evcil Hayvan Adı';
+  String get labelPetName => 'Evcil Hayvan AdÃ„Â±';
 
   @override
   String get addPetTitle => 'Evcil Hayvan Ekle';
@@ -756,22 +740,22 @@ class AppLocalizationsTr extends AppLocalizations {
   String get labelRequired => '(Gerekli)';
 
   @override
-  String get hintEnterPetName => 'İsim girin';
+  String get hintEnterPetName => 'Ã„Â°sim girin';
 
   @override
-  String get hintSelectGender => 'Cinsiyet seç';
+  String get hintSelectGender => 'Cinsiyet seÃƒÂ§';
 
   @override
-  String get errorSelectGender => 'Lütfen cinsiyet seçin';
+  String get errorSelectGender => 'LÃƒÂ¼tfen cinsiyet seÃƒÂ§in';
 
   @override
-  String get errorFillRequired => 'Lütfen gerekli alanları doldurun';
+  String get errorFillRequired => 'LÃƒÂ¼tfen gerekli alanlarÃ„Â± doldurun';
 
   @override
   String get errorRequired => '(Gerekli)';
 
   @override
-  String get hintTapToScan => 'Taramak için dokunun';
+  String get hintTapToScan => 'Taramak iÃƒÂ§in dokunun';
 
   @override
   String get msgBreedDetected => 'Irk tespit edildi!';
@@ -1149,94 +1133,95 @@ class AppLocalizationsTr extends AppLocalizations {
   String get navCalendar => 'Takvim';
 
   @override
-  String get navMyPets => 'Evcil Hayvanlarım';
+  String get navMyPets => 'Evcil HayvanlarÃ„Â±m';
 
   @override
   String get navProfile => 'Profil';
 
   @override
-  String get aiIdentifyingYour => 'YZ tanımlıyor ';
+  String get aiIdentifyingYour => 'YZ tanÃ„Â±mlÃ„Â±yor ';
 
   @override
-  String get dogText => 'KÖPEK';
+  String get dogText => 'KÃƒâ€“PEK';
 
   @override
-  String get identifyingTimeText => 'Bu genellikle 1 dakikaya kadar sürer...';
+  String get identifyingTimeText =>
+      'Bu genellikle 1 dakikaya kadar sÃƒÂ¼rer...';
 
   @override
-  String get analyzingImage => 'Görüntü analiz ediliyor...';
+  String get analyzingImage => 'GÃƒÂ¶rÃƒÂ¼ntÃƒÂ¼ analiz ediliyor...';
 
   @override
-  String get errorOccurred => 'Hata Oluştu';
+  String get errorOccurred => 'Hata OluÃ…Å¸tu';
 
   @override
   String get goBack => 'Geri Git';
 
   @override
-  String get noDogDetected => 'Köpek Algılanmadı';
+  String get noDogDetected => 'KÃƒÂ¶pek AlgÃ„Â±lanmadÃ„Â±';
 
   @override
   String get clearerPhotoPrompt =>
-      'Lütfen daha net bir köpek fotoğrafı ile deneyin.';
+      'LÃƒÂ¼tfen daha net bir kÃƒÂ¶pek fotoÃ„Å¸rafÃ„Â± ile deneyin.';
 
   @override
-  String get cancel => 'İptal';
+  String get cancel => 'Ã„Â°ptal';
 
   @override
   String get tryAgain => 'Tekrar Dene';
 
   @override
   String lowConfidenceWarning(String confidence) {
-    return 'Düşük güven ($confidence%). Sonuçlar doğru olmayabilir.';
+    return 'DÃƒÂ¼Ã…Å¸ÃƒÂ¼k gÃƒÂ¼ven ($confidence%). SonuÃƒÂ§lar doÃ„Å¸ru olmayabilir.';
   }
 
   @override
   String get savingToRecentScans => 'Son taramalara kaydediliyor...';
 
   @override
-  String get dogResults => 'Köpek Sonuçları';
+  String get dogResults => 'KÃƒÂ¶pek SonuÃƒÂ§larÃ„Â±';
 
   @override
   String get size => 'Boyut';
 
   @override
-  String get shape => 'Şekil';
+  String get shape => 'Ã…Å¾ekil';
 
   @override
   String get color => 'Renk';
 
   @override
-  String get coat => 'Tüy';
+  String get coat => 'TÃƒÂ¼y';
 
   @override
-  String get headAndFace => 'Baş ve Yüz';
+  String get headAndFace => 'BaÃ…Å¸ ve YÃƒÂ¼z';
 
   @override
-  String get purpose => 'Amaç';
+  String get purpose => 'AmaÃƒÂ§';
 
   @override
-  String get body => 'Vücut';
+  String get body => 'VÃƒÂ¼cut';
 
   @override
-  String get weight => 'Ağırlık';
+  String get weight => 'AÃ„Å¸Ã„Â±rlÃ„Â±k';
 
   @override
-  String get temperamentAndCharacteristics => 'Mizaç ve Özellikler';
+  String get temperamentAndCharacteristics => 'MizaÃƒÂ§ ve Ãƒâ€“zellikler';
 
   @override
   String get energyLevel => 'Enerji Seviyesi';
 
   @override
-  String get trainability => 'Eğitilebilirlik';
+  String get trainability => 'EÃ„Å¸itilebilirlik';
 
   @override
-  String get socialBehavior => 'Sosyal Davranış';
+  String get socialBehavior => 'Sosyal DavranÃ„Â±Ã…Å¸';
 
   @override
   String get familyCompatibility => 'Aile Uyumu';
 
   @override
-  String get childFriendliness => 'Çocuk Dostu';
+  String get childFriendliness => 'Ãƒâ€¡ocuk Dostu';
 
   @override
   String get addPet => '+Evcil Hayvan Ekle';
@@ -1255,26 +1240,26 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String cannotSaveConfidence(String confidence) {
-    return 'Kaydedilemiyor: Güven $confidence% < 40%';
+    return 'Kaydedilemiyor: GÃƒÂ¼ven $confidence% < 40%';
   }
 
   @override
-  String get noPredictionResult => 'Tahmin sonucu mevcut değil';
+  String get noPredictionResult => 'Tahmin sonucu mevcut deÃ„Å¸il';
 
   @override
-  String get noImageDataToSave => 'Kaydedilecek görüntü verisi yok';
+  String get noImageDataToSave => 'Kaydedilecek gÃƒÂ¶rÃƒÂ¼ntÃƒÂ¼ verisi yok';
 
   @override
-  String get failedToSaveResults => 'Sonuçlar kaydedilemedi';
+  String get failedToSaveResults => 'SonuÃƒÂ§lar kaydedilemedi';
 
   @override
   String get moderate => 'Orta';
 
   @override
-  String get friendly => 'Arkadaş canlısı';
+  String get friendly => 'ArkadaÃ…Å¸ canlÃ„Â±sÃ„Â±';
 
   @override
-  String get good => 'İyi';
+  String get good => 'Ã„Â°yi';
 
   @override
   String get sizeSmall => 'Small';
@@ -1466,7 +1451,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get colorSable => 'Sable';
 
   @override
-  String get chooseProfilePhoto => 'Profil Fotoğrafı Seç';
+  String get chooseProfilePhoto => 'Profil FotoÃ„Å¸rafÃ„Â± SeÃƒÂ§';
 
   @override
   String get camera => 'Kamera';
@@ -1481,10 +1466,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get petOwner => 'Evcil Hayvan Sahibi';
 
   @override
-  String get lastName => 'Soyadı';
+  String get lastName => 'SoyadÃ„Â±';
 
   @override
-  String get ownerContacts => 'Sahip Kişileri';
+  String get ownerContacts => 'Sahip KiÃ…Å¸ileri';
 
   @override
   String get email => 'E-posta';
@@ -1493,34 +1478,35 @@ class AppLocalizationsTr extends AppLocalizations {
   String get mainPhone => 'Ana Telefon';
 
   @override
-  String get instantGpsAlerts => 'Etiket Taramasında Anında GPS Uyarıları';
+  String get instantGpsAlerts =>
+      'Etiket TaramasÃ„Â±nda AnÃ„Â±nda GPS UyarÃ„Â±larÃ„Â±';
 
   @override
   String get gpsAlertsDescription =>
-      'Geleneksel e-postaların zahmetinden kurtularak evcil hayvanınızın konumuyla ilgili anlık güncellemeler alın';
+      'Geleneksel e-postalarÃ„Â±n zahmetinden kurtularak evcil hayvanÃ„Â±nÃ„Â±zÃ„Â±n konumuyla ilgili anlÃ„Â±k gÃƒÂ¼ncellemeler alÃ„Â±n';
 
   @override
-  String get emergencyContacts => 'Acil Durum Kişileri';
+  String get emergencyContacts => 'Acil Durum KiÃ…Å¸ileri';
 
   @override
   String get vetContactsDescription =>
-      'Ana telefonun ulaşılamaz olması durumunda veteriner, ortak sahip ve bakıcının iletişim bilgileri';
+      'Ana telefonun ulaÃ…Å¸Ã„Â±lamaz olmasÃ„Â± durumunda veteriner, ortak sahip ve bakÃ„Â±cÃ„Â±nÃ„Â±n iletiÃ…Å¸im bilgileri';
 
   @override
   String get messenger => 'Messenger';
 
   @override
   String get messengerDescription =>
-      'Aramanın imkansız olduğu durumlarda sahibiyle iletişime geçmenin alternatif bir yolu';
+      'AramanÃ„Â±n imkansÃ„Â±z olduÃ„Å¸u durumlarda sahibiyle iletiÃ…Å¸ime geÃƒÂ§menin alternatif bir yolu';
 
   @override
-  String get petsResidence => 'Evcil Hayvanın İkametgahı';
+  String get petsResidence => 'Evcil HayvanÃ„Â±n Ã„Â°kametgahÃ„Â±';
 
   @override
-  String get country => 'Ülke';
+  String get country => 'ÃƒÅ“lke';
 
   @override
-  String get city => 'Şehir';
+  String get city => 'Ã…Å¾ehir';
 
   @override
   String get address => 'Adres';
@@ -1543,188 +1529,189 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get zeroResults => '0 Sonuç';
+  String get zeroResults => '0 SonuÃƒÂ§';
 
   @override
   String get noScansMessage =>
-      'İlk taramanızı yapar yapmaz,\nsonuçlarınız buraya kaydedilecektir.';
+      'Ã„Â°lk taramanÃ„Â±zÃ„Â± yapar yapmaz,\nsonuÃƒÂ§larÃ„Â±nÃ„Â±z buraya kaydedilecektir.';
 
   @override
-  String get scanLooksLike => 'Taradığınız köpek buna benziyor.';
+  String get scanLooksLike => 'TaradÃ„Â±Ã„Å¸Ã„Â±nÃ„Â±z kÃƒÂ¶pek buna benziyor.';
 
   @override
-  String get returnAction => 'Geri Dön';
+  String get returnAction => 'Geri DÃƒÂ¶n';
 
   @override
-  String get showAction => 'Göster';
+  String get showAction => 'GÃƒÂ¶ster';
 
   @override
   String daysAgo(int count) {
-    return '$count gün önce';
+    return '$count gÃƒÂ¼n ÃƒÂ¶nce';
   }
 
   @override
   String hoursAgo(int count) {
-    return '$count saat önce';
+    return '$count saat ÃƒÂ¶nce';
   }
 
   @override
   String minutesAgo(int count) {
-    return '$count dakika önce';
+    return '$count dakika ÃƒÂ¶nce';
   }
 
   @override
-  String get justNow => 'Az önce';
+  String get justNow => 'Az ÃƒÂ¶nce';
 
   @override
   String rescannedSuccess(String breedName, String confidence) {
-    return '✅ Yeniden tarandı: $breedName (%$confidence güven)';
+    return 'Ã¢Å“â€¦ Yeniden tarandÃ„Â±: $breedName (%$confidence gÃƒÂ¼ven)';
   }
 
   @override
   String errorRescanning(Object error) {
-    return 'Yeniden tarama hatası: $error';
+    return 'Yeniden tarama hatasÃ„Â±: $error';
   }
 
   @override
   String get changePasswordSubtitle =>
-      'Hesabınızı korumak ve erişilebilir kılmak için güçlü, güvenli bir şifre oluşturun.';
+      'HesabÃ„Â±nÃ„Â±zÃ„Â± korumak ve eriÃ…Å¸ilebilir kÃ„Â±lmak iÃƒÂ§in gÃƒÂ¼ÃƒÂ§lÃƒÂ¼, gÃƒÂ¼venli bir Ã…Å¸ifre oluÃ…Å¸turun.';
 
   @override
-  String get currentPassword => 'Mevcut Şifre';
+  String get currentPassword => 'Mevcut Ã…Å¾ifre';
 
   @override
-  String get newPassword => 'Yeni Şifre';
+  String get newPassword => 'Yeni Ã…Å¾ifre';
 
   @override
-  String get repeatPassword => 'Şifreyi Tekrarla';
+  String get repeatPassword => 'Ã…Å¾ifreyi Tekrarla';
 
   @override
-  String get faqQuestion1 => 'Bir evcil hayvanı nasıl kaydedebilirim?';
+  String get faqQuestion1 => 'Bir evcil hayvanÃ„Â± nasÃ„Â±l kaydedebilirim?';
 
   @override
   String get faqAnswer1 =>
-      '\'Evcil Hayvan Ekle\' bölümüne giderek, gerekli bilgileri (isim, cins, yaş vb.) doldurarak ve bir fotoğraf ekleyerek evcil hayvanınızı kaydedebilirsiniz. Kaydolduktan sonra benzersiz bir QR evcil hayvan etiketi kimliği alacaksınız.';
+      '\'Evcil Hayvan Ekle\' bÃƒÂ¶lÃƒÂ¼mÃƒÂ¼ne giderek, gerekli bilgileri (isim, cins, yaÃ…Å¸ vb.) doldurarak ve bir fotoÃ„Å¸raf ekleyerek evcil hayvanÃ„Â±nÃ„Â±zÃ„Â± kaydedebilirsiniz. Kaydolduktan sonra benzersiz bir QR evcil hayvan etiketi kimliÃ„Å¸i alacaksÃ„Â±nÃ„Â±z.';
 
   @override
-  String get faqQuestion2 => 'Evcil hayvanımı neden kaydetmeliyim?';
+  String get faqQuestion2 => 'Evcil hayvanÃ„Â±mÃ„Â± neden kaydetmeliyim?';
 
   @override
   String get faqAnswer2 =>
-      'Evcil hayvanınızı kaydetmek, kaybolması durumunda yardımcı olur. Evcil hayvanınızı bulan herkes QR etiketini tarayabilir ve evcil hayvanın konumuyla size anında ulaşabilir.';
+      'Evcil hayvanÃ„Â±nÃ„Â±zÃ„Â± kaydetmek, kaybolmasÃ„Â± durumunda yardÃ„Â±mcÃ„Â± olur. Evcil hayvanÃ„Â±nÃ„Â±zÃ„Â± bulan herkes QR etiketini tarayabilir ve evcil hayvanÃ„Â±n konumuyla size anÃ„Â±nda ulaÃ…Å¸abilir.';
 
   @override
   String get faqQuestion3 => 'QR evcil hayvan etiketi aktivasyonu?';
 
   @override
   String get faqAnswer3 =>
-      'Kaydolduktan sonra dijital veya fiziksel bir QR etiketi alacaksınız. Evcil hayvanınızın profiline bağlamak için herhangi bir telefon kamerasıyla tarayın. Bulanlar için uygulamaya gerek yok!';
+      'Kaydolduktan sonra dijital veya fiziksel bir QR etiketi alacaksÃ„Â±nÃ„Â±z. Evcil hayvanÃ„Â±nÃ„Â±zÃ„Â±n profiline baÃ„Å¸lamak iÃƒÂ§in herhangi bir telefon kamerasÃ„Â±yla tarayÃ„Â±n. Bulanlar iÃƒÂ§in uygulamaya gerek yok!';
 
   @override
-  String get faqQuestion4 => 'QR kodu taraması nasıl çalışır?';
+  String get faqQuestion4 =>
+      'QR kodu taramasÃ„Â± nasÃ„Â±l ÃƒÂ§alÃ„Â±Ã…Å¸Ã„Â±r?';
 
   @override
   String get faqAnswer4 =>
-      'Herkes telefonunun kamerasını kullanarak QR etiketini tarayabilir. Size hemen ulaşabilmeleri için iletişim bilgileriniz ve evcil hayvan ayrıntılarınızla bir web sayfası açar.';
+      'Herkes telefonunun kamerasÃ„Â±nÃ„Â± kullanarak QR etiketini tarayabilir. Size hemen ulaÃ…Å¸abilmeleri iÃƒÂ§in iletiÃ…Å¸im bilgileriniz ve evcil hayvan ayrÃ„Â±ntÃ„Â±larÃ„Â±nÃ„Â±zla bir web sayfasÃ„Â± aÃƒÂ§ar.';
 
   @override
   String get faqQuestion5 => 'Kimler evcil hayvan kaydedebilir?';
 
   @override
   String get faqAnswer5 =>
-      'Herhangi bir evcil hayvan sahibi köpeğini, kedisini veya diğer evcil hayvanını kaydedebilir.';
+      'Herhangi bir evcil hayvan sahibi kÃƒÂ¶peÃ„Å¸ini, kedisini veya diÃ„Å¸er evcil hayvanÃ„Â±nÃ„Â± kaydedebilir.';
 
   @override
-  String get faqQuestion6 => 'Verilerimi nasıl değiştirebilirim?';
+  String get faqQuestion6 => 'Verilerimi nasÃ„Â±l deÃ„Å¸iÃ…Å¸tirebilirim?';
 
   @override
   String get faqAnswer6 =>
-      'Profil\'e gidin → düzenlemek ve kaydetmek için herhangi bir alana (İsim, E-posta, Telefon vb.) dokunun.';
+      'Profil\'e gidin Ã¢â€ â€™ dÃƒÂ¼zenlemek ve kaydetmek iÃƒÂ§in herhangi bir alana (Ã„Â°sim, E-posta, Telefon vb.) dokunun.';
 
   @override
   String get faqQuestion7 =>
-      'Evcil hayvanımın verilerini nasıl değiştirebilirim?';
+      'Evcil hayvanÃ„Â±mÃ„Â±n verilerini nasÃ„Â±l deÃ„Å¸iÃ…Å¸tirebilirim?';
 
   @override
   String get faqAnswer7 =>
-      'Evcil hayvanınızın profiline gidin ve isim, cins, fotoğraflar vb. güncellemek için düzenle düğmesine dokunun.';
+      'Evcil hayvanÃ„Â±nÃ„Â±zÃ„Â±n profiline gidin ve isim, cins, fotoÃ„Å¸raflar vb. gÃƒÂ¼ncellemek iÃƒÂ§in dÃƒÂ¼zenle dÃƒÂ¼Ã„Å¸mesine dokunun.';
 
   @override
-  String get faqQuestion8 => 'Evcil hayvan kimlik numarası nedir?';
+  String get faqQuestion8 => 'Evcil hayvan kimlik numarasÃ„Â± nedir?';
 
   @override
   String get faqAnswer8 =>
-      'Hızlı tanımlama için evcil hayvanınızın QR etiketiyle bağlantılı benzersiz bir tanımlayıcıdır.';
+      'HÃ„Â±zlÃ„Â± tanÃ„Â±mlama iÃƒÂ§in evcil hayvanÃ„Â±nÃ„Â±zÃ„Â±n QR etiketiyle baÃ„Å¸lantÃ„Â±lÃ„Â± benzersiz bir tanÃ„Â±mlayÃ„Â±cÃ„Â±dÃ„Â±r.';
 
   @override
-  String get faqQuestion9 => 'Evcil hayvanım kayboldu, ne yapmalıyım?';
+  String get faqQuestion9 => 'Evcil hayvanÃ„Â±m kayboldu, ne yapmalÃ„Â±yÃ„Â±m?';
 
   @override
   String get faqAnswer9 =>
-      'Uygulamada evcil hayvanınızı \"Kayıp\" olarak işaretleyin. Bu, etiketi tarayan herkesi uyarır ve acil durum iletişim bilgilerinizi gösterir.';
+      'Uygulamada evcil hayvanÃ„Â±nÃ„Â±zÃ„Â± \"KayÃ„Â±p\" olarak iÃ…Å¸aretleyin. Bu, etiketi tarayan herkesi uyarÃ„Â±r ve acil durum iletiÃ…Å¸im bilgilerinizi gÃƒÂ¶sterir.';
 
   @override
   String get savedActivities => 'Kaydedilen Aktiviteler';
 
   @override
   String get deleteProfileWarning =>
-      'Uyarı! Profil ve tüm içeriği kalıcı olarak silinecek ve kurtarılamayacak. Aktif bir Premium Aboneliğiniz varsa, App Store Abonelik ayarlarınızdan devre dışı bırakın';
+      'Profilinizi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak kaldırılacaktır.';
 
   @override
   String get yes => 'Evet';
 
   @override
-  String get no => 'HAYIR';
+  String get no => 'Hayır';
 
   @override
   String get enterAddress => 'Adres Girin';
 
   @override
-  String get errorEnterAddress => 'Lütfen adresinizi girin';
+  String get errorEnterAddress => 'LÃƒÂ¼tfen adresinizi girin';
 
   @override
-  String get enterFirstName => 'Adı girin';
+  String get enterFirstName => 'AdÃ„Â± girin';
 
   @override
-  String get allowNotifications => 'Bildirimlere İzin Ver';
+  String get allowNotifications => 'Bildirimlere Ã„Â°zin Ver';
 
   @override
   String get enterEmail => 'E-posta Girin';
 
   @override
-  String get errorEnterValidEmail => 'Lütfen geçerli bir e-posta girin';
+  String get errorEnterValidEmail => 'LÃƒÂ¼tfen geÃƒÂ§erli bir e-posta girin';
 
   @override
   String get genderPreferNotToSay => 'Belirtmek istemiyorum';
 
   @override
-  String get enterLastName => 'Soyadını girin';
+  String get enterLastName => 'SoyadÃ„Â±nÃ„Â± girin';
 
   @override
   String get errorEnterValidPhone =>
-      'Lütfen geçerli bir telefon numarası girin';
+      'LÃƒÂ¼tfen geÃƒÂ§erli bir telefon numarasÃ„Â± girin';
 
   @override
-  String get drinkCalculator => 'İçecek Hesaplayıcı';
+  String get drinkCalculator => 'Ã„Â°ÃƒÂ§ecek HesaplayÃ„Â±cÃ„Â±';
 
   @override
-  String get drinkFrequencyChartTitle => 'Sıklık (günde kaç kez)';
+  String get drinkFrequencyChartTitle => 'SÃ„Â±klÃ„Â±k (gÃƒÂ¼nde kaÃƒÂ§ kez)';
 
   @override
   String get drinkCalcDescription =>
-      'Köpeğinizin ihtiyacı olan günlük su alımını\nağırlık ve aktivite seviyesine göre hesaplayın,\nher gün sağlıklı hidrasyon için';
+      'KÃƒÂ¶peÃ„Å¸inizin ihtiyacÃ„Â± olan gÃƒÂ¼nlÃƒÂ¼k su alÃ„Â±mÃ„Â±nÃ„Â±\naÃ„Å¸Ã„Â±rlÃ„Â±k ve aktivite seviyesine gÃƒÂ¶re hesaplayÃ„Â±n,\nher gÃƒÂ¼n saÃ„Å¸lÃ„Â±klÃ„Â± hidrasyon iÃƒÂ§in';
 
   @override
-  String get currentWeight => 'Mevcut Ağırlık';
+  String get currentWeight => 'Mevcut AÃ„Å¸Ã„Â±rlÃ„Â±k';
 
   @override
-  String get hintWeight => 'Ağırlık';
+  String get hintWeight => 'AÃ„Å¸Ã„Â±rlÃ„Â±k';
 
   @override
-  String get yourDogWillNeed => 'Köpeğinizin ihtiyacı olacak';
+  String get yourDogWillNeed => 'KÃƒÂ¶peÃ„Å¸inizin ihtiyacÃ„Â± olacak';
 
   @override
-  String get perDay => '/ gün';
+  String get perDay => '/ gÃƒÂ¼n';
 
   @override
   String get unitPounds => 'Pound';
@@ -1748,10 +1735,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get unitLiters => 'Litre';
 
   @override
-  String get unitUSFluidOunces => 'ABD Sıvı Ons';
+  String get unitUSFluidOunces => 'ABD SÃ„Â±vÃ„Â± Ons';
 
   @override
-  String get unitUKFluidOunces => 'UK Sıvı Ons';
+  String get unitUKFluidOunces => 'UK SÃ„Â±vÃ„Â± Ons';
 
   @override
   String get activityLevel => 'Aktivite seviyesi';
@@ -2000,22 +1987,23 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dateHint => 'MM/DD/YYYY';
 
   @override
-  String get okAction => 'OK';
+  String get okAction => 'Tamam';
 
   @override
   String get dateRangeError => 'Please enter a date between 2020-2030';
 
   @override
-  String get enjoyingApp => 'Enjoying the app?';
+  String get enjoyingApp => 'Dog Breed Scanner\'ı beğendiniz mi?';
 
   @override
-  String get tapToRate => 'Tap to rate:';
+  String get tapToRate =>
+      'Deneyiminizi değerlendirmek için bir yıldıza dokunun';
 
   @override
-  String get rateUsAction => 'Rate Us';
+  String get rateUsAction => 'Değerlendirmeyi Gönder';
 
   @override
-  String get selectStars => 'Select Stars';
+  String get selectStars => 'Önce Yıldız Seçin';
 
   @override
   String get sorryToHear => 'We\'re sorry to hear that';
@@ -2028,96 +2016,60 @@ class AppLocalizationsTr extends AppLocalizations {
   String get feedbackHint => 'Tell us what we can improve...';
 
   @override
-  String get submitFeedback => 'Submit Feedback';
+  String get submitFeedback => 'Geri Bildirim Gönder';
 
   @override
-  String get errorAppStore =>
-      'Could not open app store. Please try again later.';
+  String get errorAppStore => 'Uygulama mağazası açılamadı';
 
   @override
-  String get errorOpenStore => 'Error opening app store.';
+  String get errorOpenStore => 'Mağaza açılamadı';
 
   @override
   String errorShare(Object error) {
-    return 'Unable to open share options. Error: $error';
+    return 'Paylaşım başarısız: $error';
   }
 
   @override
-  String get linkCopied =>
-      'Link copied to clipboard! You can now paste and share it.';
+  String get linkCopied => 'Bağlantı panoya kopyalandı';
 
   @override
-  String get copyFailed => 'Failed to copy to clipboard.';
+  String get copyFailed => 'Bağlantı kopyalanamadı';
 
   @override
-  String get shareApp => 'Share App';
+  String get shareApp => 'Uygulamayı Paylaş';
 
   @override
-  String get copyLink => 'Copy Link';
+  String get copyLink => 'Bağlantıyı Kopyala';
 
   @override
-  String get shareWhatsApp => 'Share via WhatsApp';
+  String get shareWhatsApp => 'WhatsApp ile Paylaş';
 
   @override
-  String get shareEmail => 'Share via Email';
+  String get shareEmail => 'E-posta ile Paylaş';
 
   @override
-  String get shareSMS => 'Share via SMS';
+  String get shareSMS => 'SMS ile Paylaş';
 
   @override
-  String get chooseShare => 'Choose how you want to share:';
+  String get chooseShare => 'Nasıl paylaşmak istediğinizi seçin:';
 
   @override
-  String get copy => 'Copy';
+  String get copy => 'Kopyala';
 
   @override
   String get whatsapp => 'WhatsApp';
 
   @override
-  String get more => 'More';
+  String get more => 'Daha Fazla';
 
   @override
   String get feedbackThanks => 'Thank you for your feedback!';
 
   @override
-  String get themeTitle => 'Theme';
-
-  @override
-  String get darkTheme => 'Dark';
-
-  @override
-  String get lightTheme => 'Light';
-
-  @override
   String get myFavorites => 'My Favorites';
 
   @override
-  String get feedbackTitle => 'Feedback';
-
-  @override
-  String get rateUsTitle => 'Rate us';
-
-  @override
-  String get shareTitle => 'Share';
-
-  @override
   String get myPremiumService => 'My Premium Service';
-
-  @override
-  String get shareMessageBody =>
-      'Check out Dog Breed - an amazing app for dog lovers!';
-
-  @override
-  String get shareIOS => '📱 Discover Dog Breed on the App Store!';
-
-  @override
-  String get shareAndroid => '📱 Get Dog Breed on Google Play!';
-
-  @override
-  String get shareDefault => '📱 Check out Dog Breed!';
-
-  @override
-  String get shareSubject => 'Dog Breed App';
 
   @override
   String get dashboardHome => 'Dashboard Home';
@@ -2212,23 +2164,23 @@ class AppLocalizationsTr extends AppLocalizations {
   String get height => 'Height';
 
   @override
-  String get deleteAll => 'Tümünü Sil';
+  String get deleteAll => 'TÃƒÂ¼mÃƒÂ¼nÃƒÂ¼ Sil';
 
   @override
   String get deleteAllPetsConfirmation =>
-      'Tüm evcil hayvanları silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.';
+      'TÃƒÂ¼m evcil hayvanlarÃ„Â± silmek istediÃ„Å¸inizden emin misiniz? Bu iÃ…Å¸lem geri alÃ„Â±namaz.';
 
   @override
-  String get dialogUploadPhoto => 'Upload Photo';
+  String get dialogUploadPhoto => 'FotoÄŸraf YÃ¼kle';
 
   @override
-  String get dialogUploadVideo => 'Upload Video';
+  String get dialogUploadVideo => 'Video YÃ¼kle';
 
   @override
-  String get pickerOpenCamera => 'Open Camera';
+  String get pickerOpenCamera => 'KamerayÄ± AÃ§';
 
   @override
-  String get pickerUploadGallery => 'Upload from Gallery';
+  String get pickerUploadGallery => 'Galeriden YÃ¼kle';
 
   @override
   String errorPleaseEnterAmountFor(String activityName) {
@@ -2239,4 +2191,367 @@ class AppLocalizationsTr extends AppLocalizations {
   String errorNameOrTypeRequiredFor(String activityName) {
     return 'Name or Type required for $activityName';
   }
+
+  @override
+  String get labelBirthday => 'Birthday';
+
+  @override
+  String get errorFillPetName => 'Please Fill Pet Name';
+
+  @override
+  String get supportedBreeds => 'Desteklenen Irklar';
+
+  @override
+  String favoriteCount(int count) {
+    return '$count Favori';
+  }
+
+  @override
+  String get breedNameBulldog => 'Bulldog';
+
+  @override
+  String get breedDescBulldog =>
+      'YaÃ…Å¸am beklentisi: 8-10 yÃ„Â±l.\nSÃ„Â±cak havalarda ÃƒÂ¶zel bakÃ„Â±m gerektiren\brakisefalik Ã„Â±rk.';
+
+  @override
+  String get breedNameBeagle => 'Beagle';
+
+  @override
+  String get breedDescBeagle =>
+      'YaÃ…Å¸am beklentisi: 12-15 yÃ„Â±l.\nGÃƒÂ¼ÃƒÂ§lÃƒÂ¼ avlanma iÃƒÂ§gÃƒÂ¼dÃƒÂ¼lerine sahip\ndost canlÃ„Â±sÃ„Â±, meraklÃ„Â± kÃƒÂ¶pekler.';
+
+  @override
+  String get breedNameYorkshireTerrier => 'Yorkshire Terrier';
+
+  @override
+  String get breedDescYorkshireTerrier =>
+      'YaÃ…Å¸am beklentisi: 13-16 yÃ„Â±l.\nDÃƒÂ¼zenli bakÃ„Â±m gerektiren\nkÃƒÂ¼ÃƒÂ§ÃƒÂ¼k ama enerjik sÃƒÂ¼s kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameCavalierKingCharlesSpaniel =>
+      'Cavalier King Charles Spaniel';
+
+  @override
+  String get breedDescCavalierKingCharlesSpaniel =>
+      'YaÃ…Å¸am beklentisi: 9-14 yÃ„Â±l.\nKalp rahatsÃ„Â±zlÃ„Â±klarÃ„Â±na yatkÃ„Â±n\nsevecen, nazik sÃƒÂ¼s kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameEnglishSpringerSpaniel => 'Ã„Â°ngiliz Springer Spaniel';
+
+  @override
+  String get breedDescEnglishSpringerSpaniel =>
+      'YaÃ…Å¸am beklentisi: 12-14 yÃ„Â±l.\nBol egzersize ihtiyaÃƒÂ§ duyan\nenerjik av kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameBullmastiff => 'Bullmastiff';
+
+  @override
+  String get breedDescBullmastiff =>
+      'YaÃ…Å¸am beklentisi: 8-10 yÃ„Â±l.\nErken sosyalleÃ…Å¸me gerektiren\nbÃƒÂ¼yÃƒÂ¼k, gÃƒÂ¼ÃƒÂ§lÃƒÂ¼ bekÃƒÂ§i Ã„Â±rkÃ„Â±.';
+
+  @override
+  String get breedNameEnglishCockerSpaniel => 'Ã„Â°ngiliz Cocker Spaniel';
+
+  @override
+  String get breedDescEnglishCockerSpaniel =>
+      'YaÃ…Å¸am beklentisi: 12-14 yÃ„Â±l.\nDÃƒÂ¼zenli kulak temizliÃ„Å¸i gerektiren\nneÃ…Å¸eli, aktif spor kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameAiredaleTerrier => 'Airedale Terrier';
+
+  @override
+  String get breedDescAiredaleTerrier =>
+      'YaÃ…Å¸am beklentisi: 10-13 yÃ„Â±l.\nEn bÃƒÂ¼yÃƒÂ¼k teriyer Ã„Â±rkÃ„Â± -\nzeki, enerjik, ÃƒÂ§ok yÃƒÂ¶nlÃƒÂ¼.';
+
+  @override
+  String get breedNameTerrier => 'Terrier';
+
+  @override
+  String get breedDescTerrier =>
+      'YaÃ…Å¸am beklentisi: DeÃ„Å¸iÃ…Å¸ir.\nHaÃ…Å¸ere avlamak iÃƒÂ§in yetiÃ…Å¸tirilen\nenerjik, cesur kÃƒÂ¶pekler.';
+
+  @override
+  String get breedNameWhippet => 'Whippet';
+
+  @override
+  String get breedDescWhippet =>
+      'YaÃ…Å¸am beklentisi: 12-15 yÃ„Â±l.\nDÃƒÂ¼zenli koÃ…Å¸uya ihtiyaÃƒÂ§ duyan\nnazik, sevecen tazÃ„Â±.';
+
+  @override
+  String get breedNameBullTerrier => 'Bull Terrier';
+
+  @override
+  String get breedDescBullTerrier =>
+      'YaÃ…Å¸am beklentisi: 10-14 yÃ„Â±l.\nBelirgin yumurta Ã…Å¸eklinde kafasÃ„Â± olan\nkaslÃ„Â± kÃƒÂ¶pekler.';
+
+  @override
+  String get breedNameGoldenRetriever => 'Golden Retriever';
+
+  @override
+  String get breedDescGoldenRetriever =>
+      'YaÃ…Å¸am beklentisi: 10-12 yÃ„Â±l.\nKalÃƒÂ§a displazisine yatkÃ„Â±n\ndost canlÃ„Â±sÃ„Â±, zeki aile kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameOldEnglishSheepdog =>
+      'Eski Ã„Â°ngiliz Ãƒâ€¡oban KÃƒÂ¶peÃ„Å¸i';
+
+  @override
+  String get breedDescOldEnglishSheepdog =>
+      'YaÃ…Å¸am beklentisi: 10-12 yÃ„Â±l.\nKapsamlÃ„Â± bakÃ„Â±m gerektiren\nbÃƒÂ¼yÃƒÂ¼k, tÃƒÂ¼ylÃƒÂ¼ ÃƒÂ§oban kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameBorderCollie => 'Border Collie';
+
+  @override
+  String get breedDescBorderCollie =>
+      'YaÃ…Å¸am beklentisi: 12-15 yÃ„Â±l.\nKapsamlÃ„Â± zihinsel egzersize ihtiyaÃƒÂ§ duyan\nson derece zeki kÃƒÂ¶pekler.';
+
+  @override
+  String get breedNameGreyhound => 'Greyhound';
+
+  @override
+  String get breedDescGreyhound =>
+      'YaÃ…Å¸am beklentisi: 10-14 yÃ„Â±l.\nEn hÃ„Â±zlÃ„Â± kÃƒÂ¶pek Ã„Â±rkÃ„Â± - iÃƒÂ§ mekanlarda\ndÃƒÂ¼Ã…Å¸ÃƒÂ¼k enerjili, nazik ve sakin.';
+
+  @override
+  String get breedNameJackRussellTerrier => 'Jack Russell Terrier';
+
+  @override
+  String get breedDescJackRussellTerrier =>
+      'YaÃ…Å¸am beklentisi: 13-16 yÃ„Â±l.\nYÃƒÂ¼ksek enerji seviyelerine sahip\nkÃƒÂ¼ÃƒÂ§ÃƒÂ¼k ama korkusuz teriyerler.';
+
+  @override
+  String get breedNameBloodhound => 'Bloodhound';
+
+  @override
+  String get breedDescBloodhound =>
+      'YaÃ…Å¸am beklentisi: 10-12 yÃ„Â±l.\nEÃ„Å¸itimde sabÃ„Â±r gerektiren\nolaÃ„Å¸anÃƒÂ¼stÃƒÂ¼ koku takip kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameEnglishPointer => 'Ã„Â°ngiliz Pointer';
+
+  @override
+  String get breedDescEnglishPointer =>
+      'YaÃ…Å¸am beklentisi: 12-15 yÃ„Â±l.\nYÃƒÂ¼ksek enerjili ve gÃƒÂ¼ÃƒÂ§lÃƒÂ¼ ferma iÃƒÂ§gÃƒÂ¼dÃƒÂ¼sÃƒÂ¼ne sahip\nzarif kuÃ…Å¸ kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameStaffordshireBullTerrier => 'Staffordshire Bull Terrier';
+
+  @override
+  String get breedDescStaffordshireBullTerrier =>
+      'YaÃ…Å¸am beklentisi: 12-14 yÃ„Â±l.\nUygun sosyalleÃ…Å¸meye ihtiyaÃƒÂ§ duyan\nkaslÃ„Â±, sevecen kÃƒÂ¶pekler.';
+
+  @override
+  String get breedNameEnglishFoxhound => 'Ã„Â°ngiliz Foxhound';
+
+  @override
+  String get breedDescEnglishFoxhound =>
+      'YaÃ…Å¸am beklentisi: 10-13 yÃ„Â±l.\nDayanÃ„Â±klÃ„Â±lÃ„Â±k iÃƒÂ§in yetiÃ…Å¸tirilen,\nbol egzersize ihtiyaÃƒÂ§ duyan sÃƒÂ¼rÃƒÂ¼ av kÃƒÂ¶pekleri.';
+
+  @override
+  String get breedNameWireFoxTerrier => 'Tel TÃƒÂ¼ylÃƒÂ¼ Fox Terrier';
+
+  @override
+  String get breedDescWireFoxTerrier =>
+      'YaÃ…Å¸am beklentisi: 12-15 yÃ„Â±l.\nBelirgin tel tÃƒÂ¼ylÃƒÂ¼ kÃƒÂ¼rke sahip\ntetik, hÃ„Â±zlÃ„Â± kÃƒÂ¶pekler.';
+
+  @override
+  String get breedNameManchesterTerrier => 'Manchester Terrier';
+
+  @override
+  String get breedDescManchesterTerrier =>
+      'YaÃ…Å¸am beklentisi: 14-16 yÃ„Â±l.\nFare avlama yetenekleriyle bilinen\nzarif, ince teriyerler.';
+
+  @override
+  String get breedNameBedlingtonTerrier => 'Bedlington Terrier';
+
+  @override
+  String get breedDescBedlingtonTerrier =>
+      'YaÃ…Å¸am beklentisi: 12-14 yÃ„Â±l.\nBelirgin kuzu benzeri gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼m,\nenerjik ama nazik.';
+
+  @override
+  String get breedNameBostonTerrier => 'Boston Terrier';
+
+  @override
+  String get breedDescBostonTerrier =>
+      'YaÃ…Å¸am beklentisi: 11-13 yÃ„Â±l.\nSmokin benzeri iÃ…Å¸aretlere sahip\ndost canlÃ„Â±sÃ„Â± \"Amerikan Beyefendisi\".';
+
+  @override
+  String get breedNameEnglishSetter => 'Ã„Â°ngiliz Setter';
+
+  @override
+  String get breedDescEnglishSetter =>
+      'YaÃ…Å¸am beklentisi: 10-12 yÃ„Â±l.\nBenekli kÃƒÂ¼rke sahip zarif kuÃ…Å¸ kÃƒÂ¶pekleri,\nnazik arkadaÃ…Å¸lar.';
+
+  @override
+  String get breedNameBorderTerrier => 'Border Terrier';
+
+  @override
+  String get breedDescBorderTerrier =>
+      'Ortalama ÃƒÂ¶mÃƒÂ¼r: 12-15 yÃ„Â±l.\nTilki avÃ„Â± iÃƒÂ§in yetiÃ…Å¸tirilmiÃ…Å¸\ndayanÃ„Â±klÃ„Â± kÃƒÂ¼ÃƒÂ§ÃƒÂ¼k teriyerler.';
+
+  @override
+  String get favoritesTitle => 'Favoriler';
+
+  @override
+  String get scanTabTitle => 'Tara';
+
+  @override
+  String get noFavoriteBreedsMessage => 'HenÃƒÂ¼z favori Ã„Â±rk yok';
+
+  @override
+  String dialogShareTitle(String appName) {
+    return '$appName\'ı Paylaş';
+  }
+
+  @override
+  String get shareTags => '#DogBreed #Dogs #Pets';
+
+  @override
+  String errorLaunchUrl(String url) {
+    return '$url açılamadı';
+  }
+
+  @override
+  String get feedbackTitle => 'Geri Bildirim';
+
+  @override
+  String get feedbackDescribeIssue =>
+      'Deneyiminizi geliştirmemize yardımcı olun\nYaşadığınız sorunu açıklayın';
+
+  @override
+  String get feedbackTellUsMore => 'Daha fazla bilgi verin (isteğe bağlı)';
+
+  @override
+  String get submitButton => 'Gönder';
+
+  @override
+  String get feedbackIssueLagging => 'Gecikme';
+
+  @override
+  String get feedbackIssueCrashes => 'Çökmeler';
+
+  @override
+  String get feedbackIssueAds => 'Rahatsız edici reklamlar';
+
+  @override
+  String get feedbackIssueOther => 'Diğer';
+
+  @override
+  String get feedbackIssueNotWorking => 'Çalışmıyor';
+
+  @override
+  String get feedbackChooseEmailApp =>
+      'Geri bildirim göndermek için e-posta uygulamanızı seçin:';
+
+  @override
+  String get feedbackSendEmail => 'E-posta Gönder';
+
+  @override
+  String get feedbackEmailSubject => 'DogBreed: Geri Bildirim';
+
+  @override
+  String get feedbackIssueType => 'Sorun Türü:';
+
+  @override
+  String get feedbackDetails => 'Detaylar:';
+
+  @override
+  String get feedbackGeneral => 'Uygulama hakkında genel geri bildirim';
+
+  @override
+  String get feedbackManualEmailTitle => 'E-posta Uygulaması Bulunamadı';
+
+  @override
+  String get feedbackManualEmailBody =>
+      'Lütfen aşağıdaki bilgileri kopyalayıp şu adrese gönderin:';
+
+  @override
+  String get feedbackSubject => 'Konu:';
+
+  @override
+  String get feedbackMessage => 'Mesaj:';
+
+  @override
+  String get feedbackManualEmailSuccess =>
+      'Geri bildirim başarıyla gönderildi!';
+
+  @override
+  String get feedbackSelectIssue => 'Lütfen bir sorun türü seçin';
+
+  @override
+  String get loading => 'Yükleniyor...';
+
+  @override
+  String get editProfile => 'Profili Düzenle';
+
+  @override
+  String get profileRecentScan => 'Son Taramalar';
+
+  @override
+  String get profileHistory => 'Tarama Geçmişi';
+
+  @override
+  String get notifications => 'Bildirimler';
+
+  @override
+  String get appLanguageTitle => 'Uygulama Dili';
+
+  @override
+  String get premiumSubscription => 'Premium Abonelik';
+
+  @override
+  String get profileMyFavorites => 'Favorilerim';
+
+  @override
+  String get rateUsTitle => 'Bizi Değerlendirin';
+
+  @override
+  String get shareTitle => 'Uygulamayı Paylaş';
+
+  @override
+  String get faq => 'SSS';
+
+  @override
+  String get termsOfUse => 'Kullanım Şartları';
+
+  @override
+  String get privacyPolicy => 'Gizlilik Politikası';
+
+  @override
+  String get deleteOwnerProfile => 'Profili Sil';
+
+  @override
+  String get logout => 'Çıkış Yap';
+
+  @override
+  String get themeTitle => 'Tema';
+
+  @override
+  String get darkTheme => 'Koyu';
+
+  @override
+  String get lightTheme => 'Açık';
+
+  @override
+  String get aiAppName => 'Köpek Irkı Tarayıcı';
+
+  @override
+  String get shareMessageBody =>
+      'Dog Breed Scanner\'ı inceleyin - AI destekli köpek ırkı tanımlama uygulaması! 🐕';
+
+  @override
+  String get shareIOS => 'App Store\'da Dog Breed Scanner\'a bakın!';
+
+  @override
+  String get shareAndroid => 'Google Play\'de Dog Breed Scanner\'a bakın!';
+
+  @override
+  String get shareDefault => 'Dog Breed Scanner\'a bakın!';
+
+  @override
+  String get shareDownloadNow => 'Şimdi indirin: ';
+
+  @override
+  String get shareSubject => 'Dog Breed Scanner Uygulaması';
 }

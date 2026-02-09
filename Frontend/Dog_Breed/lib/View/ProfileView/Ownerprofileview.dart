@@ -656,21 +656,31 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: isEmpty ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.onSurface,
+                  Flexible(
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: isEmpty ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.onSurface,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
-                  Text(
-                    isEmpty ? AppLocalizations.of(context)!.labelAdd : value,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: isEmpty
-                          ? AppColors.vibrantPurple
-                          : Theme.of(context).colorScheme.onSurfaceVariant,
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: Text(
+                      isEmpty ? AppLocalizations.of(context)!.labelAdd : value,
+                      textAlign: TextAlign.end,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        color: isEmpty
+                            ? AppColors.vibrantPurple
+                            : Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ),
                 ],

@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "pl",
     "appTitle":  "Rasa psa",
     "settingsTitle":  "Ustawienia",
@@ -878,5 +878,133 @@
                                                                                   "type":  "String"
                                                                               }
                                                          }
-                                    }
+                                    },
+    "labelBirthday":  "Birthday",
+    "errorFillPetName":  "Please Fill Pet Name",
+    "supportedBreeds":  "Supported Breeds",
+    "favoriteCount":  "{count} Favorite",
+    "@favoriteCount":  {
+                           "placeholders":  {
+                                                "count":  {
+                                                              "type":  "int"
+                                                          }
+                                            }
+                       },
+    "breedNameBulldog":  "Bulldog",
+    "breedDescBulldog":  "Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.",
+    "breedNameBeagle":  "Beagle",
+    "breedDescBeagle":  "Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.",
+    "breedNameYorkshireTerrier":  "Yorkshire Terrier",
+    "breedDescYorkshireTerrier":  "Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.",
+    "breedNameCavalierKingCharlesSpaniel":  "Cavalier King Charles Spaniel",
+    "breedDescCavalierKingCharlesSpaniel":  "Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.",
+    "breedNameEnglishSpringerSpaniel":  "English Springer Spaniel",
+    "breedDescEnglishSpringerSpaniel":  "Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.",
+    "breedNameBullmastiff":  "Bullmastiff",
+    "breedDescBullmastiff":  "Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.",
+    "breedNameEnglishCockerSpaniel":  "English Cocker Spaniel",
+    "breedDescEnglishCockerSpaniel":  "Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.",
+    "breedNameAiredaleTerrier":  "Airedale Terrier",
+    "breedDescAiredaleTerrier":  "Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.",
+    "breedNameTerrier":  "Terrier",
+    "breedDescTerrier":  "Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.",
+    "breedNameWhippet":  "Whippet",
+    "breedDescWhippet":  "Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.",
+    "breedNameBullTerrier":  "Bull Terrier",
+    "breedDescBullTerrier":  "Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.",
+    "breedNameGoldenRetriever":  "Golden Retriever",
+    "breedDescGoldenRetriever":  "Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.",
+    "breedNameOldEnglishSheepdog":  "Old English Sheepdog",
+    "breedDescOldEnglishSheepdog":  "Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.",
+    "breedNameBorderCollie":  "Border Collie",
+    "breedDescBorderCollie":  "Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.",
+    "breedNameGreyhound":  "Greyhound",
+    "breedDescGreyhound":  "Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.",
+    "breedNameJackRussellTerrier":  "Jack Russell Terrier",
+    "breedDescJackRussellTerrier":  "Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.",
+    "breedNameBloodhound":  "Bloodhound",
+    "breedDescBloodhound":  "Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.",
+    "breedNameEnglishPointer":  "English Pointer",
+    "breedDescEnglishPointer":  "Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.",
+    "breedNameStaffordshireBullTerrier":  "Staffordshire Bull Terrier",
+    "breedDescStaffordshireBullTerrier":  "Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.",
+    "breedNameEnglishFoxhound":  "English Foxhound",
+    "breedDescEnglishFoxhound":  "Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.",
+    "breedNameWireFoxTerrier":  "Wire Fox Terrier",
+    "breedDescWireFoxTerrier":  "Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.",
+    "breedNameManchesterTerrier":  "Manchester Terrier",
+    "breedDescManchesterTerrier":  "Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.",
+    "breedNameBedlingtonTerrier":  "Bedlington Terrier",
+    "breedDescBedlingtonTerrier":  "Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.",
+    "breedNameBostonTerrier":  "Boston Terrier",
+    "breedDescBostonTerrier":  "Life expectancy: 11-13 years.\nFriendly \"American Gentleman\"\nwith tuxedo-like markings.",
+    "breedNameEnglishSetter":  "English Setter",
+    "breedDescEnglishSetter":  "Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.",
+    "breedNameBorderTerrier":  "Border Terrier",
+    "breedDescBorderTerrier":  "Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.",
+    "@activityCount":  {
+                           "placeholders":  {
+                                                "count":  {
+                                                              "type":  "int"
+                                                          }
+                                            }
+                       },
+    "@documentUploadFailed":  {
+                                  "placeholders":  {
+                                                       "error":  {
+                                                                     "type":  "Object"
+                                                                 }
+                                                   }
+                              },
+    "dialogUploadPhoto":  "Upload Photo",
+    "dialogUploadVideo":  "Upload Video",
+    "pickerOpenCamera":  "Open Camera",
+    "pickerUploadGallery":  "Upload from Gallery",
+    "favoritesTitle":  "Favorites",
+    "scanTabTitle":  "Scan",
+    "noFavoriteBreedsMessage":  "No favourite breeds yet",
+    "feedbackTitle": "Feedback",
+    "feedbackIssueLagging":  "Lagging Issue",
+    "feedbackIssueCrashes":  "App Crashes",
+    "feedbackIssueAds":  "Too Many Ads",
+    "feedbackIssueOther":  "Other Problem",
+    "feedbackIssueNotWorking":  "Doesn\u0027t Work",
+    "submitFeedback": "Submit Feedback",
+    "feedbackChooseEmailApp":  "Please choose an email app to send your feedback to:",
+    "feedbackSendEmail":  "Send Email",
+    "feedbackEmailSubject":  "DogBreed: Feedback",
+    "feedbackIssueType":  "Issue Type:",
+    "feedbackDetails":  "Feedback Details:",
+    "feedbackGeneral":  "General Feedback",
+    "feedbackManualEmailTitle":  "Send Email Manually",
+    "feedbackManualEmailBody":  "Please send an email to:",
+    "feedbackSubject":  "Subject:",
+    "feedbackMessage":  "Message:",
+    "feedbackManualEmailSuccess":  "Thank you! Please send the email manually.",
+    "feedbackSelectIssue":  "Please select an issue",
+    "feedbackDescribeIssue":  "Could You Describe The Issue\nYou\u0027re Experiencing",
+    "feedbackTellUsMore":  "Please Tell Us More Details...",
+    "submitButton":  "Submit",
+    "profileRecentScan":  "Recent Scan",
+    "profileHistory":  "History",
+    "profileMyFavorites":  "My Favourites",
+    "shareDownloadNow":  "Download now: ",
+    "aiAppName":  "AI Dog Breed",
+    "dialogShareTitle":  "Share {appName}",
+    "@dialogShareTitle":  {
+                              "placeholders":  {
+                                                   "appName":  {
+                                                                   "type":  "String"
+                                                               }
+                                               }
+                          },
+    "shareTags":  "#DogBreed #Dogs #Pets",
+    "errorLaunchUrl":  "Could not launch {url}",
+    "@errorLaunchUrl":  {
+                            "placeholders":  {
+                                                 "url":  {
+                                                             "type":  "String"
+                                                         }
+                                             }
+                        }
 }

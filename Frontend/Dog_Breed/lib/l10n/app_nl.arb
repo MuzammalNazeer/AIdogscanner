@@ -38,10 +38,10 @@
     "subscriptionDisclaimer":  "Door door te gaan, gaat u akkoord met onze voorwaarden en privacybeleid. Het abonnement wird na afloop van de proefperiode gefactureerd en automatisch verlengd. Annuleer op elk moment voor het einde om kosten te voorkomen.",
     "welcomeBack":  "Welkom terug, ",
     "searchForDog":  "Zoek naar hond",
-    "tryPremiumFeatures":  "Probeer Premium Functies 🌵",
+    "tryPremiumFeatures":  "Probeer Premium Functies ðŸŒµ",
     "premiumOfferDescription":  "Claim nu uw aanbieding en krijg onbeperkte herkenning, gezondheidscontrole en meer",
     "getIt":  "KRIJG HET",
-    "hygiene":  "Hygiëne",
+    "hygiene":  "HygiÃ«ne",
     "cleaning":  "Schoonmaak",
     "medical":  "Medisch",
     "booking":  "Boeking",
@@ -55,7 +55,7 @@
     "foodManagementDescription":  "Houd maaltijden bij en beheer de \n dagelijkse voeding van uw huisdier",
     "checkSchedule":  "Bekijk schema",
     "unknownBreed":  "Onbekend ras",
-    "savedScanMessage":  "✅ Opgeslagen: {breedName} ({confidence}% zekerheid)",
+    "savedScanMessage":  "âœ… Opgeslagen: {breedName} ({confidence}% zekerheid)",
     "errorMessage":  "Fout: {error}",
     "skip":  "Overslaan",
     "next":  "Volgende",
@@ -67,7 +67,7 @@
     "onboardingTitle3":  "Behoud beeldkwaliteit",
     "onboardingDesc3":  "Leg indien mogelijk het hele lichaam vast. Het hoofd moet \nzichtbaar zijn.",
     "onboardingTitle4":  "Zorg dat uw hond \n gezond en actief blijft.",
-    "onboardingDesc4":  "Beheer elk detail van uw hond—gezondheid, foto\u0027s,\n activiteiten en meer op één eenvoudige plek.",
+    "onboardingDesc4":  "Beheer elk detail van uw hondâ€”gezondheid, foto\u0027s,\n activiteiten en meer op Ã©Ã©n eenvoudige plek.",
     "calendarTabActivities":  "Activiteiten",
     "calendarTabReminders":  "Herinneringen",
     "calendarTabProgress":  "Vooruitgang",
@@ -125,7 +125,7 @@
     "calendarMostActiveTime":  "Meest actieve tijd",
     "dialogDeleteActivityContent":  "Weet u zeker dat u \"{activityName}\" wilt verwijderen?",
     "dialogActionsRequired":  "Acties vereist",
-    "dialogAddPetMessage":  "Voeg minstens één huisdier toe om activiteiten en herinneringen toe te voegen.",
+    "dialogAddPetMessage":  "Voeg minstens Ã©Ã©n huisdier toe om activiteiten en herinneringen toe te voegen.",
     "dialogGotIt":  "Begrepen",
     "dayMon":  "Ma",
     "dayTue":  "Di",
@@ -176,8 +176,8 @@
     "unitKg":  "kg",
     "unitInches":  "inch",
     "unitCm":  "cm",
-    "unitF":  "°F",
-    "unitC":  "°C",
+    "unitF":  "Â°F",
+    "unitC":  "Â°C",
     "unitKm":  "km",
     "unitMi":  "mi",
     "actionAdd":  "Dranknaam of type toevoegen",
@@ -185,7 +185,7 @@
     "actionAddVideo":  "+ Video toevoegen",
     "hintAddNote":  "Notitie toevoegen",
     "startedAt":  "Begonnen om",
-    "endedAt":  "Geëindigd om",
+    "endedAt":  "GeÃ«indigd om",
     "noActivitySelected":  "Geen activiteit geselecteerd",
     "actionAddTreat":  "+ Traktaat toevoegen",
     "actionAddGrooming":  "+ Verzorgingstype toevoegen",
@@ -455,6 +455,36 @@
     "noPredictionResult":  "Geen voorspellingsresultaat beschikbaar",
     "noImageDataToSave":  "Geen afbeeldingsgegevens om op te slaan",
     "failedToSaveResults":  "Opslaan van resultaten mislukt",
+    "recentScansTitle":  "Recente Scans",
+    "scansCount":  "{count} Scans",
+    "@scansCount":  {
+                        "placeholders":  {
+                                             "count":  {
+                                                           "type":  "int"
+                                                       }
+                                         }
+                    },
+    "rescannedSuccess":  "âœ… Opnieuw gescand: {breedName} ({confidence}% zekerheid)",
+    "@rescannedSuccess":  {
+                              "placeholders":  {
+                                                   "breedName":  {
+                                                                     "type":  "String"
+                                                                 },
+                                                   "confidence":  {
+                                                                      "type":  "String"
+                                                                  }
+                                               }
+                          },
+    "errorRescanning":  "Fout bij opnieuw scannen: {error}",
+    "@errorRescanning":  {
+                             "placeholders":  {
+                                                  "error":  {
+                                                                "type":  "Object"
+                                                            }
+                                              }
+                         },
+    "zeroResults":  "0 Resultaten",
+    "noScansMessage":  "Zodra u uw eerste scan heeft gemaakt,\nworden uw resultaten hier geregistreerd.",
     "moderate":  "Matig",
     "friendly":  "Vriendelijk",
     "good":  "Goed",
@@ -543,17 +573,6 @@
     "addAddress":  "Adres toevoegen",
     "labelAdd":  "Toevoegen",
     "getPremium":  "KRIJG PREMIUM",
-    "recentScansTitle":  "Recente Scans",
-    "scansCount":  "{count} Scans",
-    "@scansCount":  {
-                        "placeholders":  {
-                                             "count":  {
-                                                           "type":  "int"
-                                                       }
-                                         }
-                    },
-    "zeroResults":  "0 Resultaten",
-    "noScansMessage":  "Zodra u uw eerste scan heeft gemaakt,\nworden uw resultaten hier geregistreerd.",
     "scanLooksLike":  "Uw gescande hond ziet er zo uit.",
     "returnAction":  "Terug",
     "showAction":  "Tonen",
@@ -582,25 +601,6 @@
                                          }
                     },
     "justNow":  "Zojuist",
-    "rescannedSuccess":  "✅ Opnieuw gescand: {breedName} ({confidence}% zekerheid)",
-    "@rescannedSuccess":  {
-                              "placeholders":  {
-                                                   "breedName":  {
-                                                                     "type":  "String"
-                                                                 },
-                                                   "confidence":  {
-                                                                      "type":  "String"
-                                                                  }
-                                               }
-                          },
-    "errorRescanning":  "Fout bij opnieuw scannen: {error}",
-    "@errorRescanning":  {
-                             "placeholders":  {
-                                                  "error":  {
-                                                                "type":  "Object"
-                                                            }
-                                              }
-                         },
     "changePasswordSubtitle":  "Maak een sterk, veilig wachtwoord om uw account beschermd en toegankelijk te houden.",
     "currentPassword":  "Huidig wachtwoord",
     "newPassword":  "Nieuw wachtwoord",
@@ -616,7 +616,7 @@
     "faqQuestion5":  "Wie kan een huisdier registreren?",
     "faqAnswer5":  "Elke huisdiereigenaar kan zijn hond, kat of ander gezelschapsdier registreren.",
     "faqQuestion6":  "Hoe kan ik mijn gegevens wijzigen?",
-    "faqAnswer6":  "Ga naar Profiel → tik op een veld (Naam, E-mail, Telefoon, enz.) om te bewerken en op te slaan.",
+    "faqAnswer6":  "Ga naar Profiel â†’ tik op een veld (Naam, E-mail, Telefoon, enz.) om te bewerken en op te slaan.",
     "faqQuestion7":  "Hoe kan ik de gegevens van mijn huisdier wijzigen?",
     "faqAnswer7":  "Ga naar het profiel van uw huisdier en tik op de bewerkknop om naam, ras, foto\u0027s, enz. bij te werken.",
     "faqQuestion8":  "Wat is een huisdier-ID-nummer?",
@@ -829,9 +829,9 @@
     "labelCountry":  "Country",
     "labelCity":  "City",
     "shareMessageBody":  "Check out Dog Breed - an amazing app for dog lovers!",
-    "shareIOS":  "📱 Discover Dog Breed on the App Store!",
-    "shareAndroid":  "📱 Get Dog Breed on Google Play!",
-    "shareDefault":  "📱 Check out Dog Breed!",
+    "shareIOS":  "ðŸ“± Discover Dog Breed on the App Store!",
+    "shareAndroid":  "ðŸ“± Get Dog Breed on Google Play!",
+    "shareDefault":  "ðŸ“± Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Alles verwijderen",
     "deleteAllPetsConfirmation":  "Weet je zeker dat je alle huisdieren wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.",
@@ -850,5 +850,139 @@
                                                                                   "type":  "String"
                                                                               }
                                                          }
-                                    }
+                                    },
+    "labelBirthday":  "Birthday",
+    "errorFillPetName":  "Please Fill Pet Name",
+    "supportedBreeds":  "Ondersteunde rassen",
+    "favoriteCount":  "{count} Favoriet",
+    "@favoriteCount":  {
+                           "placeholders":  {
+                                                "count":  {
+                                                              "type":  "int"
+                                                          }
+                                            }
+                       },
+    "breedNameBulldog":  "Bulldog",
+    "breedDescBulldog":  "Levensverwachting: 8-10 jaar.\nBrachycefaal ras dat speciale\nzorg nodig heeft bij warm weer.",
+    "breedNameBeagle":  "Beagle",
+    "breedDescBeagle":  "Levensverwachting: 12-15 jaar.\nVriendelijke, nieuwsgierige honden met\nsterke jachtinstincten.",
+    "breedNameYorkshireTerrier":  "Yorkshire TerriÃ«r",
+    "breedDescYorkshireTerrier":  "Levensverwachting: 13-16 jaar.\nKleine maar energieke gezelschapshonden\ndie regelmatige verzorging nodig hebben.",
+    "breedNameCavalierKingCharlesSpaniel":  "Cavalier King Charles SpaniÃ«l",
+    "breedDescCavalierKingCharlesSpaniel":  "Levensverwachting: 9-14 jaar.\nAanhankelijke, zachtaardige gezelschapshonden\ngevoelig voor hartaandoeningen.",
+    "breedNameEnglishSpringerSpaniel":  "Engelse Springer SpaniÃ«l",
+    "breedDescEnglishSpringerSpaniel":  "Levensverwachting: 12-14 jaar.\nEnergieke jachthonden die\nveel beweging nodig hebben.",
+    "breedNameBullmastiff":  "Bullmastiff",
+    "breedDescBullmastiff":  "Levensverwachting: 8-10 jaar.\nGroot, krachtig waakhondenras\ndat vroege socialisatie vereist.",
+    "breedNameEnglishCockerSpaniel":  "Engelse Cocker SpaniÃ«l",
+    "breedDescEnglishCockerSpaniel":  "Levensverwachting: 12-14 jaar.\nVrolijke, actieve sporthonden\nregelmatige oorreiniging nodig.",
+    "breedNameAiredaleTerrier":  "Airedale TerriÃ«r",
+    "breedDescAiredaleTerrier":  "Levensverwachting: 10-13 jaar.\nGrootste terriÃ«rras -\nintelligent, energiek, veelzijdig.",
+    "breedNameTerrier":  "TerriÃ«r",
+    "breedDescTerrier":  "Levensverwachting: Varieert.\nEnergieke, pittige honden gefokt\nvoor het jagen op ongedierte.",
+    "breedNameWhippet":  "Whippet",
+    "breedDescWhippet":  "Levensverwachting: 12-15 jaar.\nZachtaardige, aanhankelijke windhond\ndie regelmatig moet rennen.",
+    "breedNameBullTerrier":  "BulterriÃ«r",
+    "breedDescBullTerrier":  "Levensverwachting: 10-14 jaar.\nGespierde honden met kenmerkende\neivormige kop.",
+    "breedNameGoldenRetriever":  "Golden Retriever",
+    "breedDescGoldenRetriever":  "Levensverwachting: 10-12 jaar.\nVriendelijke, intelligente gezinshonden\ngevoelig voor heupdysplasie.",
+    "breedNameOldEnglishSheepdog":  "Oude Engelse Herdershond",
+    "breedDescOldEnglishSheepdog":  "Levensverwachting: 10-12 jaar.\nGrote, ruige herdershonden\ndie uitgebreide verzorging nodig hebben.",
+    "breedNameBorderCollie":  "Border Collie",
+    "breedDescBorderCollie":  "Levensverwachting: 12-15 jaar.\nZeer intelligente honden die\nuitgebreide mentale uitdaging nodig hebben.",
+    "breedNameGreyhound":  "Greyhound",
+    "breedDescGreyhound":  "Levensverwachting: 10-14 jaar.\nSnelste hondenras - weinig energie\nbinnenshuis, zachtaardig en kalm.",
+    "breedNameJackRussellTerrier":  "Jack Russell TerriÃ«r",
+    "breedDescJackRussellTerrier":  "Levensverwachting: 13-16 jaar.\nKleine maar onbevreesde terriÃ«rs\nmet een hoog energieniveau.",
+    "breedNameBloodhound":  "Bloedhond",
+    "breedDescBloodhound":  "Levensverwachting: 10-12 jaar.\nUitzonderlijke speurhonden\ndie geduld vereisen bij training.",
+    "breedNameEnglishPointer":  "Engelse Pointer",
+    "breedDescEnglishPointer":  "Levensverwachting: 12-15 jaar.\nElegante vogelhonden met veel energie\nen sterk staand instinct.",
+    "breedNameStaffordshireBullTerrier":  "Staffordshire BulterriÃ«r",
+    "breedDescStaffordshireBullTerrier":  "Levensverwachting: 12-14 jaar.\nGespierde, aanhankelijke honden\ndie goede socialisatie nodig hebben.",
+    "breedNameEnglishFoxhound":  "Engelse Foxhound",
+    "breedDescEnglishFoxhound":  "Levensverwachting: 10-13 jaar.\nMeutehonden gefokt voor\nuithoudingsvermogen, veel beweging nodig.",
+    "breedNameWireFoxTerrier":  "Draadharige FoxterriÃ«r",
+    "breedDescWireFoxTerrier":  "Levensverwachting: 12-15 jaar.\nWakere, snelle honden met\nkenmerkende draadharige vacht.",
+    "breedNameManchesterTerrier":  "Manchester TerriÃ«r",
+    "breedDescManchesterTerrier":  "Levensverwachting: 14-16 jaar.\nSlanke, elegante terriÃ«rs\nbekend om hun rattenvangerscapaciteiten.",
+    "breedNameBedlingtonTerrier":  "Bedlington TerriÃ«r",
+    "breedDescBedlingtonTerrier":  "Levensverwachting: 12-14 jaar.\nKenmerkend lamsachtig uiterlijk,\nenergiek maar zachtaardig.",
+    "breedNameBostonTerrier":  "Boston TerriÃ«r",
+    "breedDescBostonTerrier":  "Levensverwachting: 11-13 jaar.\nVriendelijke \"Amerikaanse Gentleman\"\nmet smoking-achtige aftekeningen.",
+    "breedNameEnglishSetter":  "Engelse Setter",
+    "breedDescEnglishSetter":  "Levensverwachting: 10-12 jaar.\nElegante vogelhonden met\ngespikkelde vacht, zachtaardige metgezellen.",
+    "breedNameBorderTerrier":  "Border TerriÃ«r",
+    "breedDescBorderTerrier":  "Levensverwachting: 12-15 jaar.\nSterke kleine terriÃ«rs gefokt\nvoor de vossenjacht.",
+    "favoritesTitle":  "Favorieten",
+    "scanTabTitle":  "Scannen",
+    "noFavoriteBreedsMessage":  "Nog geen favoriete rassen",
+    "@activityCount":  {
+                           "placeholders":  {
+                                                "count":  {
+                                                              "type":  "int"
+                                                          }
+                                            }
+                       },
+    "@documentCount":  {
+                           "placeholders":  {
+                                                "count":  {
+                                                              "type":  "int"
+                                                          }
+                                            }
+                       },
+    "@deleteDocumentConfirmation":  {
+                                        "placeholders":  {
+                                                             "title":  {
+                                                                           "type":  "String"
+                                                                       }
+                                                         }
+                                    },
+    "@daysAgoShort":  {
+                          "placeholders":  {
+                                               "count":  {
+                                                             "type":  "int"
+                                                         }
+                                           }
+                      },
+    "@weeksAgo":  {
+                      "placeholders":  {
+                                           "count":  {
+                                                         "type":  "int"
+                                                     }
+                                       }
+                  },
+    "@documentUploadFailed":  {
+                                  "placeholders":  {
+                                                       "error":  {
+                                                                     "type":  "Object"
+                                                                 }
+                                                   }
+                              },
+    "dialogUploadPhoto":  "Foto uploaden",
+    "dialogUploadVideo":  "Video uploaden",
+    "pickerOpenCamera":  "Camera openen",
+    "pickerUploadGallery":  "Uploaden uit galerij",
+    "feedbackTitle": "Feedback",
+    "feedbackIssueLagging": "Lagging Issue",
+    "feedbackIssueCrashes": "App Crashes",
+    "feedbackIssueAds": "Too Many Ads",
+    "feedbackIssueOther": "Other Problem",
+    "feedbackIssueNotWorking": "Doesn't Work",
+    "submitFeedback": "Submit Feedback",
+    "feedbackChooseEmailApp": "Please choose an email app to send your feedback to:",
+    "feedbackSendEmail": "Send Email",
+    "feedbackEmailSubject": "DogBreed: Feedback",
+    "feedbackIssueType": "Issue Type:",
+    "feedbackDetails": "Feedback Details:",
+    "feedbackGeneral": "General Feedback",
+    "feedbackManualEmailTitle": "Send Email Manually",
+    "feedbackManualEmailBody": "Please send an email to:",
+    "feedbackSubject": "Subject:",
+    "feedbackMessage": "Message:",
+    "feedbackManualEmailSuccess": "Thank you! Please send the email manually.",
+    "feedbackSelectIssue": "Please select an issue",
+    "feedbackDescribeIssue": "Could You Describe The Issue\nYou're Experiencing",
+    "feedbackTellUsMore": "Please Tell Us More Details...",
+    "submitButton": "Submit"
 }

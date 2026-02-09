@@ -77,20 +77,25 @@ class _ListsaveState extends State<Listsave> {
                               ),
                             ),
                           ),
-                          Text(
-                            'Recent Scans',
-                            style: TextStyle(
-                              fontFamily: 'Sora',
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 16.sp,
-                              height: 1.0,
-                              letterSpacing: 0.0,
-                              color: Theme.of(context).colorScheme.onSurface,
+                          Expanded(
+                            child: Text(
+                              AppLocalizations.of(context)!.recentScansTitle,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Sora',
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 16.sp,
+                                height: 1.0,
+                                letterSpacing: 0.0,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                           ),
                           Text(
-                            '${recentScans.length} Scans',
+                            AppLocalizations.of(context)!.scansCount(recentScans.length),
                             style: TextStyle(
                               fontFamily: 'Sora',
 
@@ -106,26 +111,29 @@ class _ListsaveState extends State<Listsave> {
                         _buildRecentScansList(recentScans, scanProvider,context)
                       else
                         _buildEmptyState(),
-
                       SizedBox(height: 20.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Supported Breeds',
-                            style: TextStyle(
-                              fontFamily: 'Sora',
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                              fontSize: 16.sp,
-                              height: 1.0,
-                              letterSpacing: 0.0,
-                              color: Theme.of(context).colorScheme.onSurface,
+                          Expanded(
+                            child: Text(
+                              AppLocalizations.of(context)!.supportedBreeds,
+                              style: TextStyle(
+                                fontFamily: 'Sora',
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                fontSize: 16.sp,
+                                height: 1.0,
+                                letterSpacing: 0.0,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                           ),
                           if (favoriteBreeds.isNotEmpty)
                             Text(
-                              '${favoriteBreeds.length} Favorite',
+                              AppLocalizations.of(context)!.favoriteCount(favoriteBreeds.length),
                               style: TextStyle(
                                 fontFamily: 'Sora',
 
@@ -150,166 +158,145 @@ class _ListsaveState extends State<Listsave> {
 
   }
 
-  Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
-    final colors = Theme.of(context).colorScheme;
-    final List<Map<String, String>> topBreeds = [
+  List<Map<String, String>> _getLocalizedBreeds(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return [
       {
-        'name': 'Bulldog',
-        'description':
-        'Life expectancy: 8-10 years.\nBrachycephalic breed requiring\nspecial care in hot weather.',
+        'name': localizations.breedNameBulldog,
+        'description': localizations.breedDescBulldog,
         'image': 'assets/images/Ellipse 139.png',
       },
       {
-        'name': 'Beagle',
-        'description':
-        'Life expectancy: 12-15 years.\nFriendly, curious dogs with\nstrong hunting instincts.',
+        'name': localizations.breedNameBeagle,
+        'description': localizations.breedDescBeagle,
         'image': 'assets/images/Ellipse 139 (1).png',
       },
       {
-        'name': 'Yorkshire Terrier',
-        'description':
-        'Life expectancy: 13-16 years.\nSmall but energetic companion\ndogs requiring regular grooming.',
+        'name': localizations.breedNameYorkshireTerrier,
+        'description': localizations.breedDescYorkshireTerrier,
         'image': 'assets/images/Ellipse 139 (2).png',
       },
       {
-        'name': 'Cavalier King Charles Spaniel',
-        'description':
-        'Life expectancy: 9-14 years.\nAffectionate, gentle companion\ndogs prone to heart conditions.',
+        'name': localizations.breedNameCavalierKingCharlesSpaniel,
+        'description': localizations.breedDescCavalierKingCharlesSpaniel,
         'image': 'assets/images/Ellipse 139 (3).png',
       },
       {
-        'name': 'English Springer Spaniel',
-        'description':
-        'Life expectancy: 12-14 years.\nEnergetic hunting dogs needing\nplenty of exercise.',
+        'name': localizations.breedNameEnglishSpringerSpaniel,
+        'description': localizations.breedDescEnglishSpringerSpaniel,
         'image': 'assets/images/Ellipse 139 (4).png',
       },
       {
-        'name': 'Bullmastiff',
-        'description':
-        'Life expectancy: 8-10 years.\nLarge, powerful guardian breed\nrequiring early socialization.',
+        'name': localizations.breedNameBullmastiff,
+        'description': localizations.breedDescBullmastiff,
         'image': 'assets/images/Ellipse 139 (5).png',
       },
       {
-        'name': 'English Cocker Spaniel',
-        'description':
-        'Life expectancy: 12-14 years.\nMerry, active sporting dogs\nneeding regular ear cleaning.',
+        'name': localizations.breedNameEnglishCockerSpaniel,
+        'description': localizations.breedDescEnglishCockerSpaniel,
         'image': 'assets/images/Ellipse 139 (6).png',
       },
       {
-        'name': 'Airedale Terrier',
-        'description':
-        'Life expectancy: 10-13 years.\nLargest terrier breed -\nintelligent, energetic, versatile.',
+        'name': localizations.breedNameAiredaleTerrier,
+        'description': localizations.breedDescAiredaleTerrier,
         'image': 'assets/images/Ellipse 139 (7).png',
       },
       {
-        'name': 'Terrier',
-        'description':
-        'Life expectancy: Varies.\nEnergetic, feisty dogs bred\nfor hunting vermin.',
+        'name': localizations.breedNameTerrier,
+        'description': localizations.breedDescTerrier,
         'image': 'assets/images/Ellipse 139 (8).png',
       },
       {
-        'name': 'Whippet',
-        'description':
-        'Life expectancy: 12-15 years.\nGentle, affectionate sighthound\nneeding regular running.',
+        'name': localizations.breedNameWhippet,
+        'description': localizations.breedDescWhippet,
         'image': 'assets/images/Ellipse 1399.png',
       },
       {
-        'name': 'Bull Terrier',
-        'description':
-        'Life expectancy: 10-14 years.\nMuscular dogs with distinctive\negg-shaped head.',
+        'name': localizations.breedNameBullTerrier,
+        'description': localizations.breedDescBullTerrier,
         'image': 'assets/images/Ellipse 139 (9).png',
       },
       {
-        'name': 'Golden Retriever',
-        'description':
-        'Life expectancy: 10-12 years.\nFriendly, intelligent family\ndogs prone to hip dysplasia.',
+        'name': localizations.breedNameGoldenRetriever,
+        'description': localizations.breedDescGoldenRetriever,
         'image': 'assets/images/Ellipse 139 (10).png',
       },
       {
-        'name': 'Old English Sheepdog',
-        'description':
-        'Life expectancy: 10-12 years.\nLarge, shaggy herding dogs\nrequiring extensive grooming.',
+        'name': localizations.breedNameOldEnglishSheepdog,
+        'description': localizations.breedDescOldEnglishSheepdog,
         'image': 'assets/images/Ellipse 1391.png',
       },
       {
-        'name': 'Border Collie',
-        'description':
-        'Life expectancy: 12-15 years.\nHighly intelligent dogs needing\nextensive mental exercise.',
+        'name': localizations.breedNameBorderCollie,
+        'description': localizations.breedDescBorderCollie,
         'image': 'assets/images/Ellipse 1392.png',
       },
       {
-        'name': 'Greyhound',
-        'description':
-        'Life expectancy: 10-14 years.\nFastest dog breed - low-energy\nindoors, gentle and calm.',
+        'name': localizations.breedNameGreyhound,
+        'description': localizations.breedDescGreyhound,
         'image': 'assets/images/Ellipse 139 (12).png',
       },
       {
-        'name': 'Jack Russell Terrier',
-        'description':
-        'Life expectancy: 13-16 years.\nSmall but fearless terriers\nwith high energy levels.',
+        'name': localizations.breedNameJackRussellTerrier,
+        'description': localizations.breedDescJackRussellTerrier,
         'image': 'assets/images/Ellipse 139 (13).png',
       },
       {
-        'name': 'Bloodhound',
-        'description':
-        'Life expectancy: 10-12 years.\nExceptional scent-tracking dogs\nrequiring patience in training.',
+        'name': localizations.breedNameBloodhound,
+        'description': localizations.breedDescBloodhound,
         'image': 'assets/images/Ellipse 139 (14).png',
       },
       {
-        'name': 'English Pointer',
-        'description':
-        'Life expectancy: 12-15 years.\nElegant bird dogs with high energy\nand strong pointing instinct.',
+        'name': localizations.breedNameEnglishPointer,
+        'description': localizations.breedDescEnglishPointer,
         'image': 'assets/images/Ellipse 139 (15).png',
       },
       {
-        'name': 'Staffordshire Bull Terrier',
-        'description':
-        'Life expectancy: 12-14 years.\nMuscular, affectionate dogs\nneeding proper socialization.',
+        'name': localizations.breedNameStaffordshireBullTerrier,
+        'description': localizations.breedDescStaffordshireBullTerrier,
         'image': 'assets/images/Ellipse 139 (16).png',
       },
       {
-        'name': 'English Foxhound',
-        'description':
-        'Life expectancy: 10-13 years.\nPack hunting dogs bred for\nendurance, need ample exercise.',
+        'name': localizations.breedNameEnglishFoxhound,
+        'description': localizations.breedDescEnglishFoxhound,
         'image': 'assets/images/Ellipse 139 (17).png',
       },
       {
-        'name': 'Wire Fox Terrier',
-        'description':
-        'Life expectancy: 12-15 years.\nAlert, quick dogs with\ndistinctive wiry coats.',
+        'name': localizations.breedNameWireFoxTerrier,
+        'description': localizations.breedDescWireFoxTerrier,
         'image': 'assets/images/Ellipse 139 (18).png',
       },
       {
-        'name': 'Manchester Terrier',
-        'description':
-        'Life expectancy: 14-16 years.\nSleek, elegant terriers\nknown for ratting abilities.',
+        'name': localizations.breedNameManchesterTerrier,
+        'description': localizations.breedDescManchesterTerrier,
         'image': 'assets/images/Ellipse 1393.png',
       },
       {
-        'name': 'Bedlington Terrier',
-        'description':
-        'Life expectancy: 12-14 years.\nDistinctive lamb-like appearance,\nenergetic yet gentle.',
+        'name': localizations.breedNameBedlingtonTerrier,
+        'description': localizations.breedDescBedlingtonTerrier,
         'image': 'assets/images/Ellipse 139 (20).png',
       },
       {
-        'name': 'Boston Terrier',
-        'description':
-        'Life expectancy: 11-13 years.\nFriendly "American Gentleman"\nwith tuxedo-like markings.',
+        'name': localizations.breedNameBostonTerrier,
+        'description': localizations.breedDescBostonTerrier,
         'image': 'assets/images/Ellipse 1394.png',
       },
       {
-        'name': 'English Setter',
-        'description':
-        'Life expectancy: 10-12 years.\nElegant bird dogs with\nspeckled coats, gentle companions.',
+        'name': localizations.breedNameEnglishSetter,
+        'description': localizations.breedDescEnglishSetter,
         'image': 'assets/images/Ellipse 139 (21).png',
       },
       {
-        'name': 'Border Terrier',
-        'description':
-        'Life expectancy: 12-15 years.\nHardy small terriers bred\nfor fox hunting.',
+        'name': localizations.breedNameBorderTerrier,
+        'description': localizations.breedDescBorderTerrier,
         'image': 'assets/images/Ellipse 139 (22).png',
       },
     ];
+  }
+
+  Widget _buildSupportedBreedsVerticalFormatted(ScanProvider scanProvider) {
+    final colors = Theme.of(context).colorScheme;
+    final List<Map<String, String>> topBreeds = _getLocalizedBreeds(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -457,14 +444,14 @@ class _ListsaveState extends State<Listsave> {
           final scanData = {
             'id': DateTime.now().millisecondsSinceEpoch.toString(),
             'image': dogResult['image'] ?? cameraResult,
-            'breedName': dogResult['breedName']?.toString() ?? 'Unknown Breed',
+            'breedName': dogResult['breedName']?.toString() ?? AppLocalizations.of(context)!.unknownBreed,
             'confidence': (dogResult['confidence'] ?? 0.0) is double
                 ? dogResult['confidence'] as double
                 : 0.0,
             'formattedBreedName':
             dogResult['formattedBreedName']?.toString() ??
                 _formatBreedName(
-                  dogResult['breedName']?.toString() ?? 'Unknown Breed',
+                  dogResult['breedName']?.toString() ?? AppLocalizations.of(context)!.unknownBreed,
                 ),
             'timestamp': DateTime.now(),
             'isFavorite': false,

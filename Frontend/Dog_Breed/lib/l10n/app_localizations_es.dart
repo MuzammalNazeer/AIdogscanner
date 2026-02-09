@@ -15,46 +15,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get settingsTitle => 'Ajustes';
 
   @override
-  String get appLanguageTitle => 'Idioma de la aplicación';
+  String get notificationLanguageTitle => 'Idioma de notificaciÃƒÂ³n';
 
   @override
-  String get notificationLanguageTitle => 'Idioma de notificación';
-
-  @override
-  String get editProfile => 'Editar perfil';
-
-  @override
-  String get changePassword => 'Cambiar contraseña';
-
-  @override
-  String get notifications => 'Notificaciones';
-
-  @override
-  String get premiumSubscription => 'Suscripción Premium';
+  String get changePassword => 'Cambiar contraseÃƒÂ±a';
 
   @override
   String get aboutUs => 'Sobre nosotros';
 
   @override
-  String get faq => 'Preguntas frecuentes';
-
-  @override
-  String get termsOfUse => 'Condiciones de uso';
-
-  @override
-  String get customerCare => 'Atención al cliente';
+  String get customerCare => 'AtenciÃƒÂ³n al cliente';
 
   @override
   String get measurementUnits => 'Unidades de medida';
 
   @override
   String get supportAnimalIdProject => 'Apoyar el proyecto Animal ID';
-
-  @override
-  String get deleteOwnerProfile => 'Eliminar perfil de propietario';
-
-  @override
-  String get logout => 'Cerrar sesión';
 
   @override
   String get dialogCancel => 'Cancelar';
@@ -67,14 +43,14 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get dialogDeleteProfileMessage =>
-      '¿Estás seguro de que deseas eliminar permanentemente tu perfil? Esta acción no se puede deshacer.';
+      'Ã‚Â¿EstÃƒÂ¡s seguro de que deseas eliminar permanentemente tu perfil? Esta acciÃƒÂ³n no se puede deshacer.';
 
   @override
-  String get dialogLogoutTitle => 'Cerrar sesión';
+  String get dialogLogoutTitle => '¿Estás seguro de que quieres cerrar sesión?';
 
   @override
   String get dialogLogoutMessage =>
-      '¿Estás seguro de que deseas cerrar sesión?';
+      'Ã‚Â¿EstÃƒÂ¡s seguro de que deseas cerrar sesiÃƒÂ³n?';
 
   @override
   String get manager => 'Gerente';
@@ -99,26 +75,26 @@ class AppLocalizationsEs extends AppLocalizations {
   String get unlimitedDogScans => 'Escaneos de perros ilimitados';
 
   @override
-  String get supportedBreedDetection => 'Detección de razas compatible';
+  String get supportedBreedDetection => 'DetecciÃƒÂ³n de razas compatible';
 
   @override
-  String get multiplePetProfiles => 'Múltiples perfiles de mascotas';
+  String get multiplePetProfiles => 'MÃƒÂºltiples perfiles de mascotas';
 
   @override
   String get removeAds => 'Eliminar anuncios';
 
   @override
-  String get vipCustomerSupport => 'Atención al cliente VIP';
+  String get vipCustomerSupport => 'AtenciÃƒÂ³n al cliente VIP';
 
   @override
-  String get trialOffer => 'Prueba GRATUITA de 3 días, luego Rs 2550/semana';
+  String get trialOffer => 'Prueba GRATUITA de 3 dÃƒÂ­as, luego Rs 2550/semana';
 
   @override
   String get startFreeTrial => 'INICIAR PRUEBA GRATUITA';
 
   @override
   String get subscriptionDisclaimer =>
-      'Al continuar, acepta nuestros Términos y Política de Privacidad, la suscripción se factura después de que finalice la prueba y se renovará automáticamente. Cancele la suscripción en cualquier momento antes de que finalice la prueba para evitar cargos.';
+      'Al continuar, acepta nuestros TÃƒÂ©rminos y PolÃƒÂ­tica de Privacidad, la suscripciÃƒÂ³n se factura despuÃƒÂ©s de que finalice la prueba y se renovarÃƒÂ¡ automÃƒÂ¡ticamente. Cancele la suscripciÃƒÂ³n en cualquier momento antes de que finalice la prueba para evitar cargos.';
 
   @override
   String get welcomeBack => 'Bienvenido de nuevo, ';
@@ -127,14 +103,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get searchForDog => 'Buscar perro';
 
   @override
-  String get tryPremiumFeatures => 'Probar funciones Premium 🌵';
+  String get tryPremiumFeatures => 'Probar funciones Premium Ã°Å¸Å’Âµ';
 
   @override
   String get premiumOfferDescription =>
-      'Reclame su oferta ahora y obtenga reconocimiento ilimitado, chequeo de salud y más';
+      'Reclame su oferta ahora y obtenga reconocimiento ilimitado, chequeo de salud y mÃƒÂ¡s';
 
   @override
-  String get getIt => 'CONSIGUÉLO';
+  String get getIt => 'CONSIGUÃƒâ€°LO';
 
   @override
   String get hygiene => 'Higiene';
@@ -143,7 +119,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get cleaning => 'Limpieza';
 
   @override
-  String get medical => 'Médico';
+  String get medical => 'MÃƒÂ©dico';
 
   @override
   String get booking => 'Reserva';
@@ -169,11 +145,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get createVisit => 'Crear visita';
 
   @override
-  String get foodManagement => 'Gestión de alimentos';
+  String get foodManagement => 'GestiÃƒÂ³n de alimentos';
 
   @override
   String get foodManagementDescription =>
-      'Rastree las comidas y gestione la \n nutrición diaria de su mascota';
+      'Rastree las comidas y gestione la \n nutriciÃƒÂ³n diaria de su mascota';
 
   @override
   String get checkSchedule => 'Comprobar horario';
@@ -183,7 +159,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String savedScanMessage(Object breedName, Object confidence) {
-    return '✅ Guardado: $breedName ($confidence% de confianza)';
+    return 'Ã¢Å“â€¦ Guardado: $breedName ($confidence% de confianza)';
   }
 
   @override
@@ -201,18 +177,18 @@ class AppLocalizationsEs extends AppLocalizations {
   String get getStarted => 'Empezar';
 
   @override
-  String get onboardingTitle1 => 'Director de satélite';
+  String get onboardingTitle1 => 'Director de satÃƒÂ©lite';
 
   @override
   String get onboardingDesc1 =>
-      'Explore lugares cercanos con mapeo por satélite GPS\ny encuentre satélites';
+      'Explore lugares cercanos con mapeo por satÃƒÂ©lite GPS\ny encuentre satÃƒÂ©lites';
 
   @override
   String get onboardingTitle2 => 'Necesitamos su\n permiso';
 
   @override
   String get onboardingDesc2 =>
-      'Necesitamos permiso de la cámara para que pueda realizar\nescaneos en vivo de su mascota.';
+      'Necesitamos permiso de la cÃƒÂ¡mara para que pueda realizar\nescaneos en vivo de su mascota.';
 
   @override
   String get onboardingTitle3 => 'Mantener la calidad de la imagen';
@@ -223,11 +199,11 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboardingTitle4 =>
-      'Asegúrese de que su perro se mantenga \n sano y activo.';
+      'AsegÃƒÂºrese de que su perro se mantenga \n sano y activo.';
 
   @override
   String get onboardingDesc4 =>
-      'Gestione cada detalle de su perro: salud, fotos, \nactividades y más en un solo lugar.';
+      'Gestione cada detalle de su perro: salud, fotos, \nactividades y mÃƒÂ¡s en un solo lugar.';
 
   @override
   String get calendarTabActivities => 'Actividades';
@@ -269,7 +245,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get activityCrate => 'Jaula';
 
   @override
-  String get activitySleep => 'Sueño';
+  String get activitySleep => 'SueÃƒÂ±o';
 
   @override
   String get activityTraining => 'Entrenamiento';
@@ -284,10 +260,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get activityCleaning => 'Limpieza';
 
   @override
-  String get activityMedication => 'Medicación';
+  String get activityMedication => 'MedicaciÃƒÂ³n';
 
   @override
-  String get activityVaccination => 'Vacunación';
+  String get activityVaccination => 'VacunaciÃƒÂ³n';
 
   @override
   String get activityWeight => 'Peso';
@@ -314,19 +290,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get calendarMonth => 'Mes';
 
   @override
-  String get calendarComingSoon => 'Próximamente...';
+  String get calendarComingSoon => 'PrÃƒÂ³ximamente...';
 
   @override
   String get calendarNoActivityLogged => 'Sin actividad registrada';
 
   @override
-  String get calendarAddActivity => 'Añadir actividad';
+  String get calendarAddActivity => 'AÃƒÂ±adir actividad';
 
   @override
   String get progressTabCalendar => 'Calendario';
 
   @override
-  String get progressTabChart => 'Gráfico';
+  String get progressTabChart => 'GrÃƒÂ¡fico';
 
   @override
   String get progressTabCompare => 'Comparar';
@@ -356,7 +332,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get calendarHeatmapTab => 'Mapa de calor';
 
   @override
-  String get calendarTimelineTab => 'Línea de tiempo';
+  String get calendarTimelineTab => 'LÃƒÂ­nea de tiempo';
 
   @override
   String get calendarActivityIntensity => 'Intensidad de actividad';
@@ -389,14 +365,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get calendarShare => 'Compartir';
 
   @override
-  String get calendarMostActiveDay => 'Día más activo';
+  String get calendarMostActiveDay => 'DÃƒÂ­a mÃƒÂ¡s activo';
 
   @override
-  String get calendarMostActiveTime => 'Hora más activa';
+  String get calendarMostActiveTime => 'Hora mÃƒÂ¡s activa';
 
   @override
   String dialogDeleteActivityContent(Object activityName) {
-    return '¿Estás seguro de que deseas eliminar \"$activityName\"?';
+    return 'Ã‚Â¿EstÃƒÂ¡s seguro de que deseas eliminar \"$activityName\"?';
   }
 
   @override
@@ -404,7 +380,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get dialogAddPetMessage =>
-      'Añade al menos una mascota para empezar a añadir actividades y recordatorios.';
+      'AÃƒÂ±ade al menos una mascota para empezar a aÃƒÂ±adir actividades y recordatorios.';
 
   @override
   String get dialogGot_it => 'Got it';
@@ -419,7 +395,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dayTue => 'Mar';
 
   @override
-  String get dayWed => 'Mié';
+  String get dayWed => 'MiÃƒÂ©';
 
   @override
   String get dayThu => 'Jue';
@@ -428,16 +404,17 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dayFri => 'Vie';
 
   @override
-  String get daySat => 'Sáb';
+  String get daySat => 'SÃƒÂ¡b';
 
   @override
   String get daySun => 'Dom';
 
   @override
-  String get walkDeleteTitle => '¿Eliminar paseo?';
+  String get walkDeleteTitle => 'Ã‚Â¿Eliminar paseo?';
 
   @override
-  String get walkDeleteContent => 'Esto descartará la sesión de paseo actual.';
+  String get walkDeleteContent =>
+      'Esto descartarÃƒÂ¡ la sesiÃƒÂ³n de paseo actual.';
 
   @override
   String get walkCancel => 'Cancelar';
@@ -453,27 +430,27 @@ class AppLocalizationsEs extends AppLocalizations {
   String get walkNote => 'Nota';
 
   @override
-  String get walkNoteHint => 'Sus notas aquí';
+  String get walkNoteHint => 'Sus notas aquÃƒÂ­';
 
   @override
   String get walkSave => 'Guardar';
 
   @override
-  String get walkAddNote => 'Añadir nota';
+  String get walkAddNote => 'AÃƒÂ±adir nota';
 
   @override
   String get walkDefaultName => 'Paseo';
 
   @override
   String get walkLocationPermission =>
-      'Se requiere permiso de ubicación para rastrear los paseos.';
+      'Se requiere permiso de ubicaciÃƒÂ³n para rastrear los paseos.';
 
   @override
   String get walkLocationService =>
-      'Los servicios de ubicación están desactivados.';
+      'Los servicios de ubicaciÃƒÂ³n estÃƒÂ¡n desactivados.';
 
   @override
-  String get reminderAddTitle => 'Añadir recordatorio';
+  String get reminderAddTitle => 'AÃƒÂ±adir recordatorio';
 
   @override
   String get reminderNone => 'Sin recordatorios';
@@ -509,7 +486,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get pickerTakePhoto => 'Tomar foto';
 
   @override
-  String get pickerGallery => 'Elegir de la galería';
+  String get pickerGallery => 'Elegir de la galerÃƒÂ­a';
 
   @override
   String get pickerRecordVideo => 'Grabar video';
@@ -523,24 +500,25 @@ class AppLocalizationsEs extends AppLocalizations {
       'La hora del recordatorio debe ser en el futuro';
 
   @override
-  String get errorValidWeight => 'Por favor, introduzca un peso válido';
+  String get errorValidWeight => 'Por favor, introduzca un peso vÃƒÂ¡lido';
 
   @override
-  String get errorValidHeight => 'Por favor, introduzca una altura válida';
+  String get errorValidHeight => 'Por favor, introduzca una altura vÃƒÂ¡lida';
 
   @override
-  String get errorValidTemp => 'Por favor, introduzca una temperatura válida';
+  String get errorValidTemp =>
+      'Por favor, introduzca una temperatura vÃƒÂ¡lida';
 
   @override
   String get errorEnterFood =>
       'Por favor, introduzca el nombre o tipo de comida';
 
   @override
-  String get successActivitySaved => '¡Actividad guardada con éxito!';
+  String get successActivitySaved => 'Ã‚Â¡Actividad guardada con ÃƒÂ©xito!';
 
   @override
   String get successActivitySavedReminder =>
-      '¡Actividad con recordatorio guardada con éxito!';
+      'Ã‚Â¡Actividad con recordatorio guardada con ÃƒÂ©xito!';
 
   @override
   String errorSaveFailed(Object error) {
@@ -572,10 +550,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get unitCm => 'cm';
 
   @override
-  String get unitF => '°F';
+  String get unitF => 'Ã‚Â°F';
 
   @override
-  String get unitC => '°C';
+  String get unitC => 'Ã‚Â°C';
 
   @override
   String get unitKm => 'km';
@@ -584,52 +562,52 @@ class AppLocalizationsEs extends AppLocalizations {
   String get unitMi => 'mi';
 
   @override
-  String get actionAdd => 'Añadir nombre o tipo de bebida';
+  String get actionAdd => 'AÃƒÂ±adir nombre o tipo de bebida';
 
   @override
-  String get actionAddImage => '+ Añadir imagen';
+  String get actionAddImage => '+ AÃƒÂ±adir imagen';
 
   @override
-  String get actionAddVideo => '+ Añadir video';
+  String get actionAddVideo => '+ AÃƒÂ±adir video';
 
   @override
-  String get hintAddNote => 'Añadir nota...';
+  String get hintAddNote => 'AÃƒÂ±adir nota...';
 
   @override
-  String get startedAt => 'Empezó a las';
+  String get startedAt => 'EmpezÃƒÂ³ a las';
 
   @override
-  String get endedAt => 'Terminó a las';
+  String get endedAt => 'TerminÃƒÂ³ a las';
 
   @override
   String get noActivitySelected => 'Ninguna actividad seleccionada';
 
   @override
-  String get actionAddTreat => '+ Añadir premio';
+  String get actionAddTreat => '+ AÃƒÂ±adir premio';
 
   @override
-  String get actionAddGrooming => '+ Añadir tipo de aseo';
+  String get actionAddGrooming => '+ AÃƒÂ±adir tipo de aseo';
 
   @override
-  String get actionAddMedication => '+ Añadir medicación';
+  String get actionAddMedication => '+ AÃƒÂ±adir medicaciÃƒÂ³n';
 
   @override
-  String get actionAddVaccination => '+ Añadir vacunación';
+  String get actionAddVaccination => '+ AÃƒÂ±adir vacunaciÃƒÂ³n';
 
   @override
-  String get actionAddHealthCondition => '+ Añadir estado de salud';
+  String get actionAddHealthCondition => '+ AÃƒÂ±adir estado de salud';
 
   @override
-  String get actionAddAccident => '+ Añadir tipo de accidente';
+  String get actionAddAccident => '+ AÃƒÂ±adir tipo de accidente';
 
   @override
-  String get actionAddCleaning => '+ Añadir tipo de limpieza';
+  String get actionAddCleaning => '+ AÃƒÂ±adir tipo de limpieza';
 
   @override
   String get actionAddVeterinary => '+ Add veterinary';
 
   @override
-  String get actionAddFood => '+ Añadir nombre o tipo de comida';
+  String get actionAddFood => '+ AÃƒÂ±adir nombre o tipo de comida';
 
   @override
   String get actionStartTimer => 'O iniciar un temporizador';
@@ -664,26 +642,26 @@ class AppLocalizationsEs extends AppLocalizations {
   String get myPetsTitle => 'Mis Mascotas';
 
   @override
-  String get noPetsAdded => 'Aún no se han añadido mascotas';
+  String get noPetsAdded => 'AÃƒÂºn no se han aÃƒÂ±adido mascotas';
 
   @override
-  String get addPetButton => '+ Añadir mascota';
+  String get addPetButton => '+ AÃƒÂ±adir mascota';
 
   @override
-  String get noPetsMatch => 'Ninguna mascota coincide con tu búsqueda';
+  String get noPetsMatch => 'Ninguna mascota coincide con tu bÃƒÂºsqueda';
 
   @override
-  String get tryDifferentSearch => 'Prueba con otro término de búsqueda';
+  String get tryDifferentSearch => 'Prueba con otro tÃƒÂ©rmino de bÃƒÂºsqueda';
 
   @override
-  String get petUpdatedSuccess => '¡Mascota actualizada con éxito!';
+  String get petUpdatedSuccess => 'Ã‚Â¡Mascota actualizada con ÃƒÂ©xito!';
 
   @override
   String get deletePetTitle => 'Eliminar mascota';
 
   @override
   String deletePetMessage(String petName) {
-    return '¿Estás seguro de que deseas eliminar a $petName?';
+    return 'Ã‚Â¿EstÃƒÂ¡s seguro de que deseas eliminar a $petName?';
   }
 
   @override
@@ -694,7 +672,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String petDeletedSuccess(String petName) {
-    return '$petName eliminado con éxito';
+    return '$petName eliminado con ÃƒÂ©xito';
   }
 
   @override
@@ -730,7 +708,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get msgUpdateFailed => 'Error al actualizar';
 
   @override
-  String get msgAddFailed => 'Error al añadir';
+  String get msgAddFailed => 'Error al aÃƒÂ±adir';
 
   @override
   String msgImagePickFailed(Object error) {
@@ -741,7 +719,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get labelBreed => 'Raza';
 
   @override
-  String get labelGender => 'Género';
+  String get labelGender => 'GÃƒÂ©nero';
 
   @override
   String get labelDOB => 'Fecha de nacimiento';
@@ -756,7 +734,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get labelPetName => 'Nombre de la mascota';
 
   @override
-  String get addPetTitle => 'Añadir mascota';
+  String get addPetTitle => 'AÃƒÂ±adir mascota';
 
   @override
   String get labelRequired => '(Obligatorio)';
@@ -765,10 +743,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get hintEnterPetName => 'Ingrese el nombre';
 
   @override
-  String get hintSelectGender => 'Seleccionar género';
+  String get hintSelectGender => 'Seleccionar gÃƒÂ©nero';
 
   @override
-  String get errorSelectGender => 'Por favor seleccione género';
+  String get errorSelectGender => 'Por favor seleccione gÃƒÂ©nero';
 
   @override
   String get errorFillRequired => 'Por favor complete los campos obligatorios';
@@ -780,7 +758,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get hintTapToScan => 'Tocar para escanear';
 
   @override
-  String get msgBreedDetected => '¡Raza detectada!';
+  String get msgBreedDetected => 'Ã‚Â¡Raza detectada!';
 
   @override
   String get breedAffenpinscher => 'Affenpinscher';
@@ -1173,17 +1151,17 @@ class AppLocalizationsEs extends AppLocalizations {
   String get analyzingImage => 'Analizando imagen...';
 
   @override
-  String get errorOccurred => 'Ocurrió un error';
+  String get errorOccurred => 'OcurriÃƒÂ³ un error';
 
   @override
   String get goBack => 'Volver';
 
   @override
-  String get noDogDetected => 'No se detectó ningún perro';
+  String get noDogDetected => 'No se detectÃƒÂ³ ningÃƒÂºn perro';
 
   @override
   String get clearerPhotoPrompt =>
-      'Por favor intente con una foto más clara de un perro.';
+      'Por favor intente con una foto mÃƒÂ¡s clara de un perro.';
 
   @override
   String get cancel => 'Cancelar';
@@ -1203,7 +1181,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dogResults => 'Resultados del perro';
 
   @override
-  String get size => 'Tamaño';
+  String get size => 'TamaÃƒÂ±o';
 
   @override
   String get shape => 'Forma';
@@ -1218,7 +1196,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get headAndFace => 'Cabeza y Cara';
 
   @override
-  String get purpose => 'Propósito';
+  String get purpose => 'PropÃƒÂ³sito';
 
   @override
   String get body => 'Cuerpo';
@@ -1227,10 +1205,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get weight => 'Peso';
 
   @override
-  String get temperamentAndCharacteristics => 'Temperamento y Características';
+  String get temperamentAndCharacteristics =>
+      'Temperamento y CaracterÃƒÂ­sticas';
 
   @override
-  String get energyLevel => 'Nivel de energía';
+  String get energyLevel => 'Nivel de energÃƒÂ­a';
 
   @override
   String get trainability => 'Entrenabilidad';
@@ -1242,10 +1221,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get familyCompatibility => 'Compatibilidad familiar';
 
   @override
-  String get childFriendliness => 'Amistad con niños';
+  String get childFriendliness => 'Amistad con niÃƒÂ±os';
 
   @override
-  String get addPet => '+Añadir mascota';
+  String get addPet => '+AÃƒÂ±adir mascota';
 
   @override
   String get cannotSave => 'No se puede guardar';
@@ -1266,7 +1245,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get noPredictionResult =>
-      'No hay resultados de predicción disponibles';
+      'No hay resultados de predicciÃƒÂ³n disponibles';
 
   @override
   String get noImageDataToSave => 'No hay datos de imagen para guardar';
@@ -1476,16 +1455,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get chooseProfilePhoto => 'Elegir foto de perfil';
 
   @override
-  String get camera => 'Cámara';
+  String get camera => 'CÃƒÂ¡mara';
 
   @override
-  String get gallery => 'Galería';
+  String get gallery => 'GalerÃƒÂ­a';
 
   @override
   String get ownersProfile => 'Perfil del propietario';
 
   @override
-  String get petOwner => 'Dueño de mascota';
+  String get petOwner => 'DueÃƒÂ±o de mascota';
 
   @override
   String get lastName => 'Apellido';
@@ -1494,24 +1473,24 @@ class AppLocalizationsEs extends AppLocalizations {
   String get ownerContacts => 'Contactos del propietario';
 
   @override
-  String get email => 'Correo electrónico';
+  String get email => 'Correo electrÃƒÂ³nico';
 
   @override
-  String get mainPhone => 'Teléfono principal';
+  String get mainPhone => 'TelÃƒÂ©fono principal';
 
   @override
-  String get instantGpsAlerts => 'Alertas GPS instantáneas al escanear';
+  String get instantGpsAlerts => 'Alertas GPS instantÃƒÂ¡neas al escanear';
 
   @override
   String get gpsAlertsDescription =>
-      'Obtenga actualizaciones instantáneas de la ubicación de su mascota, evitando las molestias de los correos electrónicos tradicionales';
+      'Obtenga actualizaciones instantÃƒÂ¡neas de la ubicaciÃƒÂ³n de su mascota, evitando las molestias de los correos electrÃƒÂ³nicos tradicionales';
 
   @override
   String get emergencyContacts => 'Contactos de emergencia';
 
   @override
   String get vetContactsDescription =>
-      'Contactos del veterinario, copropietario y cuidador en caso de que el teléfono principal no esté disponible';
+      'Contactos del veterinario, copropietario y cuidador en caso de que el telÃƒÂ©fono principal no estÃƒÂ© disponible';
 
   @override
   String get messenger => 'Mensajero';
@@ -1524,19 +1503,19 @@ class AppLocalizationsEs extends AppLocalizations {
   String get petsResidence => 'Residencia de la mascota';
 
   @override
-  String get country => 'País';
+  String get country => 'PaÃƒÂ­s';
 
   @override
   String get city => 'Ciudad';
 
   @override
-  String get address => 'Dirección';
+  String get address => 'DirecciÃƒÂ³n';
 
   @override
-  String get addAddress => 'Añadir dirección';
+  String get addAddress => 'AÃƒÂ±adir direcciÃƒÂ³n';
 
   @override
-  String get labelAdd => 'Añadir';
+  String get labelAdd => 'AÃƒÂ±adir';
 
   @override
   String get getPremium => 'OBTENER PREMIUM';
@@ -1554,10 +1533,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get noScansMessage =>
-      'Tan pronto como realice su primer escaneo,\nsus resultados se registrarán aquí.';
+      'Tan pronto como realice su primer escaneo,\nsus resultados se registrarÃƒÂ¡n aquÃƒÂ­.';
 
   @override
-  String get scanLooksLike => 'Su perro escaneado se ve así.';
+  String get scanLooksLike => 'Su perro escaneado se ve asÃƒÂ­.';
 
   @override
   String get returnAction => 'Volver';
@@ -1567,7 +1546,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String daysAgo(int count) {
-    return 'Hace $count días';
+    return 'Hace $count dÃƒÂ­as';
   }
 
   @override
@@ -1585,7 +1564,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String rescannedSuccess(String breedName, String confidence) {
-    return '✅ Re-escaneado: $breedName ($confidence% confianza)';
+    return 'Ã¢Å“â€¦ Re-escaneado: $breedName ($confidence% confianza)';
   }
 
   @override
@@ -1595,98 +1574,103 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get changePasswordSubtitle =>
-      'Cree una contraseña segura y fuerte para mantener su cuenta protegida y accesible.';
+      'Cree una contraseÃƒÂ±a segura y fuerte para mantener su cuenta protegida y accesible.';
 
   @override
-  String get currentPassword => 'Contraseña actual';
+  String get currentPassword => 'ContraseÃƒÂ±a actual';
 
   @override
-  String get newPassword => 'Nueva contraseña';
+  String get newPassword => 'Nueva contraseÃƒÂ±a';
 
   @override
-  String get repeatPassword => 'Repetir contraseña';
+  String get repeatPassword => 'Repetir contraseÃƒÂ±a';
 
   @override
-  String get faqQuestion1 => '¿Cómo puedo registrar una mascota?';
+  String get faqQuestion1 => 'Ã‚Â¿CÃƒÂ³mo puedo registrar una mascota?';
 
   @override
   String get faqAnswer1 =>
-      'Puede registrar a su mascota yendo a la sección \"Añadir mascota\", completando los detalles requeridos (nombre, raza, edad, etc.) y adjuntando una foto. Una vez registrado, recibirá una identificación única de etiqueta de mascota QR.';
+      'Puede registrar a su mascota yendo a la secciÃƒÂ³n \"AÃƒÂ±adir mascota\", completando los detalles requeridos (nombre, raza, edad, etc.) y adjuntando una foto. Una vez registrado, recibirÃƒÂ¡ una identificaciÃƒÂ³n ÃƒÂºnica de etiqueta de mascota QR.';
 
   @override
-  String get faqQuestion2 => '¿Por qué debería registrar a mi mascota?';
+  String get faqQuestion2 =>
+      'Ã‚Â¿Por quÃƒÂ© deberÃƒÂ­a registrar a mi mascota?';
 
   @override
   String get faqAnswer2 =>
-      'Registrar a su mascota ayuda en caso de que se pierda. Cualquiera que encuentre a su mascota puede escanear la etiqueta QR y contactarlo instantáneamente con la ubicación de la mascota.';
+      'Registrar a su mascota ayuda en caso de que se pierda. Cualquiera que encuentre a su mascota puede escanear la etiqueta QR y contactarlo instantÃƒÂ¡neamente con la ubicaciÃƒÂ³n de la mascota.';
 
   @override
-  String get faqQuestion3 => '¿Activación de la etiqueta de mascota QR?';
+  String get faqQuestion3 => 'Ã‚Â¿ActivaciÃƒÂ³n de la etiqueta de mascota QR?';
 
   @override
   String get faqAnswer3 =>
-      'Después de registrarse, obtendrá una etiqueta QR digital o física. Escanéela con cualquier cámara de teléfono para vincularla al perfil de su mascota. ¡No se necesita aplicación para los buscadores!';
+      'DespuÃƒÂ©s de registrarse, obtendrÃƒÂ¡ una etiqueta QR digital o fÃƒÂ­sica. EscanÃƒÂ©ela con cualquier cÃƒÂ¡mara de telÃƒÂ©fono para vincularla al perfil de su mascota. Ã‚Â¡No se necesita aplicaciÃƒÂ³n para los buscadores!';
 
   @override
-  String get faqQuestion4 => '¿Cómo funciona el escaneo de códigos QR?';
+  String get faqQuestion4 =>
+      'Ã‚Â¿CÃƒÂ³mo funciona el escaneo de cÃƒÂ³digos QR?';
 
   @override
   String get faqAnswer4 =>
-      'Cualquiera puede escanear la etiqueta QR usando la cámara de su teléfono. Abre una página web con su información de contacto y detalles de la mascota para que puedan contactarlo de inmediato.';
+      'Cualquiera puede escanear la etiqueta QR usando la cÃƒÂ¡mara de su telÃƒÂ©fono. Abre una pÃƒÂ¡gina web con su informaciÃƒÂ³n de contacto y detalles de la mascota para que puedan contactarlo de inmediato.';
 
   @override
-  String get faqQuestion5 => '¿Quién puede registrar una mascota?';
+  String get faqQuestion5 => 'Ã‚Â¿QuiÃƒÂ©n puede registrar una mascota?';
 
   @override
   String get faqAnswer5 =>
-      'Cualquier dueño de mascota puede registrar a su perro, gato u otro animal de compañía.';
+      'Cualquier dueÃƒÂ±o de mascota puede registrar a su perro, gato u otro animal de compaÃƒÂ±ÃƒÂ­a.';
 
   @override
-  String get faqQuestion6 => '¿Cómo puedo cambiar mis datos?';
+  String get faqQuestion6 => 'Ã‚Â¿CÃƒÂ³mo puedo cambiar mis datos?';
 
   @override
   String get faqAnswer6 =>
-      'Vaya a Perfil → toque cualquier campo (Nombre, Correo electrónico, Teléfono, etc.) para editar y guardar.';
+      'Vaya a Perfil Ã¢â€ â€™ toque cualquier campo (Nombre, Correo electrÃƒÂ³nico, TelÃƒÂ©fono, etc.) para editar y guardar.';
 
   @override
-  String get faqQuestion7 => '¿Cómo puedo cambiar los datos de mi mascota?';
+  String get faqQuestion7 =>
+      'Ã‚Â¿CÃƒÂ³mo puedo cambiar los datos de mi mascota?';
 
   @override
   String get faqAnswer7 =>
-      'Vaya al perfil de su mascota y toque el botón de editar para actualizar el nombre, la raza, las fotos, etc.';
+      'Vaya al perfil de su mascota y toque el botÃƒÂ³n de editar para actualizar el nombre, la raza, las fotos, etc.';
 
   @override
-  String get faqQuestion8 => '¿Qué es un número de identificación de mascota?';
+  String get faqQuestion8 =>
+      'Ã‚Â¿QuÃƒÂ© es un nÃƒÂºmero de identificaciÃƒÂ³n de mascota?';
 
   @override
   String get faqAnswer8 =>
-      'Es un identificador único vinculado a la etiqueta QR de su mascota para una identificación rápida.';
+      'Es un identificador ÃƒÂºnico vinculado a la etiqueta QR de su mascota para una identificaciÃƒÂ³n rÃƒÂ¡pida.';
 
   @override
-  String get faqQuestion9 => 'Mi mascota está perdida, ¿qué debo hacer?';
+  String get faqQuestion9 =>
+      'Mi mascota estÃƒÂ¡ perdida, Ã‚Â¿quÃƒÂ© debo hacer?';
 
   @override
   String get faqAnswer9 =>
-      'Marque a su mascota como \"Perdida\" en la aplicación. Esto alerta a cualquiera que escanee la etiqueta y muestra su información de contacto de emergencia.';
+      'Marque a su mascota como \"Perdida\" en la aplicaciÃƒÂ³n. Esto alerta a cualquiera que escanee la etiqueta y muestra su informaciÃƒÂ³n de contacto de emergencia.';
 
   @override
   String get savedActivities => 'Actividades guardadas';
 
   @override
   String get deleteProfileWarning =>
-      '¡Advertencia! El perfil y todo su contenido se eliminarán permanentemente y no se podrán recuperar. Si tiene una suscripción Premium activa, desactívela en la configuración de suscripción de la App Store';
+      '¿Estás seguro de que quieres eliminar tu perfil? Esta acción no se puede deshacer y todos tus datos se eliminarán permanentemente.';
 
   @override
   String get yes => 'Sí';
 
   @override
-  String get no => 'NO';
+  String get no => 'No';
 
   @override
-  String get enterAddress => 'Ingresar dirección';
+  String get enterAddress => 'Ingresar direcciÃƒÂ³n';
 
   @override
-  String get errorEnterAddress => 'Por favor ingrese su dirección';
+  String get errorEnterAddress => 'Por favor ingrese su direcciÃƒÂ³n';
 
   @override
   String get enterFirstName => 'Ingrese el nombre';
@@ -1695,11 +1679,11 @@ class AppLocalizationsEs extends AppLocalizations {
   String get allowNotifications => 'Permitir notificaciones';
 
   @override
-  String get enterEmail => 'Ingresar correo electrónico';
+  String get enterEmail => 'Ingresar correo electrÃƒÂ³nico';
 
   @override
   String get errorEnterValidEmail =>
-      'Por favor ingrese un correo electrónico válido';
+      'Por favor ingrese un correo electrÃƒÂ³nico vÃƒÂ¡lido';
 
   @override
   String get genderPreferNotToSay => 'No quiero indicarlo';
@@ -1709,17 +1693,17 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get errorEnterValidPhone =>
-      'Por favor ingrese un número de teléfono válido';
+      'Por favor ingrese un nÃƒÂºmero de telÃƒÂ©fono vÃƒÂ¡lido';
 
   @override
   String get drinkCalculator => 'Calculadora de Bebida';
 
   @override
-  String get drinkFrequencyChartTitle => 'Frecuencia (veces por día)';
+  String get drinkFrequencyChartTitle => 'Frecuencia (veces por dÃƒÂ­a)';
 
   @override
   String get drinkCalcDescription =>
-      'Calcule la ingesta diaria de agua que su perro necesita\nsegún el peso y el nivel de actividad para\nuna hidratación saludable todos los días';
+      'Calcule la ingesta diaria de agua que su perro necesita\nsegÃƒÂºn el peso y el nivel de actividad para\nuna hidrataciÃƒÂ³n saludable todos los dÃƒÂ­as';
 
   @override
   String get currentWeight => 'Peso Actual';
@@ -1728,10 +1712,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get hintWeight => 'Peso';
 
   @override
-  String get yourDogWillNeed => 'Su perro necesitará';
+  String get yourDogWillNeed => 'Su perro necesitarÃƒÂ¡';
 
   @override
-  String get perDay => '/ día';
+  String get perDay => '/ dÃƒÂ­a';
 
   @override
   String get unitPounds => 'Libras';
@@ -1755,10 +1739,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get unitLiters => 'Litros';
 
   @override
-  String get unitUSFluidOunces => 'Onzas líquidas (EE. UU.)';
+  String get unitUSFluidOunces => 'Onzas lÃƒÂ­quidas (EE. UU.)';
 
   @override
-  String get unitUKFluidOunces => 'Onzas líquidas (Reino Unido)';
+  String get unitUKFluidOunces => 'Onzas lÃƒÂ­quidas (Reino Unido)';
 
   @override
   String get activityLevel => 'Nivel de actividad';
@@ -1832,7 +1816,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get documentsTitle => 'Documentos';
 
   @override
-  String get addDocument => 'Añadir Documento';
+  String get addDocument => 'AÃƒÂ±adir Documento';
 
   @override
   String documentCount(int count) {
@@ -1849,7 +1833,8 @@ class AppLocalizationsEs extends AppLocalizations {
   String get uploadFirstDocument => 'Toque + para subir su primer documento';
 
   @override
-  String get tryDifferentSearchTerm => 'Intente con otro término de búsqueda';
+  String get tryDifferentSearchTerm =>
+      'Intente con otro tÃƒÂ©rmino de bÃƒÂºsqueda';
 
   @override
   String get documentDeleted => 'Documento eliminado';
@@ -1871,23 +1856,23 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String deleteDocumentConfirmation(String title) {
-    return '¿Está seguro de que desea eliminar \"$title\"?';
+    return 'Ã‚Â¿EstÃƒÂ¡ seguro de que desea eliminar \"$title\"?';
   }
 
   @override
-  String get documentDeletedSuccess => 'Documento eliminado con éxito';
+  String get documentDeletedSuccess => 'Documento eliminado con ÃƒÂ©xito';
 
   @override
   String get documentDetails => 'Detalles del Documento';
 
   @override
-  String get category => 'Categoría';
+  String get category => 'CategorÃƒÂ­a';
 
   @override
   String get fileType => 'Tipo de Archivo';
 
   @override
-  String get fileSize => 'Tamaño del Archivo';
+  String get fileSize => 'TamaÃƒÂ±o del Archivo';
 
   @override
   String get uploadDate => 'Fecha de Subida';
@@ -1902,10 +1887,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get close => 'Cerrar';
 
   @override
-  String get documentTitle => 'Título del Documento';
+  String get documentTitle => 'TÃƒÂ­tulo del Documento';
 
   @override
-  String get documentUpdatedSuccess => 'Documento actualizado con éxito';
+  String get documentUpdatedSuccess => 'Documento actualizado con ÃƒÂ©xito';
 
   @override
   String get today => 'Hoy';
@@ -1924,7 +1909,7 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get catMedicalCare => 'Médico y Cuidados';
+  String get catMedicalCare => 'MÃƒÂ©dico y Cuidados';
 
   @override
   String get catLegalLicensing => 'Legal y Licencias';
@@ -1936,16 +1921,16 @@ class AppLocalizationsEs extends AppLocalizations {
   String get catLearningBehavior => 'Aprendizaje y Comportamiento';
 
   @override
-  String get catTransitBoarding => 'Tránsito y Alojamiento';
+  String get catTransitBoarding => 'TrÃƒÂ¡nsito y Alojamiento';
 
   @override
-  String get catCriticalSupport => 'Crítico y Soporte';
+  String get catCriticalSupport => 'CrÃƒÂ­tico y Soporte';
 
   @override
   String get catBloodlineStock => 'Linaje y Stock';
 
   @override
-  String get catNutritionIntake => 'Nutrición e Ingesta';
+  String get catNutritionIntake => 'NutriciÃƒÂ³n e Ingesta';
 
   @override
   String get catMaintenanceLook => 'Mantenimiento y Aspecto';
@@ -1957,7 +1942,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get catAll => 'Todo';
 
   @override
-  String get documentUploadedSuccess => '¡Documento subido con éxito!';
+  String get documentUploadedSuccess => 'Ã‚Â¡Documento subido con ÃƒÂ©xito!';
 
   @override
   String documentUploadFailed(Object error) {
@@ -1965,22 +1950,22 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get addDocumentDetails => 'Añadir Detalles del Documento';
+  String get addDocumentDetails => 'AÃƒÂ±adir Detalles del Documento';
 
   @override
-  String get docVaccinationRecords => 'Registros de Vacunación';
+  String get docVaccinationRecords => 'Registros de VacunaciÃƒÂ³n';
 
   @override
-  String get docPetInsurancePolicy => 'Póliza de Seguro de Mascota';
+  String get docPetInsurancePolicy => 'PÃƒÂ³liza de Seguro de Mascota';
 
   @override
-  String get docAdoptionCertificate => 'Certificado de Adopción';
+  String get docAdoptionCertificate => 'Certificado de AdopciÃƒÂ³n';
 
   @override
   String get docTrainingCertificate => 'Certificado de Entrenamiento';
 
   @override
-  String get docMedicalCheckupReport => 'Informe de Chequeo Médico';
+  String get docMedicalCheckupReport => 'Informe de Chequeo MÃƒÂ©dico';
 
   @override
   String get labelCountry => 'Country';
@@ -2007,22 +1992,22 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dateHint => 'MM/DD/YYYY';
 
   @override
-  String get okAction => 'OK';
+  String get okAction => 'Aceptar';
 
   @override
   String get dateRangeError => 'Please enter a date between 2020-2030';
 
   @override
-  String get enjoyingApp => 'Enjoying the app?';
+  String get enjoyingApp => '¿Estás disfrutando de Dog Breed Scanner?';
 
   @override
-  String get tapToRate => 'Tap to rate:';
+  String get tapToRate => 'Toca una estrella para calificar tu experiencia';
 
   @override
-  String get rateUsAction => 'Rate Us';
+  String get rateUsAction => 'Enviar Calificación';
 
   @override
-  String get selectStars => 'Select Stars';
+  String get selectStars => 'Primero selecciona estrellas';
 
   @override
   String get sorryToHear => 'We\'re sorry to hear that';
@@ -2035,96 +2020,60 @@ class AppLocalizationsEs extends AppLocalizations {
   String get feedbackHint => 'Tell us what we can improve...';
 
   @override
-  String get submitFeedback => 'Submit Feedback';
+  String get submitFeedback => 'Enviar Comentarios';
 
   @override
-  String get errorAppStore =>
-      'Could not open app store. Please try again later.';
+  String get errorAppStore => 'No se pudo abrir la tienda de aplicaciones';
 
   @override
-  String get errorOpenStore => 'Error opening app store.';
+  String get errorOpenStore => 'No se pudo abrir la tienda';
 
   @override
   String errorShare(Object error) {
-    return 'Unable to open share options. Error: $error';
+    return 'Error al compartir: $error';
   }
 
   @override
-  String get linkCopied =>
-      'Link copied to clipboard! You can now paste and share it.';
+  String get linkCopied => 'Enlace copiado al portapapeles';
 
   @override
-  String get copyFailed => 'Failed to copy to clipboard.';
+  String get copyFailed => 'Error al copiar el enlace';
 
   @override
-  String get shareApp => 'Share App';
+  String get shareApp => 'Compartir App';
 
   @override
-  String get copyLink => 'Copy Link';
+  String get copyLink => 'Copiar Enlace';
 
   @override
-  String get shareWhatsApp => 'Share via WhatsApp';
+  String get shareWhatsApp => 'Compartir por WhatsApp';
 
   @override
-  String get shareEmail => 'Share via Email';
+  String get shareEmail => 'Compartir por Correo';
 
   @override
-  String get shareSMS => 'Share via SMS';
+  String get shareSMS => 'Compartir por SMS';
 
   @override
-  String get chooseShare => 'Choose how you want to share:';
+  String get chooseShare => 'Elige cómo compartir:';
 
   @override
-  String get copy => 'Copy';
+  String get copy => 'Copiar';
 
   @override
   String get whatsapp => 'WhatsApp';
 
   @override
-  String get more => 'More';
+  String get more => 'Más';
 
   @override
   String get feedbackThanks => 'Thank you for your feedback!';
 
   @override
-  String get themeTitle => 'Theme';
-
-  @override
-  String get darkTheme => 'Dark';
-
-  @override
-  String get lightTheme => 'Light';
-
-  @override
   String get myFavorites => 'My Favorites';
 
   @override
-  String get feedbackTitle => 'Feedback';
-
-  @override
-  String get rateUsTitle => 'Rate us';
-
-  @override
-  String get shareTitle => 'Share';
-
-  @override
   String get myPremiumService => 'My Premium Service';
-
-  @override
-  String get shareMessageBody =>
-      'Check out Dog Breed - an amazing app for dog lovers!';
-
-  @override
-  String get shareIOS => '📱 Discover Dog Breed on the App Store!';
-
-  @override
-  String get shareAndroid => '📱 Get Dog Breed on Google Play!';
-
-  @override
-  String get shareDefault => '📱 Check out Dog Breed!';
-
-  @override
-  String get shareSubject => 'Dog Breed App';
 
   @override
   String get dashboardHome => 'Dashboard Home';
@@ -2223,19 +2172,19 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get deleteAllPetsConfirmation =>
-      '¿Está seguro de que desea eliminar todas las mascotas? Esta acción no se puede deshacer.';
+      'Ã‚Â¿EstÃƒÂ¡ seguro de que desea eliminar todas las mascotas? Esta acciÃƒÂ³n no se puede deshacer.';
 
   @override
-  String get dialogUploadPhoto => 'Upload Photo';
+  String get dialogUploadPhoto => 'Subir foto';
 
   @override
-  String get dialogUploadVideo => 'Upload Video';
+  String get dialogUploadVideo => 'Subir video';
 
   @override
-  String get pickerOpenCamera => 'Open Camera';
+  String get pickerOpenCamera => 'Abrir cÃ¡mara';
 
   @override
-  String get pickerUploadGallery => 'Upload from Gallery';
+  String get pickerUploadGallery => 'Subir desde la galerÃ­a';
 
   @override
   String errorPleaseEnterAmountFor(String activityName) {
@@ -2246,4 +2195,366 @@ class AppLocalizationsEs extends AppLocalizations {
   String errorNameOrTypeRequiredFor(String activityName) {
     return 'Name or Type required for $activityName';
   }
+
+  @override
+  String get labelBirthday => 'Birthday';
+
+  @override
+  String get errorFillPetName => 'Please Fill Pet Name';
+
+  @override
+  String get supportedBreeds => 'Razas admitidas';
+
+  @override
+  String favoriteCount(int count) {
+    return '$count Favorito';
+  }
+
+  @override
+  String get breedNameBulldog => 'Bulldog';
+
+  @override
+  String get breedDescBulldog =>
+      'Esperanza de vida: 8-10 aÃƒÂ±os.\nRaza braquicÃƒÂ©fala que requiere\ncuidados especiales en clima caluroso.';
+
+  @override
+  String get breedNameBeagle => 'Beagle';
+
+  @override
+  String get breedDescBeagle =>
+      'Esperanza de vida: 12-15 aÃƒÂ±os.\nPerros amigables y curiosos con\nfuertes instintos de caza.';
+
+  @override
+  String get breedNameYorkshireTerrier => 'Yorkshire Terrier';
+
+  @override
+  String get breedDescYorkshireTerrier =>
+      'Esperanza de vida: 13-16 aÃƒÂ±os.\nPerros de compaÃƒÂ±ÃƒÂ­a pequeÃƒÂ±os pero enÃƒÂ©rgicos\nque requieren aseo regular.';
+
+  @override
+  String get breedNameCavalierKingCharlesSpaniel =>
+      'Cavalier King Charles Spaniel';
+
+  @override
+  String get breedDescCavalierKingCharlesSpaniel =>
+      'Esperanza de vida: 9-14 aÃƒÂ±os.\nPerros de compaÃƒÂ±ÃƒÂ­a cariÃƒÂ±osos y gentiles,\npropensos a enfermedades cardÃƒÂ­acas.';
+
+  @override
+  String get breedNameEnglishSpringerSpaniel => 'Springer Spaniel InglÃƒÂ©s';
+
+  @override
+  String get breedDescEnglishSpringerSpaniel =>
+      'Esperanza de vida: 12-14 aÃƒÂ±os.\nPerros de caza enÃƒÂ©rgicos que necesitan\nmucho ejercicio.';
+
+  @override
+  String get breedNameBullmastiff => 'Bullmastiff';
+
+  @override
+  String get breedDescBullmastiff =>
+      'Esperanza de vida: 8-10 aÃƒÂ±os.\nPerro guardiÃƒÂ¡n grande y poderoso\nque requiere socializaciÃƒÂ³n temprana.';
+
+  @override
+  String get breedNameEnglishCockerSpaniel => 'Cocker Spaniel InglÃƒÂ©s';
+
+  @override
+  String get breedDescEnglishCockerSpaniel =>
+      'Esperanza de vida: 12-14 aÃƒÂ±os.\nPerros deportivos alegres y activos\nque necesitan limpieza regular de oÃƒÂ­dos.';
+
+  @override
+  String get breedNameAiredaleTerrier => 'Airedale Terrier';
+
+  @override
+  String get breedDescAiredaleTerrier =>
+      'Esperanza de vida: 10-13 aÃƒÂ±os.\nLa raza de terrier mÃƒÂ¡s grande -\ninteligente, enÃƒÂ©rgico, versÃƒÂ¡til.';
+
+  @override
+  String get breedNameTerrier => 'Terrier';
+
+  @override
+  String get breedDescTerrier =>
+      'Esperanza de vida: VarÃƒÂ­a.\nPerros enÃƒÂ©rgicos y luchadores criados\npara cazar alimaÃƒÂ±as.';
+
+  @override
+  String get breedNameWhippet => 'Whippet';
+
+  @override
+  String get breedDescWhippet =>
+      'Esperanza de vida: 12-15 aÃƒÂ±os.\nLebrel gentil y cariÃƒÂ±oso\nque necesita correr regularmente.';
+
+  @override
+  String get breedNameBullTerrier => 'Bull Terrier';
+
+  @override
+  String get breedDescBullTerrier =>
+      'Esperanza de vida: 10-14 aÃƒÂ±os.\nPerros musculosos con distintiva\ncabeza en forma de huevo.';
+
+  @override
+  String get breedNameGoldenRetriever => 'Golden Retriever';
+
+  @override
+  String get breedDescGoldenRetriever =>
+      'Esperanza de vida: 10-12 aÃƒÂ±os.\nPerros familiares amigables e inteligentes,\npropensos a la displasia de cadera.';
+
+  @override
+  String get breedNameOldEnglishSheepdog => 'Antiguo Pastor InglÃƒÂ©s';
+
+  @override
+  String get breedDescOldEnglishSheepdog =>
+      'Esperanza de vida: 10-12 aÃƒÂ±os.\nPerros pastores grandes y peludos\nque requieren aseo extenso.';
+
+  @override
+  String get breedNameBorderCollie => 'Border Collie';
+
+  @override
+  String get breedDescBorderCollie =>
+      'Esperanza de vida: 12-15 aÃƒÂ±os.\nPerros altamente inteligentes que necesitan\nejercicio mental extenso.';
+
+  @override
+  String get breedNameGreyhound => 'Galgo';
+
+  @override
+  String get breedDescGreyhound =>
+      'Esperanza de vida: 10-14 aÃƒÂ±os.\nLa raza de perro mÃƒÂ¡s rÃƒÂ¡pida - baja energÃƒÂ­a\nen interiores, gentil y tranquilo.';
+
+  @override
+  String get breedNameJackRussellTerrier => 'Jack Russell Terrier';
+
+  @override
+  String get breedDescJackRussellTerrier =>
+      'Esperanza de vida: 13-16 aÃƒÂ±os.\nTerriers pequeÃƒÂ±os pero intrÃƒÂ©pidos\ncon altos niveles de energÃƒÂ­a.';
+
+  @override
+  String get breedNameBloodhound => 'Perro de San Huberto';
+
+  @override
+  String get breedDescBloodhound =>
+      'Esperanza de vida: 10-12 aÃƒÂ±os.\nPerros de rastreo excepcionales\nque requieren paciencia en el entrenamiento.';
+
+  @override
+  String get breedNameEnglishPointer => 'Pointer InglÃƒÂ©s';
+
+  @override
+  String get breedDescEnglishPointer =>
+      'Esperanza de vida: 12-15 aÃƒÂ±os.\nPerros de muestra elegantes con alta energÃƒÂ­a\ny fuerte instinto de seÃƒÂ±alar.';
+
+  @override
+  String get breedNameStaffordshireBullTerrier => 'Staffordshire Bull Terrier';
+
+  @override
+  String get breedDescStaffordshireBullTerrier =>
+      'Esperanza de vida: 12-14 aÃƒÂ±os.\nPerros musculosos y cariÃƒÂ±osos\nque necesitan socializaciÃƒÂ³n adecuada.';
+
+  @override
+  String get breedNameEnglishFoxhound => 'Foxhound InglÃƒÂ©s';
+
+  @override
+  String get breedDescEnglishFoxhound =>
+      'Esperanza de vida: 10-13 aÃƒÂ±os.\nPerros de caza en jaurÃƒÂ­a criados para\nresistencia, necesitan mucho ejercicio.';
+
+  @override
+  String get breedNameWireFoxTerrier => 'Fox Terrier de Pelo Duro';
+
+  @override
+  String get breedDescWireFoxTerrier =>
+      'Esperanza de vida: 12-15 aÃƒÂ±os.\nPerros alertas y rÃƒÂ¡pidos con\npelaje de alambre distintivo.';
+
+  @override
+  String get breedNameManchesterTerrier => 'Manchester Terrier';
+
+  @override
+  String get breedDescManchesterTerrier =>
+      'Esperanza de vida: 14-16 aÃƒÂ±os.\nTerriers elegantes y estilizados\nconocidos por sus habilidades para cazar ratas.';
+
+  @override
+  String get breedNameBedlingtonTerrier => 'Bedlington Terrier';
+
+  @override
+  String get breedDescBedlingtonTerrier =>
+      'Esperanza de vida: 12-14 aÃƒÂ±os.\nApariencia distintiva de cordero,\nenÃƒÂ©rgico pero gentil.';
+
+  @override
+  String get breedNameBostonTerrier => 'Boston Terrier';
+
+  @override
+  String get breedDescBostonTerrier =>
+      'Esperanza de vida: 11-13 aÃƒÂ±os.\nAmigable \"Caballero Americano\"\ncon marcas tipo esmoquin.';
+
+  @override
+  String get breedNameEnglishSetter => 'Setter InglÃƒÂ©s';
+
+  @override
+  String get breedDescEnglishSetter =>
+      'Esperanza de vida: 10-12 aÃƒÂ±os.\nPerros de muestra elegantes con\npelaje moteado, compaÃƒÂ±eros gentiles.';
+
+  @override
+  String get breedNameBorderTerrier => 'Border Terrier';
+
+  @override
+  String get breedDescBorderTerrier =>
+      'Esperanza de vida: 12-15 aÃƒÂ±os.\nTerriers pequeÃƒÂ±os y resistentes criados\npara la caza del zorro.';
+
+  @override
+  String get favoritesTitle => 'Favoritos';
+
+  @override
+  String get scanTabTitle => 'Escanear';
+
+  @override
+  String get noFavoriteBreedsMessage => 'AÃƒÂºn no hay razas favoritas';
+
+  @override
+  String dialogShareTitle(String appName) {
+    return 'Compartir $appName';
+  }
+
+  @override
+  String get shareTags => '#DogBreed #Dogs #Pets';
+
+  @override
+  String errorLaunchUrl(String url) {
+    return 'No se pudo abrir $url';
+  }
+
+  @override
+  String get feedbackTitle => 'Comentarios';
+
+  @override
+  String get feedbackDescribeIssue =>
+      'Ayúdanos a mejorar tu experiencia\nDescribe el problema que estás teniendo';
+
+  @override
+  String get feedbackTellUsMore => 'Cuéntanos más (opcional)';
+
+  @override
+  String get submitButton => 'Enviar';
+
+  @override
+  String get feedbackIssueLagging => 'Retraso';
+
+  @override
+  String get feedbackIssueCrashes => 'Bloqueos';
+
+  @override
+  String get feedbackIssueAds => 'Anuncios molestos';
+
+  @override
+  String get feedbackIssueOther => 'Otro';
+
+  @override
+  String get feedbackIssueNotWorking => 'No funciona';
+
+  @override
+  String get feedbackChooseEmailApp =>
+      'Elige tu aplicación de correo para enviar comentarios:';
+
+  @override
+  String get feedbackSendEmail => 'Enviar Correo';
+
+  @override
+  String get feedbackEmailSubject => 'DogBreed: Comentarios';
+
+  @override
+  String get feedbackIssueType => 'Tipo de problema:';
+
+  @override
+  String get feedbackDetails => 'Detalles:';
+
+  @override
+  String get feedbackGeneral => 'Comentarios generales sobre la aplicación';
+
+  @override
+  String get feedbackManualEmailTitle => 'Aplicación de Correo no Encontrada';
+
+  @override
+  String get feedbackManualEmailBody =>
+      'Por favor copia la información a continuación y envíala a:';
+
+  @override
+  String get feedbackSubject => 'Asunto:';
+
+  @override
+  String get feedbackMessage => 'Mensaje:';
+
+  @override
+  String get feedbackManualEmailSuccess =>
+      '¡Comentarios enviados exitosamente!';
+
+  @override
+  String get feedbackSelectIssue => 'Por favor selecciona un tipo de problema';
+
+  @override
+  String get loading => 'Cargando...';
+
+  @override
+  String get editProfile => 'Editar Perfil';
+
+  @override
+  String get profileRecentScan => 'Escaneos Recientes';
+
+  @override
+  String get profileHistory => 'Historial de Escaneos';
+
+  @override
+  String get notifications => 'Notificaciones';
+
+  @override
+  String get appLanguageTitle => 'Idioma de la App';
+
+  @override
+  String get premiumSubscription => 'Suscripción Premium';
+
+  @override
+  String get profileMyFavorites => 'Mis Favoritos';
+
+  @override
+  String get rateUsTitle => 'Calificarnos';
+
+  @override
+  String get shareTitle => 'Compartir App';
+
+  @override
+  String get faq => 'Preguntas Frecuentes';
+
+  @override
+  String get termsOfUse => 'Términos de Uso';
+
+  @override
+  String get privacyPolicy => 'Política de Privacidad';
+
+  @override
+  String get deleteOwnerProfile => 'Eliminar Perfil';
+
+  @override
+  String get logout => 'Cerrar Sesión';
+
+  @override
+  String get themeTitle => 'Tema';
+
+  @override
+  String get darkTheme => 'Oscuro';
+
+  @override
+  String get lightTheme => 'Claro';
+
+  @override
+  String get aiAppName => 'Escáner de Razas de Perros';
+
+  @override
+  String get shareMessageBody =>
+      '¡Echa un vistazo a Dog Breed Scanner - la aplicación de identificación de razas de perros con IA! 🐕';
+
+  @override
+  String get shareIOS => '¡Mira Dog Breed Scanner en la App Store!';
+
+  @override
+  String get shareAndroid => '¡Mira Dog Breed Scanner en Google Play!';
+
+  @override
+  String get shareDefault => '¡Mira Dog Breed Scanner!';
+
+  @override
+  String get shareDownloadNow => 'Descargar ahora: ';
+
+  @override
+  String get shareSubject => 'App Dog Breed Scanner';
 }

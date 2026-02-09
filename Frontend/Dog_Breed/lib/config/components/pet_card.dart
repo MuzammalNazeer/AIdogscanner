@@ -199,7 +199,7 @@ class PetCard extends StatelessWidget {
           ),
           SizedBox(height: 5.h),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2.w),
+            padding: EdgeInsets.symmetric(horizontal: 18.w),
             child: Wrap(
               spacing: 12.w,
               runSpacing: 16.h,

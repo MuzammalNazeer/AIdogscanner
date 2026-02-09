@@ -38,7 +38,7 @@
     "subscriptionDisclaimer":  "Dengan melanjutkan, Anda menyetujui Ketentuan dan Kebijakan Privasi kami, langganan ditagih setelah uji coba berakhir dan akan diperpanjang secara otomatis. Batalkan langganan kapan saja sebelum uji coba berakhir untuk menghindari biaya.",
     "welcomeBack":  "Selamat datang kembali, ",
     "searchForDog":  "Cari Anjing",
-    "tryPremiumFeatures":  "Coba Fitur Premium 🌵",
+    "tryPremiumFeatures":  "Coba Fitur Premium Ã°Å¸Å’Âµ",
     "premiumOfferDescription":  "Klaim penawaran Anda sekarang dan dapatkan pengenalan tanpa batas, pemeriksaan kesehatan, dan lainnya",
     "getIt":  "DAPATKAN",
     "hygiene":  "Kebersihan",
@@ -55,7 +55,7 @@
     "foodManagementDescription":  "Lacak makanan dan kelola \nnutrisi harian hewan peliharaan Anda",
     "checkSchedule":  "Cek Jadwal",
     "unknownBreed":  "Ras Tidak Diketahui",
-    "savedScanMessage":  "✅ Tersimpan: {breedName} (keyakinan {confidence}%)",
+    "savedScanMessage":  "Ã¢Å“â€¦ Tersimpan: {breedName} (keyakinan {confidence}%)",
     "errorMessage":  "Kesalahan: {error}",
     "skip":  "Lewati",
     "next":  "Berikutnya",
@@ -67,7 +67,7 @@
     "onboardingTitle3":  "Pertahankan Kualitas Gambar",
     "onboardingDesc3":  "Ambil seluruh tubuh jika memungkinkan. Kepala harus\nterlihat.",
     "onboardingTitle4":  "Pastikan Anjing Anda Tetap\n Sehat dan Aktif.",
-    "onboardingDesc4":  "Kelola setiap detail anjing Anda—kesehatan, foto,\naktivitas dan banyak lagi di satu tempat sederhana.",
+    "onboardingDesc4":  "Kelola setiap detail anjing AndaÃ¢â‚¬â€kesehatan, foto,\naktivitas dan banyak lagi di satu tempat sederhana.",
     "calendarTabActivities":  "Aktivitas",
     "calendarTabReminders":  "Pengingat",
     "calendarTabProgress":  "Kemajuan",
@@ -176,8 +176,8 @@
     "unitKg":  "kg",
     "unitInches":  "inci",
     "unitCm":  "cm",
-    "unitF":  "°F",
-    "unitC":  "°C",
+    "unitF":  "Ã‚Â°F",
+    "unitC":  "Ã‚Â°C",
     "unitKm":  "km",
     "unitMi":  "mi",
     "actionAdd":  "Tambah nama minuman atau jenis",
@@ -582,7 +582,7 @@
                                          }
                     },
     "justNow":  "Baru saja",
-    "rescannedSuccess":  "✅ Dipindai ulang: {breedName} (keyakinan {confidence}%)",
+    "rescannedSuccess":  "Ã¢Å“â€¦ Dipindai ulang: {breedName} (keyakinan {confidence}%)",
     "@rescannedSuccess":  {
                               "placeholders":  {
                                                    "breedName":  {
@@ -616,7 +616,7 @@
     "faqQuestion5":  "Siapa yang bisa mendaftarkan hewan peliharaan?",
     "faqAnswer5":  "Setiap pemilik hewan peliharaan dapat mendaftarkan anjing, kucing, atau hewan pendamping lainnya.",
     "faqQuestion6":  "Bagaimana cara mengubah data saya?",
-    "faqAnswer6":  "Buka Profil → ketuk bidang apa pun (Nama, Email, Telepon, dll.) untuk mengedit dan menyimpan.",
+    "faqAnswer6":  "Buka Profil Ã¢â€ â€™ ketuk bidang apa pun (Nama, Email, Telepon, dll.) untuk mengedit dan menyimpan.",
     "faqQuestion7":  "Bagaimana cara mengubah data hewan peliharaan saya?",
     "faqAnswer7":  "Buka profil hewan peliharaan Anda dan ketuk tombol edit untuk memperbarui nama, ras, foto, dll.",
     "faqQuestion8":  "Apa itu nomor ID hewan peliharaan?",
@@ -829,9 +829,9 @@
     "dialogGot_it":  "Got it",
     "actionAddVeterinary":  "+ Add veterinary",
     "shareMessageBody":  "Check out Dog Breed - an amazing app for dog lovers!",
-    "shareIOS":  "📱 Discover Dog Breed on the App Store!",
-    "shareAndroid":  "📱 Get Dog Breed on Google Play!",
-    "shareDefault":  "📱 Check out Dog Breed!",
+    "shareIOS":  "Ã°Å¸â€œÂ± Discover Dog Breed on the App Store!",
+    "shareAndroid":  "Ã°Å¸â€œÂ± Get Dog Breed on Google Play!",
+    "shareDefault":  "Ã°Å¸â€œÂ± Check out Dog Breed!",
     "shareSubject":  "Dog Breed App",
     "deleteAll":  "Hapus Semua",
     "deleteAllPetsConfirmation":  "Apakah Anda yakin ingin menghapus semua hewan peliharaan? Tindakan ini tidak dapat dibatalkan.",
@@ -850,5 +850,251 @@
                                                                                   "type":  "String"
                                                                               }
                                                          }
-                                    }
+                                    },
+    "labelBirthday":  "Birthday",
+    "errorFillPetName":  "Please Fill Pet Name",
+    "supportedBreeds":  "Ras yang Didukung",
+    "favoriteCount":  "{count} Favorit",
+    "@favoriteCount":  {
+                           "placeholders":  {
+                                                "count":  {
+                                                              "type":  "int"
+                                                          }
+                                            }
+                       },
+    "breedNameBulldog":  "Bulldog",
+    "breedDescBulldog":  "Harapan hidup: 8-10 tahun.\nRas brachycephalic yang membutuhkan\nperawatan khusus saat cuaca panas.",
+    "breedNameBeagle":  "Beagle",
+    "breedDescBeagle":  "Harapan hidup: 12-15 tahun.\nAnjing ramah dan penuh rasa ingin tahu dengan\ninsting berburu yang kuat.",
+    "breedNameYorkshireTerrier":  "Yorkshire Terrier",
+    "breedDescYorkshireTerrier":  "Harapan hidup: 13-16 tahun.\nAnjing pendamping kecil namun energik\nyang membutuhkan perawatan rutin.",
+    "breedNameCavalierKingCharlesSpaniel":  "Cavalier King Charles Spaniel",
+    "breedDescCavalierKingCharlesSpaniel":  "Harapan hidup: 9-14 tahun.\nAnjing pendamping yang penyayang dan lembut\nrentan terhadap masalah jantung.",
+    "breedNameEnglishSpringerSpaniel":  "Springer Spaniel Inggris",
+    "breedDescEnglishSpringerSpaniel":  "Harapan hidup: 12-14 tahun.\nAnjing pemburu yang energik dan membutuhkan\nbanyak latihan.",
+    "breedNameBullmastiff":  "Bullmastiff",
+    "breedDescBullmastiff":  "Harapan hidup: 8-10 tahun.\nRas penjaga besar dan kuat\nyang membutuhkan sosialisasi sejak dini.",
+    "breedNameEnglishCockerSpaniel":  "Cocker Spaniel Inggris",
+    "breedDescEnglishCockerSpaniel":  "Harapan hidup: 12-14 tahun.\nAnjing olahraga yang ceria dan aktif\nmembutuhkan pembersihan telinga secara rutin.",
+    "breedNameAiredaleTerrier":  "Airedale Terrier",
+    "breedDescAiredaleTerrier":  "Harapan hidup: 10-13 tahun.\nRas terrier terbesar -\ncerdas, energik, serbaguna.",
+    "breedNameTerrier":  "Terrier",
+    "breedDescTerrier":  "Harapan hidup: Bervariasi.\nAnjing energik dan berani yang dibiakkan\nuntuk memburu hama.",
+    "breedNameWhippet":  "Whippet",
+    "breedDescWhippet":  "Harapan hidup: 12-15 tahun.\nAnjing pemburu yang lembut dan penyayang\nmembutuhkan lari rutin.",
+    "breedNameBullTerrier":  "Bull Terrier",
+    "breedDescBullTerrier":  "Harapan hidup: 10-14 tahun.\nAnjing berotot dengan kepala berbentuk\ntelur yang khas.",
+    "breedNameGoldenRetriever":  "Golden Retriever",
+    "breedDescGoldenRetriever":  "Harapan hidup: 10-12 tahun.\nAnjing keluarga yang ramah dan cerdas\nrentan terhadap displasia pinggul.",
+    "breedNameOldEnglishSheepdog":  "Old English Sheepdog",
+    "breedDescOldEnglishSheepdog":  "Harapan hidup: 10-12 tahun.\nAnjing penggembala besar dan berbulu lebat\nyang membutuhkan perawatan ekstensif.",
+    "breedNameBorderCollie":  "Border Collie",
+    "breedDescBorderCollie":  "Harapan hidup: 12-15 tahun.\nAnjing yang sangat cerdas dan membutuhkan\nlatihan mental yang ekstensif.",
+    "breedNameGreyhound":  "Greyhound",
+    "breedDescGreyhound":  "Harapan hidup: 10-14 tahun.\nRas anjing tercepat - energi rendah\ndi dalam ruangan, lembut dan tenang.",
+    "breedNameJackRussellTerrier":  "Jack Russell Terrier",
+    "breedDescJackRussellTerrier":  "Harapan hidup: 13-16 tahun.\nTerrier kecil namun tak kenal takut\ndengan tingkat energi tinggi.",
+    "breedNameBloodhound":  "Bloodhound",
+    "breedDescBloodhound":  "Harapan hidup: 10-12 tahun.\nAnjing pelacak aroma yang luar biasa\nmembutuhkan kesabaran dalam pelatihan.",
+    "breedNameEnglishPointer":  "English Pointer",
+    "breedDescEnglishPointer":  "Harapan hidup: 12-15 tahun.\nAnjing burung elegan dengan energi tinggi\ndan insting menunjuk yang kuat.",
+    "breedNameStaffordshireBullTerrier":  "Staffordshire Bull Terrier",
+    "breedDescStaffordshireBullTerrier":  "Harapan hidup: 12-14 tahun.\nAnjing berotot dan penyayang\nyang membutuhkan sosialisasi yang tepat.",
+    "breedNameEnglishFoxhound":  "Foxhound Inggris",
+    "breedDescEnglishFoxhound":  "Harapan hidup: 10-13 tahun.\nAnjing pemburu kawanan yang dibiakkan untuk\nketahanan, butuh banyak latihan.",
+    "breedNameWireFoxTerrier":  "Wire Fox Terrier",
+    "breedDescWireFoxTerrier":  "Harapan hidup: 12-15 tahun.\nAnjing waspada dan cepat dengan\nbulu wiry yang khas.",
+    "breedNameManchesterTerrier":  "Manchester Terrier",
+    "breedDescManchesterTerrier":  "Harapan hidup: 14-16 tahun.\nTerrier ramping dan elegan\ndikenal karena kemampuan menangkap tikus.",
+    "breedNameBedlingtonTerrier":  "Bedlington Terrier",
+    "breedDescBedlingtonTerrier":  "Harapan hidup: 12-14 tahun.\nPenampilan khas seperti domba,\nenergik namun lembut.",
+    "breedNameBostonTerrier":  "Boston Terrier",
+    "breedDescBostonTerrier":  "Harapan hidup: 11-13 tahun.\n\"Gentleman Amerika\" yang ramah\ndengan tanda seperti tuksedo.",
+    "breedNameEnglishSetter":  "Setter Inggris",
+    "breedDescEnglishSetter":  "Harapan hidup: 10-12 tahun.\nAnjing burung elegan dengan\nbulu berbintik, pendamping yang lembut.",
+    "breedNameBorderTerrier":  "Border Terrier",
+    "breedDescBorderTerrier":  "Harapan hidup: 12-15 tahun.\nTerrier kecil yang tangguh dibiakkan\nuntuk berburu rubah.",
+    "favoritesTitle":  "Favorit",
+    "scanTabTitle":  "Pindai",
+    "noFavoriteBreedsMessage":  "Belum ada ras favorit",
+    "feedbackIssueLagging":  "Lagging Issue",
+    "feedbackIssueCrashes":  "App Crashes",
+    "feedbackIssueAds":  "Too Many Ads",
+    "feedbackIssueOther":  "Other Problem",
+    "feedbackIssueNotWorking":  "Doesn\u0027t Work",
+    "feedbackChooseEmailApp":  "Please choose an email app to send your feedback to:",
+    "feedbackSendEmail":  "Send Email",
+    "feedbackEmailSubject":  "DogBreed: Feedback",
+    "feedbackIssueType":  "Issue Type:",
+    "feedbackDetails":  "Feedback Details:",
+    "feedbackGeneral":  "General Feedback",
+    "feedbackManualEmailTitle":  "Send Email Manually",
+    "feedbackManualEmailBody":  "Please send an email to:",
+    "feedbackSubject":  "Subject:",
+    "feedbackMessage":  "Message:",
+    "feedbackManualEmailSuccess":  "Thank you! Please send the email manually.",
+    "feedbackSelectIssue":  "Please select an issue",
+    "feedbackDescribeIssue":  "Could You Describe The Issue\nYou\u0027re Experiencing",
+    "feedbackTellUsMore":  "Please Tell Us More Details...",
+    "submitButton":  "Submit",
+    "@activityCount":  {
+                           "placeholders":  {
+                                                "count":  {
+                                                              "type":  "int"
+                                                          }
+                                            }
+                       },
+    "@documentCount":  {
+                           "placeholders":  {
+                                                "count":  {
+                                                              "type":  "int"
+                                                          }
+                                            }
+                       },
+    "@deleteDocumentConfirmation":  {
+                                        "placeholders":  {
+                                                             "title":  {
+                                                                           "type":  "String"
+                                                                       }
+                                                         }
+                                    },
+    "@daysAgoShort":  {
+                          "placeholders":  {
+                                               "count":  {
+                                                             "type":  "int"
+                                                         }
+                                           }
+                      },
+    "@weeksAgo":  {
+                      "placeholders":  {
+                                           "count":  {
+                                                         "type":  "int"
+                                                     }
+                                       }
+                  },
+    "@documentUploadFailed":  {
+                                  "placeholders":  {
+                                                       "error":  {
+                                                                     "type":  "Object"
+                                                                 }
+                                                   }
+                              },
+    "dialogUploadPhoto":  "Unggah Foto",
+    "dialogUploadVideo":  "Unggah Video",
+    "pickerOpenCamera":  "Buka Kamera",
+    "pickerUploadGallery":  "Unggah dari Galeri",
+    "profileRecentScan":  "Pemindaian Terbaru",
+    "profileHistory":  "Riwayat",
+    "profileMyFavorites":  "Favorit Saya",
+    "shareDownloadNow":  "Download now: ",
+    "dialogShareTitle":  "Share {appName}",
+    "@dialogShareTitle":  {
+                              "placeholders":  {
+                                                   "appName":  {
+                                                                   "type":  "String"
+                                                               }
+                                               }
+                          },
+    "aiAppName":  "AI Dog Breed",
+    "profileMyPets":  "Hewan Peliharaan Saya",
+    "profilePro":  "Pro",
+    "profileNotifications":  "Notifikasi",
+    "profileSettings":  "Pengaturan",
+    "profileAboutApp":  "Tentang Aplikasi",
+    "profileShareApp":  "Bagikan Aplikasi",
+    "profileRateApp":  "Beri Nilai Aplikasi",
+    "profilePrivacyPolicy":  "Kebijakan Privasi",
+    "profileTermsConditions":  "Syarat \u0026 Ketentuan",
+    "profileSignOut":  "Keluar",
+    "profileDeleteAccount":  "Hapus Akun",
+    "profileEditProfile":  "Edit Profil",
+    "profileChangePassword":  "Ubah Kata Sandi",
+    "profileLanguage":  "Bahasa",
+    "profileFeedback":  "Masukan",
+    "shareTags":  "#DogBreed #Dogs #Pets",
+    "errorLaunchUrl":  "Could not launch {url}",
+    "@errorLaunchUrl":  {
+                            "placeholders":  {
+                                                 "url":  {
+                                                             "type":  "String"
+                                                         }
+                                             }
+                        },
+      "feedbackTitle": "Umpan Balik",
+      "feedbackDescribeIssue": "Bantu kami meningkatkan pengalaman Anda\nJelaskan masalah yang Anda alami",
+      "feedbackTellUsMore": "Ceritakan lebih banyak (opsional)",
+      "submitButton": "Kirim",
+      "feedbackIssueLagging": "Lambat",
+      "feedbackIssueCrashes": "Tiba-tiba keluar",
+      "feedbackIssueAds": "Iklan mengganggu",
+      "feedbackIssueOther": "Lainnya",
+      "feedbackIssueNotWorking": "Tidak berfungsi",
+      "submitFeedback": "Kirim Umpan Balik",
+      "feedbackChooseEmailApp": "Pilih aplikasi email Anda untuk mengirim umpan balik:",
+      "feedbackSendEmail": "Kirim Email",
+      "feedbackEmailSubject": "DogBreed: Umpan Balik",
+      "feedbackIssueType": "Jenis Masalah:",
+      "feedbackDetails": "Detail:",
+      "feedbackGeneral": "Umpan balik umum tentang aplikasi",
+      "feedbackManualEmailTitle": "Aplikasi Email Tidak Ditemukan",
+      "feedbackManualEmailBody": "Silakan salin informasi di bawah ini dan kirimkan ke:",
+      "feedbackSubject": "Subjek:",
+      "feedbackMessage": "Pesan:",
+      "feedbackManualEmailSuccess": "Umpan balik berhasil dikirim!",
+      "feedbackSelectIssue": "Silakan pilih jenis masalah",
+      "dialogCancel": "Batal",
+      "okAction": "OK",
+      "loading": "Memuat...",
+       "editProfile": "Edit Profil",
+        "profileRecentScan": "Pemindaian Terbaru",
+        "profileHistory": "Riwayat Pemindaian",
+        "notifications": "Notifikasi",
+        "appLanguageTitle": "Bahasa Aplikasi",
+        "premiumSubscription": "Langganan Premium",
+        "profileMyFavorites": "Favorit Saya",
+        "feedbackTitle": "Umpan Balik",
+        "rateUsTitle": "Beri Nilai Kami",
+        "shareTitle": "Bagikan Aplikasi",
+        "faq": "FAQ",
+        "termsOfUse": "Syarat Penggunaan",
+        "privacyPolicy": "Kebijakan Privasi",
+        "deleteOwnerProfile": "Hapus Profil",
+        "logout": "Keluar",
+        "themeTitle": "Tema",
+        "darkTheme": "Gelap",
+        "lightTheme": "Terang",
+        "aiAppName": "Pemindai Ras Anjing",
+        "shareMessageBody": "Coba Dog Breed Scanner - aplikasi identifikasi ras anjing bertenaga AI! 🐕",
+        "shareIOS": "Lihat Dog Breed Scanner di App Store!",
+        "shareAndroid": "Lihat Dog Breed Scanner di Google Play!",
+        "shareDefault": "Lihat Dog Breed Scanner!",
+        "shareDownloadNow": "Unduh sekarang: ",
+        "shareSubject": "Aplikasi Dog Breed Scanner",
+        "shareApp": "Bagikan Aplikasi",
+        "copy": "Salin",
+        "whatsapp": "WhatsApp",
+        "more": "Lainnya",
+        "copyLink": "Salin Tautan",
+        "shareWhatsApp": "Bagikan via WhatsApp",
+        "shareEmail": "Bagikan via Email",
+        "shareSMS": "Bagikan via SMS",
+        "chooseShare": "Pilih cara berbagi:",
+        "linkCopied": "Tautan disalin ke papan klip",
+        "copyFailed": "Gagal menyalin tautan",
+        "enjoyingApp": "Apakah Anda menikmati Dog Breed Scanner?",
+        "tapToRate": "Ketuk bintang untuk menilai pengalaman Anda",
+        "rateUsAction": "Kirim Penilaian",
+        "selectStars": "Pilih Bintang Dulu",
+        "dialogCancel": "Batal",
+        "dialogDelete": "Hapus",
+        "dialogLogoutTitle": "Apakah Anda yakin ingin keluar?",
+        "dialogShareTitle": "Bagikan {appName}",
+        "no": "Tidak",
+        "yes": "Ya",
+        "deleteProfileWarning": "Apakah Anda yakin ingin menghapus profil Anda? Tindakan ini tidak dapat dibatalkan dan semua data Anda akan dihapus secara permanen.",
+        "errorLaunchUrl": "Tidak dapat membuka {url}",
+        "errorShare": "Gagal berbagi: {error}",
+        "errorAppStore": "Tidak dapat membuka toko aplikasi",
+        "errorOpenStore": "Tidak dapat membuka toko",
+        "loading": "Memuat..."
 }

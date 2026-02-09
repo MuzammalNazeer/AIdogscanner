@@ -497,43 +497,42 @@ class _CalendarviewState extends State<Calendarview> {
                       ),
                     ),
 
-                    Row(
-                      children: [
-                        Text(
-                          DateFormat('MMMM yyyy', Localizations.localeOf(context).toString()).format(_currentMonth),
-                          style: TextStyle(
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(width: 16.w),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12.w,
-                            vertical: 6.h,
-                          ),
-                          decoration: BoxDecoration(
-                            // boxShadow: [
-                            //   BoxShadow(
-                            //     color: Colors.black.withOpacity(0.25),
-                            //     offset: const Offset(0, 4),
-                            //     blurRadius: 4,
-                            //     spreadRadius: 0,
-                            //   ),
-                            // ],
-                            color: _containerColor,
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          child: Text(
-                            AppLocalizations.of(context)!.calendarMonth,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              color: Theme.of(context).colorScheme.tertiary,
-                              fontWeight: FontWeight.bold,
+                    Flexible(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              DateFormat('MMMM yyyy', Localizations.localeOf(context).toString()).format(_currentMonth),
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 8.w),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 6.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: _containerColor,
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Text(
+                              AppLocalizations.of(context)!.calendarMonth,
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                color: Theme.of(context).colorScheme.tertiary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
 
                     Container(
@@ -768,27 +767,29 @@ class _CalendarviewState extends State<Calendarview> {
       );
     } else {
       content = Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              Theme.of(context).brightness == Brightness.dark
-                  ? 'assets/images/active1.png'
-                  : 'assets/images/active1.png',
-              width: 100.w,
-              height: 110.h,
-            ),
-            SizedBox(height: 20.h),
-            Text(
-              AppLocalizations.of(context)!.calendarNoActivityLogged,
-              style: TextStyle(fontSize: 20.sp, color: Theme.of(context).colorScheme.onSurface),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              formattedDate,
-              style: TextStyle(fontSize: 12.sp, color: Theme.of(context).colorScheme.primary),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                Theme.of(context).brightness == Brightness.dark
+                    ? 'assets/images/active1.png'
+                    : 'assets/images/active1.png',
+                width: 100.w,
+                height: 110.h,
+              ),
+              SizedBox(height: 20.h),
+              Text(
+                AppLocalizations.of(context)!.calendarNoActivityLogged,
+                style: TextStyle(fontSize: 20.sp, color: Theme.of(context).colorScheme.onSurface),
+              ),
+              SizedBox(height: 8.h),
+              Text(
+                formattedDate,
+                style: TextStyle(fontSize: 12.sp, color: Theme.of(context).colorScheme.primary),
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -832,11 +833,14 @@ class _CalendarviewState extends State<Calendarview> {
                   ],
                 ),
                 SizedBox(width: 2.w),
-                GestureDetector(
-                  onTap: () => _showAddActivitySheet(context),
-                  child: Text(
-                    AppLocalizations.of(context)!.calendarAddActivity,
-                    style:  TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
+                Flexible(
+                  child: GestureDetector(
+                    onTap: () => _showAddActivitySheet(context),
+                    child: Text(
+                      AppLocalizations.of(context)!.calendarAddActivity,
+                      style:  TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 Container(
@@ -1989,7 +1993,7 @@ class _CalendarviewState extends State<Calendarview> {
                       height: 70.h,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHigh : Colors.white,
+                        color: Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.1),

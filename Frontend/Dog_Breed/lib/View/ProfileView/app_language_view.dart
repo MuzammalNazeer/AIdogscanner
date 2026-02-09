@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -43,15 +44,57 @@ class _AppLanguageViewState extends State<AppLanguageView> {
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: CommonApp(
-        title: AppLocalizations.of(context)!.appLanguageTitle,
-      ),
+
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: 40.305.w,
+                      height: 40.305.h,
+                      padding: const EdgeInsets.all(8.96),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: BorderRadius.circular(8.96),
+                      ),
+                      child: Icon(
+                        CupertinoIcons.chevron_left,
+                        size: 20.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                  ),
+
+                  // Center text
+                  Expanded(
+                    child: Text(
+                      AppLocalizations.of(context)!.appLanguageTitle,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Sora',
+                        fontWeight: FontWeight.w300,
+                        fontSize: 29.75.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+
+                  // Invisible placeholder to balance
+                  SizedBox(
+                    width: 40.305.w,
+                    height: 40.305.h,
+                  ),
+                ],
+              ),
+
               // SizedBox(height: 20.h),
               // Container(
               //   width: double.infinity,
@@ -96,7 +139,7 @@ class _AppLanguageViewState extends State<AppLanguageView> {
                     thickness: 0.4,
                     indent: 0,
                     endIndent: 0,
-                    color: Theme.of(context).dividerColor,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                   ),
                   itemBuilder: (context, index) {
                     final entry = _languages.entries.elementAt(index);
