@@ -2540,4 +2540,51 @@ class AppLocalizationsSv extends AppLocalizations {
 
   @override
   String get shareSubject => 'Dog Breed App';
+
+  @override
+  String get onboardingWelcomeTitle => 'Välkommen till Dog Manager-appen';
+
+  @override
+  String get onboardingWelcomeDesc =>
+      'Skanna, hantera och ta hand om varje hund i din flock utan ansträngning – allt på ett ställe.';
+
+  @override
+  String get noDogDetectedTitle => 'Ingen hund upptäcktes';
+
+  @override
+  String get noDogDetectedMessage =>
+      'Bilden du laddade upp verkar inte vara en hund.';
+
+  @override
+  String get uploadDogImagePrompt =>
+      'Ladda upp ett tydligt foto av din hund för bättre resultat.';
+
+  @override
+  String get lowConfidenceTitle => 'Osäker identifiering';
+
+  @override
+  String lowConfidenceMessage(String confidence) {
+    return 'Vi är bara $confidence% säkra på denna rasidentifiering.';
+  }
+
+  @override
+  String get suggestionsForBetterResults => 'Förslag på bättre resultat:';
+
+  @override
+  String get ensureClearPhoto =>
+      'Se till att fotot är tydligt och inte suddigt';
+
+  @override
+  String get goodLighting => 'Använd bra, naturlig belysning';
+
+  @override
+  String get closeUpShot => 'Ta en närbild av hundens ansikte och kropp';
+
+  @override
+  String get multipleAngles => 'Försök att ta foton från flera vinklar';
+
+  @override
+  String highConfidenceSuccess(String confidence) {
+    return 'Identification successful with $confidence% confidence!';
+  }
 }

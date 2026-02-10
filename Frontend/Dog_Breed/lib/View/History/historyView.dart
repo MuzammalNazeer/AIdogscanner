@@ -59,34 +59,44 @@ class _HistoryviewState extends State<Historyview> {
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  width: 40.w,
-                  height: 40.h,
-                  decoration:  BoxDecoration(
-                    color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFF686868).withOpacity(0.1),
-                    shape: BoxShape.circle,
+                  width: 40.305.w,
+                  height: 40.305.h,
+                  padding: const EdgeInsets.all(8.96),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(8.96),
                   ),
-                  child: Center(
-                    child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),
+                  child: Icon(
+                    CupertinoIcons.chevron_left,
+                    size: 20.sp,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
-              const SizedBox(width: 60,),
-              Text(
-                'History',
-                style: TextStyle(
-                  fontFamily: 'Sora',
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 35.sp,
-                  height: 1.0,
-                  letterSpacing: 0.0,
-                  color: Theme.of(context).colorScheme.onSurface,
+
+              // Center text
+              Expanded(
+                child: Text(
+                  'History',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Sora',
+                    fontWeight: FontWeight.w300,
+                    fontSize: 27.75.sp,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ),
-              const Spacer(),
+
+              // Invisible placeholder to balance
+              SizedBox(
+                width: 40.305.w,
+                height: 40.305.h,
+              ),
             ],
           ),
-
           Positioned(
             bottom: 5,
             right: 10,
@@ -107,6 +117,60 @@ class _HistoryviewState extends State<Historyview> {
               ),
             ),
           ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     GestureDetector(
+          //       onTap: () => Navigator.pop(context),
+          //       child: Container(
+          //         width: 40.w,
+          //         height: 40.h,
+          //         decoration:  BoxDecoration(
+          //           color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFF686868).withOpacity(0.1),
+          //           shape: BoxShape.circle,
+          //         ),
+          //         child: Center(
+          //           child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),
+          //         ),
+          //       ),
+          //     ),
+          //     const SizedBox(width: 60,),
+          //     Text(
+          //       'History',
+          //       style: TextStyle(
+          //         fontFamily: 'Sora',
+          //         fontWeight: FontWeight.w400,
+          //         fontStyle: FontStyle.normal,
+          //         fontSize: 35.sp,
+          //         height: 1.0,
+          //         letterSpacing: 0.0,
+          //         color: Theme.of(context).colorScheme.onSurface,
+          //       ),
+          //     ),
+          //     const Spacer(),
+          //   ],
+          // ),
+          //
+          // Positioned(
+          //   bottom: 5,
+          //   right: 10,
+          //   child: SizedBox(
+          //     height: 78.h,
+          //     width: 80.w,
+          //     child: Center(
+          //       child: Transform.rotate(
+          //         angle: -81.51,
+          //         child: SvgPicture.asset(
+          //           "assets/images/Group099.svg",
+          //           width: 92.w,
+          //           height: 92.h,
+          //           color: colors.surfaceContainerLow,
+          //           fit: BoxFit.contain,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

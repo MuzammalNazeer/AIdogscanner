@@ -1096,5 +1096,17 @@
         "errorShare": "Teilen fehlgeschlagen: {error}",
         "errorAppStore": "App Store konnte nicht geöffnet werden",
         "errorOpenStore": "Store konnte nicht geöffnet werden",
-        "loading": "Lädt..."
+        "loading": "Lädt...",
+        "onboardingWelcomeTitle": "Willkommen bei der Dog Manager App",
+        "onboardingWelcomeDesc": "Scannen, verwalten und pflegen Sie jeden Hund in Ihrem Rudel mühelos – alles an einem Ort.",
+        "noDogDetectedTitle": "Kein Hund erkannt",
+        "noDogDetectedMessage": "Das von Ihnen hochgeladene Bild scheint kein Hund zu sein.",
+        "uploadDogImagePrompt": "Bitte laden Sie ein klares Foto Ihres Hundes für bessere Ergebnisse hoch.",
+        "lowConfidenceTitle": "Identifizierung unsicher",
+        "lowConfidenceMessage": "Wir sind uns bei dieser Rassenidentifizierung nur zu {confidence}% sicher.",
+        "suggestionsForBetterResults": "Vorschläge für bessere Ergebnisse:",
+        "ensureClearPhoto": "Stellen Sie sicher, dass das Foto klar und nicht verschwommen ist",
+        "goodLighting": "Stellen Sie sicher, dass das Foto klar und nicht verschwommen ist",
+        "closeUpShot": "Machen Sie eine Nahaufnahme von Gesicht und Körper des Hundes",
+        "multipleAngles": "Versuchen Sie, Fotos aus verschiedenen Winkeln zu machen"
 }

@@ -1046,5 +1046,17 @@
                                              }
                         },
     "loading":  "Indlæser...",
-    "privacyPolicy":  "Fortrolighedspolitik"
+    "privacyPolicy":  "Fortrolighedspolitik",
+    "onboardingWelcomeTitle": "Velkommen til Dog Manager-appen",
+    "onboardingWelcomeDesc": "Scan, administrer og pleje ubesværet enhver hund i din flok – alt på ét sted.",
+    "noDogDetectedTitle": "Ingen hund fundet",
+    "noDogDetectedMessage": "Det billede, du uploadede, ser ikke ud til at være en hund.",
+    "uploadDogImagePrompt": "Upload venligst et tydeligt billede af din hund for at få bedre resultater.",
+    "lowConfidenceTitle": "Identifikation usikker",
+    "lowConfidenceMessage": "Vi er kun {confidence}% sikre på denne raceidentifikation.",
+    "suggestionsForBetterResults": "Forslag til bedre resultater:",
+    "ensureClearPhoto": "Sørg for, at billedet er tydeligt og ikke sløret",
+    "goodLighting": "Brug god, naturlig belysning",
+    "closeUpShot": "Tag et nærbillede af hundens ansigt og krop",
+    "multipleAngles": "Prøv at tage billeder fra flere vinkler"
 }

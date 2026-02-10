@@ -984,5 +984,17 @@
     "feedbackSelectIssue": "Please select an issue",
     "feedbackDescribeIssue": "Could You Describe The Issue\nYou're Experiencing",
     "feedbackTellUsMore": "Please Tell Us More Details...",
-    "submitButton": "Submit"
+    "submitButton": "Submit",
+    "onboardingWelcomeTitle": "Welkom bij de Dog Manager-app",
+    "onboardingWelcomeDesc": "Scan, beheer en verzorg moeiteloos elke hond in uw roedel — allemaal op één plek.",
+    "noDogDetectedTitle": "Geen hond gedetecteerd",
+    "noDogDetectedMessage": "De afbeelding die u heeft geüpload lijkt geen hond te zijn.",
+    "uploadDogImagePrompt": "Upload een duidelijke foto van uw hond voor betere resultaten.",
+    "lowConfidenceTitle": "Identificatie onzeker",
+    "lowConfidenceMessage": "We zijn slechts voor {confidence}% zeker van deze rasidentificatie.",
+    "suggestionsForBetterResults": "Suggesties voor betere resultaten:",
+    "ensureClearPhoto": "Zorg ervoor dat the foto scherp is en niet wazig",
+    "goodLighting": "Gebruik goede, natuurlijke verlichting",
+    "closeUpShot": "Maak een close-up van de kop en het lichaam van de hond",
+    "multipleAngles": "Probeer foto's vanuit meerdere hoeken te maken"
 }

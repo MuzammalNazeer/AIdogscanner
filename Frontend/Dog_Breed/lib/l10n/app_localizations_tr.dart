@@ -2554,4 +2554,52 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get shareSubject => 'Dog Breed Scanner Uygulaması';
+
+  @override
+  String get onboardingWelcomeTitle => 'Dog Manager Uygulamasına Hoş Geldiniz';
+
+  @override
+  String get onboardingWelcomeDesc =>
+      'Sürünüzdeki her köpeği zahmetsizce tarayın, yönetin ve bakımını yapın — hepsi tek bir yerde.';
+
+  @override
+  String get noDogDetectedTitle => 'Köpek Algılanmadı';
+
+  @override
+  String get noDogDetectedMessage =>
+      'Yüklediğiniz resim bir köpek gibi görünmüyor.';
+
+  @override
+  String get uploadDogImagePrompt =>
+      'Daha iyi sonuçlar için lütfen köpeğinizin net bir fotoğrafını yükleyin.';
+
+  @override
+  String get lowConfidenceTitle => 'Kimlik Belirsiz';
+
+  @override
+  String lowConfidenceMessage(String confidence) {
+    return 'Bu cins tanımlamasından yalnızca %$confidence eminiz.';
+  }
+
+  @override
+  String get suggestionsForBetterResults => 'Daha iyi sonuçlar için öneriler:';
+
+  @override
+  String get ensureClearPhoto =>
+      'Fotoğrafın net ve bulanık olmadığından emin olun';
+
+  @override
+  String get goodLighting => 'İyi, doğal aydınlatma kullanın';
+
+  @override
+  String get closeUpShot =>
+      'Köpeğin yüzünün ve vücudunun yakın plan çekimini yapın';
+
+  @override
+  String get multipleAngles => 'Birden fazla açıdan fotoğraf çekmeyi deneyin';
+
+  @override
+  String highConfidenceSuccess(String confidence) {
+    return 'Identification successful with $confidence% confidence!';
+  }
 }

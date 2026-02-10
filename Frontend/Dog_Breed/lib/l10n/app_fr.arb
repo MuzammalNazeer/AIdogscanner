@@ -1096,5 +1096,17 @@
         "errorShare": "Échec du partage : {error}",
         "errorAppStore": "Impossible d'ouvrir l'App Store",
         "errorOpenStore": "Impossible d'ouvrir le magasin",
-        "loading": "Chargement..."
+        "loading": "Chargement...",
+        "onboardingWelcomeTitle": "Bienvenue sur l'application Dog Manager",
+        "onboardingWelcomeDesc": "Scannez, gérez et soignez sans effort chaque chien de votre meute — le tout en un seul endroit.",
+        "noDogDetectedTitle": "Aucun chien détecté",
+        "noDogDetectedMessage": "L'image que vous avez téléchargée ne semble pas être un chien.",
+        "uploadDogImagePrompt": "Veuillez télécharger une photo claire de votre chien pour de meilleurs résultats.",
+        "lowConfidenceTitle": "Identification incertaine",
+        "lowConfidenceMessage": "Nous ne sommes sûrs qu'à {confidence}% de cette identification de race.",
+        "suggestionsForBetterResults": "Suggestions pour de meilleurs résultats :",
+        "ensureClearPhoto": "Assurez-vous que la photo est claire et non floue",
+        "goodLighting": "Utilisez un bon éclairage naturel",
+        "closeUpShot": "Prenez un gros plan du visage et du corps du chien",
+        "multipleAngles": "Essayez de prendre des photos sous plusieurs angles"
 }

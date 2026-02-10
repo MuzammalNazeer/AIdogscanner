@@ -175,11 +175,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get getStarted => 'Get Started';
 
   @override
-  String get onboardingTitle1 => 'Satellite Director';
+  String get onboardingTitle1 => 'Identify Dog Breeds';
 
   @override
   String get onboardingDesc1 =>
-      'Explore Nearby Place with GPS Satellite\nMapping & Find Satellites';
+      'Instantly identify any dog breed using our\nadvanced AI technology.';
 
   @override
   String get onboardingTitle2 => 'We Need Your\n Permission';
@@ -2536,4 +2536,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareSubject => 'Dog Breed Scanner App';
+
+  @override
+  String get onboardingWelcomeTitle => 'Welcome to Dog Manager App';
+
+  @override
+  String get onboardingWelcomeDesc =>
+      'Effortlessly scan, manage, and care for every dog in your pack — all in one place.';
+
+  @override
+  String get noDogDetectedTitle => 'No Dog Detected';
+
+  @override
+  String get noDogDetectedMessage =>
+      'The image you uploaded does not appear to be a dog.';
+
+  @override
+  String get uploadDogImagePrompt =>
+      'Please upload a clear photo of your dog for better results.';
+
+  @override
+  String get lowConfidenceTitle => 'Identification Uncertain';
+
+  @override
+  String lowConfidenceMessage(String confidence) {
+    return 'We are only $confidence% sure of this breed identification.';
+  }
+
+  @override
+  String get suggestionsForBetterResults => 'Suggestions for better results:';
+
+  @override
+  String get ensureClearPhoto => 'Ensure the photo is clear and not blurry';
+
+  @override
+  String get goodLighting => 'Use good, natural lighting';
+
+  @override
+  String get closeUpShot => 'Get a close-up shot of the dog\'s face and body';
+
+  @override
+  String get multipleAngles => 'Try taking photos from multiple angles';
+
+  @override
+  String highConfidenceSuccess(String confidence) {
+    return 'Identification successful with $confidence% confidence!';
+  }
 }

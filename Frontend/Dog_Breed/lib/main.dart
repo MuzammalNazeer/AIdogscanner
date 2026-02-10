@@ -69,6 +69,11 @@ Future<void> main() async {
       AndroidFlutterLocalNotificationsPlugin>()
       ?.requestNotificationsPermission();
 
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+      AndroidFlutterLocalNotificationsPlugin>()
+      ?.requestExactAlarmsPermission();
+
   const AndroidNotificationChannel defaultChannel = AndroidNotificationChannel(
     'dog_breed_reminders_v2',
     'High Importance Notifications',

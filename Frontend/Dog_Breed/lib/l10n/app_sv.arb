@@ -984,5 +984,17 @@
     "feedbackSelectIssue": "Please select an issue",
     "feedbackDescribeIssue": "Could You Describe The Issue\nYou're Experiencing",
     "feedbackTellUsMore": "Please Tell Us More Details...",
-    "submitButton": "Submit"
+    "submitButton": "Submit",
+    "onboardingWelcomeTitle": "Välkommen till Dog Manager-appen",
+    "onboardingWelcomeDesc": "Skanna, hantera och ta hand om varje hund i din flock utan ansträngning – allt på ett ställe.",
+    "noDogDetectedTitle": "Ingen hund upptäcktes",
+    "noDogDetectedMessage": "Bilden du laddade upp verkar inte vara en hund.",
+    "uploadDogImagePrompt": "Ladda upp ett tydligt foto av din hund för bättre resultat.",
+    "lowConfidenceTitle": "Osäker identifiering",
+    "lowConfidenceMessage": "Vi är bara {confidence}% säkra på denna rasidentifiering.",
+    "suggestionsForBetterResults": "Förslag på bättre resultat:",
+    "ensureClearPhoto": "Se till att fotot är tydligt och inte suddigt",
+    "goodLighting": "Använd bra, naturlig belysning",
+    "closeUpShot": "Ta en närbild av hundens ansikte och kropp",
+    "multipleAngles": "Försök att ta foton från flera vinklar"
 }

@@ -23,7 +23,7 @@ public class SpringDogBackendApplication {
     @EventListener
     public void onApplicationEvent(ServletWebServerInitializedEvent event) {
         int port = event.getWebServer().getPort();
-        System.out.println("🚀 Spring Boot started on port: " + port);
+        System.out.println(STR."\uD83D\uDE80 Spring Boot started on port: \{port}");
         System.out.println("🌐 Server is bound to all network interfaces (0.0.0.0)");
         System.out.println("🚀 Dog Breed Identification Backend Started!");
         System.out.println("📡 Health Check: http://localhost:" + port + "/api/v1/predict");

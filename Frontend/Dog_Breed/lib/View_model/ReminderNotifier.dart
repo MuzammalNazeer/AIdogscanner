@@ -116,13 +116,24 @@ class ReminderNotifier with ChangeNotifier {
     if (notificationsEnabled) {
       final notifId = reminderId.hashCode & 0x7fffffff;
 
+      final androidImplementation =
+          flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>();
+
+      bool canScheduleExact = true;
+      if (androidImplementation != null) {
+        canScheduleExact = await androidImplementation.canScheduleExactNotifications() ?? false;
+      }
+
       await flutterLocalNotificationsPlugin.zonedSchedule(
         notifId,
         activity.name,
         activity.note?.isNotEmpty == true ? activity.note! : 'Reminder',
         tzTime,
         details,
-        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        androidScheduleMode: canScheduleExact
+            ? AndroidScheduleMode.exactAllowWhileIdle
+            : AndroidScheduleMode.inexactAllowWhileIdle,
         payload: activity.name,
       );
     }
@@ -243,6 +254,10 @@ class ReminderNotifier with ChangeNotifier {
 }
 
 
+
+
+
+
 // // View_model/ReminderNotifier.dart
 // import 'package:flutter/material.dart';
 // import '../activity_model.dart';
@@ -273,23 +288,11 @@ class ReminderNotifier with ChangeNotifier {
 //   Future<void> _loadReminders() async {
 //     try {
 //       final prefs = await SharedPreferences.getInstance();
-//       final userId = prefs.getInt("USER_ID");
-//       if (userId == null) {
-//         _reminders.clear();
-//         notifyListeners();
-//         return;
-//       }
-//
-//       final key = '${_storageKey}_$userId';
-//       final jsonString = prefs.getString(key);
-//
+//       final jsonString = prefs.getString(_storageKey);
 //       if (jsonString != null) {
 //         final List<dynamic> jsonList = jsonDecode(jsonString);
 //         _reminders.clear();
 //         _reminders.addAll(jsonList.cast<Map<String, dynamic>>());
-//         notifyListeners();
-//       } else {
-//         _reminders.clear();
 //         notifyListeners();
 //       }
 //     } catch (e) {
@@ -300,12 +303,8 @@ class ReminderNotifier with ChangeNotifier {
 //   Future<void> _saveReminders() async {
 //     try {
 //       final prefs = await SharedPreferences.getInstance();
-//       final userId = prefs.getInt("USER_ID");
-//       if (userId == null) return;
-//
-//       final key = '${_storageKey}_$userId';
 //       final jsonString = jsonEncode(_reminders);
-//       await prefs.setString(key, jsonString);
+//       await prefs.setString(_storageKey, jsonString);
 //     } catch (e) {
 //       debugPrint('Error saving reminders: $e');
 //     }
@@ -502,3 +501,5 @@ class ReminderNotifier with ChangeNotifier {
 //     // No periodic checks needed; notifications are scheduled.
 //   }
 // }
+//
+//

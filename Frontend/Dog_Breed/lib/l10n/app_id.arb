@@ -1096,5 +1096,17 @@
         "errorShare": "Gagal berbagi: {error}",
         "errorAppStore": "Tidak dapat membuka toko aplikasi",
         "errorOpenStore": "Tidak dapat membuka toko",
-        "loading": "Memuat..."
+        "loading": "Memuat...",
+        "onboardingWelcomeTitle": "Selamat Datang di Aplikasi Dog Manager",
+        "onboardingWelcomeDesc": "Pindai, kelola, dan rawat setiap anjing di kelompok Anda dengan mudah — semuanya di satu tempat.",
+        "noDogDetectedTitle": "Anjing Tidak Terdeteksi",
+        "noDogDetectedMessage": "Gambar yang Anda unggah tampaknya bukan anjing.",
+        "uploadDogImagePrompt": "Silakan unggah foto anjing Anda yang jelas untuk hasil yang lebih baik.",
+        "lowConfidenceTitle": "Identifikasi Tidak Pasti",
+        "lowConfidenceMessage": "Kami hanya yakin {confidence}% dengan identifikasi ras ini.",
+        "suggestionsForBetterResults": "Saran untuk hasil yang lebih baik:",
+        "ensureClearPhoto": "Pastikan foto jelas dan tidak kabur",
+        "goodLighting": "Gunakan pencahayaan alami yang baik",
+        "closeUpShot": "Ambil foto wajah dan tubuh anjing dari jarak dekat",
+        "multipleAngles": "Coba ambil foto dari beberapa sudut"
 }

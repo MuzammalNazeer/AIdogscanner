@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../../Valid/AppColors.dart';
 import '../../View_model/PetProvider.dart';
 import '../../View_model/home/Pet.dart';
 import '../../View_model/home/home_view_model.dart';
@@ -44,11 +45,13 @@ class _AddmypetviewState extends State<Addmypetview> {
       builder: (BuildContext context, Widget? child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: const Color(0xFF820DFF),
-              onPrimary: Theme.of(context).colorScheme.surface,
+            colorScheme: ColorScheme.light(
+              primary: AppColors.vibrantPurple,
+              onPrimary: Colors.white,
+              surface: Theme.of(context).cardColor,
+              onSurface: Theme.of(context).colorScheme.onSurface,
             ),
-            dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            dialogBackgroundColor: Theme.of(context).cardColor,
           ),
           child: child!,
         );

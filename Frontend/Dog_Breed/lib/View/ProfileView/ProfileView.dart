@@ -183,8 +183,8 @@ class _ProfileviewState extends State<Profileview> {
                 child: Image.asset(
                   'assets/images/theme.png',
                   color: AppColors.vibrantPurple,
-                  height: 38.h,
-                  width: 38.w,
+                  height: 25.h,
+                  width: 25.w,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -194,8 +194,8 @@ class _ProfileviewState extends State<Profileview> {
                   AppLocalizations.of(context)!.themeTitle,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onSurface,
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
                     fontFamily: 'Sora',
                   ),
                 ),
@@ -547,15 +547,15 @@ $shareText
             leading: imagePath != null
                 ? Image.asset(
               imagePath,
-              width: 33.w,
-              height: 33.h,
+              height: 25.h,
+              width: 25.w,
               color: isRed
                   ? Theme.of(context).colorScheme.error
                   : AppColors.vibrantPurple,
             )
                 : Icon(
               icon,
-              size: 33.sp,
+              size: 25.sp,
               color: isRed
                   ? Theme.of(context).colorScheme.error
                   : AppColors.vibrantPurple,
@@ -563,8 +563,8 @@ $shareText
             title: Text(
               title,
               style: TextStyle(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.w600,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w500,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
             ),

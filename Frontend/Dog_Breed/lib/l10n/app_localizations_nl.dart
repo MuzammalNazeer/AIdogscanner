@@ -2543,4 +2543,54 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get shareSubject => 'Dog Breed App';
+
+  @override
+  String get onboardingWelcomeTitle => 'Welkom bij de Dog Manager-app';
+
+  @override
+  String get onboardingWelcomeDesc =>
+      'Scan, beheer en verzorg moeiteloos elke hond in uw roedel — allemaal op één plek.';
+
+  @override
+  String get noDogDetectedTitle => 'Geen hond gedetecteerd';
+
+  @override
+  String get noDogDetectedMessage =>
+      'De afbeelding die u heeft geüpload lijkt geen hond te zijn.';
+
+  @override
+  String get uploadDogImagePrompt =>
+      'Upload een duidelijke foto van uw hond voor betere resultaten.';
+
+  @override
+  String get lowConfidenceTitle => 'Identificatie onzeker';
+
+  @override
+  String lowConfidenceMessage(String confidence) {
+    return 'We zijn slechts voor $confidence% zeker van deze rasidentificatie.';
+  }
+
+  @override
+  String get suggestionsForBetterResults =>
+      'Suggesties voor betere resultaten:';
+
+  @override
+  String get ensureClearPhoto =>
+      'Zorg ervoor dat the foto scherp is en niet wazig';
+
+  @override
+  String get goodLighting => 'Gebruik goede, natuurlijke verlichting';
+
+  @override
+  String get closeUpShot =>
+      'Maak een close-up van de kop en het lichaam van de hond';
+
+  @override
+  String get multipleAngles =>
+      'Probeer foto\'s vanuit meerdere hoeken te maken';
+
+  @override
+  String highConfidenceSuccess(String confidence) {
+    return 'Identification successful with $confidence% confidence!';
+  }
 }

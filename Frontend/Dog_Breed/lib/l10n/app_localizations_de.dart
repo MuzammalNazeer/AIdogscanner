@@ -2555,4 +2555,55 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get shareSubject => 'Dog Breed Scanner App';
+
+  @override
+  String get onboardingWelcomeTitle => 'Willkommen bei der Dog Manager App';
+
+  @override
+  String get onboardingWelcomeDesc =>
+      'Scannen, verwalten und pflegen Sie jeden Hund in Ihrem Rudel mühelos – alles an einem Ort.';
+
+  @override
+  String get noDogDetectedTitle => 'Kein Hund erkannt';
+
+  @override
+  String get noDogDetectedMessage =>
+      'Das von Ihnen hochgeladene Bild scheint kein Hund zu sein.';
+
+  @override
+  String get uploadDogImagePrompt =>
+      'Bitte laden Sie ein klares Foto Ihres Hundes für bessere Ergebnisse hoch.';
+
+  @override
+  String get lowConfidenceTitle => 'Identifizierung unsicher';
+
+  @override
+  String lowConfidenceMessage(String confidence) {
+    return 'Wir sind uns bei dieser Rassenidentifizierung nur zu $confidence% sicher.';
+  }
+
+  @override
+  String get suggestionsForBetterResults =>
+      'Vorschläge für bessere Ergebnisse:';
+
+  @override
+  String get ensureClearPhoto =>
+      'Stellen Sie sicher, dass das Foto klar und nicht verschwommen ist';
+
+  @override
+  String get goodLighting =>
+      'Stellen Sie sicher, dass das Foto klar und nicht verschwommen ist';
+
+  @override
+  String get closeUpShot =>
+      'Machen Sie eine Nahaufnahme von Gesicht und Körper des Hundes';
+
+  @override
+  String get multipleAngles =>
+      'Versuchen Sie, Fotos aus verschiedenen Winkeln zu machen';
+
+  @override
+  String highConfidenceSuccess(String confidence) {
+    return 'Identification successful with $confidence% confidence!';
+  }
 }

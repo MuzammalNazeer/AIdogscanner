@@ -1046,5 +1046,17 @@
                                              }
                         },
     "loading":  "Indlæser...",
-    "privacyPolicy":  "Fortrolighedspolitik"
+    "privacyPolicy":  "Fortrolighedspolitik",
+    "onboardingWelcomeTitle": "Vítejte v aplikaci Dog Manager",
+    "onboardingWelcomeDesc": "Bez námahy skenujte, spravujte a starejte se o každého psa ve vaší smečce – vše na jednom místě.",
+    "noDogDetectedTitle": "Nebyl detekován žádný pes",
+    "noDogDetectedMessage": "Nahraný obrázek nevypadá jako pes.",
+    "uploadDogImagePrompt": "Nahrajte prosím jasnou fotografii svého psa pro lepší výsledky.",
+    "lowConfidenceTitle": "Identifikace nejistá",
+    "lowConfidenceMessage": "Touto identifikací plemene jsme si jisti pouze na {confidence}%.",
+    "suggestionsForBetterResults": "Návrhy pro lepší výsledky:",
+    "ensureClearPhoto": "Ujistěte se, že je fotografie jasná a nikoliv rozmazaná",
+    "goodLighting": "Použijte dobré, přirozené osvětlení",
+    "closeUpShot": "Pořiďte detailní záběr tváře a těla psa",
+    "multipleAngles": "Zkuste pořídit fotografie z více úhlů"
 }

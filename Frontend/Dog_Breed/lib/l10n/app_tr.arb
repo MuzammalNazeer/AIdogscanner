@@ -1096,5 +1096,17 @@
         "errorShare": "Paylaşım başarısız: {error}",
         "errorAppStore": "Uygulama mağazası açılamadı",
         "errorOpenStore": "Mağaza açılamadı",
-        "loading": "Yükleniyor..."
+        "loading": "Yükleniyor...",
+        "onboardingWelcomeTitle": "Dog Manager Uygulamasına Hoş Geldiniz",
+        "onboardingWelcomeDesc": "Sürünüzdeki her köpeği zahmetsizce tarayın, yönetin ve bakımını yapın — hepsi tek bir yerde.",
+        "noDogDetectedTitle": "Köpek Algılanmadı",
+        "noDogDetectedMessage": "Yüklediğiniz resim bir köpek gibi görünmüyor.",
+        "uploadDogImagePrompt": "Daha iyi sonuçlar için lütfen köpeğinizin net bir fotoğrafını yükleyin.",
+        "lowConfidenceTitle": "Kimlik Belirsiz",
+        "lowConfidenceMessage": "Bu cins tanımlamasından yalnızca %{confidence} eminiz.",
+        "suggestionsForBetterResults": "Daha iyi sonuçlar için öneriler:",
+        "ensureClearPhoto": "Fotoğrafın net ve bulanık olmadığından emin olun",
+        "goodLighting": "İyi, doğal aydınlatma kullanın",
+        "closeUpShot": "Köpeğin yüzünün ve vücudunun yakın plan çekimini yapın",
+        "multipleAngles": "Birden fazla açıdan fotoğraf çekmeyi deneyin"
 }

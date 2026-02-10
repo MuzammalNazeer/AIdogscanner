@@ -439,13 +439,13 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingTitle1.
   ///
   /// In en, this message translates to:
-  /// **'Satellite Director'**
+  /// **'Identify Dog Breeds'**
   String get onboardingTitle1;
 
   /// No description provided for @onboardingDesc1.
   ///
   /// In en, this message translates to:
-  /// **'Explore Nearby Place with GPS Satellite\nMapping & Find Satellites'**
+  /// **'Instantly identify any dog breed using our\nadvanced AI technology.'**
   String get onboardingDesc1;
 
   /// No description provided for @onboardingTitle2.
@@ -4911,6 +4911,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dog Breed Scanner App'**
   String get shareSubject;
+
+  /// No description provided for @onboardingWelcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Dog Manager App'**
+  String get onboardingWelcomeTitle;
+
+  /// No description provided for @onboardingWelcomeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Effortlessly scan, manage, and care for every dog in your pack — all in one place.'**
+  String get onboardingWelcomeDesc;
+
+  /// No description provided for @noDogDetectedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Dog Detected'**
+  String get noDogDetectedTitle;
+
+  /// No description provided for @noDogDetectedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The image you uploaded does not appear to be a dog.'**
+  String get noDogDetectedMessage;
+
+  /// No description provided for @uploadDogImagePrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Please upload a clear photo of your dog for better results.'**
+  String get uploadDogImagePrompt;
+
+  /// No description provided for @lowConfidenceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Identification Uncertain'**
+  String get lowConfidenceTitle;
+
+  /// No description provided for @lowConfidenceMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'We are only {confidence}% sure of this breed identification.'**
+  String lowConfidenceMessage(String confidence);
+
+  /// No description provided for @suggestionsForBetterResults.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggestions for better results:'**
+  String get suggestionsForBetterResults;
+
+  /// No description provided for @ensureClearPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Ensure the photo is clear and not blurry'**
+  String get ensureClearPhoto;
+
+  /// No description provided for @goodLighting.
+  ///
+  /// In en, this message translates to:
+  /// **'Use good, natural lighting'**
+  String get goodLighting;
+
+  /// No description provided for @closeUpShot.
+  ///
+  /// In en, this message translates to:
+  /// **'Get a close-up shot of the dog\'s face and body'**
+  String get closeUpShot;
+
+  /// No description provided for @multipleAngles.
+  ///
+  /// In en, this message translates to:
+  /// **'Try taking photos from multiple angles'**
+  String get multipleAngles;
+
+  /// No description provided for @highConfidenceSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Identification successful with {confidence}% confidence!'**
+  String highConfidenceSuccess(String confidence);
 }
 
 class _AppLocalizationsDelegate

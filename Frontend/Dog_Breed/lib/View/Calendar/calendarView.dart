@@ -781,12 +781,12 @@ class _CalendarviewState extends State<Calendarview> {
               SizedBox(height: 20.h),
               Text(
                 AppLocalizations.of(context)!.calendarNoActivityLogged,
-                style: TextStyle(fontSize: 20.sp, color: Theme.of(context).colorScheme.onSurface),
+                style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.normal, color: Theme.of(context).colorScheme.onSurface),
               ),
               SizedBox(height: 8.h),
               Text(
                 formattedDate,
-                style: TextStyle(fontSize: 12.sp, color: Theme.of(context).colorScheme.primary),
+                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.primary),
               ),
             ],
           ),
@@ -1752,7 +1752,6 @@ class _CalendarviewState extends State<Calendarview> {
 
   Widget _buildSettingList() {
     final activityNotifier = Provider.of<ActivityNotifier>(context);
-
     return Column(
       children: [
         Expanded(
@@ -1772,7 +1771,6 @@ class _CalendarviewState extends State<Calendarview> {
                 final String imagePath = activityType['image'];
                 final Color color = activityType['color'];
                 final bool isVisible = activityNotifier.isActivityVisible(_selectedPetId, key);
-
                 return Container(
                   height: 64.h,
                   decoration: BoxDecoration(
@@ -2042,7 +2040,7 @@ class _CalendarviewState extends State<Calendarview> {
                                             _getLocalizedActivityName(context, activity.name),
                                             style: TextStyle(
                                               fontSize: 18.sp,
-                                              fontWeight: FontWeight.w400,
+                                              fontWeight: FontWeight.normal,
                                               color: Theme.of(context).colorScheme.onSurface,
                                             ),
                                           ),
@@ -2060,7 +2058,7 @@ class _CalendarviewState extends State<Calendarview> {
                                             displayName,
                                             style: TextStyle(
                                               fontSize: 14.sp,
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.normal,
                                               color: Theme.of(context).colorScheme.onSurface,
                                             ),
                                           ),
@@ -2071,7 +2069,7 @@ class _CalendarviewState extends State<Calendarview> {
                                         displayName,
                                         style: TextStyle(
                                           fontSize: 18.sp,
-                                          fontWeight: FontWeight.w400,
+                                          fontWeight: FontWeight.normal,
                                           color: Theme.of(context).colorScheme.onSurface,
                                         ),
                                       ),
@@ -2092,7 +2090,7 @@ class _CalendarviewState extends State<Calendarview> {
                                                     distanceText,
                                                     style: TextStyle(
                                                       fontSize: 14.sp,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight: FontWeight.normal,
                                                       color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                                     ),
                                                   ),
@@ -2104,7 +2102,7 @@ class _CalendarviewState extends State<Calendarview> {
                                                 durationText,
                                                 style: TextStyle(
                                                   fontSize: 14.sp,
-                                                  fontWeight: FontWeight.bold,
+                                                  fontWeight: FontWeight.normal,
                                                   color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                                 ),
                                               ),
@@ -2128,7 +2126,7 @@ class _CalendarviewState extends State<Calendarview> {
                                           _localizeAmount(context, activity.food!),
                                           style: TextStyle(
                                             fontSize: 14.sp,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.normal,
                                             color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                           ),
                                         ),
@@ -2197,7 +2195,7 @@ class _CalendarviewState extends State<Calendarview> {
                               AppLocalizations.of(context)!.activityNote,
                               style: TextStyle(
                                 fontSize: 16.sp,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.normal,
                                 color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
                               ),
                             ),
@@ -2207,6 +2205,7 @@ class _CalendarviewState extends State<Calendarview> {
                                 activity.note!,
                                 style: TextStyle(
                                   fontSize: 16.sp,
+                                  fontWeight: FontWeight.normal,
                                   color: Theme.of(context).colorScheme.onSurface,
                                 ),
                               ),

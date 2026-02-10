@@ -13,7 +13,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
   String _activityLevel = 'Moderate';
   String _weightUnit = 'Pounds';
   String _resultUnit = 'Milliliters';
-  final TextEditingController _weightController = TextEditingController(text: '20');
+  final TextEditingController _weightController = TextEditingController(text: '0');
 
   bool _isActivityDropdownOpen = false;
   bool _isWeightDropdownOpen = false;
@@ -180,7 +180,7 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
                       ),
                       SizedBox(width: 40.w),
                       SizedBox(
-                        width: 150.w,  // ← adjust this value (140–180.w usually looks good)
+                        width: 150.w,
                         child: _buildResultUnitDropdown(l10n),
                       ),
 
@@ -252,7 +252,6 @@ class _DrinkCalculatorWidgetState extends State<DrinkCalculatorWidget> {
           Align(
             alignment: Alignment.bottomRight,
             child: Container(
-              height: 100.h,
               width: 170.w,
               decoration: BoxDecoration(
                 color: Theme.of(context).cardColor,

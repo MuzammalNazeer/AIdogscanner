@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "en",
     "appTitle":  "Dog Breed",
     "settingsTitle":  "Settings",
@@ -52,8 +52,8 @@
     "skip":  "Skip",
     "next":  "Next",
     "getStarted":  "Get Started",
-    "onboardingTitle1":  "Satellite Director",
-    "onboardingDesc1":  "Explore Nearby Place with GPS Satellite\nMapping \u0026 Find Satellites",
+    "onboardingTitle1":  "Identify Dog Breeds",
+    "onboardingDesc1":  "Instantly identify any dog breed using our\nadvanced AI technology.",
     "onboardingTitle2":  "We Need Your\n Permission",
     "onboardingDesc2":  "We need camera permission so that you can take \nlive scans of your pet.",
     "onboardingTitle3":  "Maintain Image Quality",
@@ -990,14 +990,13 @@
 
 
       "loading": "Loading...",
-          "editProfile": "Edit Profile",
+  "editProfile": "Edit Profile",
   "profileRecentScan": "Recent Scans",
   "profileHistory": "Scan History",
   "notifications": "Notifications",
   "appLanguageTitle": "App Language",
   "premiumSubscription": "Premium Subscription",
   "profileMyFavorites": "My Favorites",
-  "feedbackTitle": "Feedback",
   "rateUsTitle": "Rate Us",
   "shareTitle": "Share App",
   "faq": "FAQ",
@@ -1017,6 +1016,32 @@
   "shareSubject": "Dog Breed Scanner App",
   "no": "No",
   "yes": "Yes",
-  "deleteProfileWarning": "Are you sure you want to delete your profile? This action cannot be undone and all your data will be permanently removed."
-
+  "deleteProfileWarning": "Are you sure you want to delete your profile? This action cannot be undone and all your data will be permanently removed.",
+  "onboardingWelcomeTitle": "Welcome to Dog Manager App",
+  "onboardingWelcomeDesc": "Effortlessly scan, manage, and care for every dog in your pack — all in one place.",
+  "noDogDetectedTitle": "No Dog Detected",
+  "noDogDetectedMessage": "The image you uploaded does not appear to be a dog.",
+  "uploadDogImagePrompt": "Please upload a clear photo of your dog for better results.",
+  "lowConfidenceTitle": "Identification Uncertain",
+  "lowConfidenceMessage": "We are only {confidence}% sure of this breed identification.",
+  "@lowConfidenceMessage": {
+    "placeholders": {
+      "confidence": {
+        "type": "String"
+      }
+    }
+  },
+  "suggestionsForBetterResults": "Suggestions for better results:",
+  "ensureClearPhoto": "Ensure the photo is clear and not blurry",
+  "goodLighting": "Use good, natural lighting",
+  "closeUpShot": "Get a close-up shot of the dog's face and body",
+  "multipleAngles": "Try taking photos from multiple angles",
+  "highConfidenceSuccess": "Identification successful with {confidence}% confidence!",
+  "@highConfidenceSuccess": {
+    "placeholders": {
+      "confidence": {
+        "type": "String"
+      }
+    }
+  }
 }

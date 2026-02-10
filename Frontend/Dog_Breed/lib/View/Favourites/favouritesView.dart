@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,33 +65,78 @@ class _FavouritesviewState extends State<Favouritesview> {
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  width: 40.w,
-                  height: 40.h,
-                  decoration:  BoxDecoration(
-                    color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFF686868).withOpacity(0.1),
-                    shape: BoxShape.circle,
+                  width: 40.305.w,
+                  height: 40.305.h,
+                  padding: const EdgeInsets.all(8.96),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.circular(8.96),
                   ),
-                  child: Center(
-                    child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),
+                  child: Icon(
+                    CupertinoIcons.chevron_left,
+                    size: 20.sp,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ),
-               const SizedBox(width: 60,),
-              Text(
-                AppLocalizations.of(context)!.favoritesTitle,
-                style: TextStyle(
-                  fontFamily: 'Sora',
-                  fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 30.sp,
-                  height: 1.0,
-                  letterSpacing: 0.0,
-                  color: Theme.of(context).colorScheme.onSurface,
+
+              // Center text
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context)!.favoritesTitle,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'Sora',
+                    fontWeight: FontWeight.w300,
+                    fontSize: 27.75.sp,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ),
-              const Spacer(),
+
+              // Invisible placeholder to balance
+              SizedBox(
+                width: 40.305.w,
+                height: 40.305.h,
+              ),
             ],
           ),
+
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     GestureDetector(
+          //       onTap: () => Navigator.pop(context),
+          //       child: Container(
+          //         width: 40.w,
+          //         height: 40.h,
+          //         decoration:  BoxDecoration(
+          //           color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFF686868).withOpacity(0.1),
+          //           shape: BoxShape.circle,
+          //         ),
+          //         child: Center(
+          //           child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),
+          //         ),
+          //       ),
+          //     ),
+          //      const SizedBox(width: 60,),
+          //     Text(
+          //       AppLocalizations.of(context)!.favoritesTitle,
+          //       style: TextStyle(
+          //         fontFamily: 'Sora',
+          //         fontWeight: FontWeight.w400,
+          //         fontStyle: FontStyle.normal,
+          //         fontSize: 30.sp,
+          //         height: 1.0,
+          //         letterSpacing: 0.0,
+          //         color: Theme.of(context).colorScheme.onSurface,
+          //       ),
+          //     ),
+          //     const Spacer(),
+          //   ],
+          // ),
 
           Positioned(
             bottom: 5,

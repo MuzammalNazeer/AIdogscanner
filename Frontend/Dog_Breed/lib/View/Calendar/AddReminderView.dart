@@ -279,9 +279,9 @@ class _AddReminderViewState extends State<AddReminderView> {
             width: 90.w,
           ),
           SizedBox(height: 20.h),
-          Text(AppLocalizations.of(context)!.reminderNone, style: TextStyle(fontSize: 20.sp, color: Theme.of(context).colorScheme.onSurface)),
+          Text(AppLocalizations.of(context)!.reminderNone, style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.normal, color: Theme.of(context).colorScheme.onSurface)),
           SizedBox(height: 6.h),
-          Text(formattedDate, style:  TextStyle(color: Theme.of(context).colorScheme.primary)),
+          Text(formattedDate, style:  TextStyle(color: Theme.of(context).colorScheme.primary,fontWeight: FontWeight.w500,)),
         ],
       );
     }
@@ -373,7 +373,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                     title,
                     style: TextStyle(
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.normal,
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
@@ -406,7 +406,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                     ),
                     Text(
                       DateFormat('EEE MMM d', Localizations.localeOf(context).toString()).format(scheduledTime),
-                      style: TextStyle(fontSize: 13.sp, color: Theme.of(context).hintColor),
+                      style: TextStyle(fontSize: 13.sp,fontWeight: FontWeight.normal, color: Theme.of(context).hintColor),
                     ),
                     SizedBox(height: 4.h),
                     Row(
@@ -433,7 +433,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                           style: TextStyle(
                             fontSize: 16.sp,
                             color:reminderColor,
-                            fontWeight: FontWeight.w500,
+                           fontWeight: FontWeight.normal,
                           ),
                         ),
                       ],
