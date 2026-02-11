@@ -391,6 +391,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dialogGotIt => 'Verstanden';
 
   @override
+  String get deleteReminderTitle => 'Erinnerung löschen';
+
+  @override
+  String get addAsActivity => 'Als Aktivität hinzufügen';
+
+  @override
   String get dayMon => 'Mo';
 
   @override

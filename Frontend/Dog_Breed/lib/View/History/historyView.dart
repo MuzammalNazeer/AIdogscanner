@@ -63,7 +63,7 @@ class _HistoryviewState extends State<Historyview> {
                   height: 40.305.h,
                   padding: const EdgeInsets.all(8.96),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(8.96),
                   ),
                   child: Icon(

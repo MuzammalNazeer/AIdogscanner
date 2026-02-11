@@ -390,6 +390,12 @@ class AppLocalizationsDa extends AppLocalizations {
   String get dialogGotIt => 'ForstÃƒÂ¥et';
 
   @override
+  String get deleteReminderTitle => 'Slet påmindelse';
+
+  @override
+  String get addAsActivity => 'Tilføj som aktivitet';
+
+  @override
   String get dayMon => 'Man';
 
   @override

@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "id",
     "appTitle":  "Ras Anjing",
     "settingsTitle":  "Pengaturan",
@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Tindakan Diperlukan",
     "dialogAddPetMessage":  "Tambah setidaknya satu hewan untuk mulai menambahkan aktivitas dan pengingat.",
     "dialogGotIt":  "Mengerti",
+    "deleteReminderTitle": "Hapus Pengingat",
+    "addAsActivity": "Tambahkan sebagai Aktivitas",
     "dayMon":  "Sen",
     "dayTue":  "Sel",
     "dayWed":  "Rab",

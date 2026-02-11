@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Wymagane działania",
     "dialogAddPetMessage":  "Dodaj przynajmniej jednego zwierzaka, aby zacząć dodawać aktywności i przypomnienia.",
     "dialogGotIt":  "Rozumiem",
+    "deleteReminderTitle": "Usuń przypomnienie",
+    "addAsActivity": "Dodaj jako aktywność",
     "dayMon":  "Pon",
     "dayTue":  "Wt",
     "dayWed":  "Śr",

@@ -387,6 +387,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get dialogGotIt => 'Mengerti';
 
   @override
+  String get deleteReminderTitle => 'Hapus Pengingat';
+
+  @override
+  String get addAsActivity => 'Tambahkan sebagai Aktivitas';
+
+  @override
   String get dayMon => 'Sen';
 
   @override

@@ -24,7 +24,6 @@ class AddReminderView extends StatefulWidget {
 
 class _AddReminderViewState extends State<AddReminderView> {
   late DateTime _selectedDate;
-  Timer? _cleanupTimer;
 
   @override
   void initState() {
@@ -33,7 +32,6 @@ class _AddReminderViewState extends State<AddReminderView> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ReminderNotifier>().startReminderChecker(context);
-      _startAutoRemoveCheck();
     });
   }
 
@@ -49,39 +47,10 @@ class _AddReminderViewState extends State<AddReminderView> {
 
   @override
   void dispose() {
-    _cleanupTimer?.cancel();
     super.dispose();
   }
 
-  void _startAutoRemoveCheck() {
-    _checkAndRemoveExpiredReminders();
-    _cleanupTimer =
-        Timer.periodic(const Duration(seconds: 30), (_) => _checkAndRemoveExpiredReminders());
-  }
 
-  void _checkAndRemoveExpiredReminders() async {
-    if (!mounted) return;
-
-    final activityNotifier = context.read<ActivityNotifier>();
-    final reminderNotifier = context.read<ReminderNotifier>();
-    final now = DateTime.now();
-
-    final expiredActivities = activityNotifier.activities.where(
-          (a) =>
-      a.hasReminder &&
-          a.reminderDateTime != null &&
-          a.reminderDateTime!.isBefore(now.subtract(const Duration(minutes: 5))),
-    );
-
-    for (final activity in expiredActivities) {
-      await _removeReminder(
-        reminderNotifier: reminderNotifier,
-        activityNotifier: activityNotifier,
-        activity: activity,
-        silent: true,
-      );
-    }
-  }
 
   Future<void> _updateReminderTime(
       Activity activity,
@@ -298,6 +267,10 @@ class _AddReminderViewState extends State<AddReminderView> {
     );
   }
 
+
+
+
+
   Widget _buildReminderCard(
       Map<String, dynamic> reminder,
       ReminderNotifier reminderNotifier,
@@ -330,123 +303,242 @@ class _AddReminderViewState extends State<AddReminderView> {
       } catch (_) {}
     }
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        color: Theme.of(context).cardColor,
-        child: InkWell(
-
-          child: Padding(
-            padding: EdgeInsets.all(12.w),
-            child: Row(
-              children: [
-                Container(
-                  width: 50.w,
-                  height: 50.h,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
+    return Dismissible(
+        key: Key(reminder['id'] ?? UniqueKey().toString()),
+        direction: DismissDirection.horizontal,
+        confirmDismiss: (direction) async {
+          if (direction == DismissDirection.startToEnd) {
+            // Right swipe - Update
+            _showReminderDetailsSheet(
+              context,
+              reminder,
+              activity,
+              reminderNotifier,
+              activityNotifier,
+            );
+            return false; // Don't dismiss the item
+          } else if (direction == DismissDirection.endToStart) {
+            // Left swipe - Remove
+            final bool? confirm = await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                backgroundColor: Theme.of(context).colorScheme.background,
+                title: Text(AppLocalizations.of(context)!.deleteReminderTitle),
+                content: Text(AppLocalizations.of(context)!.dialogDeleteActivityContent(_getLocalizedActivityName(context, activity!.name))),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: Text(AppLocalizations.of(context)!.cancel),
                   ),
-                  child: Center(
-                    child: ClipOval(
-                      child: imagePath != null
-                          ? Image.asset(
-                        imagePath,
-                        width: 35.w,
-                        height: 35.h,
-                        fit: BoxFit.contain,
-                        errorBuilder: (_, __, ___) =>
-                            Icon(Icons.pets, color: color, size: 24.w),
-                      )
-                          : Icon(Icons.notifications_active,
-                          color: color, size: 24.w),
-                    ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    style: TextButton.styleFrom(foregroundColor: Colors.red),
+                    child: Text(AppLocalizations.of(context)!.actionDelete),
                   ),
+                ],
+              ),
+            );
+            return confirm ?? false;
+          }
+          return false;
+        },
+        onDismissed: (direction) {
+          if (direction == DismissDirection.endToStart) {
+            // Remove reminder without showing dialog again
+            _removeReminder(
+              reminderNotifier: reminderNotifier,
+              activityNotifier: activityNotifier,
+              activity: activity,
+              reminderId: reminder['id'],
+            );
+          }
+        },
+        background: _buildSwipeRightBackground(), // Update - Right swipe
+        secondaryBackground: _buildSwipeLeftBackground(), // Remove - Left swipe
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+            child: Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
-                SizedBox(width: 12.w),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.normal,
-                      color: Theme.of(context).colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.secondaryContainer,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    GestureDetector(
-                      onTap: () async {
-                        if (activity != null) {
-                          if (reminderId != null) {
-                            await reminderNotifier.cancelReminder(reminderId);
-                          }
-                          
-                          activityNotifier.updateActivity(
-                            activity.copyWith(
-                              hasReminder: false,
-                              reminderDateTime: null,
-                              reminderId: null,
-                              dateTime: scheduledTime,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 6,horizontal: 6),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 50.w,
+                            height: 50.h,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
                             ),
-                          );
-                          
-                          if (context.mounted) {
-                            Provider.of<HomeViewModel>(context, listen: false).calendarTabIndex = 0;
-                          }
-                        }
-                      },
-                      child: const Icon(Icons.add),
-                    ),
-                    Text(
-                      DateFormat('EEE MMM d', Localizations.localeOf(context).toString()).format(scheduledTime),
-                      style: TextStyle(fontSize: 13.sp,fontWeight: FontWeight.normal, color: Theme.of(context).hintColor),
-                    ),
-                    SizedBox(height: 4.h),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            _showReminderDetailsSheet(
-                              context,
-                              reminder,
-                              activity,
-                              reminderNotifier,
-                              activityNotifier,
-                            );
-                          },
-                          child:  Icon(
-                            Icons.notifications,
-                            size: 22.sp,
-                            color: reminderColor,
+                            child: Center(
+                              child: ClipOval(
+                                child: imagePath != null
+                                    ? Image.asset(
+                                  imagePath,
+                                  width: 35.w,
+                                  height: 35.h,
+                                  fit: BoxFit.contain,
+                                  errorBuilder: (_, __, ___) =>
+                                      Icon(Icons.pets, color: color, size: 24.w),
+                                )
+                                    : Icon(Icons.notifications_active,
+                                    color: color, size: 24.w),
+                              ),
+                            ),
                           ),
-                        ),
-                        SizedBox(width: 4.w),
-                        Text(
-                          DateFormat('hh:mm a', Localizations.localeOf(context).toString()).format(scheduledTime),
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            color:reminderColor,
-                           fontWeight: FontWeight.normal,
+                          SizedBox(width: 4.w),
+                          Expanded(
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.normal,
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    DateFormat('EEE MMM d', Localizations.localeOf(context).toString()).format(scheduledTime),
+                                    style: TextStyle(fontSize: 13.sp,fontWeight: FontWeight.normal, color: Theme.of(context).hintColor),
+                                  ),
+                                  SizedBox(width: 2.w),
+                                   Text("/",style: TextStyle(fontSize: 13.sp,fontWeight: FontWeight.normal, color: Theme.of(context).hintColor),),
+                                  SizedBox(width: 2.w),
+                                  Text(
+                                    DateFormat('hh:mm a', Localizations.localeOf(context).toString()).format(scheduledTime),
+                                    style: TextStyle(
+                                      fontSize: 13.sp,
+                                      color:reminderColor,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  Icon(
+                                    Icons.notifications,
+                                    size: 22.sp,
+                                    color: reminderColor,
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4,),
+                              if (activity != null && activity.hasReminder == true) ...[
+                                GestureDetector(
+                                  onTap: () async {
+                                    if (activity != null) {
+                                      if (reminderId != null) {
+                                        await reminderNotifier.cancelReminder(reminderId);
+                                      }
+
+                                      activityNotifier.updateActivity(
+                                        activity.copyWith(
+                                          hasReminder: false,
+                                          reminderDateTime: null,
+                                          reminderId: null,
+                                          dateTime: scheduledTime,
+                                        ),
+                                      );
+
+                                      if (context.mounted) {
+                                        Provider.of<HomeViewModel>(context, listen: false).calendarTabIndex = 0;
+                                      }
+                                    }
+                                  },
+                                  child:  Text("+ Add As Activity",style: TextStyle(fontSize: 13.sp,fontWeight: FontWeight.normal, color: AppColors.vibrantPurple),),
+                                ),
+                              ],
+
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ),),
+        ));
+                }
+
+
+  // Swipe background for right swipe (Update)
+  Widget _buildSwipeRightBackground() {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: AppColors.vibrantPurple,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.edit,
+            color: Colors.white,
+            size: 24.sp,
+          ),
+          SizedBox(width: 8.w),
+          Text(
+            AppLocalizations.of(context)!.actionUpdate,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ),
+        ],
       ),
     );
   }
+
+  // Swipe background for left swipe (Remove)
+  Widget _buildSwipeLeftBackground() {
+    return Container(
+      alignment: Alignment.centerRight,
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: Colors.red,
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.actionRemove,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(width: 8.w),
+          Icon(
+            Icons.delete,
+            color: Colors.white,
+            size: 24.sp,
+          ),
+        ],
+      ),
+    );
+  }
+
 
   void _showReminderDetailsSheet(
       BuildContext context,
@@ -555,7 +647,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                             style: TextStyle(fontSize: 16.sp, color: Theme.of(context).colorScheme.onSurface),
                           ),
                           const Spacer(),
-                          Icon(Icons.arrow_forward_ios, size: 16, color: Theme.of(context).hintColor),
+                          Icon(Icons.arrow_forward_ios, size: 16.sp, color: Theme.of(context).hintColor),
                         ],
                       ),
                     ),
@@ -567,7 +659,6 @@ class _AddReminderViewState extends State<AddReminderView> {
                   InkWell(
                     onTap: () async {
                       final bool isDark = Theme.of(context).brightness == Brightness.dark;
-
                       final TimeOfDay? pickedTime = await showTimePicker(
                         context: builderContext,
                         initialTime: TimeOfDay.fromDateTime(tempScheduledTime),
@@ -635,7 +726,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                       }
                     },
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.h),
+                      padding: EdgeInsets.symmetric(horizontal: 16.w,vertical: 8.h),
                       child: Row(
                         children: [
                           Icon(Icons.access_time, color: Theme.of(context).colorScheme.primary),
@@ -645,115 +736,12 @@ class _AddReminderViewState extends State<AddReminderView> {
                             style: TextStyle(fontSize: 16.sp, color: Theme.of(context).colorScheme.onSurface),
                           ),
                           const Spacer(),
-                          Icon(Icons.edit, size: 16, color: Theme.of(context).hintColor),
+                          Icon(Icons.edit, size: 16.sp, color: Theme.of(context).hintColor),
                         ],
                       ),
                     ),
                   ),
 
-                  // // Date Row (Clickable)
-                  // InkWell(
-                  //   onTap: () async {
-                  //     final DateTime? pickedDate = await showDatePicker(
-                  //       context: builderContext,
-                  //       initialDate: tempScheduledTime,
-                  //       firstDate: DateTime.now().subtract(const Duration(days: 365)),
-                  //       lastDate: DateTime.now().add(const Duration(days: 365)),
-                  //       builder: (context, child) {
-                  //         return Theme(
-                  //           data: Theme.of(context).copyWith(
-                  //             colorScheme: Theme.of(context).colorScheme.copyWith(
-                  //               primary: AppColors.vibrantPurple, // Header color
-                  //               onPrimary: Colors.white, // Header text color
-                  //               surface: Theme.of(context).scaffoldBackgroundColor, // Background color
-                  //               onSurface: Theme.of(context).colorScheme.onSurface, // Text color
-                  //             ),
-                  //             dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor, // Background color
-                  //           ),
-                  //           child: child!,
-                  //         );
-                  //       },
-                  //     );
-                  //     if (pickedDate != null) {
-                  //       setSheetState(() {
-                  //         tempScheduledTime = DateTime(
-                  //           pickedDate.year,
-                  //           pickedDate.month,
-                  //           pickedDate.day,
-                  //           tempScheduledTime.hour,
-                  //           tempScheduledTime.minute,
-                  //         );
-                  //       });
-                  //     }
-                  //   },
-                  //   child: Padding(
-                  //     padding: EdgeInsets.symmetric(vertical: 8.h),
-                  //     child: Row(
-                  //       children: [
-                  //         Icon(Icons.calendar_today, color: Theme.of(context).colorScheme.primary),
-                  //         SizedBox(width: 8.w),
-                  //         Text(
-                  //           DateFormat('EEE, MMM d, yyyy', Localizations.localeOf(context).toString()).format(tempScheduledTime),
-                  //           style: TextStyle(fontSize: 16.sp, color: Theme.of(context).colorScheme.onSurface),
-                  //         ),
-                  //         const Spacer(),
-                  //         Icon(Icons.edit, size: 16, color: Theme.of(context).hintColor),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                  //
-                  // SizedBox(height: 10.h),
-                  // InkWell(
-                  //   onTap: () async {
-                  //     final TimeOfDay? pickedTime = await showTimePicker(
-                  //       context: builderContext,
-                  //       initialTime: TimeOfDay.fromDateTime(tempScheduledTime),
-                  //       builder: (context, child) {
-                  //         return Theme(
-                  //           data: Theme.of(context).copyWith(
-                  //             colorScheme: Theme.of(context).colorScheme.copyWith(
-                  //               primary: AppColors.vibrantPurple,
-                  //               onPrimary: Colors.white,
-                  //               surface: Theme.of(context).scaffoldBackgroundColor,
-                  //               onSurface: Theme.of(context).colorScheme.onSurface,
-                  //               secondary: AppColors.vibrantPurple,
-                  //               onSecondary: Colors.white,
-                  //             ),
-                  //             dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor, // Background color
-                  //           ),
-                  //           child: child!,
-                  //         );
-                  //       },
-                  //     );
-                  //     if (pickedTime != null) {
-                  //       setSheetState(() {
-                  //         tempScheduledTime = DateTime(
-                  //           tempScheduledTime.year,
-                  //           tempScheduledTime.month,
-                  //           tempScheduledTime.day,
-                  //           pickedTime.hour,
-                  //           pickedTime.minute,
-                  //         );
-                  //       });
-                  //     }
-                  //   },
-                  //   child: Padding(
-                  //     padding: EdgeInsets.symmetric(vertical: 8.h),
-                  //     child: Row(
-                  //       children: [
-                  //         const Icon(Icons.access_time, color: AppColors.vibrantPurple),
-                  //         SizedBox(width: 8.w),
-                  //         Text(
-                  //           DateFormat('hh:mm a', Localizations.localeOf(context).toString()).format(tempScheduledTime),
-                  //           style: TextStyle(fontSize: 16.sp, color: Theme.of(context).colorScheme.onSurface),
-                  //         ),
-                  //         const Spacer(),
-                  //         Icon(Icons.edit, size: 16, color: Theme.of(context).hintColor),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
 
                   SizedBox(height: 30.h),
 
@@ -784,33 +772,33 @@ class _AddReminderViewState extends State<AddReminderView> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: AppColors.vibrantPurple,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r)),
                           ),
                           child: Text(AppLocalizations.of(context)!.actionUpdate, style: const TextStyle(color: Colors.white)),
                         ),
                       ),
-                      SizedBox(width: 16.w),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            Navigator.pop(builderContext);
-                            await _removeReminder(
-                              reminderNotifier: reminderNotifier,
-                              activityNotifier: activityNotifier,
-                              activity: activity,
-                              reminderId: reminder['id'],
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.r)),
-                          ),
-                          child: Text(AppLocalizations.of(context)!.actionRemove, style: const TextStyle(color: Colors.white)),
-                        ),
-                      ),
+                      // SizedBox(width: 16.w),
+                      // Expanded(
+                      //   child: ElevatedButton(
+                      //     onPressed: () async {
+                      //       Navigator.pop(builderContext);
+                      //       await _removeReminder(
+                      //         reminderNotifier: reminderNotifier,
+                      //         activityNotifier: activityNotifier,
+                      //         activity: activity,
+                      //         reminderId: reminder['id'],
+                      //       );
+                      //     },
+                      //     style: ElevatedButton.styleFrom(
+                      //       backgroundColor: Colors.red,
+                      //       shape: RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(10.r)),
+                      //     ),
+                      //     child: Text(AppLocalizations.of(context)!.actionRemove, style: const TextStyle(color: Colors.white)),
+                      //   ),
+                      // ),
                     ],
                   ),
                   SizedBox(height: 20.h),

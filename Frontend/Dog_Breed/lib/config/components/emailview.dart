@@ -51,7 +51,7 @@ class _EmailViewState extends State<EmailView> {
                   width: 40.w,
                   height: 40.h,
                   decoration:  BoxDecoration(
-                      color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Colors.grey.shade200,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(9)
                   ),
                   child: Center(
@@ -73,7 +73,7 @@ class _EmailViewState extends State<EmailView> {
                   hintText: 'Enter Email',
                   hintStyle: TextStyle(fontSize: 18.sp, color: Theme.of(context).hintColor),
                   filled: true,
-                  fillColor: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF5F5F5),
+                  fillColor: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Theme.of(context).colorScheme.secondaryContainer,
                   contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),

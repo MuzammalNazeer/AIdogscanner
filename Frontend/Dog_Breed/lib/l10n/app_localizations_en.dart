@@ -386,6 +386,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dialogGotIt => 'Got it';
 
   @override
+  String get deleteReminderTitle => 'Delete Reminder';
+
+  @override
+  String get addAsActivity => 'Add as Activity';
+
+  @override
   String get dayMon => 'Mon';
 
   @override

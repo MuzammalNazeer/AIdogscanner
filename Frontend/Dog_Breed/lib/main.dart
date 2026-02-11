@@ -22,6 +22,8 @@ import 'View_model/activity_provider.dart';
 import 'View_model/dogvaluesviewmodel.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tzdata;
+import 'dart:io';
+import 'package:video_player_win/video_player_win_plugin.dart';
 
 List<CameraDescription> cameras = [];
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -29,6 +31,10 @@ FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  if (!kIsWeb && Platform.isWindows) {
+    WindowsVideoPlayer.registerWith();
+  }
 
   // Timezone init
   tzdata.initializeTimeZones();

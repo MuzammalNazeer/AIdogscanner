@@ -949,7 +949,7 @@ class _AddPetViewState extends State<AddPetView> {
                         height: 40.305.h,
                         padding: const EdgeInsets.all(8.96),
                         decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor,
+                          color: Theme.of(context).colorScheme.secondaryContainer,
                           borderRadius: BorderRadius.circular(8.96),
                         ),
                         child: Icon(
@@ -1020,7 +1020,7 @@ class _AddPetViewState extends State<AddPetView> {
                     width: 159.w,
                     height: 159.h,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(27.83),
                       //   border: _selectedImage != null
                       //       ? Border.all(color: const Color(0xFF820DFF), width: 2)
@@ -1074,7 +1074,7 @@ class _AddPetViewState extends State<AddPetView> {
                       style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Theme.of(context).cardColor,
+                        fillColor: Theme.of(context).colorScheme.secondaryContainer,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -1103,7 +1103,7 @@ class _AddPetViewState extends State<AddPetView> {
                     height: 58.h,
                     padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -1142,7 +1142,7 @@ class _AddPetViewState extends State<AddPetView> {
                       ),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Theme.of(context).cardColor,
+                        fillColor: Theme.of(context).colorScheme.secondaryContainer,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -1194,7 +1194,7 @@ class _AddPetViewState extends State<AddPetView> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color:Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(

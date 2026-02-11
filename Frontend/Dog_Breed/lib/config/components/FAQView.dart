@@ -65,7 +65,7 @@ class _FAQViewState extends State<FAQView> {
 
       body: SafeArea(
         child: Padding(
-          padding:  EdgeInsets.symmetric(vertical: 12,horizontal: 12),
+          padding:  const EdgeInsets.symmetric(vertical: 12,horizontal: 12),
           child: Column(
             children: [
               Row(
@@ -78,7 +78,7 @@ class _FAQViewState extends State<FAQView> {
                       height: 40.305.h,
                       padding: const EdgeInsets.all(8.96),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         borderRadius: BorderRadius.circular(8.96),
                       ),
                       child: Icon(

@@ -169,7 +169,6 @@ class _HomeviewState extends State<Homeview> {
                           style: TextStyle(
                             fontFamily: 'Sora',
                             fontWeight: FontWeight.w200,
-                            fontStyle: FontStyle.normal,
                             fontSize: 30.sp,
                             height: 1.0,
                             letterSpacing: 0.0,

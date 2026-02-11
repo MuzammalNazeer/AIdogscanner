@@ -104,7 +104,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
           height: 46.h,
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(16.r),
           ),
           child: InkWell(
@@ -180,7 +180,7 @@ class _DocumentsScreenState extends State<DocumentsScreen> {
           child: Container(
             padding: EdgeInsets.all(4.w),
             decoration: BoxDecoration(
-              color: Theme.of(context).cardColor.withOpacity(0.5),
+              color: Theme.of(context).colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(16.r),
             ),
             child: filteredDocs.isNotEmpty

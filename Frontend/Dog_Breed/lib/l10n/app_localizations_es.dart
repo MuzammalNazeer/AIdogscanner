@@ -389,6 +389,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get dialogGotIt => 'Entendido';
 
   @override
+  String get deleteReminderTitle => 'Eliminar recordatorio';
+
+  @override
+  String get addAsActivity => 'Añadir como actividad';
+
+  @override
   String get dayMon => 'Lun';
 
   @override

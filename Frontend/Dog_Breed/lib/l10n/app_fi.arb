@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Vaaditut toiminnot",
     "dialogAddPetMessage":  "Lisää vähintään yksi lemmikki aloittaaksesi toimintojen ja muistutusten lisäämisen.",
     "dialogGotIt":  "Selvä",
+    "deleteReminderTitle": "Poista muistutus",
+    "addAsActivity": "Lisää aktiviteettina",
     "dayMon":  "Ma",
     "dayTue":  "Ti",
     "dayWed":  "Ke",

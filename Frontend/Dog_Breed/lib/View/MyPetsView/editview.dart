@@ -491,7 +491,7 @@ class _EditviewState extends State<Editview> {
             colorScheme: ColorScheme.light(
               primary: AppColors.vibrantPurple,
               onPrimary: Colors.white,
-              surface: Theme.of(context).cardColor,
+              surface: Theme.of(context).colorScheme.secondaryContainer,
               onSurface: Theme.of(context).colorScheme.onSurface,
             ),
             dialogBackgroundColor: Theme.of(context).cardColor,
@@ -782,7 +782,7 @@ class _EditviewState extends State<Editview> {
                         height: 40.305.h,
                         padding: const EdgeInsets.all(8.96),
                         decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor,
+                          color: Theme.of(context).colorScheme.secondaryContainer,
                           borderRadius: BorderRadius.circular(8.96),
                         ),
                         child: Icon(
@@ -823,7 +823,7 @@ class _EditviewState extends State<Editview> {
                       width: 159.w,
                       height: 159.h,
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         borderRadius: BorderRadius.circular(27.83),
                       ),
                       child: _selectedImage != null
@@ -885,7 +885,7 @@ class _EditviewState extends State<Editview> {
                       style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Theme.of(context).cardColor,
+                        fillColor: Theme.of(context).colorScheme.secondaryContainer,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -918,7 +918,7 @@ class _EditviewState extends State<Editview> {
 
                         builder: (context) {
                           return AlertDialog(
-                            backgroundColor: Theme.of(context).cardColor,
+                            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
                             title: const Text('Change Breed?'),
                             content: const Text(
                                 'Are you sure you want to change the breed?'),
@@ -947,7 +947,7 @@ class _EditviewState extends State<Editview> {
                     width: double.infinity,
                     height: 58.h,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -1005,7 +1005,7 @@ class _EditviewState extends State<Editview> {
                       value: _selectedGender,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Theme.of(context).cardColor,
+                        fillColor: Theme.of(context).colorScheme.secondaryContainer,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.r),
                           borderSide: BorderSide.none,
@@ -1055,7 +1055,7 @@ class _EditviewState extends State<Editview> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(

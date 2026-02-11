@@ -49,7 +49,7 @@ class _ListsaveState extends State<Listsave> {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
           child: Column(
             children: [
@@ -69,8 +69,8 @@ class _ListsaveState extends State<Listsave> {
                               width: 40.w,
                               height: 40.h,
                               decoration:  BoxDecoration(
-                                color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFF686868).withOpacity(0.1),
-                                shape: BoxShape.circle,
+                                color: Theme.of(context).colorScheme.secondaryContainer,
+                                borderRadius: BorderRadius.circular(12.r),
                               ),
                               child: Center(
                                 child: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.onSurface, size: 20.sp),

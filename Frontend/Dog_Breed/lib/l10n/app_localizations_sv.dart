@@ -387,6 +387,12 @@ class AppLocalizationsSv extends AppLocalizations {
   String get dialogGotIt => 'Uppfattat';
 
   @override
+  String get deleteReminderTitle => 'Ta bort påminnelse';
+
+  @override
+  String get addAsActivity => 'Lägg till som aktivitet';
+
+  @override
   String get dayMon => 'MÃ¥n';
 
   @override

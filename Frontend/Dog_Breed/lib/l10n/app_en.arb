@@ -120,6 +120,8 @@
     "dialogAddPetMessage":  "Add at least one pet to start adding activities and reminders.",
     "dialogGot_it":  "Got it",
     "dialogGotIt":  "Got it",
+    "deleteReminderTitle": "Delete Reminder",
+    "addAsActivity": "Add as Activity",
     "dayMon":  "Mon",
     "dayTue":  "Tue",
     "dayWed":  "Wed",

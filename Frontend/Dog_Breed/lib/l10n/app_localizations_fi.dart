@@ -389,6 +389,12 @@ class AppLocalizationsFi extends AppLocalizations {
   String get dialogGotIt => 'Selvä';
 
   @override
+  String get deleteReminderTitle => 'Poista muistutus';
+
+  @override
+  String get addAsActivity => 'Lisää aktiviteettina';
+
+  @override
   String get dayMon => 'Ma';
 
   @override

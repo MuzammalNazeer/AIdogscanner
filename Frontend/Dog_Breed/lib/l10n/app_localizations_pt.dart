@@ -386,6 +386,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get dialogGotIt => 'Got it';
 
   @override
+  String get deleteReminderTitle => 'Excluir lembrete';
+
+  @override
+  String get addAsActivity => 'Adicionar como atividade';
+
+  @override
   String get dayMon => 'Mon';
 
   @override

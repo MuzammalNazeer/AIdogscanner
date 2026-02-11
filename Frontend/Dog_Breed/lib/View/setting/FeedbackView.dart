@@ -268,7 +268,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                         height: 40.305.h,
                         padding: const EdgeInsets.all(8.96),
                         decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor,
+                          color:Theme.of(context).colorScheme.secondaryContainer,
                           borderRadius: BorderRadius.circular(8.96),
                         ),
                         child: Icon(
@@ -314,7 +314,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           fontSize: 20,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                           height: 1.3,
                         ),
                       ),
@@ -346,10 +346,10 @@ class _FeedbackViewState extends State<FeedbackView> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              color: isSelected ? const Color(0xFFE3D4FF) : const Color(0xFFF5F5F5),
+                              color: isSelected ? const Color(0xFFE3D4FF) : Theme.of(context).colorScheme.secondaryContainer,
                               borderRadius: BorderRadius.circular(30),
                               border: Border.all(
-                                color: isSelected ? const Color(0xFF9C27B0) : Colors.transparent,
+                                color: isSelected ? const Color(0xFF9C27B0) : Theme.of(context).colorScheme.secondaryContainer,
                                 width: 2,
                               ),
                             ),

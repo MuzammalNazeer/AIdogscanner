@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Actions requises",
     "dialogAddPetMessage":  "Ajoutez au moins un animal pour commencer ÃƒÂ  ajouter des activitÃƒÂ©s.",
     "dialogGotIt":  "Compris",
+    "deleteReminderTitle": "Supprimer le rappel",
+    "addAsActivity": "Ajouter comme activité",
     "dayMon":  "Lun",
     "dayTue":  "Mar",
     "dayWed":  "Mer",

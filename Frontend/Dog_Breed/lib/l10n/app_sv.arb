@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Ã…tgÃ¤rder krÃ¤vs",
     "dialogAddPetMessage":  "LÃ¤gg till minst ett husdjur fÃ¶r att bÃ¶rja lÃ¤gga till aktiviteter och pÃ¥minnelser.",
     "dialogGotIt":  "Uppfattat",
+    "deleteReminderTitle": "Ta bort påminnelse",
+    "addAsActivity": "Lägg till som aktivitet",
     "dayMon":  "MÃ¥n",
     "dayTue":  "Tis",
     "dayWed":  "Ons",

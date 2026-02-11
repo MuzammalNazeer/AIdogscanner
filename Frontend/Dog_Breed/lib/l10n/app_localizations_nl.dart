@@ -387,6 +387,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dialogGotIt => 'Begrepen';
 
   @override
+  String get deleteReminderTitle => 'Herinnering verwijderen';
+
+  @override
+  String get addAsActivity => 'Toevoegen als activiteit';
+
+  @override
   String get dayMon => 'Ma';
 
   @override

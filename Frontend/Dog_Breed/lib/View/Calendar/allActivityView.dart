@@ -4,11 +4,15 @@ import 'package:dog_breed/View/Calendar/walkView.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as p;
+import 'package:video_player/video_player.dart';
 
 import '../../View_model/ReminderNotifier.dart';
 import '../../View_model/activity_provider.dart';
@@ -44,11 +48,14 @@ class _AllactivityviewState extends State<Allactivityview> {
 
   File? _selectedImage;
   File? _selectedVideo;
+  VideoPlayerController? _videoController;
+  bool _isVideoInitializing = false;
+  String? _videoError;
   final ImagePicker _picker = ImagePicker();
 
   Activity? _currentActivity;
   DateTime _walkStartDate = DateTime.now();
-  final TimeOfDay _walkStartTime = TimeOfDay.now();
+  late TimeOfDay _walkStartTime = TimeOfDay.now();
   DateTime _walkEndDate = DateTime.now();
   TimeOfDay _walkEndTime = TimeOfDay.now();
 
@@ -68,6 +75,8 @@ class _AllactivityviewState extends State<Allactivityview> {
   bool _isFahrenheitUnit = true;
 
   bool _hasReminder = false;
+
+  bool get _isDesktop => !kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS);
 
   String _getLocalizedActivityName(BuildContext context, String name) {
     final localizations = AppLocalizations.of(context)!;
@@ -97,6 +106,67 @@ class _AllactivityviewState extends State<Allactivityview> {
   }
 
   @override
+  void dispose() {
+    _videoController?.dispose();
+    _foodController.dispose();
+    _noteController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _initializeVideoController() async {
+    if (_selectedVideo != null) {
+      if (await _selectedVideo!.exists()) {
+        final oldController = _videoController;
+        if (mounted) {
+          setState(() {
+            _isVideoInitializing = true;
+            _videoError = null;
+          });
+        }
+        
+        await oldController?.dispose();
+
+        // Use .file() for local files, which is more reliable for the Windows plugin
+        final newController = VideoPlayerController.file(_selectedVideo!);
+        _videoController = newController;
+
+        try {
+          await newController.initialize();
+          if (mounted && _videoController == newController) {
+            setState(() {
+              _isVideoInitializing = false;
+            });
+            // Force first frame render
+            await newController.setVolume(0);
+            await newController.play();
+            await Future.delayed(const Duration(milliseconds: 100));
+            if (mounted && _videoController == newController) {
+               await newController.pause();
+            }
+          }
+        } catch (error) {
+          debugPrint("Video initialization error: $error");
+          if (mounted && _videoController == newController) {
+            setState(() {
+              _isVideoInitializing = false;
+              _videoController = null;
+              _videoError = error.toString();
+            });
+          }
+        }
+      } else {
+        debugPrint("Video file does not exist: ${_selectedVideo!.path}");
+        if (mounted) {
+           setState(() {
+             _videoController = null;
+             _videoError = "File not found";
+           });
+        }
+      }
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
     _currentActivity = widget.selectedActivity;
@@ -106,6 +176,72 @@ class _AllactivityviewState extends State<Allactivityview> {
     } else if (_currentActivity != null) {
       _selectedDate = _currentActivity!.dateTime;
       _selectedTime = TimeOfDay.fromDateTime(_currentActivity!.dateTime);
+      
+      // Load note
+      if (_currentActivity!.note != null) {
+        _noteController.text = _currentActivity!.note!;
+      }
+      
+      // Load media
+      if (_currentActivity!.imagePathLocal != null) {
+        _selectedImage = File(_currentActivity!.imagePathLocal!);
+      }
+      if (_currentActivity!.videoPathLocal != null) {
+        _selectedVideo = File(_currentActivity!.videoPathLocal!);
+        _initializeVideoController();
+      }
+      
+      // Parse food/amount
+      if (_currentActivity!.food != null && _currentActivity!.food!.isNotEmpty) {
+          final String food = _currentActivity!.food!;
+          final RegExp quantityRegex = RegExp(r'^(\d+(?:\.\d+)?)\s*([a-zA-Z]+)(.*)$');
+          final match = quantityRegex.firstMatch(food);
+          
+          final String activityName = _currentActivity!.name.toLowerCase();
+          
+          if (match != null) {
+             double val = double.tryParse(match.group(1) ?? '0') ?? 0;
+             String unit = match.group(2)?.toLowerCase() ?? '';
+             String rest = match.group(3)?.trim() ?? '';
+             
+             if (activityName == 'drink') {
+                 _drinkQuantityOz = val;
+                 if (unit == 'ml') {
+                    _isOzUnit = false;
+                 } else {
+                    _isOzUnit = true;
+                 }
+                 _foodController.text = rest;
+             } else if (activityName == 'weight') {
+                 _weightValue = val;
+                 if (unit == 'kg') _isLbsUnit = false;
+             } else if (activityName == 'height') {
+                 _heightValue = val;
+                 if (unit == 'cm') _isInchesUnit = false;
+             } else if (activityName == 'temperature') {
+                 _temperatureValue = val;
+                 if (unit == 'c') _isFahrenheitUnit = false;
+             } else if (['walk', 'play', 'crate'].contains(activityName)) {
+                 _walkDistanceKm = val;
+                 if (unit == 'mi') _isKmUnit = false;
+             } else {
+                 _foodController.text = food;
+             }
+          } else {
+             _foodController.text = food;
+          }
+      }
+      
+      // Timer activities start/end
+      if (['walk', 'play', 'crate'].contains(_currentActivity!.name.toLowerCase())) {
+           _walkStartDate = _currentActivity!.dateTime;
+           _walkStartTime = TimeOfDay.fromDateTime(_currentActivity!.dateTime);
+           if (_currentActivity!.duration != null) {
+               final end = _currentActivity!.dateTime.add(_currentActivity!.duration!);
+               _walkEndDate = end;
+               _walkEndTime = TimeOfDay.fromDateTime(end);
+           }
+      }
     }
 
     // If editing existing activity with reminder, populate values
@@ -117,11 +253,13 @@ class _AllactivityviewState extends State<Allactivityview> {
           : null;
     }
 
-    final int totalMinutes =
-        _selectedTime.hour * 60 + _selectedTime.minute + 60;
-    final int endHour = totalMinutes ~/ 60 % 24;
-    final int endMinute = totalMinutes % 60;
-    _walkEndTime = TimeOfDay(hour: endHour, minute: endMinute);
+    if (_currentActivity == null || !['walk', 'play', 'crate'].contains(_currentActivity!.name.toLowerCase())) {
+      final int totalMinutes =
+          _selectedTime.hour * 60 + _selectedTime.minute + 60;
+      final int endHour = totalMinutes ~/ 60 % 24;
+      final int endMinute = totalMinutes % 60;
+      _walkEndTime = TimeOfDay(hour: endHour, minute: endMinute);
+    }
   }
 
   // Reminder date selection
@@ -445,105 +583,6 @@ class _AllactivityviewState extends State<Allactivityview> {
     }
   }
 
-  // Future<void> _selectWalkStartTime() async {
-  //   final TimeOfDay? picked = await showTimePicker(
-  //     context: context,
-  //     initialTime: _walkStartTime,
-  //     builder: (context, child) => Theme(
-  //       data: Theme.of(context).copyWith(
-  //         timePickerTheme: TimePickerThemeData(
-  //           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-  //           dialHandColor: AppColors.vibrantPurple,
-  //           dialBackgroundColor: Theme.of(context).brightness == Brightness.dark
-  //               ? Colors.grey[800]
-  //               : Colors.grey[200],
-  //           hourMinuteTextColor: Theme.of(context).colorScheme.onSurface,
-  //           dayPeriodTextColor: Theme.of(context).colorScheme.onSurface,
-  //           entryModeIconColor: Theme.of(context).colorScheme.onSurface,
-  //         ),
-  //         colorScheme: Theme.of(context).colorScheme.copyWith(
-  //           primary: AppColors.vibrantPurple,
-  //           onPrimary: Colors.white,
-  //           surface: Theme.of(context).scaffoldBackgroundColor,
-  //           onSurface: Theme.of(context).colorScheme.onSurface,
-  //           secondary: AppColors.vibrantPurple,
-  //           onSecondary: Colors.white,
-  //         ),
-  //         textButtonTheme: TextButtonThemeData(
-  //           style: TextButton.styleFrom(
-  //             foregroundColor: AppColors.vibrantPurple,
-  //           ),
-  //         ),
-  //       ),
-  //       child: child!,
-  //     ),
-  //   );
-  //   if (picked != null) setState(() => _walkStartTime = picked);
-  // }
-
-
-
-
-  // Future<void> _selectWalkEndDate() async {
-  //   final DateTime? picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: _walkEndDate,
-  //     firstDate: DateTime(2020),
-  //     lastDate: DateTime(2030),
-  //     builder: (context, child) => Theme(
-  //       data: Theme.of(context).copyWith(
-  //         colorScheme: Theme.of(context).colorScheme.copyWith(
-  //             primary: const Color(0xFF820DFF),
-  //             onPrimary: Colors.white,
-  //             surface: Theme.of(context).scaffoldBackgroundColor,
-  //             onSurface: Theme.of(context).colorScheme.onSurface,
-  //         ),
-  //         dialogBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-  //       ),
-  //       child: child!,
-  //     ),
-  //   );
-  //   if (picked != null) setState(() => _walkEndDate = picked);
-  // }
-
-
-
-  // Future<void> _selectWalkEndTime() async {
-  //   final TimeOfDay? picked = await showTimePicker(
-  //     context: context,
-  //     initialTime: _walkEndTime,
-  //     builder: (context, child) => Theme(
-  //       data: Theme.of(context).copyWith(
-  //         timePickerTheme: TimePickerThemeData(
-  //           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-  //           dialHandColor: AppColors.vibrantPurple,
-  //           dialBackgroundColor: Theme.of(context).brightness == Brightness.dark
-  //               ? Colors.grey[800]
-  //               : Colors.grey[200],
-  //           hourMinuteTextColor: Theme.of(context).colorScheme.onSurface,
-  //           dayPeriodTextColor: Theme.of(context).colorScheme.onSurface,
-  //           entryModeIconColor: Theme.of(context).colorScheme.onSurface,
-  //         ),
-  //         colorScheme: Theme.of(context).colorScheme.copyWith(
-  //           primary: AppColors.vibrantPurple,
-  //           onPrimary: Colors.white,
-  //           surface: Theme.of(context).scaffoldBackgroundColor,
-  //           onSurface: Theme.of(context).colorScheme.onSurface,
-  //           secondary: AppColors.vibrantPurple,
-  //           onSecondary: Colors.white,
-  //         ),
-  //         textButtonTheme: TextButtonThemeData(
-  //           style: TextButton.styleFrom(
-  //             foregroundColor: AppColors.vibrantPurple,
-  //           ),
-  //         ),
-  //       ),
-  //       child: child!,
-  //     ),
-  //   );
-  //   if (picked != null) setState(() => _walkEndTime = picked);
-  // }
-
   Future<void> _selectWalkEndDate() async {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -666,6 +705,7 @@ class _AllactivityviewState extends State<Allactivityview> {
       final XFile? video = await _picker.pickVideo(source: source);
       if (video != null) {
         setState(() => _selectedVideo = File(video.path));
+        _initializeVideoController();
       }
     } catch (e) {
       debugPrint('Error picking video: $e');
@@ -716,26 +756,27 @@ class _AllactivityviewState extends State<Allactivityview> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    _pickImage(ImageSource.camera);
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
-                    child: Center(
-                      child: Text(
-                        AppLocalizations.of(context)!.pickerOpenCamera,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: const Color(0xFF007AFF),
-                          fontWeight: FontWeight.w500,
+                if (!_isDesktop)
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      _pickImage(ImageSource.camera);
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      child: Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.pickerOpenCamera,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: const Color(0xFF007AFF),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
                 SizedBox(height: 8.h),
               ],
             ),
@@ -789,26 +830,27 @@ class _AllactivityviewState extends State<Allactivityview> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                    _pickVideo(ImageSource.camera);
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
-                    child: Center(
-                      child: Text(
-                        AppLocalizations.of(context)!.pickerOpenCamera,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          color: const Color(0xFF007AFF),
-                          fontWeight: FontWeight.w500,
+                if (!_isDesktop)
+                  InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                      _pickVideo(ImageSource.camera);
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      child: Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.pickerOpenCamera,
+                          style: TextStyle(
+                            fontSize: 16.sp,
+                            color: const Color(0xFF007AFF),
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
                 SizedBox(height: 8.h),
               ],
             ),
@@ -923,6 +965,41 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
 
     try {
+      // Handle Image Persistence
+      String? savedImagePath = _selectedImage?.path;
+      if (_selectedImage != null) {
+        try {
+          final appDir = await getApplicationDocumentsDirectory();
+          final String appDirPath = appDir.path;
+
+          // Check if file is already in app documents (persistent)
+          if (!_selectedImage!.path.startsWith(appDirPath)) {
+            final fileName = '${DateTime.now().millisecondsSinceEpoch}_${p.basename(_selectedImage!.path)}';
+            final File newImage = await _selectedImage!.copy('$appDirPath/$fileName');
+            savedImagePath = newImage.path;
+          }
+        } catch (e) {
+          debugPrint('Error saving image: $e');
+        }
+      }
+
+      // Handle Video Persistence
+      String? savedVideoPath = _selectedVideo?.path;
+      if (_selectedVideo != null) {
+        try {
+          final appDir = await getApplicationDocumentsDirectory();
+          final String appDirPath = appDir.path;
+
+          if (!_selectedVideo!.path.startsWith(appDirPath)) {
+            final fileName = '${DateTime.now().millisecondsSinceEpoch}_${p.basename(_selectedVideo!.path)}';
+            final File newVideo = await _selectedVideo!.copy('$appDirPath/$fileName');
+            savedVideoPath = newVideo.path;
+          }
+        } catch (e) {
+          debugPrint('Error saving video: $e');
+        }
+      }
+
       DateTime activityDateTime;
 
       if (['walk', 'play', 'crate'].contains(activityName)) {
@@ -952,8 +1029,8 @@ class _AllactivityviewState extends State<Allactivityview> {
         note: _noteController.text.trim().isEmpty
             ? null
             : _noteController.text.trim(),
-        imagePathLocal: _selectedImage?.path,
-        videoPathLocal: _selectedVideo?.path,
+        imagePathLocal: savedImagePath,
+        videoPathLocal: savedVideoPath,
         hasReminder: _hasReminder,
         reminderDateTime: reminderDateTime,
         reminderId: _currentActivity?.reminderId,
@@ -1146,22 +1223,70 @@ class _AllactivityviewState extends State<Allactivityview> {
                 height: 120.h,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.r),
-                  color: const Color(0xFF820DFF).withOpacity(0.1),
+                  color: Colors.black,
                   border: Border.all(color: const Color(0xFF820DFF).withOpacity(0.3)),
                 ),
-                child: const Center(
-                  child: Icon(
-                    Icons.videocam,
-                    size: 40,
-                    color: Color(0xFF820DFF),
-                  ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: _isVideoInitializing
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF820DFF),
+                          ),
+                        )
+                      : (_videoController == null || !_videoController!.value.isInitialized)
+                          ? Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(Icons.error, color: Colors.red),
+                                  if (_videoError != null)
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        _videoError!,
+                                        style: TextStyle(color: Colors.red, fontSize: 10.sp),
+                                        textAlign: TextAlign.center,
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    )
+                                ],
+                              ),
+                            )
+                          : Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                SizedBox.expand(
+                                  child: FittedBox(
+                                    fit: BoxFit.cover,
+                                    child: SizedBox(
+                                      width: _videoController!.value.size.width,
+                                      height: _videoController!.value.size.height,
+                                      child: VideoPlayer(_videoController!),
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.play_circle_outline,
+                                  color: Colors.white.withOpacity(0.7),
+                                  size: 40,
+                                ),
+                              ],
+                            ),
                 ),
               ),
               Positioned(
                 top: 6,
                 right: 6,
                 child: GestureDetector(
-                  onTap: () => setState(() => _selectedVideo = null),
+                  onTap: () {
+                    setState(() {
+                      _selectedVideo = null;
+                      _videoController?.dispose();
+                      _videoController = null;
+                    });
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
@@ -1664,12 +1789,87 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
   }
 
+  void _showCustomQuantityDialog(double currentDisplayValue, bool isOz) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
+    final TextEditingController controller = TextEditingController(
+      text: isOz
+          ? currentDisplayValue.toStringAsFixed(1)
+          : currentDisplayValue.toStringAsFixed(0),
+    );
 
-
-
-
-
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: colorScheme.surface,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text(
+            'Enter Quantity',
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: colorScheme.onSurface,
+            ),
+          ),
+          content: TextField(
+            controller: controller,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            autofocus: true,
+            style: TextStyle(color: colorScheme.onSurface),
+            decoration: InputDecoration(
+              suffixText: isOz
+                  ? AppLocalizations.of(context)!.unitOz
+                  : AppLocalizations.of(context)!.unitMl,
+              suffixStyle: TextStyle(color: colorScheme.onSurfaceVariant),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: colorScheme.outline),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: colorScheme.primary, width: 2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          ),
+          actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                AppLocalizations.of(context)!.dialogCancel,
+                style: TextStyle(color: colorScheme.onSurfaceVariant),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                final double? newValue = double.tryParse(controller.text);
+                if (newValue != null) {
+                  setState(() {
+                    if (isOz) {
+                      _drinkQuantityOz = newValue;
+                    } else {
+                      const double ozToMl = 29.5735;
+                      _drinkQuantityOz = newValue / ozToMl;
+                    }
+                  });
+                }
+                Navigator.pop(context);
+              },
+              child: Text(
+                AppLocalizations.of(context)!.actionSave,
+                style: TextStyle(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
   Widget _buildDrinkQuantitySelector() {
     // ... (keep existing drink selector code)
     const double ozToMl = 29.5735;
@@ -1731,7 +1931,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           RoundButton(
             title: AppLocalizations.of(context)!.actionAdd,
             isSelected: true,
-            backgroundColors: Theme.of(context).colorScheme.surface,
+            backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
             textColors: const Color(0xFF820DFF),
             onPress: _showDrinkNameBottomSheet,
           ),
@@ -1739,7 +1939,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         Container(
           padding: EdgeInsets.all(6.w),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
@@ -1758,11 +1958,14 @@ class _AllactivityviewState extends State<Allactivityview> {
                   ),
                 ),
               ),
-              Text(
-                _isOzUnit
-                    ? displayValue.toStringAsFixed(1)
-                    : displayValue.toStringAsFixed(0),
-                style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+              GestureDetector(
+                onTap: () => _showCustomQuantityDialog(displayValue, _isOzUnit),
+                child: Text(
+                  _isOzUnit
+                      ? displayValue.toStringAsFixed(1)
+                      : displayValue.toStringAsFixed(0),
+                  style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+                ),
               ),
               Container(
                 height: 42.h,
@@ -1872,23 +2075,39 @@ class _AllactivityviewState extends State<Allactivityview> {
         Container(
           padding: EdgeInsets.all(6.w),
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
-                onPressed: decrement,
+              Container(
+                width: 85.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
+                  onPressed: decrement,
+                ),
               ),
               Text(
                 displayValue.toStringAsFixed(1),
                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
               ),
-              IconButton(
-                icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
-                onPressed: increment,
+              Container(
+                width: 85.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
+                  onPressed: increment,
+                ),
               ),
             ],
           ),
@@ -1896,7 +2115,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         SizedBox(height: 12.h),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
+            color:Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
@@ -1999,23 +2218,39 @@ class _AllactivityviewState extends State<Allactivityview> {
         Container(
           padding: EdgeInsets.all(6.w),
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
-                onPressed: decrement,
+              Container(
+                width: 85.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
+                  onPressed: decrement,
+                ),
               ),
               Text(
                 displayValue.toStringAsFixed(1),
                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
               ),
-              IconButton(
-                icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
-                onPressed: increment,
+              Container(
+                width: 85.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
+                  onPressed: increment,
+                ),
               ),
             ],
           ),
@@ -2023,7 +2258,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         SizedBox(height: 12.h),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
@@ -2125,23 +2360,39 @@ class _AllactivityviewState extends State<Allactivityview> {
         Container(
           padding: EdgeInsets.all(6.w),
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IconButton(
-                icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
-                onPressed: decrement,
+              Container(
+                width: 85.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.remove, color: Color(0xFF820DFF)),
+                  onPressed: decrement,
+                ),
               ),
               Text(
                 displayValue.toStringAsFixed(1),
                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
               ),
-              IconButton(
-                icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
-                onPressed: increment,
+              Container(
+                width: 85.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surfaceContainerLow,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.add, color: Color(0xFF820DFF)),
+                  onPressed: increment,
+                ),
               ),
             ],
           ),
@@ -2149,7 +2400,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         SizedBox(height: 12.h),
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xFFF4F7F6),
+            color: Theme.of(context).colorScheme.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
@@ -2225,8 +2476,6 @@ class _AllactivityviewState extends State<Allactivityview> {
       ],
     );
   }
-
-
   Widget _buildWalkDistanceSelector() {
     final String activityName = _currentActivity?.name.toLowerCase() ?? '';
     final bool isWalkActivity = activityName == 'walk';
@@ -2248,7 +2497,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           textColors: AppColors.vibrantPurple,
           hasIcons: true,
           icon: const Icon(Icons.update, color: AppColors.vibrantPurple),
-          backgroundColors: Theme.of(context).colorScheme.surface,
+          backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
           onPress: () async {
             final result = await Navigator.push(
               context,
@@ -2306,7 +2555,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           Container(
             padding: EdgeInsets.all(6.w),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Row(
@@ -2376,7 +2625,7 @@ class _AllactivityviewState extends State<Allactivityview> {
           SizedBox(height: 12.h),
           Container(
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Row(
@@ -2453,7 +2702,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2482,7 +2731,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2520,7 +2769,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2549,7 +2798,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2581,11 +2830,6 @@ class _AllactivityviewState extends State<Allactivityview> {
       ],
     );
   }
-
-
-
-
-
   String _getButtonTitle(BuildContext context, String activityName) {
     switch (activityName) {
       case 'treat':
@@ -2607,7 +2851,6 @@ class _AllactivityviewState extends State<Allactivityview> {
         return AppLocalizations.of(context)!.actionAddFood;
     }
   }
-
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat.yMd(Localizations.localeOf(context).toString());
@@ -2629,7 +2872,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(CupertinoIcons.chevron_left),
@@ -2640,7 +2883,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surface,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(CupertinoIcons.check_mark),
@@ -2648,12 +2891,11 @@ class _AllactivityviewState extends State<Allactivityview> {
                   ),
                 ],
               ),
-              SizedBox(height: 16.h),
-
+              SizedBox(height: 12.h),
               Container(
                 padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Row(
@@ -2672,7 +2914,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   ],
                 ),
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 12.h),
 
               // Reminder Section (for all activities)
               _buildReminderSection(),
@@ -2693,7 +2935,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                           RoundButton(
                             title: _foodController.text,
                             isSelected: true,
-                            backgroundColors: Theme.of(context).colorScheme.surface,
+                            backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
                             textColors: Colors.black,
                             borderColors: const Color(0xFF820DFF),
                             hasIcons: true,
@@ -2706,7 +2948,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                           RoundButton(
                             title: _getButtonTitle(context, activityName),
                             isSelected: true,
-                            backgroundColors: Theme.of(context).colorScheme.surface,
+                            backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
                             textColors: const Color(0xFF820DFF),
                             onPress: _showFoodNameBottomSheet,
                           ),
@@ -2735,7 +2977,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                     vertical: 14.h,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Theme.of(context).colorScheme.surface,
+                                    color: Theme.of(context).colorScheme.secondaryContainer,
                                     borderRadius: BorderRadius.circular(12.r),
                                   ),
                                   child: Row(
@@ -2764,7 +3006,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                     vertical: 14.h,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.grey[50],
+                                    color: Theme.of(context).colorScheme.secondaryContainer,
                                     borderRadius: BorderRadius.circular(12.r),
                                   ),
                                   child: Row(
@@ -2810,7 +3052,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                     vertical: 14.h,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.grey[50],
+                                    color: Theme.of(context).colorScheme.secondaryContainer,
                                     borderRadius: BorderRadius.circular(12.r),
                                   ),
                                   child: Row(
@@ -2839,7 +3081,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                     vertical: 14.h,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.grey[50],
+                                    color: Theme.of(context).colorScheme.secondaryContainer,
                                     borderRadius: BorderRadius.circular(12.r),
                                   ),
                                   child: Row(
@@ -2881,7 +3123,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       vertical: 14.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -2917,7 +3159,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       vertical: 14.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
@@ -2950,7 +3192,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 decoration: InputDecoration(
                   hintText: AppLocalizations.of(context)!.hintAddNote,
                   filled: true,
-                  fillColor: Theme.of(context).colorScheme.surface,
+                  fillColor: Theme.of(context).colorScheme.secondaryContainer,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
                     borderSide: BorderSide.none,
@@ -2958,7 +3200,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                   contentPadding: EdgeInsets.all(16.w),
                 ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 12.h),
 
               // Add Image
               GestureDetector(
@@ -2969,7 +3211,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -2988,7 +3230,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 ),
               ),
               _buildSelectedImage(),
-              SizedBox(height: 16.h),
+              SizedBox(height: 12.h),
 
               // Add Video
               GestureDetector(
@@ -2999,7 +3241,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color:Theme.of(context).colorScheme.surface,
+                    color:Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -3018,11 +3260,11 @@ class _AllactivityviewState extends State<Allactivityview> {
                 ),
               ),
               _buildSelectedVideo(),
-              SizedBox(height: 32.h),
+              SizedBox(height: 22.h),
 
               // Save Button
               RoundButton(
-                title: AppLocalizations.of(context)!.actionSave,
+                title: AppLocalizations.of(context)!.addAsActivity,
                 isSelected: true,
                 textColors: Colors.white,
                 backgroundColors: AppColors.vibrantPurple,

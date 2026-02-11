@@ -114,17 +114,20 @@ class _MypetsviewState extends State<Mypetsview> {
                     // ),
                     //
                     // // Centered Title
+                    const SizedBox(width: 40,),
                     Expanded(
-                      child: Text(
-                        AppLocalizations.of(context)!.myPetsTitle,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Sora',
-                          fontWeight: FontWeight.w300,
-                          fontSize: 26.75.sp,
-                          color: Theme.of(context).colorScheme.onSurface,
+                      child: Center(
+                        child: Text(
+                          AppLocalizations.of(context)!.myPetsTitle,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Sora',
+                            fontWeight: FontWeight.w300,
+                            fontSize: 26.75.sp,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
 
@@ -136,7 +139,7 @@ class _MypetsviewState extends State<Mypetsview> {
                           height: 40.305.h,
                           padding: const EdgeInsets.all(8.96),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
+                            color: Theme.of(context).colorScheme.secondaryContainer,
                             borderRadius: BorderRadius.circular(8.96),
                           ),
                           child: Icon(
@@ -203,7 +206,7 @@ class _MypetsviewState extends State<Mypetsview> {
                     });
                   },
                   decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),

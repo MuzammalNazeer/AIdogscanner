@@ -48,7 +48,7 @@ class _AddmypetviewState extends State<Addmypetview> {
             colorScheme: ColorScheme.light(
               primary: AppColors.vibrantPurple,
               onPrimary: Colors.white,
-              surface: Theme.of(context).cardColor,
+              surface: Theme.of(context).colorScheme.secondaryContainer,
               onSurface: Theme.of(context).colorScheme.onSurface,
             ),
             dialogBackgroundColor: Theme.of(context).cardColor,

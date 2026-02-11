@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "da",
     "appTitle":  "Hunderace",
     "settingsTitle":  "Indstillinger",
@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Handlinger pÃƒÂ¥krÃƒÂ¦vet",
     "dialogAddPetMessage":  "TilfÃƒÂ¸j mindst ÃƒÂ©t kÃƒÂ¦ledyr for at begynde at tilfÃƒÂ¸je aktiviteter og pÃƒÂ¥mindelser.",
     "dialogGotIt":  "ForstÃƒÂ¥et",
+    "deleteReminderTitle": "Slet påmindelse",
+    "addAsActivity": "Tilføj som aktivitet",
     "dayMon":  "Man",
     "dayTue":  "Tir",
     "dayWed":  "Ons",

@@ -38,7 +38,7 @@ class _ProfileviewState extends State<Profileview> {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CommonApp(title: l10n.navProfile, showBackButton: false),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -123,8 +123,8 @@ class _ProfileviewState extends State<Profileview> {
                       ),
                       _buildThemeSwitchTile(),
                       Divider(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                        height: 0,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        height: 1,
                         thickness: 1,
                         indent: 0.w,
                       ),
@@ -173,7 +173,7 @@ class _ProfileviewState extends State<Profileview> {
           margin: EdgeInsets.only(bottom: 10.h),
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           decoration: BoxDecoration(
-            color: colors.surface,
+            color: colors.secondaryContainer,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
@@ -213,8 +213,8 @@ class _ProfileviewState extends State<Profileview> {
                 inactiveText: AppLocalizations.of(context)!.lightTheme,
                 activeTextColor: Colors.grey,
                 inactiveTextColor: Colors.black,
-                activeTextFontWeight: FontWeight.w500,
-                inactiveTextFontWeight: FontWeight.w500,
+                activeTextFontWeight: FontWeight.w400,
+                inactiveTextFontWeight: FontWeight.w400,
                 activeColor: AppColors.vibrantPurple,
                 inactiveColor: Theme.of(context).disabledColor,
                 showOnOff: true,
@@ -576,7 +576,7 @@ $shareText
         if (showDivider)
           Divider(
             color: Theme.of(context).colorScheme.onPrimary,
-            height: 0,
+            height: 1,
             thickness: 1,
             indent: 0.w,
           ),

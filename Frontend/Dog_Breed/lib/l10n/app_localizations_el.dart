@@ -388,6 +388,12 @@ class AppLocalizationsEl extends AppLocalizations {
   String get dialogGotIt => 'Το κατάλαβα';
 
   @override
+  String get deleteReminderTitle => 'Διαγραφή υπενθύμισης';
+
+  @override
+  String get addAsActivity => 'Προσθήκη ως δραστηριότητα';
+
+  @override
   String get dayMon => 'Δευ';
 
   @override

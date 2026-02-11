@@ -388,6 +388,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get dialogGotIt => 'Capito';
 
   @override
+  String get deleteReminderTitle => 'Elimina promemoria';
+
+  @override
+  String get addAsActivity => 'Aggiungi come attività';
+
+  @override
   String get dayMon => 'Lun';
 
   @override

@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "de",
     "appTitle":  "Hunderasse",
     "settingsTitle":  "Einstellungen",
@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Aktionen erforderlich",
     "dialogAddPetMessage":  "FÃƒÂ¼gen Sie mindestens ein Haustier hinzu, um AktivitÃƒÂ¤ten und Erinnerungen hinzuzufÃƒÂ¼gen.",
     "dialogGotIt":  "Verstanden",
+    "deleteReminderTitle": "Erinnerung löschen",
+    "addAsActivity": "Als Aktivität hinzufügen",
     "dayMon":  "Mo",
     "dayTue":  "Di",
     "dayWed":  "Mi",

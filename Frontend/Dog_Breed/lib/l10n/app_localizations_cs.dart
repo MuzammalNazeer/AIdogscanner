@@ -390,6 +390,12 @@ class AppLocalizationsCs extends AppLocalizations {
   String get dialogGotIt => 'ForstÃƒÂ¥et';
 
   @override
+  String get deleteReminderTitle => 'Smazat připomínku';
+
+  @override
+  String get addAsActivity => 'Přidat jako aktivitu';
+
+  @override
   String get dayMon => 'Man';
 
   @override

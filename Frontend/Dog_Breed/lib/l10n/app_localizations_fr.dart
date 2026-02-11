@@ -390,6 +390,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dialogGotIt => 'Compris';
 
   @override
+  String get deleteReminderTitle => 'Supprimer le rappel';
+
+  @override
+  String get addAsActivity => 'Ajouter comme activité';
+
+  @override
   String get dayMon => 'Lun';
 
   @override

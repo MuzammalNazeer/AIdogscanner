@@ -54,7 +54,7 @@ class _NotificationViewState extends State<NotificationView> {
                       height: 40.305.h,
                       padding: const EdgeInsets.all(8.96),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         borderRadius: BorderRadius.circular(8.96),
                       ),
                       child: Icon(
@@ -94,7 +94,7 @@ class _NotificationViewState extends State<NotificationView> {
               // Notification Toggle Tile
               Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : const Color(0xFFF3F6F3),
+                  color: Theme.of(context).brightness == Brightness.dark ? Theme.of(context).colorScheme.surfaceContainerHighest : Theme.of(context).colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.circular(16.r),
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),

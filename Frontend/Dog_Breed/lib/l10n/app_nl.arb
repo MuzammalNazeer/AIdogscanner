@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "nl",
     "appTitle":  "Hondenras",
     "settingsTitle":  "Instellingen",
@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Acties vereist",
     "dialogAddPetMessage":  "Voeg minstens Ã©Ã©n huisdier toe om activiteiten en herinneringen toe te voegen.",
     "dialogGotIt":  "Begrepen",
+    "deleteReminderTitle": "Herinnering verwijderen",
+    "addAsActivity": "Toevoegen als activiteit",
     "dayMon":  "Ma",
     "dayTue":  "Di",
     "dayWed":  "Wo",

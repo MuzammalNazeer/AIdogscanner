@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Eylem Gerekli",
     "dialogAddPetMessage":  "Aktivite ve hatÃ„Â±rlatÃ„Â±cÃ„Â± eklemeye baÃ…Å¸lamak iÃƒÂ§in en az bir evcil hayvan ekleyin.",
     "dialogGotIt":  "AnladÃ„Â±m",
+    "deleteReminderTitle": "Hatırlatıcıyı Sil",
+    "addAsActivity": "Aktivite olarak ekle",
     "dayMon":  "Pzt",
     "dayTue":  "Sal",
     "dayWed":  "Ãƒâ€¡ar",

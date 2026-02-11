@@ -436,7 +436,7 @@ class _WalkviewState extends State<Walkview> {
                     padding:
                     EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
+                      color: Theme.of(context).colorScheme.secondaryContainer,
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Row(

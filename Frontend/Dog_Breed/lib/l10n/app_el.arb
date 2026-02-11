@@ -120,6 +120,8 @@
     "dialogAddPetMessage":  "Προσθέστε τουλάχιστον ένα κατοικίδιο για να ξεκινήσετε.",
     "dialogGot_it":  "Το κατάλαβα",
     "dialogGotIt":  "Το κατάλαβα",
+    "deleteReminderTitle": "Διαγραφή υπενθύμισης",
+    "addAsActivity": "Προσθήκη ως δραστηριότητα",
     "dayMon":  "Δευ",
     "dayTue":  "Τρι",
     "dayWed":  "Τετ",

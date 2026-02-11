@@ -1,4 +1,4 @@
-﻿{
+{
     "@@locale":  "es",
     "appTitle":  "Raza de perro",
     "settingsTitle":  "Ajustes",
@@ -127,6 +127,8 @@
     "dialogActionsRequired":  "Acciones requeridas",
     "dialogAddPetMessage":  "AÃƒÂ±ade al menos una mascota para empezar a aÃƒÂ±adir actividades y recordatorios.",
     "dialogGotIt":  "Entendido",
+    "deleteReminderTitle": "Eliminar recordatorio",
+    "addAsActivity": "Añadir como actividad",
     "dayMon":  "Lun",
     "dayTue":  "Mar",
     "dayWed":  "MiÃƒÂ©",

@@ -238,15 +238,15 @@ class _ReminderlistState extends State<Reminderlist> {
       double amount = _isKmUnit ? _walkDistanceKm : _walkDistanceKm * kmToMi;
       foodValue = '${amount.toStringAsFixed(1)} ${_isKmUnit ? localizations.unitKm : localizations.unitMi}';
     } else {
-      if (activityName == 'eat') {
-        if (_foodController.text.trim().isEmpty) {
-          _showErrorSnackBar(localizations.errorEnterFood);
-          return;
-        }
-      }
-      if (_foodController.text.trim().isNotEmpty) {
-        foodValue = _foodController.text.trim();
-      }
+      // if (activityName == 'eat') {
+      //   if (_foodController.text.trim().isEmpty) {
+      //     _showErrorSnackBar(localizations.errorEnterFood);
+      //     return;
+      //   }
+      // }
+      // if (_foodController.text.trim().isNotEmpty) {
+      //   foodValue = _foodController.text.trim();
+      // }
 
 
     }
@@ -454,7 +454,7 @@ class _ReminderlistState extends State<Reminderlist> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(CupertinoIcons.chevron_left, color: Theme.of(context).colorScheme.onSurface),
@@ -465,7 +465,7 @@ class _ReminderlistState extends State<Reminderlist> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).cardColor,
+                        color: Theme.of(context).colorScheme.secondaryContainer,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Icon(CupertinoIcons.check_mark, color: Theme.of(context).colorScheme.onSurface),
@@ -478,7 +478,7 @@ class _ReminderlistState extends State<Reminderlist> {
               Container(
                 padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
+                  color: Theme.of(context).colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Row(
@@ -521,7 +521,7 @@ class _ReminderlistState extends State<Reminderlist> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(
@@ -559,7 +559,7 @@ class _ReminderlistState extends State<Reminderlist> {
                     vertical: 14.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
+                    color: Theme.of(context).colorScheme.secondaryContainer,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Row(

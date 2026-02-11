@@ -391,6 +391,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dialogGotIt => 'AnladÃ„Â±m';
 
   @override
+  String get deleteReminderTitle => 'Hatırlatıcıyı Sil';
+
+  @override
+  String get addAsActivity => 'Aktivite olarak ekle';
+
+  @override
   String get dayMon => 'Pzt';
 
   @override

@@ -844,6 +844,18 @@ abstract class AppLocalizations {
   /// **'Got it'**
   String get dialogGotIt;
 
+  /// No description provided for @deleteReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Reminder'**
+  String get deleteReminderTitle;
+
+  /// No description provided for @addAsActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Add as Activity'**
+  String get addAsActivity;
+
   /// No description provided for @dayMon.
   ///
   /// In en, this message translates to:
