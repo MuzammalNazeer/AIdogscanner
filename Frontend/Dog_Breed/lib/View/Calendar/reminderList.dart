@@ -492,8 +492,9 @@ class _ReminderlistState extends State<Reminderlist> {
                                 context, _currentActivity!.name)
                             : AppLocalizations.of(context)!.noActivitySelected,
                         style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: 'Sora',
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
@@ -507,8 +508,7 @@ class _ReminderlistState extends State<Reminderlist> {
               Text(
                 AppLocalizations.of(context)!.labelDate,
                 style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
@@ -530,8 +530,7 @@ class _ReminderlistState extends State<Reminderlist> {
                       Text(
                         dateFormat.format(_selectedDate),
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
@@ -545,8 +544,7 @@ class _ReminderlistState extends State<Reminderlist> {
               Text(
                 AppLocalizations.of(context)!.labelTime,
                 style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
+                  fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
@@ -576,8 +574,7 @@ class _ReminderlistState extends State<Reminderlist> {
                           ),
                         ),
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),

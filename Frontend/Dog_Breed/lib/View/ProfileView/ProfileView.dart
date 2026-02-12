@@ -196,7 +196,7 @@ class _ProfileviewState extends State<Profileview> {
                     color: Theme.of(context).colorScheme.onSurface,
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w500,
-                    fontFamily: 'Sora',
+                    fontFamily: 'Inter',
                   ),
                 ),
               ),
@@ -565,6 +565,7 @@ $shareText
               style: TextStyle(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w500,
+                fontFamily: 'Inter',
                 color: Theme.of(context).colorScheme.onSurface,
               ),
             ),

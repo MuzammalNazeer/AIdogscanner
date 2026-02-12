@@ -80,7 +80,7 @@ class _ProviewState extends State<Proview> {
                   fontSize: 28.sp,
                   height: 45.2 / 28,
                   letterSpacing: 0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                   color:  AppColors.vibrantPurple,
                   fontFamily: "Inter",
                 ),
@@ -93,6 +93,7 @@ class _ProviewState extends State<Proview> {
                   height: 45.2 / 16,
                   letterSpacing: 0,
                   color: colors.primary,
+                  fontWeight: FontWeight.w400,
                   fontFamily: "Inter",
                 ),
               ),
@@ -107,7 +108,8 @@ class _ProviewState extends State<Proview> {
                       style: TextStyle(
                         color:  colors.primary,
                         fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Inter',
                       ),
                     ),
                     SizedBox(width: 20.w),
@@ -115,8 +117,9 @@ class _ProviewState extends State<Proview> {
                       AppLocalizations.of(context)!.free,
                       style: TextStyle(
                         color:  colors.primary,
-                        fontWeight: FontWeight.bold,
                         fontSize: 15.sp,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Inter',
                       ),
                     ),
                   ],
@@ -155,7 +158,7 @@ class _ProviewState extends State<Proview> {
                   fontSize: 14.sp,
                   height: 24 / 14,
                   letterSpacing: 0,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   color: Theme.of(context).colorScheme.onSurface,
                   fontFamily: "Inter",
                 ),
@@ -182,7 +185,7 @@ class _ProviewState extends State<Proview> {
                     fontSize: 10.sp,
                     height: 18 / 10,
                     letterSpacing: 0,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     color: Theme.of(context).colorScheme.onSurface,
                     fontFamily: "Inter",
                   ),
@@ -247,7 +250,8 @@ class _FeatureRow extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.sp,
                 color: Theme.of(context).colorScheme.onSurface,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'Inter',
               ),
             ),
           ),
@@ -257,7 +261,7 @@ class _FeatureRow extends StatelessWidget {
             color: premium
                 ? (isDarkTheme ? Color(0xFFFFFFFF): AppColors.vibrantPurple)
                 : (isDarkTheme ? Color(0xFFFFFFFF) : AppColors.vibrantPurple),
-            size: 20,
+            size: 22.sp,
           ),
           const SizedBox(width: 40),
           // Second column (Free)
@@ -266,7 +270,7 @@ class _FeatureRow extends StatelessWidget {
             color: free
                 ? (isDarkTheme ?Color(0xFFFFFFFF): AppColors.vibrantPurple)
                 : (isDarkTheme ? Color(0xFFFFFFFF) : AppColors.vibrantPurple),
-            size: 20,
+            size: 22.sp,
           ),
         ],
       ),

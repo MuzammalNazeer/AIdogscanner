@@ -733,8 +733,8 @@ class _ListsaveState extends State<Listsave> {
 
                   // Confidence Circle
                   Container(
-                    width: 70.w,
-                    height: 70.h,
+                    width: 80.w,
+                    height: 80.h,
                     decoration:  BoxDecoration(
                       shape: BoxShape.circle,
                       color:  const Color(0xFFFACE7D).withValues(alpha: 0.4),

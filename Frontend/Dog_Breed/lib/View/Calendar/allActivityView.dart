@@ -26,12 +26,12 @@ class Allactivityview extends StatefulWidget {
   final Activity? selectedActivity;
   final DateTime? initialDate;
   final String? selectedPetId;
-
+  final String? initialActivityName;
   const Allactivityview({
     super.key,
     this.selectedActivity,
     this.initialDate,
-    this.selectedPetId,
+    this.selectedPetId, this.initialActivityName,
   });
 
   @override
@@ -2648,8 +2648,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: _isKmUnit ? Colors.white :Theme.of(context).colorScheme.onSurface,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',
                         ),
                       ),
                     ),
@@ -2673,8 +2672,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: !_isKmUnit ? Colors.white : Theme.of(context).colorScheme.onSurface,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.sp,
+                          fontSize: 14.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',
                         ),
                       ),
                     ),
@@ -2688,7 +2686,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         SizedBox(height: 24.h),
         Text(
           AppLocalizations.of(context)!.startedAt,
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',),
         ),
         SizedBox(height: 8.h),
         Row(
@@ -2711,8 +2709,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       Text(
                         DateFormat.yMd(Localizations.localeOf(context).toString()).format(_walkStartDate),
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                         ),
                       ),
                       const Icon(Icons.calendar_today, color: Colors.grey),
@@ -2740,8 +2737,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       Text(
                         _walkStartTime.format(context),
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                         ),
                       ),
                       const Icon(Icons.access_time, color: Colors.grey),
@@ -2755,7 +2751,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         SizedBox(height: 16.h),
         Text(
           AppLocalizations.of(context)!.endedAt,
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',),
         ),
         SizedBox(height: 8.h),
         Row(
@@ -2778,8 +2774,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                       Text(
                         DateFormat.yMd(Localizations.localeOf(context).toString()).format(_walkEndDate),
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                         ),
                       ),
                       const Icon(Icons.calendar_today, color: Colors.grey),
@@ -2815,8 +2810,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                           ),
                         ),
                         style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                         ),
                       ),
                       const Icon(Icons.access_time, color: Colors.grey),
@@ -2906,8 +2900,9 @@ class _AllactivityviewState extends State<Allactivityview> {
                       child: Text(
                         _currentActivity != null ? _getLocalizedActivityName(context, _currentActivity!.name) : AppLocalizations.of(context)!.noActivitySelected,
                         style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Sora',
                         ),
                       ),
                     ),
@@ -2963,7 +2958,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         SizedBox(height: 4.h),
                         Text(
                           AppLocalizations.of(context)!.startedAt,
-                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                          style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',),
                         ),
                         SizedBox(height: 8.h),
                         Row(
@@ -2986,8 +2981,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                       Text(
                                         DateFormat.yMd(Localizations.localeOf(context).toString()).format(_walkStartDate),
                                         style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                                         ),
                                       ),
                                       const Icon(Icons.calendar_today, color: Colors.grey),
@@ -3023,8 +3017,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                           ),
                                         ),
                                         style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                                         ),
                                       ),
                                       const Icon(Icons.access_time, color: Colors.grey),
@@ -3038,7 +3031,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         SizedBox(height: 16.h),
                         Text(
                           AppLocalizations.of(context)!.endedAt,
-                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                          style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',),
                         ),
                         SizedBox(height: 8.h),
                         Row(
@@ -3061,8 +3054,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                       Text(
                                         DateFormat.yMd(Localizations.localeOf(context).toString()).format(_walkEndDate),
                                         style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                                         ),
                                       ),
                                       const Icon(Icons.calendar_today, color: Colors.grey),
@@ -3090,8 +3082,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                                       Text(
                                         _walkEndTime.format(context),
                                         style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                                         ),
                                       ),
                                       const Icon(Icons.access_time, color: Colors.grey),
@@ -3110,8 +3101,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 Text(
                   AppLocalizations.of(context)!.labelDate,
                   style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',
                   ),
                 ),
                 SizedBox(height: 6.h),
@@ -3132,8 +3122,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         Text(
                           dateFormat.format(_selectedDate),
                           style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                           ),
                         ),
                         const Icon(Icons.calendar_month),
@@ -3146,8 +3135,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                 Text(
                   AppLocalizations.of(context)!.labelTime,
                   style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',
                   ),
                 ),
                 SizedBox(height: 8.h),
@@ -3168,8 +3156,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         Text(
                           _selectedTime.format(context),
                           style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 14.sp, fontWeight: FontWeight.w500,fontFamily: 'Inter',
                           ),
                         ),
                         const Icon(Icons.access_time),
@@ -3183,7 +3170,7 @@ class _AllactivityviewState extends State<Allactivityview> {
               // Note
               Text(
                 AppLocalizations.of(context)!.walkNote,
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400,fontFamily: 'Inter',),
               ),
               SizedBox(height: 8.h),
               TextField(

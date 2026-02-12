@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RoundButton extends StatelessWidget {
   final String title;
@@ -77,8 +78,9 @@ class RoundButton extends StatelessWidget {
                         overflow: TextOverflow.ellipsis, // Handle overflow
                         style: TextStyle(
                           color: isOutline ? textColors : (isSelected ? textColors : Colors.blue),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500, // Slightly bolder
+                          fontSize: 20.h,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Inter',// Slightly bolder
                         ),
                       ),
                     ),

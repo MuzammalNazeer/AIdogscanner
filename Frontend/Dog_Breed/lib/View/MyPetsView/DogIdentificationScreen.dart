@@ -97,17 +97,16 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
                       style: TextStyle(
                         fontSize: 28.sp,
                         fontFamily: 'Sora',
-
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w600,
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                     TextSpan(
                       text: AppLocalizations.of(context)!.dogText,
-                      style: TextStyle(
+                      style:  TextStyle(
                         fontFamily: 'Sora',
+                        fontWeight: FontWeight.w600,
                         fontSize: 28.sp,
-                        fontWeight: FontWeight.bold,
                         color: const Color(0xFF820DFF),
                       ),
                     ),
@@ -121,7 +120,7 @@ class _DogIdentificationScreenState extends State<DogIdentificationScreen>
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontFamily: 'Inter',
-
+                  fontWeight: FontWeight.w300,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
                 textAlign: TextAlign.center,

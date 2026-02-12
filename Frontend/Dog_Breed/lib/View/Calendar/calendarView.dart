@@ -462,14 +462,7 @@ class _CalendarviewState extends State<Calendarview> {
                       height: 40.h,
                       width: 40.w,
                       decoration: BoxDecoration(
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: Colors.black.withOpacity(0.25),
-                        //     offset: const Offset(0, 4),
-                        //     blurRadius: 4,
-                        //     spreadRadius: 0,
-                        //   ),
-                        // ],
+
                         color: _containerColor,
                         borderRadius: BorderRadius.circular(9),
                       ),
@@ -506,13 +499,12 @@ class _CalendarviewState extends State<Calendarview> {
                             child: Text(
                               DateFormat('MMMM yyyy', Localizations.localeOf(context).toString()).format(_currentMonth),
                               style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 18.sp, fontWeight: FontWeight.w600,fontFamily: 'Inter',
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          SizedBox(width: 8.w),
+                          SizedBox(width: 16.w),
                           GestureDetector(
                             onTap: () {
                               setState(() {
@@ -809,12 +801,12 @@ class _CalendarviewState extends State<Calendarview> {
               SizedBox(height: 20.h),
               Text(
                 AppLocalizations.of(context)!.calendarNoActivityLogged,
-                style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.normal, color: Theme.of(context).colorScheme.onSurface),
+                style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.w400,fontFamily: 'Inter', color: Theme.of(context).colorScheme.onSurface),
               ),
               SizedBox(height: 8.h),
               Text(
                 formattedDate,
-                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w500, color: Theme.of(context).colorScheme.primary),
+                style: TextStyle(fontSize: 12.sp,fontWeight: FontWeight.w500,fontFamily: 'Inter', color: Theme.of(context).colorScheme.primary),
               ),
             ],
           ),
@@ -1160,36 +1152,45 @@ class _CalendarviewState extends State<Calendarview> {
           child: Container(
             height: 45.h,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondaryContainer,
+              // color: Theme.of(context).colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(8.r),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  icon: Icon(Icons.chevron_left, color: Theme.of(context).colorScheme.onSurface),
-                  onPressed: () {
-                    setState(() {
-                      _selectedDate = _selectedDate.subtract(
-                        const Duration(days: 1),
-                      );
-                      if (_selectedDate.month != _currentMonth.month) {
-                        _currentMonth = DateTime(
-                          _selectedDate.year,
-                          _selectedDate.month,
+                Container(
+                  height: 40.h,
+                  width: 40.w,
+                  decoration: BoxDecoration(
+                    color: _containerColor,
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.chevron_left, color: Theme.of(context).colorScheme.onSurface),
+                    onPressed: () {
+                      setState(() {
+                        _selectedDate = _selectedDate.subtract(
+                          const Duration(days: 1),
                         );
-                      }
-                    });
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      _scrollToSelectedDate();
-                    });
-                  },
+                        if (_selectedDate.month != _currentMonth.month) {
+                          _currentMonth = DateTime(
+                            _selectedDate.year,
+                            _selectedDate.month,
+                          );
+                        }
+                      });
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        _scrollToSelectedDate();
+                      });
+                    },
+                  ),
                 ),
                 Text(
                   DateFormat('MMMM d, y', Localizations.localeOf(context).toString()).format(_selectedDate),
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 18.sp,
                     fontWeight: FontWeight.w600,
+                    fontFamily: 'Inter',
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
@@ -1221,22 +1222,31 @@ class _CalendarviewState extends State<Calendarview> {
                     ),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(Icons.chevron_right, color: Theme.of(context).colorScheme.onSurface),
-                  onPressed: () {
-                    setState(() {
-                      _selectedDate = _selectedDate.add(const Duration(days: 1));
-                      if (_selectedDate.month != _currentMonth.month) {
-                        _currentMonth = DateTime(
-                          _selectedDate.year,
-                          _selectedDate.month,
-                        );
-                      }
-                    });
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      _scrollToSelectedDate();
-                    });
-                  },
+                Container(
+                  height: 40.h,
+                  width: 40.w,
+                  decoration: BoxDecoration(
+
+                    color: _containerColor,
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.chevron_right, color: Theme.of(context).colorScheme.onSurface),
+                    onPressed: () {
+                      setState(() {
+                        _selectedDate = _selectedDate.add(const Duration(days: 1));
+                        if (_selectedDate.month != _currentMonth.month) {
+                          _currentMonth = DateTime(
+                            _selectedDate.year,
+                            _selectedDate.month,
+                          );
+                        }
+                      });
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        _scrollToSelectedDate();
+                      });
+                    },
+                  ),
                 ),
               ],
             ),
@@ -1643,8 +1653,8 @@ class _CalendarviewState extends State<Calendarview> {
                   Text(
                     displayName,
                     style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
@@ -1652,7 +1662,7 @@ class _CalendarviewState extends State<Calendarview> {
               ),
               Icon(
                 Icons.keyboard_arrow_down,
-                size: 24,
+                size: 24.sp,
                 color: Theme.of(context).colorScheme.onSurface,
               ),
             ],
@@ -2041,7 +2051,7 @@ class _CalendarviewState extends State<Calendarview> {
         ),
         color: _containerColor,
         child: Container(
-          padding: EdgeInsets.all(10.w),
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: Column(
             children: [
               Row(
@@ -2199,7 +2209,7 @@ class _CalendarviewState extends State<Calendarview> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
+                              padding:  EdgeInsets.symmetric(vertical: 20.h),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -2241,11 +2251,11 @@ class _CalendarviewState extends State<Calendarview> {
                   ),
                 ],
               ),
-              Divider(thickness: 1, height: 1, color: Theme.of(context).colorScheme.onPrimaryContainer),
+              Divider(thickness: 1, height: 1.h, color: Theme.of(context).colorScheme.onPrimaryContainer),
               SizedBox(height: 2.h),
               if (hasNote)
                 Padding(
-                  padding: EdgeInsets.only(top: 8.h),
+                  padding: const EdgeInsets.all(4),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

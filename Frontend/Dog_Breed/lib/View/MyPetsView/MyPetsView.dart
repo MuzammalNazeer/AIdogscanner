@@ -364,6 +364,7 @@ class _MypetsviewState extends State<Mypetsview> {
               name: pet.name,
               petId: pet.id,
               activityCounts: activityCounts,
+              selectedDate: DateTime.now(),
               onEditPressed: () {
                 _navigateToEditPet(pet, l10n);
               },

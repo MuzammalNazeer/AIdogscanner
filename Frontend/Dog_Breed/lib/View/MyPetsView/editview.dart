@@ -929,7 +929,9 @@ class _EditviewState extends State<Editview> {
                               ),
                               TextButton(
                                 onPressed: () => Navigator.pop(context, true),
-                                child: const Text('Change'),
+                                child: const Text('Change',style: TextStyle(
+                                  color: Colors.red
+                                ),),
                               ),
                             ],
                           );
@@ -1081,7 +1083,7 @@ class _EditviewState extends State<Editview> {
                     ),
                   ),
                 ),
-                SizedBox(height: 190.h),
+                SizedBox(height: 170.h),
                 RoundButton(
                   title: widget.isEditing ? AppLocalizations.of(context)!.actionUpdate : AppLocalizations.of(context)!.actionSave,
                   height: 50,

@@ -6,8 +6,11 @@ import 'package:dog_breed/utils/routes/routes_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../View_model/activity_provider.dart';
 
 class PetCard extends StatelessWidget {
   final String? imageUrl;
@@ -18,6 +21,7 @@ class PetCard extends StatelessWidget {
   final VoidCallback? onEditPressed;
   final VoidCallback? onDeletePressed;
   final bool showEditButton;
+  final DateTime? selectedDate;
 
   const PetCard({
     super.key,
@@ -29,12 +33,107 @@ class PetCard extends StatelessWidget {
     this.onEditPressed,
     this.onDeletePressed,
     this.showEditButton = true,
+    this.selectedDate,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return Container(
+    final DateTime effectiveDate = selectedDate ?? DateTime.now();
+    final String dateLabel = DateFormat(
+      'd MMM, yyyy',
+      Localizations.localeOf(context).toString(),
+    ).format(effectiveDate);
+
+    // If a specific date is provided, compute activity counts for that date and pet
+    final Map<String, int> effectiveCounts = selectedDate == null
+        ? activityCounts
+        : _computeCountsForDate(
+            context: context,
+            date: effectiveDate,
+            petId: petId,
+          );
+    return Dismissible(
+      key: ValueKey('petcard_${petId ?? name}_${imageBytes?.hashCode ?? 0}'),
+      direction: DismissDirection.horizontal,
+      background: Container(
+        margin: EdgeInsets.only(bottom: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        decoration: BoxDecoration(
+          color: AppColors.vibrantPurple,
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        alignment: Alignment.centerLeft,
+        child: Row(
+          children: [
+            Icon(Icons.edit, color: Colors.white, size: 24.sp),
+            const SizedBox(width: 3,),
+            Text(
+              l10n?.actionEdit ?? 'Edit',
+              style: TextStyle(
+                fontFamily: 'Sora',
+                fontSize: 16.sp,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+      secondaryBackground: Container(
+        margin: EdgeInsets.only(bottom: 16.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        decoration: BoxDecoration(
+          color: Colors.red,
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        alignment: Alignment.centerRight,
+        child: Row(
+          children: [
+            Icon(Icons.delete, color: Colors.white, size: 24.sp),
+            const SizedBox(width: 3,),
+            Text(
+              l10n?.actionDelete ?? 'Delete',
+              style: TextStyle(
+                fontFamily: 'Sora',
+                fontSize: 16.sp,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+      confirmDismiss: (direction) async {
+        if (direction == DismissDirection.startToEnd) {
+          if (onEditPressed != null) {
+            onEditPressed!();
+          } else {
+            Navigator.pushNamed(
+              context,
+              RoutesName.edit,
+              arguments: {
+                'isEditing': true,
+                'petName': name,
+                'petId': petId,
+                'imageBytes': imageBytes,
+              },
+            );
+          }
+          return false;
+        } else {
+          if (onDeletePressed != null) {
+            onDeletePressed!();
+            return false;
+          }
+          return false;
+        }
+      },
+      child: Container(
       width: double.infinity,
       padding: EdgeInsets.only(bottom: 20.h),
       decoration: BoxDecoration(
@@ -80,94 +179,101 @@ class PetCard extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: Theme.of(context).cardColor,
                       ),
-                      child: ClipOval(
-                        child: _buildImage(context),
-                      ),
+                      child: ClipOval(child: _buildImage(context)),
                     ),
-                    // Edit button (replaces camera button)
-                    if (showEditButton)
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        child: PopupMenuButton<String>(
-                          padding: EdgeInsets.zero,
-                          color: Theme.of(context).cardColor,
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          onSelected: (value) {
-                            if (value == 'edit') {
-                              if (onEditPressed != null) {
-                                onEditPressed!();
-                              } else {
-                                // Default edit action - navigate to edit screen
-                                Navigator.pushNamed(
-                                  context,
-                                  RoutesName.edit,
-                                  arguments: {
-                                    'isEditing': true,
-                                    'petName': name,
-                                    'petId': petId,
-                                    'imageBytes': imageBytes,
-                                  },
-                                );
-                              }
-                            } else if (value == 'delete') {
-                              onDeletePressed?.call();
-                            }
-                          },
-                          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                            PopupMenuItem<String>(
-                              value: 'edit',
-                              child: Text(
-                                l10n?.actionEdit ?? 'Edit',
-                                style: TextStyle(
-                                  fontFamily: 'Sora',
-                                  fontSize: 16.sp,
-                                  color: Theme.of(context).colorScheme.onSurface,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                             PopupMenuDivider(
-                              color: Theme.of(context).colorScheme.onPrimaryContainer,
-                               thickness: 1,
-                            ),
-                            PopupMenuItem<String>(
-                              value: 'delete',
-                              child: Text(
-                                l10n?.actionDelete ?? 'Delete',
-                                style: TextStyle(
-                                  fontFamily: 'Sora',
-                                  fontSize: 16.sp,
-                                  color: Theme.of(context).colorScheme.onSurface,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Theme.of(context).shadowColor.withOpacity(0.12),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: const Icon(
-                              Icons.more_vert,
-                              size: 16,
-                              color: AppColors.vibrantPurple,
-                            ),
-                          ),
-                        ),
-                      ),
+                    // // Edit button (replaces camera button)
+                    // if (showEditButton)
+                    //   Positioned(
+                    //     right: 0,
+                    //     top: 0,
+                    //     child: PopupMenuButton<String>(
+                    //       padding: EdgeInsets.zero,
+                    //       color: Theme.of(context).cardColor,
+                    //       elevation: 4,
+                    //       shape: RoundedRectangleBorder(
+                    //         borderRadius: BorderRadius.circular(12.r),
+                    //       ),
+                    //       onSelected: (value) {
+                    //         if (value == 'edit') {
+                    //           if (onEditPressed != null) {
+                    //             onEditPressed!();
+                    //           } else {
+                    //             // Default edit action - navigate to edit screen
+                    //             Navigator.pushNamed(
+                    //               context,
+                    //               RoutesName.edit,
+                    //               arguments: {
+                    //                 'isEditing': true,
+                    //                 'petName': name,
+                    //                 'petId': petId,
+                    //                 'imageBytes': imageBytes,
+                    //               },
+                    //             );
+                    //           }
+                    //         } else if (value == 'delete') {
+                    //           onDeletePressed?.call();
+                    //         }
+                    //       },
+                    //       itemBuilder: (BuildContext context) =>
+                    //       <PopupMenuEntry<String>>[
+                    //         PopupMenuItem<String>(
+                    //           value: 'edit',
+                    //           child: Text(
+                    //             l10n?.actionEdit ?? 'Edit',
+                    //             style: TextStyle(
+                    //               fontFamily: 'Sora',
+                    //               fontSize: 16.sp,
+                    //               color: Theme.of(
+                    //                 context,
+                    //               ).colorScheme.onSurface,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //         PopupMenuDivider(
+                    //           color: Theme.of(
+                    //             context,
+                    //           ).colorScheme.onPrimaryContainer,
+                    //           thickness: 1,
+                    //         ),
+                    //         PopupMenuItem<String>(
+                    //           value: 'delete',
+                    //           child: Text(
+                    //             l10n?.actionDelete ?? 'Delete',
+                    //             style: TextStyle(
+                    //               fontFamily: 'Sora',
+                    //               fontSize: 16.sp,
+                    //               color: Theme.of(
+                    //                 context,
+                    //               ).colorScheme.onSurface,
+                    //               fontWeight: FontWeight.w500,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //       child: Container(
+                    //         padding: const EdgeInsets.all(4),
+                    //         decoration: BoxDecoration(
+                    //           color: Colors.white,
+                    //           shape: BoxShape.circle,
+                    //           boxShadow: [
+                    //             BoxShadow(
+                    //               color: Theme.of(
+                    //                 context,
+                    //               ).shadowColor.withOpacity(0.12),
+                    //               blurRadius: 4,
+                    //               offset: const Offset(0, 2),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //         child: const Icon(
+                    //           Icons.more_vert,
+                    //           size: 16,
+                    //           color: AppColors.vibrantPurple,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
                   ],
                 ),
                 SizedBox(width: 12.w),
@@ -189,15 +295,60 @@ class PetCard extends StatelessWidget {
                   'assets/images/1233.png',
                   width: 118.w,
                   height: 73.h,
-                )
+                ),
               ],
             ),
           ),
-           Divider(
-            color: Theme.of(context).colorScheme.onPrimaryContainer,
-            thickness: 1,
+          Padding(
+            padding:EdgeInsets.symmetric(horizontal: 18.w),
+            child: Divider(
+              color: Theme.of(context).colorScheme.onPrimaryContainer,
+              thickness: 1,
+            ),
           ),
           SizedBox(height: 5.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.w),
+            child: Container(
+              height: 30.h,
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color(0xFF21241F)
+                    : const Color(0xFFE8EEEC),
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              child: Padding(
+                padding:  const EdgeInsets.symmetric(vertical: 5,horizontal: 11),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                '${AppLocalizations.of(context)!.today} ${AppLocalizations.of(context)!.calendarTabActivities}',
+                      // selectedDate == null
+                      //     // ? '${AppLocalizations.of(context)!.today} ${AppLocalizations.of(context)!.calendarTabActivities}'
+                      //     // : AppLocalizations.of(context)!.calendarTabActivities,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Theme.of(context).hintColor,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
+                    Text(
+                      dateLabel,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Theme.of(context).hintColor,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 8.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.w),
             child: Wrap(
@@ -205,18 +356,42 @@ class PetCard extends StatelessWidget {
               runSpacing: 16.h,
               alignment: WrapAlignment.start,
               children: ActivityConstants.allActivities
-                  .where((type) => (activityCounts[type.name] ?? 0) > 0)
-                  .map((type) => _buildGridItem(
-                context,
-                imageAsset: type.image,
-                count: activityCounts[type.name]!,
-                backgroundColor: type.color,
-              )).toList(),
+                  .where((type) => (effectiveCounts[type.name] ?? 0) > 0)
+                  .map(
+                    (type) => _buildGridItem(
+                  context,
+                  imageAsset: type.image,
+                  count: effectiveCounts[type.name]!,
+                  backgroundColor: type.color,
+                ),
+              )
+                  .toList(),
             ),
-          )
+          ),
         ],
       ),
-    );
+    ));
+  }
+
+  Map<String, int> _computeCountsForDate({
+    required BuildContext context,
+    required DateTime date,
+    required String? petId,
+  }) {
+    final activities = Provider.of<ActivityNotifier>(context).activities;
+    final Map<String, int> counts = {};
+
+    for (final activity in activities) {
+      final bool samePet = petId == null || activity.petId == petId;
+      final bool sameDay = activity.dateTime.year == date.year &&
+          activity.dateTime.month == date.month &&
+          activity.dateTime.day == date.day;
+      if (samePet && sameDay) {
+        final key = activity.name;
+        counts[key] = (counts[key] ?? 0) + 1;
+      }
+    }
+    return counts;
   }
 
   Widget _buildImage(BuildContext context) {
@@ -267,19 +442,17 @@ class PetCard extends StatelessWidget {
   Widget _errorImage(BuildContext context) {
     return Container(
       color: Theme.of(context).colorScheme.surfaceContainerHighest,
-      child: Icon(
-        CupertinoIcons.photo,
-        color: Theme.of(context).hintColor,
-      ),
+      child: Icon(CupertinoIcons.photo, color: Theme.of(context).hintColor),
     );
   }
 
-  Widget _buildGridItem(BuildContext context, {
-    required int count,
-    required Color backgroundColor,
-    String? imageAsset,
-    IconData? icon, // fallback if asset missing
-  }) {
+  Widget _buildGridItem(
+      BuildContext context, {
+        required int count,
+        required Color backgroundColor,
+        String? imageAsset,
+        IconData? icon, // fallback if asset missing
+      }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -326,280 +499,20 @@ class PetCard extends StatelessWidget {
 }
 
 
-// import 'dart:io';
-// import 'dart:typed_data';
-// import 'package:dog_breed/Valid/AppColors.dart';
-// import 'package:dog_breed/Valid/ActivityConstants.dart';
-//
-// import 'package:dog_breed/utils/routes/routes_name.dart';
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-//
-// class PetCard extends StatelessWidget {
-//   final String? imageUrl;
-//   final String name;
-//   final String? petId;
-//   final Uint8List? imageBytes;
-//   final Map<String, int> activityCounts;
-//   final VoidCallback? onEditPressed;
-//   final bool showEditButton;
-//
-//   const PetCard({
-//     super.key,
-//     this.imageUrl,
-//     this.imageBytes,
-//     required this.name,
-//     this.petId,
-//     required this.activityCounts,
-//     this.onEditPressed,
-//     this.showEditButton = true,
-//   });
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: double.infinity,
-//       padding: EdgeInsets.only(bottom: 20.h),
-//       decoration: BoxDecoration(
-//         color: const Color(0xFFF4F7F6),
-//         borderRadius: BorderRadius.circular(16.r),
-//         boxShadow: [
-//           BoxShadow(
-//             color: CupertinoColors.systemGrey.withOpacity(0.10),
-//             blurRadius: 10,
-//             offset: const Offset(0, 2),
-//           ),
-//         ],
-//       ),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         mainAxisAlignment: MainAxisAlignment.start,
-//         children: [
-//           Padding(
-//             padding: EdgeInsets.all(12.w),
-//             child: Row(
-//               children: [
-//                 Stack(
-//                   alignment: Alignment.center,
-//                   children: [
-//                     // Outer gradient circle
-//                     Container(
-//                       width: 68.w,
-//                       height: 68.h,
-//                       decoration: const BoxDecoration(
-//                         shape: BoxShape.circle,
-//                         gradient: LinearGradient(
-//                           colors: [Color(0xFF9C27B0), Color(0xFFE91E63)],
-//                           begin: Alignment.topLeft,
-//                           end: Alignment.bottomRight,
-//                         ),
-//                       ),
-//                     ),
-//                     // White circle background for image
-//                     Container(
-//                       width: 60.w,
-//                       height: 60.h,
-//                       decoration: const BoxDecoration(
-//                         shape: BoxShape.circle,
-//                         color: CupertinoColors.white,
-//                       ),
-//                       child: ClipOval(
-//                         child: _buildImage(),
-//                       ),
-//                     ),
-//                     // Edit button (replaces camera button)
-//                     if (showEditButton)
-//                       Positioned(
-//                         right: 0,
-//                         top: 0,
-//                         child: GestureDetector(
-//                           onTap: onEditPressed ?? () {
-//                             // Default edit action - navigate to edit screen
-//                             Navigator.pushNamed(
-//                               context,
-//                               RoutesName.edit,
-//                               arguments: {
-//                                 'isEditing': true,
-//                                 'petName': name,
-//                                 'petId': petId,
-//                                 'imageBytes': imageBytes,
-//                               },
-//                             );
-//                           },
-//                           child: Container(
-//                             padding: const EdgeInsets.all(4),
-//                             decoration: const BoxDecoration(
-//                               color: Colors.white,
-//                               shape: BoxShape.circle,
-//                               boxShadow: [
-//                                 BoxShadow(
-//                                   color: Colors.black12,
-//                                   blurRadius: 4,
-//                                   offset: Offset(0, 2),
-//                                 ),
-//                               ],
-//                             ),
-//                             child: const Icon(
-//                               CupertinoIcons.pencil,
-//                               size: 16,
-//                               color: AppColors.vibrantPurple,
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                   ],
-//                 ),
-//                 SizedBox(width: 12.w),
-//                 Text(
-//                   name,
-//                   style: TextStyle(
-//                     fontFamily: "Sora",
-//                     fontSize: 18.sp,
-//                     fontWeight: FontWeight.w600,
-//                     color: CupertinoColors.black,
-//                   ),
-//                 ),
-//                 const Spacer(),
-//                 Image.asset(
-//                   'assets/images/1233.png',
-//                   width: 118.w,
-//                   height: 73.h,
-//                 )
-//               ],
-//             ),
-//           ),
-//           const Divider(
-//             color: Color(0xFFCBE4DC),
-//             thickness: 1,
-//           ),
-//           SizedBox(height: 5.h),
-//           Padding(
-//             padding: EdgeInsets.symmetric(horizontal: 2.w),
-//             child: Wrap(
-//               spacing: 12.w,
-//               runSpacing: 16.h,
-//               alignment: WrapAlignment.start,
-//               children: ActivityConstants.allActivities
-//                   .where((type) => (activityCounts[type.name] ?? 0) > 0)
-//                   .map((type) => _buildGridItem(
-//                 imageAsset: type.image,
-//                 count: activityCounts[type.name]!,
-//                 backgroundColor: type.color,
-//               ))
-//                   .toList(),
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-//
-//   Widget _buildImage() {
-//     // Priority 1: Use imageBytes if available
-//     if (imageBytes != null && imageBytes!.isNotEmpty) {
-//       return Image.memory(
-//         imageBytes!,
-//         fit: BoxFit.cover,
-//         width: 60,
-//         height: 60,
-//         errorBuilder: (_, __, ___) => _errorImage(),
-//       );
-//     }
-//
-//     // Priority 2: Use imageUrl if available
-//     if (imageUrl != null && imageUrl!.isNotEmpty) {
-//       if (imageUrl!.startsWith('http')) {
-//         return Image.network(
-//           imageUrl!,
-//           fit: BoxFit.cover,
-//           width: 60,
-//           height: 60,
-//           errorBuilder: (_, __, ___) => _errorImage(),
-//         );
-//       } else if (File(imageUrl!).existsSync()) {
-//         return Image.file(
-//           File(imageUrl!),
-//           fit: BoxFit.cover,
-//           width: 60,
-//           height: 60,
-//           errorBuilder: (_, __, ___) => _errorImage(),
-//         );
-//       } else {
-//         return Image.asset(
-//           imageUrl!,
-//           fit: BoxFit.cover,
-//           width: 60,
-//           height: 60,
-//           errorBuilder: (_, __, ___) => _errorImage(),
-//         );
-//       }
-//     }
-//
-//     // Fallback
-//     return _errorImage();
-//   }
-//
-//   Widget _errorImage() {
-//     return Container(
-//       color: CupertinoColors.systemGrey4,
-//       child: const Icon(
-//         CupertinoIcons.photo,
-//         color: CupertinoColors.systemGrey,
-//       ),
-//     );
-//   }
-//
-//   Widget _buildGridItem({
-//     required int count,
-//     required Color backgroundColor,
-//     String? imageAsset,
-//     IconData? icon, // fallback if asset missing
-//   }) {
-//     return Column(
-//       mainAxisSize: MainAxisSize.min,
-//       children: [
-//         Container(
-//           width: 50.w,
-//           height: 50.h,
-//           decoration: BoxDecoration(
-//             color: backgroundColor,
-//             shape: BoxShape.circle,
-//           ),
-//           child: Center(
-//             child: imageAsset != null
-//                 ? Image.asset(
-//               imageAsset,
-//               width: 28.w,
-//               height: 28.h,
-//               fit: BoxFit.contain,
-//               errorBuilder: (context, _, __) => Icon(
-//                 icon ?? Icons.error,
-//                 size: 24.sp,
-//                 color: Colors.black54,
-//               ),
-//             )
-//                 : Icon(
-//               icon ?? Icons.image,
-//               size: 24.sp,
-//               color: Colors.black54,
-//             ),
-//           ),
-//         ),
-//         SizedBox(height: 6.h),
-//         Text(
-//           '$count',
-//           style: TextStyle(
-//             fontFamily: 'Sora',
-//             fontWeight: FontWeight.w600,
-//             fontSize: 16.sp,
-//             color: const Color(0xFF272727),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import 'dart:io';
 // import 'dart:typed_data';
@@ -609,7 +522,9 @@ class PetCard extends StatelessWidget {
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:intl/intl.dart';
+//
+// import '../../l10n/app_localizations.dart';
 //
 // class PetCard extends StatelessWidget {
 //   final String? imageUrl;
@@ -618,6 +533,7 @@ class PetCard extends StatelessWidget {
 //   final Uint8List? imageBytes;
 //   final Map<String, int> activityCounts;
 //   final VoidCallback? onEditPressed;
+//   final VoidCallback? onDeletePressed;
 //   final bool showEditButton;
 //
 //   const PetCard({
@@ -628,24 +544,26 @@ class PetCard extends StatelessWidget {
 //     this.petId,
 //     required this.activityCounts,
 //     this.onEditPressed,
+//     this.onDeletePressed,
 //     this.showEditButton = true,
 //   });
 //
 //   @override
 //   Widget build(BuildContext context) {
+//     final l10n = AppLocalizations.of(context);
 //     return Container(
 //       width: double.infinity,
 //       padding: EdgeInsets.only(bottom: 20.h),
 //       decoration: BoxDecoration(
-//         color: const Color(0xFFF4F7F6),
+//         color: Theme.of(context).colorScheme.secondaryContainer,
 //         borderRadius: BorderRadius.circular(16.r),
-//         boxShadow: [
-//           BoxShadow(
-//             color: CupertinoColors.systemGrey.withOpacity(0.10),
-//             blurRadius: 10,
-//             offset: const Offset(0, 2),
-//           ),
-//         ],
+//         // boxShadow: [
+//         //   BoxShadow(
+//         //     color: Theme.of(context).shadowColor.withOpacity(0.10),
+//         //     blurRadius: 10,
+//         //     offset: const Offset(0, 2),
+//         //   ),
+//         // ],
 //       ),
 //       child: Column(
 //         crossAxisAlignment: CrossAxisAlignment.start,
@@ -664,59 +582,110 @@ class PetCard extends StatelessWidget {
 //                       height: 68.h,
 //                       decoration: const BoxDecoration(
 //                         shape: BoxShape.circle,
-//                         gradient: LinearGradient(
-//                           colors: [Color(0xFF9C27B0), Color(0xFFE91E63)],
-//                           begin: Alignment.topLeft,
-//                           end: Alignment.bottomRight,
-//                         ),
+//                         // gradient: LinearGradient(
+//                         //   colors: [Color(0xFF9C27B0), Color(0xFFE91E63)],
+//                         //   begin: Alignment.topLeft,
+//                         //   end: Alignment.bottomRight,
+//                         // ),
 //                       ),
 //                     ),
 //                     // White circle background for image
 //                     Container(
 //                       width: 60.w,
 //                       height: 60.h,
-//                       decoration: const BoxDecoration(
+//                       decoration: BoxDecoration(
 //                         shape: BoxShape.circle,
-//                         color: CupertinoColors.white,
+//                         color: Theme.of(context).cardColor,
 //                       ),
-//                       child: ClipOval(
-//                         child: _buildImage(),
-//                       ),
+//                       child: ClipOval(child: _buildImage(context)),
 //                     ),
 //                     // Edit button (replaces camera button)
 //                     if (showEditButton)
 //                       Positioned(
 //                         right: 0,
 //                         top: 0,
-//                         child: GestureDetector(
-//                           onTap: onEditPressed ?? () {
-//                             // Default edit action - navigate to edit screen
-//                             Navigator.pushNamed(
-//                               context,
-//                               RoutesName.edit,
-//                               arguments: {
-//                                 'isEditing': true,
-//                                 'petName': name,
-//                                 'petId': petId,
-//                                 'imageBytes': imageBytes,
-//                               },
-//                             );
+//                         child: PopupMenuButton<String>(
+//                           padding: EdgeInsets.zero,
+//                           color: Theme.of(context).cardColor,
+//                           elevation: 4,
+//                           shape: RoundedRectangleBorder(
+//                             borderRadius: BorderRadius.circular(12.r),
+//                           ),
+//                           onSelected: (value) {
+//                             if (value == 'edit') {
+//                               if (onEditPressed != null) {
+//                                 onEditPressed!();
+//                               } else {
+//                                 // Default edit action - navigate to edit screen
+//                                 Navigator.pushNamed(
+//                                   context,
+//                                   RoutesName.edit,
+//                                   arguments: {
+//                                     'isEditing': true,
+//                                     'petName': name,
+//                                     'petId': petId,
+//                                     'imageBytes': imageBytes,
+//                                   },
+//                                 );
+//                               }
+//                             } else if (value == 'delete') {
+//                               onDeletePressed?.call();
+//                             }
 //                           },
+//                           itemBuilder: (BuildContext context) =>
+//                               <PopupMenuEntry<String>>[
+//                                 PopupMenuItem<String>(
+//                                   value: 'edit',
+//                                   child: Text(
+//                                     l10n?.actionEdit ?? 'Edit',
+//                                     style: TextStyle(
+//                                       fontFamily: 'Sora',
+//                                       fontSize: 16.sp,
+//                                       color: Theme.of(
+//                                         context,
+//                                       ).colorScheme.onSurface,
+//                                       fontWeight: FontWeight.w500,
+//                                     ),
+//                                   ),
+//                                 ),
+//                                 PopupMenuDivider(
+//                                   color: Theme.of(
+//                                     context,
+//                                   ).colorScheme.onPrimaryContainer,
+//                                   thickness: 1,
+//                                 ),
+//                                 PopupMenuItem<String>(
+//                                   value: 'delete',
+//                                   child: Text(
+//                                     l10n?.actionDelete ?? 'Delete',
+//                                     style: TextStyle(
+//                                       fontFamily: 'Sora',
+//                                       fontSize: 16.sp,
+//                                       color: Theme.of(
+//                                         context,
+//                                       ).colorScheme.onSurface,
+//                                       fontWeight: FontWeight.w500,
+//                                     ),
+//                                   ),
+//                                 ),
+//                               ],
 //                           child: Container(
 //                             padding: const EdgeInsets.all(4),
-//                             decoration: const BoxDecoration(
+//                             decoration: BoxDecoration(
 //                               color: Colors.white,
 //                               shape: BoxShape.circle,
 //                               boxShadow: [
 //                                 BoxShadow(
-//                                   color: Colors.black12,
+//                                   color: Theme.of(
+//                                     context,
+//                                   ).shadowColor.withOpacity(0.12),
 //                                   blurRadius: 4,
-//                                   offset: Offset(0, 2),
+//                                   offset: const Offset(0, 2),
 //                                 ),
 //                               ],
 //                             ),
 //                             child: const Icon(
-//                               CupertinoIcons.pencil,
+//                               Icons.more_vert,
 //                               size: 16,
 //                               color: AppColors.vibrantPurple,
 //                             ),
@@ -733,7 +702,7 @@ class PetCard extends StatelessWidget {
 //                       fontFamily: "Sora",
 //                       fontSize: 18.sp,
 //                       fontWeight: FontWeight.w600,
-//                       color: CupertinoColors.black,
+//                       color: Theme.of(context).colorScheme.onSurface,
 //                       overflow: TextOverflow.ellipsis,
 //                     ),
 //                     maxLines: 1,
@@ -744,66 +713,85 @@ class PetCard extends StatelessWidget {
 //                   'assets/images/1233.png',
 //                   width: 118.w,
 //                   height: 73.h,
-//                 )
+//                 ),
 //               ],
 //             ),
 //           ),
-//           const Divider(
-//             color: Color(0xFFCBE4DC),
-//             thickness: 1,
+//           Padding(
+//             padding:EdgeInsets.symmetric(horizontal: 18.w),
+//             child: Divider(
+//               color: Theme.of(context).colorScheme.onPrimaryContainer,
+//               thickness: 1,
+//             ),
 //           ),
 //           SizedBox(height: 5.h),
 //           Padding(
-//             padding: EdgeInsets.symmetric(horizontal: 2.w),
+//             padding: EdgeInsets.symmetric(horizontal: 18.w),
+//             child: Container(
+//               height: 30.h,
+//               decoration: BoxDecoration(
+//                 color: Theme.of(context).brightness == Brightness.dark
+//                     ? const Color(0xFF21241F)
+//                     : const Color(0xFFE8EEEC),
+//                 borderRadius: BorderRadius.circular(10.r),
+//               ),
+//               child: Padding(
+//                 padding:  const EdgeInsets.symmetric(vertical: 5,horizontal: 11),
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Text(
+//                       '${AppLocalizations.of(context)!.today} ${AppLocalizations.of(context)!.calendarTabActivities}',
+//                       style: TextStyle(
+//                         fontSize: 12.sp,
+//                         color: Theme.of(context).hintColor,
+//                         fontWeight: FontWeight.w400,
+//                         fontFamily: 'Inter',
+//                       ),
+//                     ),
+//                     Text(
+//                       DateFormat(
+//                         'd MMM, yyyy',
+//                         Localizations.localeOf(context).toString(),
+//                       ).format(DateTime.now()),
+//                       style: TextStyle(
+//                         fontSize: 12.sp,
+//                         color: Theme.of(context).hintColor,
+//                         fontWeight: FontWeight.w500,
+//                         fontFamily: 'Inter',
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           ),
+//           SizedBox(height: 8.h),
+//           Padding(
+//             padding: EdgeInsets.symmetric(horizontal: 18.w),
 //             child: Wrap(
 //               spacing: 12.w,
 //               runSpacing: 16.h,
 //               alignment: WrapAlignment.start,
 //               children: ActivityConstants.allActivities
 //                   .where((type) => (activityCounts[type.name] ?? 0) > 0)
-//                   .map((type) => _buildGridItem(
-//                 imageAsset: type.image,
-//                 count: activityCounts[type.name]!,
-//                 backgroundColor: type.color,
-//                 label: _getLocalizedActivityName(context, type.name),
-//               ))
+//                   .map(
+//                     (type) => _buildGridItem(
+//                       context,
+//                       imageAsset: type.image,
+//                       count: activityCounts[type.name]!,
+//                       backgroundColor: type.color,
+//                     ),
+//                   )
 //                   .toList(),
 //             ),
-//           )
+//           ),
 //         ],
 //       ),
 //     );
 //   }
 //
-//   String _getLocalizedActivityName(BuildContext context, String activityName) {
-//     final l10n = AppLocalizations.of(context)!;
-//     switch (activityName) {
-//       case 'Veterinary': return l10n.activityVeterinary;
-//       case 'Pee': return l10n.activityPee;
-//       case 'Eat': return l10n.activityEat;
-//       case 'Drink': return l10n.activityDrink;
-//       case 'Play': return l10n.activityPlay;
-//       case 'Poop': return l10n.activityPoop;
-//       case 'Walk': return l10n.activityWalk;
-//       case 'Crate': return l10n.activityCrate;
-//       case 'Sleep': return l10n.activitySleep;
-//       case 'Training': return l10n.activityTraining;
-//       case 'Treat': return l10n.activityTreat;
-//       case 'Grooming': return l10n.activityGrooming;
-//       case 'Cleaning': return l10n.activityCleaning;
-//       case 'Medication': return l10n.activityMedication;
-//       case 'Vaccination': return l10n.activityVaccination;
-//       case 'Weight': return l10n.activityWeight;
-//       case 'Height': return l10n.activityHeight;
-//       case 'Temperature': return l10n.activityTemperature;
-//       case 'Health Condition': return l10n.activityHealthCondition;
-//       case 'Accident': return l10n.activityAccident;
-//       case 'Journal': return l10n.activityJournal;
-//       default: return activityName;
-//     }
-//   }
-//
-//   Widget _buildImage() {
+//   Widget _buildImage(BuildContext context) {
 //     // Priority 1: Use imageBytes if available
 //     if (imageBytes != null && imageBytes!.isNotEmpty) {
 //       return Image.memory(
@@ -811,7 +799,7 @@ class PetCard extends StatelessWidget {
 //         fit: BoxFit.cover,
 //         width: 60,
 //         height: 60,
-//         errorBuilder: (_, __, ___) => _errorImage(),
+//         errorBuilder: (_, __, ___) => _errorImage(context),
 //       );
 //     }
 //
@@ -823,7 +811,7 @@ class PetCard extends StatelessWidget {
 //           fit: BoxFit.cover,
 //           width: 60,
 //           height: 60,
-//           errorBuilder: (_, __, ___) => _errorImage(),
+//           errorBuilder: (_, __, ___) => _errorImage(context),
 //         );
 //       } else if (File(imageUrl!).existsSync()) {
 //         return Image.file(
@@ -831,7 +819,7 @@ class PetCard extends StatelessWidget {
 //           fit: BoxFit.cover,
 //           width: 60,
 //           height: 60,
-//           errorBuilder: (_, __, ___) => _errorImage(),
+//           errorBuilder: (_, __, ___) => _errorImage(context),
 //         );
 //       } else {
 //         return Image.asset(
@@ -839,31 +827,28 @@ class PetCard extends StatelessWidget {
 //           fit: BoxFit.cover,
 //           width: 60,
 //           height: 60,
-//           errorBuilder: (_, __, ___) => _errorImage(),
+//           errorBuilder: (_, __, ___) => _errorImage(context),
 //         );
 //       }
 //     }
 //
 //     // Fallback
-//     return _errorImage();
+//     return _errorImage(context);
 //   }
 //
-//   Widget _errorImage() {
+//   Widget _errorImage(BuildContext context) {
 //     return Container(
-//       color: CupertinoColors.systemGrey4,
-//       child: const Icon(
-//         CupertinoIcons.photo,
-//         color: CupertinoColors.systemGrey,
-//       ),
+//       color: Theme.of(context).colorScheme.surfaceContainerHighest,
+//       child: Icon(CupertinoIcons.photo, color: Theme.of(context).hintColor),
 //     );
 //   }
 //
-//   Widget _buildGridItem({
+//   Widget _buildGridItem(
+//     BuildContext context, {
 //     required int count,
 //     required Color backgroundColor,
 //     String? imageAsset,
 //     IconData? icon, // fallback if asset missing
-//     required String label,
 //   }) {
 //     return Column(
 //       mainAxisSize: MainAxisSize.min,
@@ -878,43 +863,31 @@ class PetCard extends StatelessWidget {
 //           child: Center(
 //             child: imageAsset != null
 //                 ? Image.asset(
-//               imageAsset,
-//               width: 28.w,
-//               height: 28.h,
-//               fit: BoxFit.contain,
-//               errorBuilder: (context, _, __) => Icon(
-//                 icon ?? Icons.error,
-//                 size: 24.sp,
-//                 color: Colors.black54,
-//               ),
-//             )
+//                     imageAsset,
+//                     width: 28.w,
+//                     height: 28.h,
+//                     fit: BoxFit.contain,
+//                     errorBuilder: (context, _, __) => Icon(
+//                       icon ?? Icons.error,
+//                       size: 24.sp,
+//                       color: Theme.of(context).hintColor,
+//                     ),
+//                   )
 //                 : Icon(
-//               icon ?? Icons.image,
-//               size: 24.sp,
-//               color: Colors.black54,
-//             ),
+//                     icon ?? Icons.image,
+//                     size: 24.sp,
+//                     color: Theme.of(context).hintColor,
+//                   ),
 //           ),
 //         ),
 //         SizedBox(height: 6.h),
-//         Text(
-//           label,
-//           style: TextStyle(
-//             fontFamily: 'Sora',
-//             fontWeight: FontWeight.w400,
-//             fontSize: 12.sp,
-//             color: const Color(0xFF272727),
-//           ),
-//           maxLines: 1,
-//           overflow: TextOverflow.ellipsis,
-//         ),
-//         SizedBox(height: 2.h),
 //         Text(
 //           '$count',
 //           style: TextStyle(
 //             fontFamily: 'Sora',
 //             fontWeight: FontWeight.w600,
 //             fontSize: 16.sp,
-//             color: const Color(0xFF272727),
+//             color: Theme.of(context).colorScheme.onSurface,
 //           ),
 //         ),
 //       ],
@@ -922,16 +895,16 @@ class PetCard extends StatelessWidget {
 //   }
 // }
 //
-//
 // // import 'dart:io';
 // // import 'dart:typed_data';
 // // import 'package:dog_breed/Valid/AppColors.dart';
 // // import 'package:dog_breed/Valid/ActivityConstants.dart';
-// //
 // // import 'package:dog_breed/utils/routes/routes_name.dart';
 // // import 'package:flutter/cupertino.dart';
 // // import 'package:flutter/material.dart';
 // // import 'package:flutter_screenutil/flutter_screenutil.dart';
+// //
+// // import '../../l10n/app_localizations.dart';
 // //
 // // class PetCard extends StatelessWidget {
 // //   final String? imageUrl;
@@ -940,6 +913,7 @@ class PetCard extends StatelessWidget {
 // //   final Uint8List? imageBytes;
 // //   final Map<String, int> activityCounts;
 // //   final VoidCallback? onEditPressed;
+// //   final VoidCallback? onDeletePressed;
 // //   final bool showEditButton;
 // //
 // //   const PetCard({
@@ -950,24 +924,26 @@ class PetCard extends StatelessWidget {
 // //     this.petId,
 // //     required this.activityCounts,
 // //     this.onEditPressed,
+// //     this.onDeletePressed,
 // //     this.showEditButton = true,
 // //   });
 // //
 // //   @override
 // //   Widget build(BuildContext context) {
+// //     final l10n = AppLocalizations.of(context);
 // //     return Container(
 // //       width: double.infinity,
 // //       padding: EdgeInsets.only(bottom: 20.h),
 // //       decoration: BoxDecoration(
-// //         color: const Color(0xFFF4F7F6),
+// //         color: Theme.of(context).colorScheme.secondaryContainer,
 // //         borderRadius: BorderRadius.circular(16.r),
-// //         boxShadow: [
-// //           BoxShadow(
-// //             color: CupertinoColors.systemGrey.withOpacity(0.10),
-// //             blurRadius: 10,
-// //             offset: const Offset(0, 2),
-// //           ),
-// //         ],
+// //         // boxShadow: [
+// //         //   BoxShadow(
+// //         //     color: Theme.of(context).shadowColor.withOpacity(0.10),
+// //         //     blurRadius: 10,
+// //         //     offset: const Offset(0, 2),
+// //         //   ),
+// //         // ],
 // //       ),
 // //       child: Column(
 // //         crossAxisAlignment: CrossAxisAlignment.start,
@@ -986,23 +962,23 @@ class PetCard extends StatelessWidget {
 // //                       height: 68.h,
 // //                       decoration: const BoxDecoration(
 // //                         shape: BoxShape.circle,
-// //                         gradient: LinearGradient(
-// //                           colors: [Color(0xFF9C27B0), Color(0xFFE91E63)],
-// //                           begin: Alignment.topLeft,
-// //                           end: Alignment.bottomRight,
-// //                         ),
+// //                         // gradient: LinearGradient(
+// //                         //   colors: [Color(0xFF9C27B0), Color(0xFFE91E63)],
+// //                         //   begin: Alignment.topLeft,
+// //                         //   end: Alignment.bottomRight,
+// //                         // ),
 // //                       ),
 // //                     ),
 // //                     // White circle background for image
 // //                     Container(
 // //                       width: 60.w,
 // //                       height: 60.h,
-// //                       decoration: const BoxDecoration(
+// //                       decoration: BoxDecoration(
 // //                         shape: BoxShape.circle,
-// //                         color: CupertinoColors.white,
+// //                         color: Theme.of(context).cardColor,
 // //                       ),
 // //                       child: ClipOval(
-// //                         child: _buildImage(),
+// //                         child: _buildImage(context),
 // //                       ),
 // //                     ),
 // //                     // Edit button (replaces camera button)
@@ -1010,35 +986,79 @@ class PetCard extends StatelessWidget {
 // //                       Positioned(
 // //                         right: 0,
 // //                         top: 0,
-// //                         child: GestureDetector(
-// //                           onTap: onEditPressed ?? () {
-// //                             // Default edit action - navigate to edit screen
-// //                             Navigator.pushNamed(
-// //                               context,
-// //                               RoutesName.edit,
-// //                               arguments: {
-// //                                 'isEditing': true,
-// //                                 'petName': name,
-// //                                 'petId': petId,
-// //                                 'imageBytes': imageBytes,
-// //                               },
-// //                             );
+// //                         child: PopupMenuButton<String>(
+// //                           padding: EdgeInsets.zero,
+// //                           color: Theme.of(context).cardColor,
+// //                           elevation: 4,
+// //                           shape: RoundedRectangleBorder(
+// //                             borderRadius: BorderRadius.circular(12.r),
+// //                           ),
+// //                           onSelected: (value) {
+// //                             if (value == 'edit') {
+// //                               if (onEditPressed != null) {
+// //                                 onEditPressed!();
+// //                               } else {
+// //                                 // Default edit action - navigate to edit screen
+// //                                 Navigator.pushNamed(
+// //                                   context,
+// //                                   RoutesName.edit,
+// //                                   arguments: {
+// //                                     'isEditing': true,
+// //                                     'petName': name,
+// //                                     'petId': petId,
+// //                                     'imageBytes': imageBytes,
+// //                                   },
+// //                                 );
+// //                               }
+// //                             } else if (value == 'delete') {
+// //                               onDeletePressed?.call();
+// //                             }
 // //                           },
+// //                           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+// //                             PopupMenuItem<String>(
+// //                               value: 'edit',
+// //                               child: Text(
+// //                                 l10n?.actionEdit ?? 'Edit',
+// //                                 style: TextStyle(
+// //                                   fontFamily: 'Sora',
+// //                                   fontSize: 16.sp,
+// //                                   color: Theme.of(context).colorScheme.onSurface,
+// //                                   fontWeight: FontWeight.w500,
+// //                                 ),
+// //                               ),
+// //                             ),
+// //                              PopupMenuDivider(
+// //                               color: Theme.of(context).colorScheme.onPrimaryContainer,
+// //                                thickness: 1,
+// //                             ),
+// //                             PopupMenuItem<String>(
+// //                               value: 'delete',
+// //                               child: Text(
+// //                                 l10n?.actionDelete ?? 'Delete',
+// //                                 style: TextStyle(
+// //                                   fontFamily: 'Sora',
+// //                                   fontSize: 16.sp,
+// //                                   color: Theme.of(context).colorScheme.onSurface,
+// //                                   fontWeight: FontWeight.w500,
+// //                                 ),
+// //                               ),
+// //                             ),
+// //                           ],
 // //                           child: Container(
 // //                             padding: const EdgeInsets.all(4),
-// //                             decoration: const BoxDecoration(
+// //                             decoration: BoxDecoration(
 // //                               color: Colors.white,
 // //                               shape: BoxShape.circle,
 // //                               boxShadow: [
 // //                                 BoxShadow(
-// //                                   color: Colors.black12,
+// //                                   color: Theme.of(context).shadowColor.withOpacity(0.12),
 // //                                   blurRadius: 4,
-// //                                   offset: Offset(0, 2),
+// //                                   offset: const Offset(0, 2),
 // //                                 ),
 // //                               ],
 // //                             ),
 // //                             child: const Icon(
-// //                               CupertinoIcons.pencil,
+// //                               Icons.more_vert,
 // //                               size: 16,
 // //                               color: AppColors.vibrantPurple,
 // //                             ),
@@ -1048,16 +1068,20 @@ class PetCard extends StatelessWidget {
 // //                   ],
 // //                 ),
 // //                 SizedBox(width: 12.w),
-// //                 Text(
-// //                   name,
-// //                   style: TextStyle(
-// //                     fontFamily: "Sora",
-// //                     fontSize: 18.sp,
-// //                     fontWeight: FontWeight.w600,
-// //                     color: CupertinoColors.black,
+// //                 Expanded(
+// //                   child: Text(
+// //                     name,
+// //                     style: TextStyle(
+// //                       fontFamily: "Sora",
+// //                       fontSize: 18.sp,
+// //                       fontWeight: FontWeight.w600,
+// //                       color: Theme.of(context).colorScheme.onSurface,
+// //                       overflow: TextOverflow.ellipsis,
+// //                     ),
+// //                     maxLines: 1,
 // //                   ),
 // //                 ),
-// //                 const Spacer(),
+// //                 SizedBox(width: 8.w),
 // //                 Image.asset(
 // //                   'assets/images/1233.png',
 // //                   width: 118.w,
@@ -1066,13 +1090,13 @@ class PetCard extends StatelessWidget {
 // //               ],
 // //             ),
 // //           ),
-// //           const Divider(
-// //             color: Color(0xFFCBE4DC),
+// //            Divider(
+// //             color: Theme.of(context).colorScheme.onPrimaryContainer,
 // //             thickness: 1,
 // //           ),
 // //           SizedBox(height: 5.h),
 // //           Padding(
-// //             padding: EdgeInsets.symmetric(horizontal: 2.w),
+// //             padding: EdgeInsets.symmetric(horizontal: 18.w),
 // //             child: Wrap(
 // //               spacing: 12.w,
 // //               runSpacing: 16.h,
@@ -1080,11 +1104,11 @@ class PetCard extends StatelessWidget {
 // //               children: ActivityConstants.allActivities
 // //                   .where((type) => (activityCounts[type.name] ?? 0) > 0)
 // //                   .map((type) => _buildGridItem(
+// //                 context,
 // //                 imageAsset: type.image,
 // //                 count: activityCounts[type.name]!,
 // //                 backgroundColor: type.color,
-// //               ))
-// //                   .toList(),
+// //               )).toList(),
 // //             ),
 // //           )
 // //         ],
@@ -1092,7 +1116,7 @@ class PetCard extends StatelessWidget {
 // //     );
 // //   }
 // //
-// //   Widget _buildImage() {
+// //   Widget _buildImage(BuildContext context) {
 // //     // Priority 1: Use imageBytes if available
 // //     if (imageBytes != null && imageBytes!.isNotEmpty) {
 // //       return Image.memory(
@@ -1100,7 +1124,7 @@ class PetCard extends StatelessWidget {
 // //         fit: BoxFit.cover,
 // //         width: 60,
 // //         height: 60,
-// //         errorBuilder: (_, __, ___) => _errorImage(),
+// //         errorBuilder: (_, __, ___) => _errorImage(context),
 // //       );
 // //     }
 // //
@@ -1112,7 +1136,7 @@ class PetCard extends StatelessWidget {
 // //           fit: BoxFit.cover,
 // //           width: 60,
 // //           height: 60,
-// //           errorBuilder: (_, __, ___) => _errorImage(),
+// //           errorBuilder: (_, __, ___) => _errorImage(context),
 // //         );
 // //       } else if (File(imageUrl!).existsSync()) {
 // //         return Image.file(
@@ -1120,7 +1144,7 @@ class PetCard extends StatelessWidget {
 // //           fit: BoxFit.cover,
 // //           width: 60,
 // //           height: 60,
-// //           errorBuilder: (_, __, ___) => _errorImage(),
+// //           errorBuilder: (_, __, ___) => _errorImage(context),
 // //         );
 // //       } else {
 // //         return Image.asset(
@@ -1128,26 +1152,26 @@ class PetCard extends StatelessWidget {
 // //           fit: BoxFit.cover,
 // //           width: 60,
 // //           height: 60,
-// //           errorBuilder: (_, __, ___) => _errorImage(),
+// //           errorBuilder: (_, __, ___) => _errorImage(context),
 // //         );
 // //       }
 // //     }
 // //
 // //     // Fallback
-// //     return _errorImage();
+// //     return _errorImage(context);
 // //   }
 // //
-// //   Widget _errorImage() {
+// //   Widget _errorImage(BuildContext context) {
 // //     return Container(
-// //       color: CupertinoColors.systemGrey4,
-// //       child: const Icon(
+// //       color: Theme.of(context).colorScheme.surfaceContainerHighest,
+// //       child: Icon(
 // //         CupertinoIcons.photo,
-// //         color: CupertinoColors.systemGrey,
+// //         color: Theme.of(context).hintColor,
 // //       ),
 // //     );
 // //   }
 // //
-// //   Widget _buildGridItem({
+// //   Widget _buildGridItem(BuildContext context, {
 // //     required int count,
 // //     required Color backgroundColor,
 // //     String? imageAsset,
@@ -1173,13 +1197,13 @@ class PetCard extends StatelessWidget {
 // //               errorBuilder: (context, _, __) => Icon(
 // //                 icon ?? Icons.error,
 // //                 size: 24.sp,
-// //                 color: Colors.black54,
+// //                 color: Theme.of(context).hintColor,
 // //               ),
 // //             )
 // //                 : Icon(
 // //               icon ?? Icons.image,
 // //               size: 24.sp,
-// //               color: Colors.black54,
+// //               color: Theme.of(context).hintColor,
 // //             ),
 // //           ),
 // //         ),
@@ -1190,10 +1214,12 @@ class PetCard extends StatelessWidget {
 // //             fontFamily: 'Sora',
 // //             fontWeight: FontWeight.w600,
 // //             fontSize: 16.sp,
-// //             color: const Color(0xFF272727),
+// //             color: Theme.of(context).colorScheme.onSurface,
 // //           ),
 // //         ),
 // //       ],
 // //     );
 // //   }
 // // }
+// //
+// //

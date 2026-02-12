@@ -217,8 +217,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                         AppLocalizations.of(context)!.ownersProfile,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w400,
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Sora',
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
@@ -283,8 +284,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                 child: Text(
                   AppLocalizations.of(context)!.petOwner,
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 22.h,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Sora',
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
@@ -371,8 +373,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     Text(
                       AppLocalizations.of(context)!.ownerContacts,
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 22.h,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Sora',
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
@@ -446,8 +449,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     Text(
                       AppLocalizations.of(context)!.petsResidence,
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 22.h,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Sora',
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
@@ -660,8 +664,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                     child: Text(
                       label,
                       style: TextStyle(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 18.h,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Inter',
                         color: isEmpty ? Theme.of(context).colorScheme.error : Theme.of(context).colorScheme.onSurface,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -674,7 +679,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
                       isEmpty ? AppLocalizations.of(context)!.labelAdd : value,
                       textAlign: TextAlign.end,
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 18.h,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Inter',
                         color: isEmpty
                             ? AppColors.vibrantPurple
                             : Theme.of(context).colorScheme.onSurfaceVariant,
@@ -703,8 +710,9 @@ class _OwnerprofileviewState extends State<Ownerprofileview> {
           child: Text(
             title,
             style: TextStyle(
-              fontSize: 22.sp,
-              fontWeight: FontWeight.w600,
+              fontSize: 22.h,
+              fontWeight: FontWeight.w400,
+              fontFamily: 'Sora',
               color: Theme.of(context).colorScheme.onSurface,
             ),
           ),

@@ -13,6 +13,9 @@ import '../../View_model/PetProvider.dart';
 import '../../View_model/ScanProvider.dart';
 import '../../View_model/ProfileProvider.dart';
 import '../Calendar/add_activities_View.dart';
+import '../Calendar/allActivityView.dart';
+import '../../Valid/ActivityConstants.dart';
+import '../../activity_model.dart';
 import '../MyPetsView/DogResultScreen.dart';
 import 'PremiumBanner.dart';
 
@@ -190,6 +193,7 @@ class _HomeviewState extends State<Homeview> {
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                       children: [
+
                         TextSpan(
                           text: AppLocalizations.of(context)!.welcomeBack,
                           style: const TextStyle(fontWeight: FontWeight.w400),
@@ -197,7 +201,7 @@ class _HomeviewState extends State<Homeview> {
                         TextSpan(
                           text:
                               '${Provider.of<ProfileProvider>(context).firstName}!',
-                          style: const TextStyle(fontWeight: FontWeight.w700),
+                          style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -312,72 +316,71 @@ class _HomeviewState extends State<Homeview> {
 
     if (!mounted) return;
 
-    final bottomSheetController = showBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.8,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: AddActivitiesView(
-                  initialActivityName: activityName,
-                  initialDate: DateTime.now(),
-                  selectedPetId: petId,
-                ),
-              ),
-              Positioned(
-                top: 4,
-                right: 16,
-                child: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.pop(context),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+    final activityType = ActivityConstants.allActivities.firstWhere(
+      (a) => a.name == activityName,
+      orElse: () => const ActivityType(
+        name: 'Journal',
+        image: 'assets/images/jour.png',
+        color: Color(0xFFFFD5CA),
+      ),
     );
+
+    final selectedActivity = Activity(
+      name: activityType.name,
+      imagePath: activityType.image,
+      color: activityType.color,
+      dateTime: DateTime.now(),
+      petId: petId,
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Allactivityview(
+          selectedActivity: selectedActivity,
+          initialDate: DateTime.now(),
+          selectedPetId: petId,
+        ),
+      ),
+    );
+
+    // showBottomSheet(
+    //   context: context,
+    //   backgroundColor: Colors.transparent,
+    //   builder: (context) {
+    //     return Container(
+    //       height: MediaQuery.of(context).size.height * 0.8,
+    //       decoration: const BoxDecoration(
+    //         color: Colors.white,
+    //         borderRadius: BorderRadius.only(
+    //           topLeft: Radius.circular(20),
+    //           topRight: Radius.circular(20),
+    //         ),
+    //       ),
+    //       child: Stack(
+    //         children: [
+    //           Positioned.fill(
+    //             child: Allactivityview(
+    //               selectedActivity: selectedActivity,
+    //               initialDate: DateTime.now(),
+    //               selectedPetId: petId,
+    //             ),
+    //           ),
+    //           // Positioned(
+    //           //   top: 4,
+    //           //   right: 16,
+    //           //   child: IconButton(
+    //           //     icon: const Icon(Icons.close),
+    //           //     onPressed: () => Navigator.pop(context),
+    //           //   ),
+    //           // ),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
   }
 
-  // Helper method
-  // Future<void> _goToActivity(String activityName) async {
-  //   final petProvider = Provider.of<PetProvider>(context, listen: false);
-  //   String? petId;
-  //
-  //   if (petProvider.hasPets) {
-  //     // Try to get saved pet ID
-  //     final prefs = await SharedPreferences.getInstance();
-  //     petId = prefs.getString('selectedPetId');
-  //
-  //     // If invalid or not found, use first pet
-  //     if (petId == null || !petProvider.pets.any((p) => p.id == petId)) {
-  //       petId = petProvider.pets.first.id;
-  //     }
-  //   }
-  //
-  //   if (!mounted) return;
-  //
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => AddActivitiesView(
-  //         initialActivityName: activityName,
-  //         initialDate: DateTime.now(),
-  //         selectedPetId: petId,
-  //       ),
-  //     ),
-  //   );
-  // }
 
   Widget _buildIdentifyDogCard1(
 
@@ -495,7 +498,7 @@ class _HomeviewState extends State<Homeview> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: -10.h,
+            top: 10.h,
             left: -30.w,
             child: Transform.rotate(
               angle: -83.51 * (pi / 180),
@@ -575,7 +578,7 @@ class _HomeviewState extends State<Homeview> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: -10.h,
+            top: 10.h,
             left: -30.w,
             bottom: 10.h,
             child: Transform.rotate(
@@ -615,7 +618,7 @@ class _HomeviewState extends State<Homeview> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: -10.h,
+            top: 10.h,
             left: -20.w,
             child: Transform.rotate(
               angle: -83.51 * (pi / 180),
@@ -655,8 +658,7 @@ class _HomeviewState extends State<Homeview> {
   }) {
     return Container(
       width: 384.w,
-      padding: EdgeInsets.all(6.w),
-
+      padding: EdgeInsets.symmetric(vertical: 4.w),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(12.r),
@@ -674,13 +676,13 @@ class _HomeviewState extends State<Homeview> {
                     style: TextStyle(
                       fontFamily: 'Sora',
                       fontWeight: FontWeight.w400,
-                      fontSize: 24.sp,
+                      fontSize: 22.sp,
                       height: 1.0,
                       letterSpacing: 0,
                       color: const Color(0xFF371B34),
                     ),
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 12.h),
                   Text(
                     description,
                     style: TextStyle(

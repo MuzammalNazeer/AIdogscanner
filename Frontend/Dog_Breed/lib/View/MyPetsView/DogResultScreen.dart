@@ -449,7 +449,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                   title,
                   style: TextStyle(
                     fontSize: 17.sp,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w400,
                     color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
@@ -744,8 +744,6 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
             children: [
               _buildHeader(),
               SizedBox(height: 25.h),
-
-
               if (_isSaving)
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -803,9 +801,10 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                       _formatBreedName(result.breed),
                       style: TextStyle(
                         fontSize: 23.sp,
-                        fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.onSurface,
                         height: 1.2,
+                        fontFamily: 'Sora',
+                        fontWeight: FontWeight.w400,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -813,19 +812,19 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                   ),
                   SizedBox(width: 16.w),
                   Container(
-                    width: 100.w,
-                    height: 100.h,
+                    width: 110.w,
+                    height: 110.h,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      color:  const Color(0xFFFACE7D).withValues(alpha: 0.4),
                     ),
                     child: Center(
                       child: Text(
                         "${_confidence.toStringAsFixed(0)}%",
                         style: TextStyle(
-                          fontSize: 32.sp,
+                          fontSize: 26.sp,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0xFF05E51F),
+                          color: const Color(0xFFE58F05),
                         ),
                       ),
                     ),
@@ -890,8 +889,9 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
                 AppLocalizations.of(context)!.temperamentAndCharacteristics,
                 style: TextStyle(
                   fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.tertiary,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Sore',
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SizedBox(height: 16.h),
@@ -1022,6 +1022,7 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
           style: TextStyle(
             fontSize: 13.sp,
             fontWeight: FontWeight.w500,
+            fontFamily: 'Inter',
             color: const Color(0xFF7E808F),
           ),
         ),
@@ -1030,7 +1031,8 @@ class _DogResultScreenContentState extends State<_DogResultScreenContent> {
           value,
           style: TextStyle(
             fontSize: 15.sp,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Inter',
             color: Theme.of(context).colorScheme.onSurface,
           ),
         ),

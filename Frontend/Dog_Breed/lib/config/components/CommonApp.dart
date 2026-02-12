@@ -31,6 +31,7 @@ class CommonApp extends StatelessWidget implements PreferredSizeWidget {
             color: Theme.of(context).colorScheme.onSurface,
             fontSize: 30.sp,
             fontWeight: FontWeight.w300,
+            fontFamily: 'Sora',
           ),
         ),
       ),

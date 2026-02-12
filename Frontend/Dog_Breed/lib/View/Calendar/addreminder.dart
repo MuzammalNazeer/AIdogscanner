@@ -208,8 +208,9 @@ class _ActivityCard extends StatelessWidget {
         Text(
           _getLocalizedActivityName(context, activity.name),
           style: TextStyle(
-            fontSize: 10.sp,
-            fontWeight: FontWeight.bold,
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w500,
+            fontFamily: 'Inter',
             color: isSelected ? const Color(0xFF820DFF) : Theme.of(context).colorScheme.onSurface,
           ),
           textAlign: TextAlign.center,
