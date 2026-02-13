@@ -13,6 +13,13 @@ import '../../config/components/roundButton.dart';
 import '../../utils/routes/routes_name.dart';
 import '../../l10n/app_localizations.dart';
 
+class _BreedListItem {
+  final bool header;
+  final String text;
+  const _BreedListItem.header(this.text) : header = true;
+  const _BreedListItem.item(this.text) : header = false;
+}
+
 class Editview extends StatefulWidget {
   final String? petName;
   final String? petId;
@@ -228,181 +235,256 @@ class _EditviewState extends State<Editview> {
 
             return SizedBox(
               height: MediaQuery.of(context).size.height * 0.8,
-              child: Column(
-                children: [
-                  // Header
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
+              child: Padding(
+                padding:  const EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 5,
+                      margin: const EdgeInsets.only(bottom: 12),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).dividerColor,
+                        borderRadius: BorderRadius.circular(2.5),
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Theme.of(context).shadowColor.withOpacity(0.1),
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
                     ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              AppLocalizations.of(context)!.hintSelectBreed,
-                              style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onSurface,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon: Icon(Icons.close, color: Theme.of(context).hintColor),
-                            ),
-                          ],
+                    // Header
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
                         ),
-                        const SizedBox(height: 12),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: TextField(
-                            controller: searchController,
-                            autofocus: true,
-                            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-                            decoration: InputDecoration(
-                              hintText: AppLocalizations.of(context)!.hintSearchBreed,
-                              hintStyle: TextStyle(color: Theme.of(context).hintColor),
-                              prefixIcon: Icon(Icons.search, color: Theme.of(context).hintColor),
-                              border: InputBorder.none,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 16,
-                              ),
-                              suffixIcon: searchController.text.isNotEmpty
-                                  ? IconButton(
-                                icon: const Icon(Icons.clear, size: 20),
-                                onPressed: () {
-                                  searchController.clear();
-                                  filterBreeds('');
-                                },
-                              )
-                                  : null,
-                            ),
-                            onChanged: filterBreeds,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: filteredBreeds.isEmpty
-                        ? Center(
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: Theme.of(context).shadowColor.withOpacity(0.1),
+                        //     blurRadius: 5,
+                        //     offset: const Offset(0, 2),
+                        //   ),
+                        // ],
+                      ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.search_off,
-                            size: 60.sp,
-                            color: Theme.of(context).hintColor,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Center(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.hintSelectBreed,
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Theme.of(context).colorScheme.onSurface,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () => Navigator.pop(context),
+                                icon: Icon(Icons.close, color: Theme.of(context).hintColor),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 16),
-                          Text(
-                            AppLocalizations.of(context)!.noBreedsFound,
-                            style: TextStyle(
-                              color: Theme.of(context).hintColor,
-                              fontSize: 16.sp,
+                          const SizedBox(height: 12),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).brightness == Brightness.dark
+                                  ? const Color(0xFF21241F)
+                                  : const Color(0xFFE8EEEC),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            AppLocalizations.of(context)!.tryDifferentSearch,
-                            style: TextStyle(
-                              color: Theme.of(context).hintColor,
-                              fontSize: 14.sp,
+                            child: TextField(
+                              controller: searchController,
+                              autofocus: true,
+                              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                              decoration: InputDecoration(
+                                hintText: AppLocalizations.of(context)!.hintSearchBreed,
+                                hintStyle: TextStyle(color: Theme.of(context).hintColor),
+                                prefixIcon: Icon(Icons.search, color: Theme.of(context).hintColor),
+                                border: InputBorder.none,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 16,
+                                ),
+                                suffixIcon: searchController.text.isNotEmpty
+                                    ? IconButton(
+                                  icon: const Icon(Icons.clear, size: 20),
+                                  onPressed: () {
+                                    searchController.clear();
+                                    filterBreeds('');
+                                  },
+                                )
+                                    : null,
+                              ),
+                              onChanged: filterBreeds,
                             ),
                           ),
                         ],
                       ),
-                    )
-                        : ListView.builder(
-                      itemCount: filteredBreeds.length,
-                      itemBuilder: (context, index) {
-                        final breed = filteredBreeds[index];
-                        return ListTile(
-                          title: Text(
-                            breed,
+                    ),
+                    Expanded(
+                      child: filteredBreeds.isEmpty
+                          ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search_off,
+                              size: 60.sp,
+                              color: Theme.of(context).hintColor,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              AppLocalizations.of(context)!.noBreedsFound,
+                              style: TextStyle(
+                                color: Theme.of(context).hintColor,
+                                fontSize: 16.sp,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              AppLocalizations.of(context)!.tryDifferentSearch,
+                              style: TextStyle(
+                                color: Theme.of(context).hintColor,
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                          : Builder(
+                        builder: (context) {
+                          final items = _buildGroupedBreedItems(filteredBreeds);
+                          return ListView.builder(
+                            itemCount: items.length,
+                            itemBuilder: (context, index) {
+                              final item = items[index];
+                              if (item.header) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                  child: Container(
+                                    height: 30.h,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? const Color(0xFF21241F)
+                                          : const Color(0xFFE8EEEC),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    child: Padding(
+                                      padding:const EdgeInsets.symmetric(vertical: 5,horizontal: 11),
+                                      child: Text(
+                                        item.text,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              final breed = item.text;
+                              return ListTile(
+                                title: Text(
+                                  breed,
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: Theme.of(context).colorScheme.onSurface,
+                                  ),
+                                ),
+                                trailing: _selectedBreed == breed
+                                    ? Icon(
+                                  Icons.check_circle,
+                                  color: AppColors.vibrantPurple,
+                                  size: 24.sp,
+                                )
+                                    : null,
+                                tileColor: _selectedBreed == breed
+                                    ? AppColors.vibrantPurple.withOpacity(0.1)
+                                    : Colors.transparent,
+                                onTap: () {
+                                  setState(() {
+                                    _selectedBreed = breed;
+                                    _breedController.text = breed;
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    // Cancel Button
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).cardColor,
+                        border: Border(top: BorderSide(color: Theme.of(context).dividerColor, width: 1)),
+                      ),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.pop(context),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                            foregroundColor: Theme.of(context).colorScheme.onSurface,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            elevation: 0,
+                          ),
+                          child: Text(
+                            AppLocalizations.of(context)!.cancelButton,
                             style: TextStyle(
                               fontSize: 16.sp,
-                              color: Theme.of(context).colorScheme.onSurface,
+                              fontWeight: FontWeight.w500,
                             ),
-                          ),
-                          trailing: _selectedBreed == breed
-                              ? Icon(
-                            Icons.check_circle,
-                            color: AppColors.vibrantPurple,
-                            size: 24.sp,
-                          )
-                              : null,
-                          tileColor: _selectedBreed == breed
-                              ? AppColors.vibrantPurple.withOpacity(0.1)
-                              : Colors.transparent,
-                          onTap: () {
-                            // Save breed to TextField and update state
-                            setState(() {
-                              _selectedBreed = breed;
-                              _breedController.text = breed;
-                            });
-                            Navigator.pop(context);
-                          },
-                        );
-                      },
-                    ),
-                  ),
-
-                  // Cancel Button
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                      border: Border(top: BorderSide(color: Theme.of(context).dividerColor, width: 1)),
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () => Navigator.pop(context),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                          foregroundColor: Theme.of(context).colorScheme.onSurface,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          elevation: 0,
-                        ),
-                        child: Text(
-                          AppLocalizations.of(context)!.cancelButton,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },
         );
       },
     );
+  }
+
+  List<_BreedListItem> _buildGroupedBreedItems(List<String> breeds) {
+    final sorted = List<String>.from(breeds)
+      ..sort((a, b) {
+        final la = a.length;
+        final lb = b.length;
+        if (la != lb) return la.compareTo(lb);
+        return a.toLowerCase().compareTo(b.toLowerCase());
+      });
+    final Map<String, List<String>> grouped = {};
+    for (final b in sorted) {
+      if (b.isEmpty) continue;
+      final key = b[0].toUpperCase();
+      final list = grouped.putIfAbsent(key, () => []);
+      list.add(b);
+    }
+    final keys = grouped.keys.toList()..sort();
+    final result = <_BreedListItem>[];
+    for (final k in keys) {
+      result.add(_BreedListItem.header(k));
+      final values = grouped[k]!;
+      for (final v in values) {
+        result.add(_BreedListItem.item(v));
+      }
+    }
+    return result;
   }
 
   @override
@@ -768,7 +850,7 @@ class _EditviewState extends State<Editview> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 15.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

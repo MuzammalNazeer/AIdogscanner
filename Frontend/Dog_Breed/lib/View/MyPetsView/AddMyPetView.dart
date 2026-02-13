@@ -14,6 +14,13 @@ import '../../config/components/roundButton.dart';
 import '../../utils/routes/routes_name.dart';
 import '../../l10n/app_localizations.dart';
 
+class _BreedListItem {
+  final bool header;
+  final String text;
+  const _BreedListItem.header(this.text) : header = true;
+  const _BreedListItem.item(this.text) : header = false;
+}
+
 class Addmypetview extends StatefulWidget {
   const Addmypetview({super.key});
 
@@ -298,6 +305,20 @@ class _AddmypetviewState extends State<Addmypetview> {
               height: MediaQuery.of(context).size.height * 0.8,
               child: Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Center(
+                      child: Container(
+                        width: 40,
+                        height: 5,
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).dividerColor,
+                          borderRadius: BorderRadius.circular(2.5),
+                        ),
+                      ),
+                    ),
+                  ),
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -309,15 +330,21 @@ class _AddmypetviewState extends State<Addmypetview> {
                     ),
                     child: Column(
                       children: [
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              l10n.hintSelectBreed,
-                              style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Theme.of(context).colorScheme.onSurface,
+
+                            Expanded(
+                              child: Center(
+                                child: Text(
+                                  l10n.hintSelectBreed,
+                                  style: TextStyle(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Theme.of(context).colorScheme.onSurface,
+                                  ),
+                                ),
                               ),
                             ),
                             IconButton(
@@ -330,7 +357,9 @@ class _AddmypetviewState extends State<Addmypetview> {
                         const SizedBox(height: 12),
                         Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? const Color(0xFF21241F)
+                                : const Color(0xFFE8EEEC),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: TextField(
@@ -394,26 +423,55 @@ class _AddmypetviewState extends State<Addmypetview> {
                               ],
                             ),
                           )
-                        : ListView.builder(
-                            itemCount: filteredBreeds.length,
-                            itemBuilder: (context, index) {
-                              final breed = filteredBreeds[index];
-                              return ListTile(
-                                title: Text(
-                                  breed,
-                                  style: TextStyle(
-                                    fontSize: 16.sp,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface,
-                                  ),
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    _breedName = breed;
-                                    _isBreedValid = true;
-                                  });
-                                  Navigator.pop(context);
+                        : Builder(
+                            builder: (context) {
+                              final items = _buildGroupedBreedItems(filteredBreeds);
+                              return ListView.builder(
+                                itemCount: items.length,
+                                itemBuilder: (context, index) {
+                                  final item = items[index];
+                                  if (item.header) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                      child: Container(
+                                        height: 30.h,
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).brightness == Brightness.dark
+                                              ? const Color(0xFF21241F)
+                                              : const Color(0xFFE8EEEC),
+                                          borderRadius: BorderRadius.circular(10.r),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 11),
+                                          child: Text(
+                                            item.text,
+                                            style: TextStyle(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w600,
+                                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  final breed = item.text;
+                                  return ListTile(
+                                    title: Text(
+                                      breed,
+                                      style: TextStyle(
+                                        fontSize: 16.sp,
+                                        color: Theme.of(context).colorScheme.onSurface,
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      this.setState(() {
+                                        _breedName = breed;
+                                        _isBreedValid = true;
+                                      });
+                                      Navigator.pop(context);
+                                    },
+                                  );
                                 },
                               );
                             },
@@ -426,6 +484,33 @@ class _AddmypetviewState extends State<Addmypetview> {
         );
       },
     );
+  }
+
+  List<_BreedListItem> _buildGroupedBreedItems(List<String> breeds) {
+    final sorted = List<String>.from(breeds)
+      ..sort((a, b) {
+        final la = a.length;
+        final lb = b.length;
+        if (la != lb) return la.compareTo(lb);
+        return a.toLowerCase().compareTo(b.toLowerCase());
+      });
+    final Map<String, List<String>> grouped = {};
+    for (final b in sorted) {
+      if (b.isEmpty) continue;
+      final key = b[0].toUpperCase();
+      final list = grouped.putIfAbsent(key, () => []);
+      list.add(b);
+    }
+    final keys = grouped.keys.toList()..sort();
+    final result = <_BreedListItem>[];
+    for (final k in keys) {
+      result.add(_BreedListItem.header(k));
+      final values = grouped[k]!;
+      for (final v in values) {
+        result.add(_BreedListItem.item(v));
+      }
+    }
+    return result;
   }
 
   void _showBreedEditDialog() {

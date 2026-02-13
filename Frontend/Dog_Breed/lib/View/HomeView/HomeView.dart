@@ -14,6 +14,9 @@ import '../../View_model/ScanProvider.dart';
 import '../../View_model/ProfileProvider.dart';
 import '../Calendar/add_activities_View.dart';
 import '../Calendar/allActivityView.dart';
+import '../Calendar/AddReminderView.dart';
+import '../Calendar/addreminder.dart';
+import '../Calendar/reminderList.dart';
 import '../../Valid/ActivityConstants.dart';
 import '../../activity_model.dart';
 import '../MyPetsView/DogResultScreen.dart';
@@ -114,7 +117,7 @@ class _HomeviewState extends State<Homeview> {
         children: [
           Container(
             width: double.infinity,
-            height: 90.h,
+            height: 80.h,
             padding: EdgeInsets.all(6.w),
             decoration: BoxDecoration(
               color: color,
@@ -243,61 +246,185 @@ class _HomeviewState extends State<Homeview> {
         children: [
           Expanded(
             child: quickActionButton(
-              image: SvgPicture.asset(
-                'assets/images/Group77.svg',
-                color: const Color(0xFF711544),
+              image: Image.asset(
+                'assets/images/grooming.png',
+                // color: const Color(0xFF711544),
                 height: 57.h,
                 width: 57.w,
               ),
-              label: AppLocalizations.of(context)!.hygiene,
-              color: const Color(0xFFEF5DA8),
-              onTap: () => _goToActivity('Grooming'),
+              label: "Doctor Visit",
+              color: const Color(0xFFD0FAFF),
+              onTap: () => _showActivityChoiceSheet('Grooming'),
             ),
           ),
           SizedBox(width: 7.w),
           Expanded(
             child: quickActionButton(
-              image: SvgPicture.asset(
-                'assets/images/Group88.svg',
-                color: const Color(0xFF4B4B89),
-                height: 66.h,
-                width: 52.w,
+              image:Image.asset(
+                'assets/images/73.png',
+                height: 57.h,
+                width: 57.w,
               ),
               label: AppLocalizations.of(context)!.cleaning,
-              color: const Color(0xFFAEAFF7),
-              onTap: () => _goToActivity('Cleaning'),
+              color: const Color(0xFFFFCFD5),
+              onTap: () => _showActivityChoiceSheet('Cleaning'),
             ),
           ),
           SizedBox(width: 7.w),
           Expanded(
             child: quickActionButton(
-              image: SvgPicture.asset(
-                'assets/images/medical.svg',
-                color: const Color(0xFF938200),
-                height: 44.h,
-                width: 44.w,
+              image: Image.asset(
+                'assets/images/medi.png',
+                height: 57.h,
+                width: 57.w,
               ),
               label: AppLocalizations.of(context)!.medical,
-              color: const Color(0xFFECEF8B),
-              onTap: () => _goToActivity('Medication'),
+              color: const Color(0xFFFFEBEE),
+              onTap: () => _showActivityChoiceSheet('Medication'),
             ),
           ),
           SizedBox(width: 7.w),
           Expanded(
             child: quickActionButton(
-              image: SvgPicture.asset(
-                'assets/images/Group991.svg',
-                color: const Color(0xFF1C7372),
-                height: 40.h,
-                width: 40.w,
+              image: Image.asset(
+                'assets/images/vacc.png',
+                height: 57.h,
+                width: 57.w,
               ),
               label: AppLocalizations.of(context)!.booking,
-              color: const Color(0xFFA0E3E2),
-              onTap: () => _goToActivity('Veterinary'),
+              color: const Color(0xFFFFEAE3),
+              onTap: () => _showActivityChoiceSheet('Veterinary'),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showActivityChoiceSheet(String activityName) async {
+    final petProvider = Provider.of<PetProvider>(context, listen: false);
+    String? petId;
+    if (petProvider.hasPets) {
+      final prefs = await SharedPreferences.getInstance();
+      petId = prefs.getString('selectedPetId');
+      if (petId == null || !petProvider.pets.any((p) => p.id == petId)) {
+        petId = petProvider.pets.first.id;
+      }
+    }
+    if (!mounted) return;
+    final l10n = AppLocalizations.of(context)!;
+    final activityType = ActivityConstants.allActivities.firstWhere(
+      (a) => a.name == activityName,
+      orElse: () => const ActivityType(
+        name: 'Journal',
+        image: 'assets/images/jour.png',
+        color: Color(0xFFFFD5CA),
+      ),
+    );
+    final selectedActivity = Activity(
+      name: activityType.name,
+      imagePath: activityType.image,
+      color: activityType.color,
+      dateTime: DateTime.now(),
+      petId: petId,
+    );
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Theme.of(context).cardColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) {
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(height: 8.h),
+              Text(
+                l10n.dialogActionsRequired,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              SizedBox(height: 8.h),
+              Text(
+                l10n.dialogAddPetMessage,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Theme.of(context).hintColor,
+                ),
+              ),
+              SizedBox(height: 16.h),
+              SizedBox(
+                height: 56.h,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.vibrantPurple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Allactivityview(
+                          selectedActivity: selectedActivity,
+                          initialDate: DateTime.now(),
+                          selectedPetId: petId,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    l10n.addAsActivity,
+                    style: TextStyle(fontSize: 20.sp,fontFamily: 'Inter', fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              SizedBox(height: 12.h),
+              SizedBox(
+                height: 56.h,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.vibrantPurple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(ctx);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Reminderlist(
+                          selectedActivity: selectedActivity,
+                          initialDate: DateTime.now(),
+                          selectedPetId: petId,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    l10n.reminderAddTitle,
+                    style: TextStyle(fontSize: 20.sp,fontFamily: 'Inter', fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.h),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -570,7 +697,7 @@ class _HomeviewState extends State<Homeview> {
       title: AppLocalizations.of(context)!.vetVisits,
       description: AppLocalizations.of(context)!.vetVisitsDescription,
       actionText: AppLocalizations.of(context)!.createVisit,
-      onActionTap: () => _goToActivity('Veterinary'),
+      onActionTap: () => _showActivityChoiceSheet('Vaccination'),
       backgroundColor: const Color(0xFFA4C4FF),
       actionTextColor: const Color(0xFF0059FF),
       imageWidget: Stack(
@@ -604,13 +731,12 @@ class _HomeviewState extends State<Homeview> {
       ),
     );
   }
-
   Widget _buildFoodManagementCard() {
     return _buildActionCard(
       title: AppLocalizations.of(context)!.foodManagement,
       description: AppLocalizations.of(context)!.foodManagementDescription,
       actionText: AppLocalizations.of(context)!.checkSchedule,
-      onActionTap: () => _goToActivity('Eat'),
+      onActionTap: () => _showActivityChoiceSheet('Eat'),
       backgroundColor: const Color(0xFFFFF0E0),
       actionTextColor: const Color(0xFF6E4B25),
       imageWidget: Stack(
@@ -646,7 +772,6 @@ class _HomeviewState extends State<Homeview> {
       ),
     );
   }
-
   Widget _buildActionCard({
     required String title,
     required String description,
@@ -720,6 +845,9 @@ class _HomeviewState extends State<Homeview> {
       ),
     );
   }
+
+
+
 }
 
 // import 'dart:io';

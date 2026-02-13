@@ -46,7 +46,6 @@ class _DashboardHomeViewState extends State<DashboardHomeView> {
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).colorScheme.background,

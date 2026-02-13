@@ -45,6 +45,11 @@ class _AllactivityviewState extends State<Allactivityview> {
   TimeOfDay? _reminderTime;
   final TextEditingController _foodController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
+  final TextEditingController _walkController = TextEditingController();
+  final TextEditingController _temperatureController = TextEditingController();
+  bool _isNameValid = true;
 
   File? _selectedImage;
   File? _selectedVideo;
@@ -110,6 +115,10 @@ class _AllactivityviewState extends State<Allactivityview> {
     _videoController?.dispose();
     _foodController.dispose();
     _noteController.dispose();
+    _weightController.dispose();
+    _heightController.dispose();
+    _walkController.dispose();
+    _temperatureController.dispose();
     super.dispose();
   }
 
@@ -894,10 +903,12 @@ class _AllactivityviewState extends State<Allactivityview> {
         return;
       }
       if (_foodController.text.trim().isEmpty) {
-        String localizedName = _getLocalizedActivityName(context, _currentActivity!.name);
-        _showErrorSnackBar('Name or Type required for $localizedName');
+        setState(() {
+          _isNameValid = false;
+        });
         return;
       }
+      _isNameValid = true;
       const double ozToMl = 29.5735;
       double amount = _isOzUnit ? _drinkQuantityOz : _drinkQuantityOz * ozToMl;
       foodValue = '${amount.toStringAsFixed(1)} ${_isOzUnit ? AppLocalizations.of(context)!.unitOz : AppLocalizations.of(context)!.unitMl}';
@@ -944,13 +955,15 @@ class _AllactivityviewState extends State<Allactivityview> {
 
       if (requiredNameActivities.contains(activityName)) {
         if (_foodController.text.trim().isEmpty) {
-          String errorMessage = 'Name or Type required for ${_getLocalizedActivityName(context, _currentActivity!.name)}';
-          _showErrorSnackBar(errorMessage);
-          // _showFoodNameBottomSheet();
+          setState(() {
+            _isNameValid = false;
+          });
           return;
+        } else {
+          _isNameValid = true;
         }
       }
-
+ 
       if (_foodController.text.trim().isNotEmpty) {
         foodValue = _foodController.text.trim();
       }
@@ -1100,6 +1113,100 @@ class _AllactivityviewState extends State<Allactivityview> {
         backgroundColor: Theme.of(context).colorScheme.error,
         behavior: SnackBarBehavior.floating,
       ),
+    );
+  }
+  Future<void> _showCustomDialog({
+    required String title,
+    required TextEditingController controller,
+    required double min,
+    required double max,
+    required void Function(double value) onConfirm,
+  }) async {
+    final l10n = AppLocalizations.of(context)!;
+    final tempController = TextEditingController(text: controller.text);
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: TextField(
+            controller: tempController,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(l10n.dialogCancel),
+            ),
+            TextButton(
+              onPressed: () {
+                final parsed = double.tryParse(tempController.text.replaceAll(',', '.'));
+                if (parsed == null || parsed < min || parsed > max) {
+                  Navigator.pop(context);
+                  _showErrorSnackBar('Invalid value');
+                  return;
+                }
+                onConfirm(parsed);
+                controller.text = parsed.toStringAsFixed(1);
+                Navigator.pop(context);
+              },
+              child: Text(l10n.actionSave),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showCustomWeightDialog() {
+    _showCustomDialog(
+      title: AppLocalizations.of(context)!.activityWeight,
+      controller: _weightController,
+      min: 0.1,
+      max: 999.0,
+      onConfirm: (val) => setState(() => _weightValue = val),
+    );
+  }
+
+  void _showCustomHeightDialog() {
+    _showCustomDialog(
+      title: AppLocalizations.of(context)!.activityHeight,
+      controller: _heightController,
+      min: 0.1,
+      max: 300.0,
+      onConfirm: (val) => setState(() => _heightValue = val),
+    );
+  }
+
+  void _showCustomTemperatureDialog() {
+    _showCustomDialog(
+      title: AppLocalizations.of(context)!.activityTemperature,
+      controller: _temperatureController,
+      min: 0.1,
+      max: 200.0,
+      onConfirm: (val) => setState(() => _temperatureValue = val),
+    );
+  }
+
+  void _showCustomWalkDialog() {
+    final bool km = _isKmUnit;
+    final double maxVal = km ? 99.0 : 62.0;
+    _showCustomDialog(
+      title: AppLocalizations.of(context)!.activityWalk,
+      controller: _walkController,
+      min: 0.1,
+      max: maxVal,
+      onConfirm: (val) => setState(() {
+        if (km) {
+          _walkDistanceKm = val;
+        } else {
+          const double kmToMi = 0.621371;
+          _walkDistanceKm = val / kmToMi;
+        }
+      }),
     );
   }
 
@@ -1916,24 +2023,56 @@ class _AllactivityviewState extends State<Allactivityview> {
     return Column(
       children: [
         if (_foodController.text.isNotEmpty)
-          RoundButton(
-            title: _foodController.text,
-            isSelected: true,
-            backgroundColors: const Color(0xFFF4F7F6),
-            textColors: Colors.black,
-            hasIcons: true,
-            isTrailingIcon: true,
-            icon: const Icon(Icons.edit, size: 20, color: Colors.black),
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            onPress: _showDrinkName1BottomSheet,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RoundButton(
+                title: _foodController.text,
+                isSelected: true,
+                backgroundColors: const Color(0xFFF4F7F6),
+                textColors: Colors.black,
+                hasIcons: true,
+                isTrailingIcon: true,
+                icon: const Icon(Icons.edit, size: 20, color: Colors.black),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                onPress: _showDrinkName1BottomSheet,
+              ),
+              if (!_isNameValid)
+                Padding(
+                  padding: EdgeInsets.only(top: 6.h, left: 4.w),
+                  child: Text(
+                    'Name or Type is required',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                ),
+            ],
           )
         else
-          RoundButton(
-            title: AppLocalizations.of(context)!.actionAdd,
-            isSelected: true,
-            backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
-            textColors: const Color(0xFF820DFF),
-            onPress: _showDrinkNameBottomSheet,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RoundButton(
+                title: AppLocalizations.of(context)!.actionAdd,
+                isSelected: true,
+                backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
+                textColors: const Color(0xFF820DFF),
+                onPress: _showDrinkNameBottomSheet,
+              ),
+              if (!_isNameValid)
+                Padding(
+                  padding: EdgeInsets.only(top: 6.h, left: 4.w),
+                  child: Text(
+                    'Name or Type is required',
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                ),
+            ],
           ),
         SizedBox(height: 6.h),
         Container(
@@ -2053,12 +2192,16 @@ class _AllactivityviewState extends State<Allactivityview> {
     const double step = 0.1;
 
     double displayValue = _weightValue;
+    if (_weightController.text.isEmpty) {
+      _weightController.text = displayValue.toStringAsFixed(1);
+    }
 
     void increment() {
       setState(() {
         if (displayValue < 999) {
           _weightValue = (_weightValue + step);
         }
+        _weightController.text = _weightValue.toStringAsFixed(1);
       });
     }
 
@@ -2067,6 +2210,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         if (_weightValue > step) {
           _weightValue = (_weightValue - step);
         }
+        _weightController.text = _weightValue.toStringAsFixed(1);
       });
     }
 
@@ -2094,9 +2238,28 @@ class _AllactivityviewState extends State<Allactivityview> {
                 ),
               ),
               Text(
-                displayValue.toStringAsFixed(1),
+                '',
                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
               ),
+              SizedBox(
+                width: 140.w,
+                child: TextField(
+                  controller: _weightController,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+                  decoration: const InputDecoration(border: InputBorder.none),
+                  onChanged: (v) {
+                    final parsed = double.tryParse(v.replaceAll(',', '.'));
+                    if (parsed != null) {
+                      setState(() {
+                        _weightValue = parsed;
+                      });
+                    }
+                  },
+                ),
+              ),
+
               Container(
                 width: 85.w,
                 height: 45.h,
@@ -2128,6 +2291,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         _weightValue = _weightValue / lbsToKg;
                         _isLbsUnit = true;
                       }
+                      _weightController.text = _weightValue.toStringAsFixed(1);
                     });
                   },
                   child: Container(
@@ -2160,6 +2324,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         _weightValue = _weightValue * lbsToKg;
                         _isLbsUnit = false;
                       }
+                      _weightController.text = _weightValue.toStringAsFixed(1);
                     });
                   },
                   child: Container(
@@ -2196,12 +2361,16 @@ class _AllactivityviewState extends State<Allactivityview> {
     const double step = 0.5;
 
     double displayValue = _heightValue;
+    if (_heightController.text.isEmpty) {
+      _heightController.text = displayValue.toStringAsFixed(1);
+    }
 
     void increment() {
       setState(() {
         if (displayValue < 300) {
           _heightValue = (_heightValue + step);
         }
+        _heightController.text = _heightValue.toStringAsFixed(1);
       });
     }
 
@@ -2210,6 +2379,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         if (_heightValue > step) {
           _heightValue = (_heightValue - step);
         }
+        _heightController.text = _heightValue.toStringAsFixed(1);
       });
     }
 
@@ -2237,8 +2407,36 @@ class _AllactivityviewState extends State<Allactivityview> {
                 ),
               ),
               Text(
-                displayValue.toStringAsFixed(1),
+                '',
                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                width: 140.w,
+                child: TextField(
+                  controller: _heightController,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+                  decoration: const InputDecoration(border: InputBorder.none),
+                  onChanged: (v) {
+                    final parsed = double.tryParse(v.replaceAll(',', '.'));
+                    if (parsed != null) {
+                      setState(() {
+                        _heightValue = parsed;
+                      });
+                    }
+                  },
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.edit, color: Color(0xFF820DFF)),
+                onPressed: () => _showCustomDialog(
+                  title: AppLocalizations.of(context)!.activityHeight,
+                  controller: _heightController,
+                  min: 0.1,
+                  max: 300.0,
+                  onConfirm: (val) => setState(() => _heightValue = val),
+                ),
               ),
               Container(
                 width: 85.w,
@@ -2271,6 +2469,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         _heightValue = _heightValue / inchToCm;
                         _isInchesUnit = true;
                       }
+                      _heightController.text = _heightValue.toStringAsFixed(1);
                     });
                   },
                   child: Container(
@@ -2303,6 +2502,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         _heightValue = _heightValue * inchToCm;
                         _isInchesUnit = false;
                       }
+                      _heightController.text = _heightValue.toStringAsFixed(1);
                     });
                   },
                   child: Container(
@@ -2338,12 +2538,16 @@ class _AllactivityviewState extends State<Allactivityview> {
     const double step = 0.5;
 
     double displayValue = _temperatureValue;
+    if (_temperatureController.text.isEmpty) {
+      _temperatureController.text = displayValue.toStringAsFixed(1);
+    }
 
     void increment() {
       setState(() {
         if (displayValue < 200) {
           _temperatureValue = (_temperatureValue + step);
         }
+        _temperatureController.text = _temperatureValue.toStringAsFixed(1);
       });
     }
 
@@ -2352,6 +2556,7 @@ class _AllactivityviewState extends State<Allactivityview> {
         if (_temperatureValue > step) {
           _temperatureValue = (_temperatureValue - step);
         }
+        _temperatureController.text = _temperatureValue.toStringAsFixed(1);
       });
     }
 
@@ -2379,8 +2584,36 @@ class _AllactivityviewState extends State<Allactivityview> {
                 ),
               ),
               Text(
-                displayValue.toStringAsFixed(1),
+                '',
                 style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                width: 140.w,
+                child: TextField(
+                  controller: _temperatureController,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+                  decoration: const InputDecoration(border: InputBorder.none),
+                  onChanged: (v) {
+                    final parsed = double.tryParse(v.replaceAll(',', '.'));
+                    if (parsed != null) {
+                      setState(() {
+                        _temperatureValue = parsed;
+                      });
+                    }
+                  },
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.edit, color: Color(0xFF820DFF)),
+                onPressed: () => _showCustomDialog(
+                  title: AppLocalizations.of(context)!.activityTemperature,
+                  controller: _temperatureController,
+                  min: 0.1,
+                  max: 200.0,
+                  onConfirm: (val) => setState(() => _temperatureValue = val),
+                ),
               ),
               Container(
                 width: 85.w,
@@ -2413,6 +2646,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                         _temperatureValue = (_temperatureValue * 9 / 5) + 32;
                         _isFahrenheitUnit = true;
                       }
+                      _temperatureController.text = _temperatureValue.toStringAsFixed(1);
                     });
                   },
                   child: Container(
@@ -2446,6 +2680,7 @@ class _AllactivityviewState extends State<Allactivityview> {
                             (_temperatureValue - 32) * 5 / 9;
                         _isFahrenheitUnit = false;
                       }
+                      _temperatureController.text = _temperatureValue.toStringAsFixed(1);
                     });
                   },
                   child: Container(
@@ -2486,7 +2721,10 @@ class _AllactivityviewState extends State<Allactivityview> {
     double step = 1.0;
     String displayText = _isKmUnit
         ? rawDisplayValue.toStringAsFixed(1)
-        : '${rawDisplayValue.round()} ';
+        : rawDisplayValue.round().toString();
+    if (_walkController.text.isEmpty) {
+      _walkController.text = displayText;
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -2583,15 +2821,51 @@ class _AllactivityviewState extends State<Allactivityview> {
                               _walkDistanceKm = (currentMi - step) / kmToMi;
                             }
                           }
+                          final val = _isKmUnit ? _walkDistanceKm.toStringAsFixed(1) : (_walkDistanceKm * kmToMi).round().toString();
+                          _walkController.text = val;
                         });
                       },
                     ),
                   ),
                 ),
-                Text(
-                  displayText,
+              SizedBox(
+                width: 140.w,
+                child: TextField(
+                  controller: _walkController,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 36.sp, fontWeight: FontWeight.bold),
+                  decoration: const InputDecoration(border: InputBorder.none),
+                  onChanged: (v) {
+                    final parsed = double.tryParse(v.replaceAll(',', '.'));
+                    if (parsed != null) {
+                      setState(() {
+                        if (_isKmUnit) {
+                          _walkDistanceKm = parsed;
+                        } else {
+                          _walkDistanceKm = parsed / kmToMi;
+                        }
+                      });
+                    }
+                  },
                 ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.edit, color: Color(0xFF820DFF)),
+                onPressed: () => _showCustomDialog(
+                  title: AppLocalizations.of(context)!.activityWalk,
+                  controller: _walkController,
+                  min: 0.1,
+                  max: _isKmUnit ? 99.0 : 62.0,
+                  onConfirm: (val) => setState(() {
+                    if (_isKmUnit) {
+                      _walkDistanceKm = val;
+                    } else {
+                      _walkDistanceKm = val / kmToMi;
+                    }
+                  }),
+                ),
+              ),
                 Container(
                   width: 85.w,
                   height: 45.h,
@@ -2614,6 +2888,8 @@ class _AllactivityviewState extends State<Allactivityview> {
                               _walkDistanceKm = (currentMi + step) / kmToMi;
                             }
                           }
+                          final val = _isKmUnit ? _walkDistanceKm.toStringAsFixed(1) : (_walkDistanceKm * kmToMi).round().toString();
+                          _walkController.text = val;
                         });
                       },
                     ),
@@ -2632,7 +2908,10 @@ class _AllactivityviewState extends State<Allactivityview> {
               children: [
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => setState(() => _isKmUnit = true),
+                    onTap: () => setState(() {
+                      _isKmUnit = true;
+                      _walkController.text = _walkDistanceKm.toStringAsFixed(1);
+                    }),
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       decoration: BoxDecoration(
@@ -2656,7 +2935,10 @@ class _AllactivityviewState extends State<Allactivityview> {
                 ),
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => setState(() => _isKmUnit = false),
+                    onTap: () => setState(() {
+                      _isKmUnit = false;
+                      _walkController.text = (_walkDistanceKm * kmToMi).round().toString();
+                    }),
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 14.h),
                       decoration: BoxDecoration(
@@ -2927,25 +3209,57 @@ class _AllactivityviewState extends State<Allactivityview> {
                       _buildWalkDistanceSelector()
                     else if (activityName != 'pee' && activityName != 'poop' && activityName != 'journal')
                         if (_foodController.text.isNotEmpty)
-                          RoundButton(
-                            title: _foodController.text,
-                            isSelected: true,
-                            backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
-                            textColors: Colors.black,
-                            borderColors: const Color(0xFF820DFF),
-                            hasIcons: true,
-                            isTrailingIcon: true,
-                            icon: const Icon(Icons.edit, size: 20, color: Colors.black),
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            onPress: _showFoodName1BottomSheet,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RoundButton(
+                                title: _foodController.text,
+                                isSelected: true,
+                                backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
+                                textColors: Colors.black,
+                                borderColors: const Color(0xFF820DFF),
+                                hasIcons: true,
+                                isTrailingIcon: true,
+                                icon: const Icon(Icons.edit, size: 20, color: Colors.black),
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                onPress: _showFoodName1BottomSheet,
+                              ),
+                              if (!_isNameValid)
+                                Padding(
+                                  padding: EdgeInsets.only(top: 6.h, left: 4.w),
+                                  child: Text(
+                                    'Name or Type is required',
+                                    style: TextStyle(
+                                      color: Theme.of(context).colorScheme.error,
+                                      fontSize: 12.sp,
+                                    ),
+                                  ),
+                                ),
+                            ],
                           )
                         else
-                          RoundButton(
-                            title: _getButtonTitle(context, activityName),
-                            isSelected: true,
-                            backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
-                            textColors: const Color(0xFF820DFF),
-                            onPress: _showFoodNameBottomSheet,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RoundButton(
+                                title: _getButtonTitle(context, activityName),
+                                isSelected: true,
+                                backgroundColors: Theme.of(context).colorScheme.secondaryContainer,
+                                textColors: const Color(0xFF820DFF),
+                                onPress: _showFoodNameBottomSheet,
+                              ),
+                              if (!_isNameValid)
+                                Padding(
+                                  padding: EdgeInsets.only(top: 6.h, left: 4.w),
+                                  child: Text(
+                                    'Name or Type is required',
+                                    style: TextStyle(
+                                      color: Theme.of(context).colorScheme.error,
+                                      fontSize: 12.sp,
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
               SizedBox(height: 10.h),
 

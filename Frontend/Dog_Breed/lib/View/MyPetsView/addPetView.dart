@@ -16,6 +16,13 @@ import '../../config/components/CommonApp.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/routes/routes_name.dart';
 
+class _BreedListItem {
+  final bool header;
+  final String text;
+  const _BreedListItem.header(this.text) : header = true;
+  const _BreedListItem.item(this.text) : header = false;
+}
+
 class AddPetView extends StatefulWidget {
   const AddPetView({super.key});
 
@@ -1320,7 +1327,7 @@ class _AddPetViewState extends State<AddPetView> {
         List<String> filteredBreeds = _breeds;
 
         return StatefulBuilder(
-          builder: (context, setState) {
+          builder: (context, sheetSetState) {
             filteredBreeds = _breeds
                 .where((b) =>
                 b.toLowerCase().contains(searchQuery.toLowerCase()))
@@ -1330,7 +1337,7 @@ class _AddPetViewState extends State<AddPetView> {
               padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).viewInsets.bottom),
               child: Container(
-                height: 400.h, // adjust as needed
+                height: 600.h, // adjust as needed
                 padding: const EdgeInsets.all(12),
                 child: Column(
                   children: [
@@ -1339,7 +1346,9 @@ class _AddPetViewState extends State<AddPetView> {
                       height: 5,
                       margin: const EdgeInsets.only(bottom: 12),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).dividerColor,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? const Color(0xFF21241F)
+                            : const Color(0xFFE8EEEC),
                         borderRadius: BorderRadius.circular(2.5),
                       ),
                     ),
@@ -1357,25 +1366,56 @@ class _AddPetViewState extends State<AddPetView> {
                         fillColor: Theme.of(context).cardColor,
                       ),
                       onChanged: (value) {
-                        setState(() {
+                        sheetSetState(() {
                           searchQuery = value;
                         });
                       },
                     ),
                     const SizedBox(height: 10),
                     Expanded(
-                      child: ListView.builder(
-                        itemCount: filteredBreeds.length,
-                        itemBuilder: (context, index) {
-                          final breed = filteredBreeds[index];
-                          return ListTile(
-                            title: Text(
-                              breed,
-                              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
-                            ),
-                            onTap: () {
-                              setState(() => _selectedBreed = breed);
-                              Navigator.pop(context);
+                      child: Builder(
+                        builder: (context) {
+                          final items = _buildGroupedBreedItems(filteredBreeds);
+                          return ListView.builder(
+                            itemCount: items.length,
+                            itemBuilder: (context, index) {
+                              final item = items[index];
+                              if (item.header) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                  child: Container(
+                                    height: 30.h,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).brightness == Brightness.dark
+                                          ? const Color(0xFF21241F)
+                                          : const Color(0xFFE8EEEC),
+                                      borderRadius: BorderRadius.circular(10.r),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 11),
+                                      child: Text(
+                                        item.text,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              final breed = item.text;
+                              return ListTile(
+                                title: Text(
+                                  breed,
+                                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                                ),
+                                onTap: () {
+                                  this.setState(() => _selectedBreed = breed);
+                                  Navigator.pop(context);
+                                },
+                              );
                             },
                           );
                         },
@@ -1389,6 +1429,33 @@ class _AddPetViewState extends State<AddPetView> {
         );
       },
     );
+  }
+
+  List<_BreedListItem> _buildGroupedBreedItems(List<String> breeds) {
+    final sorted = List<String>.from(breeds)
+      ..sort((a, b) {
+        final la = a.length;
+        final lb = b.length;
+        if (la != lb) return la.compareTo(lb);
+        return a.toLowerCase().compareTo(b.toLowerCase());
+      });
+    final Map<String, List<String>> grouped = {};
+    for (final b in sorted) {
+      if (b.isEmpty) continue;
+      final key = b[0].toUpperCase();
+      final list = grouped.putIfAbsent(key, () => []);
+      list.add(b);
+    }
+    final keys = grouped.keys.toList()..sort();
+    final result = <_BreedListItem>[];
+    for (final k in keys) {
+      result.add(_BreedListItem.header(k));
+      final values = grouped[k]!;
+      for (final v in values) {
+        result.add(_BreedListItem.item(v));
+      }
+    }
+    return result;
   }
 
 }

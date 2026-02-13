@@ -489,7 +489,7 @@ class _ReminderlistState extends State<Reminderlist> {
                       child: Text(
                         _currentActivity != null
                             ? _getLocalizedActivityName(
-                                context, _currentActivity!.name)
+                            context, _currentActivity!.name)
                             : AppLocalizations.of(context)!.noActivitySelected,
                         style: TextStyle(
                           fontSize: 30.sp,
