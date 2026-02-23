@@ -13,6 +13,7 @@ import 'package:dog_breed/l10n/app_localizations.dart';
 
 class PredictionResult {
   final String breed;
+  
   final double confidence;
   final String size;
   final String shape;
