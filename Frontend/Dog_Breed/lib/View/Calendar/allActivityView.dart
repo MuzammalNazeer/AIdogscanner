@@ -1,4 +1,3 @@
-
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/View/Calendar/walkView.dart';
 import 'package:dog_breed/config/components/roundButton.dart';
@@ -3578,11 +3577,6 @@ class _AllactivityviewState extends State<Allactivityview> {
     );
   }
 }
-
-
-
-
-
 
 
 // import 'package:dog_breed/Valid/AppColors.dart';

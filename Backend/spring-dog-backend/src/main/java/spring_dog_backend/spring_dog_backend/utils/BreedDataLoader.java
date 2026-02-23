@@ -2,6 +2,7 @@ package spring_dog_backend.spring_dog_backend.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ public class BreedDataLoader {
 
     private final Map<String, Map<String, Object>> breedDataMap = new HashMap<>();
     private final ObjectMapper mapper = new ObjectMapper();
+    @Getter
     private boolean dataLoaded = false;
 
     @PostConstruct
@@ -88,10 +90,6 @@ public class BreedDataLoader {
             return new ArrayList<>();
         }
         return new ArrayList<>(breedDataMap.keySet());
-    }
-
-    public boolean isDataLoaded() {
-        return dataLoaded;
     }
 
     public int getLoadedBreedCount() {

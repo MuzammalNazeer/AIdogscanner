@@ -8,6 +8,9 @@
       <w>favorited</w>
       <w>fullname</w>
       <w>mastador</w>
+      <w>openpnp</w>
+      <w>sess</w>
+      <w>xmlns</w>
     </words>
   </dictionary>
 </component>
