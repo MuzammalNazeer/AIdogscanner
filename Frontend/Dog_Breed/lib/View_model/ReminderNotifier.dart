@@ -5,10 +5,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tzdata;
 import '../main.dart' show flutterLocalNotificationsPlugin;
-
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-
 class ReminderNotifier with ChangeNotifier {
   final List<Map<String, dynamic>> _reminders = [];
   static const String _storageKey = 'dog_reminders_list';
