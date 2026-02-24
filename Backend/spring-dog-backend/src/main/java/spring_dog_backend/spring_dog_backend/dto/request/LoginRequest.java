@@ -1,12 +1,14 @@
 package spring_dog_backend.spring_dog_backend.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
 public class LoginRequest {
-    private String username;
+    @JsonProperty("usernameOremail")  
+    private String usernameOremail;
     private String password;
 
     // Constructors
@@ -14,7 +16,7 @@ public class LoginRequest {
 
     @Override
     public String toString() {
-        return "LoginRequest{username='" + username + "', password='[PROTECTED]'}";
+        return "LoginRequest{username='" + usernameOremail + "', password='[PROTECTED]'}";
     }
 }
 

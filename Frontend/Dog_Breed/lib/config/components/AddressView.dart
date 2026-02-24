@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dog_breed/Valid/AppColors.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
-import 'CommonApp.dart';
 
 class AddressView extends StatefulWidget {
   final String initialAddress;

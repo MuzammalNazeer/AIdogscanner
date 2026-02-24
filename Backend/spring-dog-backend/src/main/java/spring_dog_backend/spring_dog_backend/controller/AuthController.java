@@ -2,6 +2,7 @@
 package spring_dog_backend.spring_dog_backend.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import spring_dog_backend.spring_dog_backend.dto.request.LoginRequest;
 import spring_dog_backend.spring_dog_backend.dto.request.SignupRequest;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -190,21 +193,17 @@ public class AuthController {
         }
     }
 
-
-
-
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             System.out.println("=== 🔐 LOGIN ATTEMPT ===");
-            System.out.println("Username: " + loginRequest.getUsername());
+            System.out.println("Login identifier: " + loginRequest.getUsernameOremail());
             System.out.println("Password length: " + (loginRequest.getPassword() != null ? loginRequest.getPassword().length() : 0));
 
             // ✅ MANUAL VALIDATION: Check if fields are provided
-            if (loginRequest.getUsername() == null || loginRequest.getUsername().trim().isEmpty()) {
+            if (loginRequest.getUsernameOremail() == null || loginRequest.getUsernameOremail().trim().isEmpty()) {
                 return ResponseEntity.badRequest().body(
-                        Map.of("error", "Login failed", "message", "Username is required")
+                        Map.of("error", "Login failed", "message", "Username or email is required")
                 );
             }
 
@@ -230,58 +229,160 @@ public class AuthController {
                 );
             }
 
-            // ... rest of your existing login code
-            // [Keep all your existing login logic here - finding user, checking password, etc.]
+            // Find user by username OR email
+            String loginIdentifier = loginRequest.getUsernameOremail().trim();
+            Optional<User> userOpt = userRepository.findByUsername(loginIdentifier);
 
-            // Find the specific user
-            Optional<User> userOpt = userRepository.findByUsername(loginRequest.getUsername());
+            // If not found by username, try finding by email
+            if (userOpt.isEmpty()) {
+                userOpt = userRepository.findByEmail(loginIdentifier);
+            }
 
             if (userOpt.isEmpty()) {
-                System.out.println("❌ USER NOT FOUND: " + loginRequest.getUsername());
-                return ResponseEntity.badRequest().body(
-                        Map.of("error", "Invalid username or password", "message", "User not found")
+                System.out.println("❌ USER NOT FOUND: " + loginIdentifier);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                        Map.of("error", "Invalid username/email or password",
+                                "message", "Invalid credentials")
                 );
             }
 
             User user = userOpt.get();
             System.out.println("✅ USER FOUND: " + user.getUsername());
+            System.out.println("User ID: " + user.getId());
+            System.out.println("User Email: " + user.getEmail());
 
             // Verify password
             boolean passwordMatches = passwordEncoder.matches(loginRequest.getPassword(), user.getPassword());
             System.out.println("✅ Password matches: " + passwordMatches);
 
             if (!passwordMatches) {
-                return ResponseEntity.badRequest().body(
-                        Map.of("error", "Invalid username or password", "message", "Password incorrect")
+                System.out.println("❌ PASSWORD MISMATCH for user: " + user.getUsername());
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                        Map.of("error", "Invalid username/email or password",
+                                "message", "Invalid credentials")
                 );
             }
 
-            // Generate token
+            // Generate JWT token
             String token = jwtUtil.generateJwtToken(user.getUsername());
-            System.out.println("🎉 LOGIN SUCCESSFUL");
+            System.out.println("🎉 LOGIN SUCCESSFUL for user: " + user.getUsername());
 
-            // Response
+            // Prepare user info for response (exclude sensitive data)
             Map<String, Object> userInfo = new HashMap<>();
             userInfo.put("id", user.getId());
             userInfo.put("username", user.getUsername());
             userInfo.put("email", user.getEmail());
             userInfo.put("fullName", user.getFullName());
 
+            // Prepare response
             Map<String, Object> response = new HashMap<>();
             response.put("token", token);
+            response.put("type", "Bearer");
             response.put("user", userInfo);
             response.put("message", "Login successful");
+            response.put("timestamp", System.currentTimeMillis());
 
             return ResponseEntity.ok(response);
 
         } catch (Exception e) {
             System.out.println("💥 LOGIN ERROR: " + e.getMessage());
             e.printStackTrace();
-            return ResponseEntity.badRequest().body(
-                    Map.of("error", "Login failed", "message", e.getMessage())
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+                    Map.of(
+                            "error", "Login failed",
+                            "message", "An unexpected error occurred. Please try again later."
+                    )
             );
-        }
-    }
+        }}
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+//        try {
+//            System.out.println("=== 🔐 LOGIN ATTEMPT ===");
+//            System.out.println("Username: " + loginRequest.getUsername());
+//            System.out.println("Password length: " + (loginRequest.getPassword() != null ? loginRequest.getPassword().length() : 0));
+//
+//            // ✅ MANUAL VALIDATION: Check if fields are provided
+//            if (loginRequest.getUsername() == null || loginRequest.getUsername().trim().isEmpty()) {
+//                return ResponseEntity.badRequest().body(
+//                        Map.of("error", "Login failed", "message", "Username is required")
+//                );
+//            }
+//
+//            if (loginRequest.getPassword() == null || loginRequest.getPassword().trim().isEmpty()) {
+//                return ResponseEntity.badRequest().body(
+//                        Map.of("error", "Login failed", "message", "Password is required")
+//                );
+//            }
+//
+//            // ✅ MANUAL VALIDATION: Password length (3-20 characters)
+//            String password = loginRequest.getPassword();
+//            if (password.length() < 3) {
+//                return ResponseEntity.badRequest().body(
+//                        Map.of("error", "Login failed",
+//                                "message", "Password must be at least 3 characters long")
+//                );
+//            }
+//
+//            if (password.length() > 20) {
+//                return ResponseEntity.badRequest().body(
+//                        Map.of("error", "Login failed",
+//                                "message", "Password must be no more than 20 characters long")
+//                );
+//            }
+//
+//            // ... rest of your existing login code
+//            // [Keep all your existing login logic here - finding user, checking password, etc.]
+//
+//            // Find the specific user
+//            Optional<User> userOpt = userRepository.findByUsername(loginRequest.getUsername());
+//
+//            if (userOpt.isEmpty()) {
+//                System.out.println(STR."❌ USER NOT FOUND: \{loginRequest.getUsername()}");
+//                return ResponseEntity.badRequest().body(
+//                        Map.of("error", "Invalid username or password", "message", "User not found")
+//                );
+//            }
+//
+//            User user = userOpt.get();
+//            System.out.println("✅ USER FOUND: " + user.getUsername());
+//
+//            // Verify password
+//            boolean passwordMatches = passwordEncoder.matches(loginRequest.getPassword(), user.getPassword());
+//            System.out.println("✅ Password matches: " + passwordMatches);
+//
+//            if (!passwordMatches) {
+//                return ResponseEntity.badRequest().body(
+//                        Map.of("error", "Invalid username or password", "message", "Password incorrect")
+//                );
+//            }
+//
+//            // Generate token
+//            String token = jwtUtil.generateJwtToken(user.getUsername());
+//            System.out.println("🎉 LOGIN SUCCESSFUL");
+//
+//            // Response
+//            Map<String, Object> userInfo = new HashMap<>();
+//            userInfo.put("id", user.getId());
+//            userInfo.put("username", user.getUsername());
+//            userInfo.put("email", user.getEmail());
+//            userInfo.put("fullName", user.getFullName());
+//
+//            Map<String, Object> response = new HashMap<>();
+//            response.put("token", token);
+//            response.put("user", userInfo);
+//            response.put("message", "Login successful");
+//
+//            return ResponseEntity.ok(response);
+//
+//        } catch (Exception e) {
+//            System.out.println("💥 LOGIN ERROR: " + e.getMessage());
+//            e.printStackTrace();
+//            return ResponseEntity.badRequest().body(
+//                    Map.of("error", "Login failed", "message", e.getMessage())
+//            );
+//        }
+//    }
 
     @GetMapping("/test-users")
     public ResponseEntity<?> testUsers() {

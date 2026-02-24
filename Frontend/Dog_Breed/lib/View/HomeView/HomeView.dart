@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../View_model/PetProvider.dart';
 import '../../View_model/ScanProvider.dart';
 import '../../View_model/ProfileProvider.dart';
+import '../../View_model/home/home_view_model.dart';
 import '../Calendar/add_activities_View.dart';
 import '../Calendar/allActivityView.dart';
 import '../Calendar/AddReminderView.dart';
@@ -287,13 +288,18 @@ class _HomeviewState extends State<Homeview> {
           Expanded(
             child: quickActionButton(
               image: Image.asset(
-                'assets/images/vacc.png',
+                'assets/images/booking.png',
                 height: 57.h,
                 width: 57.w,
               ),
               label: AppLocalizations.of(context)!.booking,
-              color: const Color(0xFFFFEAE3),
-              onTap: () => _showActivityChoiceSheet('Veterinary'),
+              color: const Color(0xFFD8E5FD),
+              onTap: () {
+                final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+                homeViewModel.selectedIndex = 1; // Index for Calendar
+                homeViewModel.calendarTabIndex = 0; // Index for Calendar
+                Navigator.pushNamedAndRemoveUntil(context, RoutesName.dashboard, (route) => false);
+              },
             ),
           ),
         ],
