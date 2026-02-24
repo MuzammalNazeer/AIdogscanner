@@ -221,6 +221,9 @@ class AppLocalizationsPl extends AppLocalizations {
   String get calendarTabSettings => 'Ustawienia';
 
   @override
+  String get doctorVisit => 'Doctor Visit';
+
+  @override
   String get activityVeterinary => 'Weterynarz';
 
   @override

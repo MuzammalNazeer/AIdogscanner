@@ -85,6 +85,7 @@ class _AllactivityviewState extends State<Allactivityview> {
   String _getLocalizedActivityName(BuildContext context, String name) {
     final localizations = AppLocalizations.of(context)!;
     switch (name) {
+      case 'Doctor Visit': return localizations.doctorVisit;
       case 'Pee': return localizations.activityPee;
       case 'Eat': return localizations.activityEat;
       case 'Drink': return localizations.activityDrink;
@@ -3107,6 +3108,8 @@ class _AllactivityviewState extends State<Allactivityview> {
   }
   String _getButtonTitle(BuildContext context, String activityName) {
     switch (activityName) {
+      case 'doctor visit':
+        return '+ Add doctor name';
       case 'treat':
         return AppLocalizations.of(context)!.actionAddTreat;
       case 'grooming':

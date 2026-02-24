@@ -222,6 +222,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get calendarTabSettings => 'ParamÃƒÂ¨tres';
 
   @override
+  String get doctorVisit => 'Doctor Visit';
+
+  @override
   String get activityVeterinary => 'VÃƒÂ©tÃƒÂ©rinaire';
 
   @override

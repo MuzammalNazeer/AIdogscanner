@@ -514,6 +514,12 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get calendarTabSettings;
 
+  /// No description provided for @doctorVisit.
+  ///
+  /// In en, this message translates to:
+  /// **'Doctor Visit'**
+  String get doctorVisit;
+
   /// No description provided for @activityVeterinary.
   ///
   /// In en, this message translates to:

@@ -50,7 +50,12 @@ class _CalendarviewState extends State<Calendarview> {
   ];
 
   List<Map<String, dynamic>> get _allActivityTypes => [
-
+    {
+      'key': 'Doctor Visit',
+      'name': 'Doctor Visit',
+      'image': 'assets/images/doctor.png',
+      'color': const Color(0xFFD0FAFF),
+    },
     {
       'key': 'Pee',
       'name': AppLocalizations.of(context)!.activityPee,
@@ -306,6 +311,7 @@ class _CalendarviewState extends State<Calendarview> {
   String _getLocalizedActivityName(BuildContext context, String name) {
     final localizations = AppLocalizations.of(context)!;
     switch (name) {
+      case 'Doctor Visit': return localizations.doctorVisit;
       case 'Veterinary': return localizations.activityVeterinary;
       case 'Pee': return localizations.activityPee;
       case 'Eat': return localizations.activityEat;
@@ -339,7 +345,8 @@ class _CalendarviewState extends State<Calendarview> {
     final _ = DateTime.now();
     final activityNotifier = Provider.of<ActivityNotifier>(context);
     final petProvider = Provider.of<PetProvider>(context);
-    final effectivePetId = _selectedPetId;
+    final effectivePetId =
+        _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
 
     // Get ALL activities for the selected pet
     final allActivities = activityNotifier.activities
@@ -964,6 +971,7 @@ class _CalendarviewState extends State<Calendarview> {
 
   Widget _buildProgressChartView(List<Activity> dailyActivities) {
     final List<Map<String, dynamic>> progressItems = [
+      {'key': 'Doctor Visit', 'title': AppLocalizations.of(context)!.doctorVisit, 'icon': 'assets/images/doctor.png'},
       {'key': 'Eat', 'title': AppLocalizations.of(context)!.activityEat, 'icon': 'assets/images/image 1556.png'},
       {'key': 'Pee', 'title': AppLocalizations.of(context)!.activityPee, 'icon': 'assets/images/62.png'},
       {'key': 'Drink', 'title': AppLocalizations.of(context)!.activityDrink, 'icon': 'assets/images/drink.png'},
@@ -1347,7 +1355,13 @@ class _CalendarviewState extends State<Calendarview> {
 
   Widget _buildProgressCompareView(List<Activity> dailyActivities) {
     final activityNotifier = Provider.of<ActivityNotifier>(context);
-    final allActivities = activityNotifier.activities;
+    final petProvider = Provider.of<PetProvider>(context);
+    final effectivePetId =
+        _selectedPetId ?? (petProvider.hasPets ? petProvider.pets.first.id : null);
+
+    final allActivities = activityNotifier.activities
+        .where((activity) => effectivePetId == null || activity.petId == effectivePetId)
+        .toList();
 
     DateTime startOfWeek = _selectedDate.subtract(
       Duration(days: _selectedDate.weekday - 1),

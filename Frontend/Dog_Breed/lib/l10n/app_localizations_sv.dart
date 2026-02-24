@@ -219,6 +219,9 @@ class AppLocalizationsSv extends AppLocalizations {
   String get calendarTabSettings => 'InstÃ¤llningar';
 
   @override
+  String get doctorVisit => 'Doctor Visit';
+
+  @override
   String get activityVeterinary => 'VeterinÃ¤r';
 
   @override

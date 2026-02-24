@@ -221,6 +221,9 @@ class AppLocalizationsDa extends AppLocalizations {
   String get calendarTabSettings => 'Indstillinger';
 
   @override
+  String get doctorVisit => 'Doctor Visit';
+
+  @override
   String get activityVeterinary => 'DyrlÃƒÂ¦ge';
 
   @override

@@ -219,6 +219,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get calendarTabSettings => 'Pengaturan';
 
   @override
+  String get doctorVisit => 'Doctor Visit';
+
+  @override
   String get activityVeterinary => 'Dokter Hewan';
 
   @override

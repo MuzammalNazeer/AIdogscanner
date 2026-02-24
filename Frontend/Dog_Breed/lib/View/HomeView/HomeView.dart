@@ -197,7 +197,6 @@ class _HomeviewState extends State<Homeview> {
                         color: Theme.of(context).colorScheme.onSurface,
                       ),
                       children: [
-
                         TextSpan(
                           text: AppLocalizations.of(context)!.welcomeBack,
                           style: const TextStyle(fontWeight: FontWeight.w400),
@@ -248,14 +247,14 @@ class _HomeviewState extends State<Homeview> {
           Expanded(
             child: quickActionButton(
               image: Image.asset(
-                'assets/images/grooming.png',
+                'assets/images/doctor.png',
                 // color: const Color(0xFF711544),
                 height: 57.h,
                 width: 57.w,
               ),
               label: "Doctor Visit",
               color: const Color(0xFFD0FAFF),
-              onTap: () => _showActivityChoiceSheet('Grooming'),
+              onTap: () => _showActivityChoiceSheet('Doctor Visit'),
             ),
           ),
           SizedBox(width: 7.w),
@@ -421,7 +420,7 @@ class _HomeviewState extends State<Homeview> {
                     );
                   },
                   child: Text(
-                    l10n.reminderAddTitle,
+                    "Add as Reminder",
                     style: TextStyle(fontSize: 20.sp,fontFamily: 'Inter', fontWeight: FontWeight.w600),
                   ),
                 ),

@@ -221,6 +221,9 @@ class AppLocalizationsFi extends AppLocalizations {
   String get calendarTabSettings => 'Aasetukset';
 
   @override
+  String get doctorVisit => 'Doctor Visit';
+
+  @override
   String get activityVeterinary => 'Eläinlääkäri';
 
   @override

@@ -407,6 +407,7 @@ class _ReminderlistState extends State<Reminderlist> {
   String _getLocalizedActivityName(BuildContext context, String name) {
     final localizations = AppLocalizations.of(context)!;
     switch (name) {
+      case 'Doctor Visit': return localizations.doctorVisit;
       case 'Veterinary': return localizations.activityVeterinary;
       case 'Pee': return localizations.activityPee;
       case 'Eat': return localizations.activityEat;
@@ -586,7 +587,7 @@ class _ReminderlistState extends State<Reminderlist> {
               SizedBox(height: 416.h),
 
               RoundButton(
-                title: AppLocalizations.of(context)!.actionSave,
+                title: "Add as Reminder",
                 isSelected: true,
                 textColors: Colors.white,
                 backgroundColors: AppColors.vibrantPurple,

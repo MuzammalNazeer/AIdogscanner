@@ -57,6 +57,7 @@ class _AddActivitiesViewState extends State<AddActivitiesView> {
   String _getLocalizedActivityName(BuildContext context, String name) {
     final localizations = AppLocalizations.of(context)!;
     switch (name) {
+      case 'Doctor Visit': return localizations.doctorVisit;
       case 'Veterinary': return localizations.activityVeterinary;
       case 'Pee': return localizations.activityPee;
       case 'Eat': return localizations.activityEat;

@@ -222,6 +222,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get calendarTabSettings => 'Ayarlar';
 
   @override
+  String get doctorVisit => 'Doctor Visit';
+
+  @override
   String get activityVeterinary => 'Veteriner';
 
   @override

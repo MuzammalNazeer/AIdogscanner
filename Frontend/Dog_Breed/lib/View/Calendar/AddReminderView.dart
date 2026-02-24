@@ -85,6 +85,8 @@ class _AddReminderViewState extends State<AddReminderView> {
   String _getLocalizedActivityName(BuildContext context, String name) {
     final localizations = AppLocalizations.of(context)!;
     switch (name) {
+      case 'Doctor Visit':
+        return localizations.doctorVisit;
       case 'Veterinary':
         return localizations.activityVeterinary;
       case 'Pee':

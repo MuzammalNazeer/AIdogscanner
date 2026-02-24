@@ -219,6 +219,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get calendarTabSettings => 'Instellingen';
 
   @override
+  String get doctorVisit => 'Doctor Visit';
+
+  @override
   String get activityVeterinary => 'Dierenarts';
 
   @override
