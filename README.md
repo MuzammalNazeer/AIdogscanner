@@ -1,7 +1,7 @@
 # 🐕 AIdogscanner
 
-> **AI-Powered Dog Breed Identification & Pet Care Management Platform**  
-> A full-stack solution featuring a high-performance **Flutter** cross-platform client (Web, Android, iOS) and an enterprise-grade **Spring Boot** backend with **TensorFlow Lite** on-device inference.
+> **AI-Powered Dog Breed Identification & Complete Pet Care Management Platform**  
+> A full-stack solution featuring a high-performance **Flutter** cross-platform client (Web, Android, iOS, Windows) and an enterprise-grade **Spring Boot** backend with on-device **TensorFlow Lite** AI inference.
 
 ---
 
@@ -10,60 +10,83 @@
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-6DB33F?logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
 [![Java](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0%2B-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![TensorFlow Lite](https://img.shields.io/badge/TensorFlow%20Lite-Supported-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/lite)
+[![TensorFlow Lite](https://img.shields.io/badge/TensorFlow%20Lite-On--Device%20AI-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/lite)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 ---
 
 ## 🌟 Key Features
 
 ### 🔍 1. AI Dog Breed Identification
-- **On-Device Inference**: Fast, local breed recognition powered by TensorFlow Lite (`.tflite`).
+- **On-Device Inference**: Ultra-fast offline breed prediction powered by TensorFlow Lite (`dog_identifier.tflite`).
 - **Comprehensive Breed Intelligence**:
-  - Confidence scoring and rank-ordered predictions.
-  - Physical attributes: size, coat texture, body structure, head/face traits, and coloring.
-  - Behavioral insights: temperament characteristics, trainability, and exercise needs.
-- **Multiple Input Modes**: Real-time camera capture or photo gallery upload.
+  - Probability & confidence scoring for top breed matches.
+  - Physical attributes: size, coat texture, body structure, head/face characteristics, and coloration.
+  - Behavioral insights: temperament, trainability, exercise requirements, and purpose.
+- **Multiple Input Modes**: Real-time live camera detection or instant photo gallery picker.
+- **Web & Mobile Support**: Seamless conditional architecture (`tflite_service.dart`) with dedicated web stubs enabling cross-platform compilation on Chrome and desktop.
 
-### 🐾 2. Pet Health & Activity Companion
-- **Activity & Routine Logging**: Schedule and log walks, feeding sessions, and medication.
-- **Hydration & Nutrition Calculators**: Tailored food and drink recommendations according to dog size, weight, and activity level.
-- **Hygiene & Grooming Records**: Track grooming schedules, dental care, and baths.
-- **Reminder & Notification Engine**: Configurable calendar reminders for vet visits and wellness routines.
+### 🐾 2. Pet Health & Care Companion
+- **Pet Profile Hub**: Manage multiple pets with age, weight, breed, photos, and personalized notes.
+- **Activity & Routine Logging**: Schedule and record daily walks, feeding sessions, and medication.
+- **Hydration & Diet Calculators**: Automated water and food portion calculators calibrated to pet weight and activity level.
+- **Hygiene & Grooming Records**: Track bath sessions, brushing, dental hygiene, and nail clipping.
+- **Medical Records & Vaccinations**: Log vet visits, vaccination certificates, and medical history.
+- **Interactive Reminders**: High-priority exact alarms and calendar notifications powered by `flutter_local_notifications`.
 
 ### 🌐 3. Multi-Language & Modern UI
-- **Global Localization (i18n)**: Out-of-the-box support for English, Spanish, French, German, Italian, Portuguese, and more.
-- **Fluid Design System**: Sora and Inter typography, responsive layouts optimized for Mobile and Web (Chrome).
-- **Offline Resilience**: Local caching and preferences via Hive and SharedPreferences.
+- **Global Localization (i18n)**: Out-of-the-box support for 14+ languages (English, Spanish, French, German, Italian, Portuguese, Turkish, Dutch, Polish, Czech, Danish, Finnish, Swedish, and Indonesian).
+- **Modern Design System**: Sora and Inter typography, fluid micro-interactions, responsive ScreenUtil scaling, and Light/Dark theme switching (`ThemeNotifier`).
+- **Offline Storage & Caching**: Fast local preferences using SharedPreferences and Hive.
 
 ---
 
-## 🏗️ Architecture & Repository Structure
+## 🏗️ Architecture & Project Structure
 
 ```plaintext
 AIdogscanner/
 ├── Backend/
 │   └── spring-dog-backend/             # Spring Boot REST API
 │       ├── src/main/java/              # Controllers, Services, Models, Repositories
-│       ├── src/main/resources/         # application.properties & database migrations
-│       └── pom.xml                     # Maven project configuration (Java 21, Spring Boot 3.5)
+│       │   └── controller/             # REST Endpoints (Auth, Pets, Breeds, Reminders, etc.)
+│       ├── src/main/resources/         # application.properties (MySQL & JWT setup)
+│       └── pom.xml                     # Maven configuration (Java 21, Spring Boot 3.5)
 │
 ├── Frontend/
 │   └── Dog_Breed/                      # Flutter Cross-Platform Client
 │       ├── assets/
-│       │   ├── models/                 # TensorFlow Lite model files
-│       │   ├── fonts/                  # Sora & Inter typography
-│       │   └── images/                 # UI graphics and splash assets
+│       │   ├── models/                 # TensorFlow Lite model (dog_identifier.tflite)
+│       │   ├── fonts/                  # Sora & Inter typography fonts
+│       │   └── images/                 # App artwork, illustrations & branding
 │       ├── lib/
-│       │   ├── View/                   # Screens (Scanner, Dashboard, Pets, Calendar)
-│       │   ├── View_model/             # State management and presentation logic
-│       │   ├── services/               # TFLite service (with web stubs) & API client
+│       │   ├── View/                   # Screens (Scanner, Dashboard, Pets, Activities, Settings)
+│       │   ├── View_model/             # State management providers (Provider & Notifiers)
+│       │   ├── services/               # TFLite inference service & REST API integrations
 │       │   ├── l10n/                   # Multi-language ARB localization files
-│       │   └── main.dart               # Flutter application entrypoint
-│       └── pubspec.yaml                # Flutter dependencies & asset registry
+│       │   └── main.dart               # App entry point, camera & notification init
+│       └── pubspec.yaml                # Flutter dependencies & asset configurations
 │
-├── .gitignore                          # Root Git exclusion rules
+├── .gitignore                          # Git ignore rules for build artifacts
 └── README.md                           # Project documentation
 ```
+
+---
+
+## 🔌 Backend REST API Overview
+
+The Spring Boot backend exposes comprehensive REST endpoints:
+
+| Endpoint Group | Description |
+| :--- | :--- |
+| `/api/auth` | User registration, login, JWT token issuance, and password recovery |
+| `/api/pets` | CRUD operations for pet profiles, photos, and attributes |
+| `/api/breeds` | Dog breed database, care specifications, and trait queries |
+| `/api/favorites` | Bookmark and manage favorite dog breeds |
+| `/api/predictions` | Store and retrieve AI scanning history and predictions |
+| `/api/reminders` | Schedule reminders, task alerts, and calendar notifications |
+| `/api/cleaning-logs` | Grooming, cleaning, and bath tracking |
+| `/api/hygiene-logs` | Comprehensive hygiene and wellness monitoring |
+| `/api/medical-records` | Health checkups, vaccinations, and vet records |
 
 ---
 
@@ -71,11 +94,11 @@ AIdogscanner/
 
 ### Prerequisites
 
-- **Flutter SDK**: `>= 3.9.0` ([Install Guide](https://flutter.dev/docs/get-started/install))
-- **JDK**: Java 21 LTS ([Download OpenJDK](https://adoptium.net/))
-- **Maven**: 3.8+ (or use included `./mvnw`)
-- **MySQL**: 8.0+
-- **Google Chrome** (for web deployment)
+- **Flutter SDK**: `>= 3.9.0` ([Flutter Installation](https://flutter.dev/docs/get-started/install))
+- **Java Development Kit**: JDK 21 LTS ([Adoptium OpenJDK 21](https://adoptium.net/))
+- **Build Tool**: Maven 3.8+ (or use the included `./mvnw` wrapper)
+- **Database**: MySQL 8.0+
+- **Browser**: Google Chrome (for web client)
 
 ---
 
@@ -87,21 +110,24 @@ AIdogscanner/
    ```
 
 2. **Configure Database**:
-   Update `src/main/resources/application.properties` with your MySQL credentials:
+   Verify or update `src/main/resources/application.properties` with your MySQL credentials:
    ```properties
-   spring.datasource.url=jdbc:mysql://localhost:3306/dog_breed_db?createDatabaseIfNotExist=true
-   spring.datasource.username=root
-   spring.datasource.password=your_password
-   spring.jpa.hibernate.ddl-auto=update
    server.port=8081
+   spring.datasource.url=jdbc:mysql://localhost:3306/petcare_management?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+   spring.datasource.username=root
+   spring.datasource.password=your_mysql_password
+   spring.jpa.hibernate.ddl-auto=update
    ```
 
-3. **Build and Run**:
+3. **Run the Backend**:
    ```bash
-   # Using Maven wrapper
+   # Windows
+   .\mvnw.cmd clean spring-boot:run
+
+   # macOS / Linux
    ./mvnw clean spring-boot:run
    ```
-   *The REST API will be available at `http://localhost:8081/api`.*
+   *The API will start at `http://localhost:8081/api`.*
 
 ---
 
@@ -112,7 +138,7 @@ AIdogscanner/
    cd Frontend/Dog_Breed
    ```
 
-2. **Install Flutter dependencies**:
+2. **Install dependencies**:
    ```bash
    flutter pub get
    ```
@@ -121,34 +147,42 @@ AIdogscanner/
    ```bash
    flutter run -d chrome --web-port=8085
    ```
-   *Access the web app at `http://localhost:8085`.*
+   *Access the web application in your browser at `http://localhost:8085`.*
 
 4. **Run on Mobile (Android / iOS)**:
    ```bash
-   # Android
+   # Run on Android Device / Emulator
    flutter run -d android
 
-   # iOS
+   # Run on iOS Simulator (macOS only)
    flutter run -d ios
+   ```
+
+5. **Run on Windows Desktop**:
+   ```bash
+   flutter run -d windows
    ```
 
 ---
 
-## 🛡️ Machine Learning Pipeline
+## 🧠 Machine Learning Details
 
-- **Model format**: TensorFlow Lite (`dog_identifier.tflite`)
-- **Labels file**: `assets/labels.txt`
-- **Cross-Platform Compatibility**: Uses conditional compilation (`tflite_service.dart`) with a mock stub for browser execution, allowing web builds to run smoothly while retaining full native on-device TFLite acceleration on mobile.
+- **Model File**: `assets/models/dog_identifier.tflite`
+- **Labels Registry**: `assets/labels.txt`
+- **Inference Service**: Implemented in [`lib/services/tflite/`](lib/services/tflite/) with conditional compilation:
+  - `tflite_io.dart`: High-performance native inference utilizing hardware acceleration on mobile.
+  - `tflite_stub.dart`: Clean browser fallback enabling seamless web compilation on Google Chrome without `dart:ffi` dependency conflicts.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, bug reports, and feature requests are welcome!
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+Contributions are welcome! Please feel free to submit issues or pull requests:
+
+1. Fork the Repository
+2. Create your Feature Branch (`git checkout -b feature/NewFeature`)
+3. Commit your Changes (`git commit -m 'feat: Add NewFeature'`)
+4. Push to the Branch (`git push origin feature/NewFeature`)
 5. Open a Pull Request
 
 ---
