@@ -48,51 +48,53 @@ Future<void> main() async {
   };
 
   // Notifications init
-  const AndroidInitializationSettings androidInit =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+  if (!kIsWeb) {
+    const AndroidInitializationSettings androidInit =
+    AndroidInitializationSettings('@mipmap/ic_launcher');
 
-  const DarwinInitializationSettings iosInit = DarwinInitializationSettings(
-    requestAlertPermission: true,
-    requestBadgePermission: true,
-    requestSoundPermission: true,
-    defaultPresentAlert: true,
-    defaultPresentBadge: true,
-    defaultPresentSound: true,
-  );
+    const DarwinInitializationSettings iosInit = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+      defaultPresentAlert: true,
+      defaultPresentBadge: true,
+      defaultPresentSound: true,
+    );
 
-  const LinuxInitializationSettings linuxInit =
-  LinuxInitializationSettings(defaultActionName: 'Open');
+    const LinuxInitializationSettings linuxInit =
+    LinuxInitializationSettings(defaultActionName: 'Open');
 
-  const InitializationSettings initSettings = InitializationSettings(
-    android: androidInit,
-    iOS: iosInit,
-    linux: linuxInit,
-  );
+    const InitializationSettings initSettings = InitializationSettings(
+      android: androidInit,
+      iOS: iosInit,
+      linux: linuxInit,
+    );
 
-  await flutterLocalNotificationsPlugin.initialize(initSettings);
+    await flutterLocalNotificationsPlugin.initialize(initSettings);
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-      AndroidFlutterLocalNotificationsPlugin>()
-      ?.requestNotificationsPermission();
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-      AndroidFlutterLocalNotificationsPlugin>()
-      ?.requestExactAlarmsPermission();
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestExactAlarmsPermission();
 
-  const AndroidNotificationChannel defaultChannel = AndroidNotificationChannel(
-    'dog_breed_reminders_v2',
-    'High Importance Notifications',
-    description: 'Dog Breed app notifications with sound and alert',
-    importance: Importance.high,
-    playSound: true,
-  );
+    const AndroidNotificationChannel defaultChannel = AndroidNotificationChannel(
+      'dog_breed_reminders_v2',
+      'High Importance Notifications',
+      description: 'Dog Breed app notifications with sound and alert',
+      importance: Importance.high,
+      playSound: true,
+    );
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-      AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(defaultChannel);
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(defaultChannel);
+  }
 
   // Camera init
   try {
@@ -118,14 +120,16 @@ Future<void> main() async {
   );
 
   // Edge-to-edge UI - This ensures content doesn't overlap with system bars
-  EdgeToEdge.configure(
-    statusBarColor: Colors.transparent,
-    navigationBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.dark,
-    navigationBarIconBrightness: Brightness.dark,
-    enableTop: true,
-    enableBottom: true,
-  );
+  if (!kIsWeb) {
+    EdgeToEdge.configure(
+      statusBarColor: Colors.transparent,
+      navigationBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+      navigationBarIconBrightness: Brightness.dark,
+      enableTop: true,
+      enableBottom: true,
+    );
+  }
 
   runApp(
     ChangeNotifierProvider.value(

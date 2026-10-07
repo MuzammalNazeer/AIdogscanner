@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../View_model/DogValuesViewModel.dart';
+import '../../View_model/dogvaluesviewmodel.dart';
 import '../../View_model/ScanProvider.dart';
 
 import '../../utils/routes/routes_name.dart';

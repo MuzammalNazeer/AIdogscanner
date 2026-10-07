@@ -1,0 +1,15 @@
+.idea/
+*.iml
+.DS_Store
+*.log
+
+# Backend
+Backend/**/target/
+Backend/**/.mvn/timing.properties
+
+# Frontend
+Frontend/**/build/
+Frontend/**/.dart_tool/
+Frontend/**/.flutter-plugins-dependencies
+Frontend/**/.pub-cache/
+Frontend/**/.pub/

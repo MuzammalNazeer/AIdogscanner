@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
+import '../services/tflite/tflite_service.dart';
 import 'package:dog_breed/l10n/app_localizations.dart';
 
 class PredictionResult {

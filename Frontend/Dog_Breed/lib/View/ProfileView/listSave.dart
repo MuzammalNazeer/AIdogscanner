@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'dart:io';
 import '../../Valid/AppColors.dart';
 import '../../l10n/app_localizations.dart';
-import '../../View_model/DogValuesViewModel.dart';
+import '../../View_model/dogvaluesviewmodel.dart';
 import '../../View_model/ScanProvider.dart';
 import '../MyPetsView/DogResultScreen.dart';
 class Listsave extends StatefulWidget {

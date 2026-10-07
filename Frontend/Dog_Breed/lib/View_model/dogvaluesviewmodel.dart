@@ -6,8 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
-import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
+import '../services/tflite/tflite_service.dart';
 
 import 'ScanProvider.dart';
 
